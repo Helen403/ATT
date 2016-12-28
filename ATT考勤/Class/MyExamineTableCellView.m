@@ -59,6 +59,47 @@
 
 }
 
+-(UIImageView *)Img{
+    if (!_Img) {
+        _Img = [[UIImageView alloc] init];
+    }
+    return _Img;
+}
+
+-(UILabel *)title{
+    if (!_title) {
+        _title = [[UILabel alloc] init];
+        _title.font = H14;
+        _title.textColor = MAIN_PAN;
+        _title.text = @"待处理";
+    }
+    return _title;
+
+}
+
+-(UILabel *)hint{
+    if (!_hint) {
+        _hint = [[UILabel alloc] init];
+        _hint.text = @"1";
+        _hint.textColor = MAIN_PAN;
+        _hint.font = H14;
+    }
+    return _hint;
+}
+
+-(UIImageView *)back{
+    if (!_back) {
+        _back = [[UIImageView alloc] init];
+        _back.image = ImageNamed(@"role_right_arrow");
+    }
+    return _back;
+}
+
+
+
+
+
+
 
 
 
