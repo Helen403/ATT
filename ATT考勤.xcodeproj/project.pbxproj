@@ -65,6 +65,7 @@
 		796803341E111F7400CED421 /* MyExamineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 796803331E111F7400CED421 /* MyExamineView.m */; settings = {ASSET_TAGS = (); }; };
 		796803371E11202C00CED421 /* MyApplyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 796803361E11202C00CED421 /* MyApplyViewModel.m */; settings = {ASSET_TAGS = (); }; };
 		7968033A1E11206D00CED421 /* MyExamineViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 796803391E11206D00CED421 /* MyExamineViewModel.m */; settings = {ASSET_TAGS = (); }; };
+		7980A8DD1E1354B300F3F289 /* myexamine.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7980A8DC1E1354B300F3F289 /* myexamine.plist */; settings = {ASSET_TAGS = (); }; };
 		7985066D1E028AC600028C22 /* CMRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7985066C1E028AC600028C22 /* CMRequest.m */; settings = {ASSET_TAGS = (); }; };
 		798506701E028C1400028C22 /* HView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7985066F1E028C1400028C22 /* HView.m */; settings = {ASSET_TAGS = (); }; };
 		798506761E0294D400028C22 /* HViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 798506751E0294D400028C22 /* HViewModel.m */; settings = {ASSET_TAGS = (); }; };
@@ -220,6 +221,7 @@
 		796803361E11202C00CED421 /* MyApplyViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyApplyViewModel.m; sourceTree = "<group>"; };
 		796803381E11206D00CED421 /* MyExamineViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyExamineViewModel.h; sourceTree = "<group>"; };
 		796803391E11206D00CED421 /* MyExamineViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyExamineViewModel.m; sourceTree = "<group>"; };
+		7980A8DC1E1354B300F3F289 /* myexamine.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = myexamine.plist; sourceTree = "<group>"; };
 		7985066B1E028AC600028C22 /* CMRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMRequest.h; sourceTree = "<group>"; };
 		7985066C1E028AC600028C22 /* CMRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMRequest.m; sourceTree = "<group>"; };
 		7985066E1E028C1400028C22 /* HView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HView.h; sourceTree = "<group>"; };
@@ -589,6 +591,7 @@
 			isa = PBXGroup;
 			children = (
 				79367B031E12220C00696A38 /* myapplytext.plist */,
+				7980A8DC1E1354B300F3F289 /* myexamine.plist */,
 			);
 			name = File;
 			sourceTree = "<group>";
@@ -1196,6 +1199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79367B041E12220C00696A38 /* myapplytext.plist in Resources */,
+				7980A8DD1E1354B300F3F289 /* myexamine.plist in Resources */,
 				79FD0E2A1E0D00E3006AAF0E /* ic_schedule_menu_back.png in Resources */,
 				79282EC61E0B832F00F4E050 /* l3.jpg in Resources */,
 				79282EC31E0B80FF00F4E050 /* l1.png in Resources */,
@@ -1463,7 +1467,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ATT考勤/PrefixHeader.pch";
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Helen.ATT--";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1479,7 +1483,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ATT考勤/PrefixHeader.pch";
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Helen.ATT--";
 				PRODUCT_NAME = "$(TARGET_NAME)";

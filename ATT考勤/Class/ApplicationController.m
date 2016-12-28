@@ -49,10 +49,10 @@
 -(void)h_bindViewModel{
 
     [[self.applicationViewModel.submitclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+
+//        [self.navigationController popToRootViewControllerAnimated:NO];
         
-        
-        
-        [self.navigationController popToRootViewControllerAnimated:NO];
+        [self.navigationController popViewControllerAnimated:NO];
     }];
 
 }

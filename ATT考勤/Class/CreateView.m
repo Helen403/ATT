@@ -51,7 +51,7 @@
     
     CGFloat leftPadding =(SCREEN_WIDTH-SCREEN_WIDTH*0.8)*0.5;
     CGFloat topPadding = SCREEN_HEIGHT *0.1;
-    CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
+    
     
     [self.useImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topPadding);

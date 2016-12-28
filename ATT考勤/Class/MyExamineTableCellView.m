@@ -21,6 +21,8 @@
 
 @property(nonatomic,strong) UIImageView *back;
 
+@property(nonatomic,strong) UIView *line;
+
 @end
 
 
@@ -29,24 +31,63 @@
 
 #pragma mark system
 -(void)updateConstraints{
-
+    
     WS(weakSelf);
+    [self.Img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf);
+        make.left.equalTo(10);
+    }];
+    
+    [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf);
+        make.left.equalTo(weakSelf.Img.mas_right).offset(10);
+    }];
+    
+    [self.back mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf);
+        make.right.equalTo(-10);
+    }];
+    
+    [self.hint mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf);
+        make.right.equalTo(weakSelf.back.mas_left).offset(-10);
+    }];
+    
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(weakSelf.mas_bottom).offset(1);
+        make.left.equalTo(weakSelf);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+    }];
+    
     [super updateConstraints];
 }
 
 
 #pragma mark private
 -(void)h_setupViews{
-
-
+    
+    
     [self addSubview:self.Img];
     [self addSubview:self.title];
     [self addSubview:self.hint];
     [self addSubview:self.back];
-    
+    [self addSubview:self.line];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
+}
+
+#pragma mark loaddata
+-(void)setMyExamineModel:(MyExamineModel *)myExamineModel{
+    if (!myExamineModel) {
+        return;
+    }
+    _myExamineModel = myExamineModel;
+    
+    self.Img.image = ImageNamed(myExamineModel.Img);
+    self.title.text = myExamineModel.title;
+    self.hint.text = myExamineModel.hint;
+
 }
 
 
@@ -56,12 +97,13 @@
         _myExamineCellViewModel = [[MyExamineCellViewModel alloc] init];
     }
     return _myExamineCellViewModel;
-
+    
 }
 
 -(UIImageView *)Img{
     if (!_Img) {
         _Img = [[UIImageView alloc] init];
+        _Img.image = ImageNamed(@"role_code_icon");
     }
     return _Img;
 }
@@ -74,7 +116,7 @@
         _title.text = @"待处理";
     }
     return _title;
-
+    
 }
 
 -(UILabel *)hint{
@@ -95,13 +137,13 @@
     return _back;
 }
 
-
-
-
-
-
-
-
+-(UIView *)line{
+    if (!_line) {
+        _line = [[UIView alloc] init];
+        _line.backgroundColor = BG_COLOR;
+    }
+    return _line;
+}
 
 
 @end

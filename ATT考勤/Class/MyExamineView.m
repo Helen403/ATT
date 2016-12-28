@@ -10,7 +10,7 @@
 #import "MyExamineViewModel.h"
 #import "MyExamineTableCellView.h"
 
-@interface MyExamineView()
+@interface MyExamineView()<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong) MyExamineViewModel *myExamineViewModel;
 
@@ -28,7 +28,15 @@
 
 
 -(void)updateConstraints{
-    WS(weakSelf);
+
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+
+        make.left.equalTo(0);
+        make.right.equalTo(0);
+        make.bottom.equalTo(0);
+        make.top.equalTo(-10);
+    }];
+    
     [super updateConstraints];
 
 }
@@ -38,6 +46,7 @@
 
     self.backgroundColor = red_color;
     
+    [self addSubview:self.tableView];
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
@@ -87,7 +96,7 @@
     
     MyExamineTableCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MyExamineTableCellView class])] forIndexPath:indexPath];
     
-//    cell.loginViewCellViewModel = self.loginViewModel.alArray[indexPath.row];
+    cell.myExamineModel = self.myExamineViewModel.arr[indexPath.row];
     
     return cell;
 }
@@ -95,13 +104,16 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 100;
+    return 60;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    [self.loginViewModel.cellClickSubject sendNext:nil];
+    [self.myExamineViewModel.cellclickSubject sendNext:nil];
 }
+
+
+
 
 
 @end

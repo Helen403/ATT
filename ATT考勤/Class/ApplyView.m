@@ -59,7 +59,7 @@
     
     [self addSubview:self.myApply];
     [self addSubview:self.myExamine];
-    //    [self addSubview:self.view];
+    
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];

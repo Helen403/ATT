@@ -10,4 +10,14 @@
 
 @interface MyExamineModel : NSObject
 
+@property(nonatomic,strong) NSString *Img;
+
+@property(nonatomic,strong) NSString *title;
+
+@property(nonatomic,strong) NSString *hint;
+
++ (instancetype)examineWithDict:(NSDictionary *)dict;
+- (instancetype)initWithDict:(NSDictionary *)dict;
+
+
 @end
