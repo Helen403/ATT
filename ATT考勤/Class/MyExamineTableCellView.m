@@ -40,7 +40,9 @@
 
 
     [self addSubview:self.Img];
-    
+    [self addSubview:self.title];
+    [self addSubview:self.hint];
+    [self addSubview:self.back];
     
     
     [self setNeedsUpdateConstraints];
