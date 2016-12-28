@@ -10,4 +10,11 @@
 
 @implementation CreateViewModel
 
+-(RACSubject *)buildRoleclickSubject{
+    if (!_buildRoleclickSubject) {
+        _buildRoleclickSubject = [RACSubject subject];
+    }
+    return _buildRoleclickSubject;
+}
+
 @end

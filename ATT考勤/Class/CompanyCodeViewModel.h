@@ -10,4 +10,7 @@
 
 @interface CompanyCodeViewModel : HViewModel
 
+@property(nonatomic,strong) RACSubject *addclickSubject;
+
+
 @end

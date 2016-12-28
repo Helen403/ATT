@@ -7,8 +7,15 @@
 //
 
 #import "CompanyCodeController.h"
+#import "CompanyCodeView.h"
+#import "CompanyCodeViewModel.h"
+
 
 @interface CompanyCodeController ()
+
+@property(nonatomic,strong) CompanyCodeView *companyCodeView;
+
+@property(nonatomic,strong) CompanyCodeViewModel *companyCodeViewModel;
 
 @end
 
@@ -16,22 +23,55 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
 }
+#pragma mark system
+-(void)updateViewConstraints{
+    WS(weakSelf);
+    [self.companyCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view);
+    }];
+    
+    [super updateViewConstraints];
+}
+
+#pragma mark private
+-(void)h_addSubviews{
+    [self.view addSubview:self.companyCodeView];
+
+}
+
+-(void)h_bindViewModel{
+
+    [[self.companyCodeViewModel.addclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        
+      [self.navigationController popToRootViewControllerAnimated:YES];
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma lazyload
+-(CompanyCodeView *)companyCodeView{
+    if (!_companyCodeView) {
+        _companyCodeView = [[CompanyCodeView alloc] initWithViewModel:self.companyCodeViewModel];
+    }
+    return _companyCodeView;
+
 }
-*/
+
+-(CompanyCodeViewModel *)companyCodeViewModel{
+    if (!_companyCodeViewModel) {
+        _companyCodeViewModel = [[CompanyCodeViewModel alloc] init];
+    }
+    return _companyCodeViewModel;
+
+}
+
 
 @end

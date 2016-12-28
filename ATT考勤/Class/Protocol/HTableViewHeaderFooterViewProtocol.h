@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HTableViewHeaderFooterViewProtocol : NSObject
 
+@protocol HTableViewHeaderFooterViewProtocol <NSObject>
+
+@optional
+
+- (void)h_setupViews;
 @end

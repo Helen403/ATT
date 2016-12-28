@@ -7,39 +7,141 @@
 //
 
 #import "AppDelegate.h"
+#import "StartApp.h"
+#import "ThirdPartService.h"
+#import "ZJLeadingPageController.h"
+#import "ZJLaunchAdController.h"
+/**********************************************/
+#import "HNavigationController.h"
+
+
+#import "HTarBarViewController.h"
+
+#import "LoginViewController.h"
+
 
 @interface AppDelegate ()
+
+@property (nonatomic,strong) HNavigationController *nav;
 
 @end
 
 @implementation AppDelegate
 
-
+#pragma mark system
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+   
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstStart"]){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstStart"];
+        
+        // 如果是第一次安装打开App --- 显示引导页面
+        ZJLeadingPageController *leadController = [[ZJLeadingPageController alloc] initWithPagesCount:2 setupCellHandler:^(ZJLeadingPageCell *cell, NSIndexPath *indexPath) {
+            
+            // 设置图片
+            NSString *imageName = [NSString stringWithFormat:@"l%ld",indexPath.row+1];
+            cell.imageView.image = [UIImage imageNamed:imageName];
+            
+            // 设置按钮属性
+            [cell.finishBtn setTitle:@"立即体验" forState:UIControlStateNormal];
+            [cell.finishBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+            
+        } finishHandler:^(UIButton *finishBtn) {
+ 
+            self.window.rootViewController = self.nav;
+            
+        }];
+        // 自定义属性
+        leadController.pageControl.pageIndicatorTintColor = [UIColor yellowColor];
+        leadController.pageControl.currentPageIndicatorTintColor = [UIColor purpleColor];
+        
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.window.backgroundColor = [UIColor whiteColor];
+        [self.window makeKeyAndVisible];
+        self.window.rootViewController = leadController;
+        
+        
+    }else{
+      
+        
+        //    NSString *adImageURLString = @"这是启动广告图片的URL";
+        //    NSString *adURLString = @"这是点击广告图片后的广告URL";
+        
+        ZJLaunchAdController *launchVc = [[ZJLaunchAdController alloc] initWithLaunchImage:nil setAdImageHandler:^(UIImageView *imageView) {
+            // 这里可以直接使用SDWebimage等来请求服务器提供的广告图片(SDWebimage会处理好gif图片的显示)
+            // 不过你需要注意选择SDWebimage的缓存策略
+            imageView.image = [UIImage imageNamed:@"l2"];
+            
+        } finishHandler:^(ZJLaunchAdCallbackType callbackType) {
+            switch (callbackType) {
+                    // 点击了广告, 展示相应的广告即可
+                case ZJLaunchAdCallbackTypeClickAd:
+                    self.window.rootViewController = self.nav;
+                    
+                    break;
+                    //  展示广告图片结束, 可以进入App
+                case ZJLaunchAdCallbackTypeShowFinish:
+                    self.window.rootViewController = self.nav;
+                    break;
+                    
+                    // 点击了跳过广告, 可以进入App
+                case ZJLaunchAdCallbackTypeClickSkipBtn:
+                    
+                    self.window.rootViewController = self.nav;
+                    
+                    break;
+            }
+        }];
+        
+        launchVc.countDownTime = 3.f;
+        // 自定义广告图片的frame
+        //    launchVc.adImageViewFrame = [UIScreen mainScreen].bounds;
+        [launchVc setSkipBtnHandler:^(UIButton *skipBtn, NSInteger currentTime) {
+            [skipBtn setTitle:[NSString stringWithFormat:@"%lds 跳过", (long)currentTime] forState:UIControlStateNormal];
+        }];
+        
+        
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.window.backgroundColor = [UIColor whiteColor];
+        [self.window makeKeyAndVisible];
+        self.window.rootViewController = launchVc;
+        
+    }
+
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+  
 }
+
+#pragma mark lazyload
+-(HNavigationController *)nav{
+    if (!_nav) {
+        _nav = [[HNavigationController alloc] init];
+        [_nav addChildViewController:[[LoginViewController alloc] init]];
+    }
+    return _nav;
+    
+}
+
+
+
 
 @end

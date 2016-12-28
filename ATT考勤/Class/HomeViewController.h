@@ -6,8 +6,9 @@
 //  Copyright © 2016年 Helen. All rights reserved.
 //
 
-#import "HView.h"
 
-@interface HomeViewController : HView
+#import "HViewController.h"
+
+@interface HomeViewController : HViewController
 
 @end

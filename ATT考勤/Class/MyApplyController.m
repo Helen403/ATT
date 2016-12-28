@@ -7,8 +7,16 @@
 //
 
 #import "MyApplyController.h"
+#import "MyApplyView.h"
+#import "MyApplyViewModel.h"
+
+#import "ApplicationController.h"
 
 @interface MyApplyController ()
+
+@property(nonatomic,strong) MyApplyView *myapplyView;
+
+@property(nonatomic,strong) MyApplyViewModel *myApplyViewModel;
 
 @end
 
@@ -16,22 +24,64 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
 }
+
+#pragma mark system
+-(void)updateViewConstraints{
+    
+    [self.myapplyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(50);
+        make.left.equalTo(0);
+        make.bottom.equalTo(0);
+        make.right.equalTo(0);
+    }];
+    
+    
+    [super updateViewConstraints];
+}
+
+
+-(void)h_addSubviews{
+    
+    [self.view addSubview:self.myapplyView];
+}
+
+-(void)h_bindViewModel{
+    
+    [[self.myApplyViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        ApplicationController *application = [[ApplicationController alloc] init];
+        
+        [self.navigationController pushViewController:application animated:NO];
+        
+    
+        NSLog(@"%@",x);
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark lazyload
+-(MyApplyView *)myapplyView{
+    
+    if (!_myapplyView) {
+        _myapplyView = [[MyApplyView alloc] initWithViewModel:self.myApplyViewModel];
+    }
+    return _myapplyView;
 }
-*/
+
+
+-(MyApplyViewModel *)myApplyViewModel{
+    if (!_myApplyViewModel) {
+        _myApplyViewModel = [[MyApplyViewModel alloc] init];
+    }
+    return _myApplyViewModel;
+}
+
 
 @end

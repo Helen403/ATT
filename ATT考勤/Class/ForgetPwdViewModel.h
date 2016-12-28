@@ -10,4 +10,6 @@
 
 @interface ForgetPwdViewModel : HViewModel
 
+@property(nonatomic,strong) RACSubject *finishclickSubject;
+
 @end

@@ -7,8 +7,15 @@
 //
 
 #import "ApplicationController.h"
+#import "ApplicationView.h"
+#import "ApplicationViewModel.h"
+
 
 @interface ApplicationController ()
+
+@property(nonatomic,strong) ApplicationView *applicationView;
+
+@property(nonatomic,strong) ApplicationViewModel *applicationViewModel;
 
 @end
 
@@ -16,22 +23,63 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
 }
+#pragma mark system
+-(void)updateViewConstraints{
+    WS(weakSelf);
+    [self.applicationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view);
+    }];
+    
+    [super updateViewConstraints];
+
+}
+
+#pragma mark private
+-(void)h_layoutNavigation{
+
+    self.title = @"迟到申请";
+}
+
+-(void)h_addSubviews{
+    [self.view addSubview:self.applicationView];
+}
+
+-(void)h_bindViewModel{
+
+    [[self.applicationViewModel.submitclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        
+        
+        
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }];
+
+}
+
+
+#pragma mark lazyload
+-(ApplicationView *)applicationView{
+    if (!_applicationView) {
+        _applicationView = [[ApplicationView alloc] initWithViewModel:self.applicationViewModel];
+    }
+    return _applicationView;
+}
+
+-(ApplicationViewModel *)applicationViewModel{
+    if (!_applicationViewModel) {
+        _applicationViewModel = [[ApplicationViewModel alloc] init];
+    }
+    return _applicationViewModel;
+
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

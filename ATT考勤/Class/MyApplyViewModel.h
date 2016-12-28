@@ -10,4 +10,8 @@
 
 @interface MyApplyViewModel : HViewModel
 
+@property(nonatomic,strong) NSMutableArray *arr;
+
+@property(nonatomic,strong) RACSubject *cellclickSubject;
+
 @end

@@ -7,7 +7,10 @@
 //
 
 #import "HTableViewCell.h"
+#import "MyExamineModel.h"
 
 @interface MyExamineTableCellView : HTableViewCell
+
+@property(nonatomic,strong) MyExamineModel *myExamineModel;
 
 @end

@@ -10,4 +10,6 @@
 
 @interface ApplicationViewModel : HViewModel
 
+@property(nonatomic,strong) RACSubject *submitclickSubject;
+
 @end

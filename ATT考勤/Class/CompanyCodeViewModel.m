@@ -10,4 +10,12 @@
 
 @implementation CompanyCodeViewModel
 
+
+-(RACSubject *)addclickSubject{
+    if (!_addclickSubject) {
+        _addclickSubject = [RACSubject subject];
+    }
+    return _addclickSubject;
+
+}
 @end

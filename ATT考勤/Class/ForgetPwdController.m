@@ -7,8 +7,15 @@
 //
 
 #import "ForgetPwdController.h"
+#import "ForgetPwdViewModel.h"
+#import "ForgetPwdView.h"
+
 
 @interface ForgetPwdController ()
+
+@property(nonatomic,strong) ForgetPwdViewModel *forgetPwdViewModel;
+
+@property(nonatomic,strong) ForgetPwdView *forgetPwdView;
 
 @end
 
@@ -16,22 +23,68 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+}
+
+#pragma mark system
+-(void)updateViewConstraints{
+
+    
+    WS(weakSelf);
+    [self.forgetPwdView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view);
+    }];
+    
+    
+    [super updateViewConstraints];
+}
+
+
+#pragma mark private
+-(void)h_layoutNavigation{
+
+    self.title = @"忘记密码";
+}
+
+
+-(void)h_addSubviews{
+    [self.view addSubview:self.forgetPwdView];
+    
+
+}
+
+-(void)h_bindViewModel{
+
+    [[self.forgetPwdViewModel.finishclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+       
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark lazyload
+-(ForgetPwdView *)forgetPwdView{
+    if (!_forgetPwdView) {
+        _forgetPwdView = [[ForgetPwdView alloc] initWithViewModel:self.forgetPwdViewModel];
+    }
+    return _forgetPwdView;
+
 }
-*/
+
+-(ForgetPwdViewModel *)forgetPwdViewModel{
+    if (!_forgetPwdViewModel) {
+        _forgetPwdViewModel = [[ForgetPwdViewModel alloc] init];
+    }
+    return _forgetPwdViewModel;
+}
+
 
 @end

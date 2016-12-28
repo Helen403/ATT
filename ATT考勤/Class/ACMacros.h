@@ -118,10 +118,11 @@
 #define JPGkImg(NAME)          [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(NAME) ofType:@"jpg"]]
 #define kImg(NAME, EXT)        [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(NAME) ofType:(EXT)]]
 
-#define V_IMAGE(imgName) [UIImage imageNamed:imgName]
+
 
 
 #define URL(url) [NSURL URLWithString:url]
+
 #define string(str1,str2) [NSString stringWithFormat:@"%@%@",str1,str2]
 #define s_str(str1) [NSString stringWithFormat:@"%@",str1]
 #define s_Num(num1) [NSString stringWithFormat:@"%d",num1]
@@ -315,38 +316,56 @@
 /* ************************************************************************************************* */
 
 ///正常字体
-#define H30 [UIFont systemFontOfSize:30]
-#define H29 [UIFont systemFontOfSize:29]
-#define H28 [UIFont systemFontOfSize:28]
-#define H27 [UIFont systemFontOfSize:27]
-#define H26 [UIFont systemFontOfSize:26]
-#define H25 [UIFont systemFontOfSize:25]
-#define H24 [UIFont systemFontOfSize:24]
-#define H23 [UIFont systemFontOfSize:23]
-#define H22 [UIFont systemFontOfSize:22]
-#define H20 [UIFont systemFontOfSize:20]
-#define H19 [UIFont systemFontOfSize:19]
-#define H18 [UIFont systemFontOfSize:18]
-#define H17 [UIFont systemFontOfSize:17]
-#define H16 [UIFont systemFontOfSize:16]
-#define H15 [UIFont systemFontOfSize:15]
-#define H14 [UIFont systemFontOfSize:14]
-#define H13 [UIFont systemFontOfSize:13]
-#define H12 [UIFont systemFontOfSize:12]
-#define H11 [UIFont systemFontOfSize:11]
-#define H10 [UIFont systemFontOfSize:10]
-#define H8 [UIFont systemFontOfSize:8]
+#define H36 [UIFont systemFontOfSize:36*SizeScaleW]
+#define H35 [UIFont systemFontOfSize:35*SizeScaleW]
+#define H34 [UIFont systemFontOfSize:34*SizeScaleW]
+#define H33 [UIFont systemFontOfSize:33*SizeScaleW]
+#define H32 [UIFont systemFontOfSize:32*SizeScaleW]
+#define H31 [UIFont systemFontOfSize:31*SizeScaleW]
+#define H30 [UIFont systemFontOfSize:30*SizeScaleW]
+#define H29 [UIFont systemFontOfSize:29*SizeScaleW]
+#define H28 [UIFont systemFontOfSize:28*SizeScaleW]
+#define H27 [UIFont systemFontOfSize:27*SizeScaleW]
+#define H26 [UIFont systemFontOfSize:26*SizeScaleW]
+#define H25 [UIFont systemFontOfSize:25*SizeScaleW]
+#define H24 [UIFont systemFontOfSize:24*SizeScaleW]
+#define H23 [UIFont systemFontOfSize:23*SizeScaleW]
+#define H22 [UIFont systemFontOfSize:22*SizeScaleW]
+#define H20 [UIFont systemFontOfSize:20*SizeScaleW]
+#define H19 [UIFont systemFontOfSize:19*SizeScaleW]
+#define H18 [UIFont systemFontOfSize:18*SizeScaleW]
+#define H17 [UIFont systemFontOfSize:17*SizeScaleW]
+#define H16 [UIFont systemFontOfSize:16*SizeScaleW]
+#define H15 [UIFont systemFontOfSize:15*SizeScaleW]
+#define H14 [UIFont systemFontOfSize:14*SizeScaleW]
+#define H13 [UIFont systemFontOfSize:13*SizeScaleW]
+#define H12 [UIFont systemFontOfSize:12*SizeScaleW]
+#define H11 [UIFont systemFontOfSize:11*SizeScaleW]
+#define H10 [UIFont systemFontOfSize:10*SizeScaleW]
+#define H8 [UIFont systemFontOfSize:8*SizeScaleW]
 
 ///粗体
-#define HB20 [UIFont boldSystemFontOfSize:20]
-#define HB18 [UIFont boldSystemFontOfSize:18]
-#define HB16 [UIFont boldSystemFontOfSize:16]
-#define HB14 [UIFont boldSystemFontOfSize:14]
-#define HB13 [UIFont boldSystemFontOfSize:13]
-#define HB12 [UIFont boldSystemFontOfSize:12]
-#define HB11 [UIFont boldSystemFontOfSize:11]
-#define HB10 [UIFont boldSystemFontOfSize:10]
-#define HB8 [UIFont boldSystemFontOfSize:8]
+#define HB44 [UIFont boldSystemFontOfSize:44*SizeScaleW]
+#define HB42 [UIFont boldSystemFontOfSize:42*SizeScaleW]
+#define HB40 [UIFont boldSystemFontOfSize:40*SizeScaleW]
+#define HB38 [UIFont boldSystemFontOfSize:38*SizeScaleW]
+#define HB36 [UIFont boldSystemFontOfSize:36*SizeScaleW]
+#define HB34 [UIFont boldSystemFontOfSize:34*SizeScaleW]
+#define HB32 [UIFont boldSystemFontOfSize:32*SizeScaleW]
+#define HB30 [UIFont boldSystemFontOfSize:30*SizeScaleW]
+#define HB28 [UIFont boldSystemFontOfSize:28*SizeScaleW]
+#define HB26 [UIFont boldSystemFontOfSize:26*SizeScaleW]
+#define HB24 [UIFont boldSystemFontOfSize:24*SizeScaleW]
+#define HB22 [UIFont boldSystemFontOfSize:22*SizeScaleW]
+#define HB20 [UIFont boldSystemFontOfSize:20*SizeScaleW]
+#define HB18 [UIFont boldSystemFontOfSize:18*SizeScaleW]
+#define HB16 [UIFont boldSystemFontOfSize:16*SizeScaleW]
+#define HB14 [UIFont boldSystemFontOfSize:14*SizeScaleW]
+#define HB13 [UIFont boldSystemFontOfSize:13*SizeScaleW]
+#define HB12 [UIFont boldSystemFontOfSize:12*SizeScaleW]
+#define HB11 [UIFont boldSystemFontOfSize:11*SizeScaleW]
+#define HB10 [UIFont boldSystemFontOfSize:10*SizeScaleW]
+#define HB8 [UIFont boldSystemFontOfSize:8*SizeScaleW]
 
 ///常用颜色
 #define black_color     [UIColor blackColor]
@@ -367,6 +386,9 @@
 #define magenta_color   [UIColor magentaColor]
 
 #define kBackColor UIColorFromRGB(0xd81460)
+//随机颜色
+#define randomColor random(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
+#define random(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)/255.0]
 
 /* ************************************************************************************************* */
 
@@ -377,8 +399,8 @@
 //#define UDID [[[UIDevice currentDevice] identifierForVendor] UUIDString]
 
 //屏幕高、宽
-#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
-#define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height - 64
+//#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
+//#define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height - 64
 
 ///系统版本号
 #define VersionLargerThan7  ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)

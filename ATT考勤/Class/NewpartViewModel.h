@@ -10,4 +10,7 @@
 
 @interface NewpartViewModel : HViewModel
 
+@property(nonatomic,strong) RACSubject *createclickSubject;
+
+
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HViewModelProtocol.h"
 
-@interface HViewModel : NSObject
+@interface HViewModel : NSObject <HViewModelProtocol>
 
 @end

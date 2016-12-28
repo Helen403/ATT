@@ -7,31 +7,52 @@
 //
 
 #import "HTarBarViewController.h"
-#import "HelenNavigationController.h"
+#import "HNavigationController.h"
 /*******************************************/
-#import "IntegralViewController.h"
-#import "ShoppingCartViewController.h"
-#import "MineViewController.h"
-#import "MyCardViewController.h"
 #import "HomeViewController.h"
-
-
-//设置字体的大小
-#define textSize 12
+#import "ApplyController.h"
 //设置下面导航栏的高度
 #define TarBarHeight 49
 //导航栏的颜色
-#define TarBarBackgroundColor RGBCOLOR(0, 0, 0)
+#define TarBarBackgroundColor RGBCOLOR(255, 255, 255)
 
+//设置字体的大小
+#define textSize 12
+//正常字体的颜色
+#define textNomalColor RGBCOLOR(29, 29, 29)
+//被点击字体的颜色
+#define textPressColor RGBCOLOR(242, 130, 74)
 
+//设置对应的文字
+#define text_1 @"申请"
+#define text_2 @"考勤"
+#define text_3 @"通讯录"
+#define text_4 @"统计"
+#define text_5 @"信息"
 
+//设置对应的图片
+#define Img_1_normal @"homepage_apply_button_gray"
+#define Img_2_normal @"homepage_attendance_button_gray"
+#define Img_3_normal @"homepage_record_button_gray"
+#define Img_4_normal @"homepage_statistics_button_gray"
+#define Img_5_normal @"homepage_information_button_gray"
 
+#define Img_1_press @"homepage_apply_button_orange"
+#define Img_2_press @"homepage_attendance_button_orange"
+#define Img_3_press @"homepage_record_button_orange"
+#define Img_4_press @"homepage_statistics_button_orange"
+#define Img_5_press @"homepage_information_button_orange"
+
+#define controller_1 [[HomeViewController alloc] init]
+#define controller_2 [[ApplyController alloc] init]
+#define controller_3 [[ApplyController alloc] init]
+#define controller_4 [[ApplyController alloc] init]
+#define controller_5 [[ApplyController alloc] init]
 
 @implementation HTarBarViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     //移除TabBarController自带的下部的条
     [self.tabBar removeFromSuperview];
@@ -63,8 +84,6 @@
     _TarBarView.backgroundColor = TarBarBackgroundColor;
     
     [self.view addSubview:_TarBarView];
-    
-    
     
     //添加按钮1
     int button1X = 0;
@@ -113,11 +132,11 @@
 -(void)setTarBarAttribute{
     
     //设置文字内容
-    [_button1 setTitle:@"申请" forState:UIControlStateNormal];
-    [_button2 setTitle:@"考勤" forState:UIControlStateNormal];
-    [_button3 setTitle:@"通讯录" forState:UIControlStateNormal];
-    [_button4 setTitle:@"统计" forState:UIControlStateNormal];
-    [_button5 setTitle:@"信息" forState:UIControlStateNormal];
+    [_button1 setTitle:text_1 forState:UIControlStateNormal];
+    [_button2 setTitle:text_2 forState:UIControlStateNormal];
+    [_button3 setTitle:text_3 forState:UIControlStateNormal];
+    [_button4 setTitle:text_4 forState:UIControlStateNormal];
+    [_button5 setTitle:text_5 forState:UIControlStateNormal];
     //设置文字的大小
     _button1.titleLabel.font = [UIFont systemFontOfSize:textSize];
     _button2.titleLabel.font = [UIFont systemFontOfSize:textSize];
@@ -132,32 +151,32 @@
     _button5.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     //设置正常状态的颜色
-    [_button1 setTitleColor:[HelenUtils colorRed:255 Green:255 Blue:255] forState:UIControlStateNormal];
-    [_button2 setTitleColor:[HelenUtils colorRed:255 Green:255 Blue:255] forState:UIControlStateNormal];
-    [_button3 setTitleColor:[HelenUtils colorRed:255 Green:255 Blue:255] forState:UIControlStateNormal];
-    [_button4 setTitleColor:[HelenUtils colorRed:255 Green:255 Blue:255] forState:UIControlStateNormal];
-    [_button5 setTitleColor:[HelenUtils colorRed:255 Green:255 Blue:255] forState:UIControlStateNormal];
+    [_button1 setTitleColor:textNomalColor forState:UIControlStateNormal];
+    [_button2 setTitleColor:textNomalColor forState:UIControlStateNormal];
+    [_button3 setTitleColor:textNomalColor forState:UIControlStateNormal];
+    [_button4 setTitleColor:textNomalColor forState:UIControlStateNormal];
+    [_button5 setTitleColor:textNomalColor forState:UIControlStateNormal];
     
     //设置点击状态的颜色
-    [_button1 setTitleColor:[HelenUtils colorRed:35 Green:35 Blue:35] forState:UIControlStateSelected];
-    [_button2 setTitleColor:[HelenUtils colorRed:35 Green:35 Blue:35] forState:UIControlStateSelected];
-    [_button3 setTitleColor:[HelenUtils colorRed:35 Green:35 Blue:35] forState:UIControlStateSelected];
-    [_button4 setTitleColor:[HelenUtils colorRed:35 Green:35 Blue:35] forState:UIControlStateSelected];
-    [_button5 setTitleColor:[HelenUtils colorRed:35 Green:35 Blue:35] forState:UIControlStateSelected];
+    [_button1 setTitleColor:textPressColor forState:UIControlStateSelected];
+    [_button2 setTitleColor:textPressColor forState:UIControlStateSelected];
+    [_button3 setTitleColor:textPressColor forState:UIControlStateSelected];
+    [_button4 setTitleColor:textPressColor forState:UIControlStateSelected];
+    [_button5 setTitleColor:textPressColor forState:UIControlStateSelected];
     
     //设置正常状态的图片
-    [_button1 setImage:[UIImage imageNamed:@"homepage_apply_button_white"] forState:UIControlStateNormal];
-    [_button2 setImage:[UIImage imageNamed:@"homepage_attendance_button_white"] forState:UIControlStateNormal];
-    [_button3 setImage:[UIImage imageNamed:@"homepage_record_button_white"] forState:UIControlStateNormal];
-    [_button4 setImage:[UIImage imageNamed:@"homepage_statistics_button_white"] forState:UIControlStateNormal];
-    [_button5 setImage:[UIImage imageNamed:@"homepage_information_button_white"] forState:UIControlStateNormal];
+    [_button1 setImage:[UIImage imageNamed:Img_1_normal] forState:UIControlStateNormal];
+    [_button2 setImage:[UIImage imageNamed:Img_2_normal] forState:UIControlStateNormal];
+    [_button3 setImage:[UIImage imageNamed:Img_3_normal] forState:UIControlStateNormal];
+    [_button4 setImage:[UIImage imageNamed:Img_4_normal] forState:UIControlStateNormal];
+    [_button5 setImage:[UIImage imageNamed:Img_5_normal] forState:UIControlStateNormal];
     
     //设置被点击状态的图片
-    [_button1 setImage:[UIImage imageNamed:@"homepage_apply_button_gray"] forState:UIControlStateSelected];
-    [_button2 setImage:[UIImage imageNamed:@"homepage_attendance_button_gray"] forState:UIControlStateSelected];
-    [_button3 setImage:[UIImage imageNamed:@"homepage_record_button_gray"] forState:UIControlStateSelected];
-    [_button4 setImage:[UIImage imageNamed:@"homepage_statistics_button_gray"] forState:UIControlStateSelected];
-    [_button5 setImage:[UIImage imageNamed:@"homepage_information_button_gray"] forState:UIControlStateSelected];
+    [_button1 setImage:[UIImage imageNamed:Img_1_press] forState:UIControlStateSelected];
+    [_button2 setImage:[UIImage imageNamed:Img_2_press] forState:UIControlStateSelected];
+    [_button3 setImage:[UIImage imageNamed:Img_3_press] forState:UIControlStateSelected];
+    [_button4 setImage:[UIImage imageNamed:Img_4_press] forState:UIControlStateSelected];
+    [_button5 setImage:[UIImage imageNamed:Img_5_press] forState:UIControlStateSelected];
     
     //设置button的内容横向居中
     _button1.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -165,8 +184,6 @@
     _button3.contentHorizontalAlignment =UIControlContentHorizontalAlignmentCenter;
     _button4.contentHorizontalAlignment =UIControlContentHorizontalAlignmentCenter;
     _button5.contentHorizontalAlignment =UIControlContentHorizontalAlignmentCenter;
-    
-    
 }
 
 //添加对应的点击事件
@@ -190,7 +207,6 @@
     
     //默认第一个按钮被点击
     [self.button1 setSelected:YES];
-    
     
     [self OnClickButton:self.button1];
 }
@@ -217,20 +233,16 @@
  */
 - (void)addAllChildVcs
 {
-    HomeViewController *near = [[HomeViewController alloc] init];
-    [self addOneChlildVc:near title:@"首页"];
     
-    IntegralViewController *integral = [[IntegralViewController alloc] init];
-    [self addOneChlildVc:integral title:@"考勤"];
+    [self addOneChlildVc:controller_1] ;
     
-    MyCardViewController *myCard = [[MyCardViewController alloc] init];
-    [self addOneChlildVc:myCard title:@"通讯录"];
+    [self addOneChlildVc:controller_2];
     
-    ShoppingCartViewController *shoppingCart = [[ShoppingCartViewController alloc] init];
-    [self addOneChlildVc:shoppingCart title:@"统计"];
+    [self addOneChlildVc:controller_3];
     
-    MineViewController *mine = [[MineViewController alloc] init];
-    [self addOneChlildVc:mine title:@"信息"];
+    [self addOneChlildVc:controller_4];
+    
+    [self addOneChlildVc:controller_5];
     //让系统的控制器数组指向自己的数组
     self.viewControllers = self.controllers;
     
@@ -241,19 +253,18 @@
  *
  *  @param childVc           子控制器对象
  */
-- (void)addOneChlildVc:(UIViewController *)childVc title:(NSString *)title
+- (void)addOneChlildVc:(UIViewController *)childVc
 {
-    // 设置标题
-    childVc.title = title;
     
     // 添加为tabbar控制器的子控制器
-    HelenNavigationController *nav = [[HelenNavigationController alloc] initWithRootViewController:childVc];
+    HNavigationController *nav = [[HNavigationController alloc] initWithRootViewController:childVc];
     nav.TarBarView = self.TarBarView;
     
     [self.controllers addObject:nav];
 }
 
 //懒加载
+#pragma mark lazyload
 -(NSMutableArray *)controllers{
     if (_controllers==nil) {
         _controllers = [NSMutableArray array];

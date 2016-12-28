@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HViewProtocol.h"
 
-@interface HView : UIView
+@interface HView : UIView <HViewProtocol>
+
+
 
 @end

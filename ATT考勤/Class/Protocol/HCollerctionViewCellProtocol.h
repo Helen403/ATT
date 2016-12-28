@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HCollerctionViewCellProtocol : NSObject
+@protocol HCollerctionViewCellProtocol <NSObject>
 
+@optional
+
+- (void)h_setupViews;
 @end

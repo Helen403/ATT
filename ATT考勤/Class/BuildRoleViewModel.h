@@ -10,4 +10,6 @@
 
 @interface BuildRoleViewModel : HViewModel
 
+@property(nonatomic,strong) RACSubject *companyCodeclickSubject;
+
 @end

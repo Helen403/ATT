@@ -10,4 +10,8 @@
 
 @interface ApplyViewModel : HViewModel
 
+@property(nonatomic,strong) RACSubject *myApplyclickSubject;
+
+@property(nonatomic,strong) RACSubject *myExamineclickSubject;
+
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HTableViewHeaderFooterViewProtocol.h"
 
-@interface HTableViewHeaderFooterView : UITableViewHeaderFooterView
+@interface HTableViewHeaderFooterView : UITableViewHeaderFooterView<HTableViewHeaderFooterViewProtocol>
+
+
 
 @end

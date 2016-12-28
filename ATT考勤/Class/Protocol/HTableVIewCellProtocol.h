@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HTableVIewCellProtocol : NSObject
+@protocol HTableVIewCellProtocol <NSObject>
+@optional
+
+- (void)h_setupViews;
+- (void)h_bindViewModel;
 
 @end

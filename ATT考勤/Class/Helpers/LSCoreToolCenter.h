@@ -17,4 +17,13 @@ extern void ShowMaskStatus(NSString *statues);
 extern void ShowMessage(NSString *statues);
 extern void ShowProgress(CGFloat progress);
 extern void DismissHud(void);
+
+
+//插入数据库
++(void)insertSQLByStringKey:(NSString *)key Value:(NSString *)value;
+//查询数据库
++(NSString *)querySQLByStringKey:(NSString *)key;
+//删除数据库
++(void)deleteTable;
+
 @end

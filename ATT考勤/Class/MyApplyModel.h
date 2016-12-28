@@ -10,4 +10,12 @@
 
 @interface MyApplyModel : NSObject
 
+@property(nonatomic,strong) NSString *Img;
+
+@property(nonatomic,strong) NSString *title;
+
++ (instancetype)applyWithDict:(NSDictionary *)dict;
+- (instancetype)initWithDict:(NSDictionary *)dict;
+
+
 @end

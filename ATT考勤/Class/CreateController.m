@@ -7,8 +7,17 @@
 //
 
 #import "CreateController.h"
+#import "CreateView.h"
+#import "CreateViewModel.h"
+
+
+#import "BuildRoleController.h"
 
 @interface CreateController ()
+
+@property(nonatomic,strong) CreateView *createView;
+
+@property(nonatomic,strong) CreateViewModel *createViewModel;
 
 @end
 
@@ -16,22 +25,62 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
 }
+
+#pragma mark system
+-(void)updateViewConstraints{
+    WS(weakSelf)
+    [self.createView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view);
+    }];
+    [super updateViewConstraints];
+}
+
+#pragma mark private
+-(void)h_layoutNavigation{
+    self.title = @"创建账户";
+
+}
+
+-(void)h_addSubviews{
+
+    [self.view addSubview:self.createView];
+    
+}
+
+-(void)h_bindViewModel{
+
+    
+    [[self.createViewModel.buildRoleclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        
+        BuildRoleController *buildRole = [[BuildRoleController alloc] init];
+        
+        [self.navigationController pushViewController:buildRole animated:YES];
+    }];
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark lazyload
+-(CreateView *)createView{
+    if (!_createView) {
+        _createView = [[CreateView alloc] initWithViewModel:self.createViewModel];
+    }
+    return _createView;
 }
-*/
+-(CreateViewModel *)createViewModel{
+    if (!_createViewModel) {
+        _createViewModel = [[CreateViewModel alloc] init];
+    }
+    return _createViewModel;
+}
+
 
 @end

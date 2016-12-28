@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HCollerctionViewCellProtocol.h"
 
-@interface HCollectionViewCell : UICollectionViewCell
+@interface HCollectionViewCell : UICollectionViewCell<HCollerctionViewCellProtocol>
+
 
 @end

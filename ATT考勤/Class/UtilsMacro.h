@@ -37,7 +37,7 @@
 #define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
 
 //定义UIImage对象
-#define IMAGE(A) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:A ofType:nil]]
+//#define IMAGE(A) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:A ofType:nil]]
 #define ImageNamed(name) [UIImage imageNamed:name]
 
 // 每次请求列表 数据量
@@ -67,16 +67,31 @@
 
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
+//不同设备的屏幕比例 以6为原型
+#define SizeScaleH SCREEN_HEIGHT/667.f
+#define SizeScaleW SCREEN_WIDTH/375.f
+
+//以iphone6为主自动适配宽
+#define autoScaleW(width) width*SizeScaleW;
+//以iphone6为主自动适配高
+#define autoScaleH(height) width*SizeScaleH;
+
+//插入数据库
+#define insert(key,value) [LSCoreToolCenter insertSQLByStringKey:key Value:value]
+//查询数据库
+#define query(key) [LSCoreToolCenter querySQLByStringKey:key]
+//删除数据库
+#define delete [LSCoreToolCenter deleteTable]
 
 
+#define MAIN_GRAY RGBCOLOR(110, 111, 114)
+
+#define MAIN_ORANGER RGBCOLOR(242, 130, 74)
 
 
+#define MAIN_PAN RGBCOLOR(188, 188, 188)
 
+#define BG_COLOR RGBCOLOR(240,240,240)
 
-
-
-
-
-
-
+#define LINE_COLOR RGBCOLOR(206,206,206)
 

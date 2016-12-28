@@ -10,4 +10,6 @@
 
 @interface CreateViewModel : HViewModel
 
+@property(nonatomic,strong) RACSubject *buildRoleclickSubject;
+
 @end

@@ -11,13 +11,26 @@
 @implementation HTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self h_setupViews];
+        [self h_bindViewModel];
+    }
+    return self;
+}
+
+- (void)h_setupViews{}
+
+- (void)h_bindViewModel{}
+
+
 
 @end

@@ -10,4 +10,20 @@
 
 @implementation MyApplyModel
 
++ (instancetype)applyWithDict:(NSDictionary *)dict
+{
+    return [[self alloc] initWithDict:dict];
+}
+
+
+- (instancetype)initWithDict:(NSDictionary *)dict
+{
+    if (self = [super init]) {
+        // 赋值标题
+        self.title = dict[@"title"];
+        self.Img = dict[@"imgtext"];
+    }
+    return self;
+}
+
 @end

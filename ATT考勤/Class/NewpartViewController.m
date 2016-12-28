@@ -7,8 +7,17 @@
 //
 
 #import "NewpartViewController.h"
+#import "NewpartViewModel.h"
+#import "NewpartView.h"
+#import "CreateController.h"
+
 
 @interface NewpartViewController ()
+
+@property(nonatomic,strong) NewpartView *newpartView;
+
+@property(nonatomic,strong) NewpartViewModel *newpartViewModel;
+
 
 @end
 
@@ -16,22 +25,67 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+   
 }
+
+#pragma mark system
+-(void)updateViewConstraints{
+    
+    WS(weakSelf);
+    [self.newpartView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view);
+    }];
+
+    [super updateViewConstraints];
+}
+
+
+#pragma mark private
+-(void)h_layoutNavigation{
+    self.title = @"创建账户";
+}
+
+-(void)h_addSubviews{
+
+    [self.view addSubview:self.newpartView];
+}
+
+-(void)h_bindViewModel{
+    [[self.newpartViewModel.createclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        
+        CreateController *create = [[CreateController alloc] init];
+        
+        [self.navigationController pushViewController:create animated:YES];
+    }];
+}
+
+
+#pragma mark lazyload
+-(NewpartView *)newpartView{
+    if (!_newpartView) {
+        _newpartView = [[NewpartView alloc] initWithViewModel:self.newpartViewModel];
+    }
+    return _newpartView;
+}
+
+-(NewpartViewModel *)newpartViewModel{
+    if (!_newpartViewModel) {
+        _newpartViewModel = [[NewpartViewModel alloc] init];
+    }
+    return _newpartViewModel;
+
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
+
+
 
 @end

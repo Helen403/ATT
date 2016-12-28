@@ -10,4 +10,19 @@
 
 @implementation HCollectionViewCell
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        [self h_setupViews];
+    }
+    return self;
+}
+
+- (void)h_setupViews {}
+
+
+
+
 @end

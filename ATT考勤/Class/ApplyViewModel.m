@@ -10,4 +10,19 @@
 
 @implementation ApplyViewModel
 
+-(RACSubject *)myApplyclickSubject{
+    if (!_myApplyclickSubject) {
+        _myApplyclickSubject = [RACSubject subject];
+    }
+    return _myApplyclickSubject;
+}
+
+-(RACSubject *)myExamineclickSubject{
+    if (!_myExamineclickSubject) {
+        _myExamineclickSubject = [RACSubject subject];
+    }
+    return _myExamineclickSubject;
+
+}
+
 @end

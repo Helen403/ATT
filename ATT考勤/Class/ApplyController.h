@@ -8,6 +8,8 @@
 
 #import "HViewController.h"
 
-@interface ApplyController : HViewController
+@interface ApplyController : UITabBarController
+
+
 
 @end

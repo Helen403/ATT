@@ -10,4 +10,11 @@
 
 @implementation BuildRoleViewModel
 
+-(RACSubject *)companyCodeclickSubject{
+    if (!_companyCodeclickSubject) {
+        _companyCodeclickSubject = [RACSubject subject];
+    }
+    return _companyCodeclickSubject;
+
+}
 @end

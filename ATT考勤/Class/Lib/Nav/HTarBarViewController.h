@@ -20,7 +20,6 @@
 @property(strong,nonatomic) HButtonView * button4;
 @property(strong,nonatomic) HButtonView * button5;
 
-
 //当前被选中的按钮
 @property(strong,nonatomic) HButtonView * Selectbutton;
 

@@ -7,15 +7,58 @@
 //
 
 #import "MyExamineTableCellView.h"
+#import "MyExamineCellViewModel.h"
+
+@interface MyExamineTableCellView()
+
+@property(nonatomic,strong) MyExamineCellViewModel *myExamineCellViewModel;
+
+@property(nonatomic,strong) UIImageView *Img;
+
+@property(nonatomic,strong) UILabel *title;
+
+@property(nonatomic,strong) UILabel *hint;
+
+@property(nonatomic,strong) UIImageView *back;
+
+@end
+
 
 @implementation MyExamineTableCellView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+#pragma mark system
+-(void)updateConstraints{
+
+    WS(weakSelf);
+    [super updateConstraints];
 }
-*/
+
+
+#pragma mark private
+-(void)h_setupViews{
+
+
+    [self addSubview:self.Img];
+    
+    
+    
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
+}
+
+
+#pragma mark lazyload
+-(MyExamineCellViewModel *)myExamineCellViewModel{
+    if (!_myExamineCellViewModel) {
+        _myExamineCellViewModel = [[MyExamineCellViewModel alloc] init];
+    }
+    return _myExamineCellViewModel;
+
+}
+
+
+
+
 
 @end

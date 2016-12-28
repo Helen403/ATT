@@ -10,4 +10,11 @@
 
 @implementation ApplicationViewModel
 
+-(RACSubject *)submitclickSubject{
+    if (!_submitclickSubject) {
+        _submitclickSubject = [RACSubject subject];
+    }
+    return _submitclickSubject;
+}
+
 @end

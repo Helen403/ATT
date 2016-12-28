@@ -7,8 +7,16 @@
 //
 
 #import "BuildRoleController.h"
+#import "BuildRoleView.h"
+#import "BuildRoleViewModel.h"
+
+#import "CompanyCodeController.h"
 
 @interface BuildRoleController ()
+
+@property(nonatomic,strong) BuildRoleView *buildRoleView;
+
+@property(nonatomic,strong) BuildRoleViewModel *buildRoleViewModel;
 
 @end
 
@@ -16,22 +24,58 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+}
+
+
+#pragma mark system
+-(void)updateViewConstraints{
+
+    WS(weakSelf);
+    [self.buildRoleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view);
+    }];
+    
+    [super updateViewConstraints];
+}
+
+#pragma mark private
+-(void)h_layoutNavigation{
+    self.title = @"新建角色";
+
+}
+
+-(void)h_addSubviews{
+    [self.view addSubview:self.buildRoleView];
+
+}
+-(void)h_bindViewModel{
+
+    [[self.buildRoleViewModel.companyCodeclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        
+        CompanyCodeController *company = [[CompanyCodeController alloc] init];
+        
+        [self.navigationController pushViewController:company animated:YES];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark lazyload
+-(BuildRoleView *)buildRoleView{
+    if (!_buildRoleView) {
+        _buildRoleView = [[BuildRoleView alloc] initWithViewModel:self.buildRoleViewModel];
+    }
+    return _buildRoleView;
 }
-*/
+-(BuildRoleViewModel *)buildRoleViewModel{
+    if (!_buildRoleViewModel) {
+        _buildRoleViewModel = [[BuildRoleViewModel alloc] init];
+    }
+    return _buildRoleViewModel;
+
+}
 
 @end

@@ -10,4 +10,12 @@
 
 @implementation NewpartViewModel
 
+
+-(RACSubject *)createclickSubject{
+    if (!_createclickSubject) {
+        _createclickSubject = [RACSubject subject];
+    }
+    return _createclickSubject;
+}
+
 @end

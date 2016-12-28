@@ -33,16 +33,16 @@
     
     [self.operationManager GET:URLString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
-        NSLog(@"%@",downloadProgress);
+//        NSLog(@"%@",downloadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
          NSString *responseJson = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"[CMRequest]: %@",responseJson);
+//        NSLog(@"[CMRequest]: %@",responseJson);
         success(self,responseJson);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        NSLog(@"[CMRequest]: %@",error.localizedDescription);
+//        NSLog(@"[CMRequest]: %@",error.localizedDescription);
         failure(self,error);
     }];
     
@@ -58,16 +58,16 @@
    
     [self.operationManager POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
-        NSLog(@"%@",uploadProgress);
+//        NSLog(@"%@",uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSString* responseJson = [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"[CMRequest]: %@",responseJson);
+//        NSLog(@"[CMRequest]: %@",responseJson);
         success(self,responseJson);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        NSLog(@"[CMRequest]: %@",error.localizedDescription);
+//        NSLog(@"[CMRequest]: %@",error.localizedDescription);
         failure(self,error);
 
     }];

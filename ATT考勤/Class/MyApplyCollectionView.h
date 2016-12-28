@@ -7,7 +7,10 @@
 //
 
 #import "HCollectionViewCell.h"
+#import "MyApplyModel.h"
 
 @interface MyApplyCollectionView : HCollectionViewCell
+
+@property(nonatomic,strong) MyApplyModel *myApplyModel;
 
 @end

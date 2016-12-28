@@ -10,4 +10,13 @@
 
 @implementation ForgetViewModel
 
+
+-(RACSubject *)forgetPwdclickSubject{
+
+    if (!_forgetPwdclickSubject) {
+        _forgetPwdclickSubject = [RACSubject subject];
+    }
+    return _forgetPwdclickSubject;
+}
+
 @end
