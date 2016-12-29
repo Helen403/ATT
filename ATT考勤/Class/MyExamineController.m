@@ -10,7 +10,7 @@
 #import "MyExamineViewModel.h"
 #import "MyExamineView.h"
 #import "PendingController.h"
-
+#import "DealWithController.h"
 
 
 @interface MyExamineController ()
@@ -53,12 +53,25 @@
     
     [[self.myExamineViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
-        PendingController *pending = [[PendingController alloc] init];
+       
         
-        [self.navigationController pushViewController:pending animated:NO];
+        
+        if ([x isEqualToNumber:@(0)]) {
+            PendingController *pending = [[PendingController alloc] init];
+            
+            [self.navigationController pushViewController:pending animated:NO];
+//            ShowMaskStatus(@"正在加载");
+        }else{
+            DealWithController *dealWith = [[DealWithController alloc] init];
+            
+            [self.navigationController pushViewController:dealWith animated:NO];
+        }
+       
         
 
         NSLog(@"%@",x);
+        
+        
     }];
 
 }

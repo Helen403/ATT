@@ -25,6 +25,45 @@
     
 }
 
+#pragma mark system
+-(void)updateViewConstraints{
+    WS(weakSelf);
+    [self.dealWithView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view);
+    }];
+    
+    [super updateViewConstraints];
+}
 
+
+#pragma mark private
+-(void)h_layoutNavigation{
+    self.title = @"已处理";
+}
+
+-(void)h_addSubviews{
+    [self.view addSubview:self.dealWithView];
+}
+
+-(void)h_bindViewModel{
+
+
+}
+
+
+#pragma mark lazyload
+-(DealWithView *)dealWithView{
+    if (!_dealWithView) {
+        _dealWithView =  [[DealWithView alloc]initWithViewModel:self.dealWithViewModel ];
+    }
+    return _dealWithView;
+}
+
+-(DealWithViewModel *)dealWithViewModel{
+    if (!_dealWithViewModel) {
+        _dealWithViewModel = [[DealWithViewModel alloc] init];
+    }
+    return _dealWithViewModel;
+}
 
 @end

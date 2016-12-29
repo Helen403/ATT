@@ -46,6 +46,9 @@
 		7937652F1E14944000F7B34F /* DealWithController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7937652E1E14944000F7B34F /* DealWithController.m */; settings = {ASSET_TAGS = (); }; };
 		793765321E14946400F7B34F /* DealWithViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765311E14946400F7B34F /* DealWithViewModel.m */; settings = {ASSET_TAGS = (); }; };
 		793765351E14947600F7B34F /* DealWithView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765341E14947600F7B34F /* DealWithView.m */; settings = {ASSET_TAGS = (); }; };
+		793765381E14978300F7B34F /* DealWithCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765371E14978300F7B34F /* DealWithCellView.m */; settings = {ASSET_TAGS = (); }; };
+		7937653B1E14983A00F7B34F /* DealWithModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7937653A1E14983A00F7B34F /* DealWithModel.m */; settings = {ASSET_TAGS = (); }; };
+		7937653D1E14987F00F7B34F /* DealWith.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7937653C1E14987F00F7B34F /* DealWith.plist */; settings = {ASSET_TAGS = (); }; };
 		793868261E0A29DF004EC88A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793868251E0A29DF004EC88A /* HomeViewController.m */; settings = {ASSET_TAGS = (); }; };
 		793868291E0A29F5004EC88A /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793868281E0A29F5004EC88A /* HomeView.m */; settings = {ASSET_TAGS = (); }; };
 		7938682C1E0A2A8A004EC88A /* HomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7938682B1E0A2A8A004EC88A /* HomeViewModel.m */; settings = {ASSET_TAGS = (); }; };
@@ -204,6 +207,11 @@
 		793765311E14946400F7B34F /* DealWithViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealWithViewModel.m; sourceTree = "<group>"; };
 		793765331E14947600F7B34F /* DealWithView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealWithView.h; sourceTree = "<group>"; };
 		793765341E14947600F7B34F /* DealWithView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealWithView.m; sourceTree = "<group>"; };
+		793765361E14978300F7B34F /* DealWithCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealWithCellView.h; sourceTree = "<group>"; };
+		793765371E14978300F7B34F /* DealWithCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealWithCellView.m; sourceTree = "<group>"; };
+		793765391E14983A00F7B34F /* DealWithModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealWithModel.h; sourceTree = "<group>"; };
+		7937653A1E14983A00F7B34F /* DealWithModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealWithModel.m; sourceTree = "<group>"; };
+		7937653C1E14987F00F7B34F /* DealWith.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DealWith.plist; sourceTree = "<group>"; };
 		793868241E0A29DF004EC88A /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		793868251E0A29DF004EC88A /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		793868271E0A29F5004EC88A /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
@@ -657,6 +665,7 @@
 				79367B031E12220C00696A38 /* myapplytext.plist */,
 				7980A8DC1E1354B300F3F289 /* myexamine.plist */,
 				79F0A1481E13B0BF00A1B8AA /* Pending.plist */,
+				7937653C1E14987F00F7B34F /* DealWith.plist */,
 			);
 			name = File;
 			sourceTree = "<group>";
@@ -769,6 +778,8 @@
 		7937652A1E14940E00F7B34F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				793765391E14983A00F7B34F /* DealWithModel.h */,
+				7937653A1E14983A00F7B34F /* DealWithModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -776,6 +787,8 @@
 		7937652B1E14941500F7B34F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				793765361E14978300F7B34F /* DealWithCellView.h */,
+				793765371E14978300F7B34F /* DealWithCellView.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -1433,6 +1446,7 @@
 				7980A8DD1E1354B300F3F289 /* myexamine.plist in Resources */,
 				79FD0E2A1E0D00E3006AAF0E /* ic_schedule_menu_back.png in Resources */,
 				79282EC61E0B832F00F4E050 /* l3.jpg in Resources */,
+				7937653D1E14987F00F7B34F /* DealWith.plist in Resources */,
 				79F0A1491E13B0BF00A1B8AA /* Pending.plist in Resources */,
 				79282EC31E0B80FF00F4E050 /* l1.png in Resources */,
 				79F0A1511E13C2CE00A1B8AA /* JCAlertView.bundle in Resources */,
@@ -1523,6 +1537,7 @@
 				7928BD711E0273A4009BB0B4 /* AppDelegate.m in Sources */,
 				7949276D1E10F19F007331CA /* CompanyCodeView.m in Sources */,
 				79362F681E0CB1E500F9B769 /* ForgetView.m in Sources */,
+				7937653B1E14983A00F7B34F /* DealWithModel.m in Sources */,
 				79F43DAA1E0D598A00C4C932 /* CreateViewModel.m in Sources */,
 				7938682C1E0A2A8A004EC88A /* HomeViewModel.m in Sources */,
 				794927781E10FB6E007331CA /* ForgetPwdController.m in Sources */,
@@ -1530,6 +1545,7 @@
 				79367B171E1268E200696A38 /* ProveView.m in Sources */,
 				79FA39441E1346BC00B8D3A7 /* MyExamineCellViewModel.m in Sources */,
 				793765351E14947600F7B34F /* DealWithView.m in Sources */,
+				793765381E14978300F7B34F /* DealWithCellView.m in Sources */,
 				79F0A1471E13B01700A1B8AA /* PendingCellViewModel.m in Sources */,
 				79F0A1401E13AE8700A1B8AA /* PendingCellView.m in Sources */,
 				79367AF71E11FD1800696A38 /* MyApplyController.m in Sources */,
