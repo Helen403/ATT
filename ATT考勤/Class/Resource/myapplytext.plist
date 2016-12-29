@@ -6,25 +6,25 @@
 		<key>title</key>
 		<string>请假</string>
 		<key>imgtext</key>
-		<string>apply_paid_leave_button</string>
+		<string>apply_ask_for leave_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>加班</string>
 		<key>imgtext</key>
-		<string>apply_ask_for leave_button</string>
+		<string>apply_overtime_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>出差</string>
 		<key>imgtext</key>
-		<string>apply_overtime_button</string>
+		<string>apply_on_a_business trip_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>外出</string>
 		<key>imgtext</key>
-		<string>apply_on_a_business trip_button</string>
+		<string>apply_to_go_out_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
@@ -60,13 +60,13 @@
 		<key>title</key>
 		<string>迟到</string>
 		<key>imgtext</key>
-		<string>apply_leave_early_button</string>
+		<string>apply_late_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>早退</string>
 		<key>imgtext</key>
-		<string>apply_late_button</string>
+		<string>apply_leave_early_button</string>
 	</dict>
 	<dict>
 		<key>title</key>

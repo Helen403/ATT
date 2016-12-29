@@ -31,7 +31,7 @@
 -(void)updateViewConstraints{
     
     [self.myapplyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(50);
+        make.top.equalTo(0);
         make.left.equalTo(0);
         make.bottom.equalTo(0);
         make.right.equalTo(0);

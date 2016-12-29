@@ -67,16 +67,16 @@
 }
 
 #pragma mark - system
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    
-    if (self.statusBarStyle) {
-        
-        return self.statusBarStyle;
-    } else {
-        
-        return UIStatusBarStyleLightContent;
-    }
-}
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//    
+//    if (self.statusBarStyle) {
+//        
+//        return self.statusBarStyle;
+//    } else {
+//        
+//        return UIStatusBarStyleLightContent;
+//    }
+//}
 
 - (BOOL)prefersStatusBarHidden {
     

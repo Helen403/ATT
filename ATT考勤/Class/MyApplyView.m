@@ -71,7 +71,7 @@
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         //设置每个item的大小为100*100
         
-        CGFloat padding = 10;
+        CGFloat padding = 6;
 
         layout.itemSize = CGSizeMake((SCREEN_WIDTH-4*padding)/3.f, (SCREEN_WIDTH-4*padding)/3.f);
         //创建collectionView 通过一个布局策略layout来创建
@@ -110,7 +110,7 @@
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(-10, 10, 0, 10);
+    return UIEdgeInsetsMake(5, 10, 0, 10);
 }
 
 
@@ -120,5 +120,14 @@
     [self.myApplyViewModel.cellclickSubject sendNext:row];
 }
 
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+
+    return 1;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 1;
+}
 
 @end

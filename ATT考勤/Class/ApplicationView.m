@@ -287,7 +287,7 @@
         _textView.layer.borderColor = LINE_COLOR.CGColor;
         _textView.layer.borderWidth =1.0;
         _textView.layer.cornerRadius =5.0;
-
+        _textView.font = H14;
         
     }
     return _textView;

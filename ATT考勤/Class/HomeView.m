@@ -73,13 +73,13 @@
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
-        make.top.equalTo(18);
+        make.top.equalTo(30);
     }];
     
     [self.setImg mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(-10);
-        make.top.equalTo(15);
+        make.top.equalTo(26);
         make.size.equalTo(CGSizeMake(25, 25));
     }];
     

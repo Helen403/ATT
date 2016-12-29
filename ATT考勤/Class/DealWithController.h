@@ -1,15 +1,13 @@
 //
-//  ResignationController.h
+//  DealWithController.h
 //  ATT考勤
 //
-//  Created by Helen on 16/12/26.
+//  Created by Helen on 16/12/29.
 //  Copyright © 2016年 Helen. All rights reserved.
 //
 
 #import "HViewController.h"
 
-@interface ApplyController : HViewController
-
-
+@interface DealWithController : HViewController
 
 @end

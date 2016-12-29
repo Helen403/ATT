@@ -43,6 +43,7 @@
     WS(weakSelf);
     [self.homeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf.view);
+        
     }];
     
     [super updateViewConstraints];

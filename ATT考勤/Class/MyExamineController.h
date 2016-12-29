@@ -7,7 +7,8 @@
 //
 
 #import "HViewController.h"
+#import "ZJScrollPageViewDelegate.h"
 
-@interface MyExamineController : HViewController
+@interface MyExamineController : HViewController<ZJScrollPageViewChildVcDelegate>
 
 @end

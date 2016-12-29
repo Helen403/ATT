@@ -9,6 +9,9 @@
 #import "MyExamineController.h"
 #import "MyExamineViewModel.h"
 #import "MyExamineView.h"
+#import "PendingController.h"
+
+
 
 @interface MyExamineController ()
 
@@ -29,7 +32,7 @@
 -(void)updateViewConstraints{
 
     [self.myExamineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(50);
+        make.top.equalTo(0);
         make.left.equalTo(0);
         make.bottom.equalTo(0);
         make.right.equalTo(0);
@@ -47,6 +50,16 @@
 
 -(void)h_bindViewModel{
 
+    
+    [[self.myExamineViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        PendingController *pending = [[PendingController alloc] init];
+        
+        [self.navigationController pushViewController:pending animated:NO];
+        
+
+        NSLog(@"%@",x);
+    }];
 
 }
 

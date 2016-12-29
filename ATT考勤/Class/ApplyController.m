@@ -7,114 +7,93 @@
 //
 
 #import "ApplyController.h"
-#import "ApplyViewModel.h"
-#import "ApplyView.h"
+
 
 
 #import "MyApplyController.h"
 #import "MyExamineController.h"
 
-@interface ApplyController ()
+#import "ZJScrollPageView.h"
 
-@property(nonatomic,strong) ApplyViewModel *applyViewModel;
 
-@property(nonatomic,strong) ApplyView *applyView;
+@interface ApplyController ()<ZJScrollPageViewDelegate>
+
+@property(strong, nonatomic)NSArray<NSString *> *titles;
+
+@property(strong, nonatomic)NSMutableArray<UIViewController *> *childVcs;
 
 @end
 
 @implementation ApplyController
 
 -(void)viewWillAppear:(BOOL)animated{
-    
-    //    [self hideNavigationBar:YES animated:NO];
-    self.navigationController.navigationBarHidden = YES;
+    [self hideNavigationBar:YES animated:NO];
     [super viewWillAppear:animated];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    //    [self hideNavigationBar:NO animated:NO];
-    self.navigationController.navigationBarHidden = NO;
+    [self hideNavigationBar:NO animated:NO];
     [super viewWillDisappear:animated];
 }
 
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //移除TabBarController自带的下部的条
-    [self.tabBar removeFromSuperview];
-    
-   
-    
-    [self h_addSubviews];
-    [self h_bindViewModel];
 }
 
-#pragma mark system
--(void)updateViewConstraints{
-    
-//    WS(weakSelf);
-    [self.applyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(20);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 30));
-    }];
-    [super updateViewConstraints];
-}
 
-#pragma mark private
 -(void)h_addSubviews{
-    [self.view addSubview:self.applyView];
-    
-    MyApplyController *myApply = [[MyApplyController alloc] init];
-    
-    [self addChildViewController:myApply];
-    
-    MyExamineController *myExamine = [[MyExamineController alloc] init];
-    
-    [self addChildViewController:myExamine];
 
-    self.selectedIndex = 0;
+    //必要的设置, 如果没有设置可能导致内容显示不正常
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    ZJSegmentStyle *style = [[ZJSegmentStyle alloc] init];
+    //显示滚动条
+    style.showLine = YES;
+    // 颜色渐变
+    style.gradualChangeTitleColor = YES;
+    style.autoAdjustTitlesWidth = YES;
+    style.adjustCoverOrLineWidth = YES;
+    style.selectedTitleColor = MAIN_ORANGER;
+    self.titles = @[@"我申请的",
+                    @"我审批的",
+                    ];
+    // 初始化
+    ZJScrollPageView *scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.height) segmentStyle:style titles:self.titles parentViewController:self delegate:self];
+    
+    [self.view addSubview:scrollPageView];
+    
 }
 
--(void)h_bindViewModel{
-    
-    [[self.applyViewModel.myApplyclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-        self.selectedIndex = 0;
-    }];
-    
-    [[self.applyViewModel.myExamineclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-        self.selectedIndex = 1;
-    }];
-    
- 
-
-
-
+- (NSInteger)numberOfChildViewControllers {
+    return self.titles.count;
 }
 
 
-#pragma mark lazyload
--(ApplyView *)applyView{
-    if (!_applyView) {
-        _applyView = [[ApplyView alloc] initWithViewModel:self.applyViewModel];
+- (UIViewController<ZJScrollPageViewChildVcDelegate> *)childViewController:(UIViewController<ZJScrollPageViewChildVcDelegate> *)reuseViewController forIndex:(NSInteger)index {
+    
+    
+    UIViewController<ZJScrollPageViewChildVcDelegate> *childVc = reuseViewController;
+    
+    if (!childVc) {
+        childVc = [self.childVcs objectAtIndex:index];
     }
-    return _applyView;
+
+    return childVc;
 }
 
--(ApplyViewModel *)applyViewModel{
-    if (!_applyViewModel) {
-        _applyViewModel = [[ApplyViewModel alloc] init];
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods {
+    return NO;
+}
+
+-(NSMutableArray<UIViewController *> *)childVcs{
+    if (!_childVcs) {
+        _childVcs = [NSMutableArray array];
+        [_childVcs addObject:[[MyApplyController alloc] init]];
+        [_childVcs addObject:[[MyExamineController alloc] init]];
     }
-    return _applyViewModel;
+    return _childVcs;
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    
-}
-
 
 
 @end
