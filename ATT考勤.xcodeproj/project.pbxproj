@@ -49,6 +49,9 @@
 		793765381E14978300F7B34F /* DealWithCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765371E14978300F7B34F /* DealWithCellView.m */; settings = {ASSET_TAGS = (); }; };
 		7937653B1E14983A00F7B34F /* DealWithModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7937653A1E14983A00F7B34F /* DealWithModel.m */; settings = {ASSET_TAGS = (); }; };
 		7937653D1E14987F00F7B34F /* DealWith.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7937653C1E14987F00F7B34F /* DealWith.plist */; settings = {ASSET_TAGS = (); }; };
+		793765451E14A45800F7B34F /* XCFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765411E14A45800F7B34F /* XCFNavigationController.m */; settings = {ASSET_TAGS = (); }; };
+		793765461E14A45800F7B34F /* XCFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765431E14A45800F7B34F /* XCFTabBarController.m */; settings = {ASSET_TAGS = (); }; };
+		793765491E14A78400F7B34F /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765481E14A78400F7B34F /* UIBarButtonItem+Extension.m */; settings = {ASSET_TAGS = (); }; };
 		793868261E0A29DF004EC88A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793868251E0A29DF004EC88A /* HomeViewController.m */; settings = {ASSET_TAGS = (); }; };
 		793868291E0A29F5004EC88A /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793868281E0A29F5004EC88A /* HomeView.m */; settings = {ASSET_TAGS = (); }; };
 		7938682C1E0A2A8A004EC88A /* HomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7938682B1E0A2A8A004EC88A /* HomeViewModel.m */; settings = {ASSET_TAGS = (); }; };
@@ -212,6 +215,12 @@
 		793765391E14983A00F7B34F /* DealWithModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealWithModel.h; sourceTree = "<group>"; };
 		7937653A1E14983A00F7B34F /* DealWithModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealWithModel.m; sourceTree = "<group>"; };
 		7937653C1E14987F00F7B34F /* DealWith.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DealWith.plist; sourceTree = "<group>"; };
+		793765401E14A45800F7B34F /* XCFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFNavigationController.h; sourceTree = "<group>"; };
+		793765411E14A45800F7B34F /* XCFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFNavigationController.m; sourceTree = "<group>"; };
+		793765421E14A45800F7B34F /* XCFTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFTabBarController.h; sourceTree = "<group>"; };
+		793765431E14A45800F7B34F /* XCFTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFTabBarController.m; sourceTree = "<group>"; };
+		793765471E14A78400F7B34F /* UIBarButtonItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extension.h"; sourceTree = "<group>"; };
+		793765481E14A78400F7B34F /* UIBarButtonItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extension.m"; sourceTree = "<group>"; };
 		793868241E0A29DF004EC88A /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		793868251E0A29DF004EC88A /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		793868271E0A29F5004EC88A /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
@@ -428,6 +437,12 @@
 		7904A6EB1E091F9C00D6E8D4 /* Nav */ = {
 			isa = PBXGroup;
 			children = (
+				793765471E14A78400F7B34F /* UIBarButtonItem+Extension.h */,
+				793765481E14A78400F7B34F /* UIBarButtonItem+Extension.m */,
+				793765401E14A45800F7B34F /* XCFNavigationController.h */,
+				793765411E14A45800F7B34F /* XCFNavigationController.m */,
+				793765421E14A45800F7B34F /* XCFTabBarController.h */,
+				793765431E14A45800F7B34F /* XCFTabBarController.m */,
 				7904A6F81E0923A000D6E8D4 /* HButtonView.h */,
 				7904A6F91E0923A000D6E8D4 /* HButtonView.m */,
 				7904A6F21E09236700D6E8D4 /* HTarBarViewController.h */,
@@ -1531,6 +1546,7 @@
 				7949276A1E10F176007331CA /* CompanyCodeController.m in Sources */,
 				79FA39411E13439000B8D3A7 /* MyExamineTableCellView.m in Sources */,
 				79F8A4E01E03C110004F8A8C /* StartApp.m in Sources */,
+				793765461E14A45800F7B34F /* XCFTabBarController.m in Sources */,
 				7949275C1E10A660007331CA /* BuildRoleController.m in Sources */,
 				79282EA51E0B65E400F4E050 /* LoginViewModel.m in Sources */,
 				79367B1A1E12692800696A38 /* ApplyManView.m in Sources */,
@@ -1559,6 +1575,7 @@
 				79F856221E02D561002D82F4 /* LSCoreToolCenter.m in Sources */,
 				79282EBF1E0B7DF000F4E050 /* ZJTextAndImageHUDView.m in Sources */,
 				79282EAB1E0B7C7F00F4E050 /* ZJLeadingPageCell.m in Sources */,
+				793765491E14A78400F7B34F /* UIBarButtonItem+Extension.m in Sources */,
 				79F43DA71E0D597100C4C932 /* CreateView.m in Sources */,
 				79282EA21E0B65C600F4E050 /* LoginView.m in Sources */,
 				79F0A14C1E13B1E300A1B8AA /* PendingModel.m in Sources */,
@@ -1586,6 +1603,7 @@
 				79282EBB1E0B7DF000F4E050 /* ZJImageOnlyHUDView.m in Sources */,
 				79F43DA41E0D595300C4C932 /* CreateController.m in Sources */,
 				7928BD6E1E0273A4009BB0B4 /* main.m in Sources */,
+				793765451E14A45800F7B34F /* XCFNavigationController.m in Sources */,
 				79367AFA1E11FD4300696A38 /* MyExamineController.m in Sources */,
 				7968033A1E11206D00CED421 /* MyExamineViewModel.m in Sources */,
 				79367AFD1E12171D00696A38 /* MyApplyCollectionView.m in Sources */,

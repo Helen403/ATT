@@ -10,7 +10,6 @@
 #import "PendingViewModel.h"
 #import "LogisticsView.h"
 
-
 @interface PendingView()
 
 @property(nonatomic,strong) PendingViewModel *pendingViewModel;

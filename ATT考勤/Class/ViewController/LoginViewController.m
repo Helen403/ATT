@@ -16,6 +16,7 @@
 
 #import "NewpartViewController.h"
 
+#import "XCFTabBarController.h"
 
 @interface LoginViewController ()
 
@@ -72,7 +73,7 @@
         
         switch ([x integerValue]) {
             case HSuccess:
-                [UIApplication sharedApplication].keyWindow.rootViewController =[[HTarBarViewController alloc] init];
+                [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
                 break;
                 
             case HFailure:
