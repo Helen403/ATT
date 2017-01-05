@@ -23,6 +23,9 @@
 - (void)h_setupViews {}
 
 
+-(NSInteger)h_w:(NSInteger)width{
+    return autoScaleW(width);
+}
 
 
 @end

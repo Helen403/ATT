@@ -30,23 +30,23 @@
     WS(weakSelf);
     [self.Img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.left.equalTo(10);
-        make.size.equalTo(CGSizeMake(25, 25));
+        make.left.equalTo([self h_w:10]);
+        make.size.equalTo(CGSizeMake([self h_w:25], [self h_w:25]));
     }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.left.equalTo(weakSelf.Img.mas_right).offset(10);
+        make.left.equalTo(weakSelf.Img.mas_right).offset([self h_w:10]);
     }];
     
     [self.back mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.right.equalTo(-10);
+        make.right.equalTo(-[self h_w:10]);
     }];
     
     [self.number mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.right.equalTo(weakSelf.back.mas_left).offset(-10);
+        make.right.equalTo(weakSelf.back.mas_left).offset(-[self h_w:10]);
     }];
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {

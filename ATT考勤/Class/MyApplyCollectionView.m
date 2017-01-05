@@ -27,11 +27,11 @@
 -(void)updateConstraints{
     WS(weakSelf)
     
-    CGFloat paddingEdge = -6;
+    CGFloat paddingEdge = -[self h_w:6];
     
     [self.headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(weakSelf);
-        make.size.equalTo(CGSizeMake(40, 40));
+        make.size.equalTo(CGSizeMake([self h_w:40], [self h_w:40]));
     }];
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {

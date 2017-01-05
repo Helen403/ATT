@@ -60,8 +60,8 @@
     
     [self.useText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.useImg);
-        make.left.equalTo(weakSelf.useImg.mas_right).offset(10);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, 30));
+        make.left.equalTo(weakSelf.useImg.mas_right).offset([self h_w:10]);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, [self h_w:30]));
     }];
     
     
@@ -69,20 +69,20 @@
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.useText.mas_bottom).offset(20);
+        make.top.equalTo(weakSelf.useText.mas_bottom).offset([self h_w:20]);
         
     }];
     
     
     [self.pwdImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.line1.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.line1.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line1);
     }];
     
     [self.pwdText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.pwdImg);
-        make.left.equalTo(weakSelf.pwdImg.mas_right).offset(10);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, 30));
+        make.left.equalTo(weakSelf.pwdImg.mas_right).offset([self h_w:10]);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, [self h_w:30]));
     }];
     
     
@@ -90,35 +90,35 @@
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.pwdText.mas_bottom).offset(20);
+        make.top.equalTo(weakSelf.pwdText.mas_bottom).offset([self h_w:20]);
         
     }];
     
     
     [self.surepwdImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.line2.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.line2.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line2);
     }];
     
     [self.surepwdText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.surepwdImg);
-        make.left.equalTo(weakSelf.surepwdImg.mas_right).offset(10);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, 30));
+        make.left.equalTo(weakSelf.surepwdImg.mas_right).offset([self h_w:10]);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, [self h_w:30]));
     }];
     
     [self.line3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.surepwdText.mas_bottom).offset(20);
+        make.top.equalTo(weakSelf.surepwdText.mas_bottom).offset([self h_w:20]);
         
     }];
     
     [self.next mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.line3.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.line3.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 40));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
     }];
     
     

@@ -46,22 +46,22 @@
     
     
     [self.companyCodeTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.companyCodeImg.mas_right).offset(10);
+        make.left.equalTo(weakSelf.companyCodeImg.mas_right).offset([self h_w:10]);
         make.centerY.equalTo(weakSelf.companyCodeImg);
     }];
     
     
     [self.hintText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.companyCodeImg);
-        make.top.equalTo(weakSelf.companyCodeImg.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.companyCodeImg.mas_bottom).offset([self h_w:15]);
         
     }];
     
     [self.addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.hintText.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.hintText.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(leftPadding);
         make.right.equalTo(-leftPadding);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 40));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
     }];
     
     

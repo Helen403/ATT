@@ -6,73 +6,73 @@
 		<key>title</key>
 		<string>请假</string>
 		<key>imgtext</key>
-		<string>apply_ask_for leave_button</string>
+		<string>processed_ask_for leave_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>加班</string>
 		<key>imgtext</key>
-		<string>apply_overtime_button</string>
+		<string>processed_overtime_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>出差</string>
 		<key>imgtext</key>
-		<string>apply_on_a_business trip_button</string>
+		<string>processed_on_a_business trip_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>外出</string>
 		<key>imgtext</key>
-		<string>apply_to_go_out_button</string>
+		<string>processedto_go_out_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>换班</string>
 		<key>imgtext</key>
-		<string>apply_shift_button</string>
+		<string>processed_shift_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>调班</string>
 		<key>imgtext</key>
-		<string>apply_in_the_class_button</string>
+		<string>processed_in_the_class_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>辞职</string>
 		<key>imgtext</key>
-		<string>apply_departure_button</string>
+		<string>processed_departure_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>调休</string>
 		<key>imgtext</key>
-		<string>apply_paid_leave_button</string>
+		<string>processed_paid_leave_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>漏打卡</string>
 		<key>imgtext</key>
-		<string>apply_clocj_in_leakage_button</string>
+		<string>processed_clocj_in_leakage_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>迟到</string>
 		<key>imgtext</key>
-		<string>apply_late_button</string>
+		<string>processed_late_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>早退</string>
 		<key>imgtext</key>
-		<string>apply_leave_early_button</string>
+		<string>processed_leave_early_button</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>费用</string>
 		<key>imgtext</key>
-		<string>apply_cost_button</string>
+		<string>processed_cost_button</string>
 	</dict>
 </array>
 </plist>

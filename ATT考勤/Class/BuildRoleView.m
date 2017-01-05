@@ -58,12 +58,12 @@
     
     [self.twoDimensionCodeTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.twoDimensionCodeImg);
-        make.left.equalTo(weakSelf.twoDimensionCodeImg.mas_right).offset(10);
+        make.left.equalTo(weakSelf.twoDimensionCodeImg.mas_right).offset([self h_w:10]);
         
     }];
     
     [self.twoDimensionCodeText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.twoDimensionCodeTitle.mas_bottom).offset(7);
+        make.top.equalTo(weakSelf.twoDimensionCodeTitle.mas_bottom).offset([self h_w:7]);
         make.left.equalTo(weakSelf.twoDimensionCodeTitle);
     }];
     
@@ -76,22 +76,22 @@
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.twoDimensionCodeText.mas_bottom).offset(20);
+        make.top.equalTo(weakSelf.twoDimensionCodeText.mas_bottom).offset([self h_w:20]);
     }];
     
     [self.companyImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.twoDimensionCodeImg);
-        make.top.equalTo(weakSelf.line1.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.line1.mas_bottom).offset([self h_w:15]);
     }];
     
     
     [self.companyTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.companyImg);
-        make.left.equalTo(weakSelf.companyImg.mas_right).offset(10);
+        make.left.equalTo(weakSelf.companyImg.mas_right).offset([self h_w:10]);
     }];
     
     [self.companyText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.companyTitle.mas_bottom).offset(7);
+        make.top.equalTo(weakSelf.companyTitle.mas_bottom).offset([self h_w:7]);
         make.left.equalTo(weakSelf.companyTitle);
     }];
     
@@ -104,12 +104,8 @@
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.companyText.mas_bottom).offset(20);
+        make.top.equalTo(weakSelf.companyText.mas_bottom).offset([self h_w:20]);
     }];
-    
-    
-
-    
     
     
     [super updateConstraints];
@@ -128,7 +124,7 @@
     [self addSubview:self.companyText];
     [self addSubview:self.companyBack];
     [self addSubview:self.line2];
-  
+    
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -191,8 +187,8 @@
     return _twoDimensionCodeBack;
 }
 -(void)twoDimensionCode{
-
-
+    
+    
 }
 
 -(UIView *)line1{
@@ -225,9 +221,9 @@
 -(UILabel *)companyText{
     if (!_companyText) {
         _companyText = [[UILabel alloc] init];
-         _companyText.text = @"输入公司提供的企业邀请码";
+        _companyText.text = @"输入公司提供的企业邀请码";
         _companyText.textColor = MAIN_PAN;
-             _companyText.font = H14;
+        _companyText.font = H14;
     }
     return _companyText;
 }
@@ -243,7 +239,7 @@
 }
 
 -(void)companyCode{
-
+    
     [self.buildRoleViewModel.companyCodeclickSubject sendNext:nil];
 }
 

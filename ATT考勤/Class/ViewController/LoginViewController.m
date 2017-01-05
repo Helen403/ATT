@@ -9,7 +9,6 @@
 #import "LoginViewController.h"
 #import "LoginView.h"
 #import "LoginViewModel.h"
-#import "HTarBarViewController.h"
 
 
 #import "ForgetController.h"
@@ -17,6 +16,10 @@
 #import "NewpartViewController.h"
 
 #import "XCFTabBarController.h"
+
+
+
+
 
 @interface LoginViewController ()
 
@@ -57,11 +60,14 @@
 
 #pragma mark -private
 -(void)h_layoutNavigation{
-    
+  
 }
 
 -(void)h_addSubviews{
     [self.view addSubview:self.loginView];
+    
+   
+    
 
 }
 
@@ -88,6 +94,8 @@
         NSLog(@"kk");
         @strongify(self);
         ForgetController *forgetController = [[ForgetController alloc] init];
+        
+       
 ////
 //        [forgetController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
 //        

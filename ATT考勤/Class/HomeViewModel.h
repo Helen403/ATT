@@ -10,4 +10,8 @@
 
 @interface HomeViewModel : HViewModel
 
+@property(nonatomic,strong) RACSubject *headclickSubject;
+
+@property(nonatomic,strong) RACSubject *setClickSubject;
+
 @end

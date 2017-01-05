@@ -29,24 +29,24 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-    CGFloat length = 10;
-    CGFloat Padding = 6;
+    CGFloat length = [self h_w:10];
+    CGFloat Padding = [self h_w:6];
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(15);
+        make.left.equalTo([self h_w:15]);
         make.top.equalTo(0);
         make.bottom.equalTo(0);
         make.size.equalTo(CGSizeMake(1, SCREEN_WIDTH));
     }];
     
     [self.cir mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(15);
+        make.top.equalTo([self h_w:15]);
         make.centerX.equalTo(weakSelf.line);
         make.size.equalTo(CGSizeMake(length, length));
     }];
     
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.cir);
-        make.left.equalTo(weakSelf.cir.mas_right).offset(10);
+        make.left.equalTo(weakSelf.cir.mas_right).offset([self h_w:10]);
     }];
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {

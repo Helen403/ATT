@@ -9,13 +9,13 @@
 #define ACMacros_h
 
 
-//** 沙盒路径 ***********************************************************************************
+//** 沙盒路径 ***********************************************
 #define PATH_OF_APP_HOME    NSHomeDirectory()
 #define PATH_OF_TEMP        NSTemporaryDirectory()
 #define PATH_OF_DOCUMENT    [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 
 
-/* ****************************************************************************************************************** */
+/* ****************************************** */
 /** DEBUG LOG **/
 #ifdef DEBUG
 
@@ -44,7 +44,7 @@
 #define NILRelease(x)           [x release], x = nil
 
 
-/* ****************************************************************************************************************** */
+/* **************************************** */
 #pragma mark - Frame (宏 x, y, width, height)
 
 // App Frame
@@ -54,15 +54,13 @@
 #define App_Frame_Height        [[UIScreen mainScreen] applicationFrame].size.height
 #define App_Frame_Width         [[UIScreen mainScreen] applicationFrame].size.width
 
-// MainScreen Height&Width
-#define Main_Screen_Height      [[UIScreen mainScreen] bounds].size.height
-#define Main_Screen_Width       [[UIScreen mainScreen] bounds].size.width
-
 
 #define kDelay  1.5
+//延迟1.5秒
 #define delayRun dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kDelay * NSEC_PER_SEC)), dispatch_get_main_queue()
 
 #define kDelay01  0.7
+//延迟0.7秒
 #define delayRun05 dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kDelay01 * NSEC_PER_SEC)), dispatch_get_main_queue()
 
 #define kFileManager [NSFileManager defaultManager]
@@ -105,7 +103,7 @@
 #define kChineseKeyboardHeight  (252.f)
 
 
-/* ****************************************************************************************************************** */
+/* ******************************************* */
 #pragma mark - Funtion Method (宏 方法)
 
 // PNG JPG 图片路径
@@ -228,11 +226,11 @@
 #endif
 
 
-/* ****************************************************************************************************************** */
+/* ********************************** */
 #pragma mark - Log Method (宏 LOG)
 
 // 日志 / 断点
-// =============================================================================================================================
+// ===========================================
 // DEBUG模式
 #define ITTDEBUG
 
@@ -241,7 +239,7 @@
 #define ITTLOGLEVEL_WARNING     3
 #define ITTLOGLEVEL_ERROR       1
 
-// =============================================================================================================================
+// ===========================================
 // LOG最高等级
 #ifndef ITTMAXLOGLEVEL
 
@@ -253,7 +251,7 @@
 
 #endif
 
-// =============================================================================================================================
+// ============================================
 // LOG PRINT
 // The general purpose logger. This ignores logging levels.
 #ifdef ITTDEBUG
@@ -313,7 +311,8 @@
                                                     description:__VA_ARGS__];\
                                     }\
                                 } while(0)
-/* ************************************************************************************************* */
+
+/* *********************************** */
 
 ///正常字体
 #define H36 [UIFont systemFontOfSize:36*SizeScaleW]
@@ -390,7 +389,7 @@
 #define randomColor random(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
 #define random(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)/255.0]
 
-/* ************************************************************************************************* */
+/* ************************** */
 
 //系统版本号
 #define _DEVICE_SYSTEM_VERSION_  [[[UIDevice currentDevice] systemVersion]floatValue]
@@ -429,7 +428,7 @@
 
 
 
-/* ****************************************************************************************************************** */
+/* ************************************* */
 #pragma mark - Constants (宏 常量)
 
 
@@ -449,7 +448,10 @@
 #define Milliseconds(Days)      (24.f * 60.f * 60.f * 1000.f * (Days))
 
 
-//** textAlignment ***********************************************************************************
+
+
+
+//** textAlignment ****************
 
 #if !defined __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
     # define LINE_BREAK_WORD_WRAP UILineBreakModeWordWrap
@@ -464,5 +466,17 @@
 #endif
 
 
+
+//GCD - 一次性执行
+#define kDISPATCH_ONCE_BLOCK(onceBlock) static dispatch_once_t onceToken; dispatch_once(&onceToken, onceBlock);
+
+//GCD - 在Main线程上运行
+#define kDISPATCH_MAIN_THREAD(mainQueueBlock) dispatch_async(dispatch_get_main_queue(), mainQueueBlock);
+
+//GCD - 开启异步线程
+#define kDISPATCH_GLOBAL_QUEUE_DEFAULT(globalQueueBlock) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), globalQueueBlocl);
+
+/*************************************/
+#define HL(str) NSLog(@"Helen %@",str)
 
 #endif

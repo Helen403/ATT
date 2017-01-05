@@ -229,18 +229,35 @@
     if (!_setImg) {
         _setImg = [[UIImageView alloc] init];
         _setImg.image = ImageNamed(@"homepage_gray");
+        _setImg.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(set)];
+        [_setImg addGestureRecognizer:setTap];
     }
     return _setImg;
 }
 
+-(void)set{
+
+    [self.homeViewModel.setClickSubject sendNext:nil];
+}
 
 
 -(UIImageView *)headImg{
     if (!_headImg) {
         _headImg = [[UIImageView alloc] init];
         _headImg.image = ImageNamed(@"homepage_head_portrait_base");
+        _headImg.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadClick)];
+        [_headImg addGestureRecognizer:setTap];
+        
     }
     return _headImg;
+}
+
+
+-(void)HeadClick{
+    [self.homeViewModel.headclickSubject sendNext:nil];
+    
 }
 
 

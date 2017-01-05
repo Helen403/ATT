@@ -11,5 +11,7 @@
 
 @interface HTableViewCell : UITableViewCell<HTableVIewCellProtocol>
 
+-(NSInteger)h_w:(NSInteger)width;
+
 
 @end

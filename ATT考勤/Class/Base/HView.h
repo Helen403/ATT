@@ -11,6 +11,7 @@
 
 @interface HView : UIView <HViewProtocol>
 
+-(NSInteger)h_w:(NSInteger)width;
 
 
 @end

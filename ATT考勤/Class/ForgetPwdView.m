@@ -56,42 +56,42 @@
     
     [self.forgetPwdTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.forgetPwdImg);
-        make.left.equalTo(weakSelf.forgetPwdImg.mas_right).offset(10);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, 30));
+        make.left.equalTo(weakSelf.forgetPwdImg.mas_right).offset([self h_w:10]);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, [self h_w:30]));
     }];
     
     [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.forgetPwdImg.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.forgetPwdImg.mas_bottom).offset([self h_w:15]);
         
     }];
     
     [self.sureForgetPwdImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.forgetPwdImg);
-        make.top.equalTo(weakSelf.line1.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.line1.mas_bottom).offset([self h_w:15]);
     }];
     
     [self.sureForgetPwdTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.sureForgetPwdImg);
-        make.left.equalTo(weakSelf.sureForgetPwdImg.mas_right).offset(10);
+        make.left.equalTo(weakSelf.sureForgetPwdImg.mas_right).offset([self h_w:10]);
     }];
     
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.sureForgetPwdImg.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.sureForgetPwdImg.mas_bottom).offset([self h_w:15]);
         
     }];
     
     
     [self.finish mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.line2.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.line2.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line2);
         make.right.equalTo(weakSelf.line2);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 40));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
     }];
     
     [super updateConstraints];

@@ -10,6 +10,10 @@
 #import "HomeView.h"
 #import "HomeViewModel.h"
 
+#import "MineController.h"
+
+#import "SetController.h"
+
 @interface HomeViewController ()
 
 @property(nonatomic,strong) HomeView *homeView;
@@ -54,6 +58,22 @@
 -(void)h_addSubviews{
     
     [self.view addSubview:self.homeView];
+}
+
+-(void)h_bindViewModel{
+    [[self.homeViewModel.headclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        
+        MineController *mine = [[MineController alloc] init];
+        [self.navigationController pushViewController:mine animated:NO];
+    }];
+    
+    
+    [[self.homeViewModel.setClickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        
+        SetController *set = [[SetController alloc] init];
+        [self.navigationController pushViewController:set animated:NO];
+    }];
+    
 }
 
 

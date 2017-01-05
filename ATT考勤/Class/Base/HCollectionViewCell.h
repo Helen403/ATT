@@ -11,5 +11,6 @@
 
 @interface HCollectionViewCell : UICollectionViewCell<HCollerctionViewCellProtocol>
 
+-(NSInteger)h_w:(NSInteger)width;
 
 @end

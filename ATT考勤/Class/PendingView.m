@@ -58,13 +58,13 @@
     
     WS(weakSelf);
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(10);
-        make.top.equalTo(15);
+        make.left.equalTo([self h_w:10]);
+        make.top.equalTo([self h_w:15]);
     }];
     
     [self.number mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.title);
-        make.top.equalTo(weakSelf.title.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:15]);
     }];
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -73,13 +73,13 @@
     }];
     
     [self.department mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(-10);
+        make.right.equalTo(-[self h_w:10]);
         make.top.equalTo(weakSelf.number);
     }];
     
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.number);
-        make.top.equalTo(weakSelf.number.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.number.mas_bottom).offset([self h_w:15]);
     }];
     
     [self.type mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -89,32 +89,32 @@
     
     [self.reason mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.time);
-        make.top.equalTo(weakSelf.time.mas_bottom).offset(15);
-        make.right.equalTo(-10);
+        make.top.equalTo(weakSelf.time.mas_bottom).offset([self h_w:15]);
+        make.right.equalTo(-[self h_w:10]);
     }];
     
     [self.examine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.reason);
-        make.top.equalTo(weakSelf.reason.mas_bottom).offset(15);
-        make.right.equalTo(-10);
+        make.top.equalTo(weakSelf.reason.mas_bottom).offset([self h_w:15]);
+        make.right.equalTo(-[self h_w:10]);
     }];
     
     
     [self.agree mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(weakSelf.examine);
-        make.top.equalTo(weakSelf.examine.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.examine.mas_bottom).offset([self h_w:15]);
     }];
     
     [self.disagree mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(weakSelf.agree.mas_left).offset(-10);
+        make.right.equalTo(weakSelf.agree.mas_left).offset(-[self h_w:10]);
         make.top.equalTo(weakSelf.agree);
     }];
     
     
     
     [self.preBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf).offset(10);
-        make.left.equalTo(weakSelf).offset(10);
+        make.bottom.equalTo(weakSelf).offset([self h_w:10]);
+        make.left.equalTo(weakSelf).offset([self h_w:10]);
     }];
     
     [self.page mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -124,14 +124,14 @@
     
     [self.lastBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.preBtn);
-        make.right.equalTo(-10);
+        make.right.equalTo(-[self h_w:10]);
     }];
     
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.agree.mas_bottom).offset(15);
-        make.left.equalTo(10);
-        make.right.equalTo(-10);
-        make.bottom.equalTo(weakSelf.preBtn.mas_top).offset(-15);
+        make.top.equalTo(weakSelf.agree.mas_bottom).offset([self h_w:15]);
+        make.left.equalTo([self h_w:10]);
+        make.right.equalTo(-[self h_w:10]);
+        make.bottom.equalTo(weakSelf.preBtn.mas_top).offset(-[self h_w:15]);
     }];
     
     

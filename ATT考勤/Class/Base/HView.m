@@ -54,4 +54,8 @@
 }
 
 
+-(NSInteger)h_w:(NSInteger)width{
+    return autoScaleW(width);
+}
+
 @end

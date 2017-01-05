@@ -15,10 +15,6 @@
 #import "ApplyController.h"
 
 
-//正常字体的颜色
-#define textNomalColor RGBCOLOR(29, 29, 29)
-//被点击字体的颜色
-#define textPressColor RGBCOLOR(242, 130, 74)
 
 //设置对应的文字
 #define text_1 @"申请"
@@ -68,23 +64,23 @@
 }
 
 - (void)viewDidLoad {
-    [self setupChildViewController:[[HomeViewController alloc] init]
+    [self setupChildViewController:controller_1
                              title:text_1
                              image:Img_1_normal
                      selectedImage:Img_1_press];
-    [self setupChildViewController:[[ApplyController alloc] init]
+    [self setupChildViewController:controller_2
                              title:text_2
                              image:Img_2_normal
                      selectedImage:Img_2_press];
-    [self setupChildViewController:[[ApplyController alloc] init]
+    [self setupChildViewController:controller_3
                              title:text_3
                              image:Img_3_normal
                      selectedImage:Img_3_press];
-    [self setupChildViewController:[[ApplyController alloc] init]
+    [self setupChildViewController:controller_4
                              title:text_4
                              image:Img_4_normal
                      selectedImage:Img_4_press];
-    [self setupChildViewController:[[ApplyController alloc] init]
+    [self setupChildViewController:controller_5
                              title:text_5
                              image:Img_5_normal
                      selectedImage:Img_5_press];

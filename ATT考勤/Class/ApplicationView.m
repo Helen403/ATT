@@ -57,24 +57,24 @@
 
     WS(weakSelf);
     
-    CGFloat padding = 15;
-    CGFloat length = 160;
+    CGFloat padding = [self h_w:15];
+    CGFloat length = [self h_w:160];
     
     [self.applyTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(10);
+        make.left.equalTo([self h_w:10]);
         make.top.equalTo(padding);
     }];
     
     [self.applyTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(-10);
+        make.right.equalTo(-[self h_w:10]);
         make.centerY.equalTo(weakSelf.applyTimeText);
     }];
     
     [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.applyTimeText.mas_bottom).offset(padding);
-        make.left.equalTo(10);
-        make.right.equalTo(-10);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+        make.left.equalTo([self h_w:10]);
+        make.right.equalTo(-[self h_w:10]);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
     [self.lateTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -91,7 +91,7 @@
         make.top.equalTo(weakSelf.lateTimeText.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
     [self.sureTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -108,7 +108,7 @@
         make.top.equalTo(weakSelf.sureTimeText.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
     

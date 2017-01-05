@@ -39,13 +39,13 @@
     [self.myApply mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(0);
         make.top.equalTo(0);
-        make.size.equalTo(CGSizeMake(center,30));
+        make.size.equalTo(CGSizeMake(center,[self h_w:30]));
     }];
     
     [self.myExamine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.myApply.mas_right).offset(0);
         make.top.equalTo(weakSelf.myApply);
-        make.size.equalTo(CGSizeMake(center,30));
+        make.size.equalTo(CGSizeMake(center,[self h_w:30]));
     }];
     
     

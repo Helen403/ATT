@@ -10,4 +10,20 @@
 
 @implementation HomeViewModel
 
+-(RACSubject *)headclickSubject{
+    if (!_headclickSubject) {
+        _headclickSubject = [RACSubject subject];
+    }
+    return _headclickSubject;
+
+}
+
+-(RACSubject *)setClickSubject{
+    if (!_setClickSubject) {
+        _setClickSubject = [RACSubject subject];
+    }
+    return _setClickSubject;
+
+}
+
 @end
