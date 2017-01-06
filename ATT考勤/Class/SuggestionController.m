@@ -1,22 +1,17 @@
 //
-//  ResignationController.m
+//  SuggestionController.m
 //  ATT考勤
 //
-//  Created by Helen on 16/12/26.
-//  Copyright © 2016年 Helen. All rights reserved.
+//  Created by Helen on 17/1/6.
+//  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "ApplyController.h"
-
-
-
-#import "MyApplyController.h"
-#import "MyExamineController.h"
-
+#import "SuggestionController.h"
 #import "ZJScrollPageView.h"
+#import "FeedbackController.h"
+#import "MyOpinionController.h"
 
-
-@interface ApplyController ()<ZJScrollPageViewDelegate>
+@interface SuggestionController ()<ZJScrollPageViewDelegate>
 
 @property(strong, nonatomic)NSArray<NSString *> *titles;
 
@@ -24,26 +19,17 @@
 
 @end
 
-@implementation ApplyController
-
--(void)viewWillAppear:(BOOL)animated{
-    [self hideNavigationBar:YES animated:NO];
-    [super viewWillAppear:animated];
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [self hideNavigationBar:NO animated:NO];
-    [super viewWillDisappear:animated];
-}
-
+@implementation SuggestionController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
 }
+
 
 #pragma mark private
 -(void)h_addSubviews{
-
+    
     //必要的设置, 如果没有设置可能导致内容显示不正常
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -55,8 +41,8 @@
     style.autoAdjustTitlesWidth = YES;
     style.adjustCoverOrLineWidth = YES;
     style.selectedTitleColor = MAIN_ORANGER;
-    self.titles = @[@"我申请的",
-                    @"我审批的",
+    self.titles = @[@"我要反馈",
+                    @"反馈记录",
                     ];
     // 初始化
     ZJScrollPageView *scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.height) segmentStyle:style titles:self.titles parentViewController:self delegate:self];
@@ -78,7 +64,7 @@
     if (!childVc) {
         childVc = [self.childVcs objectAtIndex:index];
     }
-
+    
     return childVc;
 }
 
@@ -86,12 +72,11 @@
     return NO;
 }
 
-#pragma mark lazyload
 -(NSMutableArray<UIViewController *> *)childVcs{
     if (!_childVcs) {
         _childVcs = [NSMutableArray array];
-        [_childVcs addObject:[[MyApplyController alloc] init]];
-        [_childVcs addObject:[[MyExamineController alloc] init]];
+        [_childVcs addObject:[[MyOpinionController alloc] init]];
+        [_childVcs addObject:[[FeedbackController alloc] init]];
     }
     return _childVcs;
 }

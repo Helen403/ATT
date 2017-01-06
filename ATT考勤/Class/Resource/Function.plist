@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>time</key>
+		<string>2017年1月27日</string>
+		<key>version</key>
+		<string>系统版本1.0.3</string>
+		<key>content</key>
+		<string>添加分组通讯</string>
+	</dict>
+	<dict>
+		<key>time</key>
+		<string>2017年1月22日</string>
+		<key>version</key>
+		<string>系统版本1.0.2</string>
+		<key>content</key>
+		<string>添加消息通讯</string>
+	</dict>
+	<dict>
+		<key>time</key>
+		<string>2017年1月10日</string>
+		<key>version</key>
+		<string>系统版本1.0.1</string>
+		<key>content</key>
+		<string>新增考勤申请</string>
+	</dict>
+	<dict>
+		<key>time</key>
+		<string>2017年1月1日</string>
+		<key>version</key>
+		<string>系统版本1.0.0</string>
+		<key>content</key>
+		<string>新增打卡功能</string>
+	</dict>
+</array>
+</plist>

@@ -11,6 +11,12 @@
 #import "SetViewModel.h"
 
 #import "VersionController.h"
+#import "TimeController.h"
+#import "FunctionController.h"
+
+#import "AboutController.h"
+#import "CustomController.h"
+
 
 @interface SetController ()
 
@@ -61,6 +67,37 @@
                 VersionController *version = [[VersionController alloc] init];
                 
                 [self.navigationController pushViewController:version animated:NO];
+                break;
+            }
+                //定时提醒
+            case 2:{
+                
+                TimeController *time = [[TimeController alloc] init];
+                
+                [self.navigationController pushViewController:time animated:NO];
+                break;
+            }
+               //功能介绍
+            case 3:{
+                FunctionController *function = [[FunctionController alloc] init];
+                
+                [self.navigationController pushViewController:function animated:NO];
+                break;
+            
+            }
+               //关于我们
+            case 7:{
+                AboutController *about = [[AboutController alloc] init];
+                
+                [self.navigationController pushViewController:about animated:NO];
+                break;
+            }
+                
+            case 6:{
+                CustomController *custom = [[CustomController alloc] init];
+                
+                [self.navigationController pushViewController:custom animated:NO];
+                
                 break;
             }
                 

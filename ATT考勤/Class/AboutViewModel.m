@@ -1,26 +1,27 @@
 //
-//  TimeViewModel.m
+//  AboutViewModel.m
 //  ATT考勤
 //
 //  Created by Helen on 17/1/5.
 //  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "TimeViewModel.h"
-#import "TimeModel.h"
+#import "AboutViewModel.h"
+#import "AboutModel.h"
 
-@implementation TimeViewModel
+@implementation AboutViewModel
 
 -(NSMutableArray *)arr{
     if (!_arr) {
         _arr = [NSMutableArray array];
         
         //读取plist
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Time" ofType:@"plist"];
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"About" ofType:@"plist"];
         
         NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
         
-        _arr= [TimeModel mj_objectArrayWithKeyValuesArray:data];
+        _arr= [AboutModel mj_objectArrayWithKeyValuesArray:data];
+        
     }
     return _arr;
 }

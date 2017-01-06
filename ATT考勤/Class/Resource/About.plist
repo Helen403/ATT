@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>公司名称</string>
+		<key>info</key>
+		<string>中山市韦达信息有限公司</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>公司地址</string>
+		<key>info</key>
+		<string>广东省中山市东区软件园</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>官方网站</string>
+		<key>info</key>
+		<string>www.attonline.com.cn</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>产品使用协议</string>
+		<key>info</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

@@ -1,5 +1,5 @@
 //
-//  TimeViewModel.h
+//  FunctionViewModel.h
 //  ATT考勤
 //
 //  Created by Helen on 17/1/5.
@@ -8,8 +8,7 @@
 
 #import "HViewModel.h"
 
-@interface TimeViewModel : HViewModel
-
+@interface FunctionViewModel : HViewModel
 
 @property(nonatomic,strong) NSMutableArray *arr;
 

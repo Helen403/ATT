@@ -1,30 +1,30 @@
 //
-//  TimeView.m
+//  FunctionView.m
 //  ATT考勤
 //
 //  Created by Helen on 17/1/5.
 //  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "TimeView.h"
-#import "TimeViewModel.h"
-#import "TimeCellView.h"
+#import "FunctionView.h"
+#import "FunctionViewModel.h"
 
-@interface TimeView()<UITableViewDataSource,UITableViewDelegate>
+#import "FunctionCellView.h"
 
-@property(nonatomic,strong) TimeViewModel *timeViewModel;
+@interface FunctionView()<UITableViewDataSource,UITableViewDelegate>
+
+@property(nonatomic,strong) FunctionViewModel *functionViewModel;
 
 @property(nonatomic,strong) UITableView *tableView;
 
-
 @end
 
-@implementation TimeView
+@implementation FunctionView
 
 #pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
     
-    self.timeViewModel = (TimeViewModel *)viewModel;
+    self.functionViewModel = (FunctionViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
 
@@ -38,7 +38,7 @@
     [super updateConstraints];
 }
 
-
+#pragma mark private
 -(void)h_setupViews{
     
     [self addSubview:self.tableView];
@@ -48,23 +48,14 @@
 }
 
 #pragma mark lazyload
--(TimeViewModel *)timeViewModel{
-    if (!_timeViewModel) {
-        _timeViewModel = [[TimeViewModel alloc] init];
-    }
-    return _timeViewModel;
-    
-}
-
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = GX_BGCOLOR;
+        _tableView.backgroundColor = white_color;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[TimeCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([TimeCellView class])]];
-        _tableView.scrollEnabled = NO;
+        [_tableView registerClass:[FunctionCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([FunctionCellView class])]];
         
     }
     return _tableView;
@@ -75,20 +66,20 @@
 #pragma mark - delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 1;
+    return self.functionViewModel.arr.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.timeViewModel.arr.count;
+    return 1;
 }
 
 #pragma mark tableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    TimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TimeCellView class])] forIndexPath:indexPath];
+    FunctionCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([FunctionCellView class])] forIndexPath:indexPath];
     
-    cell.timeModel = self.timeViewModel.arr[indexPath.row];
+    cell.functionModel = self.functionViewModel.arr[indexPath.section];
     
     return cell;
 }
@@ -96,13 +87,28 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:40];
+    return [self h_w:90];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    [self.timeViewModel.cellclickSubject sendNext:row];
+    [self.functionViewModel.cellclickSubject sendNext:row];
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.00001;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *headView = [[UIView alloc]init];
+    headView.backgroundColor = [UIColor clearColor];
+    return headView;
 }
 
 @end

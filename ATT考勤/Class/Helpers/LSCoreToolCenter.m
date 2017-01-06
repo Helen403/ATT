@@ -157,5 +157,21 @@ void DismissHud(void){
 }
 
 
+//计算文字的宽和高
++(CGSize) getSizeWithText:(NSString *)text fontSize:(CGFloat)fontSize
+{
+    CGFloat font =autoScaleW(fontSize);
+    CGSize size=[text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:font]}];
+    //ios系统大于7
+    if ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0) {
+        size=[text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]}];
+    }else{
+        NSAttributedString *attributeSting = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]}];
+        size = [attributeSting size];
+    }
+    return size;
+}
+
+
 
 @end

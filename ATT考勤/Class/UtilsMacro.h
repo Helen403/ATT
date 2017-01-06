@@ -98,6 +98,8 @@
 #define MAIN_PAN_2 RGBCOLOR(29, 29, 29)
 
 
+
+
 #define XCFGlobalBackgroundColor RGB(245, 240, 215)     // 背景颜色
 #define XCFLabelColorWhite RGB(255, 255, 255)           // 字体颜色：白色
 #define XCFLabelColorGray [UIColor grayColor]           // 字体颜色：灰色

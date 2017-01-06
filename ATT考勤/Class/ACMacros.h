@@ -479,4 +479,6 @@
 /*************************************/
 #define HL(str) NSLog(@"Helen %@",str)
 
+#define getSize(str,font) [LSCoreToolCenter getSizeWithText:str fontSize:font]
+
 #endif

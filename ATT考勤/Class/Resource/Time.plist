@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>icon</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>打卡声音</string>
+		<key>on</key>
+		<string>1</string>
+		<key>info</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>icon</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>打卡提示音</string>
+		<key>on</key>
+		<string>0</string>
+		<key>info</key>
+		<string>默认</string>
+	</dict>
+	<dict>
+		<key>icon</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>打卡震动</string>
+		<key>on</key>
+		<string>1</string>
+		<key>info</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>icon</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>上班打卡提醒</string>
+		<key>on</key>
+		<string>0</string>
+		<key>info</key>
+		<string>提前5分钟</string>
+	</dict>
+	<dict>
+		<key>icon</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>下班打卡提醒</string>
+		<key>on</key>
+		<string>0</string>
+		<key>info</key>
+		<string>提前5分钟</string>
+	</dict>
+</array>
+</plist>

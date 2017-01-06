@@ -26,4 +26,7 @@ extern void DismissHud(void);
 //删除数据库
 +(void)deleteTable;
 
+
+//计算文字的宽和高
++(CGSize) getSizeWithText:(NSString *)text fontSize:(CGFloat)fontSize;
 @end

@@ -1,30 +1,34 @@
 //
-//  TimeView.m
+//  AbountView.m
 //  ATT考勤
 //
 //  Created by Helen on 17/1/5.
 //  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "TimeView.h"
-#import "TimeViewModel.h"
-#import "TimeCellView.h"
+#import "AboutView.h"
+#import "AboutViewModel.h"
+#import "AboutCellView.h"
 
-@interface TimeView()<UITableViewDataSource,UITableViewDelegate>
+@interface AboutView()<UITableViewDataSource,UITableViewDelegate>
 
-@property(nonatomic,strong) TimeViewModel *timeViewModel;
+@property(nonatomic,strong) AboutViewModel *aboutViewModel;
 
 @property(nonatomic,strong) UITableView *tableView;
+
+@property(nonatomic,strong) UIView *view;
+
+@property(nonatomic,strong) UIImageView *twoDimension;
 
 
 @end
 
-@implementation TimeView
+@implementation AboutView
 
 #pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
     
-    self.timeViewModel = (TimeViewModel *)viewModel;
+    self.aboutViewModel = (AboutViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
 
@@ -38,23 +42,41 @@
     [super updateConstraints];
 }
 
-
+#pragma mark private
 -(void)h_setupViews{
     
     [self addSubview:self.tableView];
-    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
 #pragma mark lazyload
--(TimeViewModel *)timeViewModel{
-    if (!_timeViewModel) {
-        _timeViewModel = [[TimeViewModel alloc] init];
+-(AboutViewModel *)aboutViewModel{
+    if (!_aboutViewModel) {
+        _aboutViewModel = [[AboutViewModel alloc] init];
     }
-    return _timeViewModel;
-    
+    return _aboutViewModel;
 }
+
+-(UIView *)view{
+    if (!_view) {
+        _view = [[UIView alloc] init];
+        _view.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:270]);
+        [_view addSubview:self.twoDimension];
+    }
+    return _view;
+}
+
+-(UIImageView *)twoDimension{
+    if (!_twoDimension) {
+        _twoDimension = [[UIImageView alloc] init];
+        _twoDimension.image = ImageNamed(@"role_code_icon");
+        _twoDimension.frame = CGRectMake((SCREEN_WIDTH-[self h_w:250])*0.5, [self h_w:10], [self h_w:250], [self h_w:250]);
+    }
+    return _twoDimension;
+
+}
+
 
 -(UITableView *)tableView{
     if (!_tableView) {
@@ -63,8 +85,10 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[TimeCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([TimeCellView class])]];
+        [_tableView registerClass:[AboutCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([AboutCellView class])]];
         _tableView.scrollEnabled = NO;
+        
+        _tableView.tableHeaderView = self.view;
         
     }
     return _tableView;
@@ -80,15 +104,15 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.timeViewModel.arr.count;
+    return self.aboutViewModel.arr.count;
 }
 
 #pragma mark tableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    TimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TimeCellView class])] forIndexPath:indexPath];
+    AboutCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AboutCellView class])] forIndexPath:indexPath];
     
-    cell.timeModel = self.timeViewModel.arr[indexPath.row];
+    cell.aboutModel = self.aboutViewModel.arr[indexPath.row];
     
     return cell;
 }
@@ -102,7 +126,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    [self.timeViewModel.cellclickSubject sendNext:row];
+    [self.aboutViewModel.cellclickSubject sendNext:row];
 }
 
 @end

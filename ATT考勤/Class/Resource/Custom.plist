@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>content</key>
+		<string>联系电话1:889699768</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>content</key>
+		<string>联系电话2:889699768</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>0</string>
+		<key>content</key>
+		<string>注册了，为什么还不能登陆进去?</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>0</string>
+		<key>content</key>
+		<string>申请提交了，领导看不到?</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>0</string>
+		<key>content</key>
+		<string>打卡时间与公司系统时间不一致?</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>0</string>
+		<key>content</key>
+		<string>考勤报表不能及时提醒?</string>
+	</dict>
+</array>
+</plist>
