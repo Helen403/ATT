@@ -105,7 +105,7 @@
     [super updateConstraints];
 }
 
-
+#pragma mark private
 -(void)h_setupViews{
   
     [self addSubview:self.icon];
@@ -118,7 +118,6 @@
     [self addSubview:self.introduceImg];
     [self addSubview:self.introduceText];
     [self addSubview:self.line3];
-    
     
     
     [self setNeedsUpdateConstraints];
@@ -183,7 +182,7 @@
     if (!_number) {
         _number = [[UILabel alloc] init];
         _number.font = H14;
-        _number.textColor = MAIN_ORANGER;
+        _number.textColor = MAIN_PAN_2;
         _number.text = @"新版本1.0.0";
     }
     return _number;
@@ -212,7 +211,7 @@
     if (!_introduceText) {
         _introduceText = [[UILabel alloc] init];
         _introduceText.font = H14;
-        _introduceText.textColor = MAIN_ORANGER;
+        _introduceText.textColor = MAIN_PAN_2;
         _introduceText.text = @"新功能介绍";
     }
     return _introduceText;

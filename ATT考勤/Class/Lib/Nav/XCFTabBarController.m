@@ -13,34 +13,35 @@
 /*******************************************/
 #import "HomeViewController.h"
 #import "ApplyController.h"
-
-
+#import "NewsController.h"
+#import "StatisticsController.h"
+#import "TeamController.h"
 
 //设置对应的文字
-#define text_1 @"申请"
-#define text_2 @"考勤"
+#define text_1 @"考勤"
+#define text_2 @"申请"
 #define text_3 @"通讯录"
 #define text_4 @"统计"
 #define text_5 @"信息"
 
 //设置对应的图片
-#define Img_1_normal @"homepage_apply_button_gray"
-#define Img_2_normal @"homepage_attendance_button_gray"
+#define Img_1_normal @"homepage_attendance_button_gray"
+#define Img_2_normal @"homepage_apply_button_gray"
 #define Img_3_normal @"homepage_record_button_gray"
 #define Img_4_normal @"homepage_statistics_button_gray"
 #define Img_5_normal @"homepage_information_button_gray"
 
-#define Img_1_press @"homepage_apply_button_orange"
-#define Img_2_press @"homepage_attendance_button_orange"
+#define Img_1_press @"homepage_attendance_button_orange"
+#define Img_2_press @"homepage_apply_button_orange"
 #define Img_3_press @"homepage_record_button_orange"
 #define Img_4_press @"homepage_statistics_button_orange"
 #define Img_5_press @"homepage_information_button_orange"
 
 #define controller_1 [[HomeViewController alloc] init]
 #define controller_2 [[ApplyController alloc] init]
-#define controller_3 [[ApplyController alloc] init]
-#define controller_4 [[ApplyController alloc] init]
-#define controller_5 [[ApplyController alloc] init]
+#define controller_3 [[TeamController alloc] init]
+#define controller_4 [[StatisticsController alloc] init]
+#define controller_5 [[NewsController alloc] init]
 
 
 @interface XCFTabBarController ()

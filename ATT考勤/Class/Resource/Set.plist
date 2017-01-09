@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>icon</key>
-		<string>role_code_icon</string>
+		<string>settings_account_security_picture</string>
 		<key>title</key>
 		<string>账户与安全</string>
 		<key>number</key>
@@ -12,7 +12,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>role_code_icon</string>
+		<string>settings_ notice_picture</string>
 		<key>title</key>
 		<string>消息通知</string>
 		<key>number</key>
@@ -20,7 +20,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>role_code_icon</string>
+		<string>settings_ remind_picture</string>
 		<key>title</key>
 		<string>定时提醒</string>
 		<key>number</key>
@@ -28,7 +28,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>role_code_icon</string>
+		<string>settings_ funtion_picture</string>
 		<key>title</key>
 		<string>功能介绍</string>
 		<key>number</key>
@@ -36,7 +36,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>role_code_icon</string>
+		<string>settings_ feedback_picture</string>
 		<key>title</key>
 		<string>意见反馈</string>
 		<key>number</key>
@@ -44,7 +44,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>role_code_icon</string>
+		<string>settings_ detection_picture</string>
 		<key>title</key>
 		<string>版本检测</string>
 		<key>number</key>
@@ -52,7 +52,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>role_code_icon</string>
+		<string>settings_ customer_service_picture</string>
 		<key>title</key>
 		<string>客服中心</string>
 		<key>number</key>
@@ -60,7 +60,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>role_code_icon</string>
+		<string>settings_ about_us_picture</string>
 		<key>title</key>
 		<string>关于我们</string>
 		<key>number</key>

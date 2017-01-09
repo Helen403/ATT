@@ -1,22 +1,20 @@
 //
-//  MineCellView.m
+//  NewCellView.m
 //  ATT考勤
 //
-//  Created by Helen on 17/1/4.
+//  Created by Helen on 17/1/6.
 //  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "MineCellView.h"
+#import "NewCellView.h"
 
-@interface MineCellView()
+@interface NewCellView()
 
 @property(nonatomic,strong) UIImageView *img;
 
 @property(nonatomic,strong) UILabel *title;
 
-@property(nonatomic,strong) UILabel *info;
-
-@property(nonatomic,strong) UIImageView *icon;
+@property(nonatomic,strong) UILabel *number;
 
 @property(nonatomic,strong) UIImageView *back;
 
@@ -24,9 +22,7 @@
 
 @end
 
-
-@implementation MineCellView
-
+@implementation NewCellView
 
 #pragma mark system
 -(void)updateConstraints{
@@ -36,29 +32,20 @@
         make.centerY.equalTo(weakSelf);
         make.left.equalTo([self h_w:10]);
     }];
-    
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf);
+              make.centerY.equalTo(weakSelf);
         make.left.equalTo(weakSelf.img.mas_right).offset([self h_w:10]);
     }];
-    
-    [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf);
-        make.right.equalTo(-[self h_w:30]);
-    }];
-    
     [self.back mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
         make.right.equalTo(-[self h_w:10]);
     }];
-    
-    
-    [self.info mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf);
-        make.right.equalTo(-[self h_w:30]);
+    [self.number mas_makeConstraints:^(MASConstraintMaker *make) {
+              make.centerY.equalTo(weakSelf);
+        make.right.equalTo(weakSelf.back.mas_left).offset(-[self h_w:10]);
+        
     }];
-    
-    
+   
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.mas_bottom).offset([self h_w:1]);
         make.left.equalTo(weakSelf);
@@ -68,96 +55,75 @@
     [super updateConstraints];
 }
 
-
 #pragma mark private
 -(void)h_setupViews{
-    
+  
     [self addSubview:self.img];
     [self addSubview:self.title];
-    [self addSubview:self.icon];
-    [self addSubview:self.info];
+    [self addSubview:self.number];
     [self addSubview:self.back];
     [self addSubview:self.line];
+    
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
-
-#pragma mark loaddata
--(void)setMineModel:(MineModel *)mineModel{
-    if (!mineModel) {
+#pragma mark dataload
+-(void)setNewsModel:(NewsModel *)newsModel{
+    if (!newsModel) {
         return;
     }
-    _mineModel = mineModel;
+    _newsModel = newsModel;
     
-    self.img.image = ImageNamed(mineModel.img);
-    self.title.text = mineModel.title;
-    self.icon.image = ImageNamed(mineModel.icon);
-    self.info.text = mineModel.info;
-    if ([mineModel.back isEqualToString:@"1"]) {
-        self.back.hidden = NO;
-    }
-    
+    self.img.image = ImageNamed(newsModel.img);
+    self.title.text = newsModel.title;
+    self.number.text = newsModel.number;
 }
-
 
 #pragma mark lazyload
-
--(UILabel *)title{
-    if (!_title) {
-        _title = [[UILabel alloc] init];
-        _title.font = H14;
-        _title.textColor = MAIN_PAN_2;
-        _title.text = @"我的头像";
-    }
-    return _title;
-    
-}
-
 -(UIImageView *)img{
     if (!_img) {
         _img = [[UIImageView alloc] init];
-        _img.image = ImageNamed(@"");
+        _img.image = ImageNamed(@"role_code_icon");
     }
     return _img;
 }
 
--(UIImageView *)icon{
-    if (!_icon) {
-        _icon = [[UIImageView alloc] init];
+-(UILabel *)title{
+    if (!_title) {
+        _title = [[UILabel alloc] init];
+        _title.text = @"公司公告";
+        _title.font = H14;
+        _title.textColor = MAIN_PAN_2;
     }
-    return _icon;
-    
+    return _title;
 }
-
--(UILabel *)info{
-    if (!_info) {
-        _info = [[UILabel alloc] init];
-        _info.font = H14;
-        _info.textColor = MAIN_PAN_2;
-        _info.text = @"诸葛亮";
-    }
-    return _info;
-}
-
 
 -(UIImageView *)back{
     if (!_back) {
         _back = [[UIImageView alloc] init];
         _back.image = ImageNamed(@"role_right_arrow");
-        _back.hidden = YES;
     }
     return _back;
+}
+
+-(UILabel *)number{
+    if (!_number) {
+        _number = [[UILabel alloc] init];
+        _number.text = @"1";
+        _number.font = H14;
+        _number.textColor = MAIN_PAN_2;
+    }
+    return _number;
 }
 
 -(UIView *)line{
     if (!_line) {
         _line = [[UIView alloc] init];
-        _line.backgroundColor = BG_COLOR;
+        _line.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line;
 }
-
 
 @end

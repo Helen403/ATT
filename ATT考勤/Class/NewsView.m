@@ -1,62 +1,57 @@
 //
-//  MineView.m
+//  NewsView.m
 //  ATT考勤
 //
-//  Created by Helen on 17/1/4.
+//  Created by Helen on 17/1/6.
 //  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "MineView.h"
-#import "MineViewModel.h"
-#import "MineCellView.h"
+#import "NewsView.h"
+#import "NewsViewModel.h"
+#import "NewCellView.h"
 
-@interface MineView()<UITableViewDataSource,UITableViewDelegate>
+@interface NewsView()<UITableViewDataSource,UITableViewDelegate>
 
-@property(nonatomic,strong) MineViewModel *mineViewModel;
+@property(nonatomic,strong) NewsViewModel *newsViewModel;
 
 @property(nonatomic,strong) UITableView *tableView;
 
 @end
 
-@implementation MineView
+@implementation NewsView
 
 #pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
     
-    self.mineViewModel = (MineViewModel *)viewModel;
+    self.newsViewModel = (NewsViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
 
 -(void)updateConstraints{
     
-    
+    WS(weakSelf);
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(3);
-        make.left.equalTo(0);
-        make.right.equalTo(0);
-        make.bottom.equalTo(0);
+        make.edges.equalTo(weakSelf);
     }];
-    
     [super updateConstraints];
 }
 
-
+#pragma mark private
 -(void)h_setupViews{
     
-    
     [self addSubview:self.tableView];
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
 #pragma mark lazyload
--(MineViewModel *)mineViewModel{
-    if (!_mineViewModel) {
-        _mineViewModel = [[MineViewModel alloc] init];
+-(NewsViewModel *)newsViewModel{
+    if (!_newsViewModel) {
+        _newsViewModel = [[NewsViewModel alloc] init];
     }
-    return _mineViewModel;
+    return _newsViewModel;
 }
-
 
 -(UITableView *)tableView{
     if (!_tableView) {
@@ -65,11 +60,11 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[MineCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([MineCellView class])]];
-        //设置tableview 不能滚动
-        _tableView.scrollEnabled =NO;
+        [_tableView registerClass:[NewCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([NewCellView class])]];
+        
     }
     return _tableView;
+    
 }
 
 
@@ -81,15 +76,15 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.mineViewModel.arr.count;
+    return self.newsViewModel.arr.count;
 }
 
 #pragma mark tableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    MineCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MineCellView class])] forIndexPath:indexPath];
+    NewCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([NewCellView class])] forIndexPath:indexPath];
     
-    cell.mineModel = self.mineViewModel.arr[indexPath.row];
+    cell.newsModel = self.newsViewModel.arr[indexPath.row];
     
     return cell;
 }
@@ -103,12 +98,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    [self.mineViewModel.cellclickSubject sendNext:row];
+    [self.newsViewModel.cellclickSubject sendNext:row];
 }
-
-
-
-
-
 
 @end

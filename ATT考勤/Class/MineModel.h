@@ -14,7 +14,7 @@
 
 @property(nonatomic,strong) NSString *icon;
 
-
+@property(nonatomic,strong) NSString *img;
 
 @property(nonatomic,strong) NSString *info;
 

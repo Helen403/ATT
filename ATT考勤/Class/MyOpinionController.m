@@ -7,8 +7,15 @@
 //
 
 #import "MyOpinionController.h"
+#import "MyOpinionView.h"
+#import "MyOpinionViewModel.h"
+
 
 @interface MyOpinionController ()
+
+@property(nonatomic,strong) MyOpinionView *myOpinionView;
+
+@property(nonatomic,strong) MyOpinionViewModel *myOpinionViewModel;
 
 @end
 
@@ -19,7 +26,41 @@
 
 }
 
+#pragma mark system
+-(void)updateViewConstraints{
 
+    WS(weakSelf);
+    [self.myOpinionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view);
+    }];
+    [super updateViewConstraints];
+}
+
+#pragma mark private
+-(void)h_addSubviews{
+    [self.view addSubview:self.myOpinionView];
+
+}
+
+-(void)h_bindViewModel{
+
+}
+
+#pragma mark lazyload
+-(MyOpinionView *)myOpinionView{
+    if (!_myOpinionView) {
+        _myOpinionView = [[MyOpinionView alloc] initWithViewModel:self.myOpinionViewModel];
+    }
+    return _myOpinionView;
+}
+
+-(MyOpinionViewModel *)myOpinionViewModel{
+    if (!_myOpinionViewModel) {
+        _myOpinionViewModel = [[MyOpinionViewModel alloc] init];
+    }
+    return _myOpinionViewModel;
+
+}
 
 
 @end

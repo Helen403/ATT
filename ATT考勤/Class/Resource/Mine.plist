@@ -3,6 +3,8 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>img</key>
+		<string>information_head_portrait_picture</string>
 		<key>title</key>
 		<string>我的头像</string>
 		<key>icon</key>
@@ -13,6 +15,8 @@
 		<string>0</string>
 	</dict>
 	<dict>
+		<key>img</key>
+		<string>information_nickname_picture</string>
 		<key>title</key>
 		<string>我的昵称</string>
 		<key>icon</key>
@@ -23,6 +27,8 @@
 		<string>0</string>
 	</dict>
 	<dict>
+		<key>img</key>
+		<string>information_feeling_picture</string>
 		<key>title</key>
 		<string>我的签名</string>
 		<key>icon</key>
@@ -33,6 +39,8 @@
 		<string>0</string>
 	</dict>
 	<dict>
+		<key>img</key>
+		<string>information_company_picture</string>
 		<key>title</key>
 		<string>我的公司</string>
 		<key>icon</key>
@@ -43,6 +51,8 @@
 		<string>0</string>
 	</dict>
 	<dict>
+		<key>img</key>
+		<string>information_integral_picture</string>
 		<key>title</key>
 		<string>我的积分</string>
 		<key>icon</key>
@@ -53,6 +63,8 @@
 		<string>0</string>
 	</dict>
 	<dict>
+		<key>img</key>
+		<string>information_scheduling_picture</string>
 		<key>title</key>
 		<string>我的排班</string>
 		<key>icon</key>
@@ -63,6 +75,8 @@
 		<string>1</string>
 	</dict>
 	<dict>
+		<key>img</key>
+		<string>information_holiday_picture</string>
 		<key>title</key>
 		<string>我的假期</string>
 		<key>icon</key>

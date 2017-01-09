@@ -1,62 +1,58 @@
 //
-//  MineView.m
+//  TeamView.m
 //  ATT考勤
 //
-//  Created by Helen on 17/1/4.
+//  Created by Helen on 17/1/9.
 //  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "MineView.h"
-#import "MineViewModel.h"
-#import "MineCellView.h"
+#import "TeamView.h"
+#import "TeamViewModel.h"
+#import "TeamCellView.h"
 
-@interface MineView()<UITableViewDataSource,UITableViewDelegate>
+@interface TeamView()<UITableViewDataSource,UITableViewDelegate>
 
-@property(nonatomic,strong) MineViewModel *mineViewModel;
+@property(nonatomic,strong) TeamViewModel *teamViewModel;
 
 @property(nonatomic,strong) UITableView *tableView;
 
 @end
 
-@implementation MineView
+@implementation TeamView
+
 
 #pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
     
-    self.mineViewModel = (MineViewModel *)viewModel;
+    self.teamViewModel = (TeamViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
 
 -(void)updateConstraints{
     
-    
+    WS(weakSelf);
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(3);
-        make.left.equalTo(0);
-        make.right.equalTo(0);
-        make.bottom.equalTo(0);
+        make.edges.equalTo(weakSelf);
     }];
-    
     [super updateConstraints];
 }
 
-
+#pragma mark private
 -(void)h_setupViews{
     
-    
     [self addSubview:self.tableView];
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
 #pragma mark lazyload
--(MineViewModel *)mineViewModel{
-    if (!_mineViewModel) {
-        _mineViewModel = [[MineViewModel alloc] init];
+-(TeamViewModel *)teamViewModel{
+    if (!_teamViewModel) {
+        _teamViewModel = [[TeamViewModel alloc] init];
     }
-    return _mineViewModel;
+    return _teamViewModel;
 }
-
 
 -(UITableView *)tableView{
     if (!_tableView) {
@@ -65,11 +61,11 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[MineCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([MineCellView class])]];
-        //设置tableview 不能滚动
-        _tableView.scrollEnabled =NO;
+        [_tableView registerClass:[TeamCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamCellView class])]];
+        
     }
     return _tableView;
+    
 }
 
 
@@ -81,15 +77,15 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.mineViewModel.arr.count;
+    return self.teamViewModel.arr.count;
 }
 
 #pragma mark tableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    MineCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MineCellView class])] forIndexPath:indexPath];
+    TeamCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamCellView class])] forIndexPath:indexPath];
     
-    cell.mineModel = self.mineViewModel.arr[indexPath.row];
+    cell.teamModel = self.teamViewModel.arr[indexPath.row];
     
     return cell;
 }
@@ -103,12 +99,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    [self.mineViewModel.cellclickSubject sendNext:row];
+    [self.teamViewModel.cellclickSubject sendNext:row];
 }
-
-
-
-
 
 
 @end

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>我的考勤日报</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>我的考勤周报</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>我的考勤月报</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>部门考勤日报</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>部门考勤周报</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>部门考勤月报</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>部门外勤统计</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>工时英雄榜</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>签到英雄榜</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>部门红黑榜</string>
+	</dict>
+</array>
+</plist>

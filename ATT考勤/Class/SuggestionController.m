@@ -28,6 +28,13 @@
 
 
 #pragma mark private
+
+-(void)h_layoutNavigation{
+    self.title = @"意见反馈";
+
+}
+
+
 -(void)h_addSubviews{
     
     //必要的设置, 如果没有设置可能导致内容显示不正常
@@ -45,7 +52,7 @@
                     @"反馈记录",
                     ];
     // 初始化
-    ZJScrollPageView *scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.height) segmentStyle:style titles:self.titles parentViewController:self delegate:self];
+    ZJScrollPageView *scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) segmentStyle:style titles:self.titles parentViewController:self delegate:self];
     
     [self.view addSubview:scrollPageView];
     

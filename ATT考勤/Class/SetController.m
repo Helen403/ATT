@@ -16,6 +16,8 @@
 
 #import "AboutController.h"
 #import "CustomController.h"
+#import "SuggestionController.h"
+#import "MessageController.h"
 
 
 @interface SetController ()
@@ -85,6 +87,14 @@
                 break;
             
             }
+                //意见反馈
+            case 4:{
+            
+                SuggestionController *suggest = [[SuggestionController alloc] init];
+                
+                [self.navigationController pushViewController:suggest animated:NO];
+                break;
+            }
                //关于我们
             case 7:{
                 AboutController *about = [[AboutController alloc] init];
@@ -92,11 +102,19 @@
                 [self.navigationController pushViewController:about animated:NO];
                 break;
             }
-                
+             //客服中心
             case 6:{
                 CustomController *custom = [[CustomController alloc] init];
                 
                 [self.navigationController pushViewController:custom animated:NO];
+                
+                break;
+            }
+             //消息通知
+            case 1:{
+                MessageController *message = [[MessageController alloc] init];
+                
+                [self.navigationController pushViewController:message animated:NO];
                 
                 break;
             }
