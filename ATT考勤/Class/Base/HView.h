@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "HViewProtocol.h"
+#import "Toast.h"
 
 @interface HView : UIView <HViewProtocol>
 
 -(NSInteger)h_w:(NSInteger)width;
 
-
+//Toast
+-(void)toast:(NSString *)text;
 @end

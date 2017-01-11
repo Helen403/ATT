@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>准时</string>
+		<key>number</key>
+		<string>25</string>
+		<key>current</key>
+		<string></string>
+		<key>sum</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>迟到</string>
+		<key>number</key>
+		<string>4</string>
+		<key>current</key>
+		<string></string>
+		<key>sum</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>范围外</string>
+		<key>number</key>
+		<string>2</string>
+		<key>current</key>
+		<string></string>
+		<key>sum</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>未签到</string>
+		<key>number</key>
+		<string>0</string>
+		<key>current</key>
+		<string></string>
+		<key>sum</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

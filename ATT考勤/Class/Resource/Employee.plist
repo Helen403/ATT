@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>姓名</string>
+		<key>content</key>
+		<string>诸葛亮</string>
+		<key>show</key>
+		<string>0</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>性别</string>
+		<key>content</key>
+		<string>男</string>
+		<key>show</key>
+		<string>0</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>生日</string>
+		<key>content</key>
+		<string>12月25日</string>
+		<key>show</key>
+		<string>0</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>岗位</string>
+		<key>content</key>
+		<string>军师</string>
+		<key>show</key>
+		<string>0</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>手机</string>
+		<key>content</key>
+		<string>13850890798</string>
+		<key>show</key>
+		<string>role_code_icon</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>邮箱</string>
+		<key>content</key>
+		<string>67893687@qq.com</string>
+		<key>show</key>
+		<string>role_code_icon</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>设备</string>
+		<key>content</key>
+		<string>iphone6</string>
+		<key>show</key>
+		<string>0</string>
+	</dict>
+</array>
+</plist>

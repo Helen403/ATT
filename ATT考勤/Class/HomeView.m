@@ -50,6 +50,13 @@
 
 @property(nonatomic,strong) UILabel *netStatusText;
 
+//时间
+@property(nonatomic,strong) NSTimer *timeNow;
+
+@property(nonatomic,strong) NSDateFormatter *formatter;
+
+@property(nonatomic,assign) CGFloat width;
+
 @end
 
 @implementation HomeView
@@ -147,8 +154,8 @@
     
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.week.mas_bottom).offset(30);
-        make.centerX.equalTo(weakSelf.punch);
-        
+       // make.centerX.equalTo(weakSelf.punch);
+        make.left.equalTo([self h_w:self.width]);
     }];
     
     
@@ -175,7 +182,6 @@
 #pragma mark private
 -(void)h_setupViews{
     
-    
     [self addSubview:self.title];
     [self addSubview:self.setImg];
     [self addSubview:self.headImg];
@@ -186,7 +192,6 @@
     [self addSubview:self.preText];
     [self addSubview:self.lastImg];
     [self addSubview:self.lastText];
-    
     [self addSubview:self.view];
     [self addSubview:self.punch];
     [self addSubview:self.week];
@@ -196,14 +201,58 @@
     [self addSubview:self.netStatusText];
     
     
-    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
 -(void)h_bindViewModel{
+//    //判断是否已经打卡
+//    if (self.punch.userInteractionEnabled) {
+//        //开启定时器
+//        [self.timeNow setFireDate:[NSDate distantPast]];
+//    }
     
     
+    //设置时间
+    [self setTime];
+    
+}
+
+-(void)setTime{
+    //设置星期几
+    [self.week setText: [LSCoreToolCenter currentWeek]];
+    //设置年月日
+    [self.year setText: [LSCoreToolCenter currentYear]];
+    
+    //设置定时
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH:mm:ss"];
+    self.formatter = formatter;
+    self.timeNow = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeRun) userInfo:nil repeats:YES];
+}
+
+//时间变化
+- (void)timeRun{
+    
+    NSString *timetmp = [self.formatter stringFromDate:[NSDate date]];
+    
+    [self.time setText:timetmp];//时间在变化的语句
+    
+}
+
+////点击打卡
+-(void)onClickImage{
+
+    [self toast:@"打卡成功"];
+    self.punch.userInteractionEnabled = NO;
+//    //切换图片
+//    [self.imageView setImage:[UIImage imageNamed:@"homepage_Clock_button_blue"]];
+//    //关闭定时器
+    [self.timeNow setFireDate:[NSDate distantFuture]];
+//
+//    //网络请求打卡
+//    [self AttendCard];
+//
 }
 
 #pragma mark lazyload
@@ -237,7 +286,6 @@
 }
 
 -(void)set{
-
     [self.homeViewModel.setClickSubject sendNext:nil];
 }
 
@@ -257,7 +305,6 @@
 
 -(void)HeadClick{
     [self.homeViewModel.headclickSubject sendNext:nil];
-    
 }
 
 
@@ -334,6 +381,9 @@
     if (!_punch) {
         _punch = [[UIImageView alloc] init];
         _punch.image = ImageNamed(@"homepage_Clock_button");
+        _punch.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+        [_punch addGestureRecognizer:setTap];
     }
     return _punch;
 
@@ -355,6 +405,8 @@
         _time.text = @"14:50:55";
         _time.font = HB42;
         _time.textColor = RGBCOLOR(80, 80, 80);
+        
+      self.width = (SCREEN_WIDTH- [LSCoreToolCenter getSizeWithText:@"14:50:55" fontSize:42].width)*0.5;
     }
     return _time;
 }

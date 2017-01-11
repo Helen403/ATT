@@ -186,7 +186,7 @@
     if (!_applyTimeText) {
         _applyTimeText = [[UILabel alloc] init];
         _applyTimeText.text = @"申请时间";
-        _applyTimeText.textColor = MAIN_PAN;
+        _applyTimeText.textColor = MAIN_PAN_2;
         _applyTimeText.font = H14;
     }
     return _applyTimeText;
@@ -197,7 +197,7 @@
         _applyTimeShowText = [[UILabel alloc] init];
         _applyTimeShowText.text = @"2016年12月25日 08:30:00";
         _applyTimeShowText.font = H14;
-        _applyTimeShowText.textColor = MAIN_PAN;
+        _applyTimeShowText.textColor = MAIN_PAN_2;
     }
     return _applyTimeShowText;
 }
@@ -215,7 +215,7 @@
     if (!_lateTimeText) {
         _lateTimeText = [[UILabel alloc] init];
         _lateTimeText.text = @"迟到时间";
-        _lateTimeText.textColor = MAIN_PAN;
+        _lateTimeText.textColor = MAIN_PAN_2;
         _lateTimeText.font = H14;
     }
     return _lateTimeText;
@@ -226,7 +226,7 @@
         _lateTimeShowText = [[UILabel alloc] init];
         _lateTimeShowText.text = @"2016年12月25日 08:30:00";
         _lateTimeShowText.font = H14;
-        _lateTimeShowText.textColor = MAIN_PAN;
+        _lateTimeShowText.textColor = MAIN_PAN_2;
     }
     return _lateTimeShowText;
 }
@@ -243,7 +243,7 @@
     if (!_sureTimeText) {
         _sureTimeText = [[UILabel alloc] init];
         _sureTimeText.text = @"正常时间";
-        _sureTimeText.textColor = MAIN_PAN;
+        _sureTimeText.textColor = MAIN_PAN_2;
         _sureTimeText.font = H14;
     }
     return _sureTimeText;
@@ -255,7 +255,7 @@
         _sureTimeShowText = [[UILabel alloc] init];
         _sureTimeShowText.text = @"2016年12月25日 08:30:00";
         _sureTimeShowText.font = H14;
-        _sureTimeShowText.textColor = MAIN_PAN;
+        _sureTimeShowText.textColor = MAIN_PAN_2;
     }
     return _sureTimeShowText;
 }
@@ -281,7 +281,7 @@
 //        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
         _textView.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _textView.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
-        _textView.textColor = MAIN_PAN;
+        _textView.textColor = MAIN_PAN_2;
         _textView.text = @"迟到原因";//设置显示的文本内容
         
         _textView.layer.borderColor = LINE_COLOR.CGColor;

@@ -113,7 +113,7 @@
     if (!_title) {
         _title = [[UILabel alloc] init];
         _title.font = H14;
-        _title.textColor = MAIN_PAN;
+        _title.textColor = MAIN_PAN_2;
         _title.text = @"待处理";
     }
     return _title;
@@ -124,7 +124,7 @@
     if (!_hint) {
         _hint = [[UILabel alloc] init];
         _hint.text = @"1";
-        _hint.textColor = MAIN_PAN;
+        _hint.textColor = MAIN_PAN_2;
         _hint.font = H14;
     }
     return _hint;

@@ -160,7 +160,7 @@ void DismissHud(void){
 //计算文字的宽和高
 +(CGSize) getSizeWithText:(NSString *)text fontSize:(CGFloat)fontSize
 {
-    CGFloat font =autoScaleW(fontSize);
+    CGFloat font =SizeScaleW*fontSize;
     CGSize size=[text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:font]}];
     //ios系统大于7
     if ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0) {
@@ -172,6 +172,97 @@ void DismissHud(void){
     return size;
 }
 
+
+
+//获取当天为星期几
++ (NSString*)currentWeek{
+    NSString *weekDayStr = nil;
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    
+    NSString *str = [self description];
+    if (str.length >= 10) {
+        NSString *nowString = [str substringToIndex:10];
+        NSArray *array = [nowString componentsSeparatedByString:@"-"];
+        if (array.count == 0) {
+            array = [nowString componentsSeparatedByString:@"/"];
+        }
+        if (array.count >= 3) {
+            NSInteger year = [[array objectAtIndex:0] integerValue];
+            NSInteger month = [[array objectAtIndex:1] integerValue];
+            NSInteger day = [[array objectAtIndex:2] integerValue];
+            [comps setYear:year];
+            [comps setMonth:month];
+            [comps setDay:day];
+        }
+    }
+    
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *_date = [gregorian dateFromComponents:comps];
+    NSDateComponents *weekdayComponents = [gregorian components:NSCalendarUnitWeekday fromDate:_date];
+    NSInteger week = [weekdayComponents weekday];
+    week ++;
+    switch (week) {
+        case 1:
+            weekDayStr = @"星期日";
+            break;
+        case 2:
+            weekDayStr = @"星期一";
+            break;
+        case 3:
+            weekDayStr = @"星期二";
+            break;
+        case 4:
+            weekDayStr = @"星期三";
+            break;
+        case 5:
+            weekDayStr = @"星期四";
+            break;
+        case 6:
+            weekDayStr = @"星期五";
+            break;
+        case 7:
+            weekDayStr = @"星期六";
+            break;
+        default:
+            weekDayStr = @"";
+            break;
+    }
+    return weekDayStr;
+    
+}
+
+
+//获取年月日
++(NSString *)currentYear{
+    
+    NSCalendar * cal = [NSCalendar currentCalendar];
+    
+    NSUInteger unitFlags = NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear;
+    
+    NSDateComponents * conponent = [cal components:unitFlags fromDate:[NSDate date]];
+    NSInteger year=[conponent year];
+    NSInteger month=[conponent month];
+    NSInteger day=[conponent day];
+    NSString * nsDateString= [NSString stringWithFormat:@"%4ld年%2ld月%2ld日",(long)year,(long)month,(long)day];
+    return nsDateString;
+}
+
+//获取年月日
+//+(NSString *)currentYearLine{
+//    
+//    NSCalendar * cal = [NSCalendar currentCalendar];
+//    
+//    NSUInteger unitFlags = NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear;
+//    
+//    NSDateComponents * conponent = [cal components:unitFlags fromDate:[NSDate date]];
+//    NSInteger year=[conponent year];
+//    NSInteger month=[conponent month];
+//    NSInteger day=[conponent day];
+//    NSString * nsDateString= [NSString stringWithFormat:@"%4ld-%2ld-%2ld",(long)year,(long)month,(long)day];
+//    return nsDateString;
+//}
 
 
 @end

@@ -24,4 +24,10 @@
 
 @property(nonatomic,strong) RACSubject *newpartclickSubject;
 
+@property(nonatomic,strong) RACSubject *weixinclickSubject;
+
+@property(nonatomic,strong) RACSubject *qqclickSubject;
+
+@property(nonatomic,strong) RACSubject *sinaclickSubject;
+
 @end

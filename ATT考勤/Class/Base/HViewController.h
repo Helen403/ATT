@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Toast.h"
 #import "HViewControllerProtocol.h"
 
 
@@ -54,7 +54,7 @@
 
 
 
-
-
+//Toast
+-(void)toast:(NSString *)text;
 
 @end

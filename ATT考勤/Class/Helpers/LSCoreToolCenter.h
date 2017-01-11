@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
+
 @interface LSCoreToolCenter : NSObject
 
 extern void ShowSuccessStatus(NSString *statues);
@@ -29,4 +30,10 @@ extern void DismissHud(void);
 
 //计算文字的宽和高
 +(CGSize) getSizeWithText:(NSString *)text fontSize:(CGFloat)fontSize;
+
+//获取当天为星期几
++ (NSString*)currentWeek;
+
+//获取年月日
++(NSString *)currentYear;
 @end

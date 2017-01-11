@@ -55,7 +55,7 @@
         _title = [[UILabel alloc] init];
         _title.text = @"证明人(点+添加)";
         _title.font = H14;
-        _title.textColor = MAIN_PAN;
+        _title.textColor = MAIN_PAN_2;
     }
     return _title;
 }

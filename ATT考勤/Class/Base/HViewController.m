@@ -242,5 +242,10 @@
     [super didReceiveMemoryWarning];
 }
 
+//Toast
+-(void)toast:(NSString *)text{
+    [Toast showWithText:text bottomOffset:60];
+}
+
 
 @end

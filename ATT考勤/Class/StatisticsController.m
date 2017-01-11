@@ -10,6 +10,9 @@
 #import "StatisticsView.h"
 #import "StatisticsViewModel.h"
 
+#import "TeamAttendanceController.h"
+#import "PersonalController.h"
+
 @interface StatisticsController ()
 
 @property(nonatomic,strong) StatisticsView *statisticsView;
@@ -22,21 +25,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
 }
 
 
 #pragma mark system
 -(void)updateViewConstraints{
-
+    
     WS(weakSelf);
     [self.statisticsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf.view);
     }];
     [super updateViewConstraints];
 }
-
-
 
 #pragma mark private
 -(void)h_layoutNavigation{
@@ -48,7 +48,23 @@
 }
 
 -(void)h_bindViewModel{
+    
+    [[self.statisticsViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        if ([x intValue] == 0) {
 
+            PersonalController *personal = [[PersonalController alloc] init];
+            
+            [self.navigationController pushViewController:personal animated:NO];
+        }else{
+            
+            TeamAttendanceController *team = [[TeamAttendanceController alloc] init];
+            
+            [self.navigationController pushViewController:team animated:NO];
+        }
+        
+        
+    }];
 }
 
 #pragma mark lazyload

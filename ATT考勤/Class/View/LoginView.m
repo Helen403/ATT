@@ -9,7 +9,7 @@
 #import "LoginView.h"
 #import "LoginViewModel.h"
 
-@interface LoginView()
+@interface LoginView()<UITextFieldDelegate>
 
 @property(nonatomic,strong) LoginViewModel *loginViewModel;
 
@@ -41,6 +41,8 @@
 
 @property(nonatomic,strong) UIImageView *sina;
 
+@property(nonatomic,strong) UIButton *eyes;
+
 @end
 
 
@@ -57,10 +59,10 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-
+    
     CGFloat leftPadding =(SCREEN_WIDTH-SCREEN_WIDTH*0.8)*0.5;
     CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
-    CGFloat biglength = autoScaleW(50);
+    CGFloat biglength = [self h_w:50];
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
         make.top.equalTo([self h_w:80]);
@@ -92,8 +94,14 @@
     [self.pwdTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.pwdImg.mas_right).offset([self h_w:10]);
         make.centerY.equalTo(weakSelf.pwdImg);
-        make.size.equalTo(CGSizeMake(length, [self h_w:25]));
+        make.size.equalTo(CGSizeMake(length-[self h_w:30], [self h_w:25]));
     }];
+    
+    [self.eyes mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.pwdImg);
+        make.left.equalTo(weakSelf.pwdTextField.mas_right).offset([self h_w:2]);
+    }];
+    
     
     [self.login mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.pwdImg.mas_bottom).offset([self h_w:50]);
@@ -152,7 +160,6 @@
     [self setBackgroundColor:white_color];
     
     [self addSubview:self.icon];
-    
     [self addSubview:self.useImg];
     [self addSubview:self.useTextField];
     [self addSubview:self.line1];
@@ -166,7 +173,7 @@
     [self addSubview:self.weixin];
     [self addSubview:self.QQ];
     [self addSubview:self.sina];
-    
+    [self addSubview:self.eyes];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -184,7 +191,6 @@
         
     }
     return _loginViewModel;
-    
 }
 
 -(UIImageView *)icon{
@@ -225,6 +231,7 @@
         _useTextField.font = H14;
         // 设置右边永远显示清除按钮
         _useTextField.clearButtonMode = UITextFieldViewModeAlways;
+        
     }
     return _useTextField;
 }
@@ -265,12 +272,23 @@
         //设置输入框内容的字体样式和大小
         _pwdTextField.font = H14;
         // 设置右边永远显示清除按钮
-        _pwdTextField.clearButtonMode = UITextFieldViewModeAlways;
+        //        _pwdTextField.clearButtonMode = UITextFieldViewModeAlways;
+        _pwdTextField.secureTextEntry = YES;
+        _pwdTextField.delegate = self;
         
-        
+        //        // 5.监听文本框的文字改变
+        //        [_pwdTextField.rac_textSignal subscribeNext:^(id x) {
+        //
+        //            NSLog(@"文字改变了%@",x);
+        //        }];
     }
     return _pwdTextField;
     
+}
+
+
+- (void) textChangeAction:(id) sender {
+    NSLog(@"%@",self.pwdTextField.text);
 }
 
 
@@ -317,7 +335,7 @@
         _forgetText.textColor = RGBCOLOR(129, 130, 132);
         _forgetText.font = H14;
         //添加点击事件
-        _forgetText.userInteractionEnabled=YES;
+        _forgetText.userInteractionEnabled = YES;
         UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(forget)];
         [_forgetText addGestureRecognizer:setTap];
     }
@@ -339,12 +357,13 @@
         _registerText.userInteractionEnabled=YES;
         UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(registerClick)];
         [_registerText addGestureRecognizer:setTap];
+        
     }
     return _registerText;
 }
 
 -(void)registerClick{
-
+    
     [self.loginViewModel.newpartclickSubject sendNext:nil];
 }
 
@@ -373,28 +392,84 @@
     if (!_weixin) {
         _weixin = [[UIImageView alloc] init];
         _weixin.image = ImageNamed(@"login_weixin_picture");
+        _weixin.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(weixinClick)];
+        [_weixin addGestureRecognizer:setTap];
+        
     }
     return _weixin;
 }
+
+-(void)weixinClick{
+    
+    [self.loginViewModel.weixinclickSubject sendNext:nil];
+}
+
 
 -(UIImageView *)QQ{
     if (!_QQ) {
         _QQ = [[UIImageView alloc] init];
         _QQ.image = ImageNamed(@"login_QQ_picture");
+        _QQ.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(QQclick)];
+        [_QQ addGestureRecognizer:setTap];
     }
     return _QQ;
+}
+
+
+-(void)QQclick{
+    
+    [self.loginViewModel.qqclickSubject sendNext:nil];
 }
 
 -(UIImageView *)sina{
     if (!_sina) {
         _sina = [[UIImageView alloc] init];
         _sina.image = ImageNamed(@"login_weibo_picture");
+        _sina.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Sinaclick)];
+        [_sina addGestureRecognizer:setTap];
     }
     return _sina;
     
 }
 
+-(void)Sinaclick{
+    [self.loginViewModel.sinaclickSubject sendNext:nil];
+}
 
+-(UIButton *)eyes{
+    if (!_eyes) {
+        _eyes = [[UIButton alloc] init];
+        
+        [_eyes addTarget:self action:@selector(showAndHidePassword:) forControlEvents:UIControlEventTouchUpInside];
+        [_eyes setImage:ImageNamed(@"eyes") forState:UIControlStateNormal];
+    }
+    return _eyes;
+    
+}
+
+//隐藏和显示密码
+-(void)showAndHidePassword:(UIButton *)sender{
+    //避免明文/密文切换后光标位置偏移
+    self.pwdTextField.enabled = NO;    // the first one;
+    self.pwdTextField.secureTextEntry = sender.selected;
+    sender.selected = !sender.selected;
+    self.pwdTextField.enabled = YES;  // the second one;
+    [self.pwdTextField becomeFirstResponder]; // the third one
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    //明文切换密文后避免被清空
+    NSString *toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (textField == self.pwdTextField && textField.isSecureTextEntry) {
+        textField.text = toBeString;
+        return NO;
+    }
+    return YES;
+}
 
 
 @end

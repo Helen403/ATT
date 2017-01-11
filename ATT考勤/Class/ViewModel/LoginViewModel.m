@@ -91,7 +91,28 @@
         _newpartclickSubject = [RACSubject subject];
     }
     return _newpartclickSubject;
+}
 
+-(RACSubject *)weixinclickSubject{
+    if (!_weixinclickSubject) {
+        _weixinclickSubject = [RACSubject subject];
+    }
+    return _weixinclickSubject;
+}
+
+-(RACSubject *)qqclickSubject{
+    if (!_qqclickSubject) {
+        _qqclickSubject = [RACSubject subject];
+    }
+    return _qqclickSubject;
+}
+
+
+-(RACSubject *)sinaclickSubject{
+    if (!_sinaclickSubject) {
+        _sinaclickSubject = [RACSubject subject];
+    }
+    return _sinaclickSubject;
 }
 
 @end

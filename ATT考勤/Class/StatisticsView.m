@@ -110,7 +110,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
+    NSNumber *row =[NSNumber numberWithInteger:indexPath.section];
     [self.statisticsViewModel.cellclickSubject sendNext:row];
 }
 

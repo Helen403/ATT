@@ -41,7 +41,7 @@
 #pragma mark private
 -(void)h_setupViews{
     
-   
+    
     [self addSubview:self.collectionView];
     
     [self setNeedsUpdateConstraints];
@@ -72,12 +72,13 @@
         //设置每个item的大小为100*100
         
         CGFloat padding = 6;
-
+        
         layout.itemSize = CGSizeMake((SCREEN_WIDTH-4*padding)/3.f, (SCREEN_WIDTH-4*padding)/3.f);
         //创建collectionView 通过一个布局策略layout来创建
         _collectionView = [[UICollectionView alloc]initWithFrame:self.frame collectionViewLayout:layout];
         
-        _collectionView.backgroundColor = BG_COLOR;
+        
+        _collectionView.backgroundColor = GX_BGCOLOR;
         //代理设置
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -115,14 +116,14 @@
 
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.myApplyViewModel.cellclickSubject sendNext:row];
 }
 
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-
+    
     return 1;
 }
 

@@ -10,16 +10,9 @@
 #import "LoginView.h"
 #import "LoginViewModel.h"
 
-
 #import "ForgetController.h"
-
 #import "NewpartViewController.h"
-
 #import "XCFTabBarController.h"
-
-
-
-
 
 @interface LoginViewController ()
 
@@ -49,9 +42,7 @@
 - (void)updateViewConstraints {
     
     WS(weakSelf)
-    
     [self.loginView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
         make.edges.equalTo(weakSelf.view);
     }];
     
@@ -65,18 +56,12 @@
 
 -(void)h_addSubviews{
     [self.view addSubview:self.loginView];
-    
-   
-    
-
 }
 
 -(void)h_bindViewModel{
     
-//    @weakify(self);
+    //点击登陆
     [self.loginViewModel.loginclickSubject subscribeNext:^(id x) {
-//        @strongify(self);
-        
         switch ([x integerValue]) {
             case HSuccess:
                 [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
@@ -88,31 +73,46 @@
     }];
     
     
+    
+    //忘记密码
     @weakify(self);
     [[self.loginViewModel.forgetclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
         
-        NSLog(@"kk");
         @strongify(self);
         ForgetController *forgetController = [[ForgetController alloc] init];
-        
-       
-////
-//        [forgetController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-//        
-//        [self presentViewController:forgetController animated:YES completion:^{
-//            
-//        }];
+
         
         [self.navigationController pushViewController:forgetController animated:YES];
         
     }];
     
+    //创建新角色
     [[self.loginViewModel.newpartclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
     
         NewpartViewController *newpartController = [[NewpartViewController alloc] init];
         
         [self.navigationController pushViewController:newpartController animated:YES];
     }];
+    
+    //微信点击
+    [[self.loginViewModel.weixinclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        
+        [self toast:@"微信"];
+    }];
+    
+    
+    //QQ点击
+    [[self.loginViewModel.qqclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        [self toast:@"QQ"];
+    }];
+    
+    //新浪点击
+    [[self.loginViewModel.sinaclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        
+        [self toast:@"sina"];
+    }];
+    
+    
 }
 
 #pragma mark lazyload

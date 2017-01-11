@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		153979DCD9B3B0F66F09E1B1 /* libPods-ATT考勤.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 046319EB51F72983CB8284F4 /* libPods-ATT考勤.a */; };
+		790430031E2474D600D486A0 /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 790430021E2474D600D486A0 /* Toast.m */; settings = {ASSET_TAGS = (); }; };
 		7904A6F61E09236700D6E8D4 /* HTarBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7904A6F31E09236700D6E8D4 /* HTarBarViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7904A6F71E09236700D6E8D4 /* HNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7904A6F51E09236700D6E8D4 /* HNavigationController.m */; settings = {ASSET_TAGS = (); }; };
 		7904A6FA1E0923A000D6E8D4 /* HButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7904A6F91E0923A000D6E8D4 /* HButtonView.m */; settings = {ASSET_TAGS = (); }; };
@@ -107,6 +108,18 @@
 		793765451E14A45800F7B34F /* XCFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765411E14A45800F7B34F /* XCFNavigationController.m */; settings = {ASSET_TAGS = (); }; };
 		793765461E14A45800F7B34F /* XCFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765431E14A45800F7B34F /* XCFTabBarController.m */; settings = {ASSET_TAGS = (); }; };
 		793765491E14A78400F7B34F /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765481E14A78400F7B34F /* UIBarButtonItem+Extension.m */; settings = {ASSET_TAGS = (); }; };
+		7937CC061E24891B00A4F82F /* AddressListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7937CC051E24891B00A4F82F /* AddressListController.m */; settings = {ASSET_TAGS = (); }; };
+		7937CC091E24893800A4F82F /* AddressListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7937CC081E24893800A4F82F /* AddressListView.m */; settings = {ASSET_TAGS = (); }; };
+		7937CC0C1E24899000A4F82F /* AddressListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7937CC0B1E24899000A4F82F /* AddressListViewModel.m */; settings = {ASSET_TAGS = (); }; };
+		7937CC0F1E24900700A4F82F /* ToTeamView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7937CC0E1E24900700A4F82F /* ToTeamView.m */; settings = {ASSET_TAGS = (); }; };
+		79380A701E25BE93004E7250 /* EmployeeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79380A6F1E25BE93004E7250 /* EmployeeHeadView.m */; settings = {ASSET_TAGS = (); }; };
+		79380A7A1E25CFEA004E7250 /* TeamAttendanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79380A791E25CFEA004E7250 /* TeamAttendanceController.m */; settings = {ASSET_TAGS = (); }; };
+		79380A7D1E25D074004E7250 /* TeamAttendanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79380A7C1E25D074004E7250 /* TeamAttendanceView.m */; settings = {ASSET_TAGS = (); }; };
+		79380A801E25D1EC004E7250 /* TeamAttendanceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79380A7F1E25D1EC004E7250 /* TeamAttendanceViewModel.m */; settings = {ASSET_TAGS = (); }; };
+		79380A831E25D251004E7250 /* TeamAttendanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79380A821E25D251004E7250 /* TeamAttendanceModel.m */; settings = {ASSET_TAGS = (); }; };
+		79380A861E25D2C3004E7250 /* TeamAttendanceCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79380A851E25D2C3004E7250 /* TeamAttendanceCellView.m */; settings = {ASSET_TAGS = (); }; };
+		79380A891E25D3C2004E7250 /* TeamAttendanceHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79380A881E25D3C2004E7250 /* TeamAttendanceHeadView.m */; settings = {ASSET_TAGS = (); }; };
+		79380A8B1E25E066004E7250 /* TeamAttendance.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79380A8A1E25E066004E7250 /* TeamAttendance.plist */; settings = {ASSET_TAGS = (); }; };
 		793868261E0A29DF004EC88A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793868251E0A29DF004EC88A /* HomeViewController.m */; settings = {ASSET_TAGS = (); }; };
 		793868291E0A29F5004EC88A /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793868281E0A29F5004EC88A /* HomeView.m */; settings = {ASSET_TAGS = (); }; };
 		7938682C1E0A2A8A004EC88A /* HomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7938682B1E0A2A8A004EC88A /* HomeViewModel.m */; settings = {ASSET_TAGS = (); }; };
@@ -150,6 +163,14 @@
 		79ED5E8E1E1CEAD500BBC3D9 /* SetCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ED5E8D1E1CEAD500BBC3D9 /* SetCellView.m */; settings = {ASSET_TAGS = (); }; };
 		79ED5E901E1CF72600BBC3D9 /* Set.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79ED5E8F1E1CF72600BBC3D9 /* Set.plist */; settings = {ASSET_TAGS = (); }; };
 		79ED5E931E1CF76200BBC3D9 /* SetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ED5E921E1CF76200BBC3D9 /* SetModel.m */; settings = {ASSET_TAGS = (); }; };
+		79EF94191E2612E700F8E9BC /* PersonalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94181E2612E700F8E9BC /* PersonalController.m */; settings = {ASSET_TAGS = (); }; };
+		79EF941C1E26130C00F8E9BC /* PersonalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF941B1E26130C00F8E9BC /* PersonalView.m */; settings = {ASSET_TAGS = (); }; };
+		79EF941F1E26143200F8E9BC /* PersonalViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF941E1E26143200F8E9BC /* PersonalViewModel.m */; settings = {ASSET_TAGS = (); }; };
+		79EF94221E26145200F8E9BC /* PersonalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94211E26145200F8E9BC /* PersonalModel.m */; settings = {ASSET_TAGS = (); }; };
+		79EF94251E26147400F8E9BC /* PersonalCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94241E26147400F8E9BC /* PersonalCellView.m */; settings = {ASSET_TAGS = (); }; };
+		79EF94281E26148A00F8E9BC /* PersonalHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94271E26148A00F8E9BC /* PersonalHeadView.m */; settings = {ASSET_TAGS = (); }; };
+		79EF942A1E261F6300F8E9BC /* Personal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79EF94291E261F6300F8E9BC /* Personal.plist */; settings = {ASSET_TAGS = (); }; };
+		79EF94341E262DB900F8E9BC /* CheckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79EF94331E262DB900F8E9BC /* CheckController.m */; settings = {ASSET_TAGS = (); }; };
 		79F0A1361E13990A00A1B8AA /* UIView+ZJFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F0A1261E13990A00A1B8AA /* UIView+ZJFrame.m */; settings = {ASSET_TAGS = (); }; };
 		79F0A1371E13990A00A1B8AA /* UIViewController+ZJScrollPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F0A1281E13990A00A1B8AA /* UIViewController+ZJScrollPageController.m */; settings = {ASSET_TAGS = (); }; };
 		79F0A1381E13990A00A1B8AA /* ZJCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F0A12A1E13990A00A1B8AA /* ZJCollectionView.m */; settings = {ASSET_TAGS = (); }; };
@@ -193,6 +214,15 @@
 		79FA39441E1346BC00B8D3A7 /* MyExamineCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA39431E1346BC00B8D3A7 /* MyExamineCellViewModel.m */; settings = {ASSET_TAGS = (); }; };
 		79FA39471E13478600B8D3A7 /* MyExamineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA39461E13478600B8D3A7 /* MyExamineModel.m */; settings = {ASSET_TAGS = (); }; };
 		79FD0E2A1E0D00E3006AAF0E /* ic_schedule_menu_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FD0E291E0D00E3006AAF0E /* ic_schedule_menu_back.png */; settings = {ASSET_TAGS = (); }; };
+		79FFB2591E24BA7E00EC082F /* AddressListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB2581E24BA7E00EC082F /* AddressListCellView.m */; settings = {ASSET_TAGS = (); }; };
+		79FFB25C1E24BB0400EC082F /* AddressListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB25B1E24BB0400EC082F /* AddressListModel.m */; settings = {ASSET_TAGS = (); }; };
+		79FFB25E1E24BC3D00EC082F /* AddressList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79FFB25D1E24BC3D00EC082F /* AddressList.plist */; settings = {ASSET_TAGS = (); }; };
+		79FFB2671E24DF1800EC082F /* EmployeeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB2661E24DF1800EC082F /* EmployeeController.m */; settings = {ASSET_TAGS = (); }; };
+		79FFB26A1E24DF3E00EC082F /* EmployeeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB2691E24DF3E00EC082F /* EmployeeViewModel.m */; settings = {ASSET_TAGS = (); }; };
+		79FFB26D1E24DF5600EC082F /* EmployeeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB26C1E24DF5600EC082F /* EmployeeView.m */; settings = {ASSET_TAGS = (); }; };
+		79FFB2701E24DF6900EC082F /* EmployeeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB26F1E24DF6900EC082F /* EmployeeModel.m */; settings = {ASSET_TAGS = (); }; };
+		79FFB2721E24E0FE00EC082F /* Employee.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79FFB2711E24E0FE00EC082F /* Employee.plist */; settings = {ASSET_TAGS = (); }; };
+		79FFB2761E24E37100EC082F /* EmployeeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB2751E24E37100EC082F /* EmployeeCellView.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +244,8 @@
 
 /* Begin PBXFileReference section */
 		046319EB51F72983CB8284F4 /* libPods-ATT考勤.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ATT考勤.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		790430011E2474D600D486A0 /* Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Toast.h; path = "ATT考勤/Class/Lib/Toast.h"; sourceTree = "<group>"; };
+		790430021E2474D600D486A0 /* Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Toast.m; path = "ATT考勤/Class/Lib/Toast.m"; sourceTree = "<group>"; };
 		7904A6F21E09236700D6E8D4 /* HTarBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTarBarViewController.h; sourceTree = "<group>"; };
 		7904A6F31E09236700D6E8D4 /* HTarBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTarBarViewController.m; sourceTree = "<group>"; };
 		7904A6F41E09236700D6E8D4 /* HNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNavigationController.h; sourceTree = "<group>"; };
@@ -406,6 +438,29 @@
 		793765431E14A45800F7B34F /* XCFTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFTabBarController.m; sourceTree = "<group>"; };
 		793765471E14A78400F7B34F /* UIBarButtonItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extension.h"; sourceTree = "<group>"; };
 		793765481E14A78400F7B34F /* UIBarButtonItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extension.m"; sourceTree = "<group>"; };
+		7937CC041E24891B00A4F82F /* AddressListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListController.h; sourceTree = "<group>"; };
+		7937CC051E24891B00A4F82F /* AddressListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListController.m; sourceTree = "<group>"; };
+		7937CC071E24893800A4F82F /* AddressListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListView.h; sourceTree = "<group>"; };
+		7937CC081E24893800A4F82F /* AddressListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListView.m; sourceTree = "<group>"; };
+		7937CC0A1E24899000A4F82F /* AddressListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListViewModel.h; sourceTree = "<group>"; };
+		7937CC0B1E24899000A4F82F /* AddressListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListViewModel.m; sourceTree = "<group>"; };
+		7937CC0D1E24900700A4F82F /* ToTeamView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToTeamView.h; sourceTree = "<group>"; };
+		7937CC0E1E24900700A4F82F /* ToTeamView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToTeamView.m; sourceTree = "<group>"; };
+		79380A6E1E25BE93004E7250 /* EmployeeHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeHeadView.h; sourceTree = "<group>"; };
+		79380A6F1E25BE93004E7250 /* EmployeeHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeHeadView.m; sourceTree = "<group>"; };
+		79380A781E25CFEA004E7250 /* TeamAttendanceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamAttendanceController.h; sourceTree = "<group>"; };
+		79380A791E25CFEA004E7250 /* TeamAttendanceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamAttendanceController.m; sourceTree = "<group>"; };
+		79380A7B1E25D074004E7250 /* TeamAttendanceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamAttendanceView.h; sourceTree = "<group>"; };
+		79380A7C1E25D074004E7250 /* TeamAttendanceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamAttendanceView.m; sourceTree = "<group>"; };
+		79380A7E1E25D1EC004E7250 /* TeamAttendanceViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamAttendanceViewModel.h; sourceTree = "<group>"; };
+		79380A7F1E25D1EC004E7250 /* TeamAttendanceViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamAttendanceViewModel.m; sourceTree = "<group>"; };
+		79380A811E25D251004E7250 /* TeamAttendanceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamAttendanceModel.h; sourceTree = "<group>"; };
+		79380A821E25D251004E7250 /* TeamAttendanceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamAttendanceModel.m; sourceTree = "<group>"; };
+		79380A841E25D2C3004E7250 /* TeamAttendanceCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamAttendanceCellView.h; sourceTree = "<group>"; };
+		79380A851E25D2C3004E7250 /* TeamAttendanceCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamAttendanceCellView.m; sourceTree = "<group>"; };
+		79380A871E25D3C2004E7250 /* TeamAttendanceHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamAttendanceHeadView.h; sourceTree = "<group>"; };
+		79380A881E25D3C2004E7250 /* TeamAttendanceHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamAttendanceHeadView.m; sourceTree = "<group>"; };
+		79380A8A1E25E066004E7250 /* TeamAttendance.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TeamAttendance.plist; sourceTree = "<group>"; };
 		793868241E0A29DF004EC88A /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		793868251E0A29DF004EC88A /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		793868271E0A29F5004EC88A /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
@@ -490,6 +545,21 @@
 		79ED5E8F1E1CF72600BBC3D9 /* Set.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Set.plist; sourceTree = "<group>"; };
 		79ED5E911E1CF76200BBC3D9 /* SetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetModel.h; sourceTree = "<group>"; };
 		79ED5E921E1CF76200BBC3D9 /* SetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetModel.m; sourceTree = "<group>"; };
+		79EF94171E2612E700F8E9BC /* PersonalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalController.h; sourceTree = "<group>"; };
+		79EF94181E2612E700F8E9BC /* PersonalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalController.m; sourceTree = "<group>"; };
+		79EF941A1E26130C00F8E9BC /* PersonalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalView.h; sourceTree = "<group>"; };
+		79EF941B1E26130C00F8E9BC /* PersonalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalView.m; sourceTree = "<group>"; };
+		79EF941D1E26143200F8E9BC /* PersonalViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewModel.h; sourceTree = "<group>"; };
+		79EF941E1E26143200F8E9BC /* PersonalViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewModel.m; sourceTree = "<group>"; };
+		79EF94201E26145200F8E9BC /* PersonalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalModel.h; sourceTree = "<group>"; };
+		79EF94211E26145200F8E9BC /* PersonalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalModel.m; sourceTree = "<group>"; };
+		79EF94231E26147400F8E9BC /* PersonalCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCellView.h; sourceTree = "<group>"; };
+		79EF94241E26147400F8E9BC /* PersonalCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCellView.m; sourceTree = "<group>"; };
+		79EF94261E26148A00F8E9BC /* PersonalHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalHeadView.h; sourceTree = "<group>"; };
+		79EF94271E26148A00F8E9BC /* PersonalHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalHeadView.m; sourceTree = "<group>"; };
+		79EF94291E261F6300F8E9BC /* Personal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Personal.plist; sourceTree = "<group>"; };
+		79EF94321E262DB900F8E9BC /* CheckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckController.h; sourceTree = "<group>"; };
+		79EF94331E262DB900F8E9BC /* CheckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckController.m; sourceTree = "<group>"; };
 		79F0A1251E13990A00A1B8AA /* UIView+ZJFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ZJFrame.h"; sourceTree = "<group>"; };
 		79F0A1261E13990A00A1B8AA /* UIView+ZJFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ZJFrame.m"; sourceTree = "<group>"; };
 		79F0A1271E13990A00A1B8AA /* UIViewController+ZJScrollPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ZJScrollPageController.h"; sourceTree = "<group>"; };
@@ -585,6 +655,22 @@
 		79FA39451E13478600B8D3A7 /* MyExamineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyExamineModel.h; sourceTree = "<group>"; };
 		79FA39461E13478600B8D3A7 /* MyExamineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyExamineModel.m; sourceTree = "<group>"; };
 		79FD0E291E0D00E3006AAF0E /* ic_schedule_menu_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_schedule_menu_back.png; sourceTree = "<group>"; };
+		79FFB2571E24BA7E00EC082F /* AddressListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListCellView.h; sourceTree = "<group>"; };
+		79FFB2581E24BA7E00EC082F /* AddressListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListCellView.m; sourceTree = "<group>"; };
+		79FFB25A1E24BB0400EC082F /* AddressListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListModel.h; sourceTree = "<group>"; };
+		79FFB25B1E24BB0400EC082F /* AddressListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListModel.m; sourceTree = "<group>"; };
+		79FFB25D1E24BC3D00EC082F /* AddressList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AddressList.plist; sourceTree = "<group>"; };
+		79FFB2651E24DF1800EC082F /* EmployeeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeController.h; sourceTree = "<group>"; };
+		79FFB2661E24DF1800EC082F /* EmployeeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeController.m; sourceTree = "<group>"; };
+		79FFB2681E24DF3E00EC082F /* EmployeeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeViewModel.h; sourceTree = "<group>"; };
+		79FFB2691E24DF3E00EC082F /* EmployeeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeViewModel.m; sourceTree = "<group>"; };
+		79FFB26B1E24DF5600EC082F /* EmployeeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeView.h; sourceTree = "<group>"; };
+		79FFB26C1E24DF5600EC082F /* EmployeeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeView.m; sourceTree = "<group>"; };
+		79FFB26E1E24DF6900EC082F /* EmployeeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeModel.h; sourceTree = "<group>"; };
+		79FFB26F1E24DF6900EC082F /* EmployeeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeModel.m; sourceTree = "<group>"; };
+		79FFB2711E24E0FE00EC082F /* Employee.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Employee.plist; sourceTree = "<group>"; };
+		79FFB2741E24E37100EC082F /* EmployeeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeCellView.h; sourceTree = "<group>"; };
+		79FFB2751E24E37100EC082F /* EmployeeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeCellView.m; sourceTree = "<group>"; };
 		8ED7B189C990D6740CA551D4 /* Pods-ATT考勤.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATT考勤.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ATT考勤/Pods-ATT考勤.debug.xcconfig"; sourceTree = "<group>"; };
 		CD88A55891B3DFA35306F0D4 /* Pods-ATT考勤.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATT考勤.release.xcconfig"; path = "Pods/Target Support Files/Pods-ATT考勤/Pods-ATT考勤.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -624,6 +710,15 @@
 				CD88A55891B3DFA35306F0D4 /* Pods-ATT考勤.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		790430041E24755D00D486A0 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				790430011E2474D600D486A0 /* Toast.h */,
+				790430021E2474D600D486A0 /* Toast.m */,
+			);
+			name = Toast;
 			sourceTree = "<group>";
 		};
 		7904A6E61E09163800D6E8D4 /* Home(首页) */ = {
@@ -1082,7 +1177,12 @@
 				791EE6FC1E1F9D5E000BA8B8 /* Notice(公司公告) */,
 				791711691E2367CC003D15C1 /* Team(部门通讯) */,
 				794E04691E231FCD00CFE3A3 /* Statistics(统计) */,
+				79FFB25F1E24DCEA00EC082F /* Employee(员工信息) */,
+				7937CBFD1E2486AB00A4F82F /* AddressList(通讯领域) */,
 				791EE6E31E1F91E6000BA8B8 /* News(消息) */,
+				79EF94101E2611A300F8E9BC /* Personal(个人考勤) */,
+				79EF942B1E262C8E00F8E9BC /* Check(考勤) */,
+				79380A711E25CE25004E7250 /* TeamAttendance(部门考勤) */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -1126,7 +1226,6 @@
 			children = (
 				79345B881E1F22BB0007A348 /* Other */,
 				79345B871E1F22B50007A348 /* Cell */,
-				79345B861E1F22AF0007A348 /* Model */,
 				79345B851E1F22AA0007A348 /* View */,
 				79345B841E1F22A20007A348 /* ViewController */,
 				79345B831E1F22990007A348 /* ViewModel */,
@@ -1167,13 +1266,6 @@
 				79345B9C1E1F255F0007A348 /* MyOpinionView.m */,
 			);
 			name = View;
-			sourceTree = "<group>";
-		};
-		79345B861E1F22AF0007A348 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		79345B871E1F22B50007A348 /* Cell */ = {
@@ -1263,6 +1355,10 @@
 				791EE6F91E1F93DC000BA8B8 /* News.plist */,
 				794E047F1E2323BF00CFE3A3 /* Statistics.plist */,
 				7917117F1E237302003D15C1 /* Team.plist */,
+				79FFB25D1E24BC3D00EC082F /* AddressList.plist */,
+				79FFB2711E24E0FE00EC082F /* Employee.plist */,
+				79380A8A1E25E066004E7250 /* TeamAttendance.plist */,
+				79EF94291E261F6300F8E9BC /* Personal.plist */,
 			);
 			name = File;
 			sourceTree = "<group>";
@@ -1783,6 +1879,140 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		7937CBFD1E2486AB00A4F82F /* AddressList(通讯领域) */ = {
+			isa = PBXGroup;
+			children = (
+				7937CC031E24889E00A4F82F /* Other */,
+				7937CC021E24889900A4F82F /* Cell */,
+				7937CC011E24888E00A4F82F /* Model */,
+				7937CC001E24888900A4F82F /* View */,
+				7937CBFF1E24888100A4F82F /* ViewController */,
+				7937CBFE1E24882400A4F82F /* ViewModel */,
+			);
+			name = "AddressList(通讯领域)";
+			sourceTree = "<group>";
+		};
+		7937CBFE1E24882400A4F82F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7937CC0A1E24899000A4F82F /* AddressListViewModel.h */,
+				7937CC0B1E24899000A4F82F /* AddressListViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		7937CBFF1E24888100A4F82F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7937CC041E24891B00A4F82F /* AddressListController.h */,
+				7937CC051E24891B00A4F82F /* AddressListController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		7937CC001E24888900A4F82F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7937CC071E24893800A4F82F /* AddressListView.h */,
+				7937CC081E24893800A4F82F /* AddressListView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7937CC011E24888E00A4F82F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79FFB25A1E24BB0400EC082F /* AddressListModel.h */,
+				79FFB25B1E24BB0400EC082F /* AddressListModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7937CC021E24889900A4F82F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				79FFB2571E24BA7E00EC082F /* AddressListCellView.h */,
+				79FFB2581E24BA7E00EC082F /* AddressListCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		7937CC031E24889E00A4F82F /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				7937CC0D1E24900700A4F82F /* ToTeamView.h */,
+				7937CC0E1E24900700A4F82F /* ToTeamView.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		79380A711E25CE25004E7250 /* TeamAttendance(部门考勤) */ = {
+			isa = PBXGroup;
+			children = (
+				79380A771E25CF96004E7250 /* Other */,
+				79380A761E25CF92004E7250 /* Cell */,
+				79380A751E25CF8C004E7250 /* Model */,
+				79380A741E25CF88004E7250 /* View */,
+				79380A731E25CF7F004E7250 /* ViewController */,
+				79380A721E25CF77004E7250 /* ViewModel */,
+			);
+			name = "TeamAttendance(部门考勤)";
+			sourceTree = "<group>";
+		};
+		79380A721E25CF77004E7250 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79380A7E1E25D1EC004E7250 /* TeamAttendanceViewModel.h */,
+				79380A7F1E25D1EC004E7250 /* TeamAttendanceViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		79380A731E25CF7F004E7250 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79380A781E25CFEA004E7250 /* TeamAttendanceController.h */,
+				79380A791E25CFEA004E7250 /* TeamAttendanceController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		79380A741E25CF88004E7250 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79380A7B1E25D074004E7250 /* TeamAttendanceView.h */,
+				79380A7C1E25D074004E7250 /* TeamAttendanceView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		79380A751E25CF8C004E7250 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79380A811E25D251004E7250 /* TeamAttendanceModel.h */,
+				79380A821E25D251004E7250 /* TeamAttendanceModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		79380A761E25CF92004E7250 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				79380A841E25D2C3004E7250 /* TeamAttendanceCellView.h */,
+				79380A851E25D2C3004E7250 /* TeamAttendanceCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		79380A771E25CF96004E7250 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				79380A871E25D3C2004E7250 /* TeamAttendanceHeadView.h */,
+				79380A881E25D3C2004E7250 /* TeamAttendanceHeadView.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		794927551E10A5CB007331CA /* BuildRole(创建账户3) */ = {
 			isa = PBXGroup;
 			children = (
@@ -2242,6 +2472,130 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		79EF94101E2611A300F8E9BC /* Personal(个人考勤) */ = {
+			isa = PBXGroup;
+			children = (
+				79EF94161E2612BC00F8E9BC /* Other */,
+				79EF94151E2612B800F8E9BC /* Cell */,
+				79EF94141E2612B400F8E9BC /* Model */,
+				79EF94131E2612B000F8E9BC /* View */,
+				79EF94121E2612A600F8E9BC /* ViewController */,
+				79EF94111E2611C900F8E9BC /* ViewModel */,
+			);
+			name = "Personal(个人考勤)";
+			sourceTree = "<group>";
+		};
+		79EF94111E2611C900F8E9BC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79EF941D1E26143200F8E9BC /* PersonalViewModel.h */,
+				79EF941E1E26143200F8E9BC /* PersonalViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		79EF94121E2612A600F8E9BC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79EF94171E2612E700F8E9BC /* PersonalController.h */,
+				79EF94181E2612E700F8E9BC /* PersonalController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		79EF94131E2612B000F8E9BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79EF941A1E26130C00F8E9BC /* PersonalView.h */,
+				79EF941B1E26130C00F8E9BC /* PersonalView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		79EF94141E2612B400F8E9BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79EF94201E26145200F8E9BC /* PersonalModel.h */,
+				79EF94211E26145200F8E9BC /* PersonalModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		79EF94151E2612B800F8E9BC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				79EF94231E26147400F8E9BC /* PersonalCellView.h */,
+				79EF94241E26147400F8E9BC /* PersonalCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		79EF94161E2612BC00F8E9BC /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				79EF94261E26148A00F8E9BC /* PersonalHeadView.h */,
+				79EF94271E26148A00F8E9BC /* PersonalHeadView.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		79EF942B1E262C8E00F8E9BC /* Check(考勤) */ = {
+			isa = PBXGroup;
+			children = (
+				79EF94311E262D7E00F8E9BC /* Other */,
+				79EF942F1E262D7000F8E9BC /* Cell */,
+				79EF94301E262D7700F8E9BC /* Model */,
+				79EF942E1E262CE200F8E9BC /* View */,
+				79EF942D1E262CDB00F8E9BC /* ViewController */,
+				79EF942C1E262CC400F8E9BC /* ViewModel */,
+			);
+			name = "Check(考勤)";
+			sourceTree = "<group>";
+		};
+		79EF942C1E262CC400F8E9BC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		79EF942D1E262CDB00F8E9BC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79EF94321E262DB900F8E9BC /* CheckController.h */,
+				79EF94331E262DB900F8E9BC /* CheckController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		79EF942E1E262CE200F8E9BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		79EF942F1E262D7000F8E9BC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		79EF94301E262D7700F8E9BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		79EF94311E262D7E00F8E9BC /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		79F05E081E03BD5B00F335DA /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -2534,9 +2888,77 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		79FFB25F1E24DCEA00EC082F /* Employee(员工信息) */ = {
+			isa = PBXGroup;
+			children = (
+				79FFB2641E24DE5E00EC082F /* Other */,
+				79FFB2731E24E35200EC082F /* Cell */,
+				79FFB2631E24DE5800EC082F /* Model */,
+				79FFB2621E24DE5400EC082F /* View */,
+				79FFB2611E24DE4B00EC082F /* ViewController */,
+				79FFB2601E24DE4300EC082F /* ViewModel */,
+			);
+			name = "Employee(员工信息)";
+			sourceTree = "<group>";
+		};
+		79FFB2601E24DE4300EC082F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79FFB2681E24DF3E00EC082F /* EmployeeViewModel.h */,
+				79FFB2691E24DF3E00EC082F /* EmployeeViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		79FFB2611E24DE4B00EC082F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79FFB2651E24DF1800EC082F /* EmployeeController.h */,
+				79FFB2661E24DF1800EC082F /* EmployeeController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		79FFB2621E24DE5400EC082F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79FFB26B1E24DF5600EC082F /* EmployeeView.h */,
+				79FFB26C1E24DF5600EC082F /* EmployeeView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		79FFB2631E24DE5800EC082F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79FFB26E1E24DF6900EC082F /* EmployeeModel.h */,
+				79FFB26F1E24DF6900EC082F /* EmployeeModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		79FFB2641E24DE5E00EC082F /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				79380A6E1E25BE93004E7250 /* EmployeeHeadView.h */,
+				79380A6F1E25BE93004E7250 /* EmployeeHeadView.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		79FFB2731E24E35200EC082F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				79FFB2741E24E37100EC082F /* EmployeeCellView.h */,
+				79FFB2751E24E37100EC082F /* EmployeeCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		83B8787B68883EECD9829725 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				790430041E24755D00D486A0 /* Toast */,
 				79F4F05F1E1F808300115C3B /* DLSlideView */,
 				79F0A14D1E13C2CE00A1B8AA /* JCAlertView */,
 				79F0A1241E13990A00A1B8AA /* ZJScrollPageView */,
@@ -2660,11 +3082,14 @@
 			files = (
 				79367B041E12220C00696A38 /* myapplytext.plist in Resources */,
 				79375D6D1E1E409700E27934 /* Custom.plist in Resources */,
+				79380A8B1E25E066004E7250 /* TeamAttendance.plist in Resources */,
 				7980A8DD1E1354B300F3F289 /* myexamine.plist in Resources */,
 				791711801E237302003D15C1 /* Team.plist in Resources */,
 				79375D3A1E1E208600E27934 /* Function.plist in Resources */,
 				79375D1E1E1DEF1C00E27934 /* Time.plist in Resources */,
 				79FD0E2A1E0D00E3006AAF0E /* ic_schedule_menu_back.png in Resources */,
+				79FFB25E1E24BC3D00EC082F /* AddressList.plist in Resources */,
+				79FFB2721E24E0FE00EC082F /* Employee.plist in Resources */,
 				79282EC61E0B832F00F4E050 /* l3.jpg in Resources */,
 				7937653D1E14987F00F7B34F /* DealWith.plist in Resources */,
 				79F0A1491E13B0BF00A1B8AA /* Pending.plist in Resources */,
@@ -2675,6 +3100,7 @@
 				79375D521E1E2E5A00E27934 /* About.plist in Resources */,
 				794E04801E2323BF00CFE3A3 /* Statistics.plist in Resources */,
 				79F0A1511E13C2CE00A1B8AA /* JCAlertView.bundle in Resources */,
+				79EF942A1E261F6300F8E9BC /* Personal.plist in Resources */,
 				7928BD791E0273A4009BB0B4 /* Assets.xcassets in Resources */,
 				79282EC41E0B80FF00F4E050 /* l2.png in Resources */,
 				79ED5E901E1CF72600BBC3D9 /* Set.plist in Resources */,
@@ -2754,6 +3180,8 @@
 				79F0A1521E13C2CE00A1B8AA /* JCAlertView.m in Sources */,
 				79375D6B1E1E402C00E27934 /* CustomModel.m in Sources */,
 				79345B941E1F25160007A348 /* MyOpinionViewModel.m in Sources */,
+				7937CC061E24891B00A4F82F /* AddressListController.m in Sources */,
+				79380A801E25D1EC004E7250 /* TeamAttendanceViewModel.m in Sources */,
 				7980A8EC1E135B5400F3F289 /* PendingView.m in Sources */,
 				791EE7051E1F9E07000BA8B8 /* NoticeController.m in Sources */,
 				79F8A4E31E03C219004F8A8C /* ThirdPartService.m in Sources */,
@@ -2765,6 +3193,7 @@
 				79F4F0751E1F808300115C3B /* DLFixedTabbarView.m in Sources */,
 				791711751E236853003D15C1 /* TeamView.m in Sources */,
 				79375D031E1DD8CF00E27934 /* VersionController.m in Sources */,
+				79FFB25C1E24BB0400EC082F /* AddressListModel.m in Sources */,
 				79F8A4E01E03C110004F8A8C /* StartApp.m in Sources */,
 				793765461E14A45800F7B34F /* XCFTabBarController.m in Sources */,
 				79345B8E1E1F236C0007A348 /* MyOpinionController.m in Sources */,
@@ -2784,6 +3213,9 @@
 				7937653B1E14983A00F7B34F /* DealWithModel.m in Sources */,
 				79F43DAA1E0D598A00C4C932 /* CreateViewModel.m in Sources */,
 				7938682C1E0A2A8A004EC88A /* HomeViewModel.m in Sources */,
+				79EF941F1E26143200F8E9BC /* PersonalViewModel.m in Sources */,
+				79EF94281E26148A00F8E9BC /* PersonalHeadView.m in Sources */,
+				79FFB26A1E24DF3E00EC082F /* EmployeeViewModel.m in Sources */,
 				794927781E10FB6E007331CA /* ForgetPwdController.m in Sources */,
 				79F8561C1E02C689002D82F4 /* HCollectionViewCell.m in Sources */,
 				79367B171E1268E200696A38 /* ProveView.m in Sources */,
@@ -2795,10 +3227,12 @@
 				79375D621E1E3D8C00E27934 /* CustomViewModel.m in Sources */,
 				79F0A1471E13B01700A1B8AA /* PendingCellViewModel.m in Sources */,
 				79F4F0871E1F893900115C3B /* MessageModel.m in Sources */,
+				79FFB2591E24BA7E00EC082F /* AddressListCellView.m in Sources */,
 				79375D651E1E3E2800E27934 /* CustomCellView.m in Sources */,
 				791711781E23686F003D15C1 /* TeamViewModel.m in Sources */,
 				7917117B1E236AC0003D15C1 /* TeamCellView.m in Sources */,
 				79345B9D1E1F255F0007A348 /* MyOpinionView.m in Sources */,
+				79380A891E25D3C2004E7250 /* TeamAttendanceHeadView.m in Sources */,
 				79F0A1401E13AE8700A1B8AA /* PendingCellView.m in Sources */,
 				79367AF71E11FD1800696A38 /* MyApplyController.m in Sources */,
 				79F8A4EB1E03C426004F8A8C /* LoginViewController.m in Sources */,
@@ -2807,11 +3241,14 @@
 				79F4F0781E1F808300115C3B /* DLUtility.m in Sources */,
 				79F0A1361E13990A00A1B8AA /* UIView+ZJFrame.m in Sources */,
 				7904A6FA1E0923A000D6E8D4 /* HButtonView.m in Sources */,
+				79EF94341E262DB900F8E9BC /* CheckController.m in Sources */,
 				79375D4D1E1E2DE600E27934 /* AboutCellView.m in Sources */,
 				796310E91E0D2B3A001462AF /* NewpartViewController.m in Sources */,
 				79375D2E1E1DF7E400E27934 /* FunctionView.m in Sources */,
+				7937CC0C1E24899000A4F82F /* AddressListViewModel.m in Sources */,
 				79F0A13B1E13990A00A1B8AA /* ZJScrollSegmentView.m in Sources */,
 				79F856221E02D561002D82F4 /* LSCoreToolCenter.m in Sources */,
+				79FFB2761E24E37100EC082F /* EmployeeCellView.m in Sources */,
 				79282EBF1E0B7DF000F4E050 /* ZJTextAndImageHUDView.m in Sources */,
 				793710341E1C83AB002F3E2E /* MineViewModel.m in Sources */,
 				79282EAB1E0B7C7F00F4E050 /* ZJLeadingPageCell.m in Sources */,
@@ -2819,6 +3256,8 @@
 				79F43DA71E0D597100C4C932 /* CreateView.m in Sources */,
 				791EE6EC1E1F9259000BA8B8 /* NewsController.m in Sources */,
 				791711721E236836003D15C1 /* TeamController.m in Sources */,
+				79EF94191E2612E700F8E9BC /* PersonalController.m in Sources */,
+				790430031E2474D600D486A0 /* Toast.m in Sources */,
 				794E04781E23207900CFE3A3 /* StatisticsViewModel.m in Sources */,
 				79282EA21E0B65C600F4E050 /* LoginView.m in Sources */,
 				79F0A14C1E13B1E300A1B8AA /* PendingModel.m in Sources */,
@@ -2831,14 +3270,17 @@
 				79375D5F1E1E3D7300E27934 /* CustomView.m in Sources */,
 				7985066D1E028AC600028C22 /* CMRequest.m in Sources */,
 				798506701E028C1400028C22 /* HView.m in Sources */,
+				79380A7D1E25D074004E7250 /* TeamAttendanceView.m in Sources */,
 				7949277B1E10FB87007331CA /* ForgetPwdView.m in Sources */,
 				79375D4A1E1E2B7F00E27934 /* AboutViewModel.m in Sources */,
+				7937CC0F1E24900700A4F82F /* ToTeamView.m in Sources */,
 				791EE6F21E1F9292000BA8B8 /* NewsViewModel.m in Sources */,
 				79362F651E0CB1C800F9B769 /* ForgetController.m in Sources */,
 				79ED5E851E1CE53F00BBC3D9 /* SetController.m in Sources */,
 				79367B001E12180600696A38 /* MyApplyModel.m in Sources */,
 				794E04751E23206000CFE3A3 /* StatisticsView.m in Sources */,
 				79367B0D1E12539400696A38 /* ApplicationController.m in Sources */,
+				79FFB2671E24DF1800EC082F /* EmployeeController.m in Sources */,
 				791EE6F81E1F9392000BA8B8 /* NewsModel.m in Sources */,
 				79345B8B1E1F22E20007A348 /* SuggestionController.m in Sources */,
 				7904A6F71E09236700D6E8D4 /* HNavigationController.m in Sources */,
@@ -2861,6 +3303,8 @@
 				79282EBB1E0B7DF000F4E050 /* ZJImageOnlyHUDView.m in Sources */,
 				79F43DA41E0D595300C4C932 /* CreateController.m in Sources */,
 				79375D471E1E2B5600E27934 /* AboutView.m in Sources */,
+				79380A861E25D2C3004E7250 /* TeamAttendanceCellView.m in Sources */,
+				7937CC091E24893800A4F82F /* AddressListView.m in Sources */,
 				79ED5E881E1CE56400BBC3D9 /* SetView.m in Sources */,
 				7928BD6E1E0273A4009BB0B4 /* main.m in Sources */,
 				791EE70B1E1F9E3C000BA8B8 /* NoticeViewModel.m in Sources */,
@@ -2870,7 +3314,10 @@
 				791EE7081E1F9E21000BA8B8 /* NoticeView.m in Sources */,
 				791EE6F51E1F931B000BA8B8 /* NewCellView.m in Sources */,
 				79367AFA1E11FD4300696A38 /* MyExamineController.m in Sources */,
+				79FFB26D1E24DF5600EC082F /* EmployeeView.m in Sources */,
 				7968033A1E11206D00CED421 /* MyExamineViewModel.m in Sources */,
+				79380A7A1E25CFEA004E7250 /* TeamAttendanceController.m in Sources */,
+				79380A701E25BE93004E7250 /* EmployeeHeadView.m in Sources */,
 				79367AFD1E12171D00696A38 /* MyApplyCollectionView.m in Sources */,
 				7917117E1E236F11003D15C1 /* TeamModel.m in Sources */,
 				79375D381E1DFCB700E27934 /* FunctionModel.m in Sources */,
@@ -2894,19 +3341,24 @@
 				796803311E111F4F00CED421 /* MyApplyView.m in Sources */,
 				794927621E10A694007331CA /* BuildRoleViewModel.m in Sources */,
 				791711901E237CAB003D15C1 /* InformViewModel.m in Sources */,
+				79EF941C1E26130C00F8E9BC /* PersonalView.m in Sources */,
 				79F4F0731E1F808300115C3B /* DLCustomSlideView.m in Sources */,
 				79375D311E1DF7F600E27934 /* FunctionViewModel.m in Sources */,
 				793710311E1C837F002F3E2E /* MineController.m in Sources */,
+				79EF94221E26145200F8E9BC /* PersonalModel.m in Sources */,
 				7949277E1E10FB9D007331CA /* ForgetPwdViewModel.m in Sources */,
 				7949275F1E10A67B007331CA /* BuildRoleView.m in Sources */,
 				79F4F0721E1F808300115C3B /* DLLRUCache.m in Sources */,
 				79F0A1441E13AF1700A1B8AA /* LogisticsView.m in Sources */,
 				79F4F0761E1F808300115C3B /* DLScrollTabbarView.m in Sources */,
 				79ED5E8B1E1CE57700BBC3D9 /* SetViewModel.m in Sources */,
+				79FFB2701E24DF6900EC082F /* EmployeeModel.m in Sources */,
+				79EF94251E26147400F8E9BC /* PersonalCellView.m in Sources */,
 				79375D191E1DE7B000E27934 /* TimeViewModel.m in Sources */,
 				79375D1C1E1DE9D900E27934 /* TimeCellView.m in Sources */,
 				791EE6EF1E1F9280000BA8B8 /* NewsView.m in Sources */,
 				79F0A13A1E13990A00A1B8AA /* ZJScrollPageView.m in Sources */,
+				79380A831E25D251004E7250 /* TeamAttendanceModel.m in Sources */,
 				796803371E11202C00CED421 /* MyApplyViewModel.m in Sources */,
 				79F0A13D1E13990A00A1B8AA /* ZJTitleView.m in Sources */,
 				794927701E10F1B7007331CA /* CompanyCodeViewModel.m in Sources */,

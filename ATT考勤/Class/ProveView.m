@@ -54,7 +54,7 @@
         _title = [[UILabel alloc] init];
         _title.text = @"审批人";
         _title.font = H14;
-        _title.textColor = MAIN_PAN;
+        _title.textColor = MAIN_PAN_2;
     }
     return _title;
 }

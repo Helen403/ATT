@@ -31,6 +31,5 @@
                                 action:(SEL)action;
 
 
-+ (instancetype)shoppingCartIconWithTarget:(id)target
-                                    action:(SEL)action;
+
 @end

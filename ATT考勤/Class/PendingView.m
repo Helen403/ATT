@@ -110,10 +110,8 @@
         make.top.equalTo(weakSelf.agree);
     }];
     
-    
-    
     [self.preBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf).offset([self h_w:10]);
+        make.bottom.equalTo(weakSelf).offset(-[self h_w:10]);
         make.left.equalTo(weakSelf).offset([self h_w:10]);
     }];
     

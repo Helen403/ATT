@@ -21,12 +21,9 @@
 @implementation DealWithView
 #pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
-
     self.dealWithViewModel = (DealWithViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
-
-
 
 -(void)updateConstraints{
     

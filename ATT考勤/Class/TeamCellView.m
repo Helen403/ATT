@@ -23,8 +23,6 @@
 @implementation TeamCellView
 
 #pragma mark system
-
-
 -(void)updateConstraints{
     
     WS(weakSelf);
@@ -72,7 +70,6 @@
     _teamModel = teamModel;
     self.title.text = teamModel.title;
     self.number.text = teamModel.number;
-    
 }
 
 #pragma mark lazyload

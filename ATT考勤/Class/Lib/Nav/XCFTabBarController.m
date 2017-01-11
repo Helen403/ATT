@@ -15,8 +15,8 @@
 #import "ApplyController.h"
 #import "NewsController.h"
 #import "StatisticsController.h"
-#import "TeamController.h"
 
+#import "AddressListController.h"
 //设置对应的文字
 #define text_1 @"考勤"
 #define text_2 @"申请"
@@ -39,7 +39,7 @@
 
 #define controller_1 [[HomeViewController alloc] init]
 #define controller_2 [[ApplyController alloc] init]
-#define controller_3 [[TeamController alloc] init]
+#define controller_3 [[AddressListController alloc] init]
 #define controller_4 [[StatisticsController alloc] init]
 #define controller_5 [[NewsController alloc] init]
 

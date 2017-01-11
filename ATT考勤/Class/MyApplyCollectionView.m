@@ -86,7 +86,7 @@
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.font = H14;
-        _nameLabel.textColor = MAIN_PAN;
+        _nameLabel.textColor = MAIN_PAN_2;
     }
     return _nameLabel;
 }
