@@ -9,8 +9,11 @@
 #import "MineController.h"
 #import "MineView.h"
 #import "MineViewModel.h"
+#import "CheckController.h"
+#import "TZImagePickerController.h"
 
-@interface MineController ()
+
+@interface MineController ()<TZImagePickerControllerDelegate>
 
 @property(nonatomic,strong) MineView *mineView;
 
@@ -45,9 +48,43 @@
 }
 
 -(void)h_bindViewModel{
+    //跳转到考勤
+    [[self.mineViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        switch ([x intValue]) {
+                //上传头像
+            case 0:{
+            
+                [self imagePicker];
+                break;
+            }
+               //跳转到考勤
+            case 7:{
+                CheckController *check = [[CheckController alloc] init];
+                [self.navigationController pushViewController:check animated:NO];
+                break;
+            }
+                
+            default:
+                break;
+        }
 
+    }];
 }
 
+/**
+ *  上传头像
+ */
+-(void)imagePicker{
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
+    
+    // You can get the photos by block, the same as by delegate.
+    // 你可以通过block或者代理，来得到用户选择的照片.
+//    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets) {
+//        
+//    }];
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
+}
 
 #pragma mark lazyload
 -(MineView *)mineView{

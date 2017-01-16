@@ -132,14 +132,7 @@
 }
 
 #pragma mark tableViewDataSource
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    AddressListCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AddressListCellView class])] forIndexPath:indexPath];
-    
-    cell.addressListModel = self.addressListViewModel.arr[indexPath.row];
-    
-    return cell;
-}
+
 
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -152,5 +145,9 @@
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.addressListViewModel.cellclickSubject sendNext:row];
 }
+
+
+
+
 
 @end

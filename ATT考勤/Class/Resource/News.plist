@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>img</key>
-		<string>role_code_icon</string>
+		<string>settings_ feedback_picture</string>
 		<key>title</key>
 		<string>公司公告</string>
 		<key>number</key>
@@ -12,7 +12,7 @@
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>role_code_icon</string>
+		<string>settings_ detection_picture</string>
 		<key>title</key>
 		<string>公司通知</string>
 		<key>number</key>
@@ -20,7 +20,7 @@
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>role_code_icon</string>
+		<string>settings_ notice_picture</string>
 		<key>title</key>
 		<string>我的消息</string>
 		<key>number</key>

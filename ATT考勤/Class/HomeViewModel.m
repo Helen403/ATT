@@ -15,7 +15,6 @@
         _headclickSubject = [RACSubject subject];
     }
     return _headclickSubject;
-
 }
 
 -(RACSubject *)setClickSubject{
@@ -23,7 +22,8 @@
         _setClickSubject = [RACSubject subject];
     }
     return _setClickSubject;
-
 }
+
+
 
 @end

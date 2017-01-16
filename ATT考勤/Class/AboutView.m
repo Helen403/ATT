@@ -70,7 +70,7 @@
 -(UIImageView *)twoDimension{
     if (!_twoDimension) {
         _twoDimension = [[UIImageView alloc] init];
-        _twoDimension.image = ImageNamed(@"role_code_icon");
+        _twoDimension.image = ImageNamed(@"2e2bb1e0");
         _twoDimension.frame = CGRectMake((SCREEN_WIDTH-[self h_w:250])*0.5, [self h_w:10], [self h_w:250], [self h_w:250]);
     }
     return _twoDimension;

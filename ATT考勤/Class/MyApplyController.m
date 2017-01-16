@@ -44,6 +44,7 @@
 
 -(void)h_addSubviews{
     
+    
     [self.view addSubview:self.myapplyView];
 }
 

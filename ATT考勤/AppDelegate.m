@@ -13,10 +13,6 @@
 #import "ZJLaunchAdController.h"
 /**********************************************/
 #import "HNavigationController.h"
-
-
-#import "HTarBarViewController.h"
-
 #import "LoginViewController.h"
 
 
@@ -38,10 +34,10 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstStart"];
         
         // 如果是第一次安装打开App --- 显示引导页面
-        ZJLeadingPageController *leadController = [[ZJLeadingPageController alloc] initWithPagesCount:2 setupCellHandler:^(ZJLeadingPageCell *cell, NSIndexPath *indexPath) {
+        ZJLeadingPageController *leadController = [[ZJLeadingPageController alloc] initWithPagesCount:4 setupCellHandler:^(ZJLeadingPageCell *cell, NSIndexPath *indexPath) {
             
             // 设置图片
-            NSString *imageName = [NSString stringWithFormat:@"l%ld",indexPath.row+1];
+            NSString *imageName = [NSString stringWithFormat:@"splash%ld",indexPath.row+1];
             cell.imageView.image = [UIImage imageNamed:imageName];
             
             // 设置按钮属性
@@ -72,7 +68,7 @@
         ZJLaunchAdController *launchVc = [[ZJLaunchAdController alloc] initWithLaunchImage:nil setAdImageHandler:^(UIImageView *imageView) {
             // 这里可以直接使用SDWebimage等来请求服务器提供的广告图片(SDWebimage会处理好gif图片的显示)
             // 不过你需要注意选择SDWebimage的缓存策略
-            imageView.image = [UIImage imageNamed:@"l2"];
+            imageView.image = [UIImage imageNamed:@"splash1"];
             
         } finishHandler:^(ZJLaunchAdCallbackType callbackType) {
             switch (callbackType) {

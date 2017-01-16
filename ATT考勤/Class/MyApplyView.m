@@ -41,7 +41,7 @@
 #pragma mark private
 -(void)h_setupViews{
     
-    
+    self.backgroundColor = GX_BGCOLOR;
     [self addSubview:self.collectionView];
     
     [self setNeedsUpdateConstraints];

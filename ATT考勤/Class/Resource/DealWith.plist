@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>imgtext</key>
-		<string>role_code_icon</string>
+		<string>processed_ask_for leave_button</string>
 		<key>title</key>
 		<string>外出申请</string>
 		<key>number</key>
@@ -12,7 +12,7 @@
 	</dict>
 	<dict>
 		<key>imgtext</key>
-		<string>role_code_icon</string>
+		<string>processed_on_a_business trip_button</string>
 		<key>title</key>
 		<string>出差申请</string>
 		<key>number</key>
@@ -20,7 +20,7 @@
 	</dict>
 	<dict>
 		<key>imgtext</key>
-		<string>role_code_icon</string>
+		<string>processed_overtime_button</string>
 		<key>title</key>
 		<string>加班申请</string>
 		<key>number</key>
@@ -28,7 +28,7 @@
 	</dict>
 	<dict>
 		<key>imgtext</key>
-		<string>role_code_icon</string>
+		<string>processed_ask_for leave_button</string>
 		<key>title</key>
 		<string>请假申请</string>
 		<key>number</key>
@@ -36,7 +36,7 @@
 	</dict>
 	<dict>
 		<key>imgtext</key>
-		<string>role_code_icon</string>
+		<string>processed_late_button</string>
 		<key>title</key>
 		<string>迟到申请</string>
 		<key>number</key>
@@ -44,7 +44,7 @@
 	</dict>
 	<dict>
 		<key>imgtext</key>
-		<string>role_code_icon</string>
+		<string>processed_leave_early_button</string>
 		<key>title</key>
 		<string>早退申请</string>
 		<key>number</key>
@@ -52,7 +52,7 @@
 	</dict>
 	<dict>
 		<key>imgtext</key>
-		<string>role_code_icon</string>
+		<string>processed_clocj_in_leakage_button</string>
 		<key>title</key>
 		<string>漏打申请</string>
 		<key>number</key>
@@ -60,7 +60,7 @@
 	</dict>
 	<dict>
 		<key>imgtext</key>
-		<string>role_code_icon</string>
+		<string>processed_in_the_class_button</string>
 		<key>title</key>
 		<string>调班申请</string>
 		<key>number</key>
@@ -68,7 +68,7 @@
 	</dict>
 	<dict>
 		<key>imgtext</key>
-		<string>role_code_icon</string>
+		<string>processed_shift_button</string>
 		<key>title</key>
 		<string>换班申请</string>
 		<key>number</key>
@@ -76,7 +76,7 @@
 	</dict>
 	<dict>
 		<key>imgtext</key>
-		<string>role_code_icon</string>
+		<string>processed_paid_leave_button</string>
 		<key>title</key>
 		<string>调休申请</string>
 		<key>number</key>

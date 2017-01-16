@@ -57,4 +57,6 @@
 //Toast
 -(void)toast:(NSString *)text;
 
+-(NSInteger)h_w:(NSInteger)width;
+
 @end

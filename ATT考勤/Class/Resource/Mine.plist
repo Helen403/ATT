@@ -86,5 +86,17 @@
 		<key>back</key>
 		<string>1</string>
 	</dict>
+	<dict>
+		<key>img</key>
+		<string>settings_ customer_service_picture</string>
+		<key>title</key>
+		<string>我的考勤</string>
+		<key>icon</key>
+		<string></string>
+		<key>info</key>
+		<string></string>
+		<key>back</key>
+		<string>1</string>
+	</dict>
 </array>
 </plist>

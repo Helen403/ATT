@@ -4,13 +4,13 @@
 <array>
 	<dict>
 		<key>img</key>
-		<string>role_code_icon</string>
+		<string>settings_ detection_picture</string>
 		<key>content</key>
 		<string>联系电话1:889699768</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>role_code_icon</string>
+		<string>settings_ customer_service_picture</string>
 		<key>content</key>
 		<string>联系电话2:889699768</string>
 	</dict>

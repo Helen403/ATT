@@ -247,5 +247,10 @@
     [Toast showWithText:text bottomOffset:60];
 }
 
+-(NSInteger)h_w:(NSInteger)width{
+    return autoScaleW(width);
+}
+
+
 
 @end

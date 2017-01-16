@@ -57,6 +57,7 @@
 
 @property(nonatomic,assign) CGFloat width;
 
+
 @end
 
 @implementation HomeView
@@ -80,46 +81,46 @@
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
-        make.top.equalTo(30);
+        make.top.equalTo([self h_w:30]);
     }];
     
     [self.setImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.equalTo(-10);
-        make.top.equalTo(26);
-        make.size.equalTo(CGSizeMake(25, 25));
+        make.right.equalTo(-[self h_w:10]);
+        make.top.equalTo([self h_w:26]);
+        make.size.equalTo(CGSizeMake([self h_w:25], [self h_w:25]));
     }];
     
+   
     [self.headImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.title.mas_bottom).offset(10);
-        make.left.equalTo(10);
-        make.size.equalTo(CGSizeMake(80, 80));
+        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:10]);
+        make.left.equalTo([self h_w:10]);
+        make.size.equalTo(CGSizeMake([self h_w:80], [self h_w:80]));
     }];
     
     [self.department mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.headImg.mas_right).offset(10);
+        make.left.equalTo(weakSelf.headImg.mas_right).offset([self h_w:10]);
         make.bottom.equalTo(weakSelf.headImg.mas_bottom);
     }];
     
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.headImg.mas_right).offset(10);
+        make.left.equalTo(weakSelf.headImg.mas_right).offset([self h_w:10]);
         make.bottom.equalTo(weakSelf.department.mas_top);
     }];
     
     [self.status mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.headImg.mas_bottom);
-        make.right.equalTo(-10);
+        make.right.equalTo(-[self h_w:10]);
     }];
     
     [self.preImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(paddingleft);
-        make.top.equalTo(weakSelf.headImg.mas_bottom).offset(15);
-        make.size.equalTo(CGSizeMake(30, 23));
+        make.top.equalTo(weakSelf.headImg.mas_bottom).offset([self h_w:15]);
+        make.size.equalTo(CGSizeMake([self h_w:30], [self h_w:23]));
     }];
     
     [self.preText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.preImg.mas_right).offset(10);
+        make.left.equalTo(weakSelf.preImg.mas_right).offset([self h_w:10]);
         make.centerY.equalTo(weakSelf.preImg);
     }];
     
@@ -131,8 +132,8 @@
     
     [self.lastImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.preImg);
-        make.right.equalTo(weakSelf.lastText.mas_left).offset(-10);
-        make.size.equalTo(CGSizeMake(30, 23));
+        make.right.equalTo(weakSelf.lastText.mas_left).offset(-[self h_w:10]);
+        make.size.equalTo(CGSizeMake([self h_w:30], [self h_w:23]));
     }];
     
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -142,36 +143,35 @@
   
     [self.punch mas_makeConstraints:^(MASConstraintMaker *make) {
        
-        make.size.equalTo(CGSizeMake(length, length+15));
+        make.size.equalTo(CGSizeMake(length, length+[self h_w:15]));
         make.center.equalTo(weakSelf.view);
     }];
     
     [self.week mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.punch.mas_top).offset(40);
+        make.top.equalTo(weakSelf.punch.mas_top).offset([self h_w:40]);
         make.centerX.equalTo(weakSelf.punch);
     }];
     
     
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.week.mas_bottom).offset(30);
-       // make.centerX.equalTo(weakSelf.punch);
+        make.top.equalTo(weakSelf.week.mas_bottom).offset([self h_w:30]);
         make.left.equalTo([self h_w:self.width]);
     }];
     
     
     [self.year mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.time.mas_bottom).offset(20);
+        make.top.equalTo(weakSelf.time.mas_bottom).offset([self h_w:20]);
         make.centerX.equalTo(weakSelf.punch);
     }];
     
     [self.netStatusImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.time.mas_left);
-        make.top.equalTo(weakSelf.punch.mas_bottom).offset(20);
+        make.top.equalTo(weakSelf.punch.mas_bottom).offset([self h_w:20]);
     }];
     
     [self.netStatusText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.punch.mas_bottom).offset(20);
-        make.left.equalTo(weakSelf.netStatusImg.mas_right).offset(10);
+        make.top.equalTo(weakSelf.punch.mas_bottom).offset([self h_w:20]);
+        make.left.equalTo(weakSelf.netStatusImg.mas_right).offset([self h_w:10]);
         make.centerY.equalTo(weakSelf.netStatusImg);
     }];
     
@@ -199,7 +199,6 @@
     [self addSubview:self.year];
     [self addSubview:self.netStatusImg];
     [self addSubview:self.netStatusText];
-    
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -427,7 +426,6 @@
         _netStatusImg.image = ImageNamed(@"wifi");
     }
     return _netStatusImg;
-
 }
 
 -(UILabel *)netStatusText{
@@ -438,8 +436,8 @@
         _netStatusText.textColor = RGBCOLOR(131, 131, 131);
     }
     return _netStatusText;
-
 }
+
 
 
 @end

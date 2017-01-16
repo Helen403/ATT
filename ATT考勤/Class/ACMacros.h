@@ -184,7 +184,7 @@
                                 NO)
 
 // 是否IOS7
-#define isIOS7                  ([[[UIDevice currentDevice]systemVersion]floatValue] >= 7.0)
+#define isIOS7                  ([[[UIDevice currentDevice]systemVersion]floatValue] >= 8.0)
 // 是否IOS6
 #define isIOS6                  ([[[UIDevice currentDevice]systemVersion]floatValue] < 7.0)
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>img</key>
+		<string>settings_ feedback_picture</string>
+		<key>content</key>
+		<string>08:24</string>
+		<key>status</key>
+		<string>  正常  </string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>settings_ detection_picture</string>
+		<key>content</key>
+		<string>你忘记打卡</string>
+		<key>status</key>
+		<string> 漏打卡 </string>
+	</dict>
+</array>
+</plist>

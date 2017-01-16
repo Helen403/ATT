@@ -14,4 +14,6 @@
 
 @property(nonatomic,strong) RACSubject *setClickSubject;
 
+
+
 @end

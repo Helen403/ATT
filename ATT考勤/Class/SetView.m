@@ -67,7 +67,7 @@
 -(UIButton *)button{
     if (!_button) {
         _button = [[UIButton alloc] init];
-        [_button setTitle:@"推出登陆" forState:UIControlStateNormal];
+        [_button setTitle:@"退出登陆" forState:UIControlStateNormal];
         _button.titleLabel.font = H22;
         [_button addTarget:self action:@selector(exit:) forControlEvents:UIControlEventTouchUpInside];
         
