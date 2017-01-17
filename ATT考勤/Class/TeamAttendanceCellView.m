@@ -37,7 +37,7 @@
     
     [self.back mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.right.equalTo(-[self h_w:10]);
+        make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
     
     [self.number mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,17 +46,16 @@
     }];
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(0);
+        make.bottom.equalTo(weakSelf.mas_bottom).offset(-[self h_w:4]);
         make.left.equalTo([self h_w:10]);
-   
-        make.size.equalTo(CGSizeMake(length, [self h_w:4]));
+        make.size.equalTo(CGSizeMake(length-[self h_w:20], [self h_w:4]));
     }];
     
     [self.bgLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(0);
-        make.left.equalTo([self h_w:10]);
-        make.right.equalTo(-[self h_w:10]);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:4]));
+        
+        make.centerX.equalTo(weakSelf);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-[self h_w:20], [self h_w:4]));
+        make.bottom.equalTo(weakSelf.mas_bottom).offset(-[self h_w:4]);
     }];
     [super updateConstraints];
 }

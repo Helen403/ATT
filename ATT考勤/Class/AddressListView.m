@@ -36,22 +36,22 @@
     
     WS(weakSelf);
     [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:0]);
-        make.right.equalTo(-[self h_w:0]);
-        make.top.equalTo([self h_w:0]);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
+        make.left.equalTo(0);
+        make.right.equalTo(0);
+        make.top.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:30]));
     }];
     
     [self.toTeamView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:0]);
-        make.right.equalTo(-[self h_w:0]);
-        make.top.equalTo(weakSelf.searchBar.mas_bottom).offset([self h_w:0]);
+        make.left.equalTo(0);
+        make.right.equalTo(0);
+        make.top.equalTo(weakSelf.searchBar.mas_bottom).offset(0);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
     }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:0]);
-        make.right.equalTo(-[self h_w:0]);
+        make.left.equalTo(0);
+        make.right.equalTo(0);
         make.top.equalTo(weakSelf.toTeamView.mas_bottom).offset([self h_w:1]);
         make.bottom.equalTo(0);
     }];
@@ -64,8 +64,9 @@
     
     self.backgroundColor = GX_BGCOLOR;
     
-    [self addSubview:self.toTeamView];
     [self addSubview:self.searchBar];
+    [self addSubview:self.toTeamView];
+    
     [self addSubview:self.tableView];
     
     [self setNeedsUpdateConstraints];
@@ -145,6 +146,25 @@
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.addressListViewModel.cellclickSubject sendNext:row];
 }
+
+
+
+
+#pragma mark - delegate
+
+
+#pragma mark tableViewDataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    AddressListCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AddressListCellView class])] forIndexPath:indexPath];
+    
+    cell.addressListModel = self.addressListViewModel.arr[indexPath.row];
+    
+    return cell;
+}
+
+
+
 
 
 

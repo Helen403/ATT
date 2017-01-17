@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>icon</key>
-		<string>settings_account_security_picture</string>
+		<string>remind_set_vioce_picture</string>
 		<key>title</key>
 		<string>打卡声音</string>
 		<key>on</key>
@@ -14,7 +14,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>settings_ notice_picture</string>
+		<string>remind_set_vioce_prompt_picture</string>
 		<key>title</key>
 		<string>打卡提示音</string>
 		<key>on</key>
@@ -24,7 +24,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>settings_ remind_picture</string>
+		<string>remind_set_vibration_picture</string>
 		<key>title</key>
 		<string>打卡震动</string>
 		<key>on</key>
@@ -34,7 +34,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>settings_ feedback_picture</string>
+		<string>remind_set_work_prompt_picture@</string>
 		<key>title</key>
 		<string>上班打卡提醒</string>
 		<key>on</key>
@@ -44,7 +44,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>settings_ detection_picture</string>
+		<string>remind_set_rest_prompt_picture</string>
 		<key>title</key>
 		<string>下班打卡提醒</string>
 		<key>on</key>

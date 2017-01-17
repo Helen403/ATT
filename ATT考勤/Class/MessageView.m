@@ -30,9 +30,12 @@
 
 -(void)updateConstraints{
     
-    WS(weakSelf);
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(weakSelf);
+        make.left.equalTo(0);
+        make.right.equalTo(0);
+        make.top.equalTo(1);
+        make.bottom.equalTo(0);
+        
     }];
     
     [super updateConstraints];
@@ -40,6 +43,7 @@
 
 #pragma mark private
 -(void)h_setupViews{
+    self.backgroundColor = GX_BGCOLOR;
     
     [self addSubview:self.tableView];
     
@@ -85,7 +89,7 @@
     
     MessageCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MessageCellView class])] forIndexPath:indexPath];
     
-        cell.messageModel = self.messageViewModel.arr[indexPath.row];
+    cell.messageModel = self.messageViewModel.arr[indexPath.row];
     
     return cell;
 }
@@ -99,7 +103,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-        [self.messageViewModel.cellclickSubject sendNext:row];
+    [self.messageViewModel.cellclickSubject sendNext:row];
 }
 
 @end

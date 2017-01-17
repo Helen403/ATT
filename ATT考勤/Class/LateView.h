@@ -8,6 +8,6 @@
 
 #import "HView.h"
 
-@interface ApplicationView : HView
+@interface LateView : HView
 
 @end

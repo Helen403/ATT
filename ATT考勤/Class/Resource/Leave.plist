@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>事假</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>婚假</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>产假</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>丧假</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>病假</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>年假</string>
+	</dict>
+</array>
+</plist>

@@ -48,19 +48,21 @@
                 
                 @strongify(self);
                 
-                NSLog(@"%@  %@",self.user,self.pwd);
-                
-                [self.request POST:REQUEST_URL parameters:nil success:^(CMRequest *request, NSString *responseString) {
-                    
-                    NSLog(@"成功");
-                    [subscriber sendNext:responseString];
-                    [subscriber sendCompleted];
-                    
-                } failure:^(CMRequest *request, NSError *error) {
-                    
-                    ShowErrorStatus(@"网络连接失败");
-                    [subscriber sendCompleted];
-                }];
+//                NSLog(@"%@  %@",self.user,self.pwd);
+                NSLog(@"kkk");
+                [subscriber sendNext:@"asd"];
+                [subscriber sendCompleted];
+//                [self.request POST:REQUEST_URL parameters:nil success:^(CMRequest *request, NSString *responseString) {
+//                    
+////                    NSLog(@"成功");
+//                    [subscriber sendNext:responseString];
+//                    [subscriber sendCompleted];
+//                    
+//                } failure:^(CMRequest *request, NSError *error) {
+//                    
+//                    ShowErrorStatus(@"网络连接失败");
+//                    [subscriber sendCompleted];
+//                }];
                 return nil;
             }];
         }];

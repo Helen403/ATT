@@ -4,19 +4,19 @@
 <array>
 	<dict>
 		<key>img</key>
-		<string>settings_ detection_picture</string>
+		<string>information_company_announcement_picture</string>
 		<key>title</key>
 		<string>接收企业广告</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>settings_ detection_picture</string>
+		<string>information_company_notice_picture</string>
 		<key>title</key>
 		<string>接收企业通知</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>settings_ feedback_picture</string>
+		<string>information_company_information_picture</string>
 		<key>title</key>
 		<string>接收同事消息</string>
 	</dict>

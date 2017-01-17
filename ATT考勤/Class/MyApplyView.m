@@ -9,7 +9,7 @@
 #import "MyApplyView.h"
 #import "MyApplyViewModel.h"
 #import "MyApplyCollectionView.h"
-
+#import "MyApplyFootView.h"
 
 @interface MyApplyView()<UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -71,12 +71,13 @@
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         //设置每个item的大小为100*100
         
+        layout.footerReferenceSize =CGSizeMake(SCREEN_WIDTH, [self h_w:60]);
+        
         CGFloat padding = 6;
         
         layout.itemSize = CGSizeMake((SCREEN_WIDTH-4*padding)/3.f, (SCREEN_WIDTH-4*padding)/3.f);
         //创建collectionView 通过一个布局策略layout来创建
         _collectionView = [[UICollectionView alloc]initWithFrame:self.frame collectionViewLayout:layout];
-        
         
         _collectionView.backgroundColor = GX_BGCOLOR;
         //代理设置
@@ -84,6 +85,9 @@
         _collectionView.dataSource = self;
         //注册item类型 这里使用系统的类型
         [_collectionView registerClass:[MyApplyCollectionView class] forCellWithReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([MyApplyCollectionView class])]];
+        
+        [_collectionView registerClass:[MyApplyFootView class]forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
+      
     }
     
     return _collectionView;
@@ -129,6 +133,15 @@
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
     return 1;
+}
+
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+        MyApplyFootView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"footer"forIndexPath:indexPath];
+        return footerView;
+    }
+    return nil;
 }
 
 @end

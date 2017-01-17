@@ -26,7 +26,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #define MAS_SHORTHAND_GLOBALS
 #import <Masonry/Masonry.h>
-#import <IQKeyboardManager/IQKeyboardManager.h>
+//#import <IQKeyboardManager/IQKeyboardManager.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 //#import "JKCategories.h"
 

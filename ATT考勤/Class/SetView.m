@@ -31,25 +31,21 @@
 
 -(void)updateConstraints{
     
-    
-    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(3);
         make.left.equalTo(0);
         make.right.equalTo(0);
         make.bottom.equalTo(0);
     }];
-    
-    
-    
+
     [super updateConstraints];
 }
 
 
 -(void)h_setupViews{
     
+    self.backgroundColor = GX_BGCOLOR;
     [self addSubview:self.tableView];
-    
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -103,7 +99,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[SetCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([SetCellView class])]];
         //设置tableview 不能滚动
-        _tableView.scrollEnabled =NO;
+        //        _tableView.scrollEnabled =NO;
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:55])];
         _tableView.tableFooterView = view;

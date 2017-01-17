@@ -8,8 +8,10 @@
 
 #import "HViewModel.h"
 
-@interface ApplicationViewModel : HViewModel
+@interface LateViewModel : HViewModel
 
 @property(nonatomic,strong) RACSubject *submitclickSubject;
+
+
 
 @end

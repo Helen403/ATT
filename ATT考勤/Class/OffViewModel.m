@@ -1,14 +1,14 @@
 //
-//  ApplicationViewModel.m
+//  OffViewModel.m
 //  ATT考勤
 //
-//  Created by Helen on 16/12/27.
-//  Copyright © 2016年 Helen. All rights reserved.
+//  Created by Helen on 17/1/16.
+//  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "ApplicationViewModel.h"
+#import "OffViewModel.h"
 
-@implementation ApplicationViewModel
+@implementation OffViewModel
 
 -(RACSubject *)submitclickSubject{
     if (!_submitclickSubject) {
@@ -16,5 +16,6 @@
     }
     return _submitclickSubject;
 }
+
 
 @end

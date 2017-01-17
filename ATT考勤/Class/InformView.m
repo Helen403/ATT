@@ -110,7 +110,7 @@
 -(UILabel *)title{
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.text = @"人员岗位调整公告";
+        _title.text = @"关于2017年春节放假通知";
         _title.font = H26;
         _title.textColor = MAIN_PAN_2;
     }
@@ -120,7 +120,7 @@
 -(UILabel *)content{
     if (!_content) {
         _content = [[UILabel alloc] init];
-        _content.text = @"我公司现将诸葛亮从军师，从2016年12月25日起，调整为蜀国辅助大臣，现予公告，自2016年12月25日起施行。";
+        _content.text = @"各位同事:\n    根据国务院办公厅通知精神，现将2017年春节放假通知如下:1月25日至2月4日放假调休，共10天。1月22日(星期日),2月5日(星期日)上班。\n    请各位同事注意安全，确保大家祥和平安度过节日假期。\n    提前祝大家春节愉快！";
         _content.font = H18;
         _content.textColor = MAIN_PAN_2;
         //自动折行设置

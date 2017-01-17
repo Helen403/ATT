@@ -125,8 +125,8 @@
     }else{
         text.text = @"常见问题";
     }
-    CGSize textSize = getSize(@"在线客服", 14);
-    text.frame = CGRectMake([self h_w:10], ([self h_w:40]-textSize.height)*0.5, SCREEN_WIDTH, textSize.height);
+    text.frame = CGRectMake([self h_w:10], 0, SCREEN_WIDTH, [self h_w:40]);
+    [headView addSubview:text];
     [headView addSubview:text];
     return headView;
 }

@@ -7,7 +7,7 @@
 //
 
 #import "ThirdPartService.h"
-#import "IQKeyboardManager.h"
+//#import "IQKeyboardManager.h"
 
 @implementation ThirdPartService
 + (void)load {
@@ -33,11 +33,11 @@
 #pragma mark - 键盘回收相关
 + (void)setKeyBord {
     
-    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
-    manager.enable = YES;
-    manager.shouldResignOnTouchOutside = YES;
-    manager.shouldToolbarUsesTextFieldTintColor = YES;
-    manager.enableAutoToolbar = YES;
+//    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+//    manager.enable = YES;
+//    manager.shouldResignOnTouchOutside = YES;
+//    manager.shouldToolbarUsesTextFieldTintColor = YES;
+//    manager.enableAutoToolbar = YES;
 }
 
 #pragma mark － 检测网络相关

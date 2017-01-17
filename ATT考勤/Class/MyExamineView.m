@@ -45,8 +45,9 @@
 -(void)h_setupViews{
 
     
-    
+    self.backgroundColor = GX_BGCOLOR;
     [self addSubview:self.tableView];
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }

@@ -43,12 +43,13 @@
     
     [self.on mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.right.equalTo(-[self h_w:10]);
+        make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
+        
     }];
     
     [self.back mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.right.equalTo(-[self h_w:10]);
+      make.right.equalTo(weakSelf.mas_right).offset([self h_w:10]);
     }];
     
     [self.info mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,7 +70,8 @@
 #pragma mark private
 -(void)h_setupViews{
     
-
+    self.backgroundColor = GX_BGCOLOR;
+    
     [self addSubview:self.icon];
     [self addSubview:self.title];
     [self addSubview:self.on];
@@ -99,7 +101,6 @@
         self.info.hidden = NO;
         self.info.text = timeModel.info;
     }
-
 }
 
 

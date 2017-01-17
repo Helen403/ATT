@@ -62,14 +62,15 @@
     
     //点击登陆
     [self.loginViewModel.loginclickSubject subscribeNext:^(id x) {
-        switch ([x integerValue]) {
-            case HSuccess:
-                [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
-                break;
-                
-            case HFailure:
-                break;
-        }
+             [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
+//        switch ([x integerValue]) {
+//            case HSuccess:
+//                [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
+//                break;
+//                
+//            case HFailure:
+//                break;
+//        }
     }];
     
     

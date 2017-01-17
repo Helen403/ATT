@@ -50,7 +50,7 @@
         make.left.equalTo([self h_w:10]);
         make.right.equalTo(-[self h_w:10]);
         make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:15]);
-       // make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:130]));
+       
     }];
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -120,7 +120,7 @@
 -(UILabel *)content{
     if (!_content) {
         _content = [[UILabel alloc] init];
-        _content.text = @"我公司现将诸葛亮从军师，从2016年12月25日起，调整为蜀国辅助大臣，现予公告，自2016年12月25日起施行。";
+        _content.text = @"    我公司现将诸葛亮从军师，从2016年12月25日起，调整为蜀国辅助大臣，现予公告，自2016年12月25日起施行。";
         _content.font = H18;
         _content.textColor = MAIN_PAN_2;
         //自动折行设置

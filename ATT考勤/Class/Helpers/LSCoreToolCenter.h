@@ -36,4 +36,8 @@ extern void DismissHud(void);
 
 //获取年月日
 +(NSString *)currentYear;
+
+
+
+
 @end

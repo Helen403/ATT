@@ -29,15 +29,20 @@
 
 -(void)updateConstraints{
     
-    WS(weakSelf);
+
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(weakSelf);
+       make.left.equalTo(0);
+        make.right.equalTo(0);
+        make.top.equalTo(1);
+        make.bottom.equalTo(0);
     }];
     [super updateConstraints];
 }
 
 #pragma mark private
 -(void)h_setupViews{
+    
+    self.backgroundColor = GX_BGCOLOR;
     
     [self addSubview:self.tableView];
     

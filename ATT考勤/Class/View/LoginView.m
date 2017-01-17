@@ -9,7 +9,7 @@
 #import "LoginView.h"
 #import "LoginViewModel.h"
 
-@interface LoginView()<UITextFieldDelegate>
+@interface LoginView()
 
 @property(nonatomic,strong) LoginViewModel *loginViewModel;
 
@@ -274,7 +274,7 @@
         // 设置右边永远显示清除按钮
         //        _pwdTextField.clearButtonMode = UITextFieldViewModeAlways;
         _pwdTextField.secureTextEntry = YES;
-        _pwdTextField.delegate = self;
+//        _pwdTextField.delegate = self;
         
         //        // 5.监听文本框的文字改变
         //        [_pwdTextField.rac_textSignal subscribeNext:^(id x) {
@@ -287,9 +287,9 @@
 }
 
 
-- (void) textChangeAction:(id) sender {
-    NSLog(@"%@",self.pwdTextField.text);
-}
+//- (void) textChangeAction:(id) sender {
+//   
+//}
 
 
 -(UIButton *)login{
@@ -320,11 +320,17 @@
 
 -(void)login:(UIButton *)button{
     
+    if (self.useTextField.text.length>0&&self.pwdTextField.text.length>0) {
+      
+    }
     //点击后不然再点击
     self.loginViewModel.user = self.useTextField.text;
     self.loginViewModel.pwd = self.pwdTextField.text;
+    
     //登陆成功后发送按钮
     [self.loginViewModel.loginclickCommand execute:nil];
+    
+  
 }
 
 

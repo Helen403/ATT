@@ -162,7 +162,7 @@
 -(UIImageView *)useImg{
     if (!_useImg) {
         _useImg = [[UIImageView alloc] init];
-        _useImg.image = ImageNamed(@"login_phone_picture");
+//        _useImg.image = ImageNamed(@"login_phone_picture");
     }
     return _useImg;
 }
@@ -206,7 +206,8 @@
 -(UIImageView *)pwdImg{
     if (!_pwdImg) {
         _pwdImg = [[UIImageView alloc] init];
-        _pwdImg.image = ImageNamed(@"Login_password_picture");
+//        _pwdImg.image = ImageNamed(@"Login_password_picture");
+        _pwdImg.image = [UIImage imageNamed:@"Login_password_picture"];
     }
     return _pwdImg;
     
@@ -251,7 +252,8 @@
 -(UIImageView *)surepwdImg{
     if (!_surepwdImg) {
         _surepwdImg = [[UIImageView alloc] init];
-        _surepwdImg.image = ImageNamed(@"Login_password_picture");
+//        _surepwdImg.image = ImageNamed(@"Login_password_picture");
+         _surepwdImg.image = [UIImage imageNamed:@"Login_password_picture"];
     }
     return _surepwdImg;
     

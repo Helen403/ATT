@@ -42,19 +42,16 @@
     [self.setView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf.view);
     }];
-    
     [super updateViewConstraints];
 }
 
 #pragma mark private
 -(void)h_layoutNavigation{
     self.title  = @"设置";
-    
 }
 
 -(void)h_addSubviews{
     [self.view addSubview:self.setView];
-    
 }
 
 -(void)h_bindViewModel{
@@ -118,18 +115,11 @@
                 
                 break;
             }
-                
         }
-        
-        NSLog(@"%@",x);
     }];
     
     [[self.setViewModel.exitclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-        
-        
         [self.navigationController popToRootViewControllerAnimated:NO];
-        
-        
     }];
     
 }
@@ -147,7 +137,6 @@
         _setViewModel = [[SetViewModel alloc] init];
     }
     return _setViewModel;
-    
 }
 
 @end

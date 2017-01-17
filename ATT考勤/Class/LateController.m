@@ -6,20 +6,20 @@
 //  Copyright © 2016年 Helen. All rights reserved.
 //
 
-#import "ApplicationController.h"
-#import "ApplicationView.h"
-#import "ApplicationViewModel.h"
+#import "LateController.h"
+#import "LateView.h"
+#import "LateViewModel.h"
 
 
-@interface ApplicationController ()
+@interface LateController ()
 
-@property(nonatomic,strong) ApplicationView *applicationView;
+@property(nonatomic,strong) LateView *applicationView;
 
-@property(nonatomic,strong) ApplicationViewModel *applicationViewModel;
+@property(nonatomic,strong) LateViewModel *applicationViewModel;
 
 @end
 
-@implementation ApplicationController
+@implementation LateController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,25 +59,19 @@
 
 
 #pragma mark lazyload
--(ApplicationView *)applicationView{
+-(LateView *)applicationView{
     if (!_applicationView) {
-        _applicationView = [[ApplicationView alloc] initWithViewModel:self.applicationViewModel];
+        _applicationView = [[LateView alloc] initWithViewModel:self.applicationViewModel];
     }
     return _applicationView;
 }
 
--(ApplicationViewModel *)applicationViewModel{
+-(LateViewModel *)applicationViewModel{
     if (!_applicationViewModel) {
-        _applicationViewModel = [[ApplicationViewModel alloc] init];
+        _applicationViewModel = [[LateViewModel alloc] init];
     }
     return _applicationViewModel;
 
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    
 }
 
 

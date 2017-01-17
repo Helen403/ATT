@@ -58,6 +58,8 @@
 @property(nonatomic,assign) CGFloat width;
 
 
+@property(nonatomic,strong) UIScrollView *scrollView;
+
 @end
 
 @implementation HomeView
@@ -73,11 +75,16 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-  
+    
     
     CGFloat paddingleft = SCREEN_WIDTH*0.1;
     
     CGFloat length = SCREEN_WIDTH*0.7;
+    
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf);
+        
+    }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
@@ -85,12 +92,12 @@
     }];
     
     [self.setImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(-[self h_w:10]);
+        make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
         make.top.equalTo([self h_w:26]);
         make.size.equalTo(CGSizeMake([self h_w:25], [self h_w:25]));
     }];
     
-   
+    
     [self.headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:10]);
         make.left.equalTo([self h_w:10]);
@@ -110,7 +117,7 @@
     
     [self.status mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.headImg.mas_bottom);
-        make.right.equalTo(-[self h_w:10]);
+        make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
     
     [self.preImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -125,7 +132,7 @@
     }];
     
     [self.lastText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(-paddingleft);
+        make.right.equalTo(weakSelf.mas_right).offset(-paddingleft);
         make.centerY.equalTo(weakSelf.preImg);
     }];
     
@@ -137,14 +144,15 @@
     }];
     
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.lastImg.mas_bottom).offset(15);
+        make.top.equalTo(weakSelf.lastImg.mas_bottom).offset([self h_w:15]);
         make.left.right.bottom.equalTo(weakSelf);
+        
     }];
-  
+    
     [self.punch mas_makeConstraints:^(MASConstraintMaker *make) {
-       
+        make.top.equalTo(weakSelf.view.mas_top).offset([self h_w:15]);
         make.size.equalTo(CGSizeMake(length, length+[self h_w:15]));
-        make.center.equalTo(weakSelf.view);
+        make.centerX.equalTo(weakSelf.view);
     }];
     
     [self.week mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -155,7 +163,8 @@
     
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.week.mas_bottom).offset([self h_w:30]);
-        make.left.equalTo([self h_w:self.width]);
+        
+        make.centerX.equalTo(weakSelf);
     }];
     
     
@@ -175,41 +184,46 @@
         make.centerY.equalTo(weakSelf.netStatusImg);
     }];
     
+
+    [self.scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(weakSelf.netStatusText.mas_bottom).offset(20);
+    }];
     
     [super updateConstraints];
 }
 
 #pragma mark private
 -(void)h_setupViews{
+    [self addSubview:self.scrollView];
     
-    [self addSubview:self.title];
-    [self addSubview:self.setImg];
-    [self addSubview:self.headImg];
-    [self addSubview:self.name];
-    [self addSubview:self.department];
-    [self addSubview:self.status];
-    [self addSubview:self.preImg];
-    [self addSubview:self.preText];
-    [self addSubview:self.lastImg];
-    [self addSubview:self.lastText];
-    [self addSubview:self.view];
-    [self addSubview:self.punch];
-    [self addSubview:self.week];
-    [self addSubview:self.time];
-    [self addSubview:self.year];
-    [self addSubview:self.netStatusImg];
-    [self addSubview:self.netStatusText];
+    [self.scrollView addSubview:self.title];
+    [self.scrollView addSubview:self.setImg];
+    [self.scrollView addSubview:self.headImg];
+    [self.scrollView addSubview:self.name];
+    [self.scrollView addSubview:self.department];
+    [self.scrollView addSubview:self.status];
+    [self.scrollView addSubview:self.preImg];
+    [self.scrollView addSubview:self.preText];
+    [self.scrollView addSubview:self.lastImg];
+    [self.scrollView addSubview:self.lastText];
+    [self.scrollView addSubview:self.view];
+    [self.scrollView addSubview:self.punch];
+    [self.scrollView addSubview:self.week];
+    [self.scrollView addSubview:self.time];
+    [self.scrollView addSubview:self.year];
+    [self.scrollView addSubview:self.netStatusImg];
+    [self.scrollView addSubview:self.netStatusText];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
 -(void)h_bindViewModel{
-//    //判断是否已经打卡
-//    if (self.punch.userInteractionEnabled) {
-//        //开启定时器
-//        [self.timeNow setFireDate:[NSDate distantPast]];
-//    }
+    //    //判断是否已经打卡
+    //    if (self.punch.userInteractionEnabled) {
+    //        //开启定时器
+    //        [self.timeNow setFireDate:[NSDate distantPast]];
+    //    }
     
     
     //设置时间
@@ -241,17 +255,17 @@
 
 ////点击打卡
 -(void)onClickImage{
-
+    
     [self toast:@"打卡成功"];
     self.punch.userInteractionEnabled = NO;
-//    //切换图片
-//    [self.imageView setImage:[UIImage imageNamed:@"homepage_Clock_button_blue"]];
-//    //关闭定时器
+    //    //切换图片
+    //    [self.imageView setImage:[UIImage imageNamed:@"homepage_Clock_button_blue"]];
+    //    //关闭定时器
     [self.timeNow setFireDate:[NSDate distantFuture]];
-//
-//    //网络请求打卡
-//    [self AttendCard];
-//
+    //
+    //    //网络请求打卡
+    //    [self AttendCard];
+    //
 }
 
 #pragma mark lazyload
@@ -385,7 +399,7 @@
         [_punch addGestureRecognizer:setTap];
     }
     return _punch;
-
+    
 }
 
 -(UILabel *)week{
@@ -405,12 +419,12 @@
         _time.font = HB42;
         _time.textColor = RGBCOLOR(80, 80, 80);
         
-      self.width = (SCREEN_WIDTH- [LSCoreToolCenter getSizeWithText:@"14:50:55" fontSize:42].width)*0.5;
+        self.width = (SCREEN_WIDTH- [LSCoreToolCenter getSizeWithText:@"14:50:55" fontSize:42].width)*0.5;
     }
     return _time;
 }
 -(UILabel *)year{
-
+    
     if (!_year) {
         _year = [[UILabel alloc] init];
         _year.text = @"2016年11月11日";
@@ -438,6 +452,12 @@
     return _netStatusText;
 }
 
-
+-(UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        
+    }
+    return _scrollView;
+}
 
 @end

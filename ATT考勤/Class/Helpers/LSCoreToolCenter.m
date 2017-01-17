@@ -265,4 +265,32 @@ void DismissHud(void){
 //}
 
 
+//#pragma mark - ScaleSize
+//- (void)initAutoScaleSize{
+//    int kScreenHeight = getHeight;
+//    int kScreenWith = getWidth;
+//    
+//    if (kScreenHeight == 480) {
+//        //4s
+//        _autoSizeScaleW = kScreenWith / 375.f;
+//        _autoSizeScaleH = kScreenHeight / 667.f;
+//    }else if (kScreenHeight == 568) {
+//        //5
+//        _autoSizeScaleW = kScreenWith / 375.f;
+//        _autoSizeScaleH = kScreenHeight / 667.f;
+//    }else if (kScreenHeight == 667){
+//        //6 以6为原型
+//        _autoSizeScaleW = kScreenWith / 375.f;
+//        _autoSizeScaleH = kScreenHeight / 667.f;
+//    }else if(kScreenHeight == 736){
+//        //6p
+//        _autoSizeScaleW = kScreenWith / 375.f;
+//        _autoSizeScaleH = kScreenHeight/ 667.f;
+//    }else{
+//        _autoSizeScaleW = 1;
+//        _autoSizeScaleH = 1;
+//    }
+//    
+//}
+
 @end

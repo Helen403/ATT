@@ -145,8 +145,8 @@
     }else if(section == 1){
         text.text = @"下午下班18:00";
     }
-    CGSize textSize = getSize(@"上午上班09:00", 14);
-    text.frame = CGRectMake([self h_w:10], ([self h_w:40]-textSize.height)*0.5, SCREEN_WIDTH, textSize.height);
+    text.frame = CGRectMake([self h_w:10], 0, SCREEN_WIDTH, [self h_w:40]);
+    
     [headView addSubview:text];
     return headView;
 }

@@ -1,20 +1,19 @@
 //
-//  ApplicationView.m
+//  GoOutView.m
 //  ATT考勤
 //
-//  Created by Helen on 16/12/27.
-//  Copyright © 2016年 Helen. All rights reserved.
+//  Created by Helen on 17/1/16.
+//  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "ApplicationView.h"
-#import "ApplicationViewModel.h"
-
-#import "ProveView.h"
+#import "GoOutView.h"
 #import "ApplyManView.h"
+#import "ProveView.h"
+#import "GoOutViewModel.h"
 
-@interface ApplicationView()
+@interface GoOutView()
 
-@property(nonatomic,strong) ApplicationViewModel *applicationViewModel;
+@property(nonatomic,strong) GoOutViewModel *goOutViewModel;
 
 @property(nonatomic,strong) UILabel *applyTimeText;
 
@@ -42,19 +41,38 @@
 
 @property(nonatomic,strong) UIButton *finish;
 
+@property(nonatomic,strong) UILabel *compensateText;
+
+@property(nonatomic,strong) UILabel *compensateShowText;
+
+@property(nonatomic,strong) UIView *line4;
+
+@property(nonatomic,strong) UIImageView *back1;
+
+@property(nonatomic,strong) UIImageView *back2;
+
+@property(nonatomic,strong) UIView *view1;
+
+@property(nonatomic,strong) UIView *view2;
+
+
+@property(nonatomic,strong) UIScrollView *scrollView;
+
 @end
 
-@implementation ApplicationView
+
+@implementation GoOutView
+
 
 #pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
-
-    self.applicationViewModel = (ApplicationViewModel *)viewModel;
+    
+    self.goOutViewModel = (GoOutViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
 
 -(void)updateConstraints{
-
+    
     WS(weakSelf);
     
     CGFloat padding = [self h_w:15];
@@ -65,16 +83,17 @@
         make.top.equalTo(padding);
     }];
     
-    [self.applyTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(-[self h_w:10]);
-        make.centerY.equalTo(weakSelf.applyTimeText);
-    }];
+  
     
     [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.applyTimeText.mas_bottom).offset(padding);
-        make.left.equalTo([self h_w:10]);
-        make.right.equalTo(-[self h_w:10]);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
+       make.centerX.equalTo(weakSelf);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-[self h_w:20], [self h_w:1]));
+    }];
+    
+    [self.applyTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(weakSelf.line1);
+        make.centerY.equalTo(weakSelf.applyTimeText);
     }];
     
     [self.lateTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -94,18 +113,62 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
+    [self.view1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.line2.mas_bottom).offset(0);
+        make.left.equalTo(weakSelf.line1);
+        make.right.equalTo(weakSelf.line1);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:45]));
+    }];
+    
     [self.sureTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.line2.mas_bottom).offset(padding);
+        make.centerY.equalTo(weakSelf.view1);
         make.left.equalTo(weakSelf.applyTimeText);
     }];
     
+    [self.back1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.view1);
+        make.right.equalTo(0);
+    }];
+    
     [self.sureTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.sureTimeText);
-        make.left.equalTo(weakSelf.applyTimeShowText);
+        make.right.equalTo(weakSelf.back1.mas_left).offset(-[self h_w:10]);
+        make.centerY.equalTo(weakSelf.view1);
     }];
     
     [self.line3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.sureTimeText.mas_bottom).offset(padding);
+        make.bottom.equalTo(weakSelf.view1).offset(0);
+        make.left.equalTo(weakSelf.line1);
+        make.right.equalTo(weakSelf.line1);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
+    }];
+    
+    
+    [self.view2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.view1.mas_bottom).offset(0);
+        make.left.equalTo(weakSelf.line1);
+        make.right.equalTo(weakSelf.line1);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:45]));
+    }];
+    
+    [self.compensateText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.view2);
+        make.left.equalTo(weakSelf.applyTimeText);
+    }];
+    
+    
+    
+    [self.back2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.view2);
+        make.right.equalTo(0);
+    }];
+    
+    [self.compensateShowText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(weakSelf.back2.mas_left).offset(-[self h_w:10]);
+        make.centerY.equalTo(weakSelf.view2);
+    }];
+    
+    [self.line4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(weakSelf.view2).offset(0);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
@@ -113,7 +176,7 @@
     
     
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.line3.mas_bottom).offset(padding);
+        make.top.equalTo(weakSelf.view2.mas_bottom).offset([self h_w:10]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length));
@@ -137,7 +200,12 @@
         make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-
+        
+    }];
+    
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf);
+        make.bottom.equalTo(weakSelf.finish.mas_bottom).offset([self h_w:20]);
     }];
     
     [super updateConstraints];
@@ -145,21 +213,32 @@
 
 #pragma mark private
 -(void)h_setupViews{
-
     
-    [self addSubview:self.applyTimeText];
-    [self addSubview:self.applyTimeShowText];
-    [self addSubview:self.line1];
-    [self addSubview:self.lateTimeText];
-    [self addSubview:self.lateTimeShowText];
-    [self addSubview:self.line2];
-    [self addSubview:self.sureTimeText];
-    [self addSubview:self.sureTimeShowText];
-    [self addSubview:self.line3];
-    [self addSubview:self.textView];
-    [self addSubview:self.proveView];
-    [self addSubview:self.applyManView];
-    [self addSubview:self.finish];
+    [self addSubview:self.scrollView];
+    
+    [self.scrollView addSubview:self.applyTimeText];
+    [self.scrollView addSubview:self.applyTimeShowText];
+    [self.scrollView addSubview:self.line1];
+    [self.scrollView addSubview:self.lateTimeText];
+    [self.scrollView addSubview:self.lateTimeShowText];
+    [self.scrollView addSubview:self.line2];
+    [self.scrollView addSubview:self.view1];
+    [self.scrollView addSubview:self.view2];
+    
+    [self.view1 addSubview:self.sureTimeText];
+    [self.view1 addSubview:self.sureTimeShowText];
+    [self.view1 addSubview:self.back1];
+    [self.view1 addSubview:self.line3];
+    
+    [self.view2 addSubview:self.compensateText];
+    [self.view2 addSubview:self.compensateShowText];
+    [self.view2 addSubview:self.back2];
+    [self.view2 addSubview:self.line4];
+    
+    [self.scrollView addSubview:self.textView];
+    [self.scrollView addSubview:self.proveView];
+    [self.scrollView addSubview:self.applyManView];
+    [self.scrollView addSubview:self.finish];
     
     
     [self setNeedsUpdateConstraints];
@@ -167,25 +246,25 @@
 }
 
 -(void)h_bindViewModel{
-
-
+    
+    
 }
 
 
 
 #pragma mark lazyload
--(ApplicationViewModel *)applicationViewModel{
-    if (!_applicationViewModel) {
-        _applicationViewModel = [[ApplicationViewModel alloc] init];
+-(GoOutViewModel *)goOutViewModel{
+    if (!_goOutViewModel) {
+        _goOutViewModel = [[GoOutViewModel alloc] init];
     }
-    return _applicationViewModel;
+    return _goOutViewModel;
 }
 
 
 -(UILabel *)applyTimeText{
     if (!_applyTimeText) {
         _applyTimeText = [[UILabel alloc] init];
-        _applyTimeText.text = @"申请时间";
+        _applyTimeText.text = @"开始时间";
         _applyTimeText.textColor = MAIN_PAN_2;
         _applyTimeText.font = H14;
     }
@@ -203,7 +282,7 @@
 }
 
 -(UIView *)line1{
-
+    
     if (!_line1) {
         _line1 = [[UIView alloc] init];
         _line1.backgroundColor = LINE_COLOR;
@@ -214,7 +293,7 @@
 -(UILabel *)lateTimeText{
     if (!_lateTimeText) {
         _lateTimeText = [[UILabel alloc] init];
-        _lateTimeText.text = @"迟到时间";
+        _lateTimeText.text = @"结束时间";
         _lateTimeText.textColor = MAIN_PAN_2;
         _lateTimeText.font = H14;
     }
@@ -242,18 +321,18 @@
 -(UILabel *)sureTimeText{
     if (!_sureTimeText) {
         _sureTimeText = [[UILabel alloc] init];
-        _sureTimeText.text = @"正常时间";
+        _sureTimeText.text = @"外出地点";
         _sureTimeText.textColor = MAIN_PAN_2;
         _sureTimeText.font = H14;
     }
     return _sureTimeText;
-
+    
 }
 
 -(UILabel *)sureTimeShowText{
     if (!_sureTimeShowText) {
         _sureTimeShowText = [[UILabel alloc] init];
-        _sureTimeShowText.text = @"2016年12月25日 08:30:00";
+        _sureTimeShowText.text = @"广东省中山市";
         _sureTimeShowText.font = H14;
         _sureTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -271,18 +350,18 @@
 -(UITextView *)textView{
     if (!_textView) {
         _textView  = [[UITextView alloc] init];
-//        _textView.backgroundColor = yellow_color;
-
+        //        _textView.backgroundColor = yellow_color;
+        
         _textView.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
         _textView.editable = YES;        //是否允许编辑内容，默认为“YES”
-//        _textView.delegate = self;       //设置代理方法的实现类
+        //        _textView.delegate = self;       //设置代理方法的实现类
         _textView.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置字体名字和字体大小;
-//        _textView.returnKeyType = UIReturnKeyDefault;//return键的类型
-//        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
+        //        _textView.returnKeyType = UIReturnKeyDefault;//return键的类型
+        //        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
         _textView.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _textView.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
         _textView.textColor = MAIN_PAN_2;
-        _textView.text = @"迟到原因";//设置显示的文本内容
+        _textView.text = @"外出理由";//设置显示的文本内容
         
         _textView.layer.borderColor = LINE_COLOR.CGColor;
         _textView.layer.borderWidth =1.0;
@@ -340,8 +419,78 @@
 }
 
 -(void)finish:(UIButton *)button{
-    [self.applicationViewModel.submitclickSubject sendNext:nil];
+    [self.goOutViewModel.submitclickSubject sendNext:nil];
+}
+
+
+
+
+-(UILabel *)compensateText{
+    if (!_compensateText) {
+        _compensateText = [[UILabel alloc] init];
+        _compensateText.text = @"外出类型";
+        _compensateText.font = H14;
+        _compensateText.textColor = MAIN_PAN_2;
+    }
+    return _compensateText;
+}
+
+-(UILabel *)compensateShowText{
+    if (!_compensateShowText) {
+        _compensateShowText = [[UILabel alloc] init];
+        _compensateShowText.text = @"私事";
+        _compensateShowText.font = H14;
+        _compensateShowText.textColor = MAIN_PAN_2;
+    }
+    return _compensateShowText;
+}
+
+-(UIImageView *)back1{
+    if (!_back1) {
+        _back1 = [[UIImageView alloc] init];
+        _back1.image = ImageNamed(@"role_right_arrow");
+    }
+    return _back1;
+}
+
+-(UIImageView *)back2{
+    if (!_back2) {
+        _back2 = [[UIImageView alloc] init];
+        _back2.image = ImageNamed(@"role_right_arrow");
+    }
+    return _back2;
+}
+
+-(UIView *)view1{
+    if (!_view1) {
+        _view1 = [[UIView alloc] init];
+    }
+    return _view1;
+}
+
+-(UIView *)view2{
+    if (!_view2) {
+        _view2 = [[UIView alloc] init];
+    }
+    return _view2;
+}
+
+
+-(UIView *)line4{
+    if (!_line4) {
+        _line4 = [[UIView alloc] init];
+        _line4.backgroundColor = LINE_COLOR;
+    }
+    return _line4;
+}
+
+-(UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+    }
+    return _scrollView;
 
 }
+
 
 @end

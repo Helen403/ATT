@@ -8,6 +8,6 @@
 
 #import "HViewController.h"
 
-@interface ApplicationController : HViewController
+@interface LateController : HViewController
 
 @end

@@ -40,7 +40,7 @@
     
     [self.on mas_makeConstraints:^(MASConstraintMaker *make) {
          make.centerY.equalTo(weakSelf);
-        make.right.equalTo(-[self h_w:10]);
+        make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
