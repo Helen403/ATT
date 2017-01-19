@@ -14,20 +14,13 @@
 -(NSMutableArray *)arr{
     if (!_arr) {
         _arr = [NSMutableArray array];
-        
-        //读取plist
-        
+           //读取plist
         NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DealWith" ofType:@"plist"];
         
         NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
         
-        for (NSDictionary *dict in data) {
-            // 3.1.创建模型对象
-            
-            DealWithModel *myExamine = [DealWithModel dealWithDict:dict];
-            // 3.2.添加模型对象到数组中
-            [_arr addObject:myExamine];
-        }
+       _arr= [DealWithModel mj_objectArrayWithKeyValuesArray:data];
+   
     }
     return _arr;
 }

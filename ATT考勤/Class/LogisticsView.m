@@ -42,10 +42,9 @@
 
 #pragma mark private
 -(void)h_setupViews{
-    
-    
-    
+
     [self addSubview:self.tableView];
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
@@ -81,7 +80,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 3;
+    return self.pendingCellViewModel.arr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -96,7 +95,7 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 80;
+    return [self h_w:80];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

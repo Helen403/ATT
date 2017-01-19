@@ -34,7 +34,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstStart"];
         
         // 如果是第一次安装打开App --- 显示引导页面
-        ZJLeadingPageController *leadController = [[ZJLeadingPageController alloc] initWithPagesCount:4 setupCellHandler:^(ZJLeadingPageCell *cell, NSIndexPath *indexPath) {
+        ZJLeadingPageController *leadController = [[ZJLeadingPageController alloc] initWithPagesCount:5 setupCellHandler:^(ZJLeadingPageCell *cell, NSIndexPath *indexPath) {
             
             // 设置图片
             NSString *imageName = [NSString stringWithFormat:@"splash%ld",indexPath.row+1];

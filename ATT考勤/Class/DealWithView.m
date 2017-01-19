@@ -19,6 +19,7 @@
 @end
 
 @implementation DealWithView
+
 #pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
     self.dealWithViewModel = (DealWithViewModel *)viewModel;
@@ -42,9 +43,10 @@
 #pragma mark private
 -(void)h_setupViews{
     
-    
+    self.backgroundColor = GX_BGCOLOR;
     
     [self addSubview:self.tableView];
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
@@ -105,8 +107,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
+
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.dealWithViewModel.cellclickSubject sendNext:row];
 }

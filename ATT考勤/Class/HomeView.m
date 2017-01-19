@@ -60,30 +60,65 @@
 
 @property(nonatomic,strong) UIScrollView *scrollView;
 
+@property(nonatomic,strong) UIView *RippleView;
+
+
 @end
 
 @implementation HomeView
 
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
     
+    
+//    self.RippleView = [[UIView alloc] initWithFrame:(CGRect){0,0,300,300}];
+//    self.RippleView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+//    self.RippleView.layer.cornerRadius = 150;
+//    self.RippleView.layer.masksToBounds=true;
+//    self.RippleView.alpha=0;
+    
+    
     self.homeViewModel = (HomeViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
 
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+//    [super touchesBegan:touches withEvent:event];
+//    UITouch *touch = [touches anyObject];
+//    CGPoint location = [touch locationInView:self];
+//    NSLog(@"asdd");
+//    [self.scrollView addSubview:self.RippleView];
+//    self.RippleView.center = location;
+//    self.RippleView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+//    [UIView animateWithDuration:0.1
+//                     animations:^{
+//                         self.RippleView.alpha=1;
+//                         self.view.alpha=0.3;
+//                     }];
+//    [UIView animateWithDuration:0.7
+//                          delay:0
+//                        options:UIViewAnimationOptionCurveEaseInOut
+//                     animations:^{
+//                         self.RippleView.transform = CGAffineTransformMakeScale(1,1);
+//                         self.RippleView.alpha=0;
+//                         self.view.alpha=1;
+//                     } completion:^(BOOL finished) {
+//                         
+//                         [self.RippleView removeFromSuperview];
+//                     }];
+//}
+//
 
 #pragma mark system
 -(void)updateConstraints{
     
     WS(weakSelf);
-    
-    
+ 
     CGFloat paddingleft = SCREEN_WIDTH*0.1;
     
     CGFloat length = SCREEN_WIDTH*0.7;
     
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf);
-        
     }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -424,7 +459,6 @@
     return _time;
 }
 -(UILabel *)year{
-    
     if (!_year) {
         _year = [[UILabel alloc] init];
         _year.text = @"2016年11月11日";

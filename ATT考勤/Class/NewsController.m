@@ -12,6 +12,7 @@
 
 #import "InformController.h"
 #import "NoticeController.h"
+#import "MyMsgController.h"
 
 @interface NewsController ()
 
@@ -65,12 +66,11 @@
                 
                 //我的信息
             case 2:{
-                InformController *inform = [[InformController alloc] init];
+                MyMsgController *myMsg = [[MyMsgController alloc] init];
                 
-                [self.navigationController pushViewController:inform animated:NO];
+                [self.navigationController pushViewController:myMsg animated:NO];
                 break;
             }
- 
         }
     }];
 }

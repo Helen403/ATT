@@ -15,7 +15,7 @@
 
 @property(nonatomic,strong) CheckViewModel *checkViewModel;
 
-//@property(nonatomic,strong) FDCalendar *calendar;
+@property(nonatomic,strong) FDCalendar *calendar;
 
 @property(nonatomic,strong) UITableView *tableView;
 
@@ -35,17 +35,17 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-//    [self.calendar mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(0);
-//        make.top.equalTo(0);
-//        make.right.equalTo(0);
-//        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:400]));
-//    }];
+    [self.calendar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.top.equalTo(0);
+        make.right.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:320]));
+    }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
-//        make.top.equalTo(weakSelf.calendar.mas_bottom).offset([self h_w:10]);
-        make.top.equalTo(0);
+        make.top.equalTo(weakSelf.calendar.mas_bottom).offset([self h_w:10]);
+//        make.top.equalTo(0);
     }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,7 +64,7 @@
     
     self.backgroundColor = GX_BGCOLOR;
     
-//    [self addSubview:self.calendar];
+    [self addSubview:self.calendar];
     [self addSubview:self.title];
     [self addSubview:self.tableView];
     
@@ -74,12 +74,12 @@
 
 
 #pragma mark lazyload
-//-(FDCalendar *)calendar{
-//    if (!_calendar) {
-//        _calendar = [[FDCalendar alloc] initWithCurrentDate:[NSDate date]];
-//    }
-//    return _calendar;
-//}
+-(FDCalendar *)calendar{
+    if (!_calendar) {
+        _calendar = [[FDCalendar alloc] initWithCurrentDate:[NSDate date]];
+    }
+    return _calendar;
+}
 
 -(CheckViewModel *)checkViewModel{
     if (!_checkViewModel) {

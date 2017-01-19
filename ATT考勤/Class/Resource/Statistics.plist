@@ -4,61 +4,61 @@
 <array>
 	<dict>
 		<key>img</key>
-		<string>settings_ detection_picture</string>
+		<string>statistical_my_Daily_picture</string>
 		<key>title</key>
 		<string>我的考勤日报</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>information_company_picture</string>
+		<string>statistical_my_weekly_picture</string>
 		<key>title</key>
 		<string>我的考勤周报</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>settings_account_security_picture</string>
+		<string>statistical_my_Monthly_picture</string>
 		<key>title</key>
 		<string>我的考勤月报</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>settings_ detection_picture</string>
+		<string>statistical_department_Daily_picture</string>
 		<key>title</key>
 		<string>部门考勤日报</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>settings_account_security_picture</string>
+		<string>statistical_department_weekly_picture</string>
 		<key>title</key>
 		<string>部门考勤周报</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>information_scheduling_picture</string>
+		<string>statistical_department_Monthly_picture</string>
 		<key>title</key>
 		<string>部门考勤月报</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>settings_ funtion_picture</string>
+		<string>statistical_department_field_picture</string>
 		<key>title</key>
 		<string>部门外勤统计</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>settings_account_security_picture</string>
+		<string>statistical_working_hours_heroes_list_picture</string>
 		<key>title</key>
 		<string>工时英雄榜</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>information_feeling_picture</string>
+		<string>statistical_check_in_list_of_heroes_picture</string>
 		<key>title</key>
 		<string>签到英雄榜</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>settings_account_security_picture</string>
+		<string>statistical_department_of_ranking_picture</string>
 		<key>title</key>
 		<string>部门红黑榜</string>
 	</dict>

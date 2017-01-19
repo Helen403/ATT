@@ -29,8 +29,6 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-    CGFloat length = [self h_w:10];
-    CGFloat Padding = [self h_w:6];
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:15]);
         make.top.equalTo(0);
@@ -39,27 +37,25 @@
     }];
     
     [self.cir mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([self h_w:15]);
+        make.top.equalTo([self h_w:18]);
         make.centerX.equalTo(weakSelf.line);
-        make.size.equalTo(CGSizeMake(length, length));
+        make.size.equalTo(CGSizeMake([self h_w:10], [self h_w:10]));
     }];
     
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.cir);
+        make.top.equalTo([self h_w:15]);
         make.left.equalTo(weakSelf.cir.mas_right).offset([self h_w:10]);
     }];
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.time.mas_bottom).offset(Padding);
+        make.top.equalTo([self h_w:35]);
         make.left.equalTo(weakSelf.time);
     }];
     [self.status mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.name.mas_bottom).offset(Padding);
+        make.top.equalTo([self h_w:55]);
         make.left.equalTo(weakSelf.name);
     }];
-    
-    
-    
+
     [super updateConstraints];
 }
 
@@ -116,7 +112,6 @@
         _time = [[UILabel alloc] init];
         _time.textColor = MAIN_PAN_2;
         _time.font = H14;
-        
     }
     return _time;
 }

@@ -10,21 +10,5 @@
 
 @implementation PendingModel
 
-+ (instancetype)pengingWithDict:(NSDictionary *)dict
-{
-    return [[self alloc] initWithDict:dict];
-}
-
-
-- (instancetype)initWithDict:(NSDictionary *)dict
-{
-    if (self = [super init]) {
-        // 赋值标题
-        self.time = dict[@"time"];
-        self.name = dict[@"name"];
-        self.status = dict[@"status"];
-    }
-    return self;
-}
 
 @end

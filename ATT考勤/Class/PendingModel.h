@@ -17,8 +17,7 @@
 
 @property(nonatomic,strong) NSString *status;
 
-+ (instancetype)pengingWithDict:(NSDictionary *)dict;
-- (instancetype)initWithDict:(NSDictionary *)dict;
+
 
 
 @end

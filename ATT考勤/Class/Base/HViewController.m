@@ -85,7 +85,7 @@
 
 - (void)dealloc {
     
-    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+//    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
 }
 
 #pragma mark - private

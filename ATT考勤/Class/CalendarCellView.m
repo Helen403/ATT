@@ -35,7 +35,7 @@
     }];
     
     [self.button mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(-[self h_w:10]);
+        make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
         make.centerY.equalTo(weakSelf);
         make.size.equalTo(CGSizeMake([self h_w:80], [self h_w:32]));
     }];

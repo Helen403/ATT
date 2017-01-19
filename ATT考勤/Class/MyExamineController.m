@@ -9,9 +9,10 @@
 #import "MyExamineController.h"
 #import "MyExamineViewModel.h"
 #import "MyExamineView.h"
-#import "PendingController.h"
-#import "DealWithController.h"
-
+#import "TreatController.h"
+#import "ProcessedController.h"
+#import "RefuseController.h"
+#import "CopyController.h"
 
 @interface MyExamineController ()
 
@@ -25,12 +26,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
 }
 
 #pragma mark system
 -(void)updateViewConstraints{
-
+    
     [self.myExamineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(0);
         make.left.equalTo(0);
@@ -44,45 +44,55 @@
 
 
 -(void)h_addSubviews{
-
+    
     [self.view addSubview:self.myExamineView];
 }
 
 -(void)h_bindViewModel{
-
+    
     
     [[self.myExamineViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
-       
-        
-        
-        if ([x isEqualToNumber:@(0)]) {
-            PendingController *pending = [[PendingController alloc] init];
-            
-            [self.navigationController pushViewController:pending animated:NO];
-//            ShowMaskStatus(@"正在加载");
-        }else{
-            DealWithController *dealWith = [[DealWithController alloc] init];
-            
-            [self.navigationController pushViewController:dealWith animated:NO];
-        }
-       
-        
+        switch ([x integerValue]) {
+                //待处理
+            case 0:{
+                TreatController *treat = [[TreatController alloc] init];
+                
+                [self.navigationController pushViewController:treat animated:NO];
+                break;
+            }
+                //已处理
+            case 1:{
+                
+                ProcessedController *processed = [[ProcessedController alloc] init];
+                
+                [self.navigationController pushViewController:processed animated:NO];
+                break;
+            }
+                //已拒绝
+            case 2:{
+                RefuseController *refuse = [[RefuseController alloc] init];
+                
+                [self.navigationController pushViewController:refuse animated:NO];
+          
+                break;
+            }
+                //抄送我的
+            case 3:{
+                CopyController *to = [[CopyController alloc] init];
+                
+                [self.navigationController pushViewController:to animated:NO];
 
-        NSLog(@"%@",x);
-        
+                break;
+            }
+             
+        }
         
     }];
-
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
     
 }
 
-#pragma mark lazy
+#pragma mark lazyload
 -(MyExamineView *)myExamineView{
     if (!_myExamineView) {
         _myExamineView = [[MyExamineView alloc] initWithViewModel:self.myExamineViewModel];
@@ -96,7 +106,6 @@
         _myExamineViewModel = [[MyExamineViewModel alloc] init];
     }
     return _myExamineViewModel;
-    
 }
 
 @end

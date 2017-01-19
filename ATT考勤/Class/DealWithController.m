@@ -36,10 +36,6 @@
 }
 
 
-#pragma mark private
--(void)h_layoutNavigation{
-    self.title = @"已处理";
-}
 
 -(void)h_addSubviews{
     [self.view addSubview:self.dealWithView];

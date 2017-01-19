@@ -10,13 +10,10 @@
 
 @interface DealWithModel : NSObject
 
-@property(nonatomic,strong) NSString *Img;
+@property(nonatomic,strong) NSString *imgtext;
 
 @property(nonatomic,strong) NSString *title;
 
 @property(nonatomic,strong) NSString *number;
-
-+ (instancetype)dealWithDict:(NSDictionary *)dict;
-- (instancetype)initWithDict:(NSDictionary *)dict;
 
 @end

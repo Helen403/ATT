@@ -14,11 +14,14 @@
 #import "SetController.h"
 
 
+
 @interface HomeViewController ()
 
 @property(nonatomic,strong) HomeView *homeView;
 
 @property(nonatomic,strong) HomeViewModel *homeViewModel;
+
+
 
 @end
 
@@ -39,7 +42,11 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+   
 }
+
+
+
 
 #pragma mark system
 -(void)updateViewConstraints{

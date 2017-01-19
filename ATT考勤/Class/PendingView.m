@@ -110,8 +110,19 @@
         make.top.equalTo(weakSelf.agree);
     }];
     
+  
+    
+    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.agree.mas_bottom).offset([self h_w:15]);
+        make.centerX.equalTo(weakSelf);
+        //        make.bottom.equalTo(weakSelf.preBtn.mas_top).offset(-[self h_w:15]);
+        
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-[self h_w:20], [self h_w:240]));
+    }];
+    
+    
     [self.preBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf).offset(-[self h_w:10]);
+        make.top.equalTo(weakSelf.view.mas_bottom).offset([self h_w:10]);
         make.left.equalTo(weakSelf).offset([self h_w:10]);
     }];
     
@@ -124,14 +135,6 @@
         make.bottom.equalTo(weakSelf.preBtn);
         make.right.equalTo(-[self h_w:10]);
     }];
-    
-    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.agree.mas_bottom).offset([self h_w:15]);
-        make.left.equalTo([self h_w:10]);
-        make.right.equalTo(-[self h_w:10]);
-        make.bottom.equalTo(weakSelf.preBtn.mas_top).offset(-[self h_w:15]);
-    }];
-    
     
     [super updateConstraints];
 }
@@ -161,10 +164,7 @@
 
 -(void)h_bindViewModel{
     
-    
 }
-
-
 
 #pragma mark lazyload
 -(PendingViewModel *)pendingViewModel{
@@ -183,8 +183,6 @@
     }
     return _title;
 }
-
-
 
 -(UILabel *)number{
     if (!_number) {
@@ -242,7 +240,6 @@
         _reason.text = @"请假原因:胃疼";
         _reason.textColor = MAIN_PAN_2;
         _reason.font = H14;
-        //
     }
     return _reason;
 }
@@ -327,7 +324,6 @@
 -(LogisticsView *)view{
     if (!_view) {
         _view = [[LogisticsView alloc] init];
-        //        _view.backgroundColor = LINE_COLOR;
         _view.layer.borderColor = LINE_COLOR.CGColor;
         _view.layer.borderWidth =1.0;
         _view.layer.cornerRadius =5.0;
