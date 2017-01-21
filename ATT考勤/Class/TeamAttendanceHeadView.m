@@ -23,7 +23,7 @@
 #pragma mark system
 -(void)updateConstraints{
     
-    WS(weakSelf);
+//    WS(weakSelf);
     [super updateConstraints];
 }
 

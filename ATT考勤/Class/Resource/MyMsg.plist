@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>img</key>
+		<string>remind_set_vioce_prompt_picture</string>
+		<key>title</key>
+		<string>韦达信息技术</string>
+		<key>content</key>
+		<string>今晚去吃饭</string>
+		<key>time</key>
+		<string>08:22</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>remind_set_vioce_prompt_picture</string>
+		<key>title</key>
+		<string>博泰网络科技</string>
+		<key>content</key>
+		<string>春节到来！祝大家身体健康</string>
+		<key>time</key>
+		<string>15:30</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>remind_set_vioce_prompt_picture</string>
+		<key>title</key>
+		<string>广电网络</string>
+		<key>content</key>
+		<string>事业步步高升</string>
+		<key>time</key>
+		<string>12:06</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>remind_set_vioce_prompt_picture</string>
+		<key>title</key>
+		<string>中山日报</string>
+		<key>content</key>
+		<string>今天出太阳！</string>
+		<key>time</key>
+		<string>18:08</string>
+	</dict>
+</array>
+</plist>

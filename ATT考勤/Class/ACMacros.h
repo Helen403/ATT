@@ -479,7 +479,7 @@
 #define kDISPATCH_GLOBAL_QUEUE_DEFAULT(globalQueueBlock) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), globalQueueBlocl);
 
 /*************************************/
-#define HL(str) NSLog(@"Helen %@",str)
+
 
 #define getSize(str,font) [LSCoreToolCenter getSizeWithText:str fontSize:font]
 

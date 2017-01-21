@@ -40,13 +40,13 @@
 -(RACCommand *)loginclickCommand{
     if (!_loginclickCommand) {
         
-        @weakify(self);
+//        @weakify(self);
         _loginclickCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             
-            @strongify(self);
+//            @strongify(self);
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                 
-                @strongify(self);
+//                @strongify(self);
                 
 //                NSLog(@"%@  %@",self.user,self.pwd);
                 NSLog(@"kkk");

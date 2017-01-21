@@ -65,6 +65,7 @@
         //    NSString *adImageURLString = @"这是启动广告图片的URL";
         //    NSString *adURLString = @"这是点击广告图片后的广告URL";
         
+        WS(weakSelf);
         ZJLaunchAdController *launchVc = [[ZJLaunchAdController alloc] initWithLaunchImage:nil setAdImageHandler:^(UIImageView *imageView) {
             // 这里可以直接使用SDWebimage等来请求服务器提供的广告图片(SDWebimage会处理好gif图片的显示)
             // 不过你需要注意选择SDWebimage的缓存策略
@@ -74,18 +75,18 @@
             switch (callbackType) {
                     // 点击了广告, 展示相应的广告即可
                 case ZJLaunchAdCallbackTypeClickAd:
-                    self.window.rootViewController = self.nav;
+                    [weakSelf setRoot];
                     
                     break;
                     //  展示广告图片结束, 可以进入App
                 case ZJLaunchAdCallbackTypeShowFinish:
-                    self.window.rootViewController = self.nav;
+                   [weakSelf setRoot];
                     break;
                     
                     // 点击了跳过广告, 可以进入App
                 case ZJLaunchAdCallbackTypeClickSkipBtn:
+                    [weakSelf setRoot];
                     
-                    self.window.rootViewController = self.nav;
                     
                     break;
             }
@@ -107,6 +108,10 @@
     }
 
     return YES;
+}
+
+-(void)setRoot{
+    self.window.rootViewController = self.nav;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

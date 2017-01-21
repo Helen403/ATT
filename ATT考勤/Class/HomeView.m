@@ -211,6 +211,7 @@
     [self.netStatusImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.time.mas_left);
         make.top.equalTo(weakSelf.punch.mas_bottom).offset([self h_w:20]);
+         make.size.equalTo(CGSizeMake([self h_w:35], [self h_w:35]));
     }];
     
     [self.netStatusText mas_makeConstraints:^(MASConstraintMaker *make) {

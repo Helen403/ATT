@@ -157,7 +157,7 @@
 
 #pragma mark private
 -(void)h_setupViews{
-    [self setBackgroundColor:white_color];
+    self.backgroundColor = white_color;
     
     [self addSubview:self.icon];
     [self addSubview:self.useImg];

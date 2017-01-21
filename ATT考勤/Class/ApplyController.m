@@ -21,7 +21,7 @@
 
 @property(strong, nonatomic)NSArray<NSString *> *titles;
 
-@property(strong, nonatomic)NSMutableArray<UIViewController *> *childVcs;
+@property(strong, nonatomic)NSMutableArray<HViewController<ZJScrollPageViewChildVcDelegate> *> *childVcs;
 
 @end
 
@@ -88,7 +88,7 @@
 }
 
 #pragma mark lazyload
--(NSMutableArray<UIViewController *> *)childVcs{
+-(NSMutableArray<HViewController<ZJScrollPageViewChildVcDelegate> *> *)childVcs{
     if (!_childVcs) {
         _childVcs = [NSMutableArray array];
         [_childVcs addObject:[[MyApplyController alloc] init]];

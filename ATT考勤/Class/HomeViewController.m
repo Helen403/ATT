@@ -45,7 +45,32 @@
    
 }
 
-
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+//    [super touchesBegan:touches withEvent:event];
+//    UITouch *touch = [touches anyObject];
+//    CGPoint location = [touch locationInView:self];
+//    NSLog(@"asdd");
+//    [self.scrollView addSubview:self.RippleView];
+//    self.RippleView.center = location;
+//    self.RippleView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+//    [UIView animateWithDuration:0.1
+//                     animations:^{
+//                         self.RippleView.alpha=1;
+//                         self.view.alpha=0.3;
+//                     }];
+//    [UIView animateWithDuration:0.7
+//                          delay:0
+//                        options:UIViewAnimationOptionCurveEaseInOut
+//                     animations:^{
+//                         self.RippleView.transform = CGAffineTransformMakeScale(1,1);
+//                         self.RippleView.alpha=0;
+//                         self.view.alpha=1;
+//                     } completion:^(BOOL finished) {
+//
+//                         [self.RippleView removeFromSuperview];
+//                     }];
+//}
+//
 
 
 #pragma mark system

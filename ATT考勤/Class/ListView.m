@@ -156,7 +156,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    //    [self.dealWithViewModel.cellclickSubject sendNext:row];
+        [self.checkViewModel.cellclickSubject sendNext:row];
 }
 
 

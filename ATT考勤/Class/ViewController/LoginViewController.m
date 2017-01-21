@@ -10,9 +10,12 @@
 #import "LoginView.h"
 #import "LoginViewModel.h"
 
+
 #import "ForgetController.h"
 #import "NewpartViewController.h"
-#import "XCFTabBarController.h"
+
+
+#import "MultiRolesController.h"
 
 @interface LoginViewController ()
 
@@ -62,7 +65,8 @@
     
     //点击登陆
     [self.loginViewModel.loginclickSubject subscribeNext:^(id x) {
-             [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
+        MultiRolesController *multiRoles = [[MultiRolesController alloc] init];
+        [self.navigationController pushViewController:multiRoles animated:NO];
 //        switch ([x integerValue]) {
 //            case HSuccess:
 //                [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];

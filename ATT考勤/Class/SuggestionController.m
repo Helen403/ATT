@@ -15,7 +15,7 @@
 
 @property(strong, nonatomic)NSArray<NSString *> *titles;
 
-@property(strong, nonatomic)NSMutableArray<UIViewController *> *childVcs;
+@property(strong, nonatomic)NSMutableArray<HViewController<ZJScrollPageViewChildVcDelegate> *> *childVcs;
 
 @end
 
@@ -79,7 +79,7 @@
     return NO;
 }
 
--(NSMutableArray<UIViewController *> *)childVcs{
+-(NSMutableArray<HViewController<ZJScrollPageViewChildVcDelegate> *> *)childVcs{
     if (!_childVcs) {
         _childVcs = [NSMutableArray array];
         [_childVcs addObject:[[MyOpinionController alloc] init]];
