@@ -33,6 +33,8 @@
 
 @property(nonatomic,strong) UIView *line2;
 
+@property(nonatomic,strong) UIView *line3;
+
 @property(nonatomic,strong) UILabel *ThirdText;
 
 @property(nonatomic,strong) UIImageView *weixin;
@@ -42,6 +44,8 @@
 @property(nonatomic,strong) UIImageView *sina;
 
 @property(nonatomic,strong) UIButton *eyes;
+
+@property(nonatomic,strong) UIImageView *bg;
 
 @end
 
@@ -65,12 +69,13 @@
     CGFloat biglength = [self h_w:50];
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
-        make.top.equalTo([self h_w:80]);
+        make.top.equalTo(SCREEN_HEIGHT*0.1);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.35, SCREEN_WIDTH*0.35/3.f));
     }];
     
     [self.useImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding+[self h_w:10]);
-        make.top.equalTo(weakSelf.icon.mas_bottom).offset([self h_w:80]);
+        make.top.equalTo(weakSelf.icon.mas_bottom).offset(SCREEN_HEIGHT*0.1);
     }];
     
     [self.useTextField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,7 +126,7 @@
     
     
     [self.weixin mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.mas_bottom).offset(-[self h_w:40]);
+        make.bottom.equalTo(weakSelf.mas_bottom).offset(-SCREEN_HEIGHT*0.02);
         make.left.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(biglength, biglength));
     }];
@@ -138,18 +143,29 @@
         make.size.equalTo(CGSizeMake(biglength, biglength));
     }];
     
-    [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.weixin.mas_top).offset(-[self h_w:25]);
-        make.left.equalTo(weakSelf.line1);
-        make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH,1));
-    }];
-    
     [self.ThirdText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
-        make.centerY.equalTo(weakSelf.line2);
+        make.bottom.equalTo(weakSelf.weixin.mas_top).offset(-[self h_w:25]);
+        
+    }];
+    CGSize size =  [LSCoreToolCenter getSizeWithText:@" 使用第三方登陆 " fontSize:12];
+    [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.ThirdText);
+        make.left.equalTo(weakSelf.line1);
+        
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width-leftPadding,[self h_w:1]));
     }];
     
+    [self.line3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(weakSelf.line1);
+        make.centerY.equalTo(weakSelf.ThirdText);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width-leftPadding,[self h_w:1]));
+    }];
+    
+    [self.bg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf);
+    }];
     
     [super updateConstraints];
 }
@@ -159,6 +175,7 @@
 -(void)h_setupViews{
     self.backgroundColor = white_color;
     
+    [self addSubview:self.bg];
     [self addSubview:self.icon];
     [self addSubview:self.useImg];
     [self addSubview:self.useTextField];
@@ -168,8 +185,9 @@
     [self addSubview:self.login];
     [self addSubview:self.forgetText];
     [self addSubview:self.registerText];
-    [self addSubview:self.line2];
     [self addSubview:self.ThirdText];
+    [self addSubview:self.line2];
+    [self addSubview:self.line3];
     [self addSubview:self.weixin];
     [self addSubview:self.QQ];
     [self addSubview:self.sina];
@@ -180,9 +198,8 @@
 }
 
 -(void)h_bindViewModel{
-    
+    [self addDynamic:self];
 }
-
 
 #pragma mark lazyload
 -(LoginViewModel *)loginViewModel{
@@ -205,9 +222,7 @@
     if (!_useImg) {
         _useImg = [[UIImageView alloc] init];
         _useImg.image = ImageNamed(@"login_phone_picture");
-        
     }
-    
     return _useImg;
 }
 
@@ -223,14 +238,26 @@
         
         //当输入框没有内容时，水印提示 提示内容为password
         _useTextField.placeholder = @"输入手机号";
-        
+        _useTextField.tintColor = white_color;
+        _useTextField.textColor = white_color;
         //修改account的placeholder的字体颜色、大小
-        [_useTextField setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_useTextField setValue: [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
         [_useTextField setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _useTextField.font = H14;
         // 设置右边永远显示清除按钮
         _useTextField.clearButtonMode = UITextFieldViewModeAlways;
+        
+        // 5.监听文本框的文字改变
+        [_useTextField.rac_textSignal subscribeNext:^(id x) {
+            if (_useTextField.text.length>0) {
+                self.login.enabled = YES;
+                self.login.backgroundColor = MAIN_ORANGER;
+            }else{
+                self.login.enabled = NO;
+                self.login.backgroundColor = MAIN_GRAY;
+            }
+        }];
         
     }
     return _useTextField;
@@ -265,31 +292,26 @@
         
         //当输入框没有内容时，水印提示 提示内容为password
         _pwdTextField.placeholder = @"密 码";
-        
+        _pwdTextField.tintColor = white_color;
+        _pwdTextField.textColor = white_color;
         //修改account的placeholder的字体颜色、大小
-        [_pwdTextField setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_pwdTextField setValue: [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
         [_pwdTextField setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _pwdTextField.font = H14;
         // 设置右边永远显示清除按钮
         //        _pwdTextField.clearButtonMode = UITextFieldViewModeAlways;
         _pwdTextField.secureTextEntry = YES;
-//        _pwdTextField.delegate = self;
+        //        _pwdTextField.delegate = self;
         
-        //        // 5.监听文本框的文字改变
-        //        [_pwdTextField.rac_textSignal subscribeNext:^(id x) {
         //
-        //            NSLog(@"文字改变了%@",x);
-        //        }];
     }
     return _pwdTextField;
     
 }
 
 
-//- (void) textChangeAction:(id) sender {
-//   
-//}
+
 
 
 -(UIButton *)login{
@@ -320,17 +342,14 @@
 
 -(void)login:(UIButton *)button{
     
-    if (self.useTextField.text.length>0&&self.pwdTextField.text.length>0) {
-      
+    if (self.useTextField.text.length>10&&self.pwdTextField.text.length>0){
+        //点击后不然再点击
+        self.loginViewModel.user = self.useTextField.text;
+        self.loginViewModel.pwd = self.pwdTextField.text;
+        //登陆成功后发送按钮
+        [self.loginViewModel.loginclickCommand execute:nil];
     }
-    //点击后不然再点击
-    self.loginViewModel.user = self.useTextField.text;
-    self.loginViewModel.pwd = self.pwdTextField.text;
     
-    //登陆成功后发送按钮
-    [self.loginViewModel.loginclickCommand execute:nil];
-    
-  
 }
 
 
@@ -338,7 +357,7 @@
     if (!_forgetText) {
         _forgetText = [[UILabel alloc] init];
         _forgetText.text = @"忘记密码";
-        _forgetText.textColor = RGBCOLOR(129, 130, 132);
+        _forgetText.textColor = MAIN_ORANGER;
         _forgetText.font = H14;
         //添加点击事件
         _forgetText.userInteractionEnabled = YES;
@@ -357,7 +376,7 @@
     if (!_registerText) {
         _registerText = [[UILabel alloc] init];
         _registerText.text = @"快速注册";
-        _registerText.textColor = RGBCOLOR(231, 127, 72);
+        _registerText.textColor = MAIN_ORANGER;
         _registerText.font = H14;
         //添加点击事件
         _registerText.userInteractionEnabled=YES;
@@ -379,7 +398,14 @@
         _line2.backgroundColor = MAIN_GRAY;
     }
     return _line2;
-    
+}
+
+-(UIView *)line3{
+    if (!_line3) {
+        _line3 = [[UIView alloc] init];
+        _line3.backgroundColor = MAIN_GRAY;
+    }
+    return _line3;
 }
 
 -(UILabel *)ThirdText{
@@ -387,8 +413,8 @@
         _ThirdText = [[UILabel alloc] init];
         _ThirdText.text = @" 使用第三方登陆 ";
         _ThirdText.font = H12;
-        _ThirdText.textColor = RGBCOLOR(181, 182, 184);
-        _ThirdText.backgroundColor = white_color;
+        _ThirdText.textColor = white_color;
+        
     }
     return _ThirdText;
 }
@@ -475,6 +501,15 @@
         return NO;
     }
     return YES;
+}
+
+
+-(UIImageView *)bg{
+    if (!_bg) {
+        _bg = [[UIImageView alloc] init];
+        _bg.image = ImageNamed(@"bg_2");
+    }
+    return _bg;
 }
 
 

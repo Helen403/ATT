@@ -115,7 +115,9 @@
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[AddressListCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([AddressListCellView class])]];
-        
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:80])];
+        v.backgroundColor = yellow_color;
+        _tableView.tableFooterView = v;
     }
     return _tableView;
 }
@@ -147,11 +149,7 @@
     [self.addressListViewModel.cellclickSubject sendNext:row];
 }
 
-
-
-
 #pragma mark - delegate
-
 
 #pragma mark tableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

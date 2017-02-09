@@ -111,6 +111,10 @@
 }
 
 -(void)setRoot{
+    for (UIView *v in self.window.subviews) {
+        [v removeFromSuperview];
+    }
+    
     self.window.rootViewController = self.nav;
 }
 

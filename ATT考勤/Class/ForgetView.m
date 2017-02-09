@@ -129,7 +129,7 @@
 }
 
 -(void)h_bindViewModel{
-    
+     [self addDynamic:self];
 }
 
 

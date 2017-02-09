@@ -7,6 +7,13 @@
 //
 
 #import "LoginViewModel.h"
+#import "GDataXMLNode.h"
+
+#import "UserModel.h"
+
+//#import "NSXmlKit/NSXmlKit.h"
+
+
 
 @implementation LoginViewModel
 
@@ -14,8 +21,11 @@
 -(void)h_initialize{
     
     @weakify(self);
-    [self.loginclickCommand.executionSignals.switchToLatest subscribeNext:^(NSDictionary *dict) {
-        
+    [self.loginclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+
+       NSDictionary *xmlDoc = [self getFilter:result filter:@"Users"];
+       UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
+        NSLog(@"asd");
         @strongify(self);
         if ([self.user isEqualToString:@"123"]&&[self.pwd isEqualToString:@"123"]) {
             [self.loginclickSubject sendNext:@(HSuccess)];
@@ -36,42 +46,47 @@
     
 }
 
+
+-(NSDictionary *)getFilter:(NSString *)result filter:(NSString *)filter{
+ 
+    NSString *str1 = [NSString stringWithFormat:@"<%@>",filter];
+    NSRange range1 = [result rangeOfString:str1];//匹配得到的下标
+    NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
+    NSRange range2 = [result rangeOfString:str2];//匹配得到的下标
+    
+    result = [result substringToIndex:range2.location+range2.length];
+    result = [result substringFromIndex:range1.location];
+    
+    NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLString:result];
+
+    return xmlDoc;
+}
+
 #pragma mark lazyload
 -(RACCommand *)loginclickCommand{
     if (!_loginclickCommand) {
         
-//        @weakify(self);
         _loginclickCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             
-//            @strongify(self);
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                 
-//                @strongify(self);
+                NSString *body =[NSString stringWithFormat: @"<findUserByUserTelphone xmlns=\"http://service.security.vada.com/\">\
+                <userTelphone xmlns=\"\">%@</userTelphone>\
+                </findUserByUserTelphone>",self.user];
                 
-//                NSLog(@"%@  %@",self.user,self.pwd);
-                NSLog(@"kkk");
-                [subscriber sendNext:@"asd"];
-                [subscriber sendCompleted];
-//                [self.request POST:REQUEST_URL parameters:nil success:^(CMRequest *request, NSString *responseString) {
-//                    
-////                    NSLog(@"成功");
-//                    [subscriber sendNext:responseString];
-//                    [subscriber sendCompleted];
-//                    
-//                } failure:^(CMRequest *request, NSError *error) {
-//                    
-//                    ShowErrorStatus(@"网络连接失败");
-//                    [subscriber sendCompleted];
-//                }];
+                [self SOAPData:Login soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    NSLog(@"%@",error);
+                }];
                 return nil;
             }];
         }];
-        
-        
-        
+   
     }
     return _loginclickCommand;
-    
 }
 
 -(RACSubject *)loginclickSubject{

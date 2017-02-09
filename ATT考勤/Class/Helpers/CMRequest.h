@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AFNetworking/AFNetworking.h>
+#import "AFNetworking.h"
 
 @class CMRequest;
 @protocol CMRequestDelegate <NSObject>
@@ -79,5 +79,8 @@
  */
 - (void)cancelAllOperations;
 
+
+//SOAP请求
+-(void)SOAPData:(NSString *)url soapBody:(NSString *)soapBody targetNamespace:(NSString *)TargetNamespace  success:(void (^)(NSString *result))success failure:(void(^)(NSError *error))failure;
 
 @end

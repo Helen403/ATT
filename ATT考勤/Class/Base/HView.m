@@ -63,4 +63,46 @@
 -(void)toast:(NSString *)text{
     [Toast showWithText:text bottomOffset:60];
 }
+
+-(UIView *)rippleView{
+    if (!_rippleView) {
+        _rippleView = [[UIView alloc] initWithFrame:(CGRect){0,0,300,300}];
+        _rippleView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+        _rippleView.layer.cornerRadius = 150;
+        _rippleView.layer.masksToBounds=true;
+        _rippleView.alpha=0;
+        
+    }
+    return _rippleView;
+}
+
+-(void)addDynamic:(UIView *)tmpView{
+    self.tmpView = tmpView;
+    self.tmpView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClick:)];
+    [self.tmpView addGestureRecognizer:setTap];
+}
+
+-(void)onClick:(UITapGestureRecognizer *)sender{
+    CGPoint point = [sender locationInView:self.tmpView];
+    
+    [self.tmpView addSubview:self.rippleView];
+    self.rippleView.center = point;
+    self.rippleView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         self.rippleView.alpha=1;
+                     }];
+    [UIView animateWithDuration:0.7
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         self.rippleView.transform = CGAffineTransformMakeScale(1,1);
+                         self.rippleView.alpha=0;
+                     } completion:^(BOOL finished) {
+                         
+                         [self.rippleView removeFromSuperview];
+                     }];
+}
+
 @end

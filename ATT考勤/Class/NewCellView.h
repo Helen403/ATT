@@ -13,4 +13,6 @@
 
 @property(nonatomic,strong) NewsModel *newsModel;
 
+
+
 @end

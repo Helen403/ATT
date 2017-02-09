@@ -162,6 +162,7 @@ void DismissHud(void){
 {
     CGFloat font =SizeScaleW*fontSize;
     CGSize size=[text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:font]}];
+
     //ios系统大于7
     if ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0) {
         size=[text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]}];

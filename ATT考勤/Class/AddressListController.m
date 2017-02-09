@@ -52,8 +52,8 @@
 
 -(void)h_addSubviews{
     self.view.backgroundColor = [UIColor whiteColor];
-    self.content.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:80]);
-    self.tableView.frame = CGRectMake(0, [self h_w:80],SCREEN_WIDTH, self.view.frame.size.height-[self h_w:80]);
+    self.content.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:55]);
+    self.tableView.frame = CGRectMake(0, [self h_w:50],SCREEN_WIDTH, self.view.frame.size.height-[self h_w:50]);
 }
 
 -(void)h_bindViewModel{
@@ -164,7 +164,7 @@
 -(UIView *)content{
     if (!_content) {
         _content = [[UIView alloc] init];
-        _content.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:80]);
+        _content.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:50]);
         [_content addSubview:self.searchBar];
         [_content addSubview:self.toTeamView];
          [self.view addSubview:_content];
@@ -176,7 +176,7 @@
     if (!_toTeamView) {
         _toTeamView = [[ToTeamView alloc] init];
         _toTeamView.backgroundColor = white_color;
-        _toTeamView.frame = CGRectMake(0, [self h_w:40], SCREEN_WIDTH, [self h_w:40]);
+        _toTeamView.frame = CGRectMake(0, [self h_w:25], SCREEN_WIDTH, [self h_w:25]);
         _toTeamView.userInteractionEnabled = YES;
         UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toTeam)];
         [_toTeamView addGestureRecognizer:setTap];
@@ -206,7 +206,7 @@
         _searchBar.delegate = self;
         _searchBar.placeholder = @"姓名/手机号";
         _searchBar.searchBarStyle = UISearchBarStyleDefault;
-        _searchBar.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:40]);
+        _searchBar.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:25]);
     }
     return _searchBar;
 }
@@ -221,7 +221,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[AddressListCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([AddressListCellView class])]];
         [self.view addSubview:_tableView];
-//        _tableView.tableHeaderView = self.content;
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT*0.15)];
         
     }
     return _tableView;

@@ -65,6 +65,7 @@
         self.tableView.transform=CGAffineTransformMakeTranslation(0, -deltaY);
     }];
 }
+
 -(void)keyboardHide:(NSNotification *)note
 {
     [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
@@ -117,31 +118,26 @@
     [self tableViewScrollCurrentIndexPath];
 }
 
--(void)tableViewScrollCurrentIndexPath
-{
+-(void)tableViewScrollCurrentIndexPath{
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:self.resultArray.count-1 inSection:0];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     self.inputToolbar.isBecomeFirstResponder = NO;
 }
 
-- (void)moreButtonView:(MoreButtonView *)moreButtonView didClickButton:(MoreButtonViewButtonType)buttonType
-{
+- (void)moreButtonView:(MoreButtonView *)moreButtonView didClickButton:(MoreButtonViewButtonType)buttonType{
     switch (buttonType) {
-        case MoreButtonViewButtonTypeImages:
-        {
+        case MoreButtonViewButtonTypeImages:{
             UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
             ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             ipc.delegate = self;
             [self presentViewController:ipc animated:YES completion:nil];
         } break;
             
-        case MoreButtonViewButtonTypeCamera:
-        {
+        case MoreButtonViewButtonTypeCamera:{
             UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
             ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
             ipc.delegate = self;
@@ -153,13 +149,11 @@
     }
 }
 
-- (void)inputToolbar:(InputToolbar *)inputToolbar orignY:(CGFloat)orignY
-{
+- (void)inputToolbar:(InputToolbar *)inputToolbar orignY:(CGFloat)orignY{
     _inputToolbarY = orignY;
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info
-{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info{
     [picker dismissViewControllerAnimated:YES completion:nil];
     //UIImage *image = info[UIImagePickerControllerOriginalImage];
     //图片选取成功
@@ -344,11 +338,8 @@
 
 }
 
--(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
-  
 }
 
 

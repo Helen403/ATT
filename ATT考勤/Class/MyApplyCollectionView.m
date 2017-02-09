@@ -8,18 +8,13 @@
 
 #import "MyApplyCollectionView.h"
 
-
-
 @interface MyApplyCollectionView()
-
-
 
 @property(nonatomic,strong) UIImageView *headerImageView;
 
 @property(nonatomic,strong) UILabel *nameLabel;
 
 @end
-
 
 @implementation MyApplyCollectionView
 

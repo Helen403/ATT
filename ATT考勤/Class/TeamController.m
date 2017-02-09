@@ -10,6 +10,8 @@
 #import "TeamViewModel.h"
 #import "TeamView.h"
 
+#import "TeamListController.h"
+
 
 @interface TeamController ()
 
@@ -23,12 +25,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
 }
 
 #pragma mark system
 -(void)updateViewConstraints{
-
+    
     WS(weakSelf);
     [self.teamView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf.view);
@@ -43,12 +45,20 @@
 }
 
 -(void)h_addSubviews{
-
+    
     [self.view addSubview:self.teamView];
 }
 
 -(void)h_bindViewModel{
+    [[self.teamViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        TeamListController *teamList = [[TeamListController alloc] init];
+        
+        [self.navigationController pushViewController:teamList animated:NO];
 
+    }];
+    
+    
 }
 
 #pragma mark lazyload

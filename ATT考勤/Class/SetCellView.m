@@ -21,9 +21,9 @@
 
 @property(nonatomic,strong) UILabel *numbel;
 
+@property(nonatomic,strong) UIImageView *security;
+
 @end
-
-
 
 @implementation SetCellView
 
@@ -43,7 +43,7 @@
     
     [self.back mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.right.equalTo(-[self h_w:10]);
+        make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
     
     
@@ -53,9 +53,14 @@
     }];
   
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.mas_bottom).offset([self h_w:1]);
+        make.bottom.equalTo(weakSelf.mas_bottom);
         make.left.equalTo(weakSelf);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
+    }];
+    
+    [self.security mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.centerY.equalTo(weakSelf);
+        make.left.equalTo(weakSelf.title.mas_right).offset([self h_w:10]);
     }];
     
     [super updateConstraints];
@@ -69,6 +74,7 @@
     [self addSubview:self.back];
     [self addSubview:self.line];
     [self addSubview:self.numbel];
+    [self addSubview:self.security];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -84,8 +90,6 @@
     self.img.image = ImageNamed(setModel.icon);
     self.title.text = setModel.title;
     self.numbel.text = setModel.number;
-    
-    
 
 }
 
@@ -135,7 +139,19 @@
         _numbel.text = @"版本号1.0";
     }
     return _numbel;
+}
 
+-(UIImageView *)security{
+    if (!_security) {
+        _security = [[UIImageView alloc] init];
+        _security.image = ImageNamed(@"Login_password_picture");
+        _security.hidden = YES;
+    }
+    return _security;
+}
+
+-(void)setImgHidden:(Boolean)flag{
+    self.security.hidden = flag;
 }
 
 @end

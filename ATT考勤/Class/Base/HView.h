@@ -12,8 +12,15 @@
 
 @interface HView : UIView <HViewProtocol>
 
+@property(nonatomic,strong) UIView *rippleView;
+
+@property(nonatomic,strong) UIView *tmpView;
+
 -(NSInteger)h_w:(NSInteger)width;
 
 //Toast
 -(void)toast:(NSString *)text;
+
+
+-(void)addDynamic:(UIView *)tmpView;
 @end

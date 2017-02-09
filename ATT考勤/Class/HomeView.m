@@ -57,10 +57,8 @@
 
 @property(nonatomic,assign) CGFloat width;
 
-
 @property(nonatomic,strong) UIScrollView *scrollView;
 
-@property(nonatomic,strong) UIView *RippleView;
 
 
 @end
@@ -69,50 +67,15 @@
 
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
     
-    
-//    self.RippleView = [[UIView alloc] initWithFrame:(CGRect){0,0,300,300}];
-//    self.RippleView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-//    self.RippleView.layer.cornerRadius = 150;
-//    self.RippleView.layer.masksToBounds=true;
-//    self.RippleView.alpha=0;
-    
-    
     self.homeViewModel = (HomeViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
-
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-//    [super touchesBegan:touches withEvent:event];
-//    UITouch *touch = [touches anyObject];
-//    CGPoint location = [touch locationInView:self];
-//    NSLog(@"asdd");
-//    [self.scrollView addSubview:self.RippleView];
-//    self.RippleView.center = location;
-//    self.RippleView.transform = CGAffineTransformMakeScale(0.5, 0.5);
-//    [UIView animateWithDuration:0.1
-//                     animations:^{
-//                         self.RippleView.alpha=1;
-//                         self.view.alpha=0.3;
-//                     }];
-//    [UIView animateWithDuration:0.7
-//                          delay:0
-//                        options:UIViewAnimationOptionCurveEaseInOut
-//                     animations:^{
-//                         self.RippleView.transform = CGAffineTransformMakeScale(1,1);
-//                         self.RippleView.alpha=0;
-//                         self.view.alpha=1;
-//                     } completion:^(BOOL finished) {
-//                         
-//                         [self.RippleView removeFromSuperview];
-//                     }];
-//}
-//
 
 #pragma mark system
 -(void)updateConstraints{
     
     WS(weakSelf);
- 
+    
     CGFloat paddingleft = SCREEN_WIDTH*0.1;
     
     CGFloat length = SCREEN_WIDTH*0.7;
@@ -183,7 +146,7 @@
         make.left.right.bottom.equalTo(weakSelf);
         
     }];
-    
+
     [self.punch mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.view.mas_top).offset([self h_w:15]);
         make.size.equalTo(CGSizeMake(length, length+[self h_w:15]));
@@ -195,11 +158,12 @@
         make.centerX.equalTo(weakSelf.punch);
     }];
     
+   CGSize size = [LSCoreToolCenter getSizeWithText:@"08:49:07" fontSize:42];
     
+    CGFloat leftPadding = (SCREEN_WIDTH -size.width*2)*0.5;
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.week.mas_bottom).offset([self h_w:30]);
-        
-        make.centerX.equalTo(weakSelf);
+        make.left.equalTo(leftPadding);
     }];
     
     
@@ -211,7 +175,7 @@
     [self.netStatusImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.time.mas_left);
         make.top.equalTo(weakSelf.punch.mas_bottom).offset([self h_w:20]);
-         make.size.equalTo(CGSizeMake([self h_w:35], [self h_w:35]));
+        make.size.equalTo(CGSizeMake([self h_w:35], [self h_w:35]));
     }];
     
     [self.netStatusText mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -220,7 +184,7 @@
         make.centerY.equalTo(weakSelf.netStatusImg);
     }];
     
-
+    
     [self.scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(weakSelf.netStatusText.mas_bottom).offset(20);
     }];
@@ -264,8 +228,9 @@
     
     //设置时间
     [self setTime];
-    
+     [self addDynamic:self];
 }
+
 
 -(void)setTime{
     //设置星期几
@@ -301,6 +266,8 @@
     //
     //    //网络请求打卡
     //    [self AttendCard];
+     NSString *timetmp = [self.formatter stringFromDate:[NSDate date]];
+    self.preText.text = timetmp;
     //
 }
 
@@ -454,8 +421,7 @@
         _time.text = @"14:50:55";
         _time.font = HB42;
         _time.textColor = RGBCOLOR(80, 80, 80);
-        
-        self.width = (SCREEN_WIDTH- [LSCoreToolCenter getSizeWithText:@"14:50:55" fontSize:42].width)*0.5;
+
     }
     return _time;
 }
@@ -490,9 +456,12 @@
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
+       
         
     }
     return _scrollView;
 }
+
+
 
 @end

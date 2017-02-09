@@ -124,8 +124,7 @@
         _content.font = H18;
         _content.textColor = MAIN_PAN_2;
         //自动折行设置
-        _content.lineBreakMode = UILineBreakModeWordWrap;
-        
+         [_content setLineBreakMode:NSLineBreakByWordWrapping];
         _content.numberOfLines = 0;
     }
     return _content;

@@ -45,7 +45,7 @@
 -(void)h_setupViews{
     
     
-    self.backgroundColor = white_color;
+    self.backgroundColor = [UIColor clearColor];
     [self addSubview:self.img];
     [self addSubview:self.title];
     [self addSubview:self.back];

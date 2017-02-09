@@ -128,6 +128,12 @@
     SetCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([SetCellView class])] forIndexPath:indexPath];
     
     cell.setModel = self.setViewModel.arr[indexPath.row];
+    if (indexPath.row == 0) {
+        [cell setImgHidden:NO];
+    }else{
+       [cell setImgHidden:YES];
+    }
+    
     
     return cell;
 }

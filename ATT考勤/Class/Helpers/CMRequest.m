@@ -108,4 +108,68 @@
     [self.operationQueue cancelAllOperations];
 }
 
+
+//SOAP请求
+-(void)SOAPData:(NSString *)url soapBody:(NSString *)soapBody targetNamespace:(NSString *)TargetNamespace  success:(void (^)(NSString *result))success failure:(void(^)(NSError *error))failure {
+    
+//    NSString *soapStr = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+//                         <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\
+//                         xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+//                         xmlns:xnl=\"%@\">\
+//                         <soap:Header>\
+//                         </soap:Header>\
+//                         <soap:Body>%@</soap:Body>\
+//                         </soap:Envelope>",TargetNamespace,soapBody];
+    
+    NSString *soapStr = @"<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+    <soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\
+    <soap:Body>\
+    <findUserByTelphone xmlns=\"http://service.webservice.vada.com/\">\
+    <telphone xmlns=\"\">13549880208</telphone>\
+    </findUserByTelphone>\
+    </soap:Body>\
+    </soap:Envelope>";
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+    
+    // 设置请求超时时间
+    manager.requestSerializer.timeoutInterval = 30;
+    
+    // 返回NSData
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    // 设置请求头，也可以不设置
+    [manager.requestSerializer setValue:@"application/soap+xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%zd", soapStr.length] forHTTPHeaderField:@"Content-Length"];
+    
+    // 设置HTTPBody
+    [manager.requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, NSDictionary *parameters, NSError *__autoreleasing *error) {
+        return soapStr;
+    }];
+    
+    [manager POST:url parameters:soapStr constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 把返回的二进制数据转为字符串
+        NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        success(result);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+    
+    //    [manager POST:url parameters:soapStr success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    //
+    //
+    //    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    //
+    //    }];
+}
+
+
 @end

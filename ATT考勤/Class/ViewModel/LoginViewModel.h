@@ -19,7 +19,6 @@
 @property(nonatomic,strong) NSString *pwd;
 
 
-
 @property(nonatomic,strong) RACSubject *forgetclickSubject;
 
 @property(nonatomic,strong) RACSubject *newpartclickSubject;

@@ -20,6 +20,8 @@
 
 @property(nonatomic,strong) UILabel *title;
 
+@property(nonatomic,strong) UIImageView *bg;
+
 @end
 
 @implementation MultiRolesView
@@ -52,12 +54,17 @@
         make.bottom.equalTo(0);
     }];
     
+    [self.bg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf);
+    }];
+    
     [super updateConstraints];
 }
 
 #pragma mark private
 -(void)h_setupViews{
-    
+
+    [self addSubview:self.bg];
     [self addSubview:self.icon];
     [self addSubview:self.title];
     
@@ -66,6 +73,12 @@
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
+
+-(void)h_bindViewModel{
+
+}
+
+
 
 #pragma mark lazyload
 -(MultiRolesViewModel *)multiRolesViewModel{
@@ -99,9 +112,10 @@
         _tableView = [[UITableView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = GX_BGCOLOR;
+        _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MultiRolesCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([MultiRolesCellView class])]];
+        _tableView.scrollEnabled = NO;
         
     }
     return _tableView;
@@ -140,6 +154,14 @@
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.multiRolesViewModel.cellclickSubject sendNext:row];
+}
+
+-(UIImageView *)bg{
+    if (!_bg) {
+        _bg = [[UIImageView alloc] init];
+        _bg.image = ImageNamed(@"bg_3");
+    }
+    return _bg;
 }
 
 

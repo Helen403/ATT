@@ -13,4 +13,6 @@
 
 @property(nonatomic,strong) SetModel *setModel;
 
+-(void)setImgHidden:(Boolean)flag;
+
 @end

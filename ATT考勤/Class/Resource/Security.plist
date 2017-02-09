@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>更换手机号</string>
+		<key>content</key>
+		<string>13387979971</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>修改密码</string>
+		<key>content</key>
+		<string></string>
+	</dict>
+</array>
+</plist>
