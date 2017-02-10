@@ -16,6 +16,7 @@
 
 #import "MultiRolesController.h"
 
+
 @interface LoginViewController ()
 
 @property(nonatomic,strong) LoginView *loginView;
@@ -39,8 +40,6 @@
     [super viewWillDisappear:animated];
 }
 
-
-
 - (void)updateViewConstraints {
     
     WS(weakSelf)
@@ -53,27 +52,24 @@
 
 #pragma mark -private
 -(void)h_layoutNavigation{
-  
+
 }
 
 -(void)h_addSubviews{
     [self.view addSubview:self.loginView];
 }
 
+-(void)loginClick{
+    MultiRolesController *multiRoles = [[MultiRolesController alloc] init];
+    [self.navigationController pushViewController:multiRoles animated:NO];
+}
+
 -(void)h_bindViewModel{
     
     //点击登陆
     [self.loginViewModel.loginclickSubject subscribeNext:^(id x) {
-        MultiRolesController *multiRoles = [[MultiRolesController alloc] init];
-        [self.navigationController pushViewController:multiRoles animated:NO];
-//        switch ([x integerValue]) {
-//            case HSuccess:
-//                [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
-//                break;
-//                
-//            case HFailure:
-//                break;
-//        }
+ 
+        [self performSelectorOnMainThread:@selector(loginClick) withObject:nil waitUntilDone:YES];
     }];
     
     
@@ -84,7 +80,7 @@
         
         @strongify(self);
         ForgetController *forgetController = [[ForgetController alloc] init];
-
+        
         
         [self.navigationController pushViewController:forgetController animated:YES];
         
@@ -92,7 +88,7 @@
     
     //创建新角色
     [[self.loginViewModel.newpartclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-    
+        
         NewpartViewController *newpartController = [[NewpartViewController alloc] init];
         
         [self.navigationController pushViewController:newpartController animated:YES];
@@ -121,7 +117,6 @@
 
 #pragma mark lazyload
 -(LoginView *)loginView{
-    
     if (!_loginView) {
         _loginView = [[LoginView alloc] initWithViewModel:self.loginViewModel];
     }
@@ -135,12 +130,6 @@
     }
     return _loginViewModel;
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 
 
 @end

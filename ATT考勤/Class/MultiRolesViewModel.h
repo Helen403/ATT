@@ -14,4 +14,10 @@
 
 @property(nonatomic,strong) RACSubject *cellclickSubject;
 
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+@property(nonatomic,strong) RACSubject *backSubject;
+
+@property(nonatomic,strong) NSString *userCode;
+
 @end

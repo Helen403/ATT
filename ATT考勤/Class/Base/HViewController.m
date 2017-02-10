@@ -8,7 +8,6 @@
 
 #import "HViewController.h"
 
-
 @interface HViewController ()
 
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
@@ -159,11 +158,11 @@
     
     if (animated) {
         [UIView animateWithDuration:0.25 animations:^{
-            self.navigationController.navigationBarHidden=isHide;
+            self.navigationController.navigationBarHidden = isHide;
         }];
     }
     else{
-        self.navigationController.navigationBarHidden=isHide;
+        self.navigationController.navigationBarHidden = isHide;
     }
 }
 
@@ -193,13 +192,6 @@
     }
 }
 
-
-
-
-
-
-
-
 #pragma mark - 屏幕旋转
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     
@@ -207,7 +199,6 @@
 }
 
 - (BOOL)shouldAutorotate {
-    
     return NO;
 }
 
@@ -251,6 +242,10 @@
     return autoScaleW(width);
 }
 
-
+-(void)hideNav{
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+}
 
 @end

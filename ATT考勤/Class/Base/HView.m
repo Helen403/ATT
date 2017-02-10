@@ -86,6 +86,8 @@
 -(void)onClick:(UITapGestureRecognizer *)sender{
     CGPoint point = [sender locationInView:self.tmpView];
     
+    [self.tmpView endEditing:YES];
+    
     [self.tmpView addSubview:self.rippleView];
     self.rippleView.center = point;
     self.rippleView.transform = CGAffineTransformMakeScale(0.5, 0.5);

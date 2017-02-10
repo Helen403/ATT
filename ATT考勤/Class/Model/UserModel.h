@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface UserModel :NSObject
+@interface UserModel :NSObject<NSCoding>
 @property (nonatomic , copy) NSString              * userNickName;
 @property (nonatomic , copy) NSString              * userExpireDatetime;
 @property (nonatomic , copy) NSString              * userRealName;

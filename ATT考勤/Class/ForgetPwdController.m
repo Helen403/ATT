@@ -56,17 +56,14 @@
 -(void)h_bindViewModel{
 
     [[self.forgetPwdViewModel.finishclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-        
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        
-       
+
+          [self performSelectorOnMainThread:@selector(pop) withObject:nil waitUntilDone:YES];
     }];
 
 }
+-(void)pop{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    
 }
 
 

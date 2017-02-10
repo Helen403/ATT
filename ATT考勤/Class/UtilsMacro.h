@@ -39,7 +39,7 @@
 //定义UIImage对象
 //#define IMAGE(A) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:A ofType:nil]]
 #define ImageNamed(name) [UIImage imageNamed:name]
-
+#define ImageNamedBg [UIImage imageNamed:  [NSString stringWithFormat:@"bg_%u",arc4random_uniform(20)+1]]
 // 每次请求列表 数据量
 #define LS_REQUEST_LIST_COUNT @"10"
 #define LS_REQUEST_LIST_NUM_COUNT 10

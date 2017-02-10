@@ -25,8 +25,7 @@
 #define SEEKPLISTTHING(KEY)     [[NSUserDefaults standardUserDefaults]objectForKey:KEY]
 #define DEPOSITLISTTHING(VALUE,KEY)  [[NSUserDefaults standardUserDefaults] setObject:VALUE forKey:KEY]
 
-#define GA_SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
-#define GA_SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
+
 
 #pragma mark - 方正黑体简体字体定义
 #define FONT(F)                [UIFont fontWithName:@"FZHTJW--GB1-0" size:F]

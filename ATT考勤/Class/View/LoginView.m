@@ -9,7 +9,7 @@
 #import "LoginView.h"
 #import "LoginViewModel.h"
 
-@interface LoginView()
+@interface LoginView()<UITextFieldDelegate>
 
 @property(nonatomic,strong) LoginViewModel *loginViewModel;
 
@@ -173,6 +173,7 @@
 
 #pragma mark private
 -(void)h_setupViews{
+   
     self.backgroundColor = white_color;
     
     [self addSubview:self.bg];
@@ -199,6 +200,21 @@
 
 -(void)h_bindViewModel{
     [self addDynamic:self];
+    //密码错误
+  
+    [[self.loginViewModel.loginclickFail takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+      
+        [self performSelectorOnMainThread:@selector(failClick) withObject:nil waitUntilDone:YES];
+    }];
+}
+
+-(void)failClick{
+  
+    self.pwdTextField.text = @"";
+    self.login.enabled = YES;
+    self.login.backgroundColor = MAIN_ORANGER;
+    [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
+    [self toast:@"密码错误"];
 }
 
 #pragma mark lazyload
@@ -247,20 +263,50 @@
         _useTextField.font = H14;
         // 设置右边永远显示清除按钮
         _useTextField.clearButtonMode = UITextFieldViewModeAlways;
-        
+        //_useTextField.delegate = self;//设置代理
+        _useTextField.keyboardType = UIKeyboardTypePhonePad;
         // 5.监听文本框的文字改变
         [_useTextField.rac_textSignal subscribeNext:^(id x) {
-            if (_useTextField.text.length>0) {
+//            if(_useTextField.text.length == 11){
+//               [self.pwdTextField becomeFirstResponder];
+//            }
+            
+            if (_useTextField.text.length>10) {
                 self.login.enabled = YES;
                 self.login.backgroundColor = MAIN_ORANGER;
+                
+                [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
             }else{
                 self.login.enabled = NO;
                 self.login.backgroundColor = MAIN_GRAY;
+                
+                [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
             }
         }];
-        
+   
     }
     return _useTextField;
+}
+
+
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//    return [self validateNumber:string];
+//}
+
+- (BOOL)validateNumber:(NSString*)number {
+    BOOL res = YES;
+    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    int i = 0;
+    while (i < number.length) {
+        NSString * string = [number substringWithRange:NSMakeRange(i, 1)];
+        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+        if (range.length == 0) {
+            res = NO;
+            break;
+        }
+        i++;
+    }
+    return res;
 }
 
 -(UIView *)line1{
@@ -302,16 +348,17 @@
         // 设置右边永远显示清除按钮
         //        _pwdTextField.clearButtonMode = UITextFieldViewModeAlways;
         _pwdTextField.secureTextEntry = YES;
-        //        _pwdTextField.delegate = self;
-        
-        //
+        _pwdTextField.delegate = self;//设置代理
     }
     return _pwdTextField;
     
 }
 
-
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+ 
+    [self loginClick];
+    return YES;
+}
 
 
 -(UIButton *)login{
@@ -319,7 +366,7 @@
         _login = [[UIButton alloc] init];
         [_login setTitle:@"登   陆" forState:UIControlStateNormal];
         _login.titleLabel.font = H22;
-        [_login addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+        [_login addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
         
         [_login.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
         
@@ -328,28 +375,31 @@
         [_login.layer setBorderWidth:2];//设置边界的宽度
         
         [_login setBackgroundColor:MAIN_ORANGER];
-        //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
         
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
         
-        [_login.layer setBorderColor:color];
+        [_login.layer setBorderColor:MAIN_ORANGER.CGColor];
         
     }
     
     return _login;
 }
 
--(void)login:(UIButton *)button{
-    
-    if (self.useTextField.text.length>10&&self.pwdTextField.text.length>0){
+-(void)loginClick{
+
+    if ([NSString isVaildTelphoneFroString:self.useTextField.text]&&self.pwdTextField.text.length>0) {
         //点击后不然再点击
         self.loginViewModel.user = self.useTextField.text;
         self.loginViewModel.pwd = self.pwdTextField.text;
         //登陆成功后发送按钮
         [self.loginViewModel.loginclickCommand execute:nil];
+        self.login.enabled = NO;
+        self.login.backgroundColor = MAIN_GRAY;
+        
+        [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
+        [self endEditing:YES];
+    }else{
+        [self toast:@"请输入正确的手机号或者密码"];
     }
-    
 }
 
 
@@ -433,7 +483,6 @@
 }
 
 -(void)weixinClick{
-    
     [self.loginViewModel.weixinclickSubject sendNext:nil];
 }
 
@@ -451,7 +500,6 @@
 
 
 -(void)QQclick{
-    
     [self.loginViewModel.qqclickSubject sendNext:nil];
 }
 
@@ -507,7 +555,8 @@
 -(UIImageView *)bg{
     if (!_bg) {
         _bg = [[UIImageView alloc] init];
-        _bg.image = ImageNamed(@"bg_2");
+        _bg.image = ImageNamedBg;
+      
     }
     return _bg;
 }

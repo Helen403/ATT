@@ -31,6 +31,8 @@
 
 @property(nonatomic,strong) UIButton *next;
 
+@property(nonatomic,strong) NSString *backNumber;
+
 @end
 
 @implementation ForgetView
@@ -49,7 +51,7 @@
     CGFloat leftPadding =(SCREEN_WIDTH-SCREEN_WIDTH*0.8)*0.5;
     CGFloat topPadding = SCREEN_HEIGHT *0.1;
     CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
-
+   
     [self.useImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topPadding);
         make.left.equalTo(leftPadding);
@@ -58,7 +60,7 @@
     [self.useText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.useImg);
         make.left.equalTo(weakSelf.useImg.mas_right).offset([self h_w:10]);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, [self h_w:30]));
+        make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
     
     
@@ -130,6 +132,13 @@
 
 -(void)h_bindViewModel{
      [self addDynamic:self];
+    
+    //请求返回回来的验证码
+    [[self.forgetViewModel.SMSbackSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        
+        self.backNumber = x;
+
+    }];
 }
 
 
@@ -172,6 +181,36 @@
         // 设置右边永远显示清除按钮
         _useText.clearButtonMode = UITextFieldViewModeAlways;
         
+        // 5.监听文本框的文字改变
+        [_useText.rac_textSignal subscribeNext:^(id x) {
+   
+            
+            if (_useText.text.length>10) {
+                self.next.enabled = YES;
+                self.next.backgroundColor = MAIN_ORANGER;
+                
+                [self.next.layer setBorderColor:MAIN_ORANGER.CGColor];
+                
+                
+                self.countDown.enabled = YES;
+                
+                [self.countDown setBackgroundColor:MAIN_ORANGER];
+                
+                [self.countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
+            }else{
+                self.next.enabled = NO;
+                self.next.backgroundColor = MAIN_GRAY;
+                
+                [self.next.layer setBorderColor:MAIN_GRAY.CGColor];
+                
+                self.countDown.enabled = NO;
+                
+                [self.countDown setBackgroundColor:MAIN_GRAY];
+                
+                [self.countDown.layer setBorderColor:MAIN_GRAY.CGColor];
+            }
+        }];
+        
     }
     return _useText;
 }
@@ -190,7 +229,7 @@
         _hintText = [[UILabel alloc] init];
         _hintText.font = H14;
         _hintText.text = @"验证码30分钟内有效";
-        _hintText.textColor = RGBCOLOR(199, 199, 199);
+        _hintText.textColor = MAIN_GRAY;
     }
     return _hintText;
 }
@@ -201,7 +240,7 @@
         
         _countDown.titleLabel.textColor = white_color;
         
-        [_countDown setTitle:@"  获取验证码  " forState:UIControlStateNormal];
+        [_countDown setTitle:@" 验证码 " forState:UIControlStateNormal];
         _countDown.userInteractionEnabled = YES;
         _countDown.titleLabel.font = H14;
         [_countDown addTarget:self action:@selector(startTime:) forControlEvents:UIControlEventTouchUpInside];
@@ -210,15 +249,11 @@
         
         [_countDown.layer setCornerRadius:10];
         
-        [_countDown.layer setBorderWidth:2];//设置边界的宽度
+        [_countDown.layer setBorderWidth:6];//设置边界的宽度
         
         [_countDown setBackgroundColor:MAIN_ORANGER];
-        //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-        
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
-        
-        [_countDown.layer setBorderColor:color];
+
+        [_countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     
     return _countDown;
@@ -227,6 +262,13 @@
 
 -(void)startTime:(UIButton *)button{
   
+    if (![self.useText.text isVaildTelphone]) {
+        [self toast:@"请输入正确的手机号"];
+        return;
+    }
+    
+     self.forgetViewModel.user = self.useText.text;
+    [self.forgetViewModel.sendclickCommand execute:nil];
     
     __block int timeout = 30; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -237,8 +279,11 @@
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                [button setTitle:@"发送验证码" forState:UIControlStateNormal];
+                [button setTitle:@" 验证码 " forState:UIControlStateNormal];
                 button.userInteractionEnabled = YES;
+                [button setBackgroundColor:MAIN_ORANGER];
+                
+                [button.layer setBorderColor:MAIN_ORANGER.CGColor];
             });
         }else{
             int seconds = timeout % 60;
@@ -248,8 +293,11 @@
                 //                NSLog(@"____%@",strTime);
                 [UIView beginAnimations:nil context:nil];
                 [UIView setAnimationDuration:1];
-                [button setTitle:[NSString stringWithFormat:@"%@秒后重新发送",strTime] forState:UIControlStateNormal];
+                [button setTitle:[NSString stringWithFormat:@" %@秒后 ",strTime] forState:UIControlStateNormal];
                 [UIView commitAnimations];
+                [button setBackgroundColor:MAIN_GRAY];
+                
+                [button.layer setBorderColor:MAIN_GRAY.CGColor];
                 button.userInteractionEnabled = NO;
             });
             timeout--;
@@ -316,11 +364,8 @@
         
         [_next setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-        
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
-        
-        [_next.layer setBorderColor:color];
+
+        [_next.layer setBorderColor:MAIN_ORANGER.CGColor];
         
     }
     return _next;
@@ -328,8 +373,9 @@
 }
 
 -(void)next:(UIButton *)button{
-    [self.forgetViewModel.forgetPwdclickSubject sendNext:nil];
-    
+    if ([self.validateText.text isEqualToString:self.backNumber]) {
+        [self.forgetViewModel.forgetPwdclickSubject sendNext:nil];
+    }
 }
 
 

@@ -10,11 +10,67 @@
 
 @implementation ForgetPwdViewModel
 
+#pragma mark private
+-(void)h_initialize{
+    
+    
+    [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        
+        NSString *xmlDoc = [self getFilterOneStr:result filter:@"Boolean"];
+        if ([xmlDoc isEqualToString:@"true"]) {
+            [self.finishclickSubject sendNext:nil];
+        }else{
+        
+        }
+        
+        DismissHud();
+    }];
+    
+    
+    [[[self.sendclickCommand.executing skip:1] take:1] subscribeNext:^(id x) {
+        
+        if ([x isEqualToNumber:@(YES)]) {
+            ShowMaskStatus(@"正在拼命加载");
+        }
+    }];
+    
+}
+
 -(RACSubject *)finishclickSubject{
     if (!_finishclickSubject) {
         _finishclickSubject = [RACSubject subject];
     }
     return _finishclickSubject;
-
+    
 }
+
+#pragma mark lazyload
+-(RACCommand *)sendclickCommand{
+    if (!_sendclickCommand) {
+        
+        _sendclickCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                NSString *body =[NSString stringWithFormat: @"<modifyUserPwd xmlns=\"http://service.webservice.vada.com/\">\
+                                 <telphone xmlns=\"\">%@</telphone>\
+                                 <newPassword xmlns=\"\">%@</newPassword>\
+                                 </modifyUserPwd>",self.telphone,self.pwd];
+                
+                [self SOAPData:Forget_Modify soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    [self toast:@"请检查网络状态"];
+                    DismissHud();
+                }];
+                return nil;
+            }];
+        }];
+        
+    }
+    return _sendclickCommand;
+}
+
 @end

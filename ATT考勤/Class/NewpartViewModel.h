@@ -12,5 +12,10 @@
 
 @property(nonatomic,strong) RACSubject *createclickSubject;
 
+@property (nonatomic, strong) RACCommand *sendclickCommand;
+
+@property(nonatomic,strong) NSString *user;
+
+@property(nonatomic,strong) RACSubject *SMSbackSubject;
 
 @end

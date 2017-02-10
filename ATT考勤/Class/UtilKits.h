@@ -28,7 +28,7 @@
 #import <Masonry/Masonry.h>
 //#import <IQKeyboardManager/IQKeyboardManager.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
-//#import "JKCategories.h"
+#import "Categories.h"
 
 
 

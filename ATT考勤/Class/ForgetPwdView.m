@@ -8,6 +8,7 @@
 
 #import "ForgetPwdView.h"
 #import "ForgetPwdViewModel.h"
+#import "UserModel.h"
 
 @interface ForgetPwdView()
 
@@ -45,20 +46,20 @@
     WS(weakSelf);
     CGFloat leftPadding =(SCREEN_WIDTH-SCREEN_WIDTH*0.8)*0.5;
     CGFloat topPadding = SCREEN_HEIGHT *0.1;
-    
+
+    CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
     
     [self.forgetPwdImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topPadding);
         make.left.equalTo(leftPadding);
         
-        
     }];
-    
     [self.forgetPwdTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.forgetPwdImg);
         make.left.equalTo(weakSelf.forgetPwdImg.mas_right).offset([self h_w:10]);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, [self h_w:30]));
+        make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
+
     
     [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding);
@@ -76,6 +77,7 @@
     [self.sureForgetPwdTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.sureForgetPwdImg);
         make.left.equalTo(weakSelf.sureForgetPwdImg.mas_right).offset([self h_w:10]);
+        make.size.equalTo(CGSizeMake(length, [self h_w:30])); 
     }];
     
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -113,10 +115,8 @@
 }
 
 -(void)h_bindViewModel{
-     [self addDynamic:self];
+    [self addDynamic:self];
 }
-
-
 
 #pragma mark lazyload
 -(ForgetPwdViewModel *)forgetPwdViewModel{
@@ -124,7 +124,6 @@
         _forgetPwdViewModel = [[ForgetPwdViewModel alloc] init];
     }
     return _forgetPwdViewModel;
-    
 }
 
 
@@ -236,11 +235,9 @@
         
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
         
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
         
-        [_finish.layer setBorderColor:color];
+        [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _finish;
     
@@ -248,8 +245,12 @@
 
 -(void)finish:(UIButton *)button{
     
-    [self.forgetPwdViewModel.finishclickSubject sendNext:nil];
-    
+    if ([self.forgetPwdTextField.text isEqualToString:self.sureForgetPwdTextField.text]) {
+        self.forgetPwdViewModel.pwd = self.forgetPwdTextField.text;
+        UserModel *user = getModel(@"user");
+        self.forgetPwdViewModel.telphone = user.userTelphone;
+        [self.forgetPwdViewModel.sendclickCommand execute:nil];
+    }
 }
 
 @end

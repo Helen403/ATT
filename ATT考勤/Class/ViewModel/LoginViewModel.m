@@ -23,14 +23,19 @@
     @weakify(self);
     [self.loginclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
 
-       NSDictionary *xmlDoc = [self getFilter:result filter:@"Users"];
-       UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
-        NSLog(@"asd");
+       NSDictionary *xmlDoc = [self getFilter:result filter:@"User"];
+      
+        UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
+        NSString *password = [self.pwd md5String];
+       
         @strongify(self);
-        if ([self.user isEqualToString:@"123"]&&[self.pwd isEqualToString:@"123"]) {
-            [self.loginclickSubject sendNext:@(HSuccess)];
+        if ([self.user isEqualToString:model.userTelphone]&&[password isEqualToString:model.userPassword]) {
+            //存储对象
+            saveModel(model, @"user");
+
+            [self.loginclickSubject sendNext:nil];
         }else{
-            [self.loginclickSubject sendNext:@(HFailure)];
+            [self.loginclickFail sendNext:nil];
         }
         DismissHud();
     }];
@@ -39,27 +44,10 @@
     [[[self.loginclickCommand.executing skip:1] take:1] subscribeNext:^(id x) {
         
         if ([x isEqualToNumber:@(YES)]) {
-            
-            ShowMaskStatus(@"正在加载");
+            ShowMaskStatus(@"正在拼命加载");
         }
     }];
     
-}
-
-
--(NSDictionary *)getFilter:(NSString *)result filter:(NSString *)filter{
- 
-    NSString *str1 = [NSString stringWithFormat:@"<%@>",filter];
-    NSRange range1 = [result rangeOfString:str1];//匹配得到的下标
-    NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
-    NSRange range2 = [result rangeOfString:str2];//匹配得到的下标
-    
-    result = [result substringToIndex:range2.location+range2.length];
-    result = [result substringFromIndex:range1.location];
-    
-    NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLString:result];
-
-    return xmlDoc;
 }
 
 #pragma mark lazyload
@@ -70,16 +58,17 @@
             
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                 
-                NSString *body =[NSString stringWithFormat: @"<findUserByUserTelphone xmlns=\"http://service.security.vada.com/\">\
-                <userTelphone xmlns=\"\">%@</userTelphone>\
-                </findUserByUserTelphone>",self.user];
+                NSString *body =[NSString stringWithFormat: @"<findUserByTelphone xmlns=\"http://service.webservice.vada.com/\">\
+                <telphone xmlns=\"\">%@</telphone>\
+                </findUserByTelphone>",self.user];
                 
                 [self SOAPData:Login soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                    NSLog(@"%@",error);
+                    [self toast:@"请检查网络状态"];
+                    DismissHud();
                 }];
                 return nil;
             }];
@@ -94,6 +83,13 @@
         _loginclickSubject = [RACSubject subject];
     }
     return _loginclickSubject;
+}
+
+-(RACSubject *)loginclickFail{
+    if (!_loginclickFail) {
+        _loginclickFail = [RACSubject subject];
+    }
+    return _loginclickFail;
 }
 
 -(RACSubject *)forgetclickSubject{

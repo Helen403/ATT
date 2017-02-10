@@ -10,4 +10,6 @@
 
 @implementation UserModel
 
+MJCodingImplementation
+
 @end

@@ -149,8 +149,6 @@
     [self addDynamic:self];
 }
 
-
-
 #pragma mark lazyload
 -(CreateViewModel *)createViewModel{
     if (!_createViewModel) {

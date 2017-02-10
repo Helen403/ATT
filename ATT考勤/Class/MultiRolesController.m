@@ -40,6 +40,7 @@
 #pragma mark private
 -(void)h_layoutNavigation{
     self.title = @"切换角色";
+    self.navigationItem.hidesBackButton = YES;
 }
 
 
@@ -49,15 +50,13 @@
 
 -(void)h_bindViewModel{
     [[self.multiRolesViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-        
-        //        ApplicationController *application = [[ApplicationController alloc] init];
-        //
-        //        [self.navigationController pushViewController:application animated:NO];
-        [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
-        
-        
-        NSLog(@"%@",x);
+
+        [self performSelectorOnMainThread:@selector(mainClick) withObject:nil waitUntilDone:YES];
     }];
+}
+
+-(void)mainClick{
+   [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
 }
 
 #pragma mark lazyload

@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    
 }
 
 #pragma mark system
@@ -35,7 +35,7 @@
     [self.newpartView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf.view);
     }];
-
+    
     [super updateViewConstraints];
 }
 
@@ -46,17 +46,23 @@
 }
 
 -(void)h_addSubviews{
-
+    
     [self.view addSubview:self.newpartView];
 }
 
 -(void)h_bindViewModel{
     [[self.newpartViewModel.createclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
         
-        CreateController *create = [[CreateController alloc] init];
+        [self performSelectorOnMainThread:@selector(push) withObject:nil waitUntilDone:YES];
         
-        [self.navigationController pushViewController:create animated:YES];
     }];
+}
+
+-(void)push{
+    CreateController *create = [[CreateController alloc] init];
+    
+    [self.navigationController pushViewController:create animated:YES];
+    
 }
 
 
@@ -73,19 +79,8 @@
         _newpartViewModel = [[NewpartViewModel alloc] init];
     }
     return _newpartViewModel;
-
-}
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
     
 }
-
-
-
-
 
 
 @end

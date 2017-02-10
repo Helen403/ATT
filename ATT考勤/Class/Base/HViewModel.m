@@ -73,8 +73,10 @@
     
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSString *result = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
+        //        NSLog(@"%@",result);
         success(result);
-                       // NSLog(@"进入成功回调Session-----结果：%@----请求地址：%@", result, response.URL);
+        
+        // NSLog(@"进入成功回调Session-----结果：%@----请求地址：%@", result, response.URL);
         if (error) {
             //            NSLog(@"Session----失败----%@", error.localizedDescription);
             failure(error);
@@ -120,5 +122,77 @@
     
     
 }
+
+
+//Toast
+-(void)toast:(NSString *)text{
+    [Toast showWithText:text bottomOffset:60];
+}
+
+-(NSDictionary *)getFilter:(NSString *)result filter:(NSString *)filter{
+    
+    NSString *str1 = [NSString stringWithFormat:@"<%@>",filter];
+    NSRange range1 = [result rangeOfString:str1];//匹配得到的下标
+    NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
+    NSRange range2 = [result rangeOfString:str2];//匹配得到的下标
+    
+    result = [result substringToIndex:range2.location+range2.length];
+    result = [result substringFromIndex:range1.location];
+    
+    NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLString:result];
+    
+    return xmlDoc;
+}
+
+-(NSString *)getFilterStr:(NSString *)result filter:(NSString *)filter{
+    
+    NSString *str1 = [NSString stringWithFormat:@"<%@>",filter];
+    NSRange range1 = [result rangeOfString:str1];//匹配得到的下标
+    NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
+    NSRange range2 = [result rangeOfString:str2];//匹配得到的下标
+    
+    result = [result substringToIndex:range2.location];
+    result = [result substringFromIndex:range1.location+range1.length];
+    return result;
+}
+
+
+-(NSString *)getFilterOneStr:(NSString *)result filter:(NSString *)filter{
+    NSString *str1 = [NSString stringWithFormat:@"<%@>",filter];
+    NSRange range1 = [result rangeOfString:str1];//匹配得到的下标
+    NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
+    NSRange range2 = [result rangeOfString:str2];//匹配得到的下标
+    
+    result = [result substringToIndex:range2.location];
+    result = [result substringFromIndex:range1.location+range1.length];
+
+    return result;
+}
+
+-(NSString *)getFilterStr:(NSString *)result filter1:(NSString *)filter1 filter2:(NSString *)filter2{
+    
+    NSRange range1 = [result rangeOfString:filter1];//匹配得到的下标
+    NSRange range2 = [result rangeOfString:filter2];//匹配得到的下标
+    
+    result = [result substringToIndex:range2.location];
+    result = [result substringFromIndex:range1.location+range1.length];
+    return result;
+}
+
+
+-(NSDictionary *)getFilter:(NSString *)result filter1:(NSString *)filter1 filter2:(NSString *)filter2{
+    
+  
+    NSRange range1 = [result rangeOfString:filter1];//匹配得到的下标
+    NSRange range2 = [result rangeOfString:filter2];//匹配得到的下标
+    
+    result = [result substringToIndex:range2.location];
+    result = [result substringFromIndex:range1.location+range1.length];
+    
+    NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLString:result];
+    
+    return xmlDoc;
+}
+
 
 @end

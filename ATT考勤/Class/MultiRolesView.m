@@ -9,6 +9,8 @@
 #import "MultiRolesView.h"
 #import "MultiRolesViewModel.h"
 #import "MultiRolesCellView.h"
+#import "UserModel.h"
+
 
 @interface MultiRolesView()<UITableViewDataSource,UITableViewDelegate>
 
@@ -39,7 +41,7 @@
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
         make.top.equalTo([self h_w:10]);
-         make.size.equalTo(CGSizeMake([self h_w:85], [self h_w:85]));
+        make.size.equalTo(CGSizeMake([self h_w:85], [self h_w:85]));
     }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -49,6 +51,7 @@
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.icon.mas_bottom).offset([self h_w:10]);
+        //        make.top.equalTo(0);
         make.left.equalTo(0);
         make.right.equalTo(0);
         make.bottom.equalTo(0);
@@ -63,7 +66,7 @@
 
 #pragma mark private
 -(void)h_setupViews{
-
+    
     [self addSubview:self.bg];
     [self addSubview:self.icon];
     [self addSubview:self.title];
@@ -72,13 +75,23 @@
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
+    
+    UserModel *user = getModel(@"user");
+    self.multiRolesViewModel.userCode = user.userCode;
+    [self.multiRolesViewModel.refreshDataCommand execute:nil];
 }
 
 -(void)h_bindViewModel{
-
+    //网络数据返回
+    [[self.multiRolesViewModel.backSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        
+        [self performSelectorOnMainThread:@selector(reload) withObject:nil waitUntilDone:YES];
+    }];
 }
 
-
+-(void)reload{
+    [self.tableView reloadData];
+}
 
 #pragma mark lazyload
 -(MultiRolesViewModel *)multiRolesViewModel{
@@ -116,6 +129,12 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MultiRolesCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([MultiRolesCellView class])]];
         _tableView.scrollEnabled = NO;
+        
+        //        WS(weakSelf)
+        //        _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        //
+        //           // [weakSelf.multiRolesViewModel.refreshDataCommand execute:nil];
+        //        }];
         
     }
     return _tableView;
@@ -159,7 +178,7 @@
 -(UIImageView *)bg{
     if (!_bg) {
         _bg = [[UIImageView alloc] init];
-        _bg.image = ImageNamed(@"bg_3");
+        //        _bg.image = ImageNamedBg;
     }
     return _bg;
 }

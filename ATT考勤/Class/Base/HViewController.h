@@ -59,4 +59,7 @@
 
 -(NSInteger)h_w:(NSInteger)width;
 
+
+-(void)hideNav;
+
 @end

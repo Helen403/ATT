@@ -59,7 +59,7 @@
 
 @property(nonatomic,strong) UIScrollView *scrollView;
 
-
+@property(nonatomic,strong) UIImageView *bg;
 
 @end
 
@@ -190,10 +190,19 @@
     }];
     
     [super updateConstraints];
+    
+    [self.bg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(0);
+          make.left.equalTo(0);
+          make.right.equalTo(0);
+        
+    }];
 }
 
 #pragma mark private
 -(void)h_setupViews{
+    
+    [self.view addSubview:self.bg];
     [self addSubview:self.scrollView];
     
     [self.scrollView addSubview:self.title];
@@ -460,6 +469,14 @@
         
     }
     return _scrollView;
+}
+
+-(UIImageView *)bg{
+    if (!_bg) {
+        _bg = [[UIImageView alloc] init];
+        _bg.image = ImageNamedBg;
+    }
+    return _bg;
 }
 
 

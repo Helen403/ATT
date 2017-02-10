@@ -483,4 +483,8 @@
 
 #define getSize(str,font) [LSCoreToolCenter getSizeWithText:str fontSize:font]
 
+#define saveModel(model,name)  [NSKeyedArchiver archiveRootObject:model toFile:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data",name]]];
+
+#define getModel(name)  [NSKeyedUnarchiver unarchiveObjectWithFile:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data",name]]];
+
 #endif

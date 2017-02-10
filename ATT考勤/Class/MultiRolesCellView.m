@@ -45,7 +45,8 @@
 -(void)h_setupViews{
     
     
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = white_color;
+    
     [self addSubview:self.img];
     [self addSubview:self.title];
     [self addSubview:self.back];
@@ -60,8 +61,8 @@
         return;
     }
     _multiRolesModel = multiRolesModel;
-    self.img.image = ImageNamed(multiRolesModel.img);
-    self.title.text = multiRolesModel.title;
+//    self.img.image = ImageNamed(multiRolesModel.img);
+    self.title.text = multiRolesModel.companyNickName;
     
 
 }

@@ -18,6 +18,8 @@
 
 @property(nonatomic,strong) NSString *pwd;
 
+@property(nonatomic,strong) RACSubject *loginclickFail;
+
 
 @property(nonatomic,strong) RACSubject *forgetclickSubject;
 
