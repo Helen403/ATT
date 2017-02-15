@@ -212,9 +212,10 @@
   
     self.pwdTextField.text = @"";
     self.login.enabled = YES;
-    self.login.backgroundColor = MAIN_ORANGER;
-    [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
-    [self toast:@"密码错误"];
+//    self.login.backgroundColor = MAIN_ORANGER;
+//    [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
+ 
+    ShowErrorStatus(@"密码错误");
 }
 
 #pragma mark lazyload
@@ -401,9 +402,9 @@
         //登陆成功后发送按钮
         [self.loginViewModel.loginclickCommand execute:nil];
         self.login.enabled = NO;
-        self.login.backgroundColor = MAIN_GRAY;
-        
-        [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
+//        self.login.backgroundColor = MAIN_GRAY;
+//        
+//        [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
         [self endEditing:YES];
     }else{
         [self toast:@"请输入正确的手机号或者密码"];

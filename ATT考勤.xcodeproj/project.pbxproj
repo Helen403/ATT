@@ -55,7 +55,6 @@
 		792134791E4B15CA00C25A67 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 792134781E4B15CA00C25A67 /* GDataXMLNode.m */; };
 		7921347B1E4B174E00C25A67 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7921347A1E4B174E00C25A67 /* libxml2.2.tbd */; };
 		7921347D1E4B176C00C25A67 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7921347C1E4B176C00C25A67 /* libxml2.tbd */; };
-		792134841E4B237B00C25A67 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 792134821E4B237B00C25A67 /* XMLDictionary.m */; };
 		79282EA21E0B65C600F4E050 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79282EA11E0B65C600F4E050 /* LoginView.m */; };
 		79282EA51E0B65E400F4E050 /* LoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79282EA41E0B65E400F4E050 /* LoginViewModel.m */; };
 		79282EAB1E0B7C7F00F4E050 /* ZJLeadingPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79282EA81E0B7C7F00F4E050 /* ZJLeadingPageCell.m */; };
@@ -208,6 +207,7 @@
 		793B9E9F1E4807E400156CBE /* bg_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 793B9E991E4807E400156CBE /* bg_5.png */; };
 		793B9EA01E4807E400156CBE /* bg_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 793B9E9A1E4807E400156CBE /* bg_6.png */; };
 		7943136B1E53F32B0071530C /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943136A1E53F32A0071530C /* Company.m */; };
+		7943136E1E5400D10071530C /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943136D1E5400D10071530C /* XMLDictionary.m */; };
 		7949275C1E10A660007331CA /* BuildRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7949275B1E10A65F007331CA /* BuildRoleController.m */; };
 		7949275F1E10A67B007331CA /* BuildRoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7949275E1E10A67B007331CA /* BuildRoleView.m */; };
 		794927621E10A694007331CA /* BuildRoleViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794927611E10A694007331CA /* BuildRoleViewModel.m */; };
@@ -366,7 +366,6 @@
 		795AC46A1E2C50D700C69308 /* UITextField+YXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC45C1E2C50D700C69308 /* UITextField+YXAdd.m */; };
 		795AC46B1E2C50D700C69308 /* UIView+YXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC45F1E2C50D700C69308 /* UIView+YXAdd.m */; };
 		795AC4751E2C51B400C69308 /* LocManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC46E1E2C51B400C69308 /* LocManager.m */; };
-		795AC4761E2C51B400C69308 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 795AC4701E2C51B400C69308 /* README.md */; };
 		795AC4771E2C51B400C69308 /* SMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC4721E2C51B400C69308 /* SMController.m */; };
 		795AC4781E2C51B400C69308 /* UIViewController+SMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC4741E2C51B400C69308 /* UIViewController+SMController.m */; };
 		795AC47B1E2C584900C69308 /* PBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC47A1E2C584900C69308 /* PBLocation.m */; };
@@ -396,10 +395,10 @@
 		7985066D1E028AC600028C22 /* CMRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7985066C1E028AC600028C22 /* CMRequest.m */; };
 		798506701E028C1400028C22 /* HView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7985066F1E028C1400028C22 /* HView.m */; };
 		798506761E0294D400028C22 /* HViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 798506751E0294D400028C22 /* HViewModel.m */; };
+		798FB46F1E543EAD003B40D7 /* MultiRolesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 798FB46E1E543EAD003B40D7 /* MultiRolesViewModel.m */; };
 		79AF688D1E0BD741000D9E48 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AF688C1E0BD741000D9E48 /* libsqlite3.tbd */; };
 		79DD27581E319D9F00923D19 /* MultiRolesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD27571E319D9F00923D19 /* MultiRolesController.m */; };
 		79DD275B1E319E2100923D19 /* MultiRolesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD275A1E319E2100923D19 /* MultiRolesView.m */; };
-		79DD275E1E319E3D00923D19 /* MultiRolesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD275D1E319E3D00923D19 /* MultiRolesViewModel.m */; };
 		79DD27611E31A13800923D19 /* MultiRolesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD27601E31A13800923D19 /* MultiRolesModel.m */; };
 		79DD27651E31A15F00923D19 /* MultiRolesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD27641E31A15F00923D19 /* MultiRolesCellView.m */; };
 		79DD27671E31A22600923D19 /* MultiRoles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79DD27661E31A22600923D19 /* MultiRoles.plist */; };
@@ -674,8 +673,6 @@
 		792134781E4B15CA00C25A67 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		7921347A1E4B174E00C25A67 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		7921347C1E4B176C00C25A67 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
-		792134811E4B237B00C25A67 /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
-		792134821E4B237B00C25A67 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		79282EA01E0B65C600F4E050 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		79282EA11E0B65C600F4E050 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		79282EA31E0B65E400F4E050 /* LoginViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewModel.h; sourceTree = "<group>"; };
@@ -934,6 +931,8 @@
 		793B9E9A1E4807E400156CBE /* bg_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_6.png; sourceTree = "<group>"; };
 		794313691E53F32A0071530C /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
 		7943136A1E53F32A0071530C /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
+		7943136C1E5400D10071530C /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
+		7943136D1E5400D10071530C /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		7949275A1E10A65F007331CA /* BuildRoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleController.h; sourceTree = "<group>"; };
 		7949275B1E10A65F007331CA /* BuildRoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildRoleController.m; sourceTree = "<group>"; };
 		7949275D1E10A67B007331CA /* BuildRoleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleView.h; sourceTree = "<group>"; };
@@ -1131,7 +1130,6 @@
 		795AC45F1E2C50D700C69308 /* UIView+YXAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YXAdd.m"; sourceTree = "<group>"; };
 		795AC46D1E2C51B400C69308 /* LocManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocManager.h; sourceTree = "<group>"; };
 		795AC46E1E2C51B400C69308 /* LocManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocManager.m; sourceTree = "<group>"; };
-		795AC4701E2C51B400C69308 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		795AC4711E2C51B400C69308 /* SMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMController.h; sourceTree = "<group>"; };
 		795AC4721E2C51B400C69308 /* SMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMController.m; sourceTree = "<group>"; };
 		795AC4731E2C51B400C69308 /* UIViewController+SMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SMController.h"; sourceTree = "<group>"; };
@@ -1190,13 +1188,13 @@
 		798506711E028CAF00028C22 /* HViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HViewProtocol.h; sourceTree = "<group>"; };
 		798506741E0294D400028C22 /* HViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HViewModel.h; sourceTree = "<group>"; };
 		798506751E0294D400028C22 /* HViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HViewModel.m; sourceTree = "<group>"; };
+		798FB46E1E543EAD003B40D7 /* MultiRolesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiRolesViewModel.m; sourceTree = "<group>"; };
 		79AF688C1E0BD741000D9E48 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		79DD27561E319D9F00923D19 /* MultiRolesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRolesController.h; sourceTree = "<group>"; };
 		79DD27571E319D9F00923D19 /* MultiRolesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiRolesController.m; sourceTree = "<group>"; };
 		79DD27591E319E2100923D19 /* MultiRolesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRolesView.h; sourceTree = "<group>"; };
 		79DD275A1E319E2100923D19 /* MultiRolesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiRolesView.m; sourceTree = "<group>"; };
 		79DD275C1E319E3D00923D19 /* MultiRolesViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRolesViewModel.h; sourceTree = "<group>"; };
-		79DD275D1E319E3D00923D19 /* MultiRolesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiRolesViewModel.m; sourceTree = "<group>"; };
 		79DD275F1E31A13800923D19 /* MultiRolesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRolesModel.h; sourceTree = "<group>"; };
 		79DD27601E31A13800923D19 /* MultiRolesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiRolesModel.m; sourceTree = "<group>"; };
 		79DD27631E31A15F00923D19 /* MultiRolesCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRolesCellView.h; sourceTree = "<group>"; };
@@ -2112,8 +2110,8 @@
 		792134831E4B237B00C25A67 /* XMLDictionary */ = {
 			isa = PBXGroup;
 			children = (
-				792134811E4B237B00C25A67 /* XMLDictionary.h */,
-				792134821E4B237B00C25A67 /* XMLDictionary.m */,
+				7943136C1E5400D10071530C /* XMLDictionary.h */,
+				7943136D1E5400D10071530C /* XMLDictionary.m */,
 			);
 			name = XMLDictionary;
 			path = "/Users/helen/Downloads/XMLDictionary-master/Tests/../XMLDictionary";
@@ -3973,7 +3971,6 @@
 		795AC46F1E2C51B400C69308 /* SideMenu(侧滑菜单) */ = {
 			isa = PBXGroup;
 			children = (
-				795AC4701E2C51B400C69308 /* README.md */,
 				795AC4711E2C51B400C69308 /* SMController.h */,
 				795AC4721E2C51B400C69308 /* SMController.m */,
 				795AC4731E2C51B400C69308 /* UIViewController+SMController.h */,
@@ -4160,7 +4157,7 @@
 			isa = PBXGroup;
 			children = (
 				79DD275C1E319E3D00923D19 /* MultiRolesViewModel.h */,
-				79DD275D1E319E3D00923D19 /* MultiRolesViewModel.m */,
+				798FB46E1E543EAD003B40D7 /* MultiRolesViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -6225,7 +6222,6 @@
 			files = (
 				79ED5E751E1CC86C00BBC3D9 /* MineCellView.m in Sources */,
 				79F0A1521E13C2CE00A1B8AA /* JCAlertView.m in Sources */,
-				795AC4761E2C51B400C69308 /* README.md in Sources */,
 				79375D6B1E1E402C00E27934 /* CustomModel.m in Sources */,
 				79345B941E1F25160007A348 /* MyOpinionViewModel.m in Sources */,
 				7937CC061E24891B00A4F82F /* AddressListController.m in Sources */,
@@ -6258,7 +6254,6 @@
 				795AC4621E2C50D700C69308 /* NSNotificationCenter+YXAdd.m in Sources */,
 				79DD27651E31A15F00923D19 /* MultiRolesCellView.m in Sources */,
 				79F4F0751E1F808300115C3B /* DLFixedTabbarView.m in Sources */,
-				79DD275E1E319E3D00923D19 /* MultiRolesViewModel.m in Sources */,
 				790D8AC31E2F457700DDA697 /* AuditingController.m in Sources */,
 				791711751E236853003D15C1 /* TeamView.m in Sources */,
 				79375D031E1DD8CF00E27934 /* VersionController.m in Sources */,
@@ -6269,6 +6264,7 @@
 				793765461E14A45800F7B34F /* XCFTabBarController.m in Sources */,
 				7964B3791E2EFC90001AC5E5 /* MeApplyController.m in Sources */,
 				79345B8E1E1F236C0007A348 /* MyOpinionController.m in Sources */,
+				798FB46F1E543EAD003B40D7 /* MultiRolesViewModel.m in Sources */,
 				79EF94561E262F7100F8E9BC /* HASortItemView.m in Sources */,
 				7964B3851E2F0975001AC5E5 /* MeApplyCellView.m in Sources */,
 				7949275C1E10A660007331CA /* BuildRoleController.m in Sources */,
@@ -6436,7 +6432,6 @@
 				79F964BD1E2CB2D700838CC4 /* CostView.m in Sources */,
 				79F0A1391E13990A00A1B8AA /* ZJContentView.m in Sources */,
 				79FAFAB21E348D0C00577917 /* TeamListCellView.m in Sources */,
-				792134841E4B237B00C25A67 /* XMLDictionary.m in Sources */,
 				79F4F0741E1F808300115C3B /* DLSlideView.m in Sources */,
 				793868291E0A29F5004EC88A /* HomeView.m in Sources */,
 				790D8AC61E2F45A400DDA697 /* AskViewModel.m in Sources */,
@@ -6539,6 +6534,7 @@
 				793487BC1E271F3D00D074D7 /* ListCellView.m in Sources */,
 				794C77311E3204B800013243 /* VoiceButtonView.m in Sources */,
 				7949277E1E10FB9D007331CA /* ForgetPwdViewModel.m in Sources */,
+				7943136E1E5400D10071530C /* XMLDictionary.m in Sources */,
 				794C772F1E3204B800013243 /* UITextView+Category.m in Sources */,
 				79EF944E1E262F7100F8E9BC /* HAAnimationTool.m in Sources */,
 				7949275F1E10A67B007331CA /* BuildRoleView.m in Sources */,
@@ -6689,7 +6685,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8ED7B189C990D6740CA551D4 /* Pods-ATT考勤.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7P42T6TU6M;
@@ -6727,7 +6722,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD88A55891B3DFA35306F0D4 /* Pods-ATT考勤.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7P42T6TU6M;

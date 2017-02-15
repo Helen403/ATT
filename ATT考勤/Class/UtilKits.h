@@ -29,7 +29,7 @@
 //#import <IQKeyboardManager/IQKeyboardManager.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "Categories.h"
-#import "PINCache.h"
+//#import "PINCache.h"
 
 
 

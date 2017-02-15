@@ -55,19 +55,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
--(void)keyboardShow:(NSNotification *)note
-{
+-(void)keyboardShow:(NSNotification *)note{
     CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat deltaY=keyBoardRect.size.height;
-    
+
     [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
         
         self.tableView.transform=CGAffineTransformMakeTranslation(0, -deltaY);
     }];
 }
 
--(void)keyboardHide:(NSNotification *)note
-{
+-(void)keyboardHide:(NSNotification *)note{
     [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
         self.tableView.transform = CGAffineTransformIdentity;
     }];
@@ -79,10 +77,11 @@
         _inputToolbar = [InputToolbar shareInstance];
         _inputToolbar.textViewMaxVisibleLine = 4;
         _inputToolbar.width = self.view.width;
-        _inputToolbar.height = [self h_w:49];
+
+           _inputToolbar.height = [self h_w:49];
         
         
-        _inputToolbar.y = self.view.height - _inputToolbar.height;
+        _inputToolbar.y = self.view.height - _inputToolbar.height-[self h_w:60];
         _inputToolbar.delegate = self;
         [_inputToolbar setMorebuttonViewDelegate:self];
         

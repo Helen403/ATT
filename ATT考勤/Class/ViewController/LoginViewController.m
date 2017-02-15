@@ -43,7 +43,9 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-
+    insert(@"asd", @"666");
+   NSString *str =  query(@"asd");
+    NSLog(@"%@",str);
 }
 
 - (void)updateViewConstraints {

@@ -15,9 +15,6 @@
 #import "GDataXMLNode.h"
 
 
-
-
-
 @implementation LSCoreToolCenter
 
 + (void)load{
@@ -52,7 +49,9 @@ void ShowErrorStatus(NSString *statues){
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD showErrorWithStatus:statues];
-            [SVProgressHUD showProgress:0.5 status:@"上传" maskType:SVProgressHUDMaskTypeGradient];
+
+            
+            [SVProgressHUD showProgress:0.5 status:@"上传"];
             
         });
     }else{
@@ -64,20 +63,25 @@ void ShowErrorStatus(NSString *statues){
 void ShowMaskStatus(NSString *statues){
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD showWithStatus:statues maskType:SVProgressHUDMaskTypeGradient];
+
+            [SVProgressHUD showWithStatus:statues];
         });
     }else{
-        [SVProgressHUD showWithStatus:statues maskType:SVProgressHUDMaskTypeGradient];
+    
+        [SVProgressHUD showWithStatus:statues];
     }
 }
 
 void ShowProgress(CGFloat progress){
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD showProgress:progress maskType:SVProgressHUDMaskTypeGradient];
+       
+            [SVProgressHUD showProgress:progress];
+            
+          
         });
     }else{
-        [SVProgressHUD showProgress:progress maskType:SVProgressHUDMaskTypeGradient];
+        [SVProgressHUD showProgress:progress];
     }
 }
 
@@ -399,15 +403,15 @@ void DismissHud(void){
 +(NSString*)setXMLProperty:(NSString*)value propertyName:(NSString*)propertyName {
     
     NSString *retVal = @"";
-    NSString *patternString = [NSString stringWithFormat:@"(?<=<%@>)(.*)(?=</%@>)",propertyName,propertyName];
-    // CaseInsensitive:不区分大小写比较
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:patternString options:NSRegularExpressionCaseInsensitive error:nil];
-    if (regex) {
-        NSTextCheckingResult *firstMatch = [regex firstMatchInString:value options:NSCaseInsensitiveSearch range:NSMakeRange(0, [value length])];
-        if (firstMatch) {
-            retVal = [value substringWithRange:firstMatch.range];
-        }
-    }
+//    NSString *patternString = [NSString stringWithFormat:@"(?<=<%@>)(.*)(?=</%@>)",propertyName,propertyName];
+//    // CaseInsensitive:不区分大小写比较
+//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:patternString options:NSRegularExpressionCaseInsensitive error:nil];
+//    if (regex) {
+//        NSTextCheckingResult *firstMatch = [regex firstMatchInString:value options:NSCaseInsensitiveSearch range:NSMakeRange(0, [value length])];
+//        if (firstMatch) {
+//            retVal = [value substringWithRange:firstMatch.range];
+//        }
+//    }
     return retVal;
 }
 
@@ -479,15 +483,15 @@ void DismissHud(void){
 +(NSString*)setJsonProperty:(NSString*)value propertyName:(NSString*)propertyName {
     
     NSString *retVal = @"";
-    NSString *patternString = [NSString stringWithFormat:@"(?<=\"%@\":\")[^\",]*",propertyName];
-    // CaseInsensitive:不区分大小写比较
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:patternString options:NSRegularExpressionCaseInsensitive error:nil];
-    if (regex) {
-        NSTextCheckingResult *firstMatch = [regex firstMatchInString:value options:NSCaseInsensitiveSearch range:NSMakeRange(0, [value length])];
-        if (firstMatch) {
-            retVal = [value substringWithRange:firstMatch.range];
-        }
-    }
+//    NSString *patternString = [NSString stringWithFormat:@"(?<=\"%@\":\")[^\",]*",propertyName];
+//    // CaseInsensitive:不区分大小写比较
+//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:patternString options:NSRegularExpressionCaseInsensitive error:nil];
+//    if (regex) {
+//        NSTextCheckingResult *firstMatch = [regex firstMatchInString:value options:NSCaseInsensitiveSearch range:NSMakeRange(0, [value length])];
+//        if (firstMatch) {
+//            retVal = [value substringWithRange:firstMatch.range];
+//        }
+//    }
     return retVal;
 }
 ///Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home

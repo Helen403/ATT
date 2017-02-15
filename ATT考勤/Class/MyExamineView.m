@@ -44,7 +44,6 @@
 #pragma mark private
 -(void)h_setupViews{
 
-    
     self.backgroundColor = GX_BGCOLOR;
     [self addSubview:self.tableView];
     
@@ -54,35 +53,7 @@
 
 
 -(void)h_bindViewModel{
-    [self addDynamic];
-}
 
--(void)addDynamic{
-    self.userInteractionEnabled = YES;
-    UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClick:)];
-    [self addGestureRecognizer:setTap];
-}
-
--(void)onClick:(UITapGestureRecognizer *)sender{
-    CGPoint point = [sender locationInView:self];
-    
-    [self addSubview:self.rippleView];
-    self.rippleView.center = point;
-    self.rippleView.transform = CGAffineTransformMakeScale(0.5, 0.5);
-    [UIView animateWithDuration:0.1
-                     animations:^{
-                         self.rippleView.alpha=1;
-                     }];
-    [UIView animateWithDuration:0.7
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
-                         self.rippleView.transform = CGAffineTransformMakeScale(1,1);
-                         self.rippleView.alpha=0;
-                     } completion:^(BOOL finished) {
-                         
-                         [self.rippleView removeFromSuperview];
-                     }];
 }
 
 

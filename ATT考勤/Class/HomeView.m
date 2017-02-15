@@ -146,7 +146,7 @@
         make.left.right.bottom.equalTo(weakSelf);
         
     }];
-
+    
     [self.punch mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.view.mas_top).offset([self h_w:15]);
         make.size.equalTo(CGSizeMake(length, length+[self h_w:15]));
@@ -158,9 +158,14 @@
         make.centerX.equalTo(weakSelf.punch);
     }];
     
-   CGSize size = [LSCoreToolCenter getSizeWithText:@"08:49:07" fontSize:42];
+    CGSize size = [LSCoreToolCenter getSizeWithText:@"08:49:07" fontSize:42];
+    CGFloat leftPadding;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        leftPadding = (SCREEN_WIDTH -size.width)*0.5;
+    } else {
+        leftPadding = (SCREEN_WIDTH -size.width*2)*0.5;
+    }
     
-    CGFloat leftPadding = (SCREEN_WIDTH -size.width*2)*0.5;
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.week.mas_bottom).offset([self h_w:30]);
         make.left.equalTo(leftPadding);
@@ -193,8 +198,8 @@
     
     [self.bg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(0);
-          make.left.equalTo(0);
-          make.right.equalTo(0);
+        make.left.equalTo(0);
+        make.right.equalTo(0);
         
     }];
 }
@@ -237,7 +242,7 @@
     
     //设置时间
     [self setTime];
-     [self addDynamic:self];
+    [self addDynamic:self];
 }
 
 
@@ -275,7 +280,7 @@
     //
     //    //网络请求打卡
     //    [self AttendCard];
-     NSString *timetmp = [self.formatter stringFromDate:[NSDate date]];
+    NSString *timetmp = [self.formatter stringFromDate:[NSDate date]];
     self.preText.text = timetmp;
     //
 }
@@ -430,7 +435,7 @@
         _time.text = @"14:50:55";
         _time.font = HB42;
         _time.textColor = RGBCOLOR(80, 80, 80);
-
+        
     }
     return _time;
 }
@@ -465,8 +470,6 @@
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
-       
-        
     }
     return _scrollView;
 }
@@ -478,7 +481,6 @@
     }
     return _bg;
 }
-
 
 
 @end

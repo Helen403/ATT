@@ -39,7 +39,7 @@
         make.left.equalTo(0);
         make.right.equalTo(0);
         make.top.equalTo(0);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:30]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 44));
     }];
     
     [self.toTeamView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -116,7 +116,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[AddressListCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([AddressListCellView class])]];
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:80])];
-        v.backgroundColor = yellow_color;
+        v.backgroundColor = GX_BGCOLOR;
         _tableView.tableFooterView = v;
     }
     return _tableView;
