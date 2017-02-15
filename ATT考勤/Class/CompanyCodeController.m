@@ -44,8 +44,10 @@
 -(void)h_bindViewModel{
 
     [[self.companyCodeViewModel.addclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-        
-      [self.navigationController popToRootViewControllerAnimated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+             [self.navigationController popToRootViewControllerAnimated:YES];
+        });
+     
     }];
 }
 

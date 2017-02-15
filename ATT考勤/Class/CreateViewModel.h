@@ -12,4 +12,12 @@
 
 @property(nonatomic,strong) RACSubject *buildRoleclickSubject;
 
+@property (nonatomic, strong) RACCommand *sendclickCommand;
+
+@property(nonatomic,strong) NSString *name;
+
+@property(nonatomic,strong) NSString *pwd;
+
+@property(nonatomic,strong) NSString *telphone;
+
 @end

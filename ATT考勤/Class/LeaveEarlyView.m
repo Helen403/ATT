@@ -190,7 +190,7 @@
     
     if (!_line1) {
         _line1 = [[UIView alloc] init];
-        _line1.backgroundColor = LINE_COLOR;
+        _line1.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line1;
 }
@@ -218,7 +218,7 @@
 -(UIView *)line2{
     if (!_line2) {
         _line2 = [[UIView alloc] init];
-        _line2.backgroundColor = LINE_COLOR;
+        _line2.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line2;
 }
@@ -241,7 +241,7 @@
         _textView.textColor = MAIN_PAN_2;
         _textView.text = @"早退原因";//设置显示的文本内容
         
-        _textView.layer.borderColor = LINE_COLOR.CGColor;
+        _textView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _textView.layer.borderWidth =1.0;
         _textView.layer.cornerRadius =5.0;
         _textView.font = H14;
@@ -253,7 +253,7 @@
 -(ProveView *)proveView{
     if (!_proveView) {
         _proveView = [[ProveView alloc] init];
-        _proveView.layer.borderColor = LINE_COLOR.CGColor;
+        _proveView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _proveView.layer.borderWidth =1.0;
         _proveView.layer.cornerRadius =5.0;
     }
@@ -264,7 +264,7 @@
     if (!_applyManView) {
         _applyManView = [[ApplyManView alloc] init];
         
-        _applyManView.layer.borderColor = LINE_COLOR.CGColor;
+        _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _applyManView.layer.borderWidth =1.0;
         _applyManView.layer.cornerRadius =5.0;
     }

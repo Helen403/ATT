@@ -40,6 +40,9 @@
 		7917118A1E237C7D003D15C1 /* InformController.m in Sources */ = {isa = PBXBuildFile; fileRef = 791711891E237C7D003D15C1 /* InformController.m */; };
 		7917118D1E237C95003D15C1 /* InformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7917118C1E237C95003D15C1 /* InformView.m */; };
 		791711901E237CAB003D15C1 /* InformViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7917118F1E237CAB003D15C1 /* InformViewModel.m */; };
+		791C76641E515E1B003B1E54 /* BuildRoleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C76631E515E1B003B1E54 /* BuildRoleCellView.m */; };
+		791C76671E515FFF003B1E54 /* BuildRoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C76661E515FFF003B1E54 /* BuildRoleModel.m */; };
+		791C76691E5160CF003B1E54 /* BuildRole.plist in Resources */ = {isa = PBXBuildFile; fileRef = 791C76681E5160CF003B1E54 /* BuildRole.plist */; };
 		791EE6EC1E1F9259000BA8B8 /* NewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 791EE6EB1E1F9259000BA8B8 /* NewsController.m */; };
 		791EE6EF1E1F9280000BA8B8 /* NewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 791EE6EE1E1F9280000BA8B8 /* NewsView.m */; };
 		791EE6F21E1F9292000BA8B8 /* NewsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 791EE6F11E1F9292000BA8B8 /* NewsViewModel.m */; };
@@ -204,6 +207,7 @@
 		793B9E9E1E4807E400156CBE /* bg_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 793B9E981E4807E400156CBE /* bg_4.png */; };
 		793B9E9F1E4807E400156CBE /* bg_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 793B9E991E4807E400156CBE /* bg_5.png */; };
 		793B9EA01E4807E400156CBE /* bg_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 793B9E9A1E4807E400156CBE /* bg_6.png */; };
+		7943136B1E53F32B0071530C /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943136A1E53F32A0071530C /* Company.m */; };
 		7949275C1E10A660007331CA /* BuildRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7949275B1E10A65F007331CA /* BuildRoleController.m */; };
 		7949275F1E10A67B007331CA /* BuildRoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7949275E1E10A67B007331CA /* BuildRoleView.m */; };
 		794927621E10A694007331CA /* BuildRoleViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794927611E10A694007331CA /* BuildRoleViewModel.m */; };
@@ -523,6 +527,8 @@
 		79FA39411E13439000B8D3A7 /* MyExamineTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA39401E13439000B8D3A7 /* MyExamineTableCellView.m */; };
 		79FA39441E1346BC00B8D3A7 /* MyExamineCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA39431E1346BC00B8D3A7 /* MyExamineCellViewModel.m */; };
 		79FA39471E13478600B8D3A7 /* MyExamineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA39461E13478600B8D3A7 /* MyExamineModel.m */; };
+		79FAC3911E51CE92009DE784 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FAC38F1E51CE92009DE784 /* Icon.png */; };
+		79FAC3921E51CE92009DE784 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FAC3901E51CE92009DE784 /* Icon@2x.png */; };
 		79FAFAA31E348AF700577917 /* TeamListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FAFAA21E348AF600577917 /* TeamListController.m */; };
 		79FAFAA91E348BC800577917 /* TeamListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FAFAA81E348BC800577917 /* TeamListView.m */; };
 		79FAFAAC1E348BDC00577917 /* TeamListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FAFAAB1E348BDC00577917 /* TeamListViewModel.m */; };
@@ -642,6 +648,11 @@
 		7917118C1E237C95003D15C1 /* InformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformView.m; sourceTree = "<group>"; };
 		7917118E1E237CAB003D15C1 /* InformViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformViewModel.h; sourceTree = "<group>"; };
 		7917118F1E237CAB003D15C1 /* InformViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformViewModel.m; sourceTree = "<group>"; };
+		791C76621E515E1B003B1E54 /* BuildRoleCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleCellView.h; sourceTree = "<group>"; };
+		791C76631E515E1B003B1E54 /* BuildRoleCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildRoleCellView.m; sourceTree = "<group>"; };
+		791C76651E515FFF003B1E54 /* BuildRoleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleModel.h; sourceTree = "<group>"; };
+		791C76661E515FFF003B1E54 /* BuildRoleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildRoleModel.m; sourceTree = "<group>"; };
+		791C76681E5160CF003B1E54 /* BuildRole.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BuildRole.plist; sourceTree = "<group>"; };
 		791EE6EA1E1F9259000BA8B8 /* NewsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsController.h; sourceTree = "<group>"; };
 		791EE6EB1E1F9259000BA8B8 /* NewsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsController.m; sourceTree = "<group>"; };
 		791EE6ED1E1F9280000BA8B8 /* NewsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsView.h; sourceTree = "<group>"; };
@@ -921,6 +932,8 @@
 		793B9E981E4807E400156CBE /* bg_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_4.png; sourceTree = "<group>"; };
 		793B9E991E4807E400156CBE /* bg_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_5.png; sourceTree = "<group>"; };
 		793B9E9A1E4807E400156CBE /* bg_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_6.png; sourceTree = "<group>"; };
+		794313691E53F32A0071530C /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
+		7943136A1E53F32A0071530C /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
 		7949275A1E10A65F007331CA /* BuildRoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleController.h; sourceTree = "<group>"; };
 		7949275B1E10A65F007331CA /* BuildRoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildRoleController.m; sourceTree = "<group>"; };
 		7949275D1E10A67B007331CA /* BuildRoleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleView.h; sourceTree = "<group>"; };
@@ -1440,6 +1453,8 @@
 		79FA39431E1346BC00B8D3A7 /* MyExamineCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyExamineCellViewModel.m; sourceTree = "<group>"; };
 		79FA39451E13478600B8D3A7 /* MyExamineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyExamineModel.h; sourceTree = "<group>"; };
 		79FA39461E13478600B8D3A7 /* MyExamineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyExamineModel.m; sourceTree = "<group>"; };
+		79FAC38F1E51CE92009DE784 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		79FAC3901E51CE92009DE784 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		79FAFAA11E348AF600577917 /* TeamListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamListController.h; sourceTree = "<group>"; };
 		79FAFAA21E348AF600577917 /* TeamListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamListController.m; sourceTree = "<group>"; };
 		79FAFAA71E348BC800577917 /* TeamListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamListView.h; sourceTree = "<group>"; };
@@ -2575,6 +2590,7 @@
 				7937821C1E31E8C200ABA7C9 /* Chat.plist */,
 				79FAFAB31E348FA400577917 /* TeamList.plist */,
 				79FAFAD81E34B12200577917 /* Security.plist */,
+				791C76681E5160CF003B1E54 /* BuildRole.plist */,
 			);
 			name = File;
 			sourceTree = "<group>";
@@ -3428,6 +3444,8 @@
 		794927591E10A638007331CA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				791C76651E515FFF003B1E54 /* BuildRoleModel.h */,
+				791C76661E515FFF003B1E54 /* BuildRoleModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3475,6 +3493,8 @@
 		794927671E10F15B007331CA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				794313691E53F32A0071530C /* Company.h */,
+				7943136A1E53F32A0071530C /* Company.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -4472,6 +4492,8 @@
 		79F05E0A1E03BD8100F335DA /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				79FAC38F1E51CE92009DE784 /* Icon.png */,
+				79FAC3901E51CE92009DE784 /* Icon@2x.png */,
 				7928BD781E0273A4009BB0B4 /* Assets.xcassets */,
 			);
 			path = Image;
@@ -5640,6 +5662,8 @@
 		79FAFABF1E34A99800577917 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				791C76621E515E1B003B1E54 /* BuildRoleCellView.h */,
+				791C76631E515E1B003B1E54 /* BuildRoleCellView.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -5947,6 +5971,7 @@
 				793782461E31FA8500ABA7C9 /* toolbar_bottom_bar.png in Resources */,
 				79FC0E811E4C5A0E00CDDF87 /* bg_7.png in Resources */,
 				794C77381E3204B800013243 /* emotion0003@2x.png in Resources */,
+				791C76691E5160CF003B1E54 /* BuildRole.plist in Resources */,
 				794C776C1E3204B800013243 /* emotion0055@2x.png in Resources */,
 				794C77601E3204B800013243 /* emotion0043@2x.png in Resources */,
 				79F964C21E2CBDFF00838CC4 /* Leave.plist in Resources */,
@@ -6056,6 +6081,7 @@
 				794C77531E3204B800013243 /* emotion0030@2x.png in Resources */,
 				794C77981E3204B800013243 /* liaotian_ic_gengduo_nor@2x.png in Resources */,
 				79FC0E871E4C5A0E00CDDF87 /* bg_17.png in Resources */,
+				79FAC3911E51CE92009DE784 /* Icon.png in Resources */,
 				794C77431E3204B800013243 /* emotion0014@2x.png in Resources */,
 				794C77371E3204B800013243 /* emotion0002@2x.png in Resources */,
 				794C77A21E3204B800013243 /* liaotian_ic_jianpan_press@3x.png in Resources */,
@@ -6108,6 +6134,7 @@
 				79FC0E7F1E4C5A0E00CDDF87 /* bg_15.png in Resources */,
 				794C778A1E3204B800013243 /* emotion0085@2x.png in Resources */,
 				794C778F1E3204B800013243 /* img_defaulthead_nor@2x.png in Resources */,
+				79FAC3921E51CE92009DE784 /* Icon@2x.png in Resources */,
 				794C77631E3204B800013243 /* emotion0046@2x.png in Resources */,
 				79F4B6591E2773D8008CAA6E /* Trajectory.plist in Resources */,
 				793487A11E270C7D00D074D7 /* icon_next@2x.png in Resources */,
@@ -6267,6 +6294,7 @@
 				79362F681E0CB1E500F9B769 /* ForgetView.m in Sources */,
 				793781F21E31E34900ABA7C9 /* ChatController.m in Sources */,
 				7937653B1E14983A00F7B34F /* DealWithModel.m in Sources */,
+				7943136B1E53F32B0071530C /* Company.m in Sources */,
 				79F43DAA1E0D598A00C4C932 /* CreateViewModel.m in Sources */,
 				793782181E31E79B00ABA7C9 /* ChatViewModel.m in Sources */,
 				79DD27741E31B76B00923D19 /* MyMsgCellView.m in Sources */,
@@ -6388,6 +6416,7 @@
 				7964B38E1E2F1A05001AC5E5 /* ApproveViewModel.m in Sources */,
 				79F9641C1E2CA28300838CC4 /* OvertimeController.m in Sources */,
 				791EE6F81E1F9392000BA8B8 /* NewsModel.m in Sources */,
+				791C76641E515E1B003B1E54 /* BuildRoleCellView.m in Sources */,
 				79345B8B1E1F22E20007A348 /* SuggestionController.m in Sources */,
 				79F964681E2CA9FE00838CC4 /* MoveView.m in Sources */,
 				7904A6F71E09236700D6E8D4 /* HNavigationController.m in Sources */,
@@ -6413,6 +6442,7 @@
 				790D8AC61E2F45A400DDA697 /* AskViewModel.m in Sources */,
 				79F856161E02C3F3002D82F4 /* HTableViewHeaderFooterView.m in Sources */,
 				7964B3941E2F1B8F001AC5E5 /* ApproveModel.m in Sources */,
+				791C76671E515FFF003B1E54 /* BuildRoleModel.m in Sources */,
 				793868261E0A29DF004EC88A /* HomeViewController.m in Sources */,
 				798506761E0294D400028C22 /* HViewModel.m in Sources */,
 				79F4B6451E275FDC008CAA6E /* ContrastCellView.m in Sources */,

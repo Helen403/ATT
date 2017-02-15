@@ -49,7 +49,6 @@
 
 -(void)h_addSubviews{
     [self.view addSubview:self.forgetPwdView];
-    
 
 }
 
@@ -63,7 +62,7 @@
 }
 -(void)pop{
     [self.navigationController popToRootViewControllerAnimated:YES];
-
+    [self toast:@"修改成功"];
 }
 
 

@@ -21,12 +21,14 @@
 
 @property(nonatomic,strong) UIButton *addBtn;
 
+@property(nonatomic,strong) UIView *line;
+
 @end
 
 @implementation CompanyCodeView
+
 #pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
-    
     
     self.companyCodeViewModel = (CompanyCodeViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
@@ -37,7 +39,8 @@
     
     WS(weakSelf);
     CGFloat leftPadding =(SCREEN_WIDTH-SCREEN_WIDTH*0.8)*0.5;
-    CGFloat topPadding = SCREEN_HEIGHT *0.1;
+    CGFloat topPadding = SCREEN_HEIGHT *0.05;
+     CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
     
     [self.companyCodeImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topPadding);
@@ -48,8 +51,16 @@
     [self.companyCodeTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.companyCodeImg.mas_right).offset([self h_w:10]);
         make.centerY.equalTo(weakSelf.companyCodeImg);
+        make.right.equalTo(-leftPadding);
+        make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
     
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(leftPadding);
+        make.right.equalTo(-leftPadding);
+        make.top.equalTo(weakSelf.companyCodeImg.mas_bottom).offset([self h_w:3]);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
+    }];
     
     [self.hintText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.companyCodeImg);
@@ -61,7 +72,7 @@
         make.top.equalTo(weakSelf.hintText.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(leftPadding);
         make.right.equalTo(-leftPadding);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
+        
     }];
     
     
@@ -76,6 +87,7 @@
     [self addSubview:self.companyCodeTextField];
     [self addSubview:self.hintText];
     [self addSubview:self.addBtn];
+    [self addSubview:self.line];
     
     
     [self setNeedsUpdateConstraints];
@@ -83,7 +95,7 @@
 }
 
 -(void)h_bindViewModel{
-     [self addDynamic:self];
+    [self addDynamic:self];
 }
 
 
@@ -136,7 +148,7 @@
         _hintText = [[UILabel alloc] init];
         _hintText.textColor = MAIN_PAN;
         _hintText.text = @"联系公司管理获取公司码";
-        _hintText.font = H14;
+        _hintText.font = H10;
     }
     return _hintText;
 }
@@ -144,7 +156,6 @@
 -(UIButton *)addBtn{
     if (!_addBtn) {
         _addBtn = [[UIButton alloc] init];
-        
         
         [_addBtn setTitle:@"加   入" forState:UIControlStateNormal];
         _addBtn.titleLabel.font = H22;
@@ -158,20 +169,31 @@
         
         [_addBtn setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
         
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
-        
-        [_addBtn.layer setBorderColor:color];
+        [_addBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _addBtn;
     
 }
 
+-(UIView *)line{
+    if (!_line) {
+        _line = [[UIView alloc] init];
+        _line.backgroundColor = MAIN_LINE_COLOR;
+    }
+    return _line;
+    
+}
 
 -(void)add:(UIButton *)button{
-
-    [self.companyCodeViewModel.addclickSubject sendNext:nil];
+    if (self.companyCodeTextField.text.length>0) {
+        NSString *str =  [[NSUserDefaults standardUserDefaults] objectForKey:@"returnCode"];
+        self.companyCodeViewModel.userCode = str;
+        self.companyCodeViewModel.companyCode = self.companyCodeTextField.text;
+        [self.companyCodeViewModel.sendclickCommand execute:nil];
+    }else{
+        [self toast:@"请输入公司码"];
+    }
 }
 
 @end

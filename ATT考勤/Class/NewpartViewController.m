@@ -18,7 +18,6 @@
 
 @property(nonatomic,strong) NewpartViewModel *newpartViewModel;
 
-
 @end
 
 @implementation NewpartViewController
@@ -51,16 +50,17 @@
 }
 
 -(void)h_bindViewModel{
-    [[self.newpartViewModel.createclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+    [[self.newpartViewModel.createclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
         
-        [self performSelectorOnMainThread:@selector(push) withObject:nil waitUntilDone:YES];
+       
+        [self performSelectorOnMainThread:@selector(push:) withObject:x waitUntilDone:YES];
         
     }];
 }
 
--(void)push{
+-(void)push:(NSString *)str{
     CreateController *create = [[CreateController alloc] init];
-    
+    create.telphone = str;
     [self.navigationController pushViewController:create animated:YES];
     
 }

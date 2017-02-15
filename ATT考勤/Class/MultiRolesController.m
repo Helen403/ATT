@@ -22,6 +22,18 @@
 
 @implementation MultiRolesController
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [self hideNavigationBar:YES animated:NO];
+    [super viewWillAppear:animated];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self hideNavigationBar:NO animated:NO];
+    
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -40,9 +52,8 @@
 #pragma mark private
 -(void)h_layoutNavigation{
     self.title = @"切换角色";
-    self.navigationItem.hidesBackButton = YES;
+   
 }
-
 
 -(void)h_addSubviews{
     [self.view addSubview:self.multiRolesView];

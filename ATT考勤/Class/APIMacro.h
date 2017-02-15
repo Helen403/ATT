@@ -21,4 +21,12 @@
 #define MultiRoles_getCompanyList @"http://192.168.1.101:8888/smart/ws/IAttService"
 
 //创建账户1-发送验证吗
-#define CreateUser @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define Create_User_SMS @"http://192.168.1.101:8888/smart/ws/IAttService"
+//创建账户2-注册账户
+#define Create_User @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+//加入公司－根据邀请码查询公司信息
+#define Find_Company_info @"http://192.168.1.101:8888/smart/ws/IAttService"
+//加入公司
+#define add_Company @"http://192.168.1.101:8888/smart/ws/IAttService"
+

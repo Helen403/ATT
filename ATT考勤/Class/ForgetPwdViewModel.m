@@ -16,11 +16,14 @@
     
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
-        NSString *xmlDoc = [self getFilterOneStr:result filter:@"Boolean"];
-        if ([xmlDoc isEqualToString:@"true"]) {
+         NSLog(@"%@",result);
+//        NSLog(@"666");
+        NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
+
+        if ([xmlDoc isEqualToString:@"0"]) {
             [self.finishclickSubject sendNext:nil];
         }else{
-        
+            
         }
         
         DismissHud();
@@ -56,7 +59,7 @@
                                  <telphone xmlns=\"\">%@</telphone>\
                                  <newPassword xmlns=\"\">%@</newPassword>\
                                  </modifyUserPwd>",self.telphone,self.pwd];
-                
+                NSLog(@"1");
                 [self SOAPData:Forget_Modify soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];

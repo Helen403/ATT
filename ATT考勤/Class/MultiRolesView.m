@@ -40,7 +40,7 @@
     WS(weakSelf);
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
-        make.top.equalTo([self h_w:10]);
+        make.top.equalTo([self h_w:30]);
         make.size.equalTo(CGSizeMake([self h_w:85], [self h_w:85]));
     }];
     
@@ -105,10 +105,20 @@
     if (!_icon) {
         _icon = [[UIImageView alloc] init];
         _icon.image = ImageNamed(@"switch_role_refresh");
+        _icon.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(click)];
+        [_icon addGestureRecognizer:setTap];
     }
     return _icon;
-    
 }
+
+-(void)click{
+
+    UserModel *user = getModel(@"user");
+    self.multiRolesViewModel.userCode = user.userCode;
+    [self.multiRolesViewModel.refreshDataCommand execute:nil];
+}
+
 
 -(UILabel *)title{
     if (!_title) {

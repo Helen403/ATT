@@ -26,7 +26,7 @@
 
     if (self.viewControllers.count > 0) { // 如果现在push的不是栈底控制器(最先push进来的那个控制器)
        //跳转到新的界面就隐藏下面的导航栏
-        self.TarBarView.hidden = YES;
+//        self.TarBarView.hidden = YES;
         
         CGFloat photoSize = autoScaleW(backSize);
        viewController.navigationItem.leftBarButtonItem =  [self itemWithImageName:backImg highImageName:backImg size:CGSizeMake(photoSize, photoSize) target:self action:@selector(back)];

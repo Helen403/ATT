@@ -10,4 +10,6 @@
 
 @interface CreateController : HViewController
 
+@property(nonatomic,strong) NSString *telphone;
+
 @end

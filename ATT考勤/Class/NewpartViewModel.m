@@ -62,7 +62,7 @@
                                  <telphone xmlns=\"\">%@</telphone>\
                                  </sendValidateSMS>",self.user];
                 
-                [self SOAPData:CreateUser soapBody:body success:^(NSString *result) {
+                [self SOAPData:Create_User_SMS soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];

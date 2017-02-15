@@ -12,5 +12,12 @@
 
 @property(nonatomic,strong) RACSubject *addclickSubject;
 
+@property (nonatomic, strong) RACCommand *sendclickCommand;
+
+@property(nonatomic,strong) NSString *userCode;
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property (nonatomic, strong) RACCommand *sendCommand;
 
 @end

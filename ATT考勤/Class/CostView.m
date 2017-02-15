@@ -290,7 +290,7 @@
     
     if (!_line1) {
         _line1 = [[UIView alloc] init];
-        _line1.backgroundColor = LINE_COLOR;
+        _line1.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line1;
 }
@@ -318,7 +318,7 @@
 -(UIView *)line2{
     if (!_line2) {
         _line2 = [[UIView alloc] init];
-        _line2.backgroundColor = LINE_COLOR;
+        _line2.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line2;
 }
@@ -347,7 +347,7 @@
 -(UIView *)line3{
     if (!_line3) {
         _line3 = [[UIView alloc] init];
-        _line3.backgroundColor = LINE_COLOR;
+        _line3.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line3;
 }
@@ -368,7 +368,7 @@
         _textView.textColor = MAIN_PAN_2;
         _textView.text = @"报销内容";//设置显示的文本内容
         
-        _textView.layer.borderColor = LINE_COLOR.CGColor;
+        _textView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _textView.layer.borderWidth =1.0;
         _textView.layer.cornerRadius =5.0;
         _textView.font = H14;
@@ -380,7 +380,7 @@
 -(ProveView *)proveView{
     if (!_proveView) {
         _proveView = [[ProveView alloc] init];
-        _proveView.layer.borderColor = LINE_COLOR.CGColor;
+        _proveView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _proveView.layer.borderWidth =1.0;
         _proveView.layer.cornerRadius =5.0;
     }
@@ -391,7 +391,7 @@
     if (!_applyManView) {
         _applyManView = [[ApplyManView alloc] init];
         
-        _applyManView.layer.borderColor = LINE_COLOR.CGColor;
+        _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _applyManView.layer.borderWidth =1.0;
         _applyManView.layer.cornerRadius =5.0;
     }
@@ -413,11 +413,9 @@
         
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+      
         
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
-        
-        [_finish.layer setBorderColor:color];
+        [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     
     return _finish;
@@ -484,7 +482,7 @@
 -(UIView *)line4{
     if (!_line4) {
         _line4 = [[UIView alloc] init];
-        _line4.backgroundColor = LINE_COLOR;
+        _line4.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line4;
 }

@@ -60,6 +60,6 @@
 -(NSInteger)h_w:(NSInteger)width;
 
 
--(void)hideNav;
+//-(void)hideNav;
 
 @end

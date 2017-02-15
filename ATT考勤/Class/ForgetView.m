@@ -180,36 +180,36 @@
         _useText.font = H14;
         // 设置右边永远显示清除按钮
         _useText.clearButtonMode = UITextFieldViewModeAlways;
-        
+        _useText.keyboardType = UIKeyboardTypePhonePad;
         // 5.监听文本框的文字改变
-        [_useText.rac_textSignal subscribeNext:^(id x) {
-   
-            
-            if (_useText.text.length>10) {
-                self.next.enabled = YES;
-                self.next.backgroundColor = MAIN_ORANGER;
-                
-                [self.next.layer setBorderColor:MAIN_ORANGER.CGColor];
-                
-                
-                self.countDown.enabled = YES;
-                
-                [self.countDown setBackgroundColor:MAIN_ORANGER];
-                
-                [self.countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
-            }else{
-                self.next.enabled = NO;
-                self.next.backgroundColor = MAIN_GRAY;
-                
-                [self.next.layer setBorderColor:MAIN_GRAY.CGColor];
-                
-                self.countDown.enabled = NO;
-                
-                [self.countDown setBackgroundColor:MAIN_GRAY];
-                
-                [self.countDown.layer setBorderColor:MAIN_GRAY.CGColor];
-            }
-        }];
+//        [_useText.rac_textSignal subscribeNext:^(id x) {
+//   
+//            
+//            if (_useText.text.length>10) {
+//                self.next.enabled = YES;
+//                self.next.backgroundColor = MAIN_ORANGER;
+//                
+//                [self.next.layer setBorderColor:MAIN_ORANGER.CGColor];
+//                
+//                
+//                self.countDown.enabled = YES;
+//                
+//                [self.countDown setBackgroundColor:MAIN_ORANGER];
+//                
+//                [self.countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
+//            }else{
+//                self.next.enabled = NO;
+//                self.next.backgroundColor = MAIN_GRAY;
+//                
+//                [self.next.layer setBorderColor:MAIN_GRAY.CGColor];
+//                
+//                self.countDown.enabled = NO;
+//                
+//                [self.countDown setBackgroundColor:MAIN_GRAY];
+//                
+//                [self.countDown.layer setBorderColor:MAIN_GRAY.CGColor];
+//            }
+//        }];
         
     }
     return _useText;
@@ -218,7 +218,7 @@
 -(UIView *)line1{
     if (!_line1) {
         _line1 = [[UIView alloc] init];
-        _line1.backgroundColor = MAIN_GRAY;
+        _line1.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line1;
     
@@ -281,9 +281,9 @@
                 //设置界面的按钮显示 根据自己需求设置
                 [button setTitle:@" 验证码 " forState:UIControlStateNormal];
                 button.userInteractionEnabled = YES;
-                [button setBackgroundColor:MAIN_ORANGER];
-                
-                [button.layer setBorderColor:MAIN_ORANGER.CGColor];
+//                [button setBackgroundColor:MAIN_ORANGER];
+//                
+//                [button.layer setBorderColor:MAIN_ORANGER.CGColor];
             });
         }else{
             int seconds = timeout % 60;
@@ -295,9 +295,9 @@
                 [UIView setAnimationDuration:1];
                 [button setTitle:[NSString stringWithFormat:@" %@秒后 ",strTime] forState:UIControlStateNormal];
                 [UIView commitAnimations];
-                [button setBackgroundColor:MAIN_GRAY];
-                
-                [button.layer setBorderColor:MAIN_GRAY.CGColor];
+//                [button setBackgroundColor:MAIN_GRAY];
+//                
+//                [button.layer setBorderColor:MAIN_GRAY.CGColor];
                 button.userInteractionEnabled = NO;
             });
             timeout--;

@@ -51,7 +51,7 @@
     
     CGFloat leftPadding =(SCREEN_WIDTH-SCREEN_WIDTH*0.8)*0.5;
     CGFloat topPadding = SCREEN_HEIGHT *0.1;
-    
+    CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
     
     [self.useImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topPadding);
@@ -61,7 +61,7 @@
     [self.useText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.useImg);
         make.left.equalTo(weakSelf.useImg.mas_right).offset([self h_w:10]);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, [self h_w:30]));
+        make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
     
     
@@ -69,7 +69,7 @@
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.useText.mas_bottom).offset([self h_w:20]);
+        make.top.equalTo(weakSelf.useText.mas_bottom).offset([self h_w:10]);
         
     }];
     
@@ -82,7 +82,7 @@
     [self.pwdText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.pwdImg);
         make.left.equalTo(weakSelf.pwdImg.mas_right).offset([self h_w:10]);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, [self h_w:30]));
+        make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
     
     
@@ -90,7 +90,7 @@
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.pwdText.mas_bottom).offset([self h_w:20]);
+        make.top.equalTo(weakSelf.pwdText.mas_bottom).offset([self h_w:10]);
         
     }];
     
@@ -103,22 +103,21 @@
     [self.surepwdText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.surepwdImg);
         make.left.equalTo(weakSelf.surepwdImg.mas_right).offset([self h_w:10]);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding, [self h_w:30]));
+        make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
     
     [self.line3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.surepwdText.mas_bottom).offset([self h_w:20]);
-        
+        make.top.equalTo(weakSelf.surepwdText.mas_bottom).offset([self h_w:10]);
     }];
     
     [self.next mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.line3.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
+     
     }];
     
     
@@ -160,7 +159,7 @@
 -(UIImageView *)useImg{
     if (!_useImg) {
         _useImg = [[UIImageView alloc] init];
-//        _useImg.image = ImageNamed(@"login_phone_picture");
+        _useImg.image = ImageNamed(@"login_phone_picture");
     }
     return _useImg;
 }
@@ -204,7 +203,7 @@
 -(UIImageView *)pwdImg{
     if (!_pwdImg) {
         _pwdImg = [[UIImageView alloc] init];
-//        _pwdImg.image = ImageNamed(@"Login_password_picture");
+        //        _pwdImg.image = ImageNamed(@"Login_password_picture");
         _pwdImg.image = [UIImage imageNamed:@"Login_password_picture"];
     }
     return _pwdImg;
@@ -214,7 +213,7 @@
 -(UITextField *)pwdText{
     if (!_pwdText) {
         _pwdText = [[UITextField alloc] init];
-       
+        
         
         _pwdText.backgroundColor = [UIColor clearColor];
         //设置边框样式，只有设置了才会显示边框样式
@@ -250,8 +249,8 @@
 -(UIImageView *)surepwdImg{
     if (!_surepwdImg) {
         _surepwdImg = [[UIImageView alloc] init];
-//        _surepwdImg.image = ImageNamed(@"Login_password_picture");
-         _surepwdImg.image = [UIImage imageNamed:@"Login_password_picture"];
+        //        _surepwdImg.image = ImageNamed(@"Login_password_picture");
+        _surepwdImg.image = [UIImage imageNamed:@"Login_password_picture"];
     }
     return _surepwdImg;
     
@@ -309,11 +308,8 @@
         
         [_next setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
         
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
-        
-        [_next.layer setBorderColor:color];
+        [_next.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _next;
     
@@ -321,6 +317,22 @@
 
 -(void)next:(UIButton *)button{
     
-    [self.createViewModel.buildRoleclickSubject sendNext:nil];
+    if (self.useText.text.length>0&&self.pwdText.text.length>0&&self.surepwdText.text.length>0) {
+        
+    }else{
+        [self toast:@"用户名或密码不能为空"];
+        return;
+    }
+    
+    if (self.pwdText.text == self.surepwdText.text) {
+        self.createViewModel.name = self.useText.text;
+        self.createViewModel.pwd = self.pwdText.text;
+        [self.createViewModel.sendclickCommand execute:nil];
+    }else{
+        [self toast:@"密码不一致"];
+        return;
+    }
+    
+    
 }
 @end

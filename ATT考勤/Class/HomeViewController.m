@@ -39,13 +39,10 @@
     [super viewWillDisappear:animated];
 }
 
-
 -(void)viewDidLoad{
     [super viewDidLoad];
    
 }
-
-
 
 #pragma mark system
 -(void)updateViewConstraints{

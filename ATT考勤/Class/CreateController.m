@@ -40,31 +40,27 @@
 #pragma mark private
 -(void)h_layoutNavigation{
     self.title = @"创建账户";
-
 }
 
 -(void)h_addSubviews{
 
     [self.view addSubview:self.createView];
-    
 }
 
 -(void)h_bindViewModel{
 
-    
-    [[self.createViewModel.buildRoleclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+    [[self.createViewModel.buildRoleclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+  
         
-        BuildRoleController *buildRole = [[BuildRoleController alloc] init];
-        
-        [self.navigationController pushViewController:buildRole animated:YES];
+        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
     }];
 }
 
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+-(void)mainThread{
+    
+    BuildRoleController *buildRole = [[BuildRoleController alloc] init];
+ 
+    [self.navigationController pushViewController:buildRole animated:YES];
 
 }
 
@@ -78,6 +74,7 @@
 -(CreateViewModel *)createViewModel{
     if (!_createViewModel) {
         _createViewModel = [[CreateViewModel alloc] init];
+        _createViewModel.telphone = self.telphone;
     }
     return _createViewModel;
 }

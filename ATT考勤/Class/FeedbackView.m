@@ -106,7 +106,7 @@
         _mySuggestion.textColor = MAIN_PAN;
         _mySuggestion.text = @"注册账户不能正常登陆";//设置显示的文本内容
         
-        _mySuggestion.layer.borderColor = LINE_COLOR.CGColor;
+        _mySuggestion.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _mySuggestion.layer.borderWidth =1.0;
         _mySuggestion.layer.cornerRadius =5.0;
         _mySuggestion.font = H14;

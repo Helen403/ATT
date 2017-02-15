@@ -276,7 +276,7 @@
         _input.textColor = MAIN_PAN;
         _input.text = @"我遇到的问题是(如有需要,我们会与你留的联系方式和你取得联系,做意见的反馈)";//设置显示的文本内容
         
-        _input.layer.borderColor = LINE_COLOR.CGColor;
+        _input.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _input.layer.borderWidth =1.0;
         _input.layer.cornerRadius =5.0;
         _input.font = H14;

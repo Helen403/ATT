@@ -40,6 +40,12 @@
     [super viewWillDisappear:animated];
 }
 
+
+-(void)viewDidLoad{
+    [super viewDidLoad];
+
+}
+
 - (void)updateViewConstraints {
     
     WS(weakSelf)

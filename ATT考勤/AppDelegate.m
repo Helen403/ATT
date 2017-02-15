@@ -12,15 +12,12 @@
 #import "ZJLeadingPageController.h"
 #import "ZJLaunchAdController.h"
 /**********************************************/
-#import "HNavigationController.h"
+#import "XCFNavigationController.h"
 #import "LoginViewController.h"
-
-
-
 
 @interface AppDelegate ()
 
-@property (nonatomic,strong) HNavigationController *nav;
+@property (nonatomic,strong) XCFNavigationController *nav;
 
 @end
 
@@ -54,7 +51,7 @@
         leadController.pageControl.currentPageIndicatorTintColor = [UIColor purpleColor];
         
         self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        self.window.backgroundColor = [UIColor whiteColor];
+        self.window.backgroundColor = white_color;
         [self.window makeKeyAndVisible];
         self.window.rootViewController = leadController;
         
@@ -139,16 +136,14 @@
 }
 
 #pragma mark lazyload
--(HNavigationController *)nav{
+-(XCFNavigationController *)nav{
     if (!_nav) {
-        _nav = [[HNavigationController alloc] init];
+        _nav = [[XCFNavigationController alloc] init];
         [_nav addChildViewController:[[LoginViewController alloc] init]];
     }
     return _nav;
     
 }
-
-
 
 
 @end

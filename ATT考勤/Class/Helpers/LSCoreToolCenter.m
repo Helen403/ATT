@@ -8,11 +8,14 @@
 
 #import "LSCoreToolCenter.h"
 
-#import <SDWebImageManager.h>
-#import <SDWebImageCompat.h>
-#import <SVProgressHUD.h>
+#import "SDWebImageManager.h"
+#import "SDWebImageCompat.h"
+#import "SVProgressHUD.h"
 #import <AVFoundation/AVFoundation.h>
 #import "GDataXMLNode.h"
+
+
+
 
 
 @implementation LSCoreToolCenter
@@ -90,6 +93,8 @@ void DismissHud(void){
 
 
 +(void)insertSQLByStringKey:(NSString *)key Value:(NSString *)value{
+    
+   
     
     //1.获得数据库文件的路径
     NSString *fileName =[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES)  lastObject] stringByAppendingString:DBNAME];
@@ -342,6 +347,7 @@ void DismissHud(void){
     
     NSMutableArray *retVal = [NSMutableArray array];
     xml = [NSString stringWithFormat:@"<data>%@</data>",xml];
+   
       GDataXMLDocument *root = [[GDataXMLDocument alloc] initWithXMLString:xml options:0 error:nil];
     GDataXMLElement *rootEle = [root rootElement];
 
@@ -484,5 +490,5 @@ void DismissHud(void){
     }
     return retVal;
 }
-
+///Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home
 @end

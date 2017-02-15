@@ -12,4 +12,8 @@
 
 @property(nonatomic,strong) RACSubject *companyCodeclickSubject;
 
+@property(nonatomic,strong) NSMutableArray *arr;
+
+@property(nonatomic,strong) NSString *returnCode;
+
 @end

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>img</key>
+		<string>role_two_icon</string>
+		<key>title</key>
+		<string>扫码加入</string>
+		<key>text</key>
+		<string>扫描公司提供的二维码</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>role_code_icon</string>
+		<key>title</key>
+		<string>企业码加入</string>
+		<key>text</key>
+		<string>输入公司提供的企业邀请码</string>
+	</dict>
+</array>
+</plist>

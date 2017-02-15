@@ -266,32 +266,25 @@
         //_useTextField.delegate = self;//设置代理
         _useTextField.keyboardType = UIKeyboardTypePhonePad;
         // 5.监听文本框的文字改变
-        [_useTextField.rac_textSignal subscribeNext:^(id x) {
-//            if(_useTextField.text.length == 11){
-//               [self.pwdTextField becomeFirstResponder];
+//        [_useTextField.rac_textSignal subscribeNext:^(id x) {
+//         
+//            if (_useTextField.text.length>10) {
+//                self.login.enabled = YES;
+//                self.login.backgroundColor = MAIN_ORANGER;
+//                
+//                [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
+//            }else{
+//                self.login.enabled = NO;
+//                self.login.backgroundColor = MAIN_GRAY;
+//                
+//                [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
 //            }
-            
-            if (_useTextField.text.length>10) {
-                self.login.enabled = YES;
-                self.login.backgroundColor = MAIN_ORANGER;
-                
-                [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
-            }else{
-                self.login.enabled = NO;
-                self.login.backgroundColor = MAIN_GRAY;
-                
-                [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
-            }
-        }];
+//        }];
    
     }
     return _useTextField;
 }
 
-
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//    return [self validateNumber:string];
-//}
 
 - (BOOL)validateNumber:(NSString*)number {
     BOOL res = YES;
@@ -386,7 +379,22 @@
 
 -(void)loginClick{
 
-    if ([NSString isVaildTelphoneFroString:self.useTextField.text]&&self.pwdTextField.text.length>0) {
+//    if ([NSString isVaildTelphoneFroString:self.useTextField.text]&&self.pwdTextField.text.length>0) {
+//        //点击后不然再点击
+//        self.loginViewModel.user = self.useTextField.text;
+//        self.loginViewModel.pwd = self.pwdTextField.text;
+//        //登陆成功后发送按钮
+//        [self.loginViewModel.loginclickCommand execute:nil];
+//        self.login.enabled = NO;
+//        self.login.backgroundColor = MAIN_GRAY;
+//        
+//        [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
+//        [self endEditing:YES];
+//    }else{
+//        [self toast:@"请输入正确的手机号或者密码"];
+//    }
+    
+    if (self.useTextField.text.length>0&&self.pwdTextField.text.length>0) {
         //点击后不然再点击
         self.loginViewModel.user = self.useTextField.text;
         self.loginViewModel.pwd = self.pwdTextField.text;
@@ -556,10 +564,11 @@
     if (!_bg) {
         _bg = [[UIImageView alloc] init];
         _bg.image = ImageNamedBg;
-      
     }
     return _bg;
 }
+
+
 
 
 @end

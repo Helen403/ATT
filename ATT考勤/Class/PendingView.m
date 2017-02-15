@@ -258,7 +258,7 @@
         _examine.textColor = MAIN_PAN;
         _examine.text = @"审批意见";//设置显示的文本内容
         _examine.font = H14;
-        _examine.layer.borderColor = LINE_COLOR.CGColor;
+        _examine.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _examine.layer.borderWidth =1.0;
         _examine.layer.cornerRadius =5.0;
     }
@@ -324,7 +324,7 @@
 -(LogisticsView *)view{
     if (!_view) {
         _view = [[LogisticsView alloc] init];
-        _view.layer.borderColor = LINE_COLOR.CGColor;
+        _view.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _view.layer.borderWidth =1.0;
         _view.layer.cornerRadius =5.0;
         
