@@ -19,6 +19,7 @@
 @property (nonatomic , copy) NSString              * companyOfAreaProv;
 @property (nonatomic , copy) NSString              * companyNickName;
 @property (nonatomic , copy) NSString              * companyPostCode;
+@property (nonatomic , copy) NSString              * registUserEmail;
 @property (nonatomic , copy) NSString              * companyFullName;
 @property (nonatomic , copy) NSString              * companyStatus;
 @property (nonatomic , copy) NSString              * companyInvitationCode;
@@ -29,5 +30,4 @@
 @property (nonatomic , copy) NSString              * registDatetime;
 @property (nonatomic , copy) NSString              * companyCode;
 @property (nonatomic , copy) NSString              * expireDatetime;
-
 @end

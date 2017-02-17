@@ -68,9 +68,45 @@
         return;
     }
     _employeeModel = employeeModel;
-    self.title.text = employeeModel.title;
-    self.content.text = employeeModel.content;
-    self.show.image = ImageNamed(employeeModel.show);
+    
+    switch (self.index) {
+        case 0:
+            self.content.text = employeeModel.empName;
+            break;
+        case 1:
+            self.content.text = employeeModel.empSex;
+            break;
+    
+        case 2:
+            self.content.text = employeeModel.empBirthDate;
+            break;
+        case 3:
+            self.content.text = employeeModel.position;
+            break;
+        case 4:
+            self.content.text = employeeModel.empTelphone;
+            break;
+        case 5:
+            self.content.text = employeeModel.empEmail;
+            break;
+        case 6:
+            self.content.text = employeeModel.enterDate;
+            break;
+    }
+    
+
+}
+
+
+-(void)setEmployeeTitle:(EmployeeTitle *)employeeTitle{
+    if (!employeeTitle) {
+        return;
+    }
+    _employeeTitle = employeeTitle;
+    self.title.text = employeeTitle.title;
+//    self.content.text = employeeModel.content;
+    self.show.image = ImageNamed(employeeTitle.show);
+
 }
 
 #pragma mark lazyload

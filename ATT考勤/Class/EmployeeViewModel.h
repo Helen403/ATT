@@ -8,11 +8,17 @@
 
 #import "HViewModel.h"
 
-@interface EmployeeViewModel : HViewModel
 
+@interface EmployeeViewModel : HViewModel
 
 @property(nonatomic,strong) NSMutableArray *arr;
 
 @property(nonatomic,strong) RACSubject *cellclickSubject;
+
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+@property(nonatomic,strong) NSString *empCode;
+
+@property(nonatomic,strong) RACSubject *tableViewSubject;
 
 @end

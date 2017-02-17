@@ -52,7 +52,7 @@
                                  <inviteCode xmlns=\"\">%@</inviteCode>\
                                 </findCompanyByInviteCode>",self.companyCode];
 
-                [self SOAPData:Find_Company_info soapBody:body success:^(NSString *result) {
+                [self SOAPData:findCompanyByInviteCode soapBody:body success:^(NSString *result) {
                     
 
                     NSDictionary *xmlDoc = [self getFilter:result filter:@"Company"];
@@ -66,7 +66,7 @@
                                      <companyCode xmlns=\"\">%@</companyCode>\
                                      </saveUserCompany>",self.userCode,self.companyCode];
 
-                    [self SOAPData:add_Company soapBody:body2 success:^(NSString *result) {
+                    [self SOAPData:saveUserCompany soapBody:body2 success:^(NSString *result) {
                         
                         [subscriber sendNext:result];
                         [subscriber sendCompleted];

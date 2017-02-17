@@ -62,7 +62,7 @@
                 <telphone xmlns=\"\">%@</telphone>\
                 </findUserByTelphone>",self.user];
                 
-                [self SOAPData:Login soapBody:body success:^(NSString *result) {
+                [self SOAPData:findUserByTelphone soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];

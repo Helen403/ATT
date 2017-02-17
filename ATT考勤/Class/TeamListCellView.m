@@ -71,14 +71,14 @@
     _teamListModel = teamListModel;
 
     
-    if (teamListModel.img.length==3) {
-        self.img.text = [teamListModel.img  substringFromIndex:1];
+    if (teamListModel.empName.length==3) {
+        self.img.text = [teamListModel.empName  substringFromIndex:1];
     }else{
-        self.img.text = teamListModel.img;
+        self.img.text = teamListModel.empName;
     }
     
-    self.title.text = teamListModel.title;
-    self.number.text = teamListModel.number;
+    self.title.text = teamListModel.empName;
+    self.number.text = teamListModel.empTelphone;
     
 }
 

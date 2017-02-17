@@ -8,9 +8,14 @@
 
 #import "HTableViewCell.h"
 #import "EmployeeModel.h"
+#import "EmployeeTitle.h"
 
 @interface EmployeeCellView : HTableViewCell
 
 @property(nonatomic,strong) EmployeeModel *employeeModel;
+
+@property(nonatomic,strong) EmployeeTitle *employeeTitle;
+
+@property(nonatomic,assign) NSInteger index;
 
 @end

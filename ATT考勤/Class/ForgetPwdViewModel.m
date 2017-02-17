@@ -60,7 +60,7 @@
                                  <newPassword xmlns=\"\">%@</newPassword>\
                                  </modifyUserPwd>",self.telphone,self.pwd];
                 NSLog(@"1");
-                [self SOAPData:Forget_Modify soapBody:body success:^(NSString *result) {
+                [self SOAPData:modifyUserPwd soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];

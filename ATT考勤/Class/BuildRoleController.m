@@ -12,6 +12,8 @@
 
 #import "CompanyCodeController.h"
 
+#import "ScanCodeController.h"
+
 @interface BuildRoleController ()
 
 @property(nonatomic,strong) BuildRoleView *buildRoleView;
@@ -29,7 +31,7 @@
 
 #pragma mark system
 -(void)updateViewConstraints{
-
+    
     WS(weakSelf);
     [self.buildRoleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf.view);
@@ -41,27 +43,38 @@
 #pragma mark private
 -(void)h_layoutNavigation{
     self.title = @"新建角色";
-
+    
 }
 
 -(void)h_addSubviews{
     [self.view addSubview:self.buildRoleView];
-
+    
 }
 -(void)h_bindViewModel{
-
-    [[self.buildRoleViewModel.companyCodeclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+    
+    [[self.buildRoleViewModel.companyCodeclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
-        CompanyCodeController *company = [[CompanyCodeController alloc] init];
+        switch ([x intValue]) {
+            case 0:{
+                ScanCodeController *scanCode = [[ScanCodeController alloc] init];
+                
+                [self.navigationController pushViewController:scanCode animated:YES];
+            }
+                break;
+                
+            case 1:{
+                CompanyCodeController *company = [[CompanyCodeController alloc] init];
+                
+                [self.navigationController pushViewController:company animated:YES];
+            }
+                break;
+        }
         
-        [self.navigationController pushViewController:company animated:YES];
+        
     }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    
-}
+
 
 #pragma mark lazyload
 -(BuildRoleView *)buildRoleView{
@@ -75,7 +88,7 @@
         _buildRoleViewModel = [[BuildRoleViewModel alloc] init];
     }
     return _buildRoleViewModel;
-
+    
 }
 
 @end

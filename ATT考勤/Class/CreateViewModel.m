@@ -16,23 +16,14 @@
     
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
-        NSString *xmlDoc = [self getFilterOneStr:result filter:@"return"];
+        NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
         NSLog(@"%@",result);
       
         DismissHud();
-//        if ([result isEqualToString:@"4"]) {
-//        insert(@"returnCode", xmlDoc);
-//        NSString *str =   query(@"returnCode");
 
-       
         [[NSUserDefaults standardUserDefaults] setObject:xmlDoc forKey:@"returnCode"];
-        
-        
-//        NSLog(@"%@",name);
-//          NSLog(@"666");
+
         [self.buildRoleclickSubject sendNext:nil];
-//        }
-   
         
     }];
     
@@ -70,7 +61,7 @@
                                  <userPassword xmlns=\"\">%@</userPassword>\
                                  </saveUser>",self.telphone,self.name,self.pwd];
                 
-                [self SOAPData:Create_User soapBody:body success:^(NSString *result) {
+                [self SOAPData:saveUser soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];

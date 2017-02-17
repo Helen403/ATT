@@ -70,14 +70,14 @@
     }
     _addressListModel = addressListModel;
     
-    if (addressListModel.img.length==3) {
-        self.img.text = [addressListModel.img  substringFromIndex:1];
+    if (addressListModel.empName.length==3) {
+        self.img.text = [addressListModel.empName  substringFromIndex:1];
     }else{
-        self.img.text = addressListModel.img;
+        self.img.text = addressListModel.empName;
     }
     
-    self.title.text = addressListModel.title;
-    self.number.text = addressListModel.number;
+    self.title.text = addressListModel.empName;
+    self.number.text = addressListModel.empTelphone;
     
 }
 

@@ -403,15 +403,15 @@ void DismissHud(void){
 +(NSString*)setXMLProperty:(NSString*)value propertyName:(NSString*)propertyName {
     
     NSString *retVal = @"";
-//    NSString *patternString = [NSString stringWithFormat:@"(?<=<%@>)(.*)(?=</%@>)",propertyName,propertyName];
-//    // CaseInsensitive:不区分大小写比较
-//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:patternString options:NSRegularExpressionCaseInsensitive error:nil];
-//    if (regex) {
-//        NSTextCheckingResult *firstMatch = [regex firstMatchInString:value options:NSCaseInsensitiveSearch range:NSMakeRange(0, [value length])];
-//        if (firstMatch) {
-//            retVal = [value substringWithRange:firstMatch.range];
-//        }
-//    }
+    NSString *patternString = [NSString stringWithFormat:@"(?<=<%@>)(.*)(?=</%@>)",propertyName,propertyName];
+    // CaseInsensitive:不区分大小写比较
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:patternString options:NSRegularExpressionCaseInsensitive error:nil];
+    if (regex) {
+        NSTextCheckingResult *firstMatch = [regex firstMatchInString:value options:NSCaseInsensitiveSearch range:NSMakeRange(0, [value length])];
+        if (firstMatch) {
+            retVal = [value substringWithRange:firstMatch.range];
+        }
+    }
     return retVal;
 }
 

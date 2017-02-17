@@ -16,4 +16,10 @@
 
 @property(nonatomic,strong) RACSubject *teamclickSubject;
 
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property(nonatomic,strong) RACSubject *tableViewSubject;
+
 @end

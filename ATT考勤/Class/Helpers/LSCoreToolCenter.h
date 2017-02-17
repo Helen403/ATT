@@ -85,4 +85,6 @@ extern void DismissHud(void);
 +(NSMutableArray*)jsonToArray:(NSString*)json class:(Class)class;
 
 
++(id)initWithXMLString:(NSString*)xml object:(id)object;
+
 @end

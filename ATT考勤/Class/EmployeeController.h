@@ -7,7 +7,11 @@
 //
 
 #import "HViewController.h"
+#import "AddressListModel.h"
+
 
 @interface EmployeeController : HViewController
+
+@property(nonatomic,strong) AddressListModel *addressListModel;
 
 @end

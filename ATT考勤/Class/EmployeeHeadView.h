@@ -7,7 +7,10 @@
 //
 
 #import "HView.h"
+#import "EmployeeModel.h"
 
 @interface EmployeeHeadView : HView
+
+@property(nonatomic,strong) EmployeeModel *employeeModel;
 
 @end

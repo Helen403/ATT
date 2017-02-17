@@ -342,6 +342,8 @@
         _validateText.font = H14;
         // 设置右边永远显示清除按钮
         _validateText.clearButtonMode = UITextFieldViewModeAlways;
+        
+          _validateText.keyboardType = UIKeyboardTypePhonePad;
     }
     return _validateText;
 }

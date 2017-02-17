@@ -59,6 +59,7 @@
 -(EmployeeViewModel *)employeeViewModel{
     if (!_employeeViewModel) {
         _employeeViewModel = [[EmployeeViewModel alloc] init];
+        _employeeViewModel.empCode = self.addressListModel.empCode;
     }
     return _employeeViewModel;
 }

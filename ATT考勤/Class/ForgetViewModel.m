@@ -61,7 +61,7 @@
                                  <telphone xmlns=\"\">%@</telphone>\
                                  </sendValidateSMS>",self.user];
                 
-                [self SOAPData:Forget_send soapBody:body success:^(NSString *result) {
+                [self SOAPData:sendValidateSMS soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];

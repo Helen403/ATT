@@ -10,6 +10,7 @@
 #import "TeamViewModel.h"
 #import "TeamView.h"
 
+#import "TeamModel.h"
 #import "TeamListController.h"
 
 
@@ -53,9 +54,13 @@
     [[self.teamViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         TeamListController *teamList = [[TeamListController alloc] init];
-        
-        [self.navigationController pushViewController:teamList animated:NO];
 
+        TeamModel *teamModel =self.teamViewModel.arr[[x intValue]];
+        
+        teamList.deptCode =  teamModel.deptCode;
+        teamList.companyCode = teamModel.companyCode;
+        [self.navigationController pushViewController:teamList animated:NO];
+        
     }];
     
     

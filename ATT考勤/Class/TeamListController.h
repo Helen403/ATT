@@ -10,4 +10,8 @@
 
 @interface TeamListController : HViewController
 
+@property(nonatomic,strong) NSString *deptCode;
+
+@property(nonatomic,strong) NSString *companyCode;
+
 @end

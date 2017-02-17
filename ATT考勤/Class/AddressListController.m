@@ -54,31 +54,46 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.content.frame = CGRectMake(0, 0, SCREEN_WIDTH, 74);
     self.tableView.frame = CGRectMake(0,74,SCREEN_WIDTH, self.view.frame.size.height-74);
+    
+    self.addressListViewModel.companyCode = @"1";
+    [self.addressListViewModel.refreshDataCommand execute:nil];
 }
 
 -(void)h_bindViewModel{
-
+    
     //跳转到部门通讯
     [[self.addressListViewModel.teamclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-
+        
         TeamController *team = [[TeamController alloc] init];
-
+        
         [self.navigationController pushViewController:team animated:NO];
-
+        
     }];
-
-
+    
+    
     //点击每个人
     [[self.addressListViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-
-        EmployeeController *employee = [[EmployeeController alloc] init];
-
-        [self.navigationController pushViewController:employee animated:NO];
-
-
-        NSLog(@"%@",x);
+        
+        [self performSelectorOnMainThread:@selector(mainThreadback:) withObject:x waitUntilDone:YES];
     }];
+    
+    //回调刷新tableView
+    [[self.addressListViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
+    }];
+    
+}
 
+-(void)mainThreadback:(NSNumber *)num{
+    
+    EmployeeController *employee = [[EmployeeController alloc] init];
+    employee.addressListModel= self.addressListViewModel.arr[[num intValue]];
+    [self.navigationController pushViewController:employee animated:NO];
+}
+
+-(void)mainThread{
+    [self.tableView reloadData];
 }
 
 #pragma mark lazyload
@@ -105,7 +120,7 @@
         //遍历需要搜索的所有内容，其中self.dataArray为存放总数据的数组
         for (AddressListModel *model in self.addressListViewModel.arr) {
             
-            NSString *tempStr = model.title;
+            NSString *tempStr = model.empName;
             
             //----------->把所有的搜索结果转成成拼音
             NSString *pinyin = [self transformToPinyin:tempStr];
@@ -167,7 +182,7 @@
         _content.frame = CGRectMake(0, 0, SCREEN_WIDTH, 74);
         [_content addSubview:self.searchBar];
         [_content addSubview:self.toTeamView];
-         [self.view addSubview:_content];
+        [self.view addSubview:_content];
     }
     return _content;
 }
@@ -259,7 +274,7 @@
         
         //把符合搜索条件的内容展示出来
         AddressListModel *model = self.searchArr[indexPath.row];
-        cell.textLabel.text = model.title;
+        cell.textLabel.text = model.empName;
         return cell;
         
     }
@@ -273,7 +288,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.addressListViewModel.cellclickSubject sendNext:row];
 }

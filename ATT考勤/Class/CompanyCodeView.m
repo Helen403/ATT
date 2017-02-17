@@ -52,7 +52,7 @@
         make.left.equalTo(weakSelf.companyCodeImg.mas_right).offset([self h_w:10]);
         make.centerY.equalTo(weakSelf.companyCodeImg);
         make.right.equalTo(-leftPadding);
-        make.size.equalTo(CGSizeMake(length, [self h_w:30]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:30]));
     }];
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {

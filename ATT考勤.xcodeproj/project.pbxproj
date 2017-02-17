@@ -40,6 +40,7 @@
 		7917118A1E237C7D003D15C1 /* InformController.m in Sources */ = {isa = PBXBuildFile; fileRef = 791711891E237C7D003D15C1 /* InformController.m */; };
 		7917118D1E237C95003D15C1 /* InformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7917118C1E237C95003D15C1 /* InformView.m */; };
 		791711901E237CAB003D15C1 /* InformViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7917118F1E237CAB003D15C1 /* InformViewModel.m */; };
+		791A51FB1E55A1D800F7C026 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 791A51FA1E55A1D800F7C026 /* XMLDictionary.m */; };
 		791C76641E515E1B003B1E54 /* BuildRoleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C76631E515E1B003B1E54 /* BuildRoleCellView.m */; };
 		791C76671E515FFF003B1E54 /* BuildRoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C76661E515FFF003B1E54 /* BuildRoleModel.m */; };
 		791C76691E5160CF003B1E54 /* BuildRole.plist in Resources */ = {isa = PBXBuildFile; fileRef = 791C76681E5160CF003B1E54 /* BuildRole.plist */; };
@@ -206,8 +207,9 @@
 		793B9E9E1E4807E400156CBE /* bg_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 793B9E981E4807E400156CBE /* bg_4.png */; };
 		793B9E9F1E4807E400156CBE /* bg_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 793B9E991E4807E400156CBE /* bg_5.png */; };
 		793B9EA01E4807E400156CBE /* bg_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 793B9E9A1E4807E400156CBE /* bg_6.png */; };
+		793FC9961E5687F50032F689 /* EmployeeTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 793FC9951E5687F50032F689 /* EmployeeTitle.m */; };
+		793FC9A01E56A6360032F689 /* ScanCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793FC99F1E56A6360032F689 /* ScanCodeController.m */; };
 		7943136B1E53F32B0071530C /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943136A1E53F32A0071530C /* Company.m */; };
-		7943136E1E5400D10071530C /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943136D1E5400D10071530C /* XMLDictionary.m */; };
 		7949275C1E10A660007331CA /* BuildRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7949275B1E10A65F007331CA /* BuildRoleController.m */; };
 		7949275F1E10A67B007331CA /* BuildRoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7949275E1E10A67B007331CA /* BuildRoleView.m */; };
 		794927621E10A694007331CA /* BuildRoleViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794927611E10A694007331CA /* BuildRoleViewModel.m */; };
@@ -647,6 +649,8 @@
 		7917118C1E237C95003D15C1 /* InformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformView.m; sourceTree = "<group>"; };
 		7917118E1E237CAB003D15C1 /* InformViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformViewModel.h; sourceTree = "<group>"; };
 		7917118F1E237CAB003D15C1 /* InformViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformViewModel.m; sourceTree = "<group>"; };
+		791A51F91E55A1D800F7C026 /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
+		791A51FA1E55A1D800F7C026 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		791C76621E515E1B003B1E54 /* BuildRoleCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleCellView.h; sourceTree = "<group>"; };
 		791C76631E515E1B003B1E54 /* BuildRoleCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildRoleCellView.m; sourceTree = "<group>"; };
 		791C76651E515FFF003B1E54 /* BuildRoleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleModel.h; sourceTree = "<group>"; };
@@ -929,10 +933,12 @@
 		793B9E981E4807E400156CBE /* bg_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_4.png; sourceTree = "<group>"; };
 		793B9E991E4807E400156CBE /* bg_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_5.png; sourceTree = "<group>"; };
 		793B9E9A1E4807E400156CBE /* bg_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_6.png; sourceTree = "<group>"; };
+		793FC9941E5687F50032F689 /* EmployeeTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeTitle.h; sourceTree = "<group>"; };
+		793FC9951E5687F50032F689 /* EmployeeTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeTitle.m; sourceTree = "<group>"; };
+		793FC99E1E56A6360032F689 /* ScanCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeController.h; sourceTree = "<group>"; };
+		793FC99F1E56A6360032F689 /* ScanCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeController.m; sourceTree = "<group>"; };
 		794313691E53F32A0071530C /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
 		7943136A1E53F32A0071530C /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
-		7943136C1E5400D10071530C /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
-		7943136D1E5400D10071530C /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		7949275A1E10A65F007331CA /* BuildRoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleController.h; sourceTree = "<group>"; };
 		7949275B1E10A65F007331CA /* BuildRoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildRoleController.m; sourceTree = "<group>"; };
 		7949275D1E10A67B007331CA /* BuildRoleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleView.h; sourceTree = "<group>"; };
@@ -2107,16 +2113,6 @@
 			path = GDataXMLNode;
 			sourceTree = "<group>";
 		};
-		792134831E4B237B00C25A67 /* XMLDictionary */ = {
-			isa = PBXGroup;
-			children = (
-				7943136C1E5400D10071530C /* XMLDictionary.h */,
-				7943136D1E5400D10071530C /* XMLDictionary.m */,
-			);
-			name = XMLDictionary;
-			path = "/Users/helen/Downloads/XMLDictionary-master/Tests/../XMLDictionary";
-			sourceTree = "<absolute>";
-		};
 		79282EA61E0B7C7F00F4E050 /* ZJLeadingPageController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2236,6 +2232,7 @@
 				796310DF1E0D286A001462AF /* Newpart(创建账户1) */,
 				79F43D9D1E0D584200C4C932 /* Create(创建账户2) */,
 				794927551E10A5CB007331CA /* BuildRole(创建账户3) */,
+				793FC9971E56A57B0032F689 /* ScanCode(扫码加入公司) */,
 				794927631E10F124007331CA /* CompanyCode(公司码) */,
 				7904A6E61E09163800D6E8D4 /* Home(首页) */,
 				7949277F1E1108FE007331CA /* Apply(申请) */,
@@ -3397,6 +3394,63 @@
 				793B9E9A1E4807E400156CBE /* bg_6.png */,
 			);
 			name = ImageJPG;
+			sourceTree = "<group>";
+		};
+		793FC9971E56A57B0032F689 /* ScanCode(扫码加入公司) */ = {
+			isa = PBXGroup;
+			children = (
+				793FC99D1E56A6010032F689 /* Other */,
+				793FC99C1E56A5FD0032F689 /* Cell */,
+				793FC99B1E56A5F60032F689 /* Model */,
+				793FC9991E56A5D70032F689 /* View */,
+				793FC9981E56A5BE0032F689 /* ViewController */,
+				793FC99A1E56A5DE0032F689 /* ViewModel */,
+			);
+			name = "ScanCode(扫码加入公司)";
+			sourceTree = "<group>";
+		};
+		793FC9981E56A5BE0032F689 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				793FC99E1E56A6360032F689 /* ScanCodeController.h */,
+				793FC99F1E56A6360032F689 /* ScanCodeController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		793FC9991E56A5D70032F689 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		793FC99A1E56A5DE0032F689 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		793FC99B1E56A5F60032F689 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		793FC99C1E56A5FD0032F689 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		793FC99D1E56A6010032F689 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		794927551E10A5CB007331CA /* BuildRole(创建账户3) */ = {
@@ -5783,6 +5837,8 @@
 			children = (
 				79FFB26E1E24DF6900EC082F /* EmployeeModel.h */,
 				79FFB26F1E24DF6900EC082F /* EmployeeModel.m */,
+				793FC9941E5687F50032F689 /* EmployeeTitle.h */,
+				793FC9951E5687F50032F689 /* EmployeeTitle.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -5808,7 +5864,8 @@
 		83B8787B68883EECD9829725 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				792134831E4B237B00C25A67 /* XMLDictionary */,
+				791A51F91E55A1D800F7C026 /* XMLDictionary.h */,
+				791A51FA1E55A1D800F7C026 /* XMLDictionary.m */,
 				7921347C1E4B176C00C25A67 /* libxml2.tbd */,
 				7921347A1E4B174E00C25A67 /* libxml2.2.tbd */,
 				792134761E4B15CA00C25A67 /* GDataXMLNode */,
@@ -6236,6 +6293,7 @@
 				79FAFAA91E348BC800577917 /* TeamListView.m in Sources */,
 				79F964551E2CA85300838CC4 /* ShiftViewModel.m in Sources */,
 				790D8ACC1E2F45CD00DDA697 /* AuditingView.m in Sources */,
+				793FC9961E5687F50032F689 /* EmployeeTitle.m in Sources */,
 				79F964861E2CAD3500838CC4 /* OffController.m in Sources */,
 				795AC47B1E2C584900C69308 /* PBLocation.m in Sources */,
 				793782201E31F4D700ABA7C9 /* KeyBordVIew.m in Sources */,
@@ -6285,6 +6343,7 @@
 				793500EC1E3051FF009ED8AA /* RippleView.m in Sources */,
 				79345B9A1E1F25420007A348 /* FeedbackView.m in Sources */,
 				7949276D1E10F19F007331CA /* CompanyCodeView.m in Sources */,
+				791A51FB1E55A1D800F7C026 /* XMLDictionary.m in Sources */,
 				79F4F07E1E1F85E200115C3B /* MessageView.m in Sources */,
 				794E047E1E23220B00CFE3A3 /* StatisticsCellView.m in Sources */,
 				79362F681E0CB1E500F9B769 /* ForgetView.m in Sources */,
@@ -6419,6 +6478,7 @@
 				79282EAC1E0B7C7F00F4E050 /* ZJLeadingPageController.m in Sources */,
 				79EF94581E262F7100F8E9BC /* UIColor+RGBA.m in Sources */,
 				79DD276D1E31B2F000923D19 /* MyMsgViewModel.m in Sources */,
+				793FC9A01E56A6360032F689 /* ScanCodeController.m in Sources */,
 				79EF94531E262F7100F8E9BC /* HARootScrollViewManager.m in Sources */,
 				7916F7CA1E2CCC6700518DBB /* LeaveCellView.m in Sources */,
 				793782241E31F5E800ABA7C9 /* UIImage+StrethImage.m in Sources */,
@@ -6534,7 +6594,6 @@
 				793487BC1E271F3D00D074D7 /* ListCellView.m in Sources */,
 				794C77311E3204B800013243 /* VoiceButtonView.m in Sources */,
 				7949277E1E10FB9D007331CA /* ForgetPwdViewModel.m in Sources */,
-				7943136E1E5400D10071530C /* XMLDictionary.m in Sources */,
 				794C772F1E3204B800013243 /* UITextView+Category.m in Sources */,
 				79EF944E1E262F7100F8E9BC /* HAAnimationTool.m in Sources */,
 				7949275F1E10A67B007331CA /* BuildRoleView.m in Sources */,

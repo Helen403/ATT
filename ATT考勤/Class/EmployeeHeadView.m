@@ -56,6 +56,8 @@
     [super updateConstraints];
 }
 
+
+
 #pragma mark private
 -(void)h_setupViews{
     
@@ -68,6 +70,18 @@
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
+
+#pragma mark dataload
+-(void)setEmployeeModel:(EmployeeModel *)employeeModel{
+    if (!employeeModel) {
+        return;
+    }
+    _employeeModel = employeeModel;
+    self.name.text = employeeModel.empName;
+    self.autograph.text = employeeModel.empSex;
+    
+}
+
 
 #pragma mark lazyload
 -(UIImageView *)bgImg{
@@ -90,7 +104,7 @@
 -(UILabel *)name{
     if (!_name) {
         _name = [[UILabel alloc] init];
-        _name.text = @"黄慧";
+//        _name.text = @"黄慧";
         _name.font = H20;
         _name.textColor = white_color;
     }
@@ -100,7 +114,7 @@
 -(UILabel *)autograph{
     if (!_autograph) {
         _autograph = [[UILabel alloc] init];
-        _autograph.text = @"树欲静而风不止";
+//        _autograph.text = @"树欲静而风不止";
         _autograph.font = H14;
         _autograph.textColor = white_color;
     }

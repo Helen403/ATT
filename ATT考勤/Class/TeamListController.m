@@ -36,10 +36,6 @@
 
 }
 
-
-#pragma mark system
-
-
 #pragma mark private
 -(void)h_layoutNavigation{
     self.title = @"部门列表";
@@ -48,23 +44,44 @@
 
 -(void)h_addSubviews{
     self.view.backgroundColor = [UIColor whiteColor];
-    self.searchBar.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:25]);
-    self.tableView.frame = CGRectMake(0, [self h_w:25],SCREEN_WIDTH, self.view.frame.size.height-[self h_w:80]);
+    self.searchBar.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
+    self.tableView.frame = CGRectMake(0, 44,SCREEN_WIDTH, self.view.frame.size.height);
+
+    self.teamListViewModel.companyCode = self.companyCode;
+    self.teamListViewModel.deptCode = self.deptCode;
+   
+    [self.teamListViewModel.refreshDataCommand execute:nil];
 }
 
 -(void)h_bindViewModel{
 
+
+    
+    
     //点击每个人
     [[self.teamListViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
-        EmployeeController *employee = [[EmployeeController alloc] init];
-        
-        [self.navigationController pushViewController:employee animated:NO];
-        
-        
-//        NSLog(@"%@",x);
+        [self performSelectorOnMainThread:@selector(mainThreadback:) withObject:x waitUntilDone:YES];
     }];
     
+    //回调刷新tableView
+    [[self.teamListViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
+    }];
+    
+}
+
+-(void)mainThreadback:(NSNumber *)num{
+    
+    EmployeeController *employee = [[EmployeeController alloc] init];
+    employee.addressListModel= self.teamListViewModel.arr[[num intValue]];
+    [self.navigationController pushViewController:employee animated:NO];
+}
+
+
+-(void)mainThread{
+    [self.tableView reloadData];
 }
 
 #pragma mark lazyload
@@ -84,7 +101,7 @@
         //遍历需要搜索的所有内容，其中self.dataArray为存放总数据的数组
         for (TeamListModel *model in self.teamListViewModel.arr) {
             
-            NSString *tempStr = model.title;
+            NSString *tempStr = model.empName;
             
             //----------->把所有的搜索结果转成成拼音
             NSString *pinyin = [self transformToPinyin:tempStr];
@@ -174,7 +191,6 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[TeamListCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamListCellView class])]];
         [self.view addSubview:_tableView];
-        //        _tableView.tableHeaderView = self.content;
         
     }
     return _tableView;
@@ -212,7 +228,7 @@
         
         //把符合搜索条件的内容展示出来
         TeamListModel *model = self.searchArr[indexPath.row];
-        cell.textLabel.text = model.title;
+        cell.textLabel.text = model.empName;
         return cell;
         
     }

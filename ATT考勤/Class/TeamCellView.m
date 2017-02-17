@@ -68,8 +68,8 @@
         return;
     }
     _teamModel = teamModel;
-    self.title.text = teamModel.title;
-    self.number.text = teamModel.number;
+    self.title.text = teamModel.deptFullName;
+    self.number.text = teamModel.deptMasterTel;
 }
 
 #pragma mark lazyload

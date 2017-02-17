@@ -10,8 +10,19 @@
 
 @interface TeamModel : NSObject
 
-@property(nonatomic,strong) NSString *title;
+//@property(nonatomic,strong) NSString *title;
+//
+//@property(nonatomic,strong) NSString *number;
 
-@property(nonatomic,strong) NSString *number;
+
+@property (nonatomic , copy) NSString              * deptFullName;
+@property (nonatomic , copy) NSString              * deptParentCode;
+@property (nonatomic , copy) NSString              * deptMasterName;
+@property (nonatomic , copy) NSString              * deptMasterTel;
+@property (nonatomic , copy) NSString              * deptCode;
+@property (nonatomic , copy) NSString              * deptNickName;
+@property (nonatomic , copy) NSString              * deptStatus;
+@property (nonatomic , copy) NSString              * deptMasterEmail;
+@property (nonatomic , copy) NSString              * companyCode;
 
 @end
