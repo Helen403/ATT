@@ -65,7 +65,7 @@
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                    [self toast:@"请检查网络状态"];
+                   ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
                 }];
                 return nil;

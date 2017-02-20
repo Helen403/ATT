@@ -7,21 +7,27 @@
 //
 
 #import "ForgetViewModel.h"
-
+#import "UserModel.h"
 
 @implementation ForgetViewModel
 
 #pragma mark private
 -(void)h_initialize{
     
-
+    
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
-        NSString *xmlDoc = [self getFilterStr:result filter:@"String"];
-        NSLog(@"%@",xmlDoc);
-         DismissHud();
-        [self.SMSbackSubject sendNext:xmlDoc];
-
+        if(result.length<200){
+            ShowErrorStatus(@"该手机号没注册");
+            [self.telphoneBackFailSubject sendNext:nil];
+        }else{
+            
+            NSString *xmlDoc = [self getFilterStr:result filter:@"String"];
+            NSLog(@"%@",xmlDoc);
+            DismissHud();
+            [self.SMSbackSubject sendNext:xmlDoc];
+        }
+        
     }];
     
     
@@ -41,12 +47,19 @@
     return _forgetPwdclickSubject;
 }
 
+
+-(RACSubject *)telphoneBackFailSubject{
+    if (!_telphoneBackFailSubject) {
+        _telphoneBackFailSubject = [RACSubject subject];
+    }
+    return _telphoneBackFailSubject;
+}
+
 -(RACSubject *)SMSbackSubject{
     if (!_SMSbackSubject) {
         _SMSbackSubject = [RACSubject subject];
     }
     return _SMSbackSubject;
-
 }
 
 #pragma mark lazyload
@@ -56,19 +69,39 @@
         _sendclickCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-                
-                NSString *body =[NSString stringWithFormat: @"<sendValidateSMS xmlns=\"http://service.webservice.vada.com/\">\
+                NSString *body =[NSString stringWithFormat: @"<findUserByTelphone xmlns=\"http://service.webservice.vada.com/\">\
                                  <telphone xmlns=\"\">%@</telphone>\
-                                 </sendValidateSMS>",self.user];
+                                 </findUserByTelphone>",self.user];
                 
-                [self SOAPData:sendValidateSMS soapBody:body success:^(NSString *result) {
+                [self SOAPData:findUserByTelphone soapBody:body success:^(NSString *result) {
                     
-                    [subscriber sendNext:result];
-                    [subscriber sendCompleted];
+                    if (result.length <200) {
+                        
+                        [subscriber sendNext:result];
+                        [subscriber sendCompleted];
+                    }else{
+                        
+                        NSString *body =[NSString stringWithFormat: @"<sendValidateSMS xmlns=\"http://service.webservice.vada.com/\">\
+                                         <telphone xmlns=\"\">%@</telphone>\
+                                         </sendValidateSMS>",self.user];
+                        
+                        [self SOAPData:sendValidateSMS soapBody:body success:^(NSString *result) {
+                            
+                            [subscriber sendNext:result];
+                            [subscriber sendCompleted];
+                        } failure:^(NSError *error) {
+                             ShowErrorStatus(@"请检查网络状态");
+                            DismissHud();
+                        }];
+                    }
                 } failure:^(NSError *error) {
-                    [self toast:@"请检查网络状态"];
+                     ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
                 }];
+                
+                
+                
+                
                 return nil;
             }];
         }];

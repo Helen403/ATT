@@ -62,7 +62,8 @@
 }
 -(void)pop{
     [self.navigationController popToRootViewControllerAnimated:YES];
-    [self toast:@"修改成功"];
+    ShowMessage(@"修改成功");
+
 }
 
 

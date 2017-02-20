@@ -29,12 +29,12 @@
 
 -(void)updateConstraints{
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(3);
-          make.left.equalTo(0);
-          make.right.equalTo(0);
-          make.bottom.equalTo(0);
+        make.top.equalTo(0);
+        make.left.equalTo(0);
+        make.right.equalTo(0);
+        make.bottom.equalTo(0);
     }];
-   
+    
     [super updateConstraints];
 }
 
@@ -43,7 +43,7 @@
     
     self.backgroundColor = GX_BGCOLOR;
     [self addSubview:self.tableView];
-   
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
@@ -80,7 +80,7 @@
     
     SecurityCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([SecurityCellView class])] forIndexPath:indexPath];
     
-        cell.securityModel = self.securityViewModel.arr[indexPath.row];
+    cell.securityModel = self.securityViewModel.arr[indexPath.row];
     
     return cell;
 }
@@ -94,7 +94,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-        [self.securityViewModel.cellclickSubject sendNext:row];
+    [self.securityViewModel.cellclickSubject sendNext:row];
 }
 
 @end

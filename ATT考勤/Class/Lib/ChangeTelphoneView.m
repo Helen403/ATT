@@ -1,33 +1,43 @@
 //
-//  ForgetView.m
+//  ChangeTelphoneView.m
 //  ATT考勤
 //
-//  Created by Helen on 16/12/23.
-//  Copyright © 2016年 Helen. All rights reserved.
+//  Created by Helen on 17/2/20.
+//  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "ForgetView.h"
-#import "ForgetViewModel.h"
+#import "ChangeTelphoneView.h"
+#import "ChangeTelphoneViewModel.h"
 
-@interface ForgetView()
+@interface ChangeTelphoneView()
 
-@property(nonatomic,strong) ForgetViewModel *forgetViewModel;
+@property(nonatomic,strong) ChangeTelphoneViewModel *changeTelphoneViewModel;
 
 @property(nonatomic,strong) UIImageView *useImg;
 
-@property(nonatomic,strong) UITextField *useText;
+@property(nonatomic,strong) UILabel *useLabel;
+
+@property(nonatomic,strong) UILabel *useText;
 
 @property(nonatomic,strong) UIView *line1;
 
-@property(nonatomic,strong) UILabel *hintText;
+@property(nonatomic,strong) UIImageView *telphoneImg;
+
+@property(nonatomic,strong) UILabel *telphoneLabel;
+
+@property(nonatomic,strong) UITextField *telphoneText;
 
 @property(nonatomic,strong) UIButton *countDown;
 
+@property(nonatomic,strong) UIView *line2;
+
 @property(nonatomic,strong) UIImageView *validateImg;
+
+@property(nonatomic,strong) UILabel *validateLabel;
 
 @property(nonatomic,strong) UITextField *validateText;
 
-@property(nonatomic,strong) UIView *line2;
+@property(nonatomic,strong) UIView *line3;
 
 @property(nonatomic,strong) UIButton *next;
 
@@ -35,12 +45,12 @@
 
 @end
 
-@implementation ForgetView
+@implementation ChangeTelphoneView
 
-#pragma mark 初始化
+#pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
     
-    self.forgetViewModel = (ForgetViewModel *)viewModel;
+    self.changeTelphoneViewModel = (ChangeTelphoneViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
 
@@ -57,9 +67,14 @@
         make.left.equalTo(leftPadding);
     }];
     
-    [self.useText mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.useLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.useImg);
         make.left.equalTo(weakSelf.useImg.mas_right).offset([self h_w:10]);
+    }];
+    
+    [self.useText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.useImg);
+        make.left.equalTo(weakSelf.useLabel.mas_right).offset([self h_w:10]);
         make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
     
@@ -68,93 +83,98 @@
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.useText.mas_bottom).offset([self h_w:20]);
+        make.top.equalTo(weakSelf.useText.mas_bottom).offset([self h_w:10]);
         
     }];
     
-    [self.hintText mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.telphoneImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.line1.mas_bottom).offset([self h_w:15]);
-        make.left.equalTo(leftPadding);
+        make.left.equalTo(weakSelf.useImg);
+    }];
+    
+    [self.telphoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.telphoneImg);
+        make.left.equalTo(weakSelf.useLabel);
+    }];
+    [self.telphoneText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.telphoneImg);
+        make.left.equalTo(weakSelf.useText);
+        make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
     
     [self.countDown mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf.hintText);
+        make.centerY.equalTo(weakSelf.telphoneImg);
         make.right.equalTo(weakSelf.line1);
+    }];
+    
+    [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(leftPadding);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
+        make.right.equalTo(-leftPadding);
+        make.top.equalTo(weakSelf.telphoneImg.mas_bottom).offset([self h_w:10]);
     }];
     
     [self.validateImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.useImg);
-        make.top.equalTo(weakSelf.hintText.mas_bottom).offset([self h_w:15]);
+        make.top.equalTo(weakSelf.line2.mas_bottom).offset([self h_w:15]);
+    }];
+    
+    [self.validateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.validateImg);
+        make.left.equalTo(weakSelf.useLabel);
     }];
     
     [self.validateText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.useText);
         make.centerY.equalTo(weakSelf.validateImg);
-        make.size.equalTo(CGSizeMake(length, [self h_w:35]));
+        make.left.equalTo(weakSelf.useText);
+        make.size.equalTo(CGSizeMake([self h_w:100], [self h_w:30]));
     }];
     
-    [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.validateImg.mas_bottom).offset([self h_w:15]);
+    [self.line3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.validateImg.mas_bottom).offset([self h_w:10]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
     }];
     
     [self.next mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.line2.mas_bottom).offset([self h_w:15]);
+        make.top.equalTo(weakSelf.line3.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
     }];
     
-    
     [super updateConstraints];
-    
 }
 
 #pragma mark private
 -(void)h_setupViews{
     
     [self addSubview:self.useImg];
+    [self addSubview:self.useLabel];
     [self addSubview:self.useText];
     [self addSubview:self.line1];
-    [self addSubview:self.hintText];
+    [self addSubview:self.telphoneImg];
+    [self addSubview:self.telphoneLabel];
+    [self addSubview:self.telphoneText];
     [self addSubview:self.countDown];
-    [self addSubview:self.validateImg];
-    [self addSubview:self.validateText];
     [self addSubview:self.line2];
-    [self addSubview:self.next];
     
+    [self addSubview:self.validateImg];
+    [self addSubview:self.validateLabel];
+    [self addSubview:self.validateText];
+    [self addSubview:self.line3];
+    [self addSubview:self.next];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
--(void)h_bindViewModel{
-    [self addDynamic:self];
-    
-    //请求返回回来的验证码
-    [[self.forgetViewModel.SMSbackSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
-        
-        self.backNumber = x;
-        
-    }];
-    
-    //手机号不符合
-    [[self.forgetViewModel.telphoneBackFailSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-        self.useText.text = @"";
-    }];
-    
-}
-
-
 #pragma mark lazyload
--(ForgetViewModel *)forgetViewModel{
-    if (!_forgetViewModel) {
-        _forgetViewModel = [[ForgetViewModel alloc] init];
+-(ChangeTelphoneViewModel *)changeTelphoneViewModel{
+    if (!_changeTelphoneViewModel) {
+        _changeTelphoneViewModel = [[ChangeTelphoneViewModel alloc] init];
     }
-    return _forgetViewModel;
+    return _changeTelphoneViewModel;
 }
-
 
 -(UIImageView *)useImg{
     if (!_useImg) {
@@ -164,32 +184,80 @@
     return _useImg;
 }
 
--(UITextField *)useText{
+-(UILabel *)useLabel{
+    if (!_useLabel) {
+        _useLabel = [[UILabel alloc] init];
+        _useLabel.text = @"原来手机号";
+        _useLabel.textColor = MAIN_PAN_2;
+        _useLabel.font = H14;
+    }
+    return _useLabel;
+}
+
+-(UILabel *)useText{
     if (!_useText) {
-        _useText = [[UITextField alloc] init];
-        
-        _useText.backgroundColor = [UIColor clearColor];
-        //设置边框样式，只有设置了才会显示边框样式
-        
-        // 设置内容 -- 垂直居中
-        _useText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        
-        
-        //当输入框没有内容时，水印提示 提示内容为password
-        _useText.placeholder = @"输入手机号";
-        
-        //修改account的placeholder的字体颜色、大小
-        [_useText setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
-        [_useText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
-        //设置输入框内容的字体样式和大小
+        _useText = [[UILabel alloc] init];
+        _useText.text = @"18678968888";
+        _useText.textColor = MAIN_PAN_2;
         _useText.font = H14;
-        // 设置右边永远显示清除按钮
-        _useText.clearButtonMode = UITextFieldViewModeAlways;
-        _useText.keyboardType = UIKeyboardTypePhonePad;
-        
     }
     return _useText;
 }
+
+-(UIImageView *)telphoneImg{
+    if (!_telphoneImg) {
+        _telphoneImg = [[UIImageView alloc] init];
+        _telphoneImg.image = ImageNamed(@"login_phone_picture");
+    }
+    return _telphoneImg;
+}
+
+-(UILabel *)telphoneLabel{
+    if (!_telphoneLabel) {
+        _telphoneLabel = [[UILabel alloc] init];
+        _telphoneLabel.text = @"新的手机号";
+        _telphoneLabel.textColor = MAIN_PAN_2;
+        _telphoneLabel.font = H14;
+    }
+    return _telphoneLabel;
+}
+
+-(UILabel *)validateLabel{
+    if (!_validateLabel) {
+        _validateLabel = [[UILabel alloc] init];
+        _validateLabel.text = @"输入验证码";
+        _validateLabel.textColor = MAIN_PAN_2;
+        _validateLabel.font = H14;
+    }
+    return _validateLabel;
+}
+
+-(UITextField *)telphoneText{
+    if (!_telphoneText) {
+        _telphoneText = [[UITextField alloc] init];
+        
+        _telphoneText.backgroundColor = [UIColor clearColor];
+        //设置边框样式，只有设置了才会显示边框样式
+        
+        // 设置内容 -- 垂直居中
+        _telphoneText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        
+        
+        //当输入框没有内容时，水印提示 提示内容为password
+        _telphoneText.placeholder = @"输入手机号";
+        
+        //修改account的placeholder的字体颜色、大小
+        [_telphoneText setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_telphoneText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
+        //设置输入框内容的字体样式和大小
+        _telphoneText.font = H14;
+        // 设置右边永远显示清除按钮
+        _telphoneText.clearButtonMode = UITextFieldViewModeAlways;
+        _telphoneText.keyboardType = UIKeyboardTypePhonePad;
+    }
+    return _telphoneText;
+}
+
 
 -(UIView *)line1{
     if (!_line1) {
@@ -200,14 +268,13 @@
     
 }
 
--(UILabel *)hintText{
-    if (!_hintText) {
-        _hintText = [[UILabel alloc] init];
-        _hintText.font = H14;
-        _hintText.text = @"验证码30分钟内有效";
-        _hintText.textColor = MAIN_GRAY;
+-(UIView *)line3{
+    if (!_line3) {
+        _line3 = [[UIView alloc] init];
+        _line3.backgroundColor = MAIN_LINE_COLOR;
     }
-    return _hintText;
+    return _line3;
+    
 }
 
 -(UIButton *)countDown{
@@ -228,6 +295,7 @@
         [_countDown.layer setBorderWidth:6];//设置边界的宽度
         
         [_countDown setBackgroundColor:MAIN_ORANGER];
+        //设置按钮的边界颜色
         
         [_countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
@@ -239,13 +307,13 @@
 -(void)startTime:(UIButton *)button{
     
     if (![self.useText.text isVaildTelphone]) {
+       
         ShowErrorStatus(@"请输入正确的手机号");
-        
         return;
     }
     
-    self.forgetViewModel.user = self.useText.text;
-    [self.forgetViewModel.sendclickCommand execute:nil];
+    //    self.newpartViewModel.user = self.useText.text;
+    //    [self.newpartViewModel.sendclickCommand execute:nil];
     
     __block int timeout = 30; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -256,11 +324,10 @@
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
+                //设置界面的按钮显示 根据自己需求设置
                 [button setTitle:@" 验证码 " forState:UIControlStateNormal];
                 button.userInteractionEnabled = YES;
-                //                [button setBackgroundColor:MAIN_ORANGER];
-                //
-                //                [button.layer setBorderColor:MAIN_ORANGER.CGColor];
+                
             });
         }else{
             int seconds = timeout % 60;
@@ -272,9 +339,7 @@
                 [UIView setAnimationDuration:1];
                 [button setTitle:[NSString stringWithFormat:@" %@秒后 ",strTime] forState:UIControlStateNormal];
                 [UIView commitAnimations];
-                //                [button setBackgroundColor:MAIN_GRAY];
-                //
-                //                [button.layer setBorderColor:MAIN_GRAY.CGColor];
+                
                 button.userInteractionEnabled = NO;
             });
             timeout--;
@@ -287,7 +352,7 @@
 -(UIImageView *)validateImg{
     if (!_validateImg) {
         _validateImg = [[UIImageView alloc] init];
-        _validateImg.image = ImageNamed(@"login_phone_picture");
+        _validateImg.image = ImageNamed(@"Login_password_picture");
     }
     return _validateImg;
 }
@@ -312,6 +377,8 @@
         _validateText.font = H14;
         // 设置右边永远显示清除按钮
         _validateText.clearButtonMode = UITextFieldViewModeAlways;
+        
+        _validateText.keyboardType = UIKeyboardTypePhonePad;
     }
     return _validateText;
 }
@@ -319,7 +386,7 @@
 -(UIView *)line2{
     if (!_line2) {
         _line2 = [[UIView alloc] init];
-        _line2.backgroundColor = MAIN_GRAY;
+        _line2.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line2;
 }
@@ -351,9 +418,11 @@
 
 -(void)next:(UIButton *)button{
     if ([self.validateText.text isEqualToString:self.backNumber]) {
-        [self.forgetViewModel.forgetPwdclickSubject sendNext:nil];
+        //        [self.newpartViewModel.createclickSubject sendNext:self.useText.text];
     }
 }
+
+
 
 
 @end

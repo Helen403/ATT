@@ -144,7 +144,7 @@
 -(UIImageView *)security{
     if (!_security) {
         _security = [[UIImageView alloc] init];
-        _security.image = ImageNamed(@"Login_password_picture");
+//        _security.image = ImageNamed(@"Login_password_picture");
         _security.hidden = YES;
     }
     return _security;

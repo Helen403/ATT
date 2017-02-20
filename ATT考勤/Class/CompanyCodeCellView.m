@@ -1,20 +1,20 @@
 //
-//  LeaveCellView.m
+//  CompanyCodeCellView.m
 //  ATT考勤
 //
-//  Created by Helen on 17/1/16.
+//  Created by Helen on 17/2/20.
 //  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "LeaveCellView.h"
+#import "CompanyCodeCellView.h"
 
-@interface LeaveCellView()
+@interface CompanyCodeCellView()
 
 @property(nonatomic,strong) UILabel *title;
 
 @end
 
-@implementation LeaveCellView
+@implementation CompanyCodeCellView
 
 #pragma mark system
 -(void)updateConstraints{
@@ -30,6 +30,7 @@
 #pragma mark private
 -(void)h_setupViews{
     
+    self.backgroundColor = white_color;
     [self addSubview:self.title];
     
     [self setNeedsUpdateConstraints];
@@ -37,12 +38,14 @@
 }
 
 #pragma mark dataload
--(void)setLeaveModel:(LeaveModel *)leaveModel{
-    if (!leaveModel) {
+
+
+-(void)setTeamModel:(TeamModel *)teamModel{
+    if (!teamModel) {
         return;
     }
-    _leaveModel = leaveModel;
-    self.title.text = leaveModel.title;
+    _teamModel = teamModel;
+    self.title.text = teamModel.deptFullName;
 }
 
 #pragma mark lazyload
@@ -55,5 +58,6 @@
     }
     return _title;
 }
+
 
 @end

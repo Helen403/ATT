@@ -350,6 +350,7 @@
 		794C77A71E3204B800013243 /* liaotian_ic_yuyin_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 794C77261E3204B800013243 /* liaotian_ic_yuyin_nor@2x.png */; };
 		794C77A81E3204B800013243 /* liaotian_ic_yuyin_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 794C77271E3204B800013243 /* liaotian_ic_yuyin_nor@3x.png */; };
 		794C77A91E3204B800013243 /* mianView.png in Resources */ = {isa = PBXBuildFile; fileRef = 794C77281E3204B800013243 /* mianView.png */; };
+		794CB48A1E56EDFB00403387 /* ScanCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794CB4891E56EDFB00403387 /* ScanCodeModel.m */; };
 		794E04721E23203D00CFE3A3 /* StatisticsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 794E04711E23203D00CFE3A3 /* StatisticsController.m */; };
 		794E04751E23206000CFE3A3 /* StatisticsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794E04741E23206000CFE3A3 /* StatisticsView.m */; };
 		794E04781E23207900CFE3A3 /* StatisticsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794E04771E23207900CFE3A3 /* StatisticsViewModel.m */; };
@@ -478,6 +479,10 @@
 		79F4F0841E1F891C00115C3B /* MessageCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F4F0831E1F891C00115C3B /* MessageCellView.m */; };
 		79F4F0871E1F893900115C3B /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F4F0861E1F893900115C3B /* MessageModel.m */; };
 		79F4F0891E1F89BB00115C3B /* Message.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79F4F0881E1F89BB00115C3B /* Message.plist */; };
+		79F7D8501E5AC297004DF0DB /* CompanyCodeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F7D84F1E5AC297004DF0DB /* CompanyCodeCellView.m */; };
+		79F7D85A1E5AC96F004DF0DB /* ChangeTelphoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F7D8591E5AC96F004DF0DB /* ChangeTelphoneController.m */; };
+		79F7D85D1E5AC987004DF0DB /* ChangeTelphoneViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F7D85C1E5AC987004DF0DB /* ChangeTelphoneViewModel.m */; };
+		79F7D8601E5AC9A8004DF0DB /* ChangeTelphoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F7D85F1E5AC9A8004DF0DB /* ChangeTelphoneView.m */; };
 		79F8560D1E02C216002D82F4 /* HTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F8560C1E02C216002D82F4 /* HTableViewCell.m */; };
 		79F856161E02C3F3002D82F4 /* HTableViewHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F856151E02C3F3002D82F4 /* HTableViewHeaderFooterView.m */; };
 		79F8561C1E02C689002D82F4 /* HCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F8561B1E02C689002D82F4 /* HCollectionViewCell.m */; };
@@ -556,6 +561,7 @@
 		79FC0E861E4C5A0E00CDDF87 /* bg_18.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0E781E4C5A0E00CDDF87 /* bg_18.png */; };
 		79FC0E871E4C5A0E00CDDF87 /* bg_17.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0E791E4C5A0E00CDDF87 /* bg_17.png */; };
 		79FC0E881E4C5A0E00CDDF87 /* bg_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0E7A1E4C5A0E00CDDF87 /* bg_11.png */; };
+		79FC77DC1E56E7C50018C222 /* ScanCodeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC77DB1E56E7C40018C222 /* ScanCodeViewModel.m */; };
 		79FFB2591E24BA7E00EC082F /* AddressListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB2581E24BA7E00EC082F /* AddressListCellView.m */; };
 		79FFB25C1E24BB0400EC082F /* AddressListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB25B1E24BB0400EC082F /* AddressListModel.m */; };
 		79FFB25E1E24BC3D00EC082F /* AddressList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79FFB25D1E24BC3D00EC082F /* AddressList.plist */; };
@@ -1099,6 +1105,8 @@
 		794C77261E3204B800013243 /* liaotian_ic_yuyin_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liaotian_ic_yuyin_nor@2x.png"; sourceTree = "<group>"; };
 		794C77271E3204B800013243 /* liaotian_ic_yuyin_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liaotian_ic_yuyin_nor@3x.png"; sourceTree = "<group>"; };
 		794C77281E3204B800013243 /* mianView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mianView.png; sourceTree = "<group>"; };
+		794CB4881E56EDFB00403387 /* ScanCodeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeModel.h; sourceTree = "<group>"; };
+		794CB4891E56EDFB00403387 /* ScanCodeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeModel.m; sourceTree = "<group>"; };
 		794E04701E23203D00CFE3A3 /* StatisticsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsController.h; sourceTree = "<group>"; };
 		794E04711E23203D00CFE3A3 /* StatisticsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsController.m; sourceTree = "<group>"; };
 		794E04731E23206000CFE3A3 /* StatisticsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsView.h; sourceTree = "<group>"; };
@@ -1356,6 +1364,14 @@
 		79F4F0851E1F893900115C3B /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
 		79F4F0861E1F893900115C3B /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 		79F4F0881E1F89BB00115C3B /* Message.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Message.plist; sourceTree = "<group>"; };
+		79F7D84E1E5AC297004DF0DB /* CompanyCodeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyCodeCellView.h; sourceTree = "<group>"; };
+		79F7D84F1E5AC297004DF0DB /* CompanyCodeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyCodeCellView.m; sourceTree = "<group>"; };
+		79F7D8581E5AC96F004DF0DB /* ChangeTelphoneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeTelphoneController.h; sourceTree = "<group>"; };
+		79F7D8591E5AC96F004DF0DB /* ChangeTelphoneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeTelphoneController.m; sourceTree = "<group>"; };
+		79F7D85B1E5AC987004DF0DB /* ChangeTelphoneViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeTelphoneViewModel.h; sourceTree = "<group>"; };
+		79F7D85C1E5AC987004DF0DB /* ChangeTelphoneViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeTelphoneViewModel.m; sourceTree = "<group>"; };
+		79F7D85E1E5AC9A8004DF0DB /* ChangeTelphoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeTelphoneView.h; sourceTree = "<group>"; };
+		79F7D85F1E5AC9A8004DF0DB /* ChangeTelphoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeTelphoneView.m; sourceTree = "<group>"; };
 		79F8560B1E02C216002D82F4 /* HTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTableViewCell.h; sourceTree = "<group>"; };
 		79F8560C1E02C216002D82F4 /* HTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTableViewCell.m; sourceTree = "<group>"; };
 		79F856111E02C276002D82F4 /* HTableVIewCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTableVIewCellProtocol.h; sourceTree = "<group>"; };
@@ -1495,6 +1511,8 @@
 		79FC0E781E4C5A0E00CDDF87 /* bg_18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_18.png; sourceTree = "<group>"; };
 		79FC0E791E4C5A0E00CDDF87 /* bg_17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_17.png; sourceTree = "<group>"; };
 		79FC0E7A1E4C5A0E00CDDF87 /* bg_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_11.png; sourceTree = "<group>"; };
+		79FC77DA1E56E7C40018C222 /* ScanCodeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeViewModel.h; sourceTree = "<group>"; };
+		79FC77DB1E56E7C40018C222 /* ScanCodeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeViewModel.m; sourceTree = "<group>"; };
 		79FFB2571E24BA7E00EC082F /* AddressListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListCellView.h; sourceTree = "<group>"; };
 		79FFB2581E24BA7E00EC082F /* AddressListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListCellView.m; sourceTree = "<group>"; };
 		79FFB25A1E24BB0400EC082F /* AddressListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListModel.h; sourceTree = "<group>"; };
@@ -2254,6 +2272,8 @@
 				793765261E14935600F7B34F /* Approve(已处理) */,
 				793710281E1C82E8002F3E2E /* Mine(我的信息) */,
 				79ED5E7C1E1CE48100BBC3D9 /* Set(设置) */,
+				796A972B1E28782800E1B7E0 /* Security(账户与安全) */,
+				79F7D8511E5AC8BB004DF0DB /* ChangeTelPhone(更换手机号) */,
 				79375CFA1E1DD7D100E27934 /* Version(版本检测) */,
 				79375D221E1DF76F00E27934 /* function(功能介绍) */,
 				79375D0A1E1DE6E200E27934 /* Time(定时提醒) */,
@@ -2272,7 +2292,6 @@
 				79EF94101E2611A300F8E9BC /* Personal(个人考勤) */,
 				79EF942B1E262C8E00F8E9BC /* Check(考勤) */,
 				79380A711E25CE25004E7250 /* TeamAttendance(部门考勤) */,
-				796A972B1E28782800E1B7E0 /* Security(账户与安全) */,
 				790D8AF21E2F54B100DDA697 /* MyMsg(我的消息) */,
 				793781E91E31E2E500ABA7C9 /* Chat(聊天) */,
 			);
@@ -3428,6 +3447,8 @@
 		793FC99A1E56A5DE0032F689 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				79FC77DA1E56E7C40018C222 /* ScanCodeViewModel.h */,
+				79FC77DB1E56E7C40018C222 /* ScanCodeViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -3435,6 +3456,8 @@
 		793FC99B1E56A5F60032F689 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				794CB4881E56EDFB00403387 /* ScanCodeModel.h */,
+				794CB4891E56EDFB00403387 /* ScanCodeModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -4846,6 +4869,68 @@
 			path = DLTabbarView;
 			sourceTree = "<group>";
 		};
+		79F7D8511E5AC8BB004DF0DB /* ChangeTelPhone(更换手机号) */ = {
+			isa = PBXGroup;
+			children = (
+				79F7D8571E5AC908004DF0DB /* Other */,
+				79F7D8561E5AC902004DF0DB /* Cell */,
+				79F7D8551E5AC8FB004DF0DB /* Model */,
+				79F7D8541E5AC8F7004DF0DB /* View */,
+				79F7D8531E5AC8EE004DF0DB /* ViewController */,
+				79F7D8521E5AC8E6004DF0DB /* ViewModel */,
+			);
+			name = "ChangeTelPhone(更换手机号)";
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		79F7D8521E5AC8E6004DF0DB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79F7D85B1E5AC987004DF0DB /* ChangeTelphoneViewModel.h */,
+				79F7D85C1E5AC987004DF0DB /* ChangeTelphoneViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		79F7D8531E5AC8EE004DF0DB /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79F7D8581E5AC96F004DF0DB /* ChangeTelphoneController.h */,
+				79F7D8591E5AC96F004DF0DB /* ChangeTelphoneController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		79F7D8541E5AC8F7004DF0DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79F7D85E1E5AC9A8004DF0DB /* ChangeTelphoneView.h */,
+				79F7D85F1E5AC9A8004DF0DB /* ChangeTelphoneView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		79F7D8551E5AC8FB004DF0DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		79F7D8561E5AC902004DF0DB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		79F7D8571E5AC908004DF0DB /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		79F8A4E41E03C352004F8A8C /* Login(登陆) */ = {
 			isa = PBXGroup;
 			children = (
@@ -5729,6 +5814,8 @@
 		79FAFAC11E34A9A200577917 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				79F7D84E1E5AC297004DF0DB /* CompanyCodeCellView.h */,
+				79F7D84F1E5AC297004DF0DB /* CompanyCodeCellView.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -6320,6 +6407,7 @@
 				79FFB25C1E24BB0400EC082F /* AddressListModel.m in Sources */,
 				79F8A4E01E03C110004F8A8C /* StartApp.m in Sources */,
 				793765461E14A45800F7B34F /* XCFTabBarController.m in Sources */,
+				79F7D85D1E5AC987004DF0DB /* ChangeTelphoneViewModel.m in Sources */,
 				7964B3791E2EFC90001AC5E5 /* MeApplyController.m in Sources */,
 				79345B8E1E1F236C0007A348 /* MyOpinionController.m in Sources */,
 				798FB46F1E543EAD003B40D7 /* MultiRolesViewModel.m in Sources */,
@@ -6337,6 +6425,7 @@
 				7934879D1E270BA100D074D7 /* FDCalendarItem.m in Sources */,
 				79DD27611E31A13800923D19 /* MultiRolesModel.m in Sources */,
 				7917118A1E237C7D003D15C1 /* InformController.m in Sources */,
+				79F7D85A1E5AC96F004DF0DB /* ChangeTelphoneController.m in Sources */,
 				794B5B7E1E4BFCCC006B858A /* UserModel.m in Sources */,
 				7928BD711E0273A4009BB0B4 /* AppDelegate.m in Sources */,
 				79F4F07B1E1F85BC00115C3B /* MessageController.m in Sources */,
@@ -6392,6 +6481,7 @@
 				79375D4D1E1E2DE600E27934 /* AboutCellView.m in Sources */,
 				795AC4681E2C50D700C69308 /* UIColor+YXAdd.m in Sources */,
 				796310E91E0D2B3A001462AF /* NewpartViewController.m in Sources */,
+				794CB48A1E56EDFB00403387 /* ScanCodeModel.m in Sources */,
 				79375D2E1E1DF7E400E27934 /* FunctionView.m in Sources */,
 				792134791E4B15CA00C25A67 /* GDataXMLNode.m in Sources */,
 				7937CC0C1E24899000A4F82F /* AddressListViewModel.m in Sources */,
@@ -6553,6 +6643,7 @@
 				79F9647C1E2CABEB00838CC4 /* ResignationView.m in Sources */,
 				79F964321E2CA4C800838CC4 /* BusinessTravelViewModel.m in Sources */,
 				79282EBE1E0B7DF000F4E050 /* ZJProgressHUDView.m in Sources */,
+				79F7D8601E5AC9A8004DF0DB /* ChangeTelphoneView.m in Sources */,
 				79F0A1381E13990A00A1B8AA /* ZJCollectionView.m in Sources */,
 				79F8560D1E02C216002D82F4 /* HTableViewCell.m in Sources */,
 				796803341E111F7400CED421 /* MyExamineView.m in Sources */,
@@ -6577,6 +6668,7 @@
 				79F964961E2CAEA400838CC4 /* DrainPunchController.m in Sources */,
 				796803311E111F4F00CED421 /* MyApplyView.m in Sources */,
 				794927621E10A694007331CA /* BuildRoleViewModel.m in Sources */,
+				79F7D8501E5AC297004DF0DB /* CompanyCodeCellView.m in Sources */,
 				790D8AFB1E2F55EB00DDA697 /* MyMsgController.m in Sources */,
 				791711901E237CAB003D15C1 /* InformViewModel.m in Sources */,
 				79DD27581E319D9F00923D19 /* MultiRolesController.m in Sources */,
@@ -6608,6 +6700,7 @@
 				79375D191E1DE7B000E27934 /* TimeViewModel.m in Sources */,
 				79F964451E2CA6E300838CC4 /* GoOutViewModel.m in Sources */,
 				79375D1C1E1DE9D900E27934 /* TimeCellView.m in Sources */,
+				79FC77DC1E56E7C50018C222 /* ScanCodeViewModel.m in Sources */,
 				79FAFAAC1E348BDC00577917 /* TeamListViewModel.m in Sources */,
 				791EE6EF1E1F9280000BA8B8 /* NewsView.m in Sources */,
 				7964B3971E2F1E0A001AC5E5 /* ApproveCellView.m in Sources */,

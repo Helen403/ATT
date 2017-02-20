@@ -20,4 +20,7 @@
 
 @property(nonatomic,strong) NSString *userCode;
 
+
+@property(nonatomic,strong) RACSubject *addSubject;
+
 @end

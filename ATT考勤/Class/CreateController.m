@@ -59,7 +59,7 @@
 -(void)mainThread{
     
     BuildRoleController *buildRole = [[BuildRoleController alloc] init];
- 
+    buildRole.index = 0;
     [self.navigationController pushViewController:buildRole animated:YES];
 
 }

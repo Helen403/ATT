@@ -28,7 +28,6 @@
     [super viewDidLoad];
 }
 
-
 #pragma mark system
 -(void)updateViewConstraints{
     
@@ -42,7 +41,7 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-    self.title = @"新建角色";
+    self.title = @"加入公司";
     
 }
 
@@ -57,14 +56,14 @@
         switch ([x intValue]) {
             case 0:{
                 ScanCodeController *scanCode = [[ScanCodeController alloc] init];
-                
+                scanCode.index = self.index;
                 [self.navigationController pushViewController:scanCode animated:YES];
             }
                 break;
                 
             case 1:{
                 CompanyCodeController *company = [[CompanyCodeController alloc] init];
-                
+                company.index = self.index;
                 [self.navigationController pushViewController:company animated:YES];
             }
                 break;

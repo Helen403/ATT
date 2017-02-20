@@ -10,4 +10,6 @@
 
 @interface CompanyCodeController : HViewController
 
+@property(nonatomic,assign) NSInteger index;
+
 @end

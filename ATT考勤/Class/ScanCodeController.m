@@ -8,6 +8,11 @@
 
 #import "ScanCodeController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "ScanCodeViewModel.h"
+#import "ScanCodeModel.h"
+
+#import "CompanyCodeCellView.h"
+
 /**
  *  屏幕 高 宽 边界
  */
@@ -19,7 +24,7 @@
 
 #define kScanRect CGRectMake(LEFT, TOP, 220, 220)
 
-@interface ScanCodeController ()<AVCaptureMetadataOutputObjectsDelegate>{
+@interface ScanCodeController ()<AVCaptureMetadataOutputObjectsDelegate,UITableViewDelegate,UITableViewDataSource>{
     int num;
     BOOL upOrdown;
     NSTimer * timer;
@@ -33,19 +38,54 @@
 
 @property (nonatomic, strong) UIImageView * line;
 
+@property(nonatomic,strong) UILabel *label;
+
+@property(nonatomic,strong) ScanCodeViewModel *scanCodeViewModel;
+
+@property(nonatomic,strong) UITableView *tableView;
+
 @end
 
 @implementation ScanCodeController
+
+#pragma mark system
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self configView];
+}
 
 #pragma mark private
 -(void)h_layoutNavigation{
     self.title = @"扫码加入";
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self configView];
+-(void)h_bindViewModel{
+    [[self.scanCodeViewModel.addclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        if (self.index == 0) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            [self.navigationController popViewControllerAnimated:NO];
+        }
+    }];
+    
+    //加入公司后弹出部门选择
+    [[self.scanCodeViewModel.showClickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
+    }];
 }
+
+
+-(void)mainThread{
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, self.scanCodeViewModel.arr.count*[self h_w:40]);
+    [self.tableView reloadData];
+    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
+    [HWPopTool sharedInstance].tapOutsideToDismiss = NO;
+    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
+    [[HWPopTool sharedInstance] showWithPresentView:self.tableView animated:NO];
+}
+
+
 
 -(void)configView{
     UIImageView * imageView = [[UIImageView alloc]initWithFrame:kScanRect];
@@ -60,7 +100,42 @@
     
     timer = [NSTimer scheduledTimerWithTimeInterval:.02 target:self selector:@selector(animation1) userInfo:nil repeats:YES];
     
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH, 30)];
+    label.center = CGPointMake(SCREEN_WIDTH*0.5, TOP+220+30);
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"将二维码放在取景框内可自动扫码";
+    label.textColor = MAIN_ORANGER;
+    label.font = H12;
+    [self.view addSubview:label];
+    
+    //    NSString *str = @"{companyCode:3,companyInvitationCode:'ccc'}";
+    //
+    //
+    //    NSLog(@"666");
+    //    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake([self h_w:10], TOP+220+30+30, SCREEN_WIDTH-[self h_w:20], [self h_w:35])];
+    //    [button setTitle:@"取消" forState:UIControlStateNormal];
+    //    button.titleLabel.textColor = white_color;
+    //    button.titleLabel.font = H20;
+    //    [button addTarget:self action:@selector(finish:) forControlEvents:UIControlEventTouchUpInside];
+    //
+    //    [button.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
+    //
+    //    [button.layer setCornerRadius:10];
+    //
+    //    [button.layer setBorderWidth:2];//设置边界的宽度
+    //
+    //    [button setBackgroundColor:MAIN_ORANGER];
+    //    //设置按钮的边界颜色
+    //    [button.layer setBorderColor:MAIN_ORANGER.CGColor];
+    //
+    //    [self.view addSubview:button];
+    
 }
+//-(void)finish:(UIButton *)button{
+//
+//}
+
+
 -(void)viewWillAppear:(BOOL)animated{
     
     [self setCropRect:kScanRect];
@@ -88,8 +163,8 @@
     
 }
 
-
 - (void)setCropRect:(CGRect)cropRect{
+    
     cropLayer = [[CAShapeLayer alloc] init];
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathAddRect(path, nil, cropRect);
@@ -98,7 +173,7 @@
     [cropLayer setFillRule:kCAFillRuleEvenOdd];
     [cropLayer setPath:path];
     [cropLayer setFillColor:[UIColor blackColor].CGColor];
-    [cropLayer setOpacity:0.6];
+    [cropLayer setOpacity:0.3];
     
     
     [cropLayer setNeedsDisplay];
@@ -160,6 +235,9 @@
     
     // Start
     [_session startRunning];
+    
+    
+    
 }
 
 #pragma mark AVCaptureMetadataOutputObjectsDelegate
@@ -175,23 +253,31 @@
         
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
         stringValue = metadataObject.stringValue;
-        NSLog(@"扫描结果：%@",stringValue);
-        
-        NSArray *arry = metadataObject.corners;
-        for (id temp in arry) {
-            NSLog(@"%@",temp);
-        }
+        //        NSLog(@"扫描结果：%@",stringValue);
         
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"扫描结果" message:stringValue preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (_session != nil && timer != nil) {
-                [_session startRunning];
-                [timer setFireDate:[NSDate date]];
-            }
-            
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
+        stringValue =  [LSCoreToolCenter changeJsonStringToTrueJsonString:stringValue];
+        NSDictionary *dict = [stringValue dictionaryWithJsonString];
+        ScanCodeModel *scanCodeModel =  [ScanCodeModel mj_objectWithKeyValues:dict];
+        NSString *str =  [[NSUserDefaults standardUserDefaults] objectForKey:@"returnCode"];
+        self.scanCodeViewModel.userCode = str;
+        self.scanCodeViewModel.inviteCode = scanCodeModel.companyInvitationCode;
+        [self.scanCodeViewModel.sendclickCommand execute:nil];
+        //        NSArray *arry = metadataObject.corners;
+        //        for (id temp in arry) {
+        //            NSLog(@"%@",temp);
+        //        }
+        
+        
+        //        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"扫描结果" message:stringValue preferredStyle:UIAlertControllerStyleAlert];
+        //        [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //            if (_session != nil && timer != nil) {
+        //                [_session startRunning];
+        //                [timer setFireDate:[NSDate date]];
+        //            }
+        //
+        //        }]];
+        //        [self presentViewController:alert animated:YES completion:nil];
         
     } else {
         NSLog(@"无扫描信息");
@@ -200,7 +286,66 @@
     
 }
 
+-(ScanCodeViewModel *)scanCodeViewModel{
+    if (!_scanCodeViewModel) {
+        _scanCodeViewModel = [[ScanCodeViewModel alloc] init];
+    }
+    return _scanCodeViewModel;
+}
 
+
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = GX_BGCOLOR;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[CompanyCodeCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([CompanyCodeCellView class])]];
+        _tableView.scrollEnabled = NO;
+        
+    }
+    return _tableView;
+    
+}
+
+
+#pragma mark - delegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return self.scanCodeViewModel.arr.count;
+}
+
+#pragma mark tableViewDataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CompanyCodeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([CompanyCodeCellView class])] forIndexPath:indexPath];
+    
+    cell.teamModel = self.scanCodeViewModel.arr[indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return [self h_w:40];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    TeamModel *teamModel =  self.scanCodeViewModel.arr[indexPath.row];
+    self.scanCodeViewModel.deptCode = teamModel.deptCode;
+    [self.scanCodeViewModel.addTeamCommand execute:nil];
+    [[HWPopTool sharedInstance] closeWithBlcok:^{
+        
+    }];
+}
 
 
 @end

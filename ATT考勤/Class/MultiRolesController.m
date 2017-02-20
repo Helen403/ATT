@@ -11,6 +11,7 @@
 #import "MultiRolesViewModel.h"
 
 #import "XCFTabBarController.h"
+#import "BuildRoleController.h"
 
 @interface MultiRolesController ()
 
@@ -52,7 +53,7 @@
 #pragma mark private
 -(void)h_layoutNavigation{
     self.title = @"切换角色";
-   
+    
 }
 
 -(void)h_addSubviews{
@@ -61,13 +62,22 @@
 
 -(void)h_bindViewModel{
     [[self.multiRolesViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-
+        
         [self performSelectorOnMainThread:@selector(mainClick) withObject:nil waitUntilDone:YES];
     }];
+    
+    [[self.multiRolesViewModel.addSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        BuildRoleController *scanCode = [[BuildRoleController alloc] init];
+        scanCode.index = 1;
+        [self.navigationController pushViewController:scanCode animated:NO];
+
+    }];
+    
 }
 
 -(void)mainClick{
-   [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
+    [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
 }
 
 #pragma mark lazyload

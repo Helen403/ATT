@@ -24,6 +24,8 @@
 
 @property(nonatomic,strong) UIImageView *bg;
 
+@property(nonatomic,strong) UIImageView *add;
+
 @end
 
 @implementation MultiRolesView
@@ -49,6 +51,11 @@
         make.centerY.equalTo(weakSelf.icon);
     }];
     
+    [self.add mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(weakSelf.mas_right).offset([self h_w:-15]);
+        make.top.equalTo(weakSelf.icon);
+    }];
+    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.icon.mas_bottom).offset([self h_w:10]);
         //        make.top.equalTo(0);
@@ -70,6 +77,7 @@
     [self addSubview:self.bg];
     [self addSubview:self.icon];
     [self addSubview:self.title];
+    [self addSubview:self.add];
     
     [self addSubview:self.tableView];
     
@@ -183,6 +191,22 @@
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.multiRolesViewModel.cellclickSubject sendNext:row];
+}
+
+-(UIImageView *)add{
+    if (!_add) {
+        _add = [[UIImageView alloc] init];
+        _add.image = ImageNamed(@"switch_role_add_gray");
+        _add.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addCompany)];
+        [_add addGestureRecognizer:setTap];
+    }
+    return _add;
+}
+
+-(void)addCompany{
+    [self.multiRolesViewModel.addSubject sendNext:nil];
+
 }
 
 -(UIImageView *)bg{

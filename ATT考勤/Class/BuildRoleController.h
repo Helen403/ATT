@@ -10,6 +10,6 @@
 
 @interface BuildRoleController : HViewController
 
-
+@property(nonatomic,assign) NSInteger index;
 
 @end

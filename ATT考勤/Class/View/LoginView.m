@@ -152,15 +152,23 @@
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.ThirdText);
         make.left.equalTo(weakSelf.line1);
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width*0.5-leftPadding,[self h_w:1]));
+        }else{
+            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width-leftPadding,[self h_w:1]));
+        }
         
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width-leftPadding,[self h_w:1]));
     }];
     
     [self.line3 mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(weakSelf.line1);
         make.centerY.equalTo(weakSelf.ThirdText);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width-leftPadding,[self h_w:1]));
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width*0.5-leftPadding,[self h_w:1]));
+        }else{
+            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width-leftPadding,[self h_w:1]));
+        }
     }];
     
     [self.bg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -173,7 +181,7 @@
 
 #pragma mark private
 -(void)h_setupViews{
-   
+    
     self.backgroundColor = white_color;
     
     [self addSubview:self.bg];
@@ -201,20 +209,20 @@
 -(void)h_bindViewModel{
     [self addDynamic:self];
     //密码错误
-  
+    
     [[self.loginViewModel.loginclickFail takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-      
+        
         [self performSelectorOnMainThread:@selector(failClick) withObject:nil waitUntilDone:YES];
     }];
 }
 
 -(void)failClick{
-  
+    
     self.pwdTextField.text = @"";
     self.login.enabled = YES;
-//    self.login.backgroundColor = MAIN_ORANGER;
-//    [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
- 
+    //    self.login.backgroundColor = MAIN_ORANGER;
+    //    [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
+    
     ShowErrorStatus(@"密码错误");
 }
 
@@ -255,10 +263,10 @@
         
         //当输入框没有内容时，水印提示 提示内容为password
         _useTextField.placeholder = @"输入手机号";
-        _useTextField.tintColor = white_color;
-        _useTextField.textColor = white_color;
+        _useTextField.tintColor = MAIN_PAN_2;
+        _useTextField.textColor = MAIN_PAN_2;
         //修改account的placeholder的字体颜色、大小
-        [_useTextField setValue: [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_useTextField setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
         [_useTextField setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _useTextField.font = H14;
@@ -267,21 +275,21 @@
         //_useTextField.delegate = self;//设置代理
         _useTextField.keyboardType = UIKeyboardTypePhonePad;
         // 5.监听文本框的文字改变
-//        [_useTextField.rac_textSignal subscribeNext:^(id x) {
-//         
-//            if (_useTextField.text.length>10) {
-//                self.login.enabled = YES;
-//                self.login.backgroundColor = MAIN_ORANGER;
-//                
-//                [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
-//            }else{
-//                self.login.enabled = NO;
-//                self.login.backgroundColor = MAIN_GRAY;
-//                
-//                [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
-//            }
-//        }];
-   
+        //        [_useTextField.rac_textSignal subscribeNext:^(id x) {
+        //
+        //            if (_useTextField.text.length>10) {
+        //                self.login.enabled = YES;
+        //                self.login.backgroundColor = MAIN_ORANGER;
+        //
+        //                [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
+        //            }else{
+        //                self.login.enabled = NO;
+        //                self.login.backgroundColor = MAIN_GRAY;
+        //
+        //                [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
+        //            }
+        //        }];
+        
     }
     return _useTextField;
 }
@@ -332,10 +340,10 @@
         
         //当输入框没有内容时，水印提示 提示内容为password
         _pwdTextField.placeholder = @"密 码";
-        _pwdTextField.tintColor = white_color;
-        _pwdTextField.textColor = white_color;
+        _pwdTextField.tintColor = MAIN_PAN_2;
+        _pwdTextField.textColor = MAIN_PAN_2;
         //修改account的placeholder的字体颜色、大小
-        [_pwdTextField setValue: [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_pwdTextField setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
         [_pwdTextField setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _pwdTextField.font = H14;
@@ -349,7 +357,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
- 
+    
     [self loginClick];
     return YES;
 }
@@ -379,21 +387,21 @@
 }
 
 -(void)loginClick{
-
-//    if ([NSString isVaildTelphoneFroString:self.useTextField.text]&&self.pwdTextField.text.length>0) {
-//        //点击后不然再点击
-//        self.loginViewModel.user = self.useTextField.text;
-//        self.loginViewModel.pwd = self.pwdTextField.text;
-//        //登陆成功后发送按钮
-//        [self.loginViewModel.loginclickCommand execute:nil];
-//        self.login.enabled = NO;
-//        self.login.backgroundColor = MAIN_GRAY;
-//        
-//        [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
-//        [self endEditing:YES];
-//    }else{
-//        [self toast:@"请输入正确的手机号或者密码"];
-//    }
+    
+    //    if ([NSString isVaildTelphoneFroString:self.useTextField.text]&&self.pwdTextField.text.length>0) {
+    //        //点击后不然再点击
+    //        self.loginViewModel.user = self.useTextField.text;
+    //        self.loginViewModel.pwd = self.pwdTextField.text;
+    //        //登陆成功后发送按钮
+    //        [self.loginViewModel.loginclickCommand execute:nil];
+    //        self.login.enabled = NO;
+    //        self.login.backgroundColor = MAIN_GRAY;
+    //
+    //        [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
+    //        [self endEditing:YES];
+    //    }else{
+    //        [self toast:@"请输入正确的手机号或者密码"];
+    //    }
     
     if (self.useTextField.text.length>0&&self.pwdTextField.text.length>0) {
         //点击后不然再点击
@@ -402,12 +410,13 @@
         //登陆成功后发送按钮
         [self.loginViewModel.loginclickCommand execute:nil];
         self.login.enabled = NO;
-//        self.login.backgroundColor = MAIN_GRAY;
-//        
-//        [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
+        //        self.login.backgroundColor = MAIN_GRAY;
+        //
+        //        [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
         [self endEditing:YES];
     }else{
-        [self toast:@"请输入正确的手机号或者密码"];
+        ShowErrorStatus(@"请输入正确的手机号或者密码");
+
     }
 }
 
@@ -472,7 +481,7 @@
         _ThirdText = [[UILabel alloc] init];
         _ThirdText.text = @" 使用第三方登陆 ";
         _ThirdText.font = H12;
-        _ThirdText.textColor = white_color;
+        _ThirdText.textColor = MAIN_PAN_2;
         
     }
     return _ThirdText;
@@ -564,7 +573,7 @@
 -(UIImageView *)bg{
     if (!_bg) {
         _bg = [[UIImageView alloc] init];
-        _bg.image = ImageNamedBg;
+//        _bg.image = ImageNamedBg;
     }
     return _bg;
 }

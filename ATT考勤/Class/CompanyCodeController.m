@@ -36,27 +36,35 @@
 }
 
 #pragma mark private
--(void)h_addSubviews{
-    [self.view addSubview:self.companyCodeView];
-
+-(void)h_layoutNavigation{
+    self.title = @"加入公司";
 }
 
--(void)h_bindViewModel{
 
+
+-(void)h_addSubviews{
+    [self.view addSubview:self.companyCodeView];
+}
+
+
+
+-(void)h_bindViewModel{
+    
     [[self.companyCodeViewModel.addclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-             [self.navigationController popToRootViewControllerAnimated:YES];
-        });
-     
+        
+        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
     }];
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+-(void)mainThread{
     
+    if (self.index == 0) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else{
+        [self.navigationController popViewControllerAnimated:NO];
+    }
 }
-
 
 #pragma lazyload
 -(CompanyCodeView *)companyCodeView{
@@ -64,7 +72,6 @@
         _companyCodeView = [[CompanyCodeView alloc] initWithViewModel:self.companyCodeViewModel];
     }
     return _companyCodeView;
-
 }
 
 -(CompanyCodeViewModel *)companyCodeViewModel{
@@ -72,7 +79,6 @@
         _companyCodeViewModel = [[CompanyCodeViewModel alloc] init];
     }
     return _companyCodeViewModel;
-
 }
 
 

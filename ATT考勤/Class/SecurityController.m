@@ -10,6 +10,9 @@
 #import "SecurityView.h"
 #import "SecurityViewModel.h"
 
+#import "ChangeTelphoneController.h"
+#import "ForgetController.h"
+
 @interface SecurityController ()
 
 @property(nonatomic,strong) SecurityView *securityView;
@@ -22,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
 }
 
 #pragma mark system
@@ -46,7 +49,25 @@
 }
 
 -(void)h_bindViewModel{
-    
+    [[self.securityViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        switch ([x intValue]) {
+            case 0:{
+                ChangeTelphoneController *changeTelphone = [[ChangeTelphoneController alloc] init];
+                
+                [self.navigationController pushViewController:changeTelphone animated:NO];
+                break;
+            }
+            case 1:{
+                ForgetController *forget = [[ForgetController alloc] init];
+                
+                [self.navigationController pushViewController:forget animated:NO];
+                break;
+            }
+
+        }
+
+    }];
 }
 
 #pragma mark lazyload

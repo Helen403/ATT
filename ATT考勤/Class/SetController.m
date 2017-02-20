@@ -62,13 +62,25 @@
         
         NSInteger str = [x intValue];
         switch (str) {
-                //版本号
-            case 5:{
-                VersionController *version = [[VersionController alloc] init];
+                //账户与安全
+            case 0:{
+                SecurityController *security = [[SecurityController alloc] init];
                 
-                [self.navigationController pushViewController:version animated:NO];
+                [self.navigationController pushViewController:security animated:NO];
+                
+                break;
+                
+            }
+                
+                //消息通知
+            case 1:{
+                MessageController *message = [[MessageController alloc] init];
+                
+                [self.navigationController pushViewController:message animated:NO];
+                
                 break;
             }
+                
                 //定时提醒
             case 2:{
                 
@@ -77,6 +89,7 @@
                 [self.navigationController pushViewController:time animated:NO];
                 break;
             }
+                
                 //功能介绍
             case 3:{
                 FunctionController *function = [[FunctionController alloc] init];
@@ -85,6 +98,7 @@
                 break;
                 
             }
+                
                 //意见反馈
             case 4:{
                 
@@ -93,11 +107,11 @@
                 [self.navigationController pushViewController:suggest animated:NO];
                 break;
             }
-                //关于我们
-            case 7:{
-                AboutController *about = [[AboutController alloc] init];
+                //版本号
+            case 5:{
+                VersionController *version = [[VersionController alloc] init];
                 
-                [self.navigationController pushViewController:about animated:NO];
+                [self.navigationController pushViewController:version animated:NO];
                 break;
             }
                 //客服中心
@@ -108,24 +122,16 @@
                 
                 break;
             }
-                //消息通知
-            case 1:{
-                MessageController *message = [[MessageController alloc] init];
                 
-                [self.navigationController pushViewController:message animated:NO];
                 
+                //关于我们
+            case 7:{
+                AboutController *about = [[AboutController alloc] init];
+                
+                [self.navigationController pushViewController:about animated:NO];
                 break;
             }
                 
-                //账户与安全
-            case 0:{
-                SecurityController *security = [[SecurityController alloc] init];
-                
-                [self.navigationController pushViewController:security animated:NO];
-                
-                break;
-                
-            }
         }
     }];
     

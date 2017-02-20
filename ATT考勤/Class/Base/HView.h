@@ -19,7 +19,7 @@
 -(NSInteger)h_w:(NSInteger)width;
 
 //Toast
--(void)toast:(NSString *)text;
+//-(void)toast:(NSString *)text;
 
 
 -(void)addDynamic:(UIView *)tmpView;

@@ -125,9 +125,9 @@
 
 
 //Toast
--(void)toast:(NSString *)text{
-    [Toast showWithText:text bottomOffset:60];
-}
+//-(void)toast:(NSString *)text{
+//    [Toast showWithText:text bottomOffset:60];
+//}
 
 -(NSDictionary *)getFilter:(NSString *)result filter:(NSString *)filter{
     

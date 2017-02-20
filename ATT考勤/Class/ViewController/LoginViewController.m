@@ -105,19 +105,21 @@
     //微信点击
     [[self.loginViewModel.weixinclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
         
-        [self toast:@"微信"];
+        ShowMessage(@"微信");
+      
     }];
     
     
     //QQ点击
     [[self.loginViewModel.qqclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-        [self toast:@"QQ"];
+     
+          ShowMessage(@"QQ");
     }];
     
     //新浪点击
     [[self.loginViewModel.sinaclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
         
-        [self toast:@"sina"];
+         ShowMessage(@"sina");
     }];
     
     

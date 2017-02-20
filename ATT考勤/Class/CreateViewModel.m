@@ -17,7 +17,7 @@
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
-        NSLog(@"%@",result);
+        //NSLog(@"%@",result);
       
         DismissHud();
 
@@ -66,7 +66,7 @@
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                    [self toast:@"请检查网络状态"];
+                  ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
                 }];
                 return nil;

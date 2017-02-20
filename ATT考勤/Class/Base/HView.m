@@ -60,9 +60,9 @@
 
 
 //Toast
--(void)toast:(NSString *)text{
-    [Toast showWithText:text bottomOffset:60];
-}
+//-(void)toast:(NSString *)text{
+//    [Toast showWithText:text bottomOffset:60];
+//}
 
 -(UIView *)rippleView{
     if (!_rippleView) {

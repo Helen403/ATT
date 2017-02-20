@@ -320,7 +320,8 @@
     if (self.useText.text.length>0&&self.pwdText.text.length>0&&self.surepwdText.text.length>0) {
         
     }else{
-        [self toast:@"用户名或密码不能为空"];
+        
+        ShowErrorStatus(@"用户名或密码不能为空");
         return;
     }
     
@@ -329,7 +330,8 @@
         self.createViewModel.pwd = self.pwdText.text;
         [self.createViewModel.sendclickCommand execute:nil];
     }else{
-        [self toast:@"密码不一致"];
+       
+         ShowErrorStatus(@"密码不一致");
         return;
     }
     

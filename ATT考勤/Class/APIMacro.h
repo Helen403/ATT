@@ -30,6 +30,10 @@
 //加入公司  保存用户角色, 输入[用户编号,公司邀请码] ,输出[]
 #define  saveUserCompany @"http://192.168.1.101:8888/smart/ws/IAttService"
 
+//加入公司 用户变员工
+#define saveUserToEmp @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+
 //通讯录-查询员工信息, 输入[公司编号],输出[员工信息]
 #define findAllEmpByCompanyCode @"http://192.168.1.101:8888/smart/ws/IAttService"
 

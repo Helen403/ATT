@@ -86,5 +86,7 @@ extern void DismissHud(void);
 
 
 +(id)initWithXMLString:(NSString*)xml object:(id)object;
++(id)initWithJsonString:(NSString*)json object:(id)object;
 
++ (NSString *)changeJsonStringToTrueJsonString:(NSString *)json;
 @end

@@ -52,7 +52,7 @@
     CGFloat leftPadding =(SCREEN_WIDTH-SCREEN_WIDTH*0.8)*0.5;
     CGFloat topPadding = SCREEN_HEIGHT *0.1;
     CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
-
+    
     [self.useImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topPadding);
         make.left.equalTo(leftPadding);
@@ -105,7 +105,7 @@
         make.top.equalTo(weakSelf.line2.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-      
+        
     }];
     
     
@@ -132,14 +132,13 @@
 }
 
 -(void)h_bindViewModel{
-   [self addDynamic:self];
+    [self addDynamic:self];
     
     //请求返回回来的验证码
     [[self.newpartViewModel.SMSbackSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
         
         self.backNumber = x;
-     
-        
+
     }];
 }
 
@@ -151,7 +150,7 @@
         _newpartViewModel = [[NewpartViewModel alloc] init];
     }
     return _newpartViewModel;
-
+    
 }
 
 
@@ -184,36 +183,36 @@
         _useText.font = H14;
         // 设置右边永远显示清除按钮
         _useText.clearButtonMode = UITextFieldViewModeAlways;
-         _useText.keyboardType = UIKeyboardTypePhonePad;
+        _useText.keyboardType = UIKeyboardTypePhonePad;
         // 5.监听文本框的文字改变
-//        [_useText.rac_textSignal subscribeNext:^(id x) {
-//            
-//            
-//            if (_useText.text.length>10) {
-//                self.next.enabled = YES;
-//                self.next.backgroundColor = MAIN_ORANGER;
-//                
-//                [self.next.layer setBorderColor:MAIN_ORANGER.CGColor];
-//                
-//                
-//                self.countDown.enabled = YES;
-//                
-//                [self.countDown setBackgroundColor:MAIN_ORANGER];
-//                
-//                [self.countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
-//            }else{
-//                self.next.enabled = NO;
-//                self.next.backgroundColor = MAIN_GRAY;
-//                
-//                [self.next.layer setBorderColor:MAIN_GRAY.CGColor];
-//                
-//                self.countDown.enabled = NO;
-//                
-//                [self.countDown setBackgroundColor:MAIN_GRAY];
-//                
-//                [self.countDown.layer setBorderColor:MAIN_GRAY.CGColor];
-//            }
-//        }];
+        //        [_useText.rac_textSignal subscribeNext:^(id x) {
+        //
+        //
+        //            if (_useText.text.length>10) {
+        //                self.next.enabled = YES;
+        //                self.next.backgroundColor = MAIN_ORANGER;
+        //
+        //                [self.next.layer setBorderColor:MAIN_ORANGER.CGColor];
+        //
+        //
+        //                self.countDown.enabled = YES;
+        //
+        //                [self.countDown setBackgroundColor:MAIN_ORANGER];
+        //
+        //                [self.countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
+        //            }else{
+        //                self.next.enabled = NO;
+        //                self.next.backgroundColor = MAIN_GRAY;
+        //
+        //                [self.next.layer setBorderColor:MAIN_GRAY.CGColor];
+        //
+        //                self.countDown.enabled = NO;
+        //
+        //                [self.countDown setBackgroundColor:MAIN_GRAY];
+        //
+        //                [self.countDown.layer setBorderColor:MAIN_GRAY.CGColor];
+        //            }
+        //        }];
         
     }
     return _useText;
@@ -257,7 +256,7 @@
         
         [_countDown setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-       
+        
         
         [_countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
@@ -267,11 +266,11 @@
 
 
 -(void)startTime:(UIButton *)button{
-  
-//    if (![self.useText.text isVaildTelphone]) {
-//        [self toast:@"请输入正确的手机号"];
-//        return;
-//    }
+    
+    //    if (![self.useText.text isVaildTelphone]) {
+    //        [self toast:@"请输入正确的手机号"];
+    //        return;
+    //    }
     
     self.newpartViewModel.user = self.useText.text;
     [self.newpartViewModel.sendclickCommand execute:nil];
@@ -288,9 +287,9 @@
                 //设置界面的按钮显示 根据自己需求设置
                 [button setTitle:@" 验证码 " forState:UIControlStateNormal];
                 button.userInteractionEnabled = YES;
-//                [button setBackgroundColor:MAIN_ORANGER];
-//                
-//                [button.layer setBorderColor:MAIN_ORANGER.CGColor];
+                //                [button setBackgroundColor:MAIN_ORANGER];
+                //
+                //                [button.layer setBorderColor:MAIN_ORANGER.CGColor];
             });
         }else{
             int seconds = timeout % 60;
@@ -302,9 +301,9 @@
                 [UIView setAnimationDuration:1];
                 [button setTitle:[NSString stringWithFormat:@" %@秒后 ",strTime] forState:UIControlStateNormal];
                 [UIView commitAnimations];
-//                [button setBackgroundColor:MAIN_GRAY];
-//                
-//                [button.layer setBorderColor:MAIN_GRAY.CGColor];
+                //                [button setBackgroundColor:MAIN_GRAY];
+                //
+                //                [button.layer setBorderColor:MAIN_GRAY.CGColor];
                 button.userInteractionEnabled = NO;
             });
             timeout--;
@@ -343,7 +342,7 @@
         // 设置右边永远显示清除按钮
         _validateText.clearButtonMode = UITextFieldViewModeAlways;
         
-          _validateText.keyboardType = UIKeyboardTypePhonePad;
+        _validateText.keyboardType = UIKeyboardTypePhonePad;
     }
     return _validateText;
 }
@@ -373,7 +372,7 @@
         
         [_next setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-
+        
         [_next.layer setBorderColor:MAIN_ORANGER.CGColor];
         
     }

@@ -55,8 +55,14 @@ void ShowErrorStatus(NSString *statues){
             
         });
     }else{
-        [SVProgressHUD showErrorWithStatus:statues];
+//        [NSTimer scheduledWithTimeInterval:1 repeats:NO block:^(NSTimer *timer) {
+            [SVProgressHUD showErrorWithStatus:statues];
+//        }];
+        
     }
+    
+ 
+//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(myThread) userInfo:nil repeats:NO];
 }
 
 
@@ -494,5 +500,33 @@ void DismissHud(void){
 //    }
     return retVal;
 }
-///Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home
+
+//把没有双引号和用了单引号的json字符串转化为标准格式字符串;
++ (NSString *)changeJsonStringToTrueJsonString:(NSString *)json
+{
+    // 将没有双引号的替换成有双引号的
+    NSString *validString = [json stringByReplacingOccurrencesOfString:@"(\\w+)\\s*:([^A-Za-z0-9_])"
+                                                            withString:@"\"$1\":$2"
+                                                               options:NSRegularExpressionSearch
+                                                                 range:NSMakeRange(0, [json length])];
+    
+    
+    //把'单引号改为双引号"
+    validString = [validString stringByReplacingOccurrencesOfString:@"([:\\[,\\{])'"
+                                                         withString:@"$1\""
+                                                            options:NSRegularExpressionSearch
+                                                              range:NSMakeRange(0, [validString length])];
+    validString = [validString stringByReplacingOccurrencesOfString:@"'([:\\],\\}])"
+                                                         withString:@"\"$1"
+                                                            options:NSRegularExpressionSearch
+                                                              range:NSMakeRange(0, [validString length])];
+    
+    //再重复一次 将没有双引号的替换成有双引号的
+    validString = [validString stringByReplacingOccurrencesOfString:@"([:\\[,\\{])(\\w+)\\s*:"
+                                                         withString:@"$1\"$2\":"
+                                                            options:NSRegularExpressionSearch
+                                                              range:NSMakeRange(0, [validString length])];
+    return validString;
+}
+
 @end

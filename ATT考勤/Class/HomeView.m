@@ -271,7 +271,9 @@
 ////点击打卡
 -(void)onClickImage{
     
-    [self toast:@"打卡成功"];
+    ShowMessage(@"打卡成功");
+    
+    
     self.punch.userInteractionEnabled = NO;
     //    //切换图片
     //    [self.imageView setImage:[UIImage imageNamed:@"homepage_Clock_button_blue"]];
@@ -477,7 +479,7 @@
 -(UIImageView *)bg{
     if (!_bg) {
         _bg = [[UIImageView alloc] init];
-        _bg.image = ImageNamedBg;
+//        _bg.image = ImageNamedBg;
     }
     return _bg;
 }

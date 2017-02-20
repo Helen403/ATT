@@ -32,7 +32,7 @@
 -(void)updateConstraints{
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(3);
+        make.top.equalTo(0);
         make.left.equalTo(0);
         make.right.equalTo(0);
         make.bottom.equalTo(0);
@@ -75,11 +75,8 @@
         
         [_button setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-        
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
-        
-        [_button.layer setBorderColor:color];
+
+        [_button.layer setBorderColor:MAIN_ORANGER.CGColor];
         
     }
     return _button;
@@ -104,7 +101,7 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:55])];
         _tableView.tableFooterView = view;
         [view addSubview:self.button];
-        self.button.frame = CGRectMake([self h_w:10], [self h_w:15], SCREEN_WIDTH-2*[self h_w:10], [self h_w:40]);
+        self.button.frame = CGRectMake([self h_w:10], [self h_w:15], SCREEN_WIDTH-2*[self h_w:10], [self h_w:35]);
     }
     return _tableView;
     
@@ -133,8 +130,7 @@
     }else{
        [cell setImgHidden:YES];
     }
-    
-    
+
     return cell;
 }
 

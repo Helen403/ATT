@@ -22,17 +22,19 @@
     
     @weakify(self);
     [self.loginclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-
-       NSDictionary *xmlDoc = [self getFilter:result filter:@"User"];
-      
+        
+        NSDictionary *xmlDoc = [self getFilter:result filter:@"User"];
+        
         UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
         NSString *password = [self.pwd md5String];
-       
+        
         @strongify(self);
         if ([self.user isEqualToString:model.userTelphone]&&[password isEqualToString:model.userPassword]) {
             //存储对象
             saveModel(model, @"user");
-
+            
+            [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"returnCode"];
+            
             [self.loginclickSubject sendNext:nil];
         }else{
             [self.loginclickFail sendNext:nil];
@@ -59,21 +61,21 @@
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                 
                 NSString *body =[NSString stringWithFormat: @"<findUserByTelphone xmlns=\"http://service.webservice.vada.com/\">\
-                <telphone xmlns=\"\">%@</telphone>\
-                </findUserByTelphone>",self.user];
+                                 <telphone xmlns=\"\">%@</telphone>\
+                                 </findUserByTelphone>",self.user];
                 
                 [self SOAPData:findUserByTelphone soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                    [self toast:@"请检查网络状态"];
+                 ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
                 }];
                 return nil;
             }];
         }];
-   
+        
     }
     return _loginclickCommand;
 }

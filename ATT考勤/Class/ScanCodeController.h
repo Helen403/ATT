@@ -10,4 +10,6 @@
 
 @interface ScanCodeController : HViewController
 
+@property(nonatomic,assign) NSInteger index;
+
 @end

@@ -8,8 +8,9 @@
 
 #import "CompanyCodeView.h"
 #import "CompanyCodeViewModel.h"
+#import "CompanyCodeCellView.h"
 
-@interface CompanyCodeView()
+@interface CompanyCodeView()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) CompanyCodeViewModel *companyCodeViewModel;
 
@@ -22,6 +23,8 @@
 @property(nonatomic,strong) UIButton *addBtn;
 
 @property(nonatomic,strong) UIView *line;
+
+@property(nonatomic,strong) UITableView *tableView;
 
 @end
 
@@ -40,7 +43,7 @@
     WS(weakSelf);
     CGFloat leftPadding =(SCREEN_WIDTH-SCREEN_WIDTH*0.8)*0.5;
     CGFloat topPadding = SCREEN_HEIGHT *0.05;
-     CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
+    CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
     
     [self.companyCodeImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(topPadding);
@@ -51,8 +54,8 @@
     [self.companyCodeTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.companyCodeImg.mas_right).offset([self h_w:10]);
         make.centerY.equalTo(weakSelf.companyCodeImg);
-        make.right.equalTo(-leftPadding);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:30]));
+        
+        make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,8 +99,34 @@
 
 -(void)h_bindViewModel{
     [self addDynamic:self];
+    
+    //加入公司后弹出部门选择
+    [[self.companyCodeViewModel.showClickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
+    }];
+    
+    
+    [[self.companyCodeViewModel.failclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+     
+          [self performSelectorOnMainThread:@selector(failBack) withObject:nil waitUntilDone:YES];
+    }];
+    
 }
 
+-(void)failBack{
+    ShowErrorStatus(@"公司邀请码不正确");
+    self.companyCodeTextField.text = @"";
+}
+
+-(void)mainThread{
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, self.companyCodeViewModel.arr.count*[self h_w:40]);
+    [self.tableView reloadData];
+    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
+    [HWPopTool sharedInstance].tapOutsideToDismiss = NO;
+    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
+    [[HWPopTool sharedInstance] showWithPresentView:self.tableView animated:NO];
+}
 
 #pragma mark lazyload
 -(CompanyCodeViewModel *)companyCodeViewModel{
@@ -108,15 +137,12 @@
     
 }
 
-
 -(UIImageView *)companyCodeImg{
     if (!_companyCodeImg) {
         _companyCodeImg = [[UIImageView alloc] init];
         _companyCodeImg.image = ImageNamed(@"role_code_icon");
-        
     }
     return _companyCodeImg;
-    
 }
 
 -(UITextField *)companyCodeTextField{
@@ -189,11 +215,64 @@
     if (self.companyCodeTextField.text.length>0) {
         NSString *str =  [[NSUserDefaults standardUserDefaults] objectForKey:@"returnCode"];
         self.companyCodeViewModel.userCode = str;
-        self.companyCodeViewModel.companyCode = self.companyCodeTextField.text;
+        self.companyCodeViewModel.invitationCode = self.companyCodeTextField.text;
         [self.companyCodeViewModel.sendclickCommand execute:nil];
     }else{
-        [self toast:@"请输入公司码"];
+        
+        ShowErrorStatus(@"请输入公司码");
     }
+}
+
+
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = GX_BGCOLOR;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[CompanyCodeCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([CompanyCodeCellView class])]];
+        _tableView.scrollEnabled = NO;
+        
+    }
+    return _tableView;
+    
+}
+
+#pragma mark - delegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.companyCodeViewModel.arr.count;
+}
+
+#pragma mark tableViewDataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CompanyCodeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([CompanyCodeCellView class])] forIndexPath:indexPath];
+    
+    cell.teamModel = self.companyCodeViewModel.arr[indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return [self h_w:40];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    TeamModel *teamModel =  self.companyCodeViewModel.arr[indexPath.row];
+    self.companyCodeViewModel.deptCode = teamModel.deptCode;
+    [self.companyCodeViewModel.addTeamCommand execute:nil];
+    [[HWPopTool sharedInstance] closeWithBlcok:^{
+        
+    }];
 }
 
 @end

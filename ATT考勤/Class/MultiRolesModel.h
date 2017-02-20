@@ -30,4 +30,5 @@
 @property (nonatomic , copy) NSString              * registDatetime;
 @property (nonatomic , copy) NSString              * companyCode;
 @property (nonatomic , copy) NSString              * expireDatetime;
+
 @end

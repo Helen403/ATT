@@ -234,9 +234,9 @@
 }
 
 //Toast
--(void)toast:(NSString *)text{
-    [Toast showWithText:text bottomOffset:60];
-}
+//-(void)toast:(NSString *)text{
+//    [Toast showWithText:text bottomOffset:60];
+//}
 
 -(NSInteger)h_w:(NSInteger)width{
     return autoScaleW(width);

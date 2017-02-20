@@ -1,16 +1,17 @@
 //
-//  CompanyCodeViewModel.m
+//  ScanCodeViewModel.m
 //  ATT考勤
 //
-//  Created by Helen on 16/12/26.
-//  Copyright © 2016年 Helen. All rights reserved.
+//  Created by Helen on 17/2/17.
+//  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "CompanyCodeViewModel.h"
+#import "ScanCodeViewModel.h"
 #import "Company.h"
 #import "TeamModel.h"
 
-@implementation CompanyCodeViewModel
+
+@implementation ScanCodeViewModel
 
 #pragma mark private
 -(void)h_initialize{
@@ -40,10 +41,11 @@
         
         DismissHud();
         
-        //        if ([result isEqualToString:@"0"]) {
-        [self.addclickSubject sendNext:nil];
-        //        }
+        if ([result isEqualToString:@"0"]) {
+            [self.addclickSubject sendNext:nil];
+        }
     }];
+    
     
     [[[self.addTeamCommand.executing skip:1] take:1] subscribeNext:^(id x) {
         
@@ -51,6 +53,7 @@
             ShowMaskStatus(@"正在拼命加载");
         }
     }];
+
     
 }
 
@@ -68,13 +71,6 @@
     return _showClickSubject;
 }
 
--(RACSubject *)failclickSubject{
-    if (!_failclickSubject) {
-        _failclickSubject = [RACSubject subject];
-    }
-    return _failclickSubject;
-}
-
 #pragma mark lazyload
 -(RACCommand *)sendclickCommand{
     if (!_sendclickCommand) {
@@ -85,50 +81,44 @@
                 
                 NSString *body =[NSString stringWithFormat: @"<findCompanyByInviteCode xmlns=\"http://service.webservice.vada.com/\">\
                                  <inviteCode xmlns=\"\">%@</inviteCode>\
-                                 </findCompanyByInviteCode>",self.invitationCode];
+                                 </findCompanyByInviteCode>",self.inviteCode];
                 
                 [self SOAPData:findCompanyByInviteCode soapBody:body success:^(NSString *result) {
-                    NSLog(@"%lu",(unsigned long)result.length);
-                    if (result.length < 200) {
-                        [self.failclickSubject sendNext:nil];
-                        [subscriber sendCompleted];
-                      
-                    }else{
+                    
+                    
+                    NSDictionary *xmlDoc = [self getFilter:result filter:@"Company"];
+                    
+                    Company *model = [Company mj_objectWithKeyValues:xmlDoc];
+                  
+                    
+                    /***********************************************/
+                    NSString *body2 =[NSString stringWithFormat: @"<saveUserCompany xmlns=\"http://service.webservice.vada.com/\">\
+                                      <userCode xmlns=\"\">%@</userCode>\
+                                      <companyCode xmlns=\"\">%@</companyCode>\
+                                      </saveUserCompany>",self.userCode,model.companyCode];
+                    
+                    
+                    [self SOAPData:saveUserCompany soapBody:body2 success:^(NSString *result) {
                         
-                        NSDictionary *xmlDoc = [self getFilter:result filter:@"Company"];
-                        
-                        Company *model = [Company mj_objectWithKeyValues:xmlDoc];
-                        
-                        self.companyCode = model.companyCode;
-                        /***********************************************/
-                        NSString *body2 =[NSString stringWithFormat: @"<saveUserCompany xmlns=\"http://service.webservice.vada.com/\">\
-                                          <userCode xmlns=\"\">%@</userCode>\
+                        NSString *body3 =[NSString stringWithFormat: @"<findAllDeptByCompanyCode xmlns=\"http://service.webservice.vada.com/\">\
                                           <companyCode xmlns=\"\">%@</companyCode>\
-                                          </saveUserCompany>",self.userCode,model.companyCode];
+                                          </findAllDeptByCompanyCode>",model.companyCode];
                         
-                        [self SOAPData:saveUserCompany soapBody:body2 success:^(NSString *result) {
+                        [self SOAPData:findAllDeptByCompanyCode soapBody:body3 success:^(NSString *result) {
                             
-                            
-                            NSString *body3 =[NSString stringWithFormat: @"<findAllDeptByCompanyCode xmlns=\"http://service.webservice.vada.com/\">\
-                                              <companyCode xmlns=\"\">%@</companyCode>\
-                                              </findAllDeptByCompanyCode>",model.companyCode];
-                            
-                            [self SOAPData:findAllDeptByCompanyCode soapBody:body3 success:^(NSString *result) {
-                                
-                                [subscriber sendNext:result];
-                                [subscriber sendCompleted];
-                                
-                            } failure:^(NSError *error) {
-                                ShowErrorStatus(@"请检查网络状态");
-                                DismissHud();
-                            }];
-                            
+                            [subscriber sendNext:result];
+                            [subscriber sendCompleted];
                             
                         } failure:^(NSError *error) {
-                            ShowErrorStatus(@"请检查网络状态");
+                             ShowErrorStatus(@"请检查网络状态");
                             DismissHud();
                         }];
-                    }
+                        
+                    } failure:^(NSError *error) {
+                        ShowErrorStatus(@"请检查网络状态");
+                        DismissHud();
+                    }];
+                    
                     
                 } failure:^(NSError *error) {
                     ShowErrorStatus(@"请检查网络状态");
@@ -141,6 +131,7 @@
     }
     return _sendclickCommand;
 }
+
 
 -(NSMutableArray *)arr{
     if (!_arr) {

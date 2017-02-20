@@ -18,4 +18,7 @@
 
 @property(nonatomic,strong) RACSubject *SMSbackSubject;
 
+@property(nonatomic,strong) RACSubject *telphoneBackFailSubject;
+
+
 @end
