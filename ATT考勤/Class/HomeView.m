@@ -9,6 +9,9 @@
 #import "HomeView.h"
 #import "HomeViewModel.h"
 
+#import "UserModel.h"
+#import "EmpModel.h"
+
 @interface HomeView()
 
 @property(nonatomic,strong) HomeViewModel *homeViewModel;
@@ -194,14 +197,14 @@
         make.bottom.mas_equalTo(weakSelf.netStatusText.mas_bottom).offset(20);
     }];
     
-    [super updateConstraints];
-    
     [self.bg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(0);
         make.left.equalTo(0);
         make.right.equalTo(0);
         
     }];
+    
+    [super updateConstraints];
 }
 
 #pragma mark private
@@ -230,20 +233,54 @@
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
+    
+    
+}
+
+
+-(void)h_loadData{
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    
+    self.homeViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.homeViewModel.userCode = user.userCode;
+    NSMutableArray *arr = [LSCoreToolCenter currentYearArr];
+    self.homeViewModel.curYear = arr[0];
+    self.homeViewModel.curMonth = arr[1];
+    self.homeViewModel.curDay = arr[2];
+    
+    [self.homeViewModel.sendclickCommand execute:nil];
 }
 
 -(void)h_bindViewModel{
-    //    //判断是否已经打卡
-    //    if (self.punch.userInteractionEnabled) {
-    //        //开启定时器
-    //        [self.timeNow setFireDate:[NSDate distantPast]];
-    //    }
-    
     
     //设置时间
     [self setTime];
     [self addDynamic:self];
+    
+    
+    [[self.homeViewModel.resultSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        
+        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
+    }];
+    
 }
+-(void)mainThread{
+    EmpModel *empModel =  self.homeViewModel.empModel;
+    Dept *dept = self.homeViewModel.dept;
+    
+    self.title = [[NSUserDefaults standardUserDefaults] objectForKey:@"companyFullName"];
+    
+    self.name.text = empModel.empName;
+    self.department.text = [NSString stringWithFormat:@"%@ %@",dept.deptNickName,empModel.position];
+    
+    /*********************************************/
+//    self.homeViewModel.dept.
+    
+    
+}
+
 
 
 -(void)setTime{
@@ -479,7 +516,7 @@
 -(UIImageView *)bg{
     if (!_bg) {
         _bg = [[UIImageView alloc] init];
-//        _bg.image = ImageNamedBg;
+        //        _bg.image = ImageNamedBg;
     }
     return _bg;
 }

@@ -53,7 +53,7 @@
             ShowMaskStatus(@"正在拼命加载");
         }
     }];
-
+    
     
 }
 
@@ -89,7 +89,7 @@
                     NSDictionary *xmlDoc = [self getFilter:result filter:@"Company"];
                     
                     Company *model = [Company mj_objectWithKeyValues:xmlDoc];
-                  
+                    
                     
                     /***********************************************/
                     NSString *body2 =[NSString stringWithFormat: @"<saveUserCompany xmlns=\"http://service.webservice.vada.com/\">\
@@ -110,19 +110,22 @@
                             [subscriber sendCompleted];
                             
                         } failure:^(NSError *error) {
-                             ShowErrorStatus(@"请检查网络状态");
                             DismissHud();
+                            ShowErrorStatus(@"请检查网络状态");
+                            
                         }];
                         
                     } failure:^(NSError *error) {
-                        ShowErrorStatus(@"请检查网络状态");
                         DismissHud();
+                        ShowErrorStatus(@"请检查网络状态");
+                        
                     }];
                     
                     
                 } failure:^(NSError *error) {
-                    ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    
                 }];
                 return nil;
             }];

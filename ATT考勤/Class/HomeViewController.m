@@ -13,15 +13,11 @@
 #import "MineController.h"
 #import "SetController.h"
 
-
-
 @interface HomeViewController ()
 
 @property(nonatomic,strong) HomeView *homeView;
 
 @property(nonatomic,strong) HomeViewModel *homeViewModel;
-
-
 
 @end
 
@@ -75,10 +71,7 @@
         SetController *set = [[SetController alloc] init];
         [self.navigationController pushViewController:set animated:NO];
     }];
-    
-  
-    
-    
+
 }
 
 

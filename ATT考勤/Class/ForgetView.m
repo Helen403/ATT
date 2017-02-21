@@ -103,10 +103,9 @@
         make.top.equalTo(weakSelf.line2.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
+       
     }];
-    
-    
+
     [super updateConstraints];
     
 }
@@ -179,7 +178,7 @@
         _useText.placeholder = @"输入手机号";
         
         //修改account的placeholder的字体颜色、大小
-        [_useText setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_useText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_useText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _useText.font = H14;
@@ -240,7 +239,6 @@
     
     if (![self.useText.text isVaildTelphone]) {
         ShowErrorStatus(@"请输入正确的手机号");
-        
         return;
     }
     
@@ -258,9 +256,7 @@
                 //设置界面的按钮显示 根据自己需求设置
                 [button setTitle:@" 验证码 " forState:UIControlStateNormal];
                 button.userInteractionEnabled = YES;
-                //                [button setBackgroundColor:MAIN_ORANGER];
-                //
-                //                [button.layer setBorderColor:MAIN_ORANGER.CGColor];
+       
             });
         }else{
             int seconds = timeout % 60;
@@ -272,9 +268,7 @@
                 [UIView setAnimationDuration:1];
                 [button setTitle:[NSString stringWithFormat:@" %@秒后 ",strTime] forState:UIControlStateNormal];
                 [UIView commitAnimations];
-                //                [button setBackgroundColor:MAIN_GRAY];
-                //
-                //                [button.layer setBorderColor:MAIN_GRAY.CGColor];
+       
                 button.userInteractionEnabled = NO;
             });
             timeout--;
@@ -306,7 +300,7 @@
         _validateText.placeholder = @"输入验证码";
         
         //修改account的placeholder的字体颜色、大小
-        [_validateText setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_validateText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_validateText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _validateText.font = H14;

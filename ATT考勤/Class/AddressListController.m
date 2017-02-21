@@ -55,7 +55,9 @@
     self.content.frame = CGRectMake(0, 0, SCREEN_WIDTH, 74);
     self.tableView.frame = CGRectMake(0,74,SCREEN_WIDTH, self.view.frame.size.height-74);
     
-    self.addressListViewModel.companyCode = @"1";
+    //发送请求
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.addressListViewModel.companyCode = companyCode;
     [self.addressListViewModel.refreshDataCommand execute:nil];
 }
 

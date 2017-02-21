@@ -20,4 +20,8 @@
 
 @property(nonatomic,strong) NSString *telphone;
 
+@property(nonatomic,strong) NSString *phoneDeviceCode;
+
+@property(nonatomic,strong) NSString *phoneDeviceName;
+
 @end

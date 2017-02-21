@@ -17,7 +17,7 @@
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
          NSLog(@"%@",result);
-//        NSLog(@"666");
+
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
 
         if ([xmlDoc isEqualToString:@"0"]) {
@@ -59,14 +59,15 @@
                                  <telphone xmlns=\"\">%@</telphone>\
                                  <newPassword xmlns=\"\">%@</newPassword>\
                                  </modifyUserPwd>",self.telphone,self.pwd];
-                NSLog(@"1");
+              
                 [self SOAPData:modifyUserPwd soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                   ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
+                   ShowErrorStatus(@"请检查网络状态");
+                    
                 }];
                 return nil;
             }];

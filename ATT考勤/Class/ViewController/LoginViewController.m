@@ -40,12 +40,8 @@
     [super viewWillDisappear:animated];
 }
 
-
 -(void)viewDidLoad{
     [super viewDidLoad];
-    insert(@"asd", @"666");
-   NSString *str =  query(@"asd");
-    NSLog(@"%@",str);
 }
 
 - (void)updateViewConstraints {
@@ -60,7 +56,7 @@
 
 #pragma mark -private
 -(void)h_layoutNavigation{
-
+  
 }
 
 -(void)h_addSubviews{

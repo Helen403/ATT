@@ -22,24 +22,28 @@
     
     @weakify(self);
     [self.loginclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
-        NSDictionary *xmlDoc = [self getFilter:result filter:@"User"];
-        
-        UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
-        NSString *password = [self.pwd md5String];
-        
-        @strongify(self);
-        if ([self.user isEqualToString:model.userTelphone]&&[password isEqualToString:model.userPassword]) {
-            //存储对象
-            saveModel(model, @"user");
-            
-            [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"returnCode"];
-            
-            [self.loginclickSubject sendNext:nil];
-        }else{
-            [self.loginclickFail sendNext:nil];
-        }
         DismissHud();
+        if (result.length<200) {
+          
+            [self.loginNumclickFail sendNext:nil];
+        }else{
+            
+            NSDictionary *xmlDoc = [self getFilter:result filter:@"User"];
+            
+            UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
+            NSString *password = [self.pwd md5String];
+            
+            @strongify(self);
+            if ([self.user isEqualToString:model.userTelphone]&&[password isEqualToString:model.userPassword]) {
+                //存储对象
+                saveModel(model, @"user");
+                [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"createUserCode"];
+                [self.loginclickSubject sendNext:nil];
+            }else{
+                [self.loginclickFail sendNext:nil];
+            }
+            
+        }
     }];
     
     
@@ -69,8 +73,8 @@
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                 ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
                 }];
                 return nil;
             }];
@@ -85,6 +89,13 @@
         _loginclickSubject = [RACSubject subject];
     }
     return _loginclickSubject;
+}
+
+-(RACSubject *)loginNumclickFail{
+    if (!_loginNumclickFail) {
+        _loginNumclickFail = [RACSubject subject];
+    }
+    return _loginNumclickFail;
 }
 
 -(RACSubject *)loginclickFail{

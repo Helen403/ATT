@@ -198,6 +198,9 @@
 		79380A861E25D2C3004E7250 /* TeamAttendanceCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79380A851E25D2C3004E7250 /* TeamAttendanceCellView.m */; };
 		79380A891E25D3C2004E7250 /* TeamAttendanceHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79380A881E25D3C2004E7250 /* TeamAttendanceHeadView.m */; };
 		79380A8B1E25E066004E7250 /* TeamAttendance.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79380A8A1E25E066004E7250 /* TeamAttendance.plist */; };
+		7938496E1E5BC6CC00EA2502 /* ChangePasswordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7938496D1E5BC6CC00EA2502 /* ChangePasswordViewModel.m */; };
+		793849711E5BC6EC00EA2502 /* ChangePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793849701E5BC6EC00EA2502 /* ChangePasswordView.m */; };
+		793849741E5BC70300EA2502 /* ChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793849731E5BC70300EA2502 /* ChangePasswordController.m */; };
 		793868261E0A29DF004EC88A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793868251E0A29DF004EC88A /* HomeViewController.m */; };
 		793868291E0A29F5004EC88A /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793868281E0A29F5004EC88A /* HomeView.m */; };
 		7938682C1E0A2A8A004EC88A /* HomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7938682B1E0A2A8A004EC88A /* HomeViewModel.m */; };
@@ -529,6 +532,10 @@
 		79F964BD1E2CB2D700838CC4 /* CostView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F964BC1E2CB2D700838CC4 /* CostView.m */; };
 		79F964C01E2CBDDD00838CC4 /* LateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F964BF1E2CBDDD00838CC4 /* LateModel.m */; };
 		79F964C21E2CBDFF00838CC4 /* Leave.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79F964C11E2CBDFF00838CC4 /* Leave.plist */; };
+		79F9DA851E5C1C1C00625F19 /* EmpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F9DA841E5C1C1C00625F19 /* EmpModel.m */; };
+		79F9DA881E5C296E00625F19 /* Dept.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F9DA871E5C296E00625F19 /* Dept.m */; };
+		79F9DA8B1E5C3A1800625F19 /* AttendWorkShift.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F9DA8A1E5C3A1800625F19 /* AttendWorkShift.m */; };
+		79F9DA8E1E5C3D5100625F19 /* AttendWorkShiftDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F9DA8D1E5C3D5100625F19 /* AttendWorkShiftDetail.m */; };
 		79FA387C1E2DF9DB00F3CE14 /* MyApplyFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA387B1E2DF9DB00F3CE14 /* MyApplyFootView.m */; };
 		79FA39411E13439000B8D3A7 /* MyExamineTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA39401E13439000B8D3A7 /* MyExamineTableCellView.m */; };
 		79FA39441E1346BC00B8D3A7 /* MyExamineCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA39431E1346BC00B8D3A7 /* MyExamineCellViewModel.m */; };
@@ -927,6 +934,12 @@
 		79380A871E25D3C2004E7250 /* TeamAttendanceHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamAttendanceHeadView.h; sourceTree = "<group>"; };
 		79380A881E25D3C2004E7250 /* TeamAttendanceHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamAttendanceHeadView.m; sourceTree = "<group>"; };
 		79380A8A1E25E066004E7250 /* TeamAttendance.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TeamAttendance.plist; sourceTree = "<group>"; };
+		7938496C1E5BC6CC00EA2502 /* ChangePasswordViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewModel.h; sourceTree = "<group>"; };
+		7938496D1E5BC6CC00EA2502 /* ChangePasswordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewModel.m; sourceTree = "<group>"; };
+		7938496F1E5BC6EC00EA2502 /* ChangePasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordView.h; sourceTree = "<group>"; };
+		793849701E5BC6EC00EA2502 /* ChangePasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordView.m; sourceTree = "<group>"; };
+		793849721E5BC70300EA2502 /* ChangePasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordController.h; sourceTree = "<group>"; };
+		793849731E5BC70300EA2502 /* ChangePasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordController.m; sourceTree = "<group>"; };
 		793868241E0A29DF004EC88A /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		793868251E0A29DF004EC88A /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		793868271E0A29F5004EC88A /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
@@ -1465,6 +1478,14 @@
 		79F964BE1E2CBDDD00838CC4 /* LateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LateModel.h; sourceTree = "<group>"; };
 		79F964BF1E2CBDDD00838CC4 /* LateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LateModel.m; sourceTree = "<group>"; };
 		79F964C11E2CBDFF00838CC4 /* Leave.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Leave.plist; sourceTree = "<group>"; };
+		79F9DA831E5C1C1C00625F19 /* EmpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmpModel.h; sourceTree = "<group>"; };
+		79F9DA841E5C1C1C00625F19 /* EmpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmpModel.m; sourceTree = "<group>"; };
+		79F9DA861E5C296E00625F19 /* Dept.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dept.h; sourceTree = "<group>"; };
+		79F9DA871E5C296E00625F19 /* Dept.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dept.m; sourceTree = "<group>"; };
+		79F9DA891E5C3A1800625F19 /* AttendWorkShift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendWorkShift.h; sourceTree = "<group>"; };
+		79F9DA8A1E5C3A1800625F19 /* AttendWorkShift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendWorkShift.m; sourceTree = "<group>"; };
+		79F9DA8C1E5C3D5100625F19 /* AttendWorkShiftDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendWorkShiftDetail.h; sourceTree = "<group>"; };
+		79F9DA8D1E5C3D5100625F19 /* AttendWorkShiftDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendWorkShiftDetail.m; sourceTree = "<group>"; };
 		79FA387A1E2DF9DB00F3CE14 /* MyApplyFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyApplyFootView.h; sourceTree = "<group>"; };
 		79FA387B1E2DF9DB00F3CE14 /* MyApplyFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyApplyFootView.m; sourceTree = "<group>"; };
 		79FA393F1E13439000B8D3A7 /* MyExamineTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyExamineTableCellView.h; sourceTree = "<group>"; };
@@ -1597,6 +1618,14 @@
 		7904A6E71E09165900D6E8D4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				79F9DA831E5C1C1C00625F19 /* EmpModel.h */,
+				79F9DA841E5C1C1C00625F19 /* EmpModel.m */,
+				79F9DA861E5C296E00625F19 /* Dept.h */,
+				79F9DA871E5C296E00625F19 /* Dept.m */,
+				79F9DA891E5C3A1800625F19 /* AttendWorkShift.h */,
+				79F9DA8A1E5C3A1800625F19 /* AttendWorkShift.m */,
+				79F9DA8C1E5C3D5100625F19 /* AttendWorkShiftDetail.h */,
+				79F9DA8D1E5C3D5100625F19 /* AttendWorkShiftDetail.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2273,6 +2302,7 @@
 				793710281E1C82E8002F3E2E /* Mine(我的信息) */,
 				79ED5E7C1E1CE48100BBC3D9 /* Set(设置) */,
 				796A972B1E28782800E1B7E0 /* Security(账户与安全) */,
+				793849621E5BC5BD00EA2502 /* ChangePassword(修改密码) */,
 				79F7D8511E5AC8BB004DF0DB /* ChangeTelPhone(更换手机号) */,
 				79375CFA1E1DD7D100E27934 /* Version(版本检测) */,
 				79375D221E1DF76F00E27934 /* function(功能介绍) */,
@@ -3384,6 +3414,67 @@
 			children = (
 				79380A871E25D3C2004E7250 /* TeamAttendanceHeadView.h */,
 				79380A881E25D3C2004E7250 /* TeamAttendanceHeadView.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		793849621E5BC5BD00EA2502 /* ChangePassword(修改密码) */ = {
+			isa = PBXGroup;
+			children = (
+				793849681E5BC66A00EA2502 /* Other */,
+				793849671E5BC66500EA2502 /* Cell */,
+				793849661E5BC65B00EA2502 /* Model */,
+				793849651E5BC65700EA2502 /* View */,
+				793849641E5BC61600EA2502 /* ViewController */,
+				793849631E5BC60300EA2502 /* ViewModel */,
+			);
+			name = "ChangePassword(修改密码)";
+			sourceTree = "<group>";
+		};
+		793849631E5BC60300EA2502 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7938496C1E5BC6CC00EA2502 /* ChangePasswordViewModel.h */,
+				7938496D1E5BC6CC00EA2502 /* ChangePasswordViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		793849641E5BC61600EA2502 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				793849721E5BC70300EA2502 /* ChangePasswordController.h */,
+				793849731E5BC70300EA2502 /* ChangePasswordController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		793849651E5BC65700EA2502 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7938496F1E5BC6EC00EA2502 /* ChangePasswordView.h */,
+				793849701E5BC6EC00EA2502 /* ChangePasswordView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		793849661E5BC65B00EA2502 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		793849671E5BC66500EA2502 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		793849681E5BC66A00EA2502 /* Other */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -6475,6 +6566,7 @@
 				7937652F1E14944000F7B34F /* DealWithController.m in Sources */,
 				79DD27711E31B74900923D19 /* MyMsgModel.m in Sources */,
 				79F4F0781E1F808300115C3B /* DLUtility.m in Sources */,
+				793849741E5BC70300EA2502 /* ChangePasswordController.m in Sources */,
 				79F0A1361E13990A00A1B8AA /* UIView+ZJFrame.m in Sources */,
 				7904A6FA1E0923A000D6E8D4 /* HButtonView.m in Sources */,
 				79EF94341E262DB900F8E9BC /* CheckController.m in Sources */,
@@ -6489,8 +6581,10 @@
 				793487C91E27365200D074D7 /* CountModel.m in Sources */,
 				79F0A13B1E13990A00A1B8AA /* ZJScrollSegmentView.m in Sources */,
 				79F856221E02D561002D82F4 /* LSCoreToolCenter.m in Sources */,
+				79F9DA881E5C296E00625F19 /* Dept.m in Sources */,
 				79FA387C1E2DF9DB00F3CE14 /* MyApplyFootView.m in Sources */,
 				79F964891E2CAD4600838CC4 /* OffViewModel.m in Sources */,
+				793849711E5BC6EC00EA2502 /* ChangePasswordView.m in Sources */,
 				79F4B6571E2771D8008CAA6E /* TrajectoryCellView.m in Sources */,
 				79F964651E2CA9E800838CC4 /* MoveViewModel.m in Sources */,
 				79F964481E2CA6F100838CC4 /* GoOutView.m in Sources */,
@@ -6514,6 +6608,7 @@
 				794E04781E23207900CFE3A3 /* StatisticsViewModel.m in Sources */,
 				79282EA21E0B65C600F4E050 /* LoginView.m in Sources */,
 				7964B3821E2F0720001AC5E5 /* MeApplyModel.m in Sources */,
+				79F9DA851E5C1C1C00625F19 /* EmpModel.m in Sources */,
 				79F0A14C1E13B1E300A1B8AA /* PendingModel.m in Sources */,
 				79375D2B1E1DF7CC00E27934 /* FunctionController.m in Sources */,
 				79FAFAD41E34ACD200577917 /* SecurityModel.m in Sources */,
@@ -6533,6 +6628,7 @@
 				79375D5F1E1E3D7300E27934 /* CustomView.m in Sources */,
 				7985066D1E028AC600028C22 /* CMRequest.m in Sources */,
 				798506701E028C1400028C22 /* HView.m in Sources */,
+				79F9DA8B1E5C3A1800625F19 /* AttendWorkShift.m in Sources */,
 				79F964A61E2CB11900838CC4 /* LeaveEarlyController.m in Sources */,
 				7964B3881E2F1977001AC5E5 /* ProcessedController.m in Sources */,
 				79F964AC1E2CB14D00838CC4 /* LeaveEarlyView.m in Sources */,
@@ -6635,6 +6731,7 @@
 				795AC4611E2C50D700C69308 /* NSDictionary+YXAdd.m in Sources */,
 				7917117E1E236F11003D15C1 /* TeamModel.m in Sources */,
 				795AC4601E2C50D700C69308 /* NSData+YXAdd.m in Sources */,
+				79F9DA8E1E5C3D5100625F19 /* AttendWorkShiftDetail.m in Sources */,
 				795AC4751E2C51B400C69308 /* LocManager.m in Sources */,
 				79375D381E1DFCB700E27934 /* FunctionModel.m in Sources */,
 				790D8AD81E2F4A4F00DDA697 /* AskCellView.m in Sources */,
@@ -6665,6 +6762,7 @@
 				79FA39471E13478600B8D3A7 /* MyExamineModel.m in Sources */,
 				79F0A13C1E13990A00A1B8AA /* ZJSegmentStyle.m in Sources */,
 				794C772B1E3204B800013243 /* EmojiCollectionViewCell.m in Sources */,
+				7938496E1E5BC6CC00EA2502 /* ChangePasswordViewModel.m in Sources */,
 				79F964961E2CAEA400838CC4 /* DrainPunchController.m in Sources */,
 				796803311E111F4F00CED421 /* MyApplyView.m in Sources */,
 				794927621E10A694007331CA /* BuildRoleViewModel.m in Sources */,

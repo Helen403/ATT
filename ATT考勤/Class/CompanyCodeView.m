@@ -159,7 +159,7 @@
         _companyCodeTextField.placeholder = @"输入公司码";
         
         //修改account的placeholder的字体颜色、大小
-        [_companyCodeTextField setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_companyCodeTextField setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_companyCodeTextField setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _companyCodeTextField.font = H14;
@@ -213,7 +213,7 @@
 
 -(void)add:(UIButton *)button{
     if (self.companyCodeTextField.text.length>0) {
-        NSString *str =  [[NSUserDefaults standardUserDefaults] objectForKey:@"returnCode"];
+        NSString *str =  [[NSUserDefaults standardUserDefaults] objectForKey:@"createUserCode"];
         self.companyCodeViewModel.userCode = str;
         self.companyCodeViewModel.invitationCode = self.companyCodeTextField.text;
         [self.companyCodeViewModel.sendclickCommand execute:nil];

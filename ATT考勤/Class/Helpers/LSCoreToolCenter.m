@@ -13,7 +13,7 @@
 #import "SVProgressHUD.h"
 #import <AVFoundation/AVFoundation.h>
 #import "GDataXMLNode.h"
-
+#import "sys/utsname.h"
 
 @implementation LSCoreToolCenter
 
@@ -51,7 +51,7 @@ void ShowErrorStatus(NSString *statues){
             [SVProgressHUD showErrorWithStatus:statues];
 
             
-            [SVProgressHUD showProgress:0.5 status:@"上传"];
+//            [SVProgressHUD showProgress:0.5 status:@"上传"];
             
         });
     }else{
@@ -265,6 +265,40 @@ void DismissHud(void){
     NSString * nsDateString= [NSString stringWithFormat:@"%4ld年%2ld月%2ld日",(long)year,(long)month,(long)day];
     return nsDateString;
 }
+
+//获取年月日
++(NSMutableArray *)currentYearArr{
+    
+    NSCalendar * cal = [NSCalendar currentCalendar];
+    
+    NSUInteger unitFlags = NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear;
+    
+    NSDateComponents * conponent = [cal components:unitFlags fromDate:[NSDate date]];
+    NSInteger year=[conponent year];
+    NSInteger month=[conponent month];
+    NSInteger day=[conponent day];
+//    NSString * nsDateString= [NSString stringWithFormat:@"%4ld年%2ld月%2ld日",(long)year,(long)month,(long)day];
+    NSMutableArray *arr = [NSMutableArray array];
+    [arr addObject:[NSString stringWithFormat:@"%4ld",(long)year]];
+    [arr addObject:[NSString stringWithFormat:@"%2ld",(long)month]];
+    [arr addObject:[NSString stringWithFormat:@"%2ld",(long)day]];
+    return arr;
+}
+
+
++(Boolean)isDayOrNight{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH"];
+    NSString * str = [formatter stringFromDate:[NSDate date]];
+
+    NSInteger hour = [str integerValue];
+    if ((hour >= 0 && hour < 6) || (hour >= 18 && hour < 24)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 //获取年月日
 //+(NSString *)currentYearLine{
@@ -527,6 +561,145 @@ void DismissHud(void){
                                                             options:NSRegularExpressionSearch
                                                               range:NSMakeRange(0, [validString length])];
     return validString;
+}
+
+
++(NSString *)appleIFA {
+    NSString *ifa = nil;
+    Class ASIdentifierManagerClass = NSClassFromString(@"ASIdentifierManager");
+    if (ASIdentifierManagerClass) { // a dynamic way of checking if AdSupport.framework is available
+        SEL sharedManagerSelector = NSSelectorFromString(@"sharedManager");
+        id sharedManager = ((id (*)(id, SEL))[ASIdentifierManagerClass methodForSelector:sharedManagerSelector])(ASIdentifierManagerClass, sharedManagerSelector);
+        SEL advertisingIdentifierSelector = NSSelectorFromString(@"advertisingIdentifier");
+        NSUUID *advertisingIdentifier = ((NSUUID* (*)(id, SEL))[sharedManager methodForSelector:advertisingIdentifierSelector])(sharedManager, advertisingIdentifierSelector);
+        ifa = [advertisingIdentifier UUIDString];
+    }
+    return ifa;
+}
+
++ (NSString *)randomUUID {
+    if(NSClassFromString(@"NSUUID")) { // only available in iOS >= 6.0
+        return [[NSUUID UUID] UUIDString];
+    }
+    CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
+    CFStringRef cfuuid = CFUUIDCreateString(kCFAllocatorDefault, uuidRef);
+    CFRelease(uuidRef);
+    NSString *uuid = [((__bridge NSString *) cfuuid) copy];
+    CFRelease(cfuuid);
+    return uuid;
+}
+
+
++ (void)setValue:(NSString *)value forKey:(NSString *)key inService:(NSString *)service {
+    NSMutableDictionary *keychainItem = [[NSMutableDictionary alloc] init];
+    keychainItem[(__bridge id)kSecClass] = (__bridge id)kSecClassGenericPassword;
+    keychainItem[(__bridge id)kSecAttrAccessible] = (__bridge id)kSecAttrAccessibleAlways;
+    keychainItem[(__bridge id)kSecAttrAccount] = key;
+    keychainItem[(__bridge id)kSecAttrService] = service;
+    keychainItem[(__bridge id)kSecValueData] = [value dataUsingEncoding:NSUTF8StringEncoding];
+    SecItemAdd((__bridge CFDictionaryRef)keychainItem, NULL);
+}
+
+
+//+(NSString *)identifier
+//{
+//    NSString *key = @"com.app.keychain.uuid";
+//    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:key accessGroup:nil];
+//    
+//    NSString *strUUID = [keychainItem objectForKey:(__bridge id)kSecValueData];
+//    
+//    if (strUUID.length <= 0) {
+//        strUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+//        
+//        [keychainItem setObject:@"uuid" forKey:(__bridge id)kSecAttrAccount];
+//        [keychainItem setObject:strUUID forKey:(__bridge id)kSecValueData];
+//    }
+//    
+//    return strUUID;
+//}
+
+
++(NSString *)phoneModel{
+    return [[UIDevice currentDevice] model];
+}
+
+/**
+ *  设备版本
+ *
+ *  @return e.g. iPhone 5S
+ */
++ (NSString*)deviceVersion
+{
+    // 需要#import "sys/utsname.h"
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *deviceString = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    
+    //iPhone
+    if ([deviceString isEqualToString:@"iPhone1,1"])    return @"iPhone 1G";
+    if ([deviceString isEqualToString:@"iPhone1,2"])    return @"iPhone 3G";
+    if ([deviceString isEqualToString:@"iPhone2,1"])    return @"iPhone 3GS";
+    if ([deviceString isEqualToString:@"iPhone3,1"])    return @"iPhone 4";
+    if ([deviceString isEqualToString:@"iPhone3,2"])    return @"Verizon iPhone 4";
+    if ([deviceString isEqualToString:@"iPhone4,1"])    return @"iPhone 4S";
+    if ([deviceString isEqualToString:@"iPhone5,1"])    return @"iPhone 5";
+    if ([deviceString isEqualToString:@"iPhone5,2"])    return @"iPhone 5";
+    if ([deviceString isEqualToString:@"iPhone5,3"])    return @"iPhone 5C";
+    if ([deviceString isEqualToString:@"iPhone5,4"])    return @"iPhone 5C";
+    if ([deviceString isEqualToString:@"iPhone6,1"])    return @"iPhone 5S";
+    if ([deviceString isEqualToString:@"iPhone6,2"])    return @"iPhone 5S";
+    if ([deviceString isEqualToString:@"iPhone7,1"])    return @"iPhone 6 Plus";
+    if ([deviceString isEqualToString:@"iPhone7,2"])    return @"iPhone 6";
+    if ([deviceString isEqualToString:@"iPhone8,1"])    return @"iPhone 6s";
+    if ([deviceString isEqualToString:@"iPhone8,2"])    return @"iPhone 6s Plus";
+    if ([deviceString isEqualToString:@"iPhone8,3"])    return @"iPhoneSE";
+    if ([deviceString isEqualToString:@"iPhone8,4"])    return @"iPhoneSE";
+    if ([deviceString isEqualToString:@"iPhone9,1"])    return @"iPhone7";
+    if ([deviceString isEqualToString:@"iPhone9,2"])    return @"iPhone7Plus";
+    
+    
+    
+    //iPod
+    if ([deviceString isEqualToString:@"iPod1,1"])      return @"iPod Touch 1G";
+    if ([deviceString isEqualToString:@"iPod2,1"])      return @"iPod Touch 2G";
+    if ([deviceString isEqualToString:@"iPod3,1"])      return @"iPod Touch 3G";
+    if ([deviceString isEqualToString:@"iPod4,1"])      return @"iPod Touch 4G";
+    if ([deviceString isEqualToString:@"iPod5,1"])      return @"iPod Touch 5G";
+    
+    //iPad
+    if ([deviceString isEqualToString:@"iPad1,1"])      return @"iPad";
+    if ([deviceString isEqualToString:@"iPad2,1"])      return @"iPad 2 (WiFi)";
+    if ([deviceString isEqualToString:@"iPad2,2"])      return @"iPad 2 (GSM)";
+    if ([deviceString isEqualToString:@"iPad2,3"])      return @"iPad 2 (CDMA)";
+    if ([deviceString isEqualToString:@"iPad2,4"])      return @"iPad 2 (32nm)";
+    if ([deviceString isEqualToString:@"iPad2,5"])      return @"iPad mini (WiFi)";
+    if ([deviceString isEqualToString:@"iPad2,6"])      return @"iPad mini (GSM)";
+    if ([deviceString isEqualToString:@"iPad2,7"])      return @"iPad mini (CDMA)";
+    
+    if ([deviceString isEqualToString:@"iPad3,1"])      return @"iPad 3(WiFi)";
+    if ([deviceString isEqualToString:@"iPad3,2"])      return @"iPad 3(CDMA)";
+    if ([deviceString isEqualToString:@"iPad3,3"])      return @"iPad 3(4G)";
+    if ([deviceString isEqualToString:@"iPad3,4"])      return @"iPad 4 (WiFi)";
+    if ([deviceString isEqualToString:@"iPad3,5"])      return @"iPad 4 (4G)";
+    if ([deviceString isEqualToString:@"iPad3,6"])      return @"iPad 4 (CDMA)";
+    
+    if ([deviceString isEqualToString:@"iPad4,1"])      return @"iPad Air";
+    if ([deviceString isEqualToString:@"iPad4,2"])      return @"iPad Air";
+    if ([deviceString isEqualToString:@"iPad4,3"])      return @"iPad Air";
+    if ([deviceString isEqualToString:@"iPad5,3"])      return @"iPad Air 2";
+    if ([deviceString isEqualToString:@"iPad5,4"])      return @"iPad Air 2";
+    if ([deviceString isEqualToString:@"i386"])         return @"Simulator";
+    if ([deviceString isEqualToString:@"x86_64"])       return @"Simulator";
+    
+    if ([deviceString isEqualToString:@"iPad4,4"]
+        ||[deviceString isEqualToString:@"iPad4,5"]
+        ||[deviceString isEqualToString:@"iPad4,6"])      return @"iPad mini 2";
+    
+    if ([deviceString isEqualToString:@"iPad4,7"]
+        ||[deviceString isEqualToString:@"iPad4,8"]
+        ||[deviceString isEqualToString:@"iPad4,9"])      return @"iPad mini 3";
+    
+    return deviceString;
 }
 
 @end

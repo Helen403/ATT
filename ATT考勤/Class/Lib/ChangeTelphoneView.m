@@ -59,7 +59,7 @@
     WS(weakSelf);
     
     CGFloat leftPadding =(SCREEN_WIDTH-SCREEN_WIDTH*0.8)*0.5;
-    CGFloat topPadding = SCREEN_HEIGHT *0.1;
+    CGFloat topPadding = SCREEN_HEIGHT *0.05;
     CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
     
     [self.useImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,7 +81,7 @@
     
     [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,[self h_w:1]));
         make.right.equalTo(-leftPadding);
         make.top.equalTo(weakSelf.useText.mas_bottom).offset([self h_w:10]);
         
@@ -109,7 +109,7 @@
     
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,[self h_w:1]));
         make.right.equalTo(-leftPadding);
         make.top.equalTo(weakSelf.telphoneImg.mas_bottom).offset([self h_w:10]);
     }];
@@ -247,7 +247,7 @@
         _telphoneText.placeholder = @"输入手机号";
         
         //修改account的placeholder的字体颜色、大小
-        [_telphoneText setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_telphoneText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_telphoneText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _telphoneText.font = H14;
@@ -307,7 +307,7 @@
 -(void)startTime:(UIButton *)button{
     
     if (![self.useText.text isVaildTelphone]) {
-       
+        
         ShowErrorStatus(@"请输入正确的手机号");
         return;
     }
@@ -371,7 +371,7 @@
         _validateText.placeholder = @"输入验证码";
         
         //修改account的placeholder的字体颜色、大小
-        [_validateText setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_validateText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_validateText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _validateText.font = H14;
@@ -395,7 +395,7 @@
     if (!_next) {
         _next = [[UIButton alloc] init];
         
-        [_next setTitle:@"下一步" forState:UIControlStateNormal];
+        [_next setTitle:@"提交" forState:UIControlStateNormal];
         _next.titleLabel.textColor = white_color;
         _next.titleLabel.font = H20;
         [_next addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];

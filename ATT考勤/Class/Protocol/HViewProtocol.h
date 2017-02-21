@@ -18,6 +18,7 @@
 - (instancetype)initWithViewModel:(id <HViewModelProtocol>)viewModel;
 
 - (void)h_setupViews;
+- (void)h_loadData;
 - (void)h_bindViewModel;
 - (void)h_addReturnKeyBoard;
 @end

@@ -1,34 +1,43 @@
 //
-//  NewpartView.m
+//  ChangePasswordView.m
 //  ATT考勤
 //
-//  Created by Helen on 16/12/23.
-//  Copyright © 2016年 Helen. All rights reserved.
+//  Created by Helen on 17/2/21.
+//  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "NewpartView.h"
-#import "NewpartViewModel.h"
+#import "ChangePasswordView.h"
+#import "ChangePasswordViewModel.h"
 
+@interface ChangePasswordView()
 
-@interface NewpartView()
-
-@property(nonatomic,strong) NewpartViewModel *newpartViewModel;
+@property(nonatomic,strong) ChangePasswordViewModel *changePasswordViewModel;
 
 @property(nonatomic,strong) UIImageView *useImg;
+
+@property(nonatomic,strong) UILabel *useLabel;
 
 @property(nonatomic,strong) UITextField *useText;
 
 @property(nonatomic,strong) UIView *line1;
 
-@property(nonatomic,strong) UILabel *hintText;
+@property(nonatomic,strong) UIImageView *telphoneImg;
+
+@property(nonatomic,strong) UILabel *telphoneLabel;
+
+@property(nonatomic,strong) UITextField *telphoneText;
 
 @property(nonatomic,strong) UIButton *countDown;
 
+@property(nonatomic,strong) UIView *line2;
+
 @property(nonatomic,strong) UIImageView *validateImg;
+
+@property(nonatomic,strong) UILabel *validateLabel;
 
 @property(nonatomic,strong) UITextField *validateText;
 
-@property(nonatomic,strong) UIView *line2;
+@property(nonatomic,strong) UIView *line3;
 
 @property(nonatomic,strong) UIButton *next;
 
@@ -36,21 +45,20 @@
 
 @end
 
-@implementation NewpartView
+@implementation ChangePasswordView
 
-#pragma mark 初始化
+#pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
     
-    self.newpartViewModel = (NewpartViewModel *)viewModel;
+    self.changePasswordViewModel = (ChangePasswordViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
 
 -(void)updateConstraints{
     
     WS(weakSelf);
-    
     CGFloat leftPadding =(SCREEN_WIDTH-SCREEN_WIDTH*0.8)*0.5;
-    CGFloat topPadding = SCREEN_HEIGHT *0.1;
+    CGFloat topPadding = SCREEN_HEIGHT *0.05;
     CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
     
     [self.useImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -58,116 +66,132 @@
         make.left.equalTo(leftPadding);
     }];
     
-    [self.useText mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.useLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.useImg);
         make.left.equalTo(weakSelf.useImg.mas_right).offset([self h_w:10]);
+    }];
+    
+    [self.useText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.useImg);
+        make.left.equalTo(weakSelf.useLabel.mas_right).offset([self h_w:10]);
         make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
     
     
     [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,[self h_w:1]));
+        make.right.equalTo(-leftPadding);
+        make.top.equalTo(weakSelf.useText.mas_bottom).offset([self h_w:10]);
+        
+    }];
+    
+    [self.telphoneImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.line1.mas_bottom).offset([self h_w:15]);
+        make.left.equalTo(weakSelf.useImg);
+    }];
+    
+    [self.telphoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.telphoneImg);
+        make.left.equalTo(weakSelf.useLabel);
+    }];
+    
+    [self.telphoneText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.telphoneImg);
+        make.left.equalTo(weakSelf.useText);
+        make.size.equalTo(CGSizeMake(length, [self h_w:30]));
+    }];
+    
+    
+    
+    [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
-        make.top.equalTo(weakSelf.useText.mas_bottom).offset([self h_w:20]);
-        
-    }];
-    
-    [self.hintText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.line1.mas_bottom).offset([self h_w:15]);
-        make.left.equalTo(leftPadding);
-    }];
-    
-    [self.countDown mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf.hintText);
-        make.right.equalTo(weakSelf.line1);
-        
+        make.top.equalTo(weakSelf.telphoneImg.mas_bottom).offset([self h_w:10]);
     }];
     
     [self.validateImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.useImg);
-        make.top.equalTo(weakSelf.hintText.mas_bottom).offset([self h_w:15]);
+        make.top.equalTo(weakSelf.line2.mas_bottom).offset([self h_w:15]);
+    }];
+    
+    [self.validateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.validateImg);
+        make.left.equalTo(weakSelf.useLabel);
     }];
     
     [self.validateText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.useText);
         make.centerY.equalTo(weakSelf.validateImg);
-        make.size.equalTo(CGSizeMake(length, [self h_w:35]));
+        make.left.equalTo(weakSelf.useText);
+        make.size.equalTo(CGSizeMake([self h_w:100], [self h_w:30]));
     }];
     
-    [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.validateImg.mas_bottom).offset([self h_w:15]);
+    [self.line3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.validateImg.mas_bottom).offset([self h_w:10]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
     }];
     
     [self.next mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.line2.mas_bottom).offset([self h_w:15]);
+        make.top.equalTo(weakSelf.line3.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
     }];
     
     
-    [super updateConstraints];
     
+    [super updateConstraints];
 }
 
 #pragma mark private
 -(void)h_setupViews{
     
     [self addSubview:self.useImg];
+    [self addSubview:self.useLabel];
     [self addSubview:self.useText];
     [self addSubview:self.line1];
-    [self addSubview:self.hintText];
+    [self addSubview:self.telphoneImg];
+    [self addSubview:self.telphoneLabel];
+    [self addSubview:self.telphoneText];
     [self addSubview:self.countDown];
-    [self addSubview:self.validateImg];
-    [self addSubview:self.validateText];
     [self addSubview:self.line2];
-    [self addSubview:self.next];
     
+    [self addSubview:self.validateImg];
+    [self addSubview:self.validateLabel];
+    [self addSubview:self.validateText];
+    [self addSubview:self.line3];
+    [self addSubview:self.next];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
--(void)h_bindViewModel{
-    [self addDynamic:self];
-    
-    //请求返回回来的验证码
-    [[self.newpartViewModel.SMSbackSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
-        
-        self.backNumber = x;
-        
-    }];
-    
-    //手机号不符合
-    [[self.newpartViewModel.telphoneBackFailSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-        
-        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
-    }];
-    
-}
-
--(void)mainThread{
-    self.useText.text = @"";
-}
-
 #pragma mark lazyload
--(NewpartViewModel *)newpartViewModel{
-    if (!_newpartViewModel) {
-        _newpartViewModel = [[NewpartViewModel alloc] init];
+-(ChangePasswordViewModel *)changePasswordViewModel{
+    if (!_changePasswordViewModel) {
+        _changePasswordViewModel = [[ChangePasswordViewModel alloc] init];
     }
-    return _newpartViewModel;
-    
+    return _changePasswordViewModel;
 }
 
 
 -(UIImageView *)useImg{
     if (!_useImg) {
         _useImg = [[UIImageView alloc] init];
-        _useImg.image = ImageNamed(@"login_phone_picture");
+        _useImg.image = ImageNamed(@"Login_password_picture");
     }
     return _useImg;
+}
+
+-(UILabel *)useLabel{
+    if (!_useLabel) {
+        _useLabel = [[UILabel alloc] init];
+        _useLabel.text = @"输入旧密码";
+        _useLabel.textColor = MAIN_PAN_2;
+        _useLabel.font = H14;
+    }
+    return _useLabel;
 }
 
 -(UITextField *)useText{
@@ -182,7 +206,7 @@
         
         
         //当输入框没有内容时，水印提示 提示内容为password
-        _useText.placeholder = @"输入手机号";
+        _useText.placeholder = @"输入密码";
         
         //修改account的placeholder的字体颜色、大小
         [_useText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
@@ -190,31 +214,84 @@
         //设置输入框内容的字体样式和大小
         _useText.font = H14;
         // 设置右边永远显示清除按钮
-        _useText.clearButtonMode = UITextFieldViewModeAlways;
+        _useText.secureTextEntry = YES;
         _useText.keyboardType = UIKeyboardTypePhonePad;
-  
-        
     }
     return _useText;
 }
 
+-(UIImageView *)telphoneImg{
+    if (!_telphoneImg) {
+        _telphoneImg = [[UIImageView alloc] init];
+        _telphoneImg.image = ImageNamed(@"Login_password_picture");
+    }
+    return _telphoneImg;
+}
+
+-(UILabel *)telphoneLabel{
+    if (!_telphoneLabel) {
+        _telphoneLabel = [[UILabel alloc] init];
+        _telphoneLabel.text = @"输入新密码";
+        _telphoneLabel.textColor = MAIN_PAN_2;
+        _telphoneLabel.font = H14;
+    }
+    return _telphoneLabel;
+}
+
+-(UILabel *)validateLabel{
+    if (!_validateLabel) {
+        _validateLabel = [[UILabel alloc] init];
+        _validateLabel.text = @"再输入一次";
+        _validateLabel.textColor = MAIN_PAN_2;
+        _validateLabel.font = H14;
+    }
+    return _validateLabel;
+}
+
+-(UITextField *)telphoneText{
+    if (!_telphoneText) {
+        _telphoneText = [[UITextField alloc] init];
+        
+        _telphoneText.backgroundColor = [UIColor clearColor];
+        //设置边框样式，只有设置了才会显示边框样式
+        
+        // 设置内容 -- 垂直居中
+        _telphoneText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        
+        
+        //当输入框没有内容时，水印提示 提示内容为password
+        _telphoneText.placeholder = @"输入密码";
+        
+        //修改account的placeholder的字体颜色、大小
+        [_telphoneText setValue:MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
+        [_telphoneText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
+        //设置输入框内容的字体样式和大小
+        _telphoneText.font = H14;
+        // 设置右边永远显示清除按钮
+        _telphoneText.secureTextEntry = YES;
+        //        _telphoneText.clearButtonMode = UITextFieldViewModeAlways;
+        _telphoneText.keyboardType = UIKeyboardTypePhonePad;
+    }
+    return _telphoneText;
+}
+
+
 -(UIView *)line1{
     if (!_line1) {
         _line1 = [[UIView alloc] init];
-        _line1.backgroundColor = MAIN_GRAY;
+        _line1.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line1;
     
 }
 
--(UILabel *)hintText{
-    if (!_hintText) {
-        _hintText = [[UILabel alloc] init];
-        _hintText.font = H14;
-        _hintText.text = @"验证码30分钟内有效";
-        _hintText.textColor = RGBCOLOR(199, 199, 199);
+-(UIView *)line3{
+    if (!_line3) {
+        _line3 = [[UIView alloc] init];
+        _line3.backgroundColor = MAIN_LINE_COLOR;
     }
-    return _hintText;
+    return _line3;
+    
 }
 
 -(UIButton *)countDown{
@@ -237,7 +314,6 @@
         [_countDown setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
         
-        
         [_countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     
@@ -247,14 +323,14 @@
 
 -(void)startTime:(UIButton *)button{
     
-
     if (![self.useText.text isVaildTelphone]) {
+        
         ShowErrorStatus(@"请输入正确的手机号");
         return;
     }
     
-    self.newpartViewModel.user = self.useText.text;
-    [self.newpartViewModel.sendclickCommand execute:nil];
+    //    self.newpartViewModel.user = self.useText.text;
+    //    [self.newpartViewModel.sendclickCommand execute:nil];
     
     __block int timeout = 30; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -268,7 +344,7 @@
                 //设置界面的按钮显示 根据自己需求设置
                 [button setTitle:@" 验证码 " forState:UIControlStateNormal];
                 button.userInteractionEnabled = YES;
-     
+                
             });
         }else{
             int seconds = timeout % 60;
@@ -280,7 +356,7 @@
                 [UIView setAnimationDuration:1];
                 [button setTitle:[NSString stringWithFormat:@" %@秒后 ",strTime] forState:UIControlStateNormal];
                 [UIView commitAnimations];
-              
+                
                 button.userInteractionEnabled = NO;
             });
             timeout--;
@@ -293,7 +369,7 @@
 -(UIImageView *)validateImg{
     if (!_validateImg) {
         _validateImg = [[UIImageView alloc] init];
-        _validateImg.image = ImageNamed(@"login_phone_picture");
+        _validateImg.image = ImageNamed(@"Login_password_picture");
     }
     return _validateImg;
 }
@@ -309,7 +385,7 @@
         _validateText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         
         //当输入框没有内容时，水印提示 提示内容为password
-        _validateText.placeholder = @"输入验证码";
+        _validateText.placeholder = @"输入密码";
         
         //修改account的placeholder的字体颜色、大小
         [_validateText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
@@ -317,8 +393,8 @@
         //设置输入框内容的字体样式和大小
         _validateText.font = H14;
         // 设置右边永远显示清除按钮
-        _validateText.clearButtonMode = UITextFieldViewModeAlways;
-        
+        //        _validateText.clearButtonMode = UITextFieldViewModeAlways;
+        _validateText.secureTextEntry = YES;
         _validateText.keyboardType = UIKeyboardTypePhonePad;
     }
     return _validateText;
@@ -327,7 +403,7 @@
 -(UIView *)line2{
     if (!_line2) {
         _line2 = [[UIView alloc] init];
-        _line2.backgroundColor = MAIN_GRAY;
+        _line2.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line2;
 }
@@ -336,7 +412,7 @@
     if (!_next) {
         _next = [[UIButton alloc] init];
         
-        [_next setTitle:@"下一步" forState:UIControlStateNormal];
+        [_next setTitle:@"提交" forState:UIControlStateNormal];
         _next.titleLabel.textColor = white_color;
         _next.titleLabel.font = H20;
         [_next addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
@@ -359,7 +435,10 @@
 
 -(void)next:(UIButton *)button{
     if ([self.validateText.text isEqualToString:self.backNumber]) {
-        [self.newpartViewModel.createclickSubject sendNext:self.useText.text];
+        //        [self.newpartViewModel.createclickSubject sendNext:self.useText.text];
     }
 }
+
+
+
 @end

@@ -18,7 +18,6 @@
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAllEmpByCompanyCodeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAllEmpByCompanyCodeResponse>"];
-//                NSLog(@"%@",result);
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[AddressListModel class] rowRootName:@"Emps"];
         self.arr = arr;
@@ -42,13 +41,6 @@
     if (!_arr) {
         _arr = [NSMutableArray array];
         
-        //读取plist
-//        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"AddressList" ofType:@"plist"];
-//        
-//        NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
-//        
-//        _arr= [AddressListModel mj_objectArrayWithKeyValuesArray:data];
-        
     }
     return _arr;
 }
@@ -69,10 +61,10 @@
 
 -(RACSubject *)tableViewSubject{
     if (!_tableViewSubject) {
-       _tableViewSubject = [RACSubject subject];
+        _tableViewSubject = [RACSubject subject];
     }
     return _tableViewSubject;
-
+    
 }
 
 - (RACCommand *)refreshDataCommand {
@@ -96,8 +88,8 @@
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                    ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
                 }];
                 
                 return nil;

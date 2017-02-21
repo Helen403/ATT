@@ -259,7 +259,8 @@
         stringValue =  [LSCoreToolCenter changeJsonStringToTrueJsonString:stringValue];
         NSDictionary *dict = [stringValue dictionaryWithJsonString];
         ScanCodeModel *scanCodeModel =  [ScanCodeModel mj_objectWithKeyValues:dict];
-        NSString *str =  [[NSUserDefaults standardUserDefaults] objectForKey:@"returnCode"];
+        NSString *str =  [[NSUserDefaults standardUserDefaults] objectForKey:@"createUserCode"];
+
         self.scanCodeViewModel.userCode = str;
         self.scanCodeViewModel.inviteCode = scanCodeModel.companyInvitationCode;
         [self.scanCodeViewModel.sendclickCommand execute:nil];

@@ -83,11 +83,15 @@
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
-    
+ 
+}
+
+-(void)h_loadData{
     UserModel *user = getModel(@"user");
     self.multiRolesViewModel.userCode = user.userCode;
     [self.multiRolesViewModel.refreshDataCommand execute:nil];
 }
+
 
 -(void)h_bindViewModel{
     //网络数据返回
@@ -121,7 +125,7 @@
 }
 
 -(void)click{
-
+    
     UserModel *user = getModel(@"user");
     self.multiRolesViewModel.userCode = user.userCode;
     [self.multiRolesViewModel.refreshDataCommand execute:nil];
@@ -189,8 +193,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    MultiRolesModel *multiRoleModel = self.multiRolesViewModel.arr[indexPath.row];
+    [[NSUserDefaults standardUserDefaults] setObject:multiRoleModel.companyCode forKey:@"companyCode"];
+    [[NSUserDefaults standardUserDefaults] setObject:multiRoleModel.companyFullName forKey:@"companyFullName"];
+    
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.multiRolesViewModel.cellclickSubject sendNext:row];
+    
 }
 
 -(UIImageView *)add{
@@ -206,7 +215,7 @@
 
 -(void)addCompany{
     [self.multiRolesViewModel.addSubject sendNext:nil];
-
+    
 }
 
 -(UIImageView *)bg{

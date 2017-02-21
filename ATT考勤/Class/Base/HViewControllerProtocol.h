@@ -20,7 +20,7 @@
 - (void)h_layoutNavigation;//设置导航栏、分栏
 - (void)h_addSubviews;//添加View到ViewController
 - (void)h_bindViewModel;//用来绑定V(VC)与VM
-- (void)h_getNewData;//初次获取数据的时候调用（不是特别必要)
+- (void)h_loadData;//初次获取数据的时候调用（不是特别必要)
 - (void)h_recoverKeyboard;
 
 @end

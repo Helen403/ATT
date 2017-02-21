@@ -11,7 +11,7 @@
 #import "SecurityViewModel.h"
 
 #import "ChangeTelphoneController.h"
-#import "ForgetController.h"
+#import "ChangePasswordController.h"
 
 @interface SecurityController ()
 
@@ -52,16 +52,18 @@
     [[self.securityViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         switch ([x intValue]) {
+                //更换手机号
             case 0:{
                 ChangeTelphoneController *changeTelphone = [[ChangeTelphoneController alloc] init];
                 
                 [self.navigationController pushViewController:changeTelphone animated:NO];
                 break;
             }
+                //修改密码
             case 1:{
-                ForgetController *forget = [[ForgetController alloc] init];
+                ChangePasswordController *changePassword = [[ChangePasswordController alloc] init];
                 
-                [self.navigationController pushViewController:forget animated:NO];
+                [self.navigationController pushViewController:changePassword animated:NO];
                 break;
             }
 

@@ -209,20 +209,29 @@
 -(void)h_bindViewModel{
     [self addDynamic:self];
     //密码错误
-    
     [[self.loginViewModel.loginclickFail takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         [self performSelectorOnMainThread:@selector(failClick) withObject:nil waitUntilDone:YES];
     }];
+    
+    [[self.loginViewModel.loginNumclickFail takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
+    }];
+    
+}
+
+-(void)mainThread{
+    
+    self.pwdTextField.text = @"";
+    self.login.enabled = YES;
+    ShowErrorStatus(@"请输入正确的手机号");
 }
 
 -(void)failClick{
     
     self.pwdTextField.text = @"";
     self.login.enabled = YES;
-    //    self.login.backgroundColor = MAIN_ORANGER;
-    //    [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
-    
     ShowErrorStatus(@"密码错误");
 }
 
@@ -266,7 +275,7 @@
         _useTextField.tintColor = MAIN_PAN_2;
         _useTextField.textColor = MAIN_PAN_2;
         //修改account的placeholder的字体颜色、大小
-        [_useTextField setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_useTextField setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_useTextField setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _useTextField.font = H14;
@@ -343,7 +352,7 @@
         _pwdTextField.tintColor = MAIN_PAN_2;
         _pwdTextField.textColor = MAIN_PAN_2;
         //修改account的placeholder的字体颜色、大小
-        [_pwdTextField setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_pwdTextField setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_pwdTextField setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _pwdTextField.font = H14;
@@ -415,8 +424,8 @@
         //        [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
         [self endEditing:YES];
     }else{
-        ShowErrorStatus(@"请输入正确的手机号或者密码");
-
+        ShowErrorStatus(@"请输入手机号或者密码");
+        self.login.enabled = YES;
     }
 }
 
@@ -573,7 +582,7 @@
 -(UIImageView *)bg{
     if (!_bg) {
         _bg = [[UIImageView alloc] init];
-//        _bg.image = ImageNamedBg;
+        //        _bg.image = ImageNamedBg;
     }
     return _bg;
 }

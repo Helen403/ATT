@@ -51,7 +51,6 @@
 
     [[self.createViewModel.buildRoleclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
   
-        
         [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
     }];
 }

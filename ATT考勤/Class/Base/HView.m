@@ -17,6 +17,7 @@
     if (self) {
         
         [self h_setupViews];
+        [self h_loadData];
         [self h_bindViewModel];
     }
     return self;
@@ -28,6 +29,7 @@
     if (self) {
         
         [self h_setupViews];
+        [self h_loadData];
         [self h_bindViewModel];
     }
     return self;
@@ -35,6 +37,10 @@
 
 
 - (void)h_setupViews {
+}
+
+- (void)h_loadData{
+
 }
 
 - (void)h_bindViewModel {

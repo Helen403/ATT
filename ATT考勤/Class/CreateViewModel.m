@@ -18,11 +18,11 @@
         
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
         //NSLog(@"%@",result);
-      
+        
         DismissHud();
 
-        [[NSUserDefaults standardUserDefaults] setObject:xmlDoc forKey:@"returnCode"];
-
+          [[NSUserDefaults standardUserDefaults] setObject:@"createUserCode" forKey:xmlDoc];
+        
         [self.buildRoleclickSubject sendNext:nil];
         
     }];
@@ -36,8 +36,6 @@
     }];
     
 }
-
-
 
 -(RACSubject *)buildRoleclickSubject{
     if (!_buildRoleclickSubject) {
@@ -59,15 +57,18 @@
                                  <telphone xmlns=\"\">%@</telphone>\
                                  <userNickName xmlns=\"\">%@</userNickName>\
                                  <userPassword xmlns=\"\">%@</userPassword>\
-                                 </saveUser>",self.telphone,self.name,self.pwd];
+                                <phoneDeviceCode xmlns=\"\">%@</phoneDeviceCode>\
+                                    <phoneDeviceName xmlns=\"\">%@</phoneDeviceName>\
+                                 </saveUser>",self.telphone,self.name,self.pwd,self.phoneDeviceCode,self.phoneDeviceName];
                 
                 [self SOAPData:saveUser soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                  ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    
                 }];
                 return nil;
             }];

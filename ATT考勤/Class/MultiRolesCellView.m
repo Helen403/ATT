@@ -63,8 +63,6 @@
     _multiRolesModel = multiRolesModel;
 //    self.img.image = ImageNamed(multiRolesModel.img);
     self.title.text = multiRolesModel.companyNickName;
-    
-
 }
 
 #pragma mark lazyload

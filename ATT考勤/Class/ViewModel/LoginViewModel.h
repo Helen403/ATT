@@ -20,6 +20,7 @@
 
 @property(nonatomic,strong) RACSubject *loginclickFail;
 
+@property(nonatomic,strong) RACSubject *loginNumclickFail;
 
 @property(nonatomic,strong) RACSubject *forgetclickSubject;
 

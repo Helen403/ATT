@@ -16,8 +16,6 @@
 // 正式
 //#define REQUEST_URL @"http://api.qijiwang.cn/app_v1.0/"
 
-// 首次启动判断
-#define CM_FIRST_LAUNCHED @"firstLaunch"
 
 // 动态令牌
 #define YC_DYNAMIC_TOKEN_NAME @"yc_dynamic_token"

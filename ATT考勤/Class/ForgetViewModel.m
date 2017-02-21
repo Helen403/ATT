@@ -16,7 +16,7 @@
     
     
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
+          DismissHud();
         if(result.length<200){
             ShowErrorStatus(@"该手机号没注册");
             [self.telphoneBackFailSubject sendNext:nil];
@@ -24,10 +24,8 @@
             
             NSString *xmlDoc = [self getFilterStr:result filter:@"String"];
             NSLog(@"%@",xmlDoc);
-            DismissHud();
             [self.SMSbackSubject sendNext:xmlDoc];
         }
-        
     }];
     
     
@@ -90,22 +88,17 @@
                             [subscriber sendNext:result];
                             [subscriber sendCompleted];
                         } failure:^(NSError *error) {
-                             ShowErrorStatus(@"请检查网络状态");
                             DismissHud();
+                            ShowErrorStatus(@"请检查网络状态");
                         }];
                     }
                 } failure:^(NSError *error) {
-                     ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
                 }];
-                
-                
-                
-                
                 return nil;
             }];
         }];
-        
     }
     return _sendclickCommand;
 }

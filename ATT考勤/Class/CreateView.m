@@ -179,13 +179,13 @@
         _useText.placeholder = @"输入用户名";
         
         //修改account的placeholder的字体颜色、大小
-        [_useText setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_useText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_useText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _useText.font = H14;
         // 设置右边永远显示清除按钮
         _useText.clearButtonMode = UITextFieldViewModeAlways;
-        
+//          _useText.secureTextEntry = YES;
     }
     
     return _useText;
@@ -203,7 +203,6 @@
 -(UIImageView *)pwdImg{
     if (!_pwdImg) {
         _pwdImg = [[UIImageView alloc] init];
-        //        _pwdImg.image = ImageNamed(@"Login_password_picture");
         _pwdImg.image = [UIImage imageNamed:@"Login_password_picture"];
     }
     return _pwdImg;
@@ -213,8 +212,6 @@
 -(UITextField *)pwdText{
     if (!_pwdText) {
         _pwdText = [[UITextField alloc] init];
-        
-        
         _pwdText.backgroundColor = [UIColor clearColor];
         //设置边框样式，只有设置了才会显示边框样式
         
@@ -225,12 +222,13 @@
         _pwdText.placeholder = @"输入你的密码";
         
         //修改account的placeholder的字体颜色、大小
-        [_pwdText setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_pwdText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_pwdText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _pwdText.font = H14;
         // 设置右边永远显示清除按钮
-        _pwdText.clearButtonMode = UITextFieldViewModeAlways;
+      
+         _pwdText.secureTextEntry = YES;
     }
     return _pwdText;
     
@@ -249,7 +247,6 @@
 -(UIImageView *)surepwdImg{
     if (!_surepwdImg) {
         _surepwdImg = [[UIImageView alloc] init];
-        //        _surepwdImg.image = ImageNamed(@"Login_password_picture");
         _surepwdImg.image = [UIImage imageNamed:@"Login_password_picture"];
     }
     return _surepwdImg;
@@ -271,12 +268,12 @@
         _surepwdText.placeholder = @"再次输入你的密码";
         
         //修改account的placeholder的字体颜色、大小
-        [_surepwdText setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_surepwdText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_surepwdText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _surepwdText.font = H14;
         // 设置右边永远显示清除按钮
-        _surepwdText.clearButtonMode = UITextFieldViewModeAlways;
+          _surepwdText.secureTextEntry = YES;
     }
     return _surepwdText;
     
@@ -324,17 +321,18 @@
         ShowErrorStatus(@"用户名或密码不能为空");
         return;
     }
-    
+    [[[UIDevice currentDevice] identifierForVendor] UUIDString];  
     if (self.pwdText.text == self.surepwdText.text) {
         self.createViewModel.name = self.useText.text;
         self.createViewModel.pwd = self.pwdText.text;
+       
+       
+        self.createViewModel.phoneDeviceCode =  [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        self.createViewModel.phoneDeviceName =  [LSCoreToolCenter deviceVersion] ;
         [self.createViewModel.sendclickCommand execute:nil];
     }else{
-       
-         ShowErrorStatus(@"密码不一致");
+        ShowErrorStatus(@"密码不一致");
         return;
     }
-    
-    
 }
 @end

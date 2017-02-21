@@ -48,6 +48,13 @@
 //通讯录 查询员工信息, 输入[公司编号,部门编号],输出[员工信息]
 #define findAllEmpByCompanyDeptCode @"http://192.168.1.101:8888/smart/ws/IAttService"
 
+//首页 根据用户号查询员工号
+#define findEmpByUserCode @"http://192.168.1.101:8888/smart/ws/IAttService"
 
+//首页 输出上班规则
+#define findPersonShiftWorkPlan @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+//首页 输出上班规则详情
+#define findPersonShiftDetail @"http://192.168.1.101:8888/smart/ws/IAttService"
 
 

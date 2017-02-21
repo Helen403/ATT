@@ -89,4 +89,15 @@ extern void DismissHud(void);
 +(id)initWithJsonString:(NSString*)json object:(id)object;
 
 + (NSString *)changeJsonStringToTrueJsonString:(NSString *)json;
+
++(NSString *)appleIFA ;
+
++ (NSString *)randomUUID;
+
++ (NSString*)deviceVersion;
+
++(NSString *)phoneModel;
+
+//获取年月日
++(NSMutableArray *)currentYearArr;
 @end

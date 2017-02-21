@@ -397,7 +397,7 @@
 #define _DEVICE_SYSTEM_VERSION_  [[[UIDevice currentDevice] systemVersion]floatValue]
 
 ///设备的UDID号
-//#define UDID [[[UIDevice currentDevice] identifierForVendor] UUIDString]
+#define UDID [[[UIDevice currentDevice] identifierForVendor] UUIDString]
 
 //屏幕高、宽
 //#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width

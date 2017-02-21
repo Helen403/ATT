@@ -88,11 +88,11 @@
                                  </findCompanyByInviteCode>",self.invitationCode];
                 
                 [self SOAPData:findCompanyByInviteCode soapBody:body success:^(NSString *result) {
-                    NSLog(@"%lu",(unsigned long)result.length);
+//                    NSLog(@"%lu",(unsigned long)result.length);
                     if (result.length < 200) {
                         [self.failclickSubject sendNext:nil];
                         [subscriber sendCompleted];
-                      
+                        
                     }else{
                         
                         NSDictionary *xmlDoc = [self getFilter:result filter:@"Company"];
@@ -119,20 +119,23 @@
                                 [subscriber sendCompleted];
                                 
                             } failure:^(NSError *error) {
-                                ShowErrorStatus(@"请检查网络状态");
                                 DismissHud();
+                                ShowErrorStatus(@"请检查网络状态");
+                                
                             }];
                             
                             
                         } failure:^(NSError *error) {
-                            ShowErrorStatus(@"请检查网络状态");
                             DismissHud();
+                            ShowErrorStatus(@"请检查网络状态");
+                            
                         }];
                     }
                     
                 } failure:^(NSError *error) {
-                    ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    
                 }];
                 return nil;
             }];
@@ -169,8 +172,9 @@
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                    ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    
                 }];
                 return nil;
             }];

@@ -93,7 +93,7 @@
         make.top.equalTo(weakSelf.line2.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line2);
         make.right.equalTo(weakSelf.line2);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
+        
     }];
     
     [super updateConstraints];
@@ -151,7 +151,7 @@
         _forgetPwdTextField.placeholder = @"输入你的密码";
         
         //修改account的placeholder的字体颜色、大小
-        [_forgetPwdTextField setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_forgetPwdTextField setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_forgetPwdTextField setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _forgetPwdTextField.font = H14;
@@ -196,7 +196,7 @@
         _sureForgetPwdTextField.placeholder = @"再次输入你的密码";
         
         //修改account的placeholder的字体颜色、大小
-        [_sureForgetPwdTextField setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_sureForgetPwdTextField setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_sureForgetPwdTextField setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _sureForgetPwdTextField.font = H14;
