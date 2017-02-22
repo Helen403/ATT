@@ -100,4 +100,16 @@ extern void DismissHud(void);
 
 //获取年月日
 +(NSMutableArray *)currentYearArr;
+
++(Boolean)isDayOrNight:(NSString *)str;
+
++(NSString *)curDate;
+
++(NSTimeInterval)getDateDiff:(NSString *)beginTime end:(NSString *)endTime;
+
++(NSString *)getDateAddMinuts:(NSString *)str time:(NSInteger )minute;
+
+
++(NSString *)currentYearType;
+
 @end

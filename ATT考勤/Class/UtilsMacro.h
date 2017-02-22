@@ -98,6 +98,7 @@
 
 #define MAIN_TEXTFIELD RGBCOLOR(176,176,176)
 
+#define MAIN_ENABLE RGBCOLOR(176, 176, 176)
 
 
 #define XCFGlobalBackgroundColor RGB(245, 240, 215)     // 背景颜色
@@ -109,3 +110,7 @@
 #define XCFSearchBarTintColor RGB(192, 192, 192)        // 搜索按钮背景色
 #define XCFDishViewBackgroundColor RGB(235, 235, 226)   // 作品view背景色
 #define XCFAddressCellColor RGB(215, 228, 225)          // 收货地址选中颜色
+
+
+#define offSetCardArea 30*60
+

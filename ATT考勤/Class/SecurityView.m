@@ -79,11 +79,13 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SecurityCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([SecurityCellView class])] forIndexPath:indexPath];
-    
+    cell.index = indexPath.row;
     cell.securityModel = self.securityViewModel.arr[indexPath.row];
-    
+
     return cell;
 }
+
+
 
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

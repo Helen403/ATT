@@ -8,8 +8,6 @@
 
 #import "HomeViewModel.h"
 
-
-
 @implementation HomeViewModel
 
 #pragma mark private
@@ -79,9 +77,10 @@
                     EmpModel *empModel = [EmpModel mj_objectWithKeyValues:xmlDoc];
                     self.empModel = empModel;
                     
-                    
                     self.deptCode = empModel.deptCode;
                     self.empCode = empModel.empCode;
+                    
+                    [[NSUserDefaults standardUserDefaults] setObject:empModel.empTelphone forKey:@"empTelphone"];
                     /************************************************/
                     NSString *body2 =[NSString stringWithFormat: @"<findDeptByDeptCode xmlns=\"http://service.webservice.vada.com/\">\
                                       <companyCode xmlns=\"\">%@</companyCode>\

@@ -76,11 +76,9 @@
         make.top.equalTo(padding);
     }];
     
-   
-    
     [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.applyTimeText.mas_bottom).offset(padding);
-         make.centerX.equalTo(weakSelf);
+        make.centerX.equalTo(weakSelf);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-[self h_w:20], [self h_w:1]));
     }];
     
@@ -88,6 +86,7 @@
         make.right.equalTo(weakSelf.line1);
         make.centerY.equalTo(weakSelf.applyTimeText);
     }];
+    
     
     [self.lateTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.line1.mas_bottom).offset(padding);
@@ -98,6 +97,9 @@
         make.top.equalTo(weakSelf.lateTimeText);
         make.left.equalTo(weakSelf.applyTimeShowText);
     }];
+    
+
+
     
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.lateTimeText.mas_bottom).offset(padding);

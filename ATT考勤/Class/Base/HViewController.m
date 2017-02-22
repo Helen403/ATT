@@ -28,6 +28,7 @@
         
         @strongify(viewController)
         [viewController h_addSubviews];
+        [viewController h_loadData];
         [viewController h_bindViewModel];
     }];
     
@@ -227,6 +228,9 @@
  *  初次获取数据
  */
 - (void)h_getNewData {}
+
+-(void)h_loadData{
+}
 
 
 - (void)didReceiveMemoryWarning {

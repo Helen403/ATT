@@ -11,6 +11,9 @@
 
 #import "UserModel.h"
 #import "EmpModel.h"
+#import "Dept.h"
+#import "AttendWorkShift.h"
+#import "AttendWorkShiftDetail.h"
 
 @interface HomeView()
 
@@ -182,7 +185,7 @@
     
     [self.netStatusImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.time.mas_left);
-        make.top.equalTo(weakSelf.punch.mas_bottom).offset([self h_w:20]);
+        make.top.equalTo(weakSelf.punch.mas_bottom).offset([self h_w:100]);
         make.size.equalTo(CGSizeMake([self h_w:35], [self h_w:35]));
     }];
     
@@ -233,14 +236,11 @@
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
-    
-    
 }
 
 
 -(void)h_loadData{
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
-    
     
     self.homeViewModel.companyCode = companyCode;
     UserModel *user =  getModel(@"user");
@@ -276,12 +276,133 @@
     self.department.text = [NSString stringWithFormat:@"%@ %@",dept.deptNickName,empModel.position];
     
     /*********************************************/
-//    self.homeViewModel.dept.
+    //    Dept *deptTmp =  self.homeViewModel.dept;
+    AttendWorkShift *attendWorkShift = self.homeViewModel.attendWorkShift;
+    NSString *count =  attendWorkShift.daySignCount;
     
+    NSString *curDate = [LSCoreToolCenter currentYearType];
+    NSString *curDatetime = [LSCoreToolCenter curDate];
+    if ([@"2" isEqualToString:count]) {
+        AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
+        self.preText.text = detail1.workStartDatetime;
+        self.lastText.text = detail1.workEndDatetime;
+        
+    }
     
+    /**************************************************/
+    if ([@"4" isEqualToString:count]) {
+        AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
+        AttendWorkShiftDetail *detail2 = self.homeViewModel.arr[1];
+        
+        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail2.workStartDatetime]; //取的第2次上班时间
+        
+        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:offSetCardArea];
+        long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
+        if(diffC>0){
+            //显示第1阶段打卡时间
+            self.preText.text = detail1.workStartDatetime;
+            self.lastText.text = detail1.workEndDatetime;
+        }else{
+            //显示第2阶段打卡时间
+            self.preText.text = detail2.workStartDatetime;
+            self.lastText.text = detail2.workEndDatetime;
+        }
+        
+    }
+    /**************************************************/
+    if ([@"6" isEqualToString:count]) {
+        AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
+        AttendWorkShiftDetail *detail2 = self.homeViewModel.arr[1];
+        AttendWorkShiftDetail *detail3 = self.homeViewModel.arr[2];
+        
+        
+        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail2.workStartDatetime]; //取的第2次上班时间
+        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:offSetCardArea];
+        long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
+				    
+        
+        NSString *strEdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail3.workStartDatetime]; //取的第3次上班时间
+        NSString *strEbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strEdatetime time:offSetCardArea];
+        long diffE = [LSCoreToolCenter getDateDiff:curDatetime end:strEbeforedatetime];
+        
+        long diffCE = [LSCoreToolCenter getDateDiff:strCbeforedatetime end:strEbeforedatetime]; //计算C,E点时间差
+        
+        if(diffC>0){
+            //显示第1阶段打卡时间
+            self.preText.text = detail1.workStartDatetime;
+            self.lastText.text = detail1.workEndDatetime;
+        }else{
+            if(diffCE>=diffE&&diffE>0){
+                //显示第2阶段打卡时间
+                self.preText.text = detail2.workStartDatetime;
+                self.lastText.text =detail2.workEndDatetime;
+            }else{
+                //显示第3阶段打卡时间
+                self.preText.text = detail3.workStartDatetime;
+                self.lastText.text = detail3.workEndDatetime;
+            }
+        }
+        
+    }
+    /**************************************************/
+    if ([@"8" isEqualToString:count]) {
+        AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
+        AttendWorkShiftDetail *detail2 = self.homeViewModel.arr[1];
+        AttendWorkShiftDetail *detail3 = self.homeViewModel.arr[2];
+        AttendWorkShiftDetail *detail4 = self.homeViewModel.arr[3];
+        
+        
+        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail2.workStartDatetime]; //取的第2次上班时间
+        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:offSetCardArea];
+        long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
+				    
+        NSString *strEdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail3.workStartDatetime]; //取的第3次上班时间
+        NSString *strEbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strEdatetime time:offSetCardArea];
+        long diffE = [LSCoreToolCenter getDateDiff:curDatetime end:strEbeforedatetime];
+        
+        long diffCE = [LSCoreToolCenter getDateDiff:strCbeforedatetime end:strEbeforedatetime]; //计算C,E点时间差
+        
+        
+        NSString *strGdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail4.workStartDatetime]; //取的第4次上班时间
+        NSString *strGbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strGdatetime time:offSetCardArea];
+        long diffG = [LSCoreToolCenter getDateDiff:curDatetime end:strGbeforedatetime];
+        
+        long diffEG = [LSCoreToolCenter getDateDiff:strEbeforedatetime end:strGbeforedatetime]; //计算E,G点时间差
+				    
+        if(diffC>0){
+            //显示第1阶段打卡时间
+            self.preText.text = detail1.workStartDatetime;
+            self.lastText.text = detail1.workEndDatetime;
+        }else{
+            if(diffCE>=diffE&&diffE>0){
+                //显示第2阶段打卡时间
+                self.preText.text = detail2.workStartDatetime;
+                self.lastText.text = detail2.workEndDatetime;
+            }else{
+                if(diffEG>=diffG&&diffG>0){
+                    //显示第3阶段打卡时间
+                    self.preText.text = detail3.workStartDatetime;
+                    self.lastText.text = detail3.workEndDatetime;
+                }else{
+                    //显示第4阶段打卡时间
+                    self.preText.text = detail4.workStartDatetime;
+                    self.lastText.text =detail4.workEndDatetime;
+                }
+            }
+        }
+    }
+
+    if ([LSCoreToolCenter isDayOrNight:self.preText.text]) {
+        self.preImg.image = ImageNamed(@"homepage_rest_orange");
+    }else{
+        self.preImg.image = ImageNamed(@"homepage_work_orange");
+    }
+    if ([LSCoreToolCenter isDayOrNight:self.lastText.text]) {
+        self.lastImg.image = ImageNamed(@"homepage_rest_green");
+    }else{
+        self.lastImg.image = ImageNamed(@"homepage_work_green");
+    }
 }
-
-
 
 -(void)setTime{
     //设置星期几
@@ -335,7 +456,7 @@
 -(UILabel *)title{
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.text = @"韦达公司";
+        _title.text = @"";
         _title.textColor = black_color;
         _title.font = H18;
     }
@@ -380,7 +501,7 @@
 -(UILabel *)name{
     if (!_name) {
         _name = [[UILabel alloc] init];
-        _name.text = @"吴 涛";
+        _name.text = @"";
         _name.font = H14;
         
     }
@@ -390,7 +511,7 @@
 -(UILabel *)department{
     if (!_department) {
         _department = [[UILabel alloc] init];
-        _department.text = @"产品部 工程师";
+        _department.text = @"";
         
     }
     return _department;
@@ -509,6 +630,7 @@
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
+        _scrollView.scrollEnabled = NO;
     }
     return _scrollView;
 }

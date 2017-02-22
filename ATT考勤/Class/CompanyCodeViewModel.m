@@ -88,7 +88,7 @@
                                  </findCompanyByInviteCode>",self.invitationCode];
                 
                 [self SOAPData:findCompanyByInviteCode soapBody:body success:^(NSString *result) {
-//                    NSLog(@"%lu",(unsigned long)result.length);
+
                     if (result.length < 200) {
                         [self.failclickSubject sendNext:nil];
                         [subscriber sendCompleted];

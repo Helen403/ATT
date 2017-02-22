@@ -69,9 +69,7 @@
                 [self.navigationController pushViewController:security animated:NO];
                 
                 break;
-                
             }
-                
                 //消息通知
             case 1:{
                 MessageController *message = [[MessageController alloc] init];

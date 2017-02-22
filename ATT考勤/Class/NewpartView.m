@@ -81,7 +81,7 @@
     [self.countDown mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.hintText);
         make.right.equalTo(weakSelf.line1);
-        
+         make.size.equalTo(CGSizeMake([self h_w:70], [self h_w:32]));
     }];
     
     [self.validateImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -158,9 +158,7 @@
         _newpartViewModel = [[NewpartViewModel alloc] init];
     }
     return _newpartViewModel;
-    
 }
-
 
 -(UIImageView *)useImg{
     if (!_useImg) {
@@ -192,8 +190,7 @@
         // 设置右边永远显示清除按钮
         _useText.clearButtonMode = UITextFieldViewModeAlways;
         _useText.keyboardType = UIKeyboardTypePhonePad;
-  
-        
+
     }
     return _useText;
 }
@@ -204,7 +201,6 @@
         _line1.backgroundColor = MAIN_GRAY;
     }
     return _line1;
-    
 }
 
 -(UILabel *)hintText{
@@ -223,7 +219,7 @@
         
         _countDown.titleLabel.textColor = white_color;
         
-        [_countDown setTitle:@" 验证码 " forState:UIControlStateNormal];
+        [_countDown setTitle:@"验证码" forState:UIControlStateNormal];
         _countDown.userInteractionEnabled = YES;
         _countDown.titleLabel.font = H14;
         [_countDown addTarget:self action:@selector(startTime:) forControlEvents:UIControlEventTouchUpInside];
@@ -236,8 +232,7 @@
         
         [_countDown setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
-        
+
         [_countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     
@@ -268,7 +263,9 @@
                 //设置界面的按钮显示 根据自己需求设置
                 [button setTitle:@" 验证码 " forState:UIControlStateNormal];
                 button.userInteractionEnabled = YES;
-     
+                [button setBackgroundColor:MAIN_ORANGER];
+                
+                [button.layer setBorderColor:MAIN_ORANGER.CGColor];
             });
         }else{
             int seconds = timeout % 60;
@@ -282,6 +279,9 @@
                 [UIView commitAnimations];
               
                 button.userInteractionEnabled = NO;
+                [button setBackgroundColor:MAIN_ENABLE];
+                
+                [button.layer setBorderColor:MAIN_ENABLE.CGColor];
             });
             timeout--;
         }
@@ -360,6 +360,9 @@
 -(void)next:(UIButton *)button{
     if ([self.validateText.text isEqualToString:self.backNumber]) {
         [self.newpartViewModel.createclickSubject sendNext:self.useText.text];
+    }else{
+        ShowErrorStatus(@"验证码不正确");
+        self.validateText.text = @"";
     }
 }
 @end

@@ -14,11 +14,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import "GDataXMLNode.h"
 #import "sys/utsname.h"
+#import "ZJProgressHUD.h"
+
+
+#define HQDateFormatter @"yyyy-MM-dd HH:mm:ss"
 
 @implementation LSCoreToolCenter
 
 + (void)load{
-   
+    
     [SVProgressHUD setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD setInfoImage:nil];
@@ -49,42 +53,41 @@ void ShowErrorStatus(NSString *statues){
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD showErrorWithStatus:statues];
-
             
-//            [SVProgressHUD showProgress:0.5 status:@"上传"];
             
+            //            [SVProgressHUD showProgress:0.5 status:@"上传"];
+            [ZJProgressHUD showErrorWithStatus:statues andAutoHideAfterTime:1.0f];
         });
     }else{
-//        [NSTimer scheduledWithTimeInterval:1 repeats:NO block:^(NSTimer *timer) {
-            [SVProgressHUD showErrorWithStatus:statues];
-//        }];
+        
+        // [SVProgressHUD showErrorWithStatus:statues];
+        [ZJProgressHUD showErrorWithStatus:statues andAutoHideAfterTime:1.0f];
         
     }
     
- 
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(myThread) userInfo:nil repeats:NO];
 }
 
 
 void ShowMaskStatus(NSString *statues){
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-
+            //            [ZJProgressHUD showStatus:statues andAutoHideAfterTime:1.0f];
+            
             [SVProgressHUD showWithStatus:statues];
         });
     }else{
-    
+        
         [SVProgressHUD showWithStatus:statues];
+        //         [ZJProgressHUD showStatus:statues andAutoHideAfterTime:1.0f];
     }
 }
 
 void ShowProgress(CGFloat progress){
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-       
+            
             [SVProgressHUD showProgress:progress];
             
-          
         });
     }else{
         [SVProgressHUD showProgress:progress];
@@ -95,16 +98,17 @@ void DismissHud(void){
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
+            [ZJProgressHUD hideAllHUDs];
         });
     }else{
         [SVProgressHUD dismiss];
+        [ZJProgressHUD hideAllHUDs];
     }
 }
 
 
 +(void)insertSQLByStringKey:(NSString *)key Value:(NSString *)value{
     
-   
     
     //1.获得数据库文件的路径
     NSString *fileName =[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES)  lastObject] stringByAppendingString:DBNAME];
@@ -178,7 +182,7 @@ void DismissHud(void){
 {
     CGFloat font =SizeScaleW*fontSize;
     CGSize size=[text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:font]}];
-
+    
     //ios系统大于7
     if ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0) {
         size=[text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]}];
@@ -267,6 +271,28 @@ void DismissHud(void){
 }
 
 //获取年月日
++(NSString *)curDate{
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+   
+   NSString *str = [formatter stringFromDate:[NSDate date]];
+    return str;
+}
+
+
+
++(NSString *)currentYearType{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    return str;
+
+}
+
+//获取年月日
 +(NSMutableArray *)currentYearArr{
     
     NSCalendar * cal = [NSCalendar currentCalendar];
@@ -277,7 +303,7 @@ void DismissHud(void){
     NSInteger year=[conponent year];
     NSInteger month=[conponent month];
     NSInteger day=[conponent day];
-//    NSString * nsDateString= [NSString stringWithFormat:@"%4ld年%2ld月%2ld日",(long)year,(long)month,(long)day];
+    //    NSString * nsDateString= [NSString stringWithFormat:@"%4ld年%2ld月%2ld日",(long)year,(long)month,(long)day];
     NSMutableArray *arr = [NSMutableArray array];
     [arr addObject:[NSString stringWithFormat:@"%4ld",(long)year]];
     [arr addObject:[NSString stringWithFormat:@"%2ld",(long)month]];
@@ -286,63 +312,17 @@ void DismissHud(void){
 }
 
 
-+(Boolean)isDayOrNight{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH"];
-    NSString * str = [formatter stringFromDate:[NSDate date]];
-
-    NSInteger hour = [str integerValue];
++(Boolean)isDayOrNight:(NSString *)str{
+    
+    NSArray *arr = [str componentsSeparatedByString:@":"];
+    
+    NSInteger hour = [arr[0] integerValue];
     if ((hour >= 0 && hour < 6) || (hour >= 18 && hour < 24)) {
         return true;
     } else {
         return false;
     }
 }
-
-
-//获取年月日
-//+(NSString *)currentYearLine{
-//    
-//    NSCalendar * cal = [NSCalendar currentCalendar];
-//    
-//    NSUInteger unitFlags = NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear;
-//    
-//    NSDateComponents * conponent = [cal components:unitFlags fromDate:[NSDate date]];
-//    NSInteger year=[conponent year];
-//    NSInteger month=[conponent month];
-//    NSInteger day=[conponent day];
-//    NSString * nsDateString= [NSString stringWithFormat:@"%4ld-%2ld-%2ld",(long)year,(long)month,(long)day];
-//    return nsDateString;
-//}
-
-
-//#pragma mark - ScaleSize
-//- (void)initAutoScaleSize{
-//    int kScreenHeight = getHeight;
-//    int kScreenWith = getWidth;
-//    
-//    if (kScreenHeight == 480) {
-//        //4s
-//        _autoSizeScaleW = kScreenWith / 375.f;
-//        _autoSizeScaleH = kScreenHeight / 667.f;
-//    }else if (kScreenHeight == 568) {
-//        //5
-//        _autoSizeScaleW = kScreenWith / 375.f;
-//        _autoSizeScaleH = kScreenHeight / 667.f;
-//    }else if (kScreenHeight == 667){
-//        //6 以6为原型
-//        _autoSizeScaleW = kScreenWith / 375.f;
-//        _autoSizeScaleH = kScreenHeight / 667.f;
-//    }else if(kScreenHeight == 736){
-//        //6p
-//        _autoSizeScaleW = kScreenWith / 375.f;
-//        _autoSizeScaleH = kScreenHeight/ 667.f;
-//    }else{
-//        _autoSizeScaleW = 1;
-//        _autoSizeScaleH = 1;
-//    }
-//    
-//}
 
 
 #pragma mark -
@@ -391,17 +371,17 @@ void DismissHud(void){
     
     NSMutableArray *retVal = [NSMutableArray array];
     xml = [NSString stringWithFormat:@"<data>%@</data>",xml];
-   
-      GDataXMLDocument *root = [[GDataXMLDocument alloc] initWithXMLString:xml options:0 error:nil];
+    
+    GDataXMLDocument *root = [[GDataXMLDocument alloc] initWithXMLString:xml options:0 error:nil];
     GDataXMLElement *rootEle = [root rootElement];
-
+    
     NSArray *rows = [rootEle elementsForName:rowRootName];
-
+    
     for (GDataXMLElement *row in rows) {
         id object = [[class alloc] init];
         object = [self initWithXMLString:row.XMLString object:object];
         [retVal addObject:object];
-      
+        
     }
     return retVal;
 }
@@ -479,7 +459,7 @@ void DismissHud(void){
                 id object = [[class alloc] init];
                 object = [self initWithJsonString:jsonRow object:object];
                 [retVal addObject:object];
-             
+                
             }
         }
     }
@@ -523,15 +503,15 @@ void DismissHud(void){
 +(NSString*)setJsonProperty:(NSString*)value propertyName:(NSString*)propertyName {
     
     NSString *retVal = @"";
-//    NSString *patternString = [NSString stringWithFormat:@"(?<=\"%@\":\")[^\",]*",propertyName];
-//    // CaseInsensitive:不区分大小写比较
-//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:patternString options:NSRegularExpressionCaseInsensitive error:nil];
-//    if (regex) {
-//        NSTextCheckingResult *firstMatch = [regex firstMatchInString:value options:NSCaseInsensitiveSearch range:NSMakeRange(0, [value length])];
-//        if (firstMatch) {
-//            retVal = [value substringWithRange:firstMatch.range];
-//        }
-//    }
+    //    NSString *patternString = [NSString stringWithFormat:@"(?<=\"%@\":\")[^\",]*",propertyName];
+    //    // CaseInsensitive:不区分大小写比较
+    //    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:patternString options:NSRegularExpressionCaseInsensitive error:nil];
+    //    if (regex) {
+    //        NSTextCheckingResult *firstMatch = [regex firstMatchInString:value options:NSCaseInsensitiveSearch range:NSMakeRange(0, [value length])];
+    //        if (firstMatch) {
+    //            retVal = [value substringWithRange:firstMatch.range];
+    //        }
+    //    }
     return retVal;
 }
 
@@ -605,16 +585,16 @@ void DismissHud(void){
 //{
 //    NSString *key = @"com.app.keychain.uuid";
 //    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:key accessGroup:nil];
-//    
+//
 //    NSString *strUUID = [keychainItem objectForKey:(__bridge id)kSecValueData];
-//    
+//
 //    if (strUUID.length <= 0) {
 //        strUUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-//        
+//
 //        [keychainItem setObject:@"uuid" forKey:(__bridge id)kSecAttrAccount];
 //        [keychainItem setObject:strUUID forKey:(__bridge id)kSecValueData];
 //    }
-//    
+//
 //    return strUUID;
 //}
 
@@ -701,5 +681,56 @@ void DismissHud(void){
     
     return deviceString;
 }
+
+
+
+
+
+
+
+//获取当前时间yyyyMMddHHmmss
+
++(NSString *) getCurrentTime{
+
+    NSDate *date=[[NSDate alloc] init];
+
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+
+    [formatter  setDateFormat:HQDateFormatter];
+
+    NSString *curTime=[formatter stringFromDate:date];
+
+    return curTime;
+}
+
++(NSString *)getDateAddMinuts:(NSString *)str time:(NSInteger )minute{
+
+    NSDate* theDate;
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    
+    [formatter  setDateFormat:HQDateFormatter];
+
+    NSDate *date = [formatter dateFromString:str];
+    theDate = [date initWithTimeIntervalSinceNow:minute];
+    
+    return [formatter stringFromDate:theDate];
+    
+}
+
++(NSTimeInterval)getDateDiff:(NSString *)beginTime end:(NSString *)endTime{
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    
+    //要注意格式一定要统一
+    
+    [dateFormatter setDateFormat:HQDateFormatter];
+    
+    NSDate *beginD=[dateFormatter dateFromString:beginTime];
+    
+    NSDate *endD=[dateFormatter dateFromString:endTime];
+    
+    NSTimeInterval value=[endD timeIntervalSinceDate:beginD];
+    return value;
+}
+
 
 @end

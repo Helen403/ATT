@@ -8,6 +8,7 @@
 
 #import "ChangeTelphoneView.h"
 #import "ChangeTelphoneViewModel.h"
+#import "UserModel.h"
 
 @interface ChangeTelphoneView()
 
@@ -168,6 +169,34 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_bindViewModel{
+    //请求返回回来的验证码
+    [[self.changeTelphoneViewModel.SMSbackSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        
+        self.backNumber = x;
+        
+    }];
+    
+    //手机号不符合
+    [[self.changeTelphoneViewModel.telphoneBackFailSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
+    }];
+    
+}
+
+-(void)mainThread{
+    self.useText.text = @"";
+}
+
+
+
+-(void)h_loadData{
+    NSString *empTelphone =  [[NSUserDefaults standardUserDefaults] objectForKey:@"empTelphone"];
+    self.useText.text = empTelphone;
+}
+
+
 #pragma mark lazyload
 -(ChangeTelphoneViewModel *)changeTelphoneViewModel{
     if (!_changeTelphoneViewModel) {
@@ -197,7 +226,7 @@
 -(UILabel *)useText{
     if (!_useText) {
         _useText = [[UILabel alloc] init];
-        _useText.text = @"18678968888";
+        _useText.text = @"";
         _useText.textColor = MAIN_PAN_2;
         _useText.font = H14;
     }
@@ -241,8 +270,7 @@
         
         // 设置内容 -- 垂直居中
         _telphoneText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        
-        
+
         //当输入框没有内容时，水印提示 提示内容为password
         _telphoneText.placeholder = @"输入手机号";
         
@@ -306,14 +334,13 @@
 
 -(void)startTime:(UIButton *)button{
     
-    if (![self.useText.text isVaildTelphone]) {
-        
+    if (![self.telphoneText.text isVaildTelphone]) {
         ShowErrorStatus(@"请输入正确的手机号");
         return;
     }
     
-    //    self.newpartViewModel.user = self.useText.text;
-    //    [self.newpartViewModel.sendclickCommand execute:nil];
+    self.changeTelphoneViewModel.telphone = self.telphoneText.text;
+    [self.changeTelphoneViewModel.sendclickCommand execute:nil];
     
     __block int timeout = 30; //倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -327,7 +354,10 @@
                 //设置界面的按钮显示 根据自己需求设置
                 [button setTitle:@" 验证码 " forState:UIControlStateNormal];
                 button.userInteractionEnabled = YES;
-                
+           
+                [button setBackgroundColor:MAIN_ORANGER];
+                //设置按钮的边界颜色
+                [button.layer setBorderColor:MAIN_ORANGER.CGColor];
             });
         }else{
             int seconds = timeout % 60;
@@ -341,6 +371,9 @@
                 [UIView commitAnimations];
                 
                 button.userInteractionEnabled = NO;
+                [button setBackgroundColor:MAIN_ENABLE];
+                //设置按钮的边界颜色
+                [button.layer setBorderColor:MAIN_ENABLE.CGColor];
             });
             timeout--;
         }
@@ -418,7 +451,24 @@
 
 -(void)next:(UIButton *)button{
     if ([self.validateText.text isEqualToString:self.backNumber]) {
-        //        [self.newpartViewModel.createclickSubject sendNext:self.useText.text];
+        NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+        
+        self.changeTelphoneViewModel.companyCode = companyCode;
+        UserModel *user =  getModel(@"user");
+        self.changeTelphoneViewModel.userCode = user.userCode;
+        
+        [self.changeTelphoneViewModel.changeTelphoneCommand execute:nil];
+        self.next.enabled = NO;
+        [self.next setBackgroundColor:MAIN_ENABLE];
+        //设置按钮的边界颜色
+        [self.next.layer setBorderColor:MAIN_ENABLE.CGColor];
+    }else{
+        ShowErrorStatus(@"验证码不正确");
+        self.validateText.text = @"";
+        self.next.enabled = NO;
+        [self.next setBackgroundColor:MAIN_ORANGER];
+        //设置按钮的边界颜色
+        [self.next.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
 }
 

@@ -80,6 +80,7 @@
     [self.countDown mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.hintText);
         make.right.equalTo(weakSelf.line1);
+        make.size.equalTo(CGSizeMake([self h_w:70], [self h_w:32]));
     }];
     
     [self.validateImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -103,9 +104,9 @@
         make.top.equalTo(weakSelf.line2.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-       
+        
     }];
-
+    
     [super updateConstraints];
     
 }
@@ -215,7 +216,7 @@
         
         _countDown.titleLabel.textColor = white_color;
         
-        [_countDown setTitle:@" 验证码 " forState:UIControlStateNormal];
+        [_countDown setTitle:@"验证码" forState:UIControlStateNormal];
         _countDown.userInteractionEnabled = YES;
         _countDown.titleLabel.font = H14;
         [_countDown addTarget:self action:@selector(startTime:) forControlEvents:UIControlEventTouchUpInside];
@@ -256,20 +257,23 @@
                 //设置界面的按钮显示 根据自己需求设置
                 [button setTitle:@" 验证码 " forState:UIControlStateNormal];
                 button.userInteractionEnabled = YES;
-       
+                [button setBackgroundColor:MAIN_ORANGER];
+                
+                [button.layer setBorderColor:MAIN_ORANGER.CGColor];
             });
         }else{
             int seconds = timeout % 60;
             NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                //                NSLog(@"____%@",strTime);
                 [UIView beginAnimations:nil context:nil];
                 [UIView setAnimationDuration:1];
                 [button setTitle:[NSString stringWithFormat:@" %@秒后 ",strTime] forState:UIControlStateNormal];
                 [UIView commitAnimations];
-       
+                
                 button.userInteractionEnabled = NO;
+                [button setBackgroundColor:MAIN_ENABLE];
+                [button.layer setBorderColor:MAIN_ENABLE.CGColor];
             });
             timeout--;
         }
@@ -335,7 +339,6 @@
         
         [_next setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
         [_next.layer setBorderColor:MAIN_ORANGER.CGColor];
         
     }
@@ -346,6 +349,9 @@
 -(void)next:(UIButton *)button{
     if ([self.validateText.text isEqualToString:self.backNumber]) {
         [self.forgetViewModel.forgetPwdclickSubject sendNext:nil];
+    }else{
+        ShowErrorStatus(@"验证码不正确");
+        self.validateText.text = @"";
     }
 }
 

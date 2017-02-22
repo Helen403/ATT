@@ -10,4 +10,18 @@
 
 @interface ChangeTelphoneViewModel : HViewModel
 
+@property (nonatomic, strong) RACCommand *sendclickCommand;
+
+@property(nonatomic,strong) RACSubject *telphoneBackFailSubject;
+
+@property(nonatomic,strong) NSString *telphone;
+
+@property(nonatomic,strong) RACSubject *SMSbackSubject;
+
+@property(nonatomic,strong) RACCommand *changeTelphoneCommand;
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property(nonatomic,strong) NSString *userCode;
+
 @end

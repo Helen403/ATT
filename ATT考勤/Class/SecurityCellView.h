@@ -12,4 +12,6 @@
 
 @property(nonatomic,strong) SecurityModel *securityModel;
 
+@property(nonatomic,assign) NSInteger index;
+
 @end

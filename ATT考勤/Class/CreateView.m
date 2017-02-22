@@ -117,7 +117,7 @@
         make.top.equalTo(weakSelf.line3.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-     
+        
     }];
     
     
@@ -185,7 +185,7 @@
         _useText.font = H14;
         // 设置右边永远显示清除按钮
         _useText.clearButtonMode = UITextFieldViewModeAlways;
-//          _useText.secureTextEntry = YES;
+        //          _useText.secureTextEntry = YES;
     }
     
     return _useText;
@@ -227,8 +227,8 @@
         //设置输入框内容的字体样式和大小
         _pwdText.font = H14;
         // 设置右边永远显示清除按钮
-      
-         _pwdText.secureTextEntry = YES;
+        
+        _pwdText.secureTextEntry = YES;
     }
     return _pwdText;
     
@@ -273,7 +273,7 @@
         //设置输入框内容的字体样式和大小
         _surepwdText.font = H14;
         // 设置右边永远显示清除按钮
-          _surepwdText.secureTextEntry = YES;
+        _surepwdText.secureTextEntry = YES;
     }
     return _surepwdText;
     
@@ -321,12 +321,12 @@
         ShowErrorStatus(@"用户名或密码不能为空");
         return;
     }
-    [[[UIDevice currentDevice] identifierForVendor] UUIDString];  
+    
     if (self.pwdText.text == self.surepwdText.text) {
         self.createViewModel.name = self.useText.text;
         self.createViewModel.pwd = self.pwdText.text;
-       
-       
+        
+        
         self.createViewModel.phoneDeviceCode =  [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         self.createViewModel.phoneDeviceName =  [LSCoreToolCenter deviceVersion] ;
         [self.createViewModel.sendclickCommand execute:nil];

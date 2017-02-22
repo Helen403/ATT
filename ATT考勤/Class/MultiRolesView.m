@@ -125,7 +125,7 @@
 }
 
 -(void)click{
-    
+    ShowMessage(@"正在刷新");
     UserModel *user = getModel(@"user");
     self.multiRolesViewModel.userCode = user.userCode;
     [self.multiRolesViewModel.refreshDataCommand execute:nil];

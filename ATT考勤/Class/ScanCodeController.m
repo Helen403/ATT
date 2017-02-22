@@ -77,7 +77,7 @@
 
 
 -(void)mainThread{
-    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, self.scanCodeViewModel.arr.count*[self h_w:40]);
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, (self.scanCodeViewModel.arr.count+1)*[self h_w:40]);
     [self.tableView reloadData];
     [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
     [HWPopTool sharedInstance].tapOutsideToDismiss = NO;
@@ -100,40 +100,17 @@
     
     timer = [NSTimer scheduledTimerWithTimeInterval:.02 target:self selector:@selector(animation1) userInfo:nil repeats:YES];
     
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH, 30)];
-    label.center = CGPointMake(SCREEN_WIDTH*0.5, TOP+220+30);
+    label.center = CGPointMake(SCREEN_WIDTH*0.5, TOP+220+40);
     label.textAlignment = NSTextAlignmentCenter;
     label.text = @"将二维码放在取景框内可自动扫码";
     label.textColor = MAIN_ORANGER;
-    label.font = H12;
+    label.font = H16;
     [self.view addSubview:label];
-    
-    //    NSString *str = @"{companyCode:3,companyInvitationCode:'ccc'}";
-    //
-    //
-    //    NSLog(@"666");
-    //    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake([self h_w:10], TOP+220+30+30, SCREEN_WIDTH-[self h_w:20], [self h_w:35])];
-    //    [button setTitle:@"取消" forState:UIControlStateNormal];
-    //    button.titleLabel.textColor = white_color;
-    //    button.titleLabel.font = H20;
-    //    [button addTarget:self action:@selector(finish:) forControlEvents:UIControlEventTouchUpInside];
-    //
-    //    [button.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-    //
-    //    [button.layer setCornerRadius:10];
-    //
-    //    [button.layer setBorderWidth:2];//设置边界的宽度
-    //
-    //    [button setBackgroundColor:MAIN_ORANGER];
-    //    //设置按钮的边界颜色
-    //    [button.layer setBorderColor:MAIN_ORANGER.CGColor];
-    //
-    //    [self.view addSubview:button];
-    
+
 }
-//-(void)finish:(UIButton *)button{
-//
-//}
+
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -264,22 +241,7 @@
         self.scanCodeViewModel.userCode = str;
         self.scanCodeViewModel.inviteCode = scanCodeModel.companyInvitationCode;
         [self.scanCodeViewModel.sendclickCommand execute:nil];
-        //        NSArray *arry = metadataObject.corners;
-        //        for (id temp in arry) {
-        //            NSLog(@"%@",temp);
-        //        }
-        
-        
-        //        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"扫描结果" message:stringValue preferredStyle:UIAlertControllerStyleAlert];
-        //        [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //            if (_session != nil && timer != nil) {
-        //                [_session startRunning];
-        //                [timer setFireDate:[NSDate date]];
-        //            }
-        //
-        //        }]];
-        //        [self presentViewController:alert animated:YES completion:nil];
-        
+
     } else {
         NSLog(@"无扫描信息");
         return;
@@ -304,6 +266,17 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[CompanyCodeCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([CompanyCodeCellView class])]];
         _tableView.scrollEnabled = NO;
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40])];
+        UILabel *label = [[UILabel alloc] init];
+        label.frame = CGRectMake(0, 0, [self h_w:120], [self h_w:40]);
+//        label.textAlignment = NSTextAlignmentCenter;
+        label.text = @"公司部门";
+        label.textColor = MAIN_PAN_2;
+        label.font = H14;
+        label.center = CGPointMake([self h_w:60], [self h_w:20]);
+        [view addSubview:label];
+        _tableView.tableHeaderView = view;
+        
         
     }
     return _tableView;
@@ -313,7 +286,6 @@
 
 #pragma mark - delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
     return 1;
 }
 

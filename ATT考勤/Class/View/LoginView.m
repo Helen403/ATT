@@ -223,15 +223,21 @@
 
 -(void)mainThread{
     
+    self.useTextField.text = @"";
     self.pwdTextField.text = @"";
     self.login.enabled = YES;
     ShowErrorStatus(@"请输入正确的手机号");
+    self.login.backgroundColor = MAIN_ORANGER;
+    [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
 }
 
 -(void)failClick{
     
+    self.useTextField.text = @"";
     self.pwdTextField.text = @"";
     self.login.enabled = YES;
+    self.login.backgroundColor = MAIN_ORANGER;
+    [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
     ShowErrorStatus(@"密码错误");
 }
 
@@ -284,20 +290,6 @@
         //_useTextField.delegate = self;//设置代理
         _useTextField.keyboardType = UIKeyboardTypePhonePad;
         // 5.监听文本框的文字改变
-        //        [_useTextField.rac_textSignal subscribeNext:^(id x) {
-        //
-        //            if (_useTextField.text.length>10) {
-        //                self.login.enabled = YES;
-        //                self.login.backgroundColor = MAIN_ORANGER;
-        //
-        //                [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
-        //            }else{
-        //                self.login.enabled = NO;
-        //                self.login.backgroundColor = MAIN_GRAY;
-        //
-        //                [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
-        //            }
-        //        }];
         
     }
     return _useTextField;
@@ -389,28 +381,12 @@
         
         
         [_login.layer setBorderColor:MAIN_ORANGER.CGColor];
-        
     }
-    
     return _login;
 }
 
 -(void)loginClick{
     
-    //    if ([NSString isVaildTelphoneFroString:self.useTextField.text]&&self.pwdTextField.text.length>0) {
-    //        //点击后不然再点击
-    //        self.loginViewModel.user = self.useTextField.text;
-    //        self.loginViewModel.pwd = self.pwdTextField.text;
-    //        //登陆成功后发送按钮
-    //        [self.loginViewModel.loginclickCommand execute:nil];
-    //        self.login.enabled = NO;
-    //        self.login.backgroundColor = MAIN_GRAY;
-    //
-    //        [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
-    //        [self endEditing:YES];
-    //    }else{
-    //        [self toast:@"请输入正确的手机号或者密码"];
-    //    }
     
     if (self.useTextField.text.length>0&&self.pwdTextField.text.length>0) {
         //点击后不然再点击
@@ -419,13 +395,18 @@
         //登陆成功后发送按钮
         [self.loginViewModel.loginclickCommand execute:nil];
         self.login.enabled = NO;
-        //        self.login.backgroundColor = MAIN_GRAY;
-        //
-        //        [self.login.layer setBorderColor:MAIN_GRAY.CGColor];
+        
+        self.login.backgroundColor = MAIN_ENABLE;
+        [self.login.layer setBorderColor:MAIN_ENABLE.CGColor];
+        
+        
         [self endEditing:YES];
     }else{
-        ShowErrorStatus(@"请输入手机号或者密码");
+        
+        ShowErrorStatus(@"手机号和密码不能为空");
         self.login.enabled = YES;
+        self.login.backgroundColor = MAIN_ORANGER;
+        [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
 }
 
@@ -459,7 +440,6 @@
         _registerText.userInteractionEnabled=YES;
         UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(registerClick)];
         [_registerText addGestureRecognizer:setTap];
-        
     }
     return _registerText;
 }

@@ -108,8 +108,8 @@
     
     
     [[self.companyCodeViewModel.failclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-     
-          [self performSelectorOnMainThread:@selector(failBack) withObject:nil waitUntilDone:YES];
+        
+        [self performSelectorOnMainThread:@selector(failBack) withObject:nil waitUntilDone:YES];
     }];
     
 }
@@ -117,10 +117,15 @@
 -(void)failBack{
     ShowErrorStatus(@"公司邀请码不正确");
     self.companyCodeTextField.text = @"";
+    self.addBtn.enabled = YES;
+    [self.addBtn setBackgroundColor:MAIN_ORANGER];
+    //设置按钮的边界颜色
+    
+    [self.addBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
 }
 
 -(void)mainThread{
-    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, self.companyCodeViewModel.arr.count*[self h_w:40]);
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, (self.companyCodeViewModel.arr.count+1)*[self h_w:40]);
     [self.tableView reloadData];
     [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
     [HWPopTool sharedInstance].tapOutsideToDismiss = NO;
@@ -217,9 +222,20 @@
         self.companyCodeViewModel.userCode = str;
         self.companyCodeViewModel.invitationCode = self.companyCodeTextField.text;
         [self.companyCodeViewModel.sendclickCommand execute:nil];
+        self.addBtn.enabled = NO;
+        [_addBtn setBackgroundColor:MAIN_ENABLE];
+        //设置按钮的边界颜色
+        
+        [_addBtn.layer setBorderColor:MAIN_ENABLE.CGColor];
+        
     }else{
         
         ShowErrorStatus(@"请输入公司码");
+        self.addBtn.enabled = YES;
+        [self.addBtn setBackgroundColor:MAIN_ENABLE];
+        //设置按钮的边界颜色
+        
+        [self.addBtn.layer setBorderColor:MAIN_ENABLE.CGColor];
     }
 }
 
@@ -233,6 +249,17 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[CompanyCodeCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([CompanyCodeCellView class])]];
         _tableView.scrollEnabled = NO;
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40])];
+        UILabel *label = [[UILabel alloc] init];
+        label.frame = CGRectMake(0, 0, [self h_w:120], [self h_w:40]);
+        //        label.textAlignment = NSTextAlignmentCenter;
+        label.text = @"公司部门";
+        label.textColor = MAIN_PAN_2;
+        label.font = H14;
+        label.center = CGPointMake([self h_w:60], [self h_w:20]);
+        [view addSubview:label];
+        _tableView.tableHeaderView = view;
         
     }
     return _tableView;
@@ -266,7 +293,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     TeamModel *teamModel =  self.companyCodeViewModel.arr[indexPath.row];
     self.companyCodeViewModel.deptCode = teamModel.deptCode;
     [self.companyCodeViewModel.addTeamCommand execute:nil];

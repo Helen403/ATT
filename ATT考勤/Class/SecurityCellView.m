@@ -27,14 +27,12 @@
     
     WS(weakSelf);
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.centerY.equalTo(weakSelf);
+        make.centerY.equalTo(weakSelf);
         make.left.equalTo([self h_w:10]);
     }];
     
-   
-    
     [self.back mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.centerY.equalTo(weakSelf);
+        make.centerY.equalTo(weakSelf);
         make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
     
@@ -58,6 +56,12 @@
     [self updateConstraintsIfNeeded];
 }
 
+
+-(void)setTelphone{
+    
+}
+
+
 #pragma mark dataload
 -(void)setSecurityModel:(SecurityModel *)securityModel{
     if (!securityModel) {
@@ -65,7 +69,15 @@
     }
     _securityModel = securityModel;
     self.title.text = securityModel.title;
-    self.content.text = securityModel.content;
+    
+    if (self.index == 0) {
+        NSString *empTelphone =  [[NSUserDefaults standardUserDefaults] objectForKey:@"empTelphone"];
+        self.content.text = empTelphone;
+    }else{
+        self.content.text = securityModel.content;
+    }
+    
+    
 }
 
 #pragma mark lazyload

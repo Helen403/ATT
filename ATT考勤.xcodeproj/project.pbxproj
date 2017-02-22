@@ -95,6 +95,8 @@
 		793487C91E27365200D074D7 /* CountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 793487C81E27365200D074D7 /* CountModel.m */; };
 		793487CD1E27366E00D074D7 /* CountCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793487CC1E27366E00D074D7 /* CountCellView.m */; };
 		793500EC1E3051FF009ED8AA /* RippleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793500EB1E3051FF009ED8AA /* RippleView.m */; };
+		793604C11E5D43C80006646E /* ZJQRScanerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 793604BE1E5D43C80006646E /* ZJQRScanerHelper.m */; };
+		793604C21E5D43C80006646E /* ZJQRScannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793604C01E5D43C80006646E /* ZJQRScannerView.m */; };
 		79362F651E0CB1C800F9B769 /* ForgetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F641E0CB1C800F9B769 /* ForgetController.m */; };
 		79362F681E0CB1E500F9B769 /* ForgetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F671E0CB1E500F9B769 /* ForgetView.m */; };
 		79362F6B1E0CB21B00F9B769 /* ForgetViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F6A1E0CB21B00F9B769 /* ForgetViewModel.m */; };
@@ -769,6 +771,10 @@
 		793487CC1E27366E00D074D7 /* CountCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountCellView.m; sourceTree = "<group>"; };
 		793500EA1E3051FF009ED8AA /* RippleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RippleView.h; sourceTree = "<group>"; };
 		793500EB1E3051FF009ED8AA /* RippleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RippleView.m; sourceTree = "<group>"; };
+		793604BD1E5D43C80006646E /* ZJQRScanerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJQRScanerHelper.h; sourceTree = "<group>"; };
+		793604BE1E5D43C80006646E /* ZJQRScanerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJQRScanerHelper.m; sourceTree = "<group>"; };
+		793604BF1E5D43C80006646E /* ZJQRScannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJQRScannerView.h; sourceTree = "<group>"; };
+		793604C01E5D43C80006646E /* ZJQRScannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJQRScannerView.m; sourceTree = "<group>"; };
 		79362F631E0CB1C800F9B769 /* ForgetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetController.h; sourceTree = "<group>"; };
 		79362F641E0CB1C800F9B769 /* ForgetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetController.m; sourceTree = "<group>"; };
 		79362F661E0CB1E500F9B769 /* ForgetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetView.h; sourceTree = "<group>"; };
@@ -2543,6 +2549,17 @@
 				793487CC1E27366E00D074D7 /* CountCellView.m */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		793604BC1E5D43920006646E /* ZJQRScanner */ = {
+			isa = PBXGroup;
+			children = (
+				793604BD1E5D43C80006646E /* ZJQRScanerHelper.h */,
+				793604BE1E5D43C80006646E /* ZJQRScanerHelper.m */,
+				793604BF1E5D43C80006646E /* ZJQRScannerView.h */,
+				793604C01E5D43C80006646E /* ZJQRScannerView.m */,
+			);
+			name = ZJQRScanner;
 			sourceTree = "<group>";
 		};
 		79362F5E1E0CB10A00F9B769 /* Forget(忘记密码1) */ = {
@@ -6042,6 +6059,7 @@
 		83B8787B68883EECD9829725 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				793604BC1E5D43920006646E /* ZJQRScanner */,
 				791A51F91E55A1D800F7C026 /* XMLDictionary.h */,
 				791A51FA1E55A1D800F7C026 /* XMLDictionary.m */,
 				7921347C1E4B176C00C25A67 /* libxml2.tbd */,
@@ -6587,6 +6605,7 @@
 				793849711E5BC6EC00EA2502 /* ChangePasswordView.m in Sources */,
 				79F4B6571E2771D8008CAA6E /* TrajectoryCellView.m in Sources */,
 				79F964651E2CA9E800838CC4 /* MoveViewModel.m in Sources */,
+				793604C11E5D43C80006646E /* ZJQRScanerHelper.m in Sources */,
 				79F964481E2CA6F100838CC4 /* GoOutView.m in Sources */,
 				794C77291E3204B800013243 /* CollectionViewFlowLayout.m in Sources */,
 				79FFB2761E24E37100EC082F /* EmployeeCellView.m in Sources */,
@@ -6703,6 +6722,7 @@
 				79F4B6541E2771BA008CAA6E /* TrajectoryModel.m in Sources */,
 				7937CC091E24893800A4F82F /* AddressListView.m in Sources */,
 				79ED5E881E1CE56400BBC3D9 /* SetView.m in Sources */,
+				793604C21E5D43C80006646E /* ZJQRScannerView.m in Sources */,
 				79FAFAD11E34ACBA00577917 /* SecurityView.m in Sources */,
 				790D8AEE1E2F4F4D00DDA697 /* CopyToMeModel.m in Sources */,
 				7928BD6E1E0273A4009BB0B4 /* main.m in Sources */,

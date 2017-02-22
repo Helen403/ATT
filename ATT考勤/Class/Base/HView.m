@@ -35,8 +35,8 @@
     return self;
 }
 
-
 - (void)h_setupViews {
+    
 }
 
 - (void)h_loadData{

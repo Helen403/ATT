@@ -74,9 +74,10 @@
         make.centerY.equalTo(weakSelf.applyTimeText);
     }];
     
-    [self.applyTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(weakSelf.line1);
-        make.centerY.equalTo(weakSelf.applyTimeText);
+    
+    [self.lateTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.line1.mas_bottom).offset(padding);
+        make.left.equalTo(weakSelf.applyTimeText);
     }];
     
     [self.lateTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -84,6 +85,7 @@
         make.left.equalTo(weakSelf.applyTimeShowText);
     }];
     
+  
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.lateTimeText.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
@@ -286,11 +288,8 @@
         
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-        
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
-        
-        [_finish.layer setBorderColor:color];
+
+        [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     
     return _finish;

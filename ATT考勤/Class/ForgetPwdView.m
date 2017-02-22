@@ -85,7 +85,6 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
         make.right.equalTo(-leftPadding);
         make.top.equalTo(weakSelf.sureForgetPwdImg.mas_bottom).offset([self h_w:15]);
-        
     }];
     
     
@@ -93,7 +92,6 @@
         make.top.equalTo(weakSelf.line2.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.line2);
         make.right.equalTo(weakSelf.line2);
-        
     }];
     
     [super updateConstraints];
@@ -177,7 +175,6 @@
         _sureForgetPwdImg.image = ImageNamed(@"Login_password_picture");
     }
     return _sureForgetPwdImg;
-    
 }
 
 
@@ -220,8 +217,7 @@
 -(UIButton *)finish{
     if (!_finish) {
         _finish = [[UIButton alloc] init];
-        
-        
+
         [_finish setTitle:@"完成" forState:UIControlStateNormal];
         _finish.titleLabel.textColor = white_color;
         _finish.titleLabel.font = H20;
@@ -235,8 +231,7 @@
         
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
-        
+
         [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _finish;
@@ -250,6 +245,10 @@
         UserModel *user = getModel(@"user");
         self.forgetPwdViewModel.telphone = user.userTelphone;
         [self.forgetPwdViewModel.sendclickCommand execute:nil];
+    }else{
+        ShowErrorStatus(@"密码不一致");
+        self.forgetPwdTextField.text = @"";
+        self.sureForgetPwdTextField.text = @"";
     }
 }
 
