@@ -106,7 +106,7 @@
         make.top.equalTo(weakSelf.text4.mas_bottom).offset([self h_w:10]);
         make.left.equalTo(weakSelf.text1);
         make.right.equalTo(weakSelf.text3);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:170]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
     }];
     
     [self.conn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -349,11 +349,9 @@
         
         [_submit setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+     
         
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
-        
-        [_submit.layer setBorderColor:color];
+        [_submit.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _submit;
 }

@@ -45,6 +45,12 @@
     [self updateConstraintsIfNeeded];
 }
 
+
+-(void)h_refreash{
+    [self.tableView reloadData];
+}
+
+
 #pragma mark lazyload
 -(MyMsgViewModel *)myMsgViewModel{
     if (!_myMsgViewModel) {
@@ -98,6 +104,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    MyMsgCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MyMsgCellView class])] forIndexPath:indexPath];
+    
+    cell.selected = NO;
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.myMsgViewModel.cellclickSubject sendNext:row];
 }

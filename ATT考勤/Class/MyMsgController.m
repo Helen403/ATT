@@ -47,6 +47,8 @@
     [self.view addSubview:self.myMsgView];
 }
 
+
+
 -(void)h_bindViewModel{
     [[self.myMsgViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
@@ -55,6 +57,10 @@
         [self.navigationController pushViewController:chat animated:NO];
         
     }];
+}
+
+-(void)h_viewWillAppear{
+    [self.myMsgView h_refreash];
 }
 
 #pragma mark lazyload

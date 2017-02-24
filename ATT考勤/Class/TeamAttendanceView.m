@@ -121,7 +121,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+     TeamAttendanceCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamAttendanceCellView class])] forIndexPath:indexPath];
+    cell.selected = NO;
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.teamAtttendanceViewModel.cellclickSubject sendNext:row];
 }

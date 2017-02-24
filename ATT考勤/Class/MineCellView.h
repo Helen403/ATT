@@ -8,9 +8,14 @@
 
 #import "HTableViewCell.h"
 #import "MineModel.h"
+#import "UserModel.h"
 
 @interface MineCellView : HTableViewCell
 
 @property(nonatomic,strong) MineModel *mineModel;
+
+@property(nonatomic,strong) UserModel *userModel;
+
+@property(nonatomic,assign) NSInteger index;
 
 @end

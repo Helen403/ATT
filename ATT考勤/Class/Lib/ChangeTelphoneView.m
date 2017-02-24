@@ -85,7 +85,6 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,[self h_w:1]));
         make.right.equalTo(-leftPadding);
         make.top.equalTo(weakSelf.useText.mas_bottom).offset([self h_w:10]);
-        
     }];
     
     [self.telphoneImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,6 +105,7 @@
     [self.countDown mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.telphoneImg);
         make.right.equalTo(weakSelf.line1);
+        make.size.equalTo(CGSizeMake([self h_w:70], [self h_w:32]));
     }];
     
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -172,7 +172,7 @@
 -(void)h_bindViewModel{
     //请求返回回来的验证码
     [[self.changeTelphoneViewModel.SMSbackSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
-        
+       
         self.backNumber = x;
         
     }];
@@ -186,7 +186,7 @@
 }
 
 -(void)mainThread{
-    self.useText.text = @"";
+    self.telphoneText.text = @"";
 }
 
 
@@ -465,7 +465,7 @@
     }else{
         ShowErrorStatus(@"验证码不正确");
         self.validateText.text = @"";
-        self.next.enabled = NO;
+        self.next.enabled = YES;
         [self.next setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
         [self.next.layer setBorderColor:MAIN_ORANGER.CGColor];

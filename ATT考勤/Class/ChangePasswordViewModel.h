@@ -10,4 +10,14 @@
 
 @interface ChangePasswordViewModel : HViewModel
 
+@property (nonatomic, strong) RACCommand *sendclickCommand;
+
+@property(nonatomic,strong) NSString *telphone;
+
+@property(nonatomic,strong) NSString *newpassword;
+
+@property(nonatomic,strong) RACSubject *successSubject;
+
+@property(nonatomic,strong) RACSubject *failSubject;
+
 @end

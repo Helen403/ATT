@@ -51,6 +51,10 @@
     self.title  = @"设置";
 }
 
+-(void)h_viewWillAppear{
+    [self.setView h_refreash];
+}
+
 -(void)h_addSubviews{
     [self.view addSubview:self.setView];
 }

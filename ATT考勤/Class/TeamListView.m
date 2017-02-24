@@ -83,10 +83,6 @@
 }
 
 
-
-
-
-
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] init];

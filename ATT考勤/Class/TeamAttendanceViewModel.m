@@ -16,11 +16,11 @@
         _arr = [NSMutableArray array];
         
         //读取plist
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"TeamAttendance" ofType:@"plist"];
-        
-        NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
-        
-        _arr= [TeamAttendanceModel mj_objectArrayWithKeyValuesArray:data];
+//        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"TeamAttendance" ofType:@"plist"];
+//        
+//        NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
+//        
+//        _arr= [TeamAttendanceModel mj_objectArrayWithKeyValuesArray:data];
         
     }
     return _arr;

@@ -144,7 +144,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    AddressListCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AddressListCellView class])] forIndexPath:indexPath];
+    cell.selected = NO;
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.addressListViewModel.cellclickSubject sendNext:row];
 }

@@ -112,4 +112,6 @@ extern void DismissHud(void);
 
 +(NSString *)currentYearType;
 
++(NSString *)internetStatus ;
+
 @end

@@ -80,8 +80,12 @@
 
            _inputToolbar.height = [self h_w:49];
         
-        
-        _inputToolbar.y = self.view.height - _inputToolbar.height-[self h_w:60];
+        if (isPad) {
+            _inputToolbar.y = self.view.height - _inputToolbar.height-[self h_w:7];
+        }else{
+            _inputToolbar.y = self.view.height - _inputToolbar.height-[self h_w:60];
+        }
+
         _inputToolbar.delegate = self;
         [_inputToolbar setMorebuttonViewDelegate:self];
         
@@ -340,8 +344,6 @@
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
-
-
 
 
 @end

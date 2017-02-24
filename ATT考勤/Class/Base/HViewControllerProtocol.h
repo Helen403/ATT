@@ -22,5 +22,6 @@
 - (void)h_bindViewModel;//用来绑定V(VC)与VM
 - (void)h_loadData;//初次获取数据的时候调用（不是特别必要)
 - (void)h_recoverKeyboard;
-
+- (void)h_viewWillAppear;
+- (void)h_viewWillDisappear;
 @end

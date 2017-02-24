@@ -109,7 +109,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+     StatisticsCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([StatisticsCellView class])] forIndexPath:indexPath];
+    cell.selected = NO;
     NSNumber *row =[NSNumber numberWithInteger:indexPath.section];
     [self.statisticsViewModel.cellclickSubject sendNext:row];
 }

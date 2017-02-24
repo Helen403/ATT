@@ -16,7 +16,7 @@
 #import "FMDatabase.h"
 
 #import <MJExtension/MJExtension.h>//JSON 对象转换工具 通用
-//#import "AFNetworking.h"
+#import "AFNetworking.h"
 #import <MJRefresh/MJRefresh.h>//上啦刷新，下拉加载
 #import <SDWebImage/UIImageView+WebCache.h>//图片下载缓存库
 

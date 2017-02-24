@@ -26,7 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 }
 
 #pragma mark system
@@ -39,9 +38,15 @@
     [super updateViewConstraints];
 }
 
+
 #pragma mark private
 -(void)h_addSubviews{
     [self.view addSubview:self.newsView];
+}
+
+-(void)h_viewWillAppear{
+    [self.newsView h_refreash];
+
 }
 
 -(void)h_bindViewModel{

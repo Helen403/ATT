@@ -40,16 +40,7 @@
 //#define IMAGE(A) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:A ofType:nil]]
 #define ImageNamed(name) [UIImage imageNamed:name]
 #define ImageNamedBg [UIImage imageNamed:  [NSString stringWithFormat:@"bg_%u",arc4random_uniform(20)+1]]
-// 每次请求列表 数据量
-#define LS_REQUEST_LIST_COUNT @"10"
-#define LS_REQUEST_LIST_NUM_COUNT 10
 
-// 个人信息
-#define IS_LOGIN (((NSString *)SEEKPLISTTHING(USER_ID)).length > 0)
-
-#define YC_USER_ID IF_NULL_TO_STRING(((NSString *)SEEKPLISTTHING(USER_ID)))
-#define YC_USER_PHONE IF_NULL_TO_STRING(((NSString *)SEEKPLISTTHING(USER_PHONE)))
-#define YC_USER_EASEMOB_NAME IF_NULL_TO_STRING(((NSString *)SEEKPLISTTHING(USER_EASEMOB_NAME)))
 
 #define MAINCOLOR UIColorFromRGB(0x21C1F7)
 
@@ -83,34 +74,5 @@
 #define delete [LSCoreToolCenter deleteTable]
 
 
-#define MAIN_GRAY RGBCOLOR(110, 111, 114)
 
-#define MAIN_ORANGER RGBCOLOR(242, 130, 74)
-
-
-#define MAIN_PAN RGBCOLOR(188, 188, 188)
-
-#define BG_COLOR RGBCOLOR(240,240,240)
-
-#define MAIN_LINE_COLOR RGBCOLOR(206,206,206)
-
-#define MAIN_PAN_2 RGBCOLOR(29, 29, 29)
-
-#define MAIN_TEXTFIELD RGBCOLOR(176,176,176)
-
-#define MAIN_ENABLE RGBCOLOR(176, 176, 176)
-
-
-#define XCFGlobalBackgroundColor RGB(245, 240, 215)     // 背景颜色
-#define XCFLabelColorWhite RGB(255, 255, 255)           // 字体颜色：白色
-#define XCFLabelColorGray [UIColor grayColor]           // 字体颜色：灰色
-#define XCFCoverViewColor RGBA(0, 0, 0, 0.2)            // 黑色半透明遮盖
-#define XCFTabBarNormalColor RGBCOLOR(170, 170, 170)         // TabBar颜色
-#define XCFThemeColor RGBCOLOR(242, 130, 74)        // TabBar选中颜色
-#define XCFSearchBarTintColor RGB(192, 192, 192)        // 搜索按钮背景色
-#define XCFDishViewBackgroundColor RGB(235, 235, 226)   // 作品view背景色
-#define XCFAddressCellColor RGB(215, 228, 225)          // 收货地址选中颜色
-
-
-#define offSetCardArea 30*60
 

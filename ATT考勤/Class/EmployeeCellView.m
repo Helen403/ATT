@@ -14,7 +14,7 @@
 
 @property(nonatomic,strong) UILabel *content;
 
-@property(nonatomic,strong) UIImageView *show;
+
 
 @property(nonatomic,strong) UIView *line;
 
@@ -90,7 +90,7 @@
             self.content.text = employeeModel.empEmail;
             break;
         case 6:
-            self.content.text = employeeModel.enterDate;
+            self.content.text = employeeModel.phoneDeviceName;
             break;
     }
     
@@ -113,7 +113,7 @@
 -(UILabel *)title{
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.text = @"反馈类型";
+        _title.text = @"";
         _title.font = H14;
         _title.textColor = MAIN_PAN_2;
     }
@@ -123,7 +123,7 @@
 -(UILabel *)content{
     if (!_content) {
         _content = [[UILabel alloc] init];
-        _content.text = @"反馈类型";
+        _content.text = @"";
         _content.font = H14;
         _content.textColor = MAIN_PAN_2;
     }
@@ -133,8 +133,25 @@
 -(UIImageView *)show{
     if (!_show) {
         _show = [[UIImageView alloc] init];
+        _show.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClick:)];
+        [_show addGestureRecognizer:setTap];
+        
     }
     return _show;
+}
+
+-(void)onClick:(UITapGestureRecognizer *)setTap{
+   UIView *view = [setTap view];
+    if ([view tag] == 4) {
+        NSString *allString = [NSString stringWithFormat:@"%@", self.employeeModel.empTelphone];
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
+    }
+   
+    if ([view tag] == 5) {
+        ShowMessage(@"暂时没开通邮箱");
+    }
 }
 
 -(UIView *)line{

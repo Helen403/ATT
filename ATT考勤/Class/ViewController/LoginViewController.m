@@ -23,6 +23,7 @@
 
 @property(nonatomic,strong) LoginViewModel *loginViewModel;
 
+
 @end
 
 @implementation LoginViewController
@@ -40,8 +41,11 @@
     [super viewWillDisappear:animated];
 }
 
+
+
 -(void)viewDidLoad{
     [super viewDidLoad];
+    
 }
 
 - (void)updateViewConstraints {
@@ -56,7 +60,7 @@
 
 #pragma mark -private
 -(void)h_layoutNavigation{
-  
+    
 }
 
 -(void)h_addSubviews{
@@ -72,10 +76,9 @@
     
     //点击登陆
     [self.loginViewModel.loginclickSubject subscribeNext:^(id x) {
- 
+        
         [self performSelectorOnMainThread:@selector(loginClick) withObject:nil waitUntilDone:YES];
     }];
-    
     
     
     //忘记密码
@@ -102,20 +105,20 @@
     [[self.loginViewModel.weixinclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
         
         ShowMessage(@"微信");
-      
+        
     }];
     
     
     //QQ点击
     [[self.loginViewModel.qqclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-     
-          ShowMessage(@"QQ");
+        
+        ShowMessage(@"QQ");
     }];
     
     //新浪点击
     [[self.loginViewModel.sinaclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
         
-         ShowMessage(@"sina");
+        ShowMessage(@"sina");
     }];
     
     

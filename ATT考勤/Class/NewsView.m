@@ -50,6 +50,11 @@
     [self updateConstraintsIfNeeded];
 }
 
+
+-(void)h_refreash{
+    [self.tableView reloadData];
+}
+
 #pragma mark lazyload
 -(NewsViewModel *)newsViewModel{
     if (!_newsViewModel) {
@@ -102,6 +107,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    NewCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([NewCellView class])] forIndexPath:indexPath];
+    
+    cell.selected = NO;
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.newsViewModel.cellclickSubject sendNext:row];
 }

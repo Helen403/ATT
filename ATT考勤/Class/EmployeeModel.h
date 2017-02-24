@@ -26,10 +26,13 @@
 @property (nonatomic , copy) NSString              * empWebChatId;
 @property (nonatomic , copy) NSString              * leaveDate;
 @property (nonatomic , copy) NSString              * deptCode;
+@property (nonatomic , copy) NSString              * phoneDeviceCode;
+@property (nonatomic , copy) NSString              * phoneDeviceName;
 @property (nonatomic , copy) NSString              * empName;
 @property (nonatomic , copy) NSString              * positionlevel;
 @property (nonatomic , copy) NSString              * idNumber;
 @property (nonatomic , copy) NSString              * empStatus;
+@property (nonatomic , copy) NSString              * userCode;
 @property (nonatomic , copy) NSString              * empId;
 @property (nonatomic , copy) NSString              * empStreet;
 @property (nonatomic , copy) NSString              * empCity;

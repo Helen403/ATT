@@ -7,6 +7,7 @@
 //
 
 #import "HViewController.h"
+#import "HView.h"
 
 @interface HViewController ()
 
@@ -36,7 +37,18 @@
         
         @strongify(viewController)
         [viewController h_layoutNavigation];
-        [viewController h_getNewData];
+        [viewController h_viewWillAppear];
+        
+    }];
+    
+    
+    [[viewController rac_signalForSelector:@selector(viewWillDisappear:
+                                                     )] subscribeNext:^(id x) {
+        
+        @strongify(viewController)
+        
+        [viewController h_viewWillDisappear];
+        
     }];
     
     return viewController;
@@ -68,12 +80,12 @@
 
 #pragma mark - system
 //- (UIStatusBarStyle)preferredStatusBarStyle {
-//    
+//
 //    if (self.statusBarStyle) {
-//        
+//
 //        return self.statusBarStyle;
 //    } else {
-//        
+//
 //        return UIStatusBarStyleLightContent;
 //    }
 //}
@@ -85,7 +97,7 @@
 
 - (void)dealloc {
     
-//    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    //    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
 }
 
 #pragma mark - private
@@ -227,7 +239,13 @@
 /**
  *  初次获取数据
  */
-- (void)h_getNewData {}
+- (void)h_viewWillAppear {
+    
+}
+
+
+-(void)h_viewWillDisappear{
+}
 
 -(void)h_loadData{
 }

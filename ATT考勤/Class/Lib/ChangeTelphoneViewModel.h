@@ -14,6 +14,8 @@
 
 @property(nonatomic,strong) RACSubject *telphoneBackFailSubject;
 
+@property(nonatomic,strong) RACSubject *telphoneBackSuccessSubject;
+
 @property(nonatomic,strong) NSString *telphone;
 
 @property(nonatomic,strong) RACSubject *SMSbackSubject;

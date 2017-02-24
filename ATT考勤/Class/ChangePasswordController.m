@@ -47,7 +47,13 @@
 }
 
 -(void)h_bindViewModel{
-    
+    [[self.changePasswordViewModel.successSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:NO];
+            
+        });
+    }];
 }
 
 #pragma mark lazyload

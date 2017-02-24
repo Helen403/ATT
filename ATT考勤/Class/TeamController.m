@@ -62,8 +62,12 @@
         [self.navigationController pushViewController:teamList animated:NO];
         
     }];
-    
-    
+
+}
+
+-(void)h_viewWillAppear{
+
+    [self.teamView h_refreash];
 }
 
 #pragma mark lazyload

@@ -56,12 +56,12 @@ void ShowErrorStatus(NSString *statues){
             
             
             //            [SVProgressHUD showProgress:0.5 status:@"上传"];
-            [ZJProgressHUD showErrorWithStatus:statues andAutoHideAfterTime:1.0f];
+            [ZJProgressHUD showErrorWithStatus:statues andAutoHideAfterTime:0.6f];
         });
     }else{
         
         // [SVProgressHUD showErrorWithStatus:statues];
-        [ZJProgressHUD showErrorWithStatus:statues andAutoHideAfterTime:1.0f];
+        [ZJProgressHUD showErrorWithStatus:statues andAutoHideAfterTime:0.6f];
         
     }
     
@@ -711,7 +711,7 @@ void DismissHud(void){
     [formatter  setDateFormat:HQDateFormatter];
 
     NSDate *date = [formatter dateFromString:str];
-    theDate = [date initWithTimeIntervalSinceNow:minute];
+    theDate = [date dateByAddingTimeInterval:minute];
     
     return [formatter stringFromDate:theDate];
     
@@ -730,6 +730,32 @@ void DismissHud(void){
     
     NSTimeInterval value=[endD timeIntervalSinceDate:beginD];
     return value;
+}
+
+
+#pragma mark - 获取网络状态
++(NSString *)internetStatus {
+    
+    Reachability *reachability = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+    NetworkStatus internetStatus = [reachability currentReachabilityStatus];
+    NSString *net = @"WIFI";
+    switch (internetStatus) {
+        case ReachableViaWiFi:
+            net = @"WIFI";
+            break;
+            
+        case ReachableViaWWAN:
+            net = @"wwan";
+            break;
+            
+        case NotReachable:
+            net = @"notReachable";
+            
+        default:
+            break;
+    }
+    
+    return net;
 }
 
 

@@ -57,4 +57,10 @@
 //首页 输出上班规则详情
 #define findPersonShiftDetail @"http://192.168.1.101:8888/smart/ws/IAttService"
 
+//首页 打卡
+#define saveAttendRecord @"http://192.168.1.101:8888/smart/ws/IAttService"
 
+//#=======================================================#
+
+//系统设置
+#define  modifyUserPwd @"http://192.168.1.101:8888/smart/ws/IAttService"

@@ -98,6 +98,10 @@
     [self.tableView reloadData];
 }
 
+-(void)h_viewWillAppear{
+   [self.tableView reloadData];
+}
+
 #pragma mark lazyload
 -(AddressListView *)addressListView{
     if (!_addressListView) {
@@ -290,7 +294,18 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (tableView == self.tableView) {
+        AddressListCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AddressListCellView class])] forIndexPath:indexPath];
+        
+        cell.selected = NO;
+    }else
+    {
+        static NSString *identify = @"cellIdentify";
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+        
+        cell.selected = NO;
+
+    }
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.addressListViewModel.cellclickSubject sendNext:row];
 }

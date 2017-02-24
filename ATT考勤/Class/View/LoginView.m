@@ -148,7 +148,7 @@
         make.bottom.equalTo(weakSelf.weixin.mas_top).offset(-[self h_w:25]);
         
     }];
-    CGSize size =  [LSCoreToolCenter getSizeWithText:@" 使用第三方登陆 " fontSize:12];
+    CGSize size =  [LSCoreToolCenter getSizeWithText:@" 使用第三方登录 " fontSize:12];
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.ThirdText);
         make.left.equalTo(weakSelf.line1);
@@ -206,6 +206,18 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_loadData{
+    NSString *userbackups =  [[NSUserDefaults standardUserDefaults] objectForKey:@"userbackups"];
+    NSString *pwdbackups =  [[NSUserDefaults standardUserDefaults] objectForKey:@"pwdbackups"];
+    
+    if (userbackups.length>0) {
+        self.useTextField.text = userbackups;
+    }
+    if (pwdbackups.length>0) {
+         self.pwdTextField.text = pwdbackups;
+    }
+}
+
 -(void)h_bindViewModel{
     [self addDynamic:self];
     //密码错误
@@ -218,6 +230,16 @@
         
         [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
     }];
+    
+    [[self.loginViewModel.loginclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [[NSUserDefaults standardUserDefaults] setObject:self.useTextField.text forKey:@"userbackups"];
+            [[NSUserDefaults standardUserDefaults] setObject:self.pwdTextField.text forKey:@"pwdbackups"];
+            
+        });
+    }];
+    
     
 }
 
@@ -233,7 +255,7 @@
 
 -(void)failClick{
     
-    self.useTextField.text = @"";
+   
     self.pwdTextField.text = @"";
     self.login.enabled = YES;
     self.login.backgroundColor = MAIN_ORANGER;
@@ -367,7 +389,7 @@
 -(UIButton *)login{
     if (!_login) {
         _login = [[UIButton alloc] init];
-        [_login setTitle:@"登   陆" forState:UIControlStateNormal];
+        [_login setTitle:@"登   录" forState:UIControlStateNormal];
         _login.titleLabel.font = H22;
         [_login addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
         

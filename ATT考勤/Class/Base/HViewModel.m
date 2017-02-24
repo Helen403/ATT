@@ -31,9 +31,9 @@
 }
 
 //- (CMRequest *)request {
-//    
+//
 //    if (!_request) {
-//        
+//
 //        _request = [CMRequest request];
 //    }
 //    return _request;
@@ -135,12 +135,18 @@
     NSRange range1 = [result rangeOfString:str1];//匹配得到的下标
     NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
     NSRange range2 = [result rangeOfString:str2];//匹配得到的下标
+    NSDictionary *xmlDoc;
     
-    result = [result substringToIndex:range2.location+range2.length];
-    result = [result substringFromIndex:range1.location];
-    
-    NSDictionary *xmlDoc = [NSDictionary dictionaryWithXMLString:result];
-    
+    @try {
+        result = [result substringToIndex:range2.location+range2.length];
+        result = [result substringFromIndex:range1.location];
+        
+        xmlDoc = [NSDictionary dictionaryWithXMLString:result];
+    } @catch (NSException *exception) {
+        xmlDoc = nil;
+    } @finally {
+        
+    }
     return xmlDoc;
 }
 
@@ -151,8 +157,15 @@
     NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
     NSRange range2 = [result rangeOfString:str2];//匹配得到的下标
     
-    result = [result substringToIndex:range2.location];
-    result = [result substringFromIndex:range1.location+range1.length];
+    
+    @try {
+        result = [result substringToIndex:range2.location];
+        result = [result substringFromIndex:range1.location+range1.length];
+    } @catch (NSException *exception) {
+        result = @"";
+    } @finally {
+        
+    }
     return result;
 }
 
@@ -163,9 +176,15 @@
     NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
     NSRange range2 = [result rangeOfString:str2];//匹配得到的下标
     
-    result = [result substringToIndex:range2.location];
-    result = [result substringFromIndex:range1.location+range1.length];
-
+    
+    @try {
+        result = [result substringToIndex:range2.location];
+        result = [result substringFromIndex:range1.location+range1.length];
+    } @catch (NSException *exception) {
+        result = @"";
+    } @finally {
+        
+    }
     return result;
 }
 
@@ -173,16 +192,22 @@
     
     NSRange range1 = [result rangeOfString:filter1];//匹配得到的下标
     NSRange range2 = [result rangeOfString:filter2];//匹配得到的下标
+    @try {
+        result = [result substringToIndex:range2.location];
+        result = [result substringFromIndex:range1.location+range1.length];
+    } @catch (NSException *exception) {
+        result = @"";
+    } @finally {
+        
+    }
     
-    result = [result substringToIndex:range2.location];
-    result = [result substringFromIndex:range1.location+range1.length];
     return result;
 }
 
 
 -(NSDictionary *)getFilter:(NSString *)result filter1:(NSString *)filter1 filter2:(NSString *)filter2{
     
-  
+    
     NSRange range1 = [result rangeOfString:filter1];//匹配得到的下标
     NSRange range2 = [result rangeOfString:filter2];//匹配得到的下标
     

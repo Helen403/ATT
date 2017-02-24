@@ -166,18 +166,15 @@
         
         [_preBtn setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-        
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
-        
-        [_preBtn.layer setBorderColor:color];
+
+        [_preBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
         
     }
     return _preBtn;
 }
 
 -(void)pre:(UIButton *)button{
-    
+    ShowMessage(@"暂时没内容 上一页");
     
 }
 
@@ -206,18 +203,16 @@
         
         [_lastBtn setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+   
         
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
-        
-        [_lastBtn.layer setBorderColor:color];
+        [_lastBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
         
     }
     return _lastBtn;
 }
 
 -(void)last:(UIButton *)button{
-    
+    ShowMessage(@"暂时没内容 下一页");
     
 }
 @end

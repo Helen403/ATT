@@ -18,4 +18,6 @@
 
 @property(nonatomic,assign) NSInteger index;
 
+@property(nonatomic,strong) UIImageView *show;
+
 @end

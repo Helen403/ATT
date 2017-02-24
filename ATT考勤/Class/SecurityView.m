@@ -48,6 +48,11 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_refreash{
+    [self.tableView reloadData];
+}
+
+
 #pragma mark lazyload
 -(UITableView *)tableView{
     if (!_tableView) {
@@ -81,7 +86,7 @@
     SecurityCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([SecurityCellView class])] forIndexPath:indexPath];
     cell.index = indexPath.row;
     cell.securityModel = self.securityViewModel.arr[indexPath.row];
-
+    
     return cell;
 }
 
@@ -95,6 +100,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+     SecurityCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([SecurityCellView class])] forIndexPath:indexPath];
+    cell.selected=NO;
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.securityViewModel.cellclickSubject sendNext:row];
 }

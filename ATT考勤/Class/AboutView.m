@@ -125,6 +125,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    AboutCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AboutCellView class])] forIndexPath:indexPath];
+    
+    cell.selected = NO;
+    
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.aboutViewModel.cellclickSubject sendNext:row];
 }

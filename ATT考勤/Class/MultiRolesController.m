@@ -53,7 +53,6 @@
 #pragma mark private
 -(void)h_layoutNavigation{
     self.title = @"切换角色";
-    
 }
 
 -(void)h_addSubviews{

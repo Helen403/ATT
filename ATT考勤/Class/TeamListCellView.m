@@ -34,13 +34,13 @@
     
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.centerX.equalTo(weakSelf.img);
+       make.left.equalTo([self h_w:8]);
         make.size.equalTo(CGSizeMake([self h_w:36], [self h_w:36]));
     }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.left.equalTo(weakSelf.img.mas_right).offset([self h_w:10]);
+        make.left.equalTo(weakSelf.view.mas_right).offset([self h_w:10]);
     }];
     
     [self.number mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -86,7 +86,7 @@
 -(UILabel *)img{
     if (!_img) {
         _img = [[UILabel alloc] init];
-        _img.text = @"反馈类型";
+        _img.text = @"";
         _img.font = H16;
         _img.textColor = white_color;
         
@@ -107,7 +107,7 @@
 -(UILabel *)title{
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.text = @"反馈类型";
+        _title.text = @"";
         _title.font = H14;
         _title.textColor = MAIN_PAN_2;
     }
@@ -117,7 +117,7 @@
 -(UILabel *)number{
     if (!_number) {
         _number = [[UILabel alloc] init];
-        _number.text = @"反馈类型";
+        _number.text = @"";
         _number.font = H14;
         _number.textColor = MAIN_PAN_2;
     }

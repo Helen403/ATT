@@ -42,12 +42,21 @@
         
         GDataXMLElement *ele = [array objectAtIndex:0];
         NSArray *array2 =[ele children];
-        NSLog(@"%lu",(unsigned long)[array2 count]);
+        
         GDataXMLElement *ele2 = [array2 objectAtIndex:0];
         NSArray *array3 =[ele2 children];
-        NSLog(@"%lu",(unsigned long)[array3 count]);
-        NSString *str = [ele2 stringValue];
-        NSLog(@"%@",str);
+        
+        GDataXMLElement *ele3 = [array3 objectAtIndex:0];
+        NSString *str = [ele3 stringValue];
+        
+        if([str isEqualToString:@"0"]){
+            ShowMessage(@"修改成功");
+            [self.telphoneBackSuccessSubject sendNext:nil];
+        }else{
+         ShowMessage(@"修改失败");
+             [self.telphoneBackFailSubject sendNext:nil];
+        
+        }
     }];
     
     
@@ -128,6 +137,19 @@
     return _telphoneBackFailSubject;
 }
 
+-(RACSubject *)SMSbackSubject{
+    if (!_SMSbackSubject) {
+        _SMSbackSubject = [RACSubject subject];
+    }
+    return _SMSbackSubject;
+}
+
+-(RACSubject *)telphoneBackSuccessSubject{
+    if (!_telphoneBackSuccessSubject) {
+        _telphoneBackSuccessSubject = [RACSubject subject];
+    }
+    return _telphoneBackSuccessSubject;
+}
 
 #pragma mark lazyload
 -(RACCommand *)changeTelphoneCommand{

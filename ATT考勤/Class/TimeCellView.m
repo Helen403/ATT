@@ -70,7 +70,7 @@
 #pragma mark private
 -(void)h_setupViews{
     
-    self.backgroundColor = GX_BGCOLOR;
+    self.backgroundColor = white_color;
     
     [self addSubview:self.icon];
     [self addSubview:self.title];

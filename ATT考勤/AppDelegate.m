@@ -27,6 +27,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
    
+    /******************************************************************/
+    //请先启动BaiduMapManager
+    _mapManager = [[BMKMapManager alloc]init];
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [_mapManager start:@"b1jmW0hQukisNzasTZa6GuVaaTbD2iai"  generalDelegate:self];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
+    
+    /******************************************************************/
+    
+    
+    
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstStart"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstStart"];
         
@@ -101,17 +114,19 @@
         self.window.backgroundColor = [UIColor whiteColor];
         [self.window makeKeyAndVisible];
         self.window.rootViewController = launchVc;
-        
+       
     }
 
     return YES;
 }
 
+
+
+
 -(void)setRoot{
     for (UIView *v in self.window.subviews) {
         [v removeFromSuperview];
     }
-    
     self.window.rootViewController = self.nav;
 }
 
@@ -143,6 +158,27 @@
     }
     return _nav;
     
+}
+
+
+- (void)onGetNetworkState:(int)iError
+{
+    if (0 == iError) {
+        NSLog(@"联网成功");
+    }
+    else{
+        NSLog(@"onGetNetworkState %d",iError);
+    }
+}
+
+- (void)onGetPermissionState:(int)iError
+{
+    if (0 == iError) {
+        NSLog(@"授权成功");
+    }
+    else {
+        NSLog(@"onGetPermissionState %d",iError);
+    }
 }
 
 

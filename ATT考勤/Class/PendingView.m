@@ -281,11 +281,9 @@
         
         [_disagree setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+  
         
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
-        
-        [_disagree.layer setBorderColor:color];
+        [_disagree.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _disagree;
 }

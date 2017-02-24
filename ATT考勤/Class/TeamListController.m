@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
 }
 
 #pragma mark private
@@ -46,16 +46,16 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.searchBar.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
     self.tableView.frame = CGRectMake(0, 44,SCREEN_WIDTH, self.view.frame.size.height);
-
+    
     self.teamListViewModel.companyCode = self.companyCode;
     self.teamListViewModel.deptCode = self.deptCode;
-   
+    
     [self.teamListViewModel.refreshDataCommand execute:nil];
 }
 
 -(void)h_bindViewModel{
-
-
+    
+    
     
     
     //点击每个人
@@ -243,6 +243,16 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    if (tableView == self.tableView) {
+        TeamListCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamListCellView class])] forIndexPath:indexPath];
+        cell.selected = NO;
+        
+    }else
+    {
+        static NSString *identify = @"cellIdentify";
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+        cell.selected = NO;
+    }
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.teamListViewModel.cellclickSubject sendNext:row];
 }

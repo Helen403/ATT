@@ -9,12 +9,15 @@
 #import "MineView.h"
 #import "MineViewModel.h"
 #import "MineCellView.h"
+#import "UserModel.h"
 
 @interface MineView()<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong) MineViewModel *mineViewModel;
 
 @property(nonatomic,strong) UITableView *tableView;
+
+@property(nonatomic,strong) UserModel *userModel;
 
 @end
 
@@ -48,6 +51,16 @@
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
+
+-(void)h_loadData{
+    self.userModel = getModel(@"user");
+}
+
+-(void)h_refreash{
+    self.mineViewModel.arr = nil;
+    [self.tableView reloadData];
+}
+
 
 #pragma mark lazyload
 -(MineViewModel *)mineViewModel{
@@ -90,7 +103,8 @@
     MineCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MineCellView class])] forIndexPath:indexPath];
     
     cell.mineModel = self.mineViewModel.arr[indexPath.row];
-    
+    cell.index = indexPath.row;
+    cell.userModel = self.userModel;
     return cell;
 }
 
@@ -101,7 +115,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    MineCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MineCellView class])] forIndexPath:indexPath];
+    cell.selected = NO;
+    [self h_refreash];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.mineViewModel.cellclickSubject sendNext:row];
 }

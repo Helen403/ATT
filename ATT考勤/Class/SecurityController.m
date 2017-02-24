@@ -43,6 +43,9 @@
     self.title = @"账户与安全";
 }
 
+-(void)h_viewWillAppear{
+    [self.securityView h_refreash];
+}
 
 -(void)h_addSubviews{
     [self.view addSubview:self.securityView];

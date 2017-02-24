@@ -362,6 +362,21 @@
 		794E047B1E2321E600CFE3A3 /* StatisticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794E047A1E2321E600CFE3A3 /* StatisticsModel.m */; };
 		794E047E1E23220B00CFE3A3 /* StatisticsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794E047D1E23220B00CFE3A3 /* StatisticsCellView.m */; };
 		794E04801E2323BF00CFE3A3 /* Statistics.plist in Resources */ = {isa = PBXBuildFile; fileRef = 794E047F1E2323BF00CFE3A3 /* Statistics.plist */; };
+		7954BB251E5FCCE900E03173 /* msg_ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB171E5FCCE900E03173 /* msg_ding.mp3 */; };
+		7954BB261E5FCCE900E03173 /* msg_dingdong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB181E5FCCE900E03173 /* msg_dingdong.mp3 */; };
+		7954BB271E5FCCE900E03173 /* msg_door.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB191E5FCCE900E03173 /* msg_door.mp3 */; };
+		7954BB281E5FCCE900E03173 /* msg_tip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB1A1E5FCCE900E03173 /* msg_tip.mp3 */; };
+		7954BB291E5FCCE900E03173 /* msg_water.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB1B1E5FCCE900E03173 /* msg_water.mp3 */; };
+		7954BB2A1E5FCCE900E03173 /* offwork_auto.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB1C1E5FCCE900E03173 /* offwork_auto.mp3 */; };
+		7954BB2B1E5FCCE900E03173 /* offwork_succ.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB1D1E5FCCE900E03173 /* offwork_succ.mp3 */; };
+		7954BB2C1E5FCCE900E03173 /* onwork_auto.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB1E1E5FCCE900E03173 /* onwork_auto.mp3 */; };
+		7954BB2D1E5FCCE900E03173 /* onwork_succ.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB1F1E5FCCE900E03173 /* onwork_succ.mp3 */; };
+		7954BB2E1E5FCCE900E03173 /* oper_beep1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB201E5FCCE900E03173 /* oper_beep1.mp3 */; };
+		7954BB2F1E5FCCE900E03173 /* oper_beep2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB211E5FCCE900E03173 /* oper_beep2.mp3 */; };
+		7954BB301E5FCCE900E03173 /* oper_error.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB221E5FCCE900E03173 /* oper_error.mp3 */; };
+		7954BB311E5FCCE900E03173 /* tip_offwork.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB231E5FCCE900E03173 /* tip_offwork.mp3 */; };
+		7954BB321E5FCCE900E03173 /* tip_onwork.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB241E5FCCE900E03173 /* tip_onwork.mp3 */; };
+		7954BB361E5FDC9B00E03173 /* YYAudioTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7954BB351E5FDC9B00E03173 /* YYAudioTool.m */; };
 		795AC4601E2C50D700C69308 /* NSData+YXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC4401E2C50D700C69308 /* NSData+YXAdd.m */; };
 		795AC4611E2C50D700C69308 /* NSDictionary+YXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC4431E2C50D700C69308 /* NSDictionary+YXAdd.m */; };
 		795AC4621E2C50D700C69308 /* NSNotificationCenter+YXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC4461E2C50D700C69308 /* NSNotificationCenter+YXAdd.m */; };
@@ -1137,6 +1152,22 @@
 		794E047C1E23220B00CFE3A3 /* StatisticsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsCellView.h; sourceTree = "<group>"; };
 		794E047D1E23220B00CFE3A3 /* StatisticsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsCellView.m; sourceTree = "<group>"; };
 		794E047F1E2323BF00CFE3A3 /* Statistics.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Statistics.plist; sourceTree = "<group>"; };
+		7954BB171E5FCCE900E03173 /* msg_ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = msg_ding.mp3; sourceTree = "<group>"; };
+		7954BB181E5FCCE900E03173 /* msg_dingdong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = msg_dingdong.mp3; sourceTree = "<group>"; };
+		7954BB191E5FCCE900E03173 /* msg_door.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = msg_door.mp3; sourceTree = "<group>"; };
+		7954BB1A1E5FCCE900E03173 /* msg_tip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = msg_tip.mp3; sourceTree = "<group>"; };
+		7954BB1B1E5FCCE900E03173 /* msg_water.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = msg_water.mp3; sourceTree = "<group>"; };
+		7954BB1C1E5FCCE900E03173 /* offwork_auto.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = offwork_auto.mp3; sourceTree = "<group>"; };
+		7954BB1D1E5FCCE900E03173 /* offwork_succ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = offwork_succ.mp3; sourceTree = "<group>"; };
+		7954BB1E1E5FCCE900E03173 /* onwork_auto.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = onwork_auto.mp3; sourceTree = "<group>"; };
+		7954BB1F1E5FCCE900E03173 /* onwork_succ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = onwork_succ.mp3; sourceTree = "<group>"; };
+		7954BB201E5FCCE900E03173 /* oper_beep1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oper_beep1.mp3; sourceTree = "<group>"; };
+		7954BB211E5FCCE900E03173 /* oper_beep2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oper_beep2.mp3; sourceTree = "<group>"; };
+		7954BB221E5FCCE900E03173 /* oper_error.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oper_error.mp3; sourceTree = "<group>"; };
+		7954BB231E5FCCE900E03173 /* tip_offwork.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tip_offwork.mp3; sourceTree = "<group>"; };
+		7954BB241E5FCCE900E03173 /* tip_onwork.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tip_onwork.mp3; sourceTree = "<group>"; };
+		7954BB341E5FDC9B00E03173 /* YYAudioTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYAudioTool.h; sourceTree = "<group>"; };
+		7954BB351E5FDC9B00E03173 /* YYAudioTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYAudioTool.m; sourceTree = "<group>"; };
 		795526C51E1B5266008196F8 /* UtilKits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilKits.h; sourceTree = "<group>"; };
 		795AC43D1E2C50D700C69308 /* Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
 		795AC43F1E2C50D700C69308 /* NSData+YXAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+YXAdd.h"; sourceTree = "<group>"; };
@@ -1352,7 +1383,6 @@
 		79F4CB081E03EA3F000C5525 /* APIMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIMacro.h; sourceTree = "<group>"; };
 		79F4CB091E03EA3F000C5525 /* AppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
 		79F4CB0A1E03EA3F000C5525 /* NotificationMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationMacro.h; sourceTree = "<group>"; };
-		79F4CB0B1E03EA3F000C5525 /* ToolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToolView.h; sourceTree = "<group>"; };
 		79F4CB0C1E03EA3F000C5525 /* UtilsMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
 		79F4CB0D1E03EA3F000C5525 /* VendorMarco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VendorMarco.h; sourceTree = "<group>"; };
 		79F4CB0E1E03EAC6000C5525 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -4024,6 +4054,15 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		7954BB331E5FDC8500E03173 /* YYAudioTool */ = {
+			isa = PBXGroup;
+			children = (
+				7954BB341E5FDC9B00E03173 /* YYAudioTool.h */,
+				7954BB351E5FDC9B00E03173 /* YYAudioTool.m */,
+			);
+			name = YYAudioTool;
+			sourceTree = "<group>";
+		};
 		795AC43C1E2C50D700C69308 /* Categories(分类) */ = {
 			isa = PBXGroup;
 			children = (
@@ -4304,7 +4343,6 @@
 				79F4CB081E03EA3F000C5525 /* APIMacro.h */,
 				79F4CB091E03EA3F000C5525 /* AppMacro.h */,
 				79F4CB0A1E03EA3F000C5525 /* NotificationMacro.h */,
-				79F4CB0B1E03EA3F000C5525 /* ToolView.h */,
 				79F4CB0C1E03EA3F000C5525 /* UtilsMacro.h */,
 				79F4CB0D1E03EA3F000C5525 /* VendorMarco.h */,
 			);
@@ -4684,6 +4722,20 @@
 		79F05E0B1E03BD8900F335DA /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				7954BB171E5FCCE900E03173 /* msg_ding.mp3 */,
+				7954BB181E5FCCE900E03173 /* msg_dingdong.mp3 */,
+				7954BB191E5FCCE900E03173 /* msg_door.mp3 */,
+				7954BB1A1E5FCCE900E03173 /* msg_tip.mp3 */,
+				7954BB1B1E5FCCE900E03173 /* msg_water.mp3 */,
+				7954BB1C1E5FCCE900E03173 /* offwork_auto.mp3 */,
+				7954BB1D1E5FCCE900E03173 /* offwork_succ.mp3 */,
+				7954BB1E1E5FCCE900E03173 /* onwork_auto.mp3 */,
+				7954BB1F1E5FCCE900E03173 /* onwork_succ.mp3 */,
+				7954BB201E5FCCE900E03173 /* oper_beep1.mp3 */,
+				7954BB211E5FCCE900E03173 /* oper_beep2.mp3 */,
+				7954BB221E5FCCE900E03173 /* oper_error.mp3 */,
+				7954BB231E5FCCE900E03173 /* tip_offwork.mp3 */,
+				7954BB241E5FCCE900E03173 /* tip_onwork.mp3 */,
 			);
 			path = Sound;
 			sourceTree = "<group>";
@@ -6059,6 +6111,7 @@
 		83B8787B68883EECD9829725 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7954BB331E5FDC8500E03173 /* YYAudioTool */,
 				793604BC1E5D43920006646E /* ZJQRScanner */,
 				791A51F91E55A1D800F7C026 /* XMLDictionary.h */,
 				791A51FA1E55A1D800F7C026 /* XMLDictionary.m */,
@@ -6198,6 +6251,7 @@
 				794C77541E3204B800013243 /* emotion0031@2x.png in Resources */,
 				794C77551E3204B800013243 /* emotion0032@2x.png in Resources */,
 				794C77A71E3204B800013243 /* liaotian_ic_yuyin_nor@2x.png in Resources */,
+				7954BB281E5FCCE900E03173 /* msg_tip.mp3 in Resources */,
 				794C779D1E3204B800013243 /* liaotian_ic_jianpan_nor.png in Resources */,
 				79FC0E861E4C5A0E00CDDF87 /* bg_18.png in Resources */,
 				794C77501E3204B800013243 /* emotion0027@2x.png in Resources */,
@@ -6205,10 +6259,12 @@
 				793B9E9B1E4807E400156CBE /* bg_1.png in Resources */,
 				794C77441E3204B800013243 /* emotion0015@2x.png in Resources */,
 				7937820F1E31E3AD00ABA7C9 /* ReceiverVoiceNodePlaying@2x.png in Resources */,
+				7954BB321E5FCCE900E03173 /* tip_onwork.mp3 in Resources */,
 				794C777B1E3204B800013243 /* emotion0070@2x.png in Resources */,
 				794C775A1E3204B800013243 /* emotion0037@2x.png in Resources */,
 				79FC0E7B1E4C5A0E00CDDF87 /* bg_9.png in Resources */,
 				79DD27671E31A22600923D19 /* MultiRoles.plist in Resources */,
+				7954BB2D1E5FCCE900E03173 /* onwork_succ.mp3 in Resources */,
 				794C77A61E3204B800013243 /* liaotian_ic_yuyin_nor.png in Resources */,
 				793B9E9E1E4807E400156CBE /* bg_4.png in Resources */,
 				794C77721E3204B800013243 /* emotion0061@2x.png in Resources */,
@@ -6241,6 +6297,7 @@
 				794C77511E3204B800013243 /* emotion0028@2x.png in Resources */,
 				794C77681E3204B800013243 /* emotion0051@2x.png in Resources */,
 				794C774E1E3204B800013243 /* emotion0025@2x.png in Resources */,
+				7954BB2F1E5FCCE900E03173 /* oper_beep2.mp3 in Resources */,
 				794C77911E3204B800013243 /* liaotian_ic_biaoqing_nor.png in Resources */,
 				794C775E1E3204B800013243 /* emotion0041@2x.png in Resources */,
 				794C77761E3204B800013243 /* emotion0065@2x.png in Resources */,
@@ -6249,6 +6306,7 @@
 				794C77881E3204B800013243 /* emotion0083@2x.png in Resources */,
 				79EF94571E262F7100F8E9BC /* icons.bundle in Resources */,
 				7937823D1E31FA8500ABA7C9 /* chat_bottom_up_press.png in Resources */,
+				7954BB2A1E5FCCE900E03173 /* offwork_auto.mp3 in Resources */,
 				79380A8B1E25E066004E7250 /* TeamAttendance.plist in Resources */,
 				793782061E31E3AD00ABA7C9 /* photo.png in Resources */,
 				793782381E31FA8500ABA7C9 /* chat_bottom_keyboard_press.png in Resources */,
@@ -6263,6 +6321,7 @@
 				794C77321E3204B800013243 /* chat_ic_delete_nor.png in Resources */,
 				794C773C1E3204B800013243 /* emotion0007@2x.png in Resources */,
 				794C77401E3204B800013243 /* emotion0011@2x.png in Resources */,
+				7954BB261E5FCCE900E03173 /* msg_dingdong.mp3 in Resources */,
 				794C77901E3204B800013243 /* img_defaulthead_nor@3x.png in Resources */,
 				794C77491E3204B800013243 /* emotion0020@2x.png in Resources */,
 				7980A8DD1E1354B300F3F289 /* myexamine.plist in Resources */,
@@ -6310,6 +6369,7 @@
 				794C776D1E3204B800013243 /* emotion0056@2x.png in Resources */,
 				794C77701E3204B800013243 /* emotion0059@2x.png in Resources */,
 				794C77611E3204B800013243 /* emotion0044@2x.png in Resources */,
+				7954BB291E5FCCE900E03173 /* msg_water.mp3 in Resources */,
 				7937653D1E14987F00F7B34F /* DealWith.plist in Resources */,
 				794C773E1E3204B800013243 /* emotion0009@2x.png in Resources */,
 				794C77A51E3204B800013243 /* liaotian_ic_press@3x.png in Resources */,
@@ -6327,11 +6387,13 @@
 				794C779A1E3204B800013243 /* liaotian_ic_gengduo_press.png in Resources */,
 				7937823C1E31FA8500ABA7C9 /* chat_bottom_up_nor.png in Resources */,
 				793782151E31E3AD00ABA7C9 /* SenderVoiceNodePlaying@2x.png in Resources */,
+				7954BB271E5FCCE900E03173 /* msg_door.mp3 in Resources */,
 				793B9E9D1E4807E400156CBE /* bg_3.png in Resources */,
 				794C77531E3204B800013243 /* emotion0030@2x.png in Resources */,
 				794C77981E3204B800013243 /* liaotian_ic_gengduo_nor@2x.png in Resources */,
 				79FC0E871E4C5A0E00CDDF87 /* bg_17.png in Resources */,
 				79FAC3911E51CE92009DE784 /* Icon.png in Resources */,
+				7954BB301E5FCCE900E03173 /* oper_error.mp3 in Resources */,
 				794C77431E3204B800013243 /* emotion0014@2x.png in Resources */,
 				794C77371E3204B800013243 /* emotion0002@2x.png in Resources */,
 				794C77A21E3204B800013243 /* liaotian_ic_jianpan_press@3x.png in Resources */,
@@ -6354,6 +6416,7 @@
 				7937823B1E31FA8500ABA7C9 /* chat_bottom_textfield.png in Resources */,
 				793782451E31FA8500ABA7C9 /* icon02.jpg in Resources */,
 				794C77A01E3204B800013243 /* liaotian_ic_jianpan_press.png in Resources */,
+				7954BB2C1E5FCCE900E03173 /* onwork_auto.mp3 in Resources */,
 				79FC0E851E4C5A0E00CDDF87 /* bg_12.png in Resources */,
 				794C77961E3204B800013243 /* liaotian_ic_biaoqing_press@3x.png in Resources */,
 				793B9E9F1E4807E400156CBE /* bg_5.png in Resources */,
@@ -6364,6 +6427,7 @@
 				793782121E31E3AD00ABA7C9 /* SenderVoiceNodeDownloading.png in Resources */,
 				794C777F1E3204B800013243 /* emotion0074@2x.png in Resources */,
 				7937821D1E31E8C200ABA7C9 /* Chat.plist in Resources */,
+				7954BB251E5FCCE900E03173 /* msg_ding.mp3 in Resources */,
 				79FC0E881E4C5A0E00CDDF87 /* bg_11.png in Resources */,
 				794C77581E3204B800013243 /* emotion0035@2x.png in Resources */,
 				79F4F0891E1F89BB00115C3B /* Message.plist in Resources */,
@@ -6371,6 +6435,8 @@
 				79375D521E1E2E5A00E27934 /* About.plist in Resources */,
 				7937823F1E31FA8500ABA7C9 /* chat_bottom_voice_press.png in Resources */,
 				794E04801E2323BF00CFE3A3 /* Statistics.plist in Resources */,
+				7954BB311E5FCCE900E03173 /* tip_offwork.mp3 in Resources */,
+				7954BB2B1E5FCCE900E03173 /* offwork_succ.mp3 in Resources */,
 				793487BE1E2728AB00D074D7 /* List.plist in Resources */,
 				794C775B1E3204B800013243 /* emotion0038@2x.png in Resources */,
 				794C77651E3204B800013243 /* emotion0048@2x.png in Resources */,
@@ -6397,6 +6463,7 @@
 				793782361E31FA8500ABA7C9 /* chat_bg_default.jpg in Resources */,
 				794C773F1E3204B800013243 /* emotion0010@2x.png in Resources */,
 				794C77351E3204B800013243 /* chat_ic_delete_press@3x.png in Resources */,
+				7954BB2E1E5FCCE900E03173 /* oper_beep1.mp3 in Resources */,
 				794C774B1E3204B800013243 /* emotion0022@2x.png in Resources */,
 				794C77951E3204B800013243 /* liaotian_ic_biaoqing_press@2x.png in Resources */,
 				79ED5E901E1CF72600BBC3D9 /* Set.plist in Resources */,
@@ -6587,6 +6654,7 @@
 				793849741E5BC70300EA2502 /* ChangePasswordController.m in Sources */,
 				79F0A1361E13990A00A1B8AA /* UIView+ZJFrame.m in Sources */,
 				7904A6FA1E0923A000D6E8D4 /* HButtonView.m in Sources */,
+				7954BB361E5FDC9B00E03173 /* YYAudioTool.m in Sources */,
 				79EF94341E262DB900F8E9BC /* CheckController.m in Sources */,
 				79375D4D1E1E2DE600E27934 /* AboutCellView.m in Sources */,
 				795AC4681E2C50D700C69308 /* UIColor+YXAdd.m in Sources */,

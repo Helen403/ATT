@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewModel.h"
+#import "GDataXMLNode.h"
 
 @implementation HomeViewModel
 
@@ -34,6 +35,39 @@
             ShowMaskStatus(@"正在拼命加载");
         }
     }];
+
+    
+    [self.attendRecordCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        DismissHud();
+        GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:result options:0 error:nil];
+        GDataXMLElement *xmlEle = [xmlDoc rootElement];
+        NSArray *array = [xmlEle children];
+        
+        GDataXMLElement *ele = [array objectAtIndex:0];
+        NSArray *array2 =[ele children];
+        
+        GDataXMLElement *ele2 = [array2 objectAtIndex:0];
+        NSArray *array3 =[ele2 children];
+        GDataXMLElement *ele3 = [array3 objectAtIndex:0];
+        
+        if ([[ele3 stringValue] isEqualToString:@"0"]) {
+            [self.attendRecordSuccessSubject sendNext:nil];
+            ShowMessage(@"打卡成功");
+        }else{
+            [self.attendRecordFailSubject sendNext:nil];
+            ShowErrorStatus(@"打卡失败");
+        }
+        
+    }];
+    
+    
+    [[[self.attendRecordCommand.executing skip:1] take:1] subscribeNext:^(id x) {
+        
+        if ([x isEqualToNumber:@(YES)]) {
+            ShowMaskStatus(@"正在打卡,请稍等");
+        }
+    }];
+
     
 }
 
@@ -57,6 +91,21 @@
     }
     return _setClickSubject;
 }
+
+-(RACSubject *)attendRecordSuccessSubject{
+    if (!_attendRecordSuccessSubject) {
+        _attendRecordSuccessSubject = [RACSubject subject];
+    }
+    return _attendRecordSuccessSubject;
+}
+
+-(RACSubject *)attendRecordFailSubject{
+    if (!_attendRecordFailSubject) {
+        _attendRecordFailSubject = [RACSubject subject];
+    }
+    return _attendRecordFailSubject;
+}
+
 
 #pragma mark lazyload
 -(RACCommand *)sendclickCommand{
@@ -156,6 +205,51 @@
     }
     return _arr;
 }
+
+
+
+
+#pragma mark lazyload
+-(RACCommand *)attendRecordCommand{
+    if (!_attendRecordCommand) {
+        
+        _attendRecordCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                NSString *body =[NSString stringWithFormat: @"<saveAttendRecord xmlns=\"http://service.webservice.vada.com/\">\
+                                 <companyCode xmlns=\"\">%@</companyCode>\
+                                 <cardDate xmlns=\"\">%@</cardDate>\
+                                 <cardTime xmlns=\"\">%@</cardTime>\
+                                 <cardDeviceType xmlns=\"\">%@</cardDeviceType>\
+                                 <cardDeviceName xmlns=\"\">%@</cardDeviceName>\
+                                 <empCode xmlns=\"\">%@</empCode>\
+                                 <userCode xmlns=\"\">%@</userCode>\
+                                 <userName xmlns=\"\">%@</userName>\
+                                 <deptCode xmlns=\"\">%@</deptCode>\
+                                 <deptName xmlns=\"\">%@</deptName>\
+                                 <locLongitude xmlns=\"\">%@</locLongitude>\
+                                 <locLatitude xmlns=\"\">%@</locLatitude>\
+                                 <locAddress xmlns=\"\">%@</locAddress>\
+                                 <clockMode xmlns=\"\">%@</clockMode>\
+                                 </saveAttendRecord>",self.companyCode,self.cardDate,self.cardTime,self.cardDeviceType,self.cardDeviceName,self.empCode,self.userCode,self.userName,self.deptCode,self.deptName,self.locLongitude,self.locLatitude,self.locAddress,self.clockMode];
+               
+                [self SOAPData:saveAttendRecord soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                }];
+                return nil;
+            }];
+        }];
+        
+    }
+    return _attendRecordCommand;
+}
+
 
 
 

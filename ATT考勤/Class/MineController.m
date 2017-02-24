@@ -43,6 +43,10 @@
     self.title = @"我的信息";
 }
 
+-(void)h_viewWillAppear{
+    [self.mineView h_refreash];
+}
+
 -(void)h_addSubviews{
     [self.view addSubview:self.mineView];
 }
@@ -76,7 +80,7 @@
  *  上传头像
  */
 -(void)imagePicker{
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
     
     // You can get the photos by block, the same as by delegate.
     // 你可以通过block或者代理，来得到用户选择的照片.

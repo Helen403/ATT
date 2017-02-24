@@ -98,6 +98,50 @@
     if ([mineModel.back isEqualToString:@"1"]) {
         self.back.hidden = NO;
     }
+}
+
+
+-(void)setUserModel:(UserModel *)userModel{
+    if (!userModel) {
+        return;
+    }
+    _userModel = userModel;
+    switch (self.index) {
+        case 0:{
+            
+            break;
+        }
+        case 1:{
+            self.info.text = userModel.userNickName;
+            
+            break;
+        }
+        case 2:{
+            self.info.text = userModel.userNickName;
+            
+            break;
+        }
+        case 3:{
+            self.info.text = userModel.userTelphone;
+            
+            break;
+        } case 4:{
+            self.info.text = userModel.userStatus;
+            
+            break;
+        }
+        case 5:{
+            self.info.text = userModel.userEmail;
+            
+            break;
+        }
+            
+        case 6:{
+            self.info.text = userModel.userPassword;
+            
+            break;
+        }
+    }
     
 }
 
@@ -136,7 +180,7 @@
         _info = [[UILabel alloc] init];
         _info.font = H14;
         _info.textColor = MAIN_PAN_2;
-        _info.text = @"诸葛亮";
+        _info.text = @"";
     }
     return _info;
 }

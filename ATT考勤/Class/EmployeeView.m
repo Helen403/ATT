@@ -66,9 +66,13 @@
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
     
-    [self.employeeViewModel.refreshDataCommand execute:nil];
+    
 }
 
+-(void)h_loadData{
+  [self.employeeViewModel.refreshDataCommand execute:nil];
+
+}
 
 -(void)h_bindViewModel{
     [[self.employeeViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *xmlDoc) {
@@ -136,10 +140,11 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     EmployeeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([EmployeeCellView class])] forIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.employeeModel = self.model;
     cell.employeeTitle = self.employeeViewModel.arr[indexPath.row];
     cell.index = indexPath.row;
+    cell.show.tag = indexPath.row;
     return cell;
 }
 

@@ -8,6 +8,7 @@
 
 #import "ChangePasswordView.h"
 #import "ChangePasswordViewModel.h"
+#import "UserModel.h"
 
 @interface ChangePasswordView()
 
@@ -27,7 +28,7 @@
 
 @property(nonatomic,strong) UITextField *telphoneText;
 
-@property(nonatomic,strong) UIButton *countDown;
+
 
 @property(nonatomic,strong) UIView *line2;
 
@@ -73,7 +74,7 @@
     
     [self.useText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.useImg);
-        make.left.equalTo(weakSelf.useLabel.mas_right).offset([self h_w:10]);
+        make.left.equalTo(weakSelf.useLabel.mas_right).offset([self h_w:40]);
         make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
     
@@ -83,7 +84,6 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,[self h_w:1]));
         make.right.equalTo(-leftPadding);
         make.top.equalTo(weakSelf.useText.mas_bottom).offset([self h_w:10]);
-        
     }];
     
     [self.telphoneImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -101,9 +101,7 @@
         make.left.equalTo(weakSelf.useText);
         make.size.equalTo(CGSizeMake(length, [self h_w:30]));
     }];
-    
-    
-    
+
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-leftPadding*2,1));
@@ -154,7 +152,7 @@
     [self addSubview:self.telphoneImg];
     [self addSubview:self.telphoneLabel];
     [self addSubview:self.telphoneText];
-    [self addSubview:self.countDown];
+    
     [self addSubview:self.line2];
     
     [self addSubview:self.validateImg];
@@ -166,6 +164,19 @@
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
+
+-(void)h_bindViewModel{
+    [[self.changePasswordViewModel.failSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.useText.text = @"";
+            self.telphoneText.text = @"";
+            self.validateText.text = @"";
+        });
+    }];
+
+}
+
+
 
 #pragma mark lazyload
 -(ChangePasswordViewModel *)changePasswordViewModel{
@@ -187,7 +198,7 @@
 -(UILabel *)useLabel{
     if (!_useLabel) {
         _useLabel = [[UILabel alloc] init];
-        _useLabel.text = @"输入旧密码";
+        _useLabel.text = @"旧密码";
         _useLabel.textColor = MAIN_PAN_2;
         _useLabel.font = H14;
     }
@@ -231,7 +242,7 @@
 -(UILabel *)telphoneLabel{
     if (!_telphoneLabel) {
         _telphoneLabel = [[UILabel alloc] init];
-        _telphoneLabel.text = @"输入新密码";
+        _telphoneLabel.text = @"新密码";
         _telphoneLabel.textColor = MAIN_PAN_2;
         _telphoneLabel.font = H14;
     }
@@ -257,7 +268,6 @@
         
         // 设置内容 -- 垂直居中
         _telphoneText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        
         
         //当输入框没有内容时，水印提示 提示内容为password
         _telphoneText.placeholder = @"输入密码";
@@ -292,77 +302,6 @@
     }
     return _line3;
     
-}
-
--(UIButton *)countDown{
-    if (!_countDown) {
-        _countDown = [[UIButton alloc] init];
-        
-        _countDown.titleLabel.textColor = white_color;
-        
-        [_countDown setTitle:@" 验证码 " forState:UIControlStateNormal];
-        _countDown.userInteractionEnabled = YES;
-        _countDown.titleLabel.font = H14;
-        [_countDown addTarget:self action:@selector(startTime:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [_countDown.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
-        [_countDown.layer setCornerRadius:10];
-        
-        [_countDown.layer setBorderWidth:6];//设置边界的宽度
-        
-        [_countDown setBackgroundColor:MAIN_ORANGER];
-        //设置按钮的边界颜色
-        
-        [_countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
-    }
-    
-    return _countDown;
-}
-
-
--(void)startTime:(UIButton *)button{
-    
-    if (![self.useText.text isVaildTelphone]) {
-        
-        ShowErrorStatus(@"请输入正确的手机号");
-        return;
-    }
-    
-    //    self.newpartViewModel.user = self.useText.text;
-    //    [self.newpartViewModel.sendclickCommand execute:nil];
-    
-    __block int timeout = 30; //倒计时时间
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
-    dispatch_source_set_event_handler(_timer, ^{
-        if(timeout<=0){ //倒计时结束，关闭
-            dispatch_source_cancel(_timer);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //设置界面的按钮显示 根据自己需求设置
-                //设置界面的按钮显示 根据自己需求设置
-                [button setTitle:@" 验证码 " forState:UIControlStateNormal];
-                button.userInteractionEnabled = YES;
-                
-            });
-        }else{
-            int seconds = timeout % 60;
-            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //设置界面的按钮显示 根据自己需求设置
-                //                NSLog(@"____%@",strTime);
-                [UIView beginAnimations:nil context:nil];
-                [UIView setAnimationDuration:1];
-                [button setTitle:[NSString stringWithFormat:@" %@秒后 ",strTime] forState:UIControlStateNormal];
-                [UIView commitAnimations];
-                
-                button.userInteractionEnabled = NO;
-            });
-            timeout--;
-        }
-    });
-    dispatch_resume(_timer);
 }
 
 
@@ -434,9 +373,56 @@
 }
 
 -(void)next:(UIButton *)button{
-    if ([self.validateText.text isEqualToString:self.backNumber]) {
-        //        [self.newpartViewModel.createclickSubject sendNext:self.useText.text];
+  
+    
+    if (self.useText.text.length == 0) {
+        ShowErrorStatus(@"旧密码不能为空");
+        return;
     }
+    
+    if (self.telphoneText.text.length == 0) {
+        ShowErrorStatus(@"新密码不能为空");
+        return;
+    }
+    
+    if (self.validateText.text.length == 0) {
+        ShowErrorStatus(@"确认密码不能为空");
+        return;
+    }
+    
+    if (self.telphoneText.text.length<6) {
+        ShowErrorStatus(@"密码的长度不能少于6");
+        return;
+    }
+    
+    if (self.telphoneText.text.length>8) {
+        ShowErrorStatus(@"密码的长度不能大于8");
+        return;
+    }
+    
+    
+    if (![self.telphoneText.text isEqualToString:self.validateText.text]) {
+        ShowErrorStatus(@"密码不一致");
+        return;
+    }
+    
+    if ([self.useText.text isEqualToString:self.telphoneText.text]) {
+        ShowErrorStatus(@"新密码不能与旧密码相同");
+        return;
+    }
+    
+    NSString *password = [self.useText.text md5String];
+    UserModel *user = getModel(@"user");
+    if (![password isEqualToString:user.userPassword]) {
+        
+        ShowErrorStatus(@"旧密码不正确");
+        return;
+    }
+    
+
+    self.changePasswordViewModel.telphone = user.userTelphone;
+    self.changePasswordViewModel.newpassword = self.validateText.text;
+    [self.changePasswordViewModel.sendclickCommand execute:nil];
 }
 
 

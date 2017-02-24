@@ -48,4 +48,28 @@
 
 @property(nonatomic,strong) AttendWorkShift *attendWorkShift;
 
+/*************************************/
+
+@property (nonatomic, strong) RACCommand *attendRecordCommand;
+
+
+@property(nonatomic,strong) NSString *cardDate;
+
+@property(nonatomic,strong) NSString *cardTime;
+@property(nonatomic,strong) NSString *cardDeviceType;
+@property(nonatomic,strong) NSString *cardDeviceName;
+@property(nonatomic,strong) NSString *userName;
+@property(nonatomic,strong) NSString *clockMode;
+@property(nonatomic,strong) NSString *deptName;
+@property(nonatomic,strong) NSString *locLongitude;
+@property(nonatomic,strong) NSString *locLatitude;
+@property(nonatomic,strong) NSString *locAddress;
+
+
+
+@property(nonatomic,strong) RACSubject *attendRecordSuccessSubject;
+
+@property(nonatomic,strong) RACSubject *attendRecordFailSubject;
+
+
 @end

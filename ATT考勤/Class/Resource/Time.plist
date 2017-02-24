@@ -34,7 +34,7 @@
 	</dict>
 	<dict>
 		<key>icon</key>
-		<string>remind_set_work_prompt_picture@</string>
+		<string>remind_set_work_prompt_picture</string>
 		<key>title</key>
 		<string>上班打卡提醒</string>
 		<key>on</key>
