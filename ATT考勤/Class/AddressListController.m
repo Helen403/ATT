@@ -52,8 +52,8 @@
 
 -(void)h_addSubviews{
     self.view.backgroundColor = [UIColor whiteColor];
-    self.content.frame = CGRectMake(0, 0, SCREEN_WIDTH, 74);
-    self.tableView.frame = CGRectMake(0,74,SCREEN_WIDTH, self.view.frame.size.height-74);
+    self.content.frame = CGRectMake(0, 0, SCREEN_WIDTH, 84);
+    self.tableView.frame = CGRectMake(0,84,SCREEN_WIDTH, self.view.frame.size.height-84);
     
     //发送请求
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
@@ -185,7 +185,7 @@
 -(UIView *)content{
     if (!_content) {
         _content = [[UIView alloc] init];
-        _content.frame = CGRectMake(0, 0, SCREEN_WIDTH, 74);
+        _content.frame = CGRectMake(0, 0, SCREEN_WIDTH, 84);
         [_content addSubview:self.searchBar];
         [_content addSubview:self.toTeamView];
         [self.view addSubview:_content];
@@ -197,7 +197,7 @@
     if (!_toTeamView) {
         _toTeamView = [[ToTeamView alloc] init];
         _toTeamView.backgroundColor = white_color;
-        _toTeamView.frame = CGRectMake(0, 44, SCREEN_WIDTH,30);
+        _toTeamView.frame = CGRectMake(0, 44, SCREEN_WIDTH,40);
         _toTeamView.userInteractionEnabled = YES;
         UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toTeam)];
         [_toTeamView addGestureRecognizer:setTap];

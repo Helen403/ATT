@@ -292,6 +292,17 @@ void DismissHud(void){
 
 }
 
+
++(NSString *)currentDateHMS{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH:mm:ss"];
+    
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    return str;
+    
+}
+
 //获取年月日
 +(NSMutableArray *)currentYearArr{
     

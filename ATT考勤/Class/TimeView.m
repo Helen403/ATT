@@ -100,7 +100,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+       TimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TimeCellView class])] forIndexPath:indexPath];
+    cell.selected = NO;
+    cell.timeModel = self.timeViewModel.arr[indexPath.row];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.timeViewModel.cellclickSubject sendNext:row];
 }

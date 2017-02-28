@@ -18,6 +18,7 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "YYAudioTool.h"
 
+
 @interface HomeView()<BMKLocationServiceDelegate>
 
 @property(nonatomic,strong) HomeViewModel *homeViewModel;
@@ -81,11 +82,14 @@
 
 @property(nonatomic,strong) NSString *clockMode;
 
+
 @property(nonatomic,assign) NSInteger cardPhase;
 
 @property(nonatomic,assign) NSInteger timePoint;
 
 @property(nonatomic,assign) NSInteger retCode;
+
+
 
 
 @end
@@ -350,23 +354,57 @@
     
     //启动LocationService
     [self.locService startUserLocationService];
+
+}
+
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+    CLLocationCoordinate2D coord = [userLocation coordinate];
+    NSLog(@"经度:%f,纬度:%f",coord.latitude,coord.longitude);
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation: userLocation.location completionHandler:^(NSArray *array, NSError *error) {
+        if (array.count > 0) {
+            CLPlacemark *placemark = [array objectAtIndex:0];
+            if (placemark != nil) {
+                //                NSString *city = placemark.locality;
+                //                //                NSLog(@"%@",city);
+                //                NSString *city1 = placemark.name;
+                //                //                NSLog(@"%@",city1);
+                //                self.locAddress = [NSString stringWithFormat:@"%@%@",city,city1];
+                NSDictionary *city2 = placemark.addressDictionary;
+                //                NSLog(@"%@",city2);
+                NSArray *dict = city2[@"FormattedAddressLines"];
+                NSString *str=  [dict objectAtIndex:0];
+                //                NSLog(@"%@",str);
+                //                NSString *city3 = placemark.region;
+                //                NSLog(@"%@",city3);
+                //找到了当前位置城市后就关闭服务
+                
+                
+                
+                [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"locAddress"];
+                
+                [self.locService stopUserLocationService];
+                
+            }
+        }
+    }];
+
     
 }
 
 
 //实现相关delegate 处理位置信息更新
 //处理方向变更信息
-- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
-{
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation{
     //NSLog(@"heading is %@",userLocation.heading);
 }
 //处理位置坐标更新
-- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
-{
-//    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
+        NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     
     
-//    ShowMessage(@"定位成功");
+    //    ShowMessage(@"定位成功");
     NSString *currentLatitude = [[NSString alloc]
                                  initWithFormat:@"%f",
                                  userLocation.location.coordinate.latitude];
@@ -449,36 +487,36 @@
 }
 //打卡后更新界面
 -(void)attendCardSuccess{
-
-        // A=1,B=2,C=3,D=4,E=5,F=6,G=7,H=8
-        if(self.timePoint==1||self.timePoint==3||self.timePoint==5||self.timePoint==7){
-            //self.preText.setText(DateUtil.getCurDateHMS());
-            if ([LSCoreToolCenter isDayOrNight:self.preText.text]) {
-                self.preImg.image = ImageNamed(@"homepage_rest_orange");
-            }else{
-                self.preImg.image = ImageNamed(@"homepage_work_orange");
-            }
+    
+    // A=1,B=2,C=3,D=4,E=5,F=6,G=7,H=8
+    if(self.timePoint==1||self.timePoint==3||self.timePoint==5||self.timePoint==7){
+        self.preText.text = [LSCoreToolCenter currentDateHMS];
+        if ([LSCoreToolCenter isDayOrNight:self.preText.text]) {
+            self.preImg.image = ImageNamed(@"homepage_rest_orange");
         }else{
-//            tv_eveing.setText(DateUtil.getCurDateHMS());
-            if ([LSCoreToolCenter isDayOrNight:self.lastText.text]) {
-                self.lastImg.image = ImageNamed(@"homepage_rest_green");
-            }else{
-                self.lastImg.image = ImageNamed(@"homepage_work_green");
-            }
+            self.preImg.image = ImageNamed(@"homepage_work_orange");
         }
-        //打卡状态
-        if(self.retCode==0){
-           
-            self.status.text =@"状态:正常";
+    }else{
+        self.lastText.text= [LSCoreToolCenter currentDateHMS];
+        if ([LSCoreToolCenter isDayOrNight:self.lastText.text]) {
+            self.lastImg.image = ImageNamed(@"homepage_rest_green");
+        }else{
+            self.lastImg.image = ImageNamed(@"homepage_work_green");
         }
-        if(self.retCode==1){
-            
-             self.status.text =@"状态:早退";
-        }
-        if(self.retCode==2){
-            self.status.text =@"状态:迟到";
-        }
-
+    }
+    //打卡状态
+    if(self.retCode==0){
+        
+        self.status.text =@"状态:正常";
+    }
+    if(self.retCode==1){
+        
+        self.status.text =@"状态:早退";
+    }
+    if(self.retCode==2){
+        self.status.text =@"状态:迟到";
+    }
+    
 }
 
 
@@ -486,7 +524,7 @@
     EmpModel *empModel =  self.homeViewModel.empModel;
     Dept *dept = self.homeViewModel.dept;
     
-   
+    
     
     self.name.text = empModel.empName;
     self.department.text = [NSString stringWithFormat:@"%@ %@",dept.deptNickName,empModel.position];
@@ -651,15 +689,19 @@
     
 }
 
-////点击打卡
--(void)onClickImage{
-    
-    //开始播放/继续播放
-    [YYAudioTool playMusic:@"msg_ding.mp3"];
-    
+-(void)delayMethod{
+    self.punch.image = ImageNamed(@"homepage_Clock_button");
+}
 
-    
+//点击打卡
+-(void)onClickImage{
+    if(SIMULATOR==0){
+        //开始播放/继续播放
+        [YYAudioTool playMusic:@"msg_ding.mp3"];
+    }
     self.punch.image = ImageNamed(@"homepage_clock_button_press");
+    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.6f];
+
     
     EmpModel *empModel = self.homeViewModel.empModel;
     Dept *dept = self.homeViewModel.dept;
@@ -913,8 +955,10 @@
     
     //==================================================
     if(self.retCode==-1){
-//        RingUtil.playLocalSound(R.raw.oper_error);
-        
+        //        RingUtil.playLocalSound(R.raw.oper_error);
+        if(SIMULATOR==0){
+            [YYAudioTool playMusic:@"oper_error.mp3"];
+        }
         ShowMessage(@"还不到打卡时间!");
         return;
     }
@@ -931,8 +975,10 @@
         ShowMessage(@"超过上班时间,您迟到了!");
     }
     if(self.retCode==3){
-//        RingUtil.playLocalSound(R.raw.oper_error);
-        
+        //        RingUtil.playLocalSound(R.raw.oper_error);
+        if(SIMULATOR==0){
+            [YYAudioTool playMusic:@"oper_error.mp3"];
+        }
         ShowMessage(@"超过打卡时间了!");
         return;
     }
@@ -940,7 +986,6 @@
     
     
     /*************************************************/
-    
     
     
     //self.punch.userInteractionEnabled = NO;
@@ -988,11 +1033,14 @@
         // 设置定位精确度到米
         _locService.desiredAccuracy = kCLLocationAccuracyBest;
         // 设置过滤器为无
-        _locService.distanceFilter = kCLDistanceFilterNone;
+//        _locService.distanceFilter = kCLDistanceFilterNone;
+     
+        _locService.distanceFilter=10;
     }
     return _locService;
     
 }
+
 
 -(UILabel *)title{
     if (!_title) {

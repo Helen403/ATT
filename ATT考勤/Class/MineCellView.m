@@ -24,9 +24,7 @@
 
 @end
 
-
 @implementation MineCellView
-
 
 #pragma mark system
 -(void)updateConstraints{
@@ -113,29 +111,32 @@
         }
         case 1:{
             self.info.text = userModel.userNickName;
-            
             break;
         }
+            //我的签名
         case 2:{
             self.info.text = userModel.userNickName;
-            
             break;
         }
+            //我的公司
         case 3:{
-            self.info.text = userModel.userTelphone;
-            
+            NSString *companyNickName =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyNickName"];
+            self.info.text = companyNickName;
             break;
-        } case 4:{
+        }
+            //我的积分
+        case 4:{
             self.info.text = userModel.userStatus;
             
             break;
         }
+            //我的排班
         case 5:{
             self.info.text = userModel.userEmail;
             
             break;
         }
-            
+            //我的假期
         case 6:{
             self.info.text = userModel.userPassword;
             

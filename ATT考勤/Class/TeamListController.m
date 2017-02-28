@@ -42,6 +42,8 @@
 }
 
 
+
+
 -(void)h_addSubviews{
     self.view.backgroundColor = [UIColor whiteColor];
     self.searchBar.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
@@ -53,11 +55,12 @@
     [self.teamListViewModel.refreshDataCommand execute:nil];
 }
 
+-(void)h_viewWillAppear{
+    [self.tableView reloadData];
+}
+
 -(void)h_bindViewModel{
-    
-    
-    
-    
+
     //点击每个人
     [[self.teamListViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         

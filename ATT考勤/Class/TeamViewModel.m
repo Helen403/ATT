@@ -43,12 +43,12 @@
     if (!_arr) {
         _arr = [NSMutableArray array];
         
-        //读取plist
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Team" ofType:@"plist"];
-        
-        NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
-        
-        _arr= [TeamModel mj_objectArrayWithKeyValuesArray:data];
+//        //读取plist
+//        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Team" ofType:@"plist"];
+//        
+//        NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
+//        
+//        _arr= [TeamModel mj_objectArrayWithKeyValuesArray:data];
         
     }
     return _arr;

@@ -57,7 +57,7 @@
 }
 
 -(void)h_refreash{
-    self.mineViewModel.arr = nil;
+    
     [self.tableView reloadData];
 }
 
@@ -117,7 +117,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MineCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MineCellView class])] forIndexPath:indexPath];
     cell.selected = NO;
-    [self h_refreash];
+    cell.mineModel = self.mineViewModel.arr[indexPath.row];
+    cell.index = indexPath.row;
+    cell.userModel = self.userModel;
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.mineViewModel.cellclickSubject sendNext:row];
 }

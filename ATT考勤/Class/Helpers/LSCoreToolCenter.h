@@ -114,4 +114,6 @@ extern void DismissHud(void);
 
 +(NSString *)internetStatus ;
 
++(NSString *)currentDateHMS;
+
 @end

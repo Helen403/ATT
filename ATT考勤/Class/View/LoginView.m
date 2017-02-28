@@ -9,7 +9,7 @@
 #import "LoginView.h"
 #import "LoginViewModel.h"
 
-@interface LoginView()<UITextFieldDelegate>
+@interface LoginView()<UITextFieldDelegate,WJTextFieldDelegate>
 
 @property(nonatomic,strong) LoginViewModel *loginViewModel;
 
@@ -312,9 +312,22 @@
         //_useTextField.delegate = self;//设置代理
         _useTextField.keyboardType = UIKeyboardTypePhonePad;
         // 5.监听文本框的文字改变
+        _useTextField.delegate = self;
+        
+        [_useTextField.rac_textSignal subscribeNext:^(id x) {
+            if (_useTextField.text.length == 0) {
+                self.pwdTextField.text = @"";
+            }
+        }];
         
     }
     return _useTextField;
+}
+
+
+-(void)textFieldDidDeleteBackward:(UITextField *)textField{
+    
+
 }
 
 
@@ -493,7 +506,6 @@
         _ThirdText.text = @" 使用第三方登陆 ";
         _ThirdText.font = H12;
         _ThirdText.textColor = MAIN_PAN_2;
-        
     }
     return _ThirdText;
 }

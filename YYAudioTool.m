@@ -27,8 +27,7 @@ static NSMutableDictionary *_musicPlayers;
  *存放所有的音效ID
  */
 static NSMutableDictionary *_soundIDs;
-+(NSMutableDictionary *)soundIDs
-{
++(NSMutableDictionary *)soundIDs{
     if (_soundIDs==nil) {
         _soundIDs=[NSMutableDictionary dictionary];
     }

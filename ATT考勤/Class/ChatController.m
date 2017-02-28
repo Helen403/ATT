@@ -29,8 +29,7 @@
 
 @implementation ChatController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
 
 }
@@ -47,8 +46,7 @@
     [self tableViewScrollCurrentIndexPath];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -170,7 +168,6 @@
         [_resultArray addObjectsFromArray:self.chatViewModel.arr];
     }
     return _resultArray;
-    
 }
 
 -(ChatViewModel *)chatViewModel{
@@ -189,7 +186,6 @@
         _tableView.backgroundColor = white_color;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-[self h_w:49]);
-        
     }
     return _tableView;
     
@@ -268,19 +264,15 @@
 }
 
 #pragma UITableView
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.resultArray.count;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     ChatModel *model = self.resultArray[indexPath.row];
     
@@ -289,14 +281,12 @@
     return size.height+[self h_w:30];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     ChatModel *model = self.resultArray[indexPath.row];
     if ([model.judge isEqualToString:@"0"]) {
         static NSString *CellIdentifier1 = @"Cell1";
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1];
-        
+       
         UITableViewCell *cell = nil;
         if (cell == nil) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier1];
@@ -317,7 +307,7 @@
         
     }else{
         static NSString *CellIdentifier2 = @"Cell2";
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier2];
+
          UITableViewCell *cell = nil;
         if (cell == nil) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];

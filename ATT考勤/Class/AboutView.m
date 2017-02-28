@@ -127,7 +127,7 @@
     
     
     AboutCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AboutCellView class])] forIndexPath:indexPath];
-    
+      cell.aboutModel = self.aboutViewModel.arr[indexPath.row];
     cell.selected = NO;
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];

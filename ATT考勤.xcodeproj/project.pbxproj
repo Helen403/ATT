@@ -586,6 +586,7 @@
 		79FC0E871E4C5A0E00CDDF87 /* bg_17.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0E791E4C5A0E00CDDF87 /* bg_17.png */; };
 		79FC0E881E4C5A0E00CDDF87 /* bg_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FC0E7A1E4C5A0E00CDDF87 /* bg_11.png */; };
 		79FC77DC1E56E7C50018C222 /* ScanCodeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC77DB1E56E7C40018C222 /* ScanCodeViewModel.m */; };
+		79FCCC641E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FCCC631E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m */; };
 		79FFB2591E24BA7E00EC082F /* AddressListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB2581E24BA7E00EC082F /* AddressListCellView.m */; };
 		79FFB25C1E24BB0400EC082F /* AddressListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB25B1E24BB0400EC082F /* AddressListModel.m */; };
 		79FFB25E1E24BC3D00EC082F /* AddressList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79FFB25D1E24BC3D00EC082F /* AddressList.plist */; };
@@ -1570,6 +1571,8 @@
 		79FC0E7A1E4C5A0E00CDDF87 /* bg_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_11.png; sourceTree = "<group>"; };
 		79FC77DA1E56E7C40018C222 /* ScanCodeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeViewModel.h; sourceTree = "<group>"; };
 		79FC77DB1E56E7C40018C222 /* ScanCodeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeViewModel.m; sourceTree = "<group>"; };
+		79FCCC621E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84ConvertToGCJ02ForAMapView.h; sourceTree = "<group>"; };
+		79FCCC631E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84ConvertToGCJ02ForAMapView.m; sourceTree = "<group>"; };
 		79FFB2571E24BA7E00EC082F /* AddressListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListCellView.h; sourceTree = "<group>"; };
 		79FFB2581E24BA7E00EC082F /* AddressListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListCellView.m; sourceTree = "<group>"; };
 		79FFB25A1E24BB0400EC082F /* AddressListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListModel.h; sourceTree = "<group>"; };
@@ -6039,6 +6042,15 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		79FCCC611E640BD3005329C6 /* L */ = {
+			isa = PBXGroup;
+			children = (
+				79FCCC621E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.h */,
+				79FCCC631E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m */,
+			);
+			name = L;
+			sourceTree = "<group>";
+		};
 		79FFB25F1E24DCEA00EC082F /* Employee(员工信息) */ = {
 			isa = PBXGroup;
 			children = (
@@ -6111,6 +6123,7 @@
 		83B8787B68883EECD9829725 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79FCCC611E640BD3005329C6 /* L */,
 				7954BB331E5FDC8500E03173 /* YYAudioTool */,
 				793604BC1E5D43920006646E /* ZJQRScanner */,
 				791A51F91E55A1D800F7C026 /* XMLDictionary.h */,
@@ -6791,6 +6804,7 @@
 				7937CC091E24893800A4F82F /* AddressListView.m in Sources */,
 				79ED5E881E1CE56400BBC3D9 /* SetView.m in Sources */,
 				793604C21E5D43C80006646E /* ZJQRScannerView.m in Sources */,
+				79FCCC641E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m in Sources */,
 				79FAFAD11E34ACBA00577917 /* SecurityView.m in Sources */,
 				790D8AEE1E2F4F4D00DDA697 /* CopyToMeModel.m in Sources */,
 				7928BD6E1E0273A4009BB0B4 /* main.m in Sources */,

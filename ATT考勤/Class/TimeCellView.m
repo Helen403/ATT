@@ -49,7 +49,7 @@
     
     [self.back mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-      make.right.equalTo(weakSelf.mas_right).offset([self h_w:10]);
+      make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
     
     [self.info mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,7 +110,7 @@
 -(UIImageView *)icon{
     if (!_icon) {
         _icon = [[UIImageView alloc] init];
-        _icon.image = ImageNamed(@"role_code_icon");
+//        _icon.image = ImageNamed(@"role_code_icon");
     }
     return _icon;
 }
