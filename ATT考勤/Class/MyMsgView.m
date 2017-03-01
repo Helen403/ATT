@@ -10,6 +10,7 @@
 #import "MyMsgViewModel.h"
 #import "MyMsgCellView.h"
 
+
 @interface MyMsgView()<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong) MyMsgViewModel *myMsgViewModel;
@@ -44,6 +45,15 @@
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
+
+
+-(void)h_bindViewModel{
+    //    [[self.myMsgViewModel.findAnnounceNumberSuccessSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+    //
+    //    }];
+    
+}
+
 
 
 -(void)h_refreash{

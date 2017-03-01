@@ -11,6 +11,10 @@
 
 @implementation MyMsgViewModel
 
+
+
+
+
 -(NSMutableArray *)arr{
     if (!_arr) {
         _arr = [NSMutableArray array];
@@ -20,8 +24,7 @@
         
         NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
         
-        _arr= [MyMsgModel mj_objectArrayWithKeyValuesArray:data];
-        
+        _arr = [MyMsgModel mj_objectArrayWithKeyValuesArray:data];
     }
     return _arr;
 }
@@ -33,5 +36,7 @@
     }
     return _cellclickSubject;
 }
+
+
 
 @end

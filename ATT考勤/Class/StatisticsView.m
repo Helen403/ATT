@@ -105,12 +105,20 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:40];
+    return [self h_w:50];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
      StatisticsCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([StatisticsCellView class])] forIndexPath:indexPath];
     cell.selected = NO;
+    if (indexPath.section == 0) {
+        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row];
+    }else if(indexPath.section == 1){
+        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+3];
+    }else{
+        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+7];
+    }
+    
     NSNumber *row =[NSNumber numberWithInteger:indexPath.section];
     [self.statisticsViewModel.cellclickSubject sendNext:row];
 }

@@ -13,6 +13,7 @@
 #import "AttendWorkShiftDetail.h"
 
 
+
 @interface HomeViewModel : HViewModel
 
 @property(nonatomic,strong) RACSubject *headclickSubject;
@@ -64,12 +65,21 @@
 @property(nonatomic,strong) NSString *locLongitude;
 @property(nonatomic,strong) NSString *locLatitude;
 @property(nonatomic,strong) NSString *locAddress;
-
-
+@property(nonatomic,strong) NSString *timePhase;
+@property(nonatomic,strong) NSString *timePoint;
+@property(nonatomic,strong) NSString *cardStatus;
 
 @property(nonatomic,strong) RACSubject *attendRecordSuccessSubject;
 
 @property(nonatomic,strong) RACSubject *attendRecordFailSubject;
 
+
+/**************************************/
+
+@property(nonatomic,strong) RACCommand *findAttendRecordByUserDateCommand;
+
+@property(nonatomic,strong) NSMutableArray *arrAttendRecord;
+
+@property(nonatomic,strong) RACSubject *attendRecordSubject;
 
 @end

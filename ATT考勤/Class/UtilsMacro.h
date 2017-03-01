@@ -42,18 +42,7 @@
 #define ImageNamedBg [UIImage imageNamed:  [NSString stringWithFormat:@"bg_%u",arc4random_uniform(20)+1]]
 
 
-#define MAINCOLOR UIColorFromRGB(0x21C1F7)
 
-#define SUBCOLOR UIColorFromRGB(0xFF4C4C)
-
-#define GX_BGCOLOR COLOR(234, 234, 234, 1)
-
-#define MAIN_TEXT_COLOR COLOR(109, 109, 109, 1)
-
-
-#define MAIN_LIGHT_LINE_COLOR COLOR(174, 174, 174, 1)
-
-#define MAIN_BLACK_TEXT_COLOR COLOR(38, 38, 38, 1)
 
 #define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 

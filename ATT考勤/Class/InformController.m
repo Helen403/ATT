@@ -50,6 +50,11 @@
 
 }
 
+-(void)h_viewWillAppear{
+
+    [self.informView h_refreash];
+}
+
 
 -(InformView *)informView{
     if (!_informView) {

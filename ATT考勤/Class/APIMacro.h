@@ -64,3 +64,28 @@
 
 //系统设置
 #define  modifyUserPwd @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+//消息 公告数量,输入[用户编号,公司编号],输出[公告数量]
+#define findAnnounceNumber @"http://192.168.1.101:8888/smart/ws/IAttService"
+//消息 通知数量,输入[用户编号,公司编号],输出[通知数量]
+#define findNoticeNumber @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+//消息 消息数量,输入[用户编号,公司编号],输出[消息数量]
+#define findNewsNumber @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+//消息 公告查询,输入[用户编号,公司编号],输出[分页公告]
+#define findAllAnnounce @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+//消息 通知查询,输入[用户编号,公司编号],输出[分页通知]
+#define findAllNotices @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+//个人信息 修改我的昵称
+#define modifyUserNickName @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+//个人信息  获取我的签名
+#define findUserSignName @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+//个人信息 修改我的签名
+#define modifyUserSignName @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+

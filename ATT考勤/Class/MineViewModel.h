@@ -14,4 +14,19 @@
 
 @property(nonatomic,strong) RACSubject *cellclickSubject;
 
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+@property(nonatomic,strong) NSString *telphone;
+
+@property(nonatomic,strong) RACSubject *successSubject;
+
+@property(nonatomic,strong) RACSubject *failSubject;
+
+
+@property(nonatomic,strong) RACCommand *findSignCommand;
+
+@property(nonatomic,strong) NSString *userCode;
+
+@property(nonatomic,strong) RACSubject *successSignSubject;
+
 @end

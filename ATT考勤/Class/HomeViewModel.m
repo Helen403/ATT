@@ -8,11 +8,34 @@
 
 #import "HomeViewModel.h"
 #import "GDataXMLNode.h"
+#import "AttendCardRecord.h"
 
 @implementation HomeViewModel
 
 #pragma mark private
 -(void)h_initialize{
+    
+    [self.findAttendRecordByUserDateCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        DismissHud();
+        
+        
+        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAttendRecordByUserDateResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAttendRecordByUserDateResponse>"];
+        
+        NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[AttendCardRecord class] rowRootName:@"AttendCardRecords"];
+        self.arrAttendRecord = arr;
+        
+        [self.attendRecordSubject sendNext:nil];
+        
+    }];
+    
+    
+    [[[self.findAttendRecordByUserDateCommand.executing skip:1] take:1] subscribeNext:^(id x) {
+        
+        if ([x isEqualToNumber:@(YES)]) {
+            ShowMaskStatus(@"正在拼命加载");
+        }
+    }];
+    
     
     
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
@@ -25,7 +48,7 @@
         self.arr = arr;
         
         [self.resultSubject sendNext:nil];
-  
+        
     }];
     
     
@@ -35,7 +58,7 @@
             ShowMaskStatus(@"正在拼命加载");
         }
     }];
-
+    
     
     [self.attendRecordCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
@@ -54,8 +77,13 @@
             [self.attendRecordSuccessSubject sendNext:nil];
             ShowMessage(@"打卡成功");
         }else{
-            [self.attendRecordFailSubject sendNext:nil];
-            ShowErrorStatus(@"打卡失败");
+            if([[ele3 stringValue] isEqualToString:@"2"]){
+                ShowMessage(@"已经打过卡");
+                [self.attendRecordFailSubject sendNext:nil];
+            }else{
+                [self.attendRecordFailSubject sendNext:nil];
+                ShowErrorStatus(@"打卡失败");
+            }
         }
         
     }];
@@ -67,7 +95,7 @@
             ShowMaskStatus(@"正在打卡,请稍等");
         }
     }];
-
+    
     
 }
 
@@ -106,6 +134,12 @@
     return _attendRecordFailSubject;
 }
 
+-(RACSubject *)attendRecordSubject{
+    if (!_attendRecordSubject) {
+        _attendRecordSubject = [RACSubject subject];
+    }
+    return _attendRecordSubject;
+}
 
 #pragma mark lazyload
 -(RACCommand *)sendclickCommand{
@@ -157,37 +191,45 @@
                         
                         [self SOAPData:findPersonShiftWorkPlan soapBody:body3 success:^(NSString *result) {
                             
-                            
-                            NSDictionary *xmlDoc = [self getFilter:result filter:@"AttendWorkShift"];
-                            
-                            AttendWorkShift *attendWorkShift = [AttendWorkShift mj_objectWithKeyValues:xmlDoc];
-                            self.attendWorkShift = attendWorkShift;
-                            
-                            self.shiftLsh = attendWorkShift.shiftLsh;
-                            
-                            /*************************************/
-                            NSString *body4 =[NSString stringWithFormat: @"<findPersonShiftDetail xmlns=\"http://service.webservice.vada.com/\">\
-                                              <shiftLsh xmlns=\"\">%@</shiftLsh>\
-                                              </findPersonShiftDetail>",self.shiftLsh];
-                            
-                            
-                            [self SOAPData:findPersonShiftDetail soapBody:body4 success:^(NSString *result) {
+                            if (result.length<250) {
                                 
-                                [subscriber sendNext:result];
+                                ShowMessage(@"请通知管理员没有工作安排");
                                 [subscriber sendCompleted];
+                            }else{
                                 
-                            } failure:^(NSError *error) {
-                                DismissHud();
-                                ShowErrorStatus(@"请检查网络状态");
-                            }];
+                                NSDictionary *xmlDoc = [self getFilter:result filter:@"AttendWorkShift"];
+                                
+                                AttendWorkShift *attendWorkShift = [AttendWorkShift mj_objectWithKeyValues:xmlDoc];
+                                self.attendWorkShift = attendWorkShift;
+                                
+                                self.shiftLsh = attendWorkShift.shiftLsh;
+                                
+                                /*************************************/
+                                NSString *body4 =[NSString stringWithFormat: @"<findPersonShiftDetail xmlns=\"http://service.webservice.vada.com/\">\
+                                                  <shiftLsh xmlns=\"\">%@</shiftLsh>\
+                                                  </findPersonShiftDetail>",self.shiftLsh];
+                                
+                                
+                                [self SOAPData:findPersonShiftDetail soapBody:body4 success:^(NSString *result) {
+                                    
+                                    [subscriber sendNext:result];
+                                    [subscriber sendCompleted];
+                                    
+                                } failure:^(NSError *error) {
+                                    DismissHud();
+                                    ShowErrorStatus(@"请检查网络状态");
+                                }];
+                            }
                         } failure:^(NSError *error) {
                             DismissHud();
                             ShowErrorStatus(@"请检查网络状态");
                         }];
+                        
                     } failure:^(NSError *error) {
                         DismissHud();
                         ShowErrorStatus(@"请检查网络状态");
                     }];
+                    
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
@@ -197,6 +239,45 @@
         }];
     }
     return _sendclickCommand;
+}
+
+
+
+#pragma mark lazyload
+-(RACCommand *)findAttendRecordByUserDateCommand{
+    if (!_findAttendRecordByUserDateCommand) {
+        
+        _findAttendRecordByUserDateCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                NSString *body1 =[NSString stringWithFormat: @"<findAttendRecordByUserDate xmlns=\"http://service.webservice.vada.com/\">\
+                                  <companyCode xmlns=\"\">%@</companyCode>\
+                                  <userCode xmlns=\"\">%@</userCode>\
+                                  <cardDate xmlns=\"\">%@</cardDate>\
+                                  <timePhase xmlns=\"\">%@</timePhase>\
+                                  </findAttendRecordByUserDate>",self.companyCode,self.userCode,self.cardDate,self.timePhase];
+                
+                [self SOAPData:findEmpByUserCode soapBody:body1 success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                }];
+                return nil;
+            }];
+        }];
+    }
+    return _findAttendRecordByUserDateCommand;
+}
+
+
+-(NSMutableArray *)arrAttendRecord{
+    if (!_arrAttendRecord) {
+        _arrAttendRecord = [NSMutableArray array] ;
+    }
+    return _arrAttendRecord;
 }
 
 -(NSMutableArray *)arr{
@@ -232,8 +313,11 @@
                                  <locLatitude xmlns=\"\">%@</locLatitude>\
                                  <locAddress xmlns=\"\">%@</locAddress>\
                                  <clockMode xmlns=\"\">%@</clockMode>\
-                                 </saveAttendRecord>",self.companyCode,self.cardDate,self.cardTime,self.cardDeviceType,self.cardDeviceName,self.empCode,self.userCode,self.userName,self.deptCode,self.deptName,self.locLongitude,self.locLatitude,self.locAddress,self.clockMode];
-               
+                                 <timePhase xmlns=\"\">%@</timePhase>\
+                                 <timePoint xmlns=\"\">%@</timePoint>\
+                                 <cardStatus xmlns=\"\">%@</cardStatus>\
+                                 </saveAttendRecord>",self.companyCode,self.cardDate,self.cardTime,self.cardDeviceType,self.cardDeviceName,self.empCode,self.userCode,self.userName,self.deptCode,self.deptName,self.locLongitude,self.locLatitude,self.locAddress,self.clockMode,self.timePhase,self.timePoint,self.cardStatus];
+                
                 [self SOAPData:saveAttendRecord soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];

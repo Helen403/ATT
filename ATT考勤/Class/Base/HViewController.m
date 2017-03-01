@@ -154,8 +154,8 @@
              statusBarHidden:(BOOL)statusBarHidden
      changeStatusBarAnimated:(BOOL)animated {
     
-    self.statusBarStyle=statusBarStyle;
-    self.statusBarHidden=statusBarHidden;
+    self.statusBarStyle = statusBarStyle;
+    self.statusBarHidden = statusBarHidden;
     if (animated) {
         [UIView animateWithDuration:0.25 animations:^{
             [self setNeedsStatusBarAppearanceUpdate];

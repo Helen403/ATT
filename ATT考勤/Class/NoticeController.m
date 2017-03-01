@@ -51,6 +51,11 @@
 
 }
 
+-(void)h_viewWillAppear{
+    [self.noticeView h_refreash];
+
+}
+
 
 #pragma mark lazyload
 -(NoticeView *)noticeView{

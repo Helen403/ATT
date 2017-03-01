@@ -11,6 +11,8 @@
 #import "MineViewModel.h"
 #import "CheckController.h"
 #import "TZImagePickerController.h"
+#import "ChangeNameController.h"
+#import "ChangeSignNameController.h"
 
 
 @interface MineController ()<TZImagePickerControllerDelegate>
@@ -25,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
 }
 
 #pragma mark system
@@ -58,11 +60,28 @@
         switch ([x intValue]) {
                 //上传头像
             case 0:{
-            
+                
                 [self imagePicker];
                 break;
             }
-               //跳转到考勤
+                //修改名字
+            case 1:{
+                ChangeNameController *changeName = [[ChangeNameController alloc] init];
+                
+                [self.navigationController pushViewController:changeName animated:NO];
+                
+                break;
+            }
+                //修改签名
+            case 2:{
+            
+                ChangeSignNameController *signName = [[ChangeSignNameController alloc] init];
+                
+                [self.navigationController pushViewController:signName animated:NO];
+                
+                break;
+            }
+                //跳转到考勤
             case 7:{
                 CheckController *check = [[CheckController alloc] init];
                 [self.navigationController pushViewController:check animated:NO];
@@ -72,7 +91,7 @@
             default:
                 break;
         }
-
+        
     }];
 }
 
@@ -84,9 +103,9 @@
     
     // You can get the photos by block, the same as by delegate.
     // 你可以通过block或者代理，来得到用户选择的照片.
-//    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets) {
-//        
-//    }];
+    //    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets) {
+    //
+    //    }];
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
@@ -104,7 +123,7 @@
         _mineViewModel = [[MineViewModel alloc] init];
     }
     return _mineViewModel;
-
+    
 }
 
 @end

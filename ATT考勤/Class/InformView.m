@@ -8,6 +8,7 @@
 
 #import "InformView.h"
 #import "InformViewModel.h"
+#import "NoticeModel.h"
 
 @interface InformView()
 
@@ -26,6 +27,8 @@
 @property(nonatomic,strong) UILabel *page;
 
 @property(nonatomic,strong) UIButton *lastBtn;
+
+@property(nonatomic,assign) NSInteger index;
 
 @end
 
@@ -99,6 +102,49 @@
     [self updateConstraintsIfNeeded];
 }
 
+
+-(void)h_loadData{
+    
+    self.index = 1;
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.informViewModel.companyCode = companyCode;
+    
+    [self.informViewModel.refreshDataCommand execute:nil];
+    
+}
+
+
+-(void)h_refreash{
+    self.index = 1;
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.informViewModel.companyCode = companyCode;
+    
+    [self.informViewModel.refreshDataCommand execute:nil];
+}
+
+-(void)h_bindViewModel{
+    
+    [[self.informViewModel.successSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
+    }];
+}
+
+-(void)mainThread{
+    //设置多少页
+    
+    
+    self.page.text = [NSString stringWithFormat:@"第1页/共%ld页",self.informViewModel.arr.count];
+    NoticeModel *noticeModel = self.informViewModel.arr[0];
+    self.title.text = noticeModel.msgReciverNames;
+    self.content.text = noticeModel.msgContent;
+    self.name.text =  noticeModel.msgSenderName;
+    self.time.text = noticeModel.msgSendDate;
+}
+
+
 #pragma mark lazyload
 -(InformViewModel *)informViewModel{
     if (!_informViewModel) {
@@ -110,7 +156,7 @@
 -(UILabel *)title{
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.text = @"关于2017年春节放假通知";
+        _title.text = @"";
         _title.font = H26;
         _title.textColor = MAIN_PAN_2;
     }
@@ -120,7 +166,7 @@
 -(UILabel *)content{
     if (!_content) {
         _content = [[UILabel alloc] init];
-        _content.text = @"各位同事:\n    根据国务院办公厅通知精神，现将2017年春节放假通知如下:1月25日至2月4日放假调休，共10天。1月22日(星期日),2月5日(星期日)上班。\n    请各位同事注意安全，确保大家祥和平安度过节日假期。\n    提前祝大家春节愉快！";
+        _content.text = @"";
         _content.font = H18;
         _content.textColor = MAIN_PAN_2;
         //自动折行设置
@@ -134,7 +180,7 @@
 -(UILabel *)name{
     if (!_name) {
         _name = [[UILabel alloc] init];
-        _name.text = @"经理办公室";
+        _name.text = @"";
         _name.font = H18;
         _name.textColor = MAIN_PAN_2;
     }
@@ -144,7 +190,7 @@
 -(UILabel *)time{
     if (!_time) {
         _time = [[UILabel alloc] init];
-        _time.text = @"2016年12月25日";
+        _time.text = @"";
         _time.font = H18;
         _time.textColor = MAIN_PAN_2;
     }
@@ -174,14 +220,26 @@
 }
 
 -(void)pre:(UIButton *)button{
-    ShowMessage(@"暂时没内容 上一页");
+    self.index--;
+    if (self.index == 0) {
+        self.index = 1;
+    }
+    
+    self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.informViewModel.arr.count];
+    
+    
+    NoticeModel *noticeModel = self.informViewModel.arr[0];
+    self.title.text = noticeModel.msgReciverNames;
+    self.content.text = noticeModel.msgContent;
+    self.name.text =  noticeModel.msgSenderName;
+    self.time.text = noticeModel.msgSendDate;
     
 }
 
 -(UILabel *)page{
     if (!_page) {
         _page = [[UILabel alloc] init];
-        _page.text = @"第1页/共3页";
+        _page.text = @"";
         _page.font = H14;
         _page.textColor = MAIN_PAN_2;
     }
@@ -212,7 +270,18 @@
 }
 
 -(void)last:(UIButton *)button{
-    ShowMessage(@"暂时没内容 下一页");
+   
+    self.index++;
+    if (self.index > self.informViewModel.arr.count) {
+        self.index = self.informViewModel.arr.count;
+    }
     
+    self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.informViewModel.arr.count];
+ 
+    NoticeModel *noticeModel = self.informViewModel.arr[0];
+    self.title.text = noticeModel.msgReciverNames;
+    self.content.text = noticeModel.msgContent;
+    self.name.text =  noticeModel.msgSenderName;
+    self.time.text = noticeModel.msgSendDate;
 }
 @end

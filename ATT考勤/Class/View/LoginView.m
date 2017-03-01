@@ -299,7 +299,7 @@
         _useTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         
         //当输入框没有内容时，水印提示 提示内容为password
-        _useTextField.placeholder = @"输入手机号";
+        _useTextField.placeholder = @"手机号";
         _useTextField.tintColor = MAIN_PAN_2;
         _useTextField.textColor = MAIN_PAN_2;
         //修改account的placeholder的字体颜色、大小

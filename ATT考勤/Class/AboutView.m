@@ -74,7 +74,7 @@
         _twoDimension.frame = CGRectMake((SCREEN_WIDTH-[self h_w:250])*0.5, [self h_w:10], [self h_w:250], [self h_w:250]);
     }
     return _twoDimension;
-
+    
 }
 
 
@@ -113,21 +113,21 @@
     AboutCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AboutCellView class])] forIndexPath:indexPath];
     
     cell.aboutModel = self.aboutViewModel.arr[indexPath.row];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:40];
+    return [self h_w:50];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
     AboutCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AboutCellView class])] forIndexPath:indexPath];
-      cell.aboutModel = self.aboutViewModel.arr[indexPath.row];
+    cell.aboutModel = self.aboutViewModel.arr[indexPath.row];
     cell.selected = NO;
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];

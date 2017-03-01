@@ -45,20 +45,42 @@
 
 
 -(void)h_setupViews{
-    
-    
+
     [self addSubview:self.tableView];
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_bindViewModel{
+    [[self.mineViewModel.successSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+
+        dispatch_sync(dispatch_get_main_queue(), ^{
+             self.userModel = getModel(@"user");
+            [self.tableView reloadData];
+        });
+    }];
+    
+    [[self.mineViewModel.successSignSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+           
+            [self.tableView reloadData];
+        });
+    }];
+    
+}
+
+
 -(void)h_loadData{
     self.userModel = getModel(@"user");
+    self.mineViewModel.userCode = self.userModel.userCode;
+    [self.mineViewModel.findSignCommand execute:nil];
+   
 }
 
 -(void)h_refreash{
-    
-    [self.tableView reloadData];
+    self.userModel = getModel(@"user");
+    self.mineViewModel.telphone = self.userModel.userTelphone;
+    [self.mineViewModel.refreshDataCommand execute:nil];
 }
 
 
@@ -111,7 +133,7 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:40];
+    return [self h_w:50];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

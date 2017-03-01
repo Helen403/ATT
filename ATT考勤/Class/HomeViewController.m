@@ -52,6 +52,10 @@
     
 }
 
+-(void)h_viewWillAppear{
+    [self.homeView h_loadData];
+}
+
 #pragma mark private
 -(void)h_addSubviews{
     [self.view addSubview:self.homeView];

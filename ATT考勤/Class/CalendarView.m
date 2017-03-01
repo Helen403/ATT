@@ -44,7 +44,7 @@
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
-        make.top.equalTo(weakSelf.calendar.mas_bottom).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.calendar.mas_bottom).offset([self h_w:30]);
 //        make.top.equalTo(0);
     }];
     
@@ -108,7 +108,7 @@
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[CalendarCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([CalendarCellView class])]];
-        
+        _tableView.scrollEnabled = NO;
     }
     return _tableView;
     

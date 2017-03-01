@@ -146,7 +146,7 @@
     
     CountCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([CountCellView class])] forIndexPath:indexPath];
     
-        cell.countModel = self.checkViewModel.arrCount[indexPath.row];
+    cell.countModel = self.checkViewModel.arrCount[indexPath.row];
     
     return cell;
 }
@@ -154,13 +154,16 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:40];
+    return [self h_w:50];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    CountCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([CountCellView class])] forIndexPath:indexPath];
     
+    cell.countModel = self.checkViewModel.arrCount[indexPath.row];
+    cell.selected = NO;
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-        [self.checkViewModel.cellclickSubject sendNext:row];
+    [self.checkViewModel.cellclickSubject sendNext:row];
 }
 
 @end

@@ -142,7 +142,7 @@
     TrajectoryCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TrajectoryCellView class])] forIndexPath:indexPath];
     
     cell.trajectoryModel = self.checkViewModel.arrTrajectory[indexPath.row];
-    
+     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -153,7 +153,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+ 
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
         [self.checkViewModel.cellclickSubject sendNext:row];
 }

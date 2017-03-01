@@ -28,6 +28,19 @@
 #define MAIN_ENABLE RGBCOLOR(176, 176, 176)
 
 
+#define MAINCOLOR UIColorFromRGB(0x21C1F7)
+
+#define SUBCOLOR UIColorFromRGB(0xFF4C4C)
+
+#define GX_BGCOLOR COLOR(234, 234, 234, 1)
+
+#define MAIN_TEXT_COLOR COLOR(109, 109, 109, 1)
+
+
+#define MAIN_LIGHT_LINE_COLOR COLOR(174, 174, 174, 1)
+
+#define MAIN_BLACK_TEXT_COLOR COLOR(38, 38, 38, 1)
+
 #define XCFGlobalBackgroundColor RGB(245, 240, 215)     // 背景颜色
 #define XCFLabelColorWhite RGB(255, 255, 255)           // 字体颜色：白色
 #define XCFLabelColorGray [UIColor grayColor]           // 字体颜色：灰色

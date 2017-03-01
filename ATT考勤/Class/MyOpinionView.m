@@ -309,7 +309,7 @@
         _phone.placeholder = @" 手机号/邮箱/QQ号/微信号填其中一个即可";
         
         //修改account的placeholder的字体颜色、大小
-        [_phone setValue: [UIColor colorWithRed:176/255.0 green:176/255.0 blue:176/255.0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
+        [_phone setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_phone setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _phone.font = H14;
@@ -349,8 +349,7 @@
         
         [_submit setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-     
-        
+
         [_submit.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _submit;

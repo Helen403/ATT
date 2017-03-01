@@ -8,6 +8,7 @@
 
 #import "NoticeView.h"
 #import "NoticeViewModel.h"
+#import "AnnouncementModel.h"
 
 @interface NoticeView()
 
@@ -26,6 +27,9 @@
 @property(nonatomic,strong) UILabel *page;
 
 @property(nonatomic,strong) UIButton *lastBtn;
+
+@property(nonatomic,assign) NSInteger index;
+
 
 @end
 
@@ -50,7 +54,7 @@
         make.left.equalTo([self h_w:10]);
         make.right.equalTo(-[self h_w:10]);
         make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:15]);
-       
+        
     }];
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -99,6 +103,47 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_loadData{
+    
+    self.index = 1;
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.noticeViewModel.companyCode = companyCode;
+    
+    [self.noticeViewModel.refreshDataCommand execute:nil];
+    
+}
+
+-(void)h_refreash{
+    self.index = 1;
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.noticeViewModel.companyCode = companyCode;
+    
+    [self.noticeViewModel.refreshDataCommand execute:nil];
+}
+
+
+-(void)h_bindViewModel{
+
+    [[self.noticeViewModel.successSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+
+         [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
+    }];
+}
+
+-(void)mainThread{
+    //设置多少页
+
+
+    self.page.text = [NSString stringWithFormat:@"第1页/共%ld页",self.noticeViewModel.arr.count];
+    AnnouncementModel *announcementModel = self.noticeViewModel.arr[0];
+    self.title.text = announcementModel.msgSubject;
+    self.content.text = announcementModel.msgContent;
+    self.name.text =  announcementModel.msgSenderName;
+    self.time.text = announcementModel.msgPublishDate;
+}
+
 #pragma mark lazyload
 -(NoticeViewModel *)noticeViewModel{
     if (!_noticeViewModel) {
@@ -110,7 +155,7 @@
 -(UILabel *)title{
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.text = @"人员岗位调整公告";
+        _title.text = @"";
         _title.font = H26;
         _title.textColor = MAIN_PAN_2;
     }
@@ -120,11 +165,11 @@
 -(UILabel *)content{
     if (!_content) {
         _content = [[UILabel alloc] init];
-        _content.text = @"    我公司现将诸葛亮从军师，从2016年12月25日起，调整为蜀国辅助大臣，现予公告，自2016年12月25日起施行。";
+        _content.text = @"";
         _content.font = H18;
         _content.textColor = MAIN_PAN_2;
         //自动折行设置
-         [_content setLineBreakMode:NSLineBreakByWordWrapping];
+        [_content setLineBreakMode:NSLineBreakByWordWrapping];
         _content.numberOfLines = 0;
     }
     return _content;
@@ -133,7 +178,7 @@
 -(UILabel *)name{
     if (!_name) {
         _name = [[UILabel alloc] init];
-        _name.text = @"经理办公室";
+        _name.text = @"";
         _name.font = H18;
         _name.textColor = MAIN_PAN_2;
     }
@@ -143,7 +188,7 @@
 -(UILabel *)time{
     if (!_time) {
         _time = [[UILabel alloc] init];
-        _time.text = @"2016年12月25日";
+        _time.text = @"";
         _time.font = H18;
         _time.textColor = MAIN_PAN_2;
     }
@@ -165,7 +210,7 @@
         
         [_preBtn setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
- 
+        
         
         [_preBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
         
@@ -174,14 +219,23 @@
 }
 
 -(void)pre:(UIButton *)button{
-    
-    ShowMessage(@"暂时没内容 上一页");
+    self.index--;
+    if (self.index == 0) {
+        self.index = 1;
+    }
+
+    self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.noticeViewModel.arr.count];
+    AnnouncementModel *announcementModel = self.noticeViewModel.arr[self.index-1];
+    self.title.text = announcementModel.msgSubject;
+    self.content.text = announcementModel.msgContent;
+    self.name.text =  announcementModel.msgSenderName;
+    self.time.text = announcementModel.msgPublishDate;
 }
 
 -(UILabel *)page{
     if (!_page) {
         _page = [[UILabel alloc] init];
-        _page.text = @"第1页/共3页";
+        _page.text = @"";
         _page.font = H14;
         _page.textColor = MAIN_PAN_2;
     }
@@ -203,7 +257,7 @@
         
         [_lastBtn setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-     
+        
         
         [_lastBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
         
@@ -213,7 +267,18 @@
 
 -(void)last:(UIButton *)button{
     
-       ShowMessage(@"暂时没内容 下一页");
+    self.index++;
+    if (self.index > self.noticeViewModel.arr.count) {
+        self.index = self.noticeViewModel.arr.count;
+    }
+    
+    self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.noticeViewModel.arr.count];
+    AnnouncementModel *announcementModel = self.noticeViewModel.arr[self.index-1];
+    self.title.text = announcementModel.msgSubject;
+    self.content.text = announcementModel.msgContent;
+    self.name.text =  announcementModel.msgSenderName;
+    self.time.text = announcementModel.msgPublishDate;
+
 }
 
 

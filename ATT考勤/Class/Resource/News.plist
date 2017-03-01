@@ -8,7 +8,7 @@
 		<key>title</key>
 		<string>公司公告</string>
 		<key>number</key>
-		<string>1</string>
+		<string></string>
 	</dict>
 	<dict>
 		<key>img</key>
@@ -16,7 +16,7 @@
 		<key>title</key>
 		<string>公司通知</string>
 		<key>number</key>
-		<string>2</string>
+		<string></string>
 	</dict>
 	<dict>
 		<key>img</key>
@@ -24,7 +24,7 @@
 		<key>title</key>
 		<string>我的消息</string>
 		<key>number</key>
-		<string>6</string>
+		<string></string>
 	</dict>
 </array>
 </plist>

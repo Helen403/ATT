@@ -17,6 +17,7 @@
 #import "BMKLocationService.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "YYAudioTool.h"
+#import "AttendCardRecord.h"
 
 
 @interface HomeView()<BMKLocationServiceDelegate>
@@ -179,7 +180,7 @@
     }];
     
     [self.punch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.view.mas_top).offset([self h_w:15]);
+        make.top.equalTo(weakSelf.view.mas_top).offset([self h_w:25]);
         make.size.equalTo(CGSizeMake(length, length+[self h_w:15]));
         make.centerX.equalTo(weakSelf.view);
     }];
@@ -210,7 +211,7 @@
     
     [self.netStatusImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.time.mas_left);
-        make.top.equalTo(weakSelf.punch.mas_bottom).offset([self h_w:100]);
+        make.top.equalTo(weakSelf.punch.mas_bottom).offset([self h_w:70]);
         make.size.equalTo(CGSizeMake([self h_w:35], [self h_w:35]));
     }];
     
@@ -354,7 +355,7 @@
     
     //启动LocationService
     [self.locService startUserLocationService];
-
+    
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
@@ -389,7 +390,7 @@
             }
         }
     }];
-
+    
     
 }
 
@@ -401,7 +402,7 @@
 }
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-        NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     
     
     //    ShowMessage(@"定位成功");
@@ -484,7 +485,41 @@
         });
         
     }];
+    
+    [[self.homeViewModel.attendRecordSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        [self performSelectorOnMainThread:@selector(attendRecord) withObject:nil waitUntilDone:YES];
+      
+    }];
+
 }
+-(void)attendRecord{
+   
+    if (self.homeViewModel.arrAttendRecord.count == 1) {
+        AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
+        //已经打过卡
+        if ([attendCardRecord1.cardStatus isEqualToString:@"0"]) {
+           self.status.text = @"正常";
+//            self.preImg =
+        }
+        //早退
+        if ([attendCardRecord1.cardStatus isEqualToString:@"1"]){
+           self.status.text = @"早退";
+        }
+        //迟到
+        if ([attendCardRecord1.cardStatus isEqualToString:@"2"]){
+            self.status.text = @"迟到";
+        }
+    }
+
+    if (self.homeViewModel.arrAttendRecord.count == 2) {
+        AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
+        AttendCardRecord *attendCardRecord2 = self.homeViewModel.arrAttendRecord[0];
+    }
+    
+}
+
+
 //打卡后更新界面
 -(void)attendCardSuccess{
     
@@ -550,7 +585,7 @@
         
         NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail2.workStartDatetime]; //取的第2次上班时间
         
-        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:offSetCardArea];
+        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:-1*offSetCardArea];
         long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
         if(diffC>0){
             //显示第1阶段打卡时间
@@ -573,12 +608,12 @@
         
         
         NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail2.workStartDatetime]; //取的第2次上班时间
-        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:offSetCardArea];
+        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:-1*offSetCardArea];
         long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
 				    
         
         NSString *strEdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail3.workStartDatetime]; //取的第3次上班时间
-        NSString *strEbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strEdatetime time:offSetCardArea];
+        NSString *strEbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strEdatetime time:-1*offSetCardArea];
         long diffE = [LSCoreToolCenter getDateDiff:curDatetime end:strEbeforedatetime];
         
         long diffCE = [LSCoreToolCenter getDateDiff:strCbeforedatetime end:strEbeforedatetime]; //计算C,E点时间差
@@ -612,18 +647,18 @@
         
         
         NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail2.workStartDatetime]; //取的第2次上班时间
-        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:offSetCardArea];
+        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:-1*offSetCardArea];
         long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
 				    
         NSString *strEdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail3.workStartDatetime]; //取的第3次上班时间
-        NSString *strEbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strEdatetime time:offSetCardArea];
+        NSString *strEbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strEdatetime time:-1*offSetCardArea];
         long diffE = [LSCoreToolCenter getDateDiff:curDatetime end:strEbeforedatetime];
         
         long diffCE = [LSCoreToolCenter getDateDiff:strCbeforedatetime end:strEbeforedatetime]; //计算C,E点时间差
         
         
         NSString *strGdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail4.workStartDatetime]; //取的第4次上班时间
-        NSString *strGbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strGdatetime time:offSetCardArea];
+        NSString *strGbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strGdatetime time:-1*offSetCardArea];
         long diffG = [LSCoreToolCenter getDateDiff:curDatetime end:strGbeforedatetime];
         
         long diffEG = [LSCoreToolCenter getDateDiff:strEbeforedatetime end:strGbeforedatetime]; //计算E,G点时间差
@@ -665,6 +700,19 @@
     }else{
         self.lastImg.image = ImageNamed(@"homepage_work_green");
     }
+    
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    self.homeViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.homeViewModel.userCode = user.userCode;
+    
+    self.homeViewModel.cardDate = [LSCoreToolCenter currentYearType];
+    self.homeViewModel.timePhase =[NSString stringWithFormat:@"%ld",(long)self.cardPhase];
+    
+    [self.homeViewModel.findAttendRecordByUserDateCommand execute:nil];
+ 
 }
 
 -(void)setTime{
@@ -697,11 +745,13 @@
 -(void)onClickImage{
     if(SIMULATOR==0){
         //开始播放/继续播放
-        [YYAudioTool playMusic:@"msg_ding.mp3"];
+//        [YYAudioTool playMusic:@"msg_ding.mp3"];
+         [YYAudioTool playMusic:@"Cuckoo.mp3"];
+        
     }
     self.punch.image = ImageNamed(@"homepage_clock_button_press");
     [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.6f];
-
+    
     
     EmpModel *empModel = self.homeViewModel.empModel;
     Dept *dept = self.homeViewModel.dept;
@@ -1010,8 +1060,17 @@
     self.homeViewModel.deptName = dept.deptFullName;
     self.homeViewModel.locLongitude = self.locLongitude;
     self.homeViewModel.locLatitude = self.locLatitude;
+    if(SIMULATOR == 1){
+        self.homeViewModel.locLongitude = @"1.0000";
+        self.homeViewModel.locLatitude = @"1.0000";;
+    }
+    
     self.homeViewModel.locAddress = self.locAddress;
     self.homeViewModel.clockMode = self.clockMode;
+    self.homeViewModel.timePhase =[NSString stringWithFormat:@"%ld",(long)self.cardPhase] ;
+    self.homeViewModel.timePoint = [NSString stringWithFormat:@"%ld",(long)self.timePoint];
+    self.homeViewModel.cardStatus = [NSString stringWithFormat:@"%ld",(long)self.retCode];
+    
     [self.homeViewModel.attendRecordCommand execute:nil];
     
 }
@@ -1033,8 +1092,8 @@
         // 设置定位精确度到米
         _locService.desiredAccuracy = kCLLocationAccuracyBest;
         // 设置过滤器为无
-//        _locService.distanceFilter = kCLDistanceFilterNone;
-     
+        //        _locService.distanceFilter = kCLDistanceFilterNone;
+        
         _locService.distanceFilter=10;
     }
     return _locService;

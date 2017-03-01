@@ -42,26 +42,26 @@
     [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(0);
         make.top.equalTo(0);
-        make.size.equalTo(CGSizeMake([self h_w:1], [self h_w:40]));
+        make.size.equalTo(CGSizeMake([self h_w:1], [self h_w:50]));
     }];
     
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(-length*0.5);
         make.top.equalTo(0);
-        make.size.equalTo(CGSizeMake([self h_w:1], [self h_w:40]));
+        make.size.equalTo(CGSizeMake([self h_w:1], [self h_w:50]));
     }];
     
     [self.line3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(length*0.5);
         make.top.equalTo(0);
-        make.size.equalTo(CGSizeMake([self h_w:1], [self h_w:40]));
+        make.size.equalTo(CGSizeMake([self h_w:1], [self h_w:50]));
     }];
     
     
     [self.line4 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(0);
         make.right.equalTo(0);
-        make.size.equalTo(CGSizeMake([self h_w:1], [self h_w:40]));
+        make.size.equalTo(CGSizeMake([self h_w:1], [self h_w:50]));
     }];
     
     [self.line5 mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -10,6 +10,8 @@
 #import "NewsViewModel.h"
 #import "NewCellView.h"
 
+#import "UserModel.h"
+
 @interface NewsView()<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong) NewsViewModel *newsViewModel;
@@ -29,9 +31,9 @@
 
 -(void)updateConstraints{
     
-
+    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.left.equalTo(0);
+        make.left.equalTo(0);
         make.right.equalTo(0);
         make.top.equalTo(1);
         make.bottom.equalTo(0);
@@ -50,9 +52,35 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_loadData{
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.newsViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.newsViewModel.userCode = user.userCode;
+    
+    [self.newsViewModel.refreshDataCommand execute:nil];
+}
+
+-(void)h_bindViewModel{
+    
+    
+    [[self.newsViewModel.successSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            
+        });
+    }];
+}
+
 
 -(void)h_refreash{
-    [self.tableView reloadData];
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.newsViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.newsViewModel.userCode = user.userCode;
+    
+    [self.newsViewModel.refreshDataCommand execute:nil];
 }
 
 #pragma mark lazyload
@@ -102,7 +130,7 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:40];
+    return [self h_w:50];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

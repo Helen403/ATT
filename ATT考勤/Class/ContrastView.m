@@ -141,18 +141,18 @@
     ContrastCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([ContrastCellView class])] forIndexPath:indexPath];
     
     cell.contrastModel = self.checkViewModel.arrContrast[indexPath.row];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:40];
+    return [self h_w:50];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+ 
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
         [self.checkViewModel.cellclickSubject sendNext:row];
 }

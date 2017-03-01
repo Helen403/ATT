@@ -105,17 +105,20 @@
     }
     _userModel = userModel;
     switch (self.index) {
+            //
         case 0:{
             
             break;
         }
+            //我的名字
         case 1:{
             self.info.text = userModel.userNickName;
             break;
         }
             //我的签名
         case 2:{
-            self.info.text = userModel.userNickName;
+            NSString *signName =  [[NSUserDefaults standardUserDefaults] objectForKey:@"signName"];
+            self.info.text = signName;
             break;
         }
             //我的公司
