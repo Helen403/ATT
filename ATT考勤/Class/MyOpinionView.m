@@ -8,6 +8,7 @@
 
 #import "MyOpinionView.h"
 #import "MyOpinionViewModel.h"
+#import "JSTextView.h"
 
 @interface MyOpinionView()
 
@@ -29,7 +30,7 @@
 
 @property(nonatomic,strong) UILabel *problem;
 
-@property(nonatomic,strong) UITextView *input;
+@property(nonatomic,strong) JSTextView *input;
 
 @property(nonatomic,strong) UILabel *conn;
 
@@ -103,7 +104,7 @@
     }];
     
     [self.input mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.text4.mas_bottom).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.problem.mas_bottom).offset([self h_w:10]);
         make.left.equalTo(weakSelf.text1);
         make.right.equalTo(weakSelf.text3);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
@@ -156,9 +157,16 @@
     [self addSubview:self.suggest];
     [self addSubview:self.submit];
     
+    
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
+
+-(void)h_bindViewModel{
+    [self addDynamic:self];
+}
+
 
 #pragma mark lazyload
 -(MyOpinionViewModel *)myOpinionViewModel{
@@ -262,9 +270,9 @@
     
 }
 
--(UITextView *)input{
+-(JSTextView *)input{
     if (!_input) {
-        _input = [[UITextView alloc] init];
+        _input = [[JSTextView alloc] init];
         _input.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
         _input.editable = YES;        //是否允许编辑内容，默认为“YES”
         //        _textView.delegate = self;       //设置代理方法的实现类
@@ -274,8 +282,13 @@
         _input.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _input.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
         _input.textColor = MAIN_PAN;
-        _input.text = @"我遇到的问题是(如有需要,我们会与你留的联系方式和你取得联系,做意见的反馈)";//设置显示的文本内容
+        //        _input.text = @"";//设置显示的文本内容
         
+        _input.myPlaceholder=@"我遇到的问题是(如有需要,我们会与你留的联系方式和你取得联系,做意见的反馈)";
+        
+        //2.设置提醒文字颜色
+        
+        _input.myPlaceholderColor= [UIColor lightGrayColor];
         _input.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _input.layer.borderWidth =1.0;
         _input.layer.cornerRadius =5.0;
@@ -326,6 +339,9 @@
     if (!_suggest) {
         _suggest = [[UILabel alloc] init];
         _suggest.text = @"非常感谢您对本产品提出宝贵的意见，有了您的大力支持产品才能够更完善";
+//        _suggest.lineBreakMode = UILineBreakModeWordWrap;
+        [_suggest setLineBreakMode:NSLineBreakByWordWrapping];
+        _suggest.numberOfLines = 0;
         _suggest.font = H14;
         _suggest.textColor = MAIN_PAN_2;
     }
@@ -349,7 +365,7 @@
         
         [_submit setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-
+        
         [_submit.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _submit;

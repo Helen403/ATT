@@ -8,6 +8,7 @@
 
 #import "FeedbackView.h"
 #import "FeedbackViewModel.h"
+#import "JSTextView.h"
 
 @interface FeedbackView()
 
@@ -15,7 +16,7 @@
 
 @property(nonatomic,strong) UILabel *title;
 
-@property(nonatomic,strong) UITextView *mySuggestion;
+@property(nonatomic,strong) JSTextView *mySuggestion;
 
 @property(nonatomic,strong) UILabel *suggest;
 
@@ -48,7 +49,7 @@
     }];
     
     [self.suggest mas_makeConstraints:^(MASConstraintMaker *make) {
-         make.top.equalTo(weakSelf.mySuggestion.mas_bottom).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.mySuggestion.mas_bottom).offset([self h_w:10]);
         make.left.equalTo([self h_w:10]);
         
     }];
@@ -70,9 +71,16 @@
     [self addSubview:self.suggest];
     [self addSubview:self.addTo];
     
+   
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
+
+-(void)h_bindViewModel{
+    [self addDynamic:self];
+}
+
 
 #pragma mark lazyload
 -(FeedbackViewModel *)feedbackViewModel{
@@ -92,25 +100,30 @@
     return _title;
 }
 
--(UITextView *)mySuggestion{
+-(JSTextView *)mySuggestion{
     if (!_mySuggestion) {
-        _mySuggestion = [[UITextView alloc] init];
+        _mySuggestion = [[JSTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:120])];
         _mySuggestion.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
         _mySuggestion.editable = YES;        //是否允许编辑内容，默认为“YES”
         //        _textView.delegate = self;       //设置代理方法的实现类
         _mySuggestion.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置字体名字和字体大小;
+        _mySuggestion.myPlaceholder=@"注册账户不能正常登陆";
+        
+        //2.设置提醒文字颜色
+        
+        _mySuggestion.myPlaceholderColor= [UIColor lightGrayColor];
         //        _textView.returnKeyType = UIReturnKeyDefault;//return键的类型
         //        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
         _mySuggestion.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _mySuggestion.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
         _mySuggestion.textColor = MAIN_PAN;
-        _mySuggestion.text = @"注册账户不能正常登陆";//设置显示的文本内容
+        //设置显示的文本内容
         
         _mySuggestion.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _mySuggestion.layer.borderWidth =1.0;
         _mySuggestion.layer.cornerRadius =5.0;
         _mySuggestion.font = H14;
-    
+        
     }
     return _mySuggestion;
 }
@@ -140,7 +153,7 @@
         
         [_addTo setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-      
+        
         
         [_addTo.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
@@ -148,7 +161,7 @@
 }
 
 -(void)addTo:(UIButton *)button{
-
+    
 }
 
 @end

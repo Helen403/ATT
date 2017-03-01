@@ -489,29 +489,29 @@
     [[self.homeViewModel.attendRecordSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         [self performSelectorOnMainThread:@selector(attendRecord) withObject:nil waitUntilDone:YES];
-      
+        
     }];
-
+    
 }
 -(void)attendRecord{
-   
+    
     if (self.homeViewModel.arrAttendRecord.count == 1) {
         AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
         //已经打过卡
         if ([attendCardRecord1.cardStatus isEqualToString:@"0"]) {
-           self.status.text = @"正常";
-//            self.preImg =
+            self.status.text = @"正常";
+            //            self.preImg =
         }
         //早退
         if ([attendCardRecord1.cardStatus isEqualToString:@"1"]){
-           self.status.text = @"早退";
+            self.status.text = @"早退";
         }
         //迟到
         if ([attendCardRecord1.cardStatus isEqualToString:@"2"]){
             self.status.text = @"迟到";
         }
     }
-
+    
     if (self.homeViewModel.arrAttendRecord.count == 2) {
         AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
         AttendCardRecord *attendCardRecord2 = self.homeViewModel.arrAttendRecord[0];
@@ -558,9 +558,7 @@
 -(void)mainThread{
     EmpModel *empModel =  self.homeViewModel.empModel;
     Dept *dept = self.homeViewModel.dept;
-    
-    
-    
+
     self.name.text = empModel.empName;
     self.department.text = [NSString stringWithFormat:@"%@ %@",dept.deptNickName,empModel.position];
     
@@ -573,8 +571,8 @@
     NSString *curDatetime = [LSCoreToolCenter curDate];
     if ([@"2" isEqualToString:count]) {
         AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
-        self.preText.text = detail1.workStartDatetime;
-        self.lastText.text = detail1.workEndDatetime;
+        self.preText.text = [NSString stringWithFormat:@"%@:00",detail1.workStartDatetime];
+        self.lastText.text = [NSString stringWithFormat:@"%@:00",detail1.workEndDatetime];
         self.cardPhase=0;
     }
     
@@ -590,13 +588,13 @@
         if(diffC>0){
             //显示第1阶段打卡时间
             self.cardPhase=0;
-            self.preText.text = detail1.workStartDatetime;
-            self.lastText.text = detail1.workEndDatetime;
+            self.preText.text = [NSString stringWithFormat:@"%@:00",detail1.workStartDatetime];
+            self.lastText.text = [NSString stringWithFormat:@"%@:00",detail1.workEndDatetime];
         }else{
             //显示第2阶段打卡时间
             self.cardPhase=1;
-            self.preText.text = detail2.workStartDatetime;
-            self.lastText.text = detail2.workEndDatetime;
+            self.preText.text = [NSString stringWithFormat:@"%@:00",detail2.workStartDatetime];
+            self.lastText.text = [NSString stringWithFormat:@"%@:00",detail2.workEndDatetime];
         }
         
     }
@@ -605,8 +603,7 @@
         AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
         AttendWorkShiftDetail *detail2 = self.homeViewModel.arr[1];
         AttendWorkShiftDetail *detail3 = self.homeViewModel.arr[2];
-        
-        
+
         NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail2.workStartDatetime]; //取的第2次上班时间
         NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:-1*offSetCardArea];
         long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
@@ -621,19 +618,19 @@
         if(diffC>0){
             //显示第1阶段打卡时间
             self.cardPhase=0;
-            self.preText.text = detail1.workStartDatetime;
-            self.lastText.text = detail1.workEndDatetime;
+            self.preText.text = [NSString stringWithFormat:@"%@:00",detail1.workStartDatetime];
+            self.lastText.text = [NSString stringWithFormat:@"%@:00",detail1.workEndDatetime];
         }else{
             if(diffCE>=diffE&&diffE>0){
                 //显示第2阶段打卡时间
                 self.cardPhase=1;
-                self.preText.text = detail2.workStartDatetime;
-                self.lastText.text =detail2.workEndDatetime;
+                self.preText.text = [NSString stringWithFormat:@"%@:00",detail2.workStartDatetime];
+                self.lastText.text = [NSString stringWithFormat:@"%@:00",detail2.workEndDatetime];
             }else{
                 //显示第3阶段打卡时间
                 self.cardPhase=2;
-                self.preText.text = detail3.workStartDatetime;
-                self.lastText.text = detail3.workEndDatetime;
+                self.preText.text = [NSString stringWithFormat:@"%@:00",detail3.workStartDatetime];
+                self.lastText.text = [NSString stringWithFormat:@"%@:00",detail3.workEndDatetime];
             }
         }
         
@@ -666,25 +663,25 @@
         if(diffC>0){
             //显示第1阶段打卡时间
             self.cardPhase=0;
-            self.preText.text = detail1.workStartDatetime;
-            self.lastText.text = detail1.workEndDatetime;
+            self.preText.text = [NSString stringWithFormat:@"%@:00",detail1.workStartDatetime];
+            self.lastText.text =[NSString stringWithFormat:@"%@:00",detail1.workEndDatetime]; ;
         }else{
             if(diffCE>=diffE&&diffE>0){
                 //显示第2阶段打卡时间
                 self.cardPhase=1;
-                self.preText.text = detail2.workStartDatetime;
-                self.lastText.text = detail2.workEndDatetime;
+                self.preText.text = [NSString stringWithFormat:@"%@:00",detail2.workStartDatetime];
+                self.lastText.text = [NSString stringWithFormat:@"%@:00",detail2.workEndDatetime];
             }else{
                 if(diffEG>=diffG&&diffG>0){
                     //显示第3阶段打卡时间
                     self.cardPhase=2;
-                    self.preText.text = detail3.workStartDatetime;
-                    self.lastText.text = detail3.workEndDatetime;
+                    self.preText.text = [NSString stringWithFormat:@"%@:00",detail3.workStartDatetime];
+                    self.lastText.text = [NSString stringWithFormat:@"%@:00",detail3.workEndDatetime];
                 }else{
                     //显示第4阶段打卡时间
                     self.cardPhase=3;
-                    self.preText.text = detail4.workStartDatetime;
-                    self.lastText.text =detail4.workEndDatetime;
+                    self.preText.text = [NSString stringWithFormat:@"%@:00",detail4.workStartDatetime];
+                    self.lastText.text = [NSString stringWithFormat:@"%@:00",detail4.workEndDatetime];
                 }
             }
         }
@@ -712,7 +709,7 @@
     self.homeViewModel.timePhase =[NSString stringWithFormat:@"%ld",(long)self.cardPhase];
     
     [self.homeViewModel.findAttendRecordByUserDateCommand execute:nil];
- 
+    
 }
 
 -(void)setTime{
@@ -745,8 +742,8 @@
 -(void)onClickImage{
     if(SIMULATOR==0){
         //开始播放/继续播放
-//        [YYAudioTool playMusic:@"msg_ding.mp3"];
-         [YYAudioTool playMusic:@"Cuckoo.mp3"];
+        //        [YYAudioTool playMusic:@"msg_ding.mp3"];
+        [YYAudioTool playMusic:@"Cuckoo.mp3"];
         
     }
     self.punch.image = ImageNamed(@"homepage_clock_button_press");
@@ -792,7 +789,7 @@
     
     AttendWorkShift *shift = self.homeViewModel.attendWorkShift;
     long diffLate = 1; //正数为打卡正常,负数为迟到
-    long diffEarly=-1; //正数为早退,负数为正常
+    long diffEarly = -1; //正数为早退,负数为正常
     NSString *isHuman = shift.isHuman;//人性化设置
     
     if([@"2" isEqualToString:isHuman]){

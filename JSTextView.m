@@ -8,6 +8,7 @@
 
 #import "JSTextView.h"
 
+
 @interface JSTextView()
 
 @property (nonatomic,weak) UILabel *placeholderLabel; //这里先拿出这个label以方便我们后面的使用
@@ -31,7 +32,7 @@
         
         [self addSubview:placeholderLabel];
         
-        self.placeholderLabel= placeholderLabel; //赋值保存
+        self.placeholderLabel = placeholderLabel; //赋值保存
         
         self.myPlaceholderColor= [UIColor lightGrayColor]; //设置占位文字默认颜色
         
@@ -42,8 +43,35 @@
     }
     
     return self;
+}
+
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+////    self.placeholderLabel.y=8; //设置UILabel 的 y值
+//    CGRect frame1 = self.frame;
+//    frame1.origin.y = 2;
+//    self.placeholderLabel.frame = frame1;
+//    
+////    self.placeholderLabel.x=5;//设置 UILabel 的 x 值
+//    CGRect frame2 = self.frame;
+//    frame2.origin.x = 5;
+//    self.placeholderLabel.frame = frame2;
+//    
+    self.placeholderLabel.width = self.width - 5*2.0; //设置 UILabel 的 x
+//    self.placeholderLabel.backgroundColor = yellow_color;
+//    //根据文字计算高度
+//    
+    CGSize maxSize =CGSizeMake(self.placeholderLabel.width,MAXFLOAT);
+//
+//    self.placeholderLabel.height =
+    CGFloat height = [self.myPlaceholder boundingRectWithSize:maxSize options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.placeholderLabel.font} context:nil].size.height;
+    
+    self.placeholderLabel.frame = CGRectMake(5, 8, self.width - 5*2.0, height);
     
 }
+
 
 #pragma mark -监听文字改变
 

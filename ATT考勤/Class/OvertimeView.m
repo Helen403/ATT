@@ -11,6 +11,7 @@
 #import "OvertimeViewModel.h"
 #import "ProveView.h"
 #import "ApplyManView.h"
+#import "JSTextView.h"
 
 @interface OvertimeView()
 
@@ -34,7 +35,7 @@
 
 
 
-@property(nonatomic,strong) UITextView *textView;
+@property(nonatomic,strong) JSTextView *textView;
 
 @property(nonatomic,strong) ProveView *proveView;
 
@@ -350,9 +351,9 @@
 }
 
 
--(UITextView *)textView{
+-(JSTextView *)textView{
     if (!_textView) {
-        _textView  = [[UITextView alloc] init];
+        _textView  = [[JSTextView alloc] init];
         //        _textView.backgroundColor = yellow_color;
         
         _textView.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
@@ -364,8 +365,10 @@
         _textView.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _textView.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
         _textView.textColor = MAIN_PAN_2;
-        _textView.text = @"迟到原因";//设置显示的文本内容
         
+        _textView.myPlaceholder = @"加班原因";//设置显示的文本内容
+        
+        _textView.myPlaceholderColor= [UIColor lightGrayColor];
         _textView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _textView.layer.borderWidth =1.0;
         _textView.layer.cornerRadius =5.0;

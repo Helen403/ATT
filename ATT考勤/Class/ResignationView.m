@@ -10,6 +10,7 @@
 #import "ResignationViewModel.h"
 #import "ProveView.h"
 #import "ApplyManView.h"
+#import "JSTextView.h"
 
 @interface ResignationView()
 
@@ -33,7 +34,7 @@
 
 @property(nonatomic,strong) UIView *line3;
 
-@property(nonatomic,strong) UITextView *textView;
+@property(nonatomic,strong) JSTextView *textView;
 
 @property(nonatomic,strong) ProveView *proveView;
 
@@ -295,9 +296,9 @@
     return _line3;
 }
 
--(UITextView *)textView{
+-(JSTextView *)textView{
     if (!_textView) {
-        _textView  = [[UITextView alloc] init];
+        _textView  = [[JSTextView alloc] init];
         //        _textView.backgroundColor = yellow_color;
         
         _textView.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
