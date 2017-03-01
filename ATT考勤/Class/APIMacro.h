@@ -88,4 +88,9 @@
 //个人信息 修改我的签名
 #define modifyUserSignName @"http://192.168.1.101:8888/smart/ws/IAttService"
 
+//个人信息 查找我的积分
+#define findMyCardScore @"http://192.168.1.101:8888/smart/ws/IAttService"
+
+//个人信息 查找我的假期
+#define findMyHoldays @"http://192.168.1.101:8888/smart/ws/IAttService"
 

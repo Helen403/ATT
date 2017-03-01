@@ -129,7 +129,9 @@
         }
             //我的积分
         case 4:{
-            self.info.text = userModel.userStatus;
+            
+            NSString *cardScore =  [[NSUserDefaults standardUserDefaults] objectForKey:@"cardScore"];
+            self.info.text = cardScore;
             
             break;
         }
@@ -141,7 +143,8 @@
         }
             //我的假期
         case 6:{
-            self.info.text = userModel.userPassword;
+            NSString *myHoldays =  [[NSUserDefaults standardUserDefaults] objectForKey:@"findMyHoldays"];
+            self.info.text = myHoldays;
             
             break;
         }

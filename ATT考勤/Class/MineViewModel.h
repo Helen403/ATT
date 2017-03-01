@@ -22,11 +22,23 @@
 
 @property(nonatomic,strong) RACSubject *failSubject;
 
+/***************************************/
 
 @property(nonatomic,strong) RACCommand *findSignCommand;
 
 @property(nonatomic,strong) NSString *userCode;
 
 @property(nonatomic,strong) RACSubject *successSignSubject;
+
+
+/***************************************/
+
+@property(nonatomic,strong) RACCommand *cardScoreCommand;
+
+/***************************************/
+
+@property(nonatomic,strong) RACCommand *myHoldaysCommand;
+
+
 
 @end

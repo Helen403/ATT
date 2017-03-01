@@ -18,13 +18,17 @@
     [self.findAttendRecordByUserDateCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
         
-        
-        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAttendRecordByUserDateResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAttendRecordByUserDateResponse>"];
-        
-        NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[AttendCardRecord class] rowRootName:@"AttendCardRecords"];
-        self.arrAttendRecord = arr;
-        
-        [self.attendRecordSubject sendNext:nil];
+        if (result.length<200) {
+            ShowMessage(@"没有上班规则明细");
+        }else{
+            NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAttendRecordByUserDateResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAttendRecordByUserDateResponse>"];
+            
+            NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[AttendCardRecord class] rowRootName:@"AttendCardRecords"];
+            self.arrAttendRecord = arr;
+            
+            [self.attendRecordSubject sendNext:nil];
+        }
+
         
     }];
     

@@ -20,6 +20,11 @@
 
 @property(nonatomic,strong) UIImageView *star;
 
+@property(nonatomic,strong) UILabel *img;
+
+@property(nonatomic,strong) UIView *view;
+
+
 @end
 
 @implementation EmployeeHeadView
@@ -32,24 +37,29 @@
         make.edges.equalTo(weakSelf);
     }];
     
-    [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
         make.bottom.equalTo(-[self h_w:15]);
         make.size.equalTo(CGSizeMake([self h_w:60], [self h_w:60]));
     }];
     
+    [self.img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.view);
+        make.centerX.equalTo(weakSelf.view);
+    }];
+    
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.icon.mas_right).offset([self h_w:10]);
-        make.top.equalTo(weakSelf.icon.mas_top).offset([self h_w:10]);
+        make.left.equalTo(weakSelf.view.mas_right).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.view.mas_top).offset([self h_w:10]);
     }];
     
     [self.autograph mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.icon.mas_right).offset([self h_w:10]);
+        make.left.equalTo(weakSelf.view.mas_right).offset([self h_w:10]);
         make.top.equalTo(weakSelf.name.mas_bottom).offset([self h_w:6]);
     }];
     
     [self.star mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf.icon);
+        make.centerY.equalTo(weakSelf.view);
         make.right.equalTo(-[self h_w:10]);
     }];
     
@@ -62,6 +72,8 @@
 -(void)h_setupViews{
     
     [self addSubview:self.bgImg];
+    [self addSubview:self.view];
+    [self addSubview:self.img];
     [self addSubview:self.icon];
     [self addSubview:self.name];
     [self addSubview:self.autograph];
@@ -79,7 +91,11 @@
     _employeeModel = employeeModel;
     self.name.text = employeeModel.empName;
     self.autograph.text = employeeModel.empSex;
-    
+    if (employeeModel.empName.length==3) {
+        self.img.text = [employeeModel.empName substringFromIndex:1];
+    }else{
+        self.img.text = employeeModel.empName;
+    }
 }
 
 
@@ -104,7 +120,7 @@
 -(UILabel *)name{
     if (!_name) {
         _name = [[UILabel alloc] init];
-//        _name.text = @"黄慧";
+        //        _name.text = @"黄慧";
         _name.font = H20;
         _name.textColor = white_color;
     }
@@ -114,7 +130,7 @@
 -(UILabel *)autograph{
     if (!_autograph) {
         _autograph = [[UILabel alloc] init];
-//        _autograph.text = @"树欲静而风不止";
+        //        _autograph.text = @"树欲静而风不止";
         _autograph.font = H14;
         _autograph.textColor = white_color;
     }
@@ -127,6 +143,28 @@
         _star.image = ImageNamed(@"role_code_icon");
     }
     return _star;
+}
+
+-(UIView *)view{
+    if (!_view) {
+        _view = [[UIView alloc] init];
+        _view.backgroundColor = randomColorA;
+        ViewRadius(_view, [self h_w:28]);
+    }
+    return _view;
+    
+}
+
+
+-(UILabel *)img{
+    if (!_img) {
+        _img = [[UILabel alloc] init];
+        _img.text = @"";
+        _img.font = H20;
+        _img.textColor = white_color;
+        
+    }
+    return _img;
 }
 
 @end

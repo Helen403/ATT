@@ -583,7 +583,7 @@
         AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
         AttendWorkShiftDetail *detail2 = self.homeViewModel.arr[1];
         
-        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail2.workStartDatetime]; //取的第2次上班时间
+        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail2.workStartDatetime]; //取的第2次上班时间
         
         NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:-1*offSetCardArea];
         long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
@@ -607,12 +607,12 @@
         AttendWorkShiftDetail *detail3 = self.homeViewModel.arr[2];
         
         
-        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail2.workStartDatetime]; //取的第2次上班时间
+        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail2.workStartDatetime]; //取的第2次上班时间
         NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:-1*offSetCardArea];
         long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
 				    
         
-        NSString *strEdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail3.workStartDatetime]; //取的第3次上班时间
+        NSString *strEdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail3.workStartDatetime]; //取的第3次上班时间
         NSString *strEbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strEdatetime time:-1*offSetCardArea];
         long diffE = [LSCoreToolCenter getDateDiff:curDatetime end:strEbeforedatetime];
         
@@ -646,18 +646,18 @@
         AttendWorkShiftDetail *detail4 = self.homeViewModel.arr[3];
         
         
-        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail2.workStartDatetime]; //取的第2次上班时间
+        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail2.workStartDatetime]; //取的第2次上班时间
         NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:-1*offSetCardArea];
         long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
 				    
-        NSString *strEdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail3.workStartDatetime]; //取的第3次上班时间
+        NSString *strEdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail3.workStartDatetime]; //取的第3次上班时间
         NSString *strEbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strEdatetime time:-1*offSetCardArea];
         long diffE = [LSCoreToolCenter getDateDiff:curDatetime end:strEbeforedatetime];
         
         long diffCE = [LSCoreToolCenter getDateDiff:strCbeforedatetime end:strEbeforedatetime]; //计算C,E点时间差
         
         
-        NSString *strGdatetime=[NSString stringWithFormat:@"%@ %@",curDate,detail4.workStartDatetime]; //取的第4次上班时间
+        NSString *strGdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail4.workStartDatetime]; //取的第4次上班时间
         NSString *strGbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strGdatetime time:-1*offSetCardArea];
         long diffG = [LSCoreToolCenter getDateDiff:curDatetime end:strGbeforedatetime];
         

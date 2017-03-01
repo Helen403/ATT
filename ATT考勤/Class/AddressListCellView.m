@@ -33,9 +33,9 @@
     }];
     
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.centerY.equalTo(weakSelf);
-           make.centerX.equalTo(weakSelf.img);
-         make.size.equalTo(CGSizeMake([self h_w:36], [self h_w:36]));
+        make.centerY.equalTo(weakSelf);
+        make.centerX.equalTo(weakSelf.img);
+        make.size.equalTo(CGSizeMake([self h_w:36], [self h_w:36]));
     }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -85,10 +85,10 @@
 -(UILabel *)img{
     if (!_img) {
         _img = [[UILabel alloc] init];
-        _img.text = @"反馈类型";
+        _img.text = @"";
         _img.font = H16;
         _img.textColor = white_color;
-
+        
     }
     return _img;
 }
@@ -100,7 +100,7 @@
         ViewRadius(_view, [self h_w:18]);
     }
     return _view;
-
+    
 }
 
 -(UILabel *)title{

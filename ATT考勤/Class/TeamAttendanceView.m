@@ -75,7 +75,7 @@
         _title.textColor = white_color;
     }
     return _title;
-
+    
 }
 
 -(UITableView *)tableView{
@@ -117,11 +117,12 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:40];
+    return [self h_w:50];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-     TeamAttendanceCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamAttendanceCellView class])] forIndexPath:indexPath];
+    TeamAttendanceCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamAttendanceCellView class])] forIndexPath:indexPath];
+    cell.teamAttendanceModel = self.teamAtttendanceViewModel.arr[indexPath.row];
     cell.selected = NO;
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.teamAtttendanceViewModel.cellclickSubject sendNext:row];

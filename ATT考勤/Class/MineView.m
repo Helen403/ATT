@@ -74,6 +74,8 @@
     self.userModel = getModel(@"user");
     self.mineViewModel.userCode = self.userModel.userCode;
     [self.mineViewModel.findSignCommand execute:nil];
+    [self.mineViewModel.cardScoreCommand execute:nil];
+    [self.mineViewModel.myHoldaysCommand execute:nil];
    
 }
 
@@ -81,6 +83,9 @@
     self.userModel = getModel(@"user");
     self.mineViewModel.telphone = self.userModel.userTelphone;
     [self.mineViewModel.refreshDataCommand execute:nil];
+    [self.mineViewModel.findSignCommand execute:nil];
+    [self.mineViewModel.cardScoreCommand execute:nil];
+    [self.mineViewModel.myHoldaysCommand execute:nil];
 }
 
 

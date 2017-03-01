@@ -45,7 +45,7 @@
     
     [self.findSignCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
            DismissHud();
-        NSLog(@"%lu",(unsigned long)result.length);
+        
         if (result.length<189) {
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"signName"];
         }else{
@@ -58,6 +58,48 @@
     
     
     [[[self.findSignCommand.executing skip:1] take:1] subscribeNext:^(id x) {
+        
+        if ([x isEqualToNumber:@(YES)]) {
+            ShowMaskStatus(@"正在拼命加载");
+        }
+    }];
+    
+    [self.cardScoreCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        DismissHud();
+        
+        if (result.length<189) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"cardScore"];
+        }else{
+            NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
+            [[NSUserDefaults standardUserDefaults] setObject:xmlDoc forKey:@"cardScore"];
+            [self.successSignSubject sendNext:nil];
+        }
+        
+    }];
+    
+    
+    [[[self.cardScoreCommand.executing skip:1] take:1] subscribeNext:^(id x) {
+        
+        if ([x isEqualToNumber:@(YES)]) {
+            ShowMaskStatus(@"正在拼命加载");
+        }
+    }];
+    
+    [self.myHoldaysCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        DismissHud();
+        
+        if (result.length<189) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"findMyHoldays"];
+        }else{
+            NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
+            [[NSUserDefaults standardUserDefaults] setObject:xmlDoc forKey:@"findMyHoldays"];
+            [self.successSignSubject sendNext:nil];
+        }
+        
+    }];
+    
+    
+    [[[self.myHoldaysCommand.executing skip:1] take:1] subscribeNext:^(id x) {
         
         if ([x isEqualToNumber:@(YES)]) {
             ShowMaskStatus(@"正在拼命加载");
@@ -178,5 +220,70 @@
     return _findSignCommand;
 }
 
+- (RACCommand *)cardScoreCommand {
+    
+    if (!_cardScoreCommand) {
+        
+        @weakify(self);
+        _cardScoreCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                
+                NSString *body =[NSString stringWithFormat: @"<findMyCardScore xmlns=\"http://service.webservice.vada.com/\">\
+                                 <userCode xmlns=\"\">%@</userCode>\
+                                 </findMyCardScore>",self.userCode];
+                
+                [self SOAPData:findMyCardScore soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                }];
+                
+                return nil;
+            }];
+        }];
+    }
+    
+    return _cardScoreCommand;
+}
+
+- (RACCommand *)myHoldaysCommand {
+    
+    if (!_myHoldaysCommand) {
+        
+        @weakify(self);
+        _myHoldaysCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                
+                NSString *body =[NSString stringWithFormat: @"<findMyHoldays xmlns=\"http://service.webservice.vada.com/\">\
+                                 <userCode xmlns=\"\">%@</userCode>\
+                                 </findMyHoldays>",self.userCode];
+                
+                [self SOAPData:findMyHoldays soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                }];
+                
+                return nil;
+            }];
+        }];
+    }
+    
+    return _myHoldaysCommand;
+}
 
 @end
