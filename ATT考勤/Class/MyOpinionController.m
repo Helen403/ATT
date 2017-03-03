@@ -46,6 +46,12 @@
 
 }
 
+-(void)h_viewWillAppear{
+    [self.myOpinionView h_refreash];
+
+}
+
+
 #pragma mark lazyload
 -(MyOpinionView *)myOpinionView{
     if (!_myOpinionView) {

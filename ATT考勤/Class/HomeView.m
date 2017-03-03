@@ -91,8 +91,6 @@
 @property(nonatomic,assign) NSInteger retCode;
 
 
-
-
 @end
 
 @implementation HomeView
@@ -499,16 +497,16 @@
         AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
         //已经打过卡
         if ([attendCardRecord1.cardStatus isEqualToString:@"0"]) {
-            self.status.text = @"正常";
+            self.status.text = @"状态:正常";
             //            self.preImg =
         }
         //早退
         if ([attendCardRecord1.cardStatus isEqualToString:@"1"]){
-            self.status.text = @"早退";
+            self.status.text = @"状态:早退";
         }
         //迟到
         if ([attendCardRecord1.cardStatus isEqualToString:@"2"]){
-            self.status.text = @"迟到";
+            self.status.text = @"状态:迟到";
         }
     }
     

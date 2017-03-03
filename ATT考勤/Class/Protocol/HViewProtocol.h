@@ -21,5 +21,11 @@
 - (void)h_loadData;
 - (void)h_bindViewModel;
 - (void)h_addReturnKeyBoard;
--(void)h_refreash;
+- (void)h_refreash;
+
+- (void)h_viewWillAppear;
+- (void)h_viewWillDisappear;
+
+
+
 @end

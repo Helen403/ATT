@@ -10,7 +10,7 @@
 #import "MyOpinionViewModel.h"
 #import "JSTextView.h"
 
-@interface MyOpinionView()
+@interface MyOpinionView()<UITextFieldDelegate>
 
 @property(nonatomic,strong) MyOpinionViewModel *myOpinionViewModel;
 
@@ -157,14 +157,16 @@
     [self addSubview:self.suggest];
     [self addSubview:self.submit];
     
-    
-    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
+
 }
 
 -(void)h_bindViewModel{
     [self addDynamic:self];
+}
+
+-(void)h_refreash{
 }
 
 
@@ -281,7 +283,7 @@
         //        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
         _input.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _input.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
-        _input.textColor = MAIN_PAN;
+        _input.textColor = MAIN_PAN_2;
         //        _input.text = @"";//设置显示的文本内容
         
         _input.myPlaceholder=@"我遇到的问题是(如有需要,我们会与你留的联系方式和你取得联系,做意见的反馈)";
@@ -293,6 +295,8 @@
         _input.layer.borderWidth =1.0;
         _input.layer.cornerRadius =5.0;
         _input.font = H14;
+        
+        //_input.delegate = self;
         
     }
     return _input;
@@ -329,17 +333,45 @@
         // 设置右边永远显示清除按钮
         _phone.clearButtonMode = UITextFieldViewModeAlways;
         ViewBorderRadius(_phone, 5, 1, MAIN_LINE_COLOR);
+        _phone.delegate = self;
         
     }
     return _phone;
+}
+
+
+
+-(void)textFieldDidBeginEditing:(UITextField *)textView{
+
+    [UIView animateWithDuration:0.25 animations:^{
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationCurve:7];
+        self.transform = CGAffineTransformMakeTranslation(0, -258.00000f);
+    }];
+    
     
 }
+
+//完成编辑的时候下移回来（只要把offset重新设为0就行了）
+
+-(void)textFieldDidEndEditing:(UITextField *)textView{
+
+    [UIView animateWithDuration:0.25 animations:^{
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationCurve:7];
+        self.transform = CGAffineTransformIdentity;
+    }];
+    
+}
+
+
+
 
 -(UILabel *)suggest{
     if (!_suggest) {
         _suggest = [[UILabel alloc] init];
         _suggest.text = @"非常感谢您对本产品提出宝贵的意见，有了您的大力支持产品才能够更完善";
-//        _suggest.lineBreakMode = UILineBreakModeWordWrap;
+        //        _suggest.lineBreakMode = UILineBreakModeWordWrap;
         [_suggest setLineBreakMode:NSLineBreakByWordWrapping];
         _suggest.numberOfLines = 0;
         _suggest.font = H14;

@@ -41,19 +41,19 @@
     self.title = @"部门列表";
 }
 
-
-
-
 -(void)h_addSubviews{
     self.view.backgroundColor = [UIColor whiteColor];
     self.searchBar.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
     self.tableView.frame = CGRectMake(0, 44,SCREEN_WIDTH, self.view.frame.size.height);
-    
+}
+
+-(void)h_loadData{
     self.teamListViewModel.companyCode = self.companyCode;
     self.teamListViewModel.deptCode = self.deptCode;
     
     [self.teamListViewModel.refreshDataCommand execute:nil];
 }
+
 
 -(void)h_viewWillAppear{
     [self.tableView reloadData];
@@ -153,7 +153,6 @@
             [initialStr appendString:  [s substringToIndex:1]];
         }
     }
-    
     [allString appendFormat:@"#%@",initialStr];
     [allString appendFormat:@",#%@",aString];
     

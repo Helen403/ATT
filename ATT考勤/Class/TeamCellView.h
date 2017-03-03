@@ -9,7 +9,6 @@
 #import "HTableViewCell.h"
 #import "TeamModel.h"
 
-
 @interface TeamCellView : HTableViewCell
 
 @property(nonatomic,strong) TeamModel *teamModel;

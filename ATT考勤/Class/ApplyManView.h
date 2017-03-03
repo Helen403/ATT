@@ -10,4 +10,5 @@
 
 @interface ApplyManView : HView
 
+
 @end

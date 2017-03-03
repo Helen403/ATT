@@ -21,7 +21,7 @@
         
         DismissHud();
 
-          [[NSUserDefaults standardUserDefaults] setObject:@"createUserCode" forKey:xmlDoc];
+        [[NSUserDefaults standardUserDefaults] setObject:@"createUserCode" forKey:xmlDoc];
         
         [self.buildRoleclickSubject sendNext:nil];
         

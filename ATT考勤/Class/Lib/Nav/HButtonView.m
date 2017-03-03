@@ -16,8 +16,7 @@
 
 
 //重写图片的位置
-- (CGRect)imageRectForContentRect:(CGRect)contentRect
-{
+- (CGRect)imageRectForContentRect:(CGRect)contentRect{
     
     int W = contentRect.size.width;
     int H = contentRect.size.height;

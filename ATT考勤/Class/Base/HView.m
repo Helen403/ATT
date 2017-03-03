@@ -19,8 +19,7 @@
         [self h_setupViews];
         [self h_loadData];
         [self h_bindViewModel];
-        
-        
+
     }
     return self;
 }

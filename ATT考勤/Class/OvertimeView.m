@@ -13,7 +13,17 @@
 #import "ApplyManView.h"
 #import "JSTextView.h"
 
-@interface OvertimeView()
+#import "XHDatePickerView.h"
+#import "NSDate+Extension.h"
+#import "ApplyManViewModel.h"
+#import "TeamListModel.h"
+#import "UserModel.h"
+
+#import "OvertimeCellView.h"
+#import "OvertimeModel.h"
+
+
+@interface OvertimeView()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) OvertimeViewModel *overtimeViewModel;
 
@@ -62,6 +72,22 @@
 @property(nonatomic,strong) UIScrollView *scrollView;
 
 
+@property(nonatomic,strong) ApplyManViewModel *applyManViewModel;
+
+@property(nonatomic,strong) UIView *timeView1;
+
+@property(nonatomic,strong) UIView *timeView2;
+
+@property(nonatomic,strong) XHDatePickerView *datepicker;
+
+@property(nonatomic,strong) NSString *cuserCode;
+
+@property(nonatomic,strong) NSString *cuserName;
+
+@property(nonatomic,strong) NSString *workLsh;
+
+@property(nonatomic,strong) UITableView *tableView;
+
 @end
 
 @implementation OvertimeView
@@ -81,12 +107,24 @@
     CGFloat padding = [self h_w:15];
     CGFloat length = [self h_w:160];
     
+    [self.timeView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.top.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
+    }];
+    
+    [self.timeView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakSelf.timeView1);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
+        make.top.equalTo(weakSelf.timeView1.mas_bottom).offset(0);
+    }];
+    
+    
     [self.applyTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
         make.top.equalTo(padding);
     }];
     
-  
     
     [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.applyTimeText.mas_bottom).offset(padding);
@@ -106,7 +144,7 @@
     
     [self.lateTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.lateTimeText);
-        make.left.equalTo(weakSelf.applyTimeShowText);
+         make.right.equalTo(weakSelf.line1);
     }];
     
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -122,7 +160,7 @@
         make.top.equalTo(weakSelf.line2.mas_bottom).offset(0);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:45]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
     }];
     
     [self.sureTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -254,9 +292,50 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_loadData{
+    
+    //设置时间
+    self.applyTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
+    self.lateTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
+    
+    self.cuserCode = @"";
+    self.cuserName = @"";
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.overtimeViewModel.companyCode = companyCode;
+    [self.overtimeViewModel.refreshDataCommand execute:nil];
+//    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.overtimeViewModel.arr.count);
+//    [self.tableView reloadData];
+}
+
+
 -(void)h_bindViewModel{
+    [[self.overtimeViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+         
+//            OvertimeModel *overTime = self.overtimeViewModel.arr[0];
+//            self.sureTimeShowText.text = overTime.workName;
+//            self.workLsh = overTime.workLsh;
+            
+        });
+    }];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
     
+}
+
+-(void)applyManViewRefresh:(NSNotification*) notification{
+    NSMutableArray *arrTemp = [notification object];
+    
+    for(int i = 0;i<arrTemp.count-1;i++){
+        TeamListModel *teamList = arrTemp[i];
+        self.cuserCode = [NSString stringWithFormat:@"%@,%@",self.cuserCode,teamList.empCode];
+        self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
+    }
+    
+    self.cuserCode = [self.cuserCode substringFromIndex:1];
+    self.cuserName = [self.cuserName substringFromIndex:1];
 }
 
 
@@ -283,7 +362,7 @@
 -(UILabel *)applyTimeShowText{
     if (!_applyTimeShowText) {
         _applyTimeShowText = [[UILabel alloc] init];
-        _applyTimeShowText.text = @"2016年12月25日 08:30:00";
+        _applyTimeShowText.text = @"";
         _applyTimeShowText.font = H14;
         _applyTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -312,7 +391,7 @@
 -(UILabel *)lateTimeShowText{
     if (!_lateTimeShowText) {
         _lateTimeShowText = [[UILabel alloc] init];
-        _lateTimeShowText.text = @"2016年12月25日 08:30:00";
+        _lateTimeShowText.text = @"";
         _lateTimeShowText.font = H14;
         _lateTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -393,8 +472,8 @@
         _applyManView = [[ApplyManView alloc] init];
         
         _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _applyManView.layer.borderWidth =1.0;
-        _applyManView.layer.cornerRadius =5.0;
+        _applyManView.layer.borderWidth = 1.0;
+        _applyManView.layer.cornerRadius = 5.0;
     }
     return _applyManView;
 }
@@ -414,11 +493,9 @@
         
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
         
-        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){242/255.f,130/255.f,74/255.f,1});
         
-        [_finish.layer setBorderColor:color];
+        [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     
     return _finish;
@@ -501,5 +578,62 @@
     }
     return _scrollView;
 }
+
+
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = GX_BGCOLOR;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[OvertimeCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([OvertimeCellView class])]];
+        _tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:170]);
+        
+    }
+    return _tableView;
+    
+}
+
+
+#pragma mark - delegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+//    return self.overtimeViewModel.arr.count;
+    return 1;
+}
+
+#pragma mark tableViewDataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    OvertimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([OvertimeCellView class])] forIndexPath:indexPath];
+    
+//    cell.overtimeModel = self.overtimeViewModel.arr[indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return [self h_w:40];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    OvertimeModel *overtime =  self.overtimeViewModel.arr[indexPath.row];
+//    self.sureTimeShowText.text = overtime.workName;
+//    self.workLsh = overtime.workLsh;
+//    [[HWPopTool sharedInstance] closeWithBlcok:^{
+//        
+//    }];
+}
+
+
 
 @end

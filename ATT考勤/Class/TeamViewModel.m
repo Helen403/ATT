@@ -18,7 +18,7 @@
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAllDeptByCompanyCodeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAllDeptByCompanyCodeResponse>"];
-        NSLog(@"%@",result);
+        
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[TeamModel class] rowRootName:@"Depts"];
         self.arr = arr;

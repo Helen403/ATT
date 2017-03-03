@@ -12,85 +12,95 @@
 
 // *********************************************************
 //登陆  登陆APP, 输入[手机号码],输出[用户信息]
-#define findUserByTelphone @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findUserByTelphone @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 //忘记密码－发送验证码 输入[手机号码],输出[发送验证码]
-#define sendValidateSMS @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define sendValidateSMS @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 //忘记密码－修改密码  修改密码,输入[手机号码,新密码],输出[]
-#define modifyUserPwd @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define modifyUserPwd @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 //获取公司列表
-#define MultiRoles_getCompanyList @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define MultiRoles_getCompanyList @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //创建账户1-发送验证吗 输入[手机号码],输出[发送验证码]
-#define sendValidateSMS @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define sendValidateSMS @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 //创建账户2-注册账户  保存帐号,输入[手机号码,用户名,密码],输出[用户编号]
-#define saveUser @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define saveUser @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //加入公司－根据邀请码查询公司信息
-#define findCompanyByInviteCode @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findCompanyByInviteCode @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 //加入公司  保存用户角色, 输入[用户编号,公司邀请码] ,输出[]
-#define  saveUserCompany @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define  saveUserCompany @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //加入公司 用户变员工
-#define saveUserToEmp @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define saveUserToEmp @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 
 //通讯录-查询员工信息, 输入[公司编号],输出[员工信息]
-#define findAllEmpByCompanyCode @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findAllEmpByCompanyCode @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //通讯录-查询员工信息, 输入[公司编号],输出[员工信息]
-#define  findAllDeptByCompanyCode  @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define  findAllDeptByCompanyCode  @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 //通讯录 查询员工信息, 输入[姓名,手机号,公司编号],输出[员工信息]
-#define findEmpByNameOrTelPhone @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findEmpByNameOrTelPhone @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //通讯录 查询员工信息, 输入[员工编号],输出[员工信息]
-#define findEmpByCode @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findEmpByCode @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //通讯录 查询员工信息, 输入[公司编号,部门编号],输出[员工信息]
-#define findAllEmpByCompanyDeptCode @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findAllEmpByCompanyDeptCode @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //首页 根据用户号查询员工号
-#define findEmpByUserCode @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findEmpByUserCode @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //首页 输出上班规则
-#define findPersonShiftWorkPlan @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findPersonShiftWorkPlan @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //首页 输出上班规则详情
-#define findPersonShiftDetail @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findPersonShiftDetail @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //首页 打卡
-#define saveAttendRecord @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define saveAttendRecord @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //#=======================================================#
 
 //系统设置
-#define  modifyUserPwd @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define  modifyUserPwd @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //消息 公告数量,输入[用户编号,公司编号],输出[公告数量]
-#define findAnnounceNumber @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findAnnounceNumber @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 //消息 通知数量,输入[用户编号,公司编号],输出[通知数量]
-#define findNoticeNumber @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findNoticeNumber @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //消息 消息数量,输入[用户编号,公司编号],输出[消息数量]
-#define findNewsNumber @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findNewsNumber @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //消息 公告查询,输入[用户编号,公司编号],输出[分页公告]
-#define findAllAnnounce @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findAllAnnounce @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //消息 通知查询,输入[用户编号,公司编号],输出[分页通知]
-#define findAllNotices @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findAllNotices @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //个人信息 修改我的昵称
-#define modifyUserNickName @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define modifyUserNickName @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //个人信息  获取我的签名
-#define findUserSignName @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findUserSignName @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //个人信息 修改我的签名
-#define modifyUserSignName @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define modifyUserSignName @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //个人信息 查找我的积分
-#define findMyCardScore @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findMyCardScore @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
 //个人信息 查找我的假期
-#define findMyHoldays @"http://192.168.1.101:8888/smart/ws/IAttService"
+#define findMyHoldays @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+
+//请假类型
+#define findAttendOffWorkType @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//加班类型
+#define findAttendOverTimeTypeWork @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+//加班补偿方式
+#define findAttendOverTimeWorkType @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
 

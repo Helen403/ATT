@@ -70,9 +70,7 @@
     [self addSubview:self.mySuggestion];
     [self addSubview:self.suggest];
     [self addSubview:self.addTo];
-    
-   
-    
+
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
@@ -116,7 +114,7 @@
         //        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
         _mySuggestion.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _mySuggestion.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
-        _mySuggestion.textColor = MAIN_PAN;
+        _mySuggestion.textColor = MAIN_PAN_2;
         //设置显示的文本内容
         
         _mySuggestion.layer.borderColor = MAIN_LINE_COLOR.CGColor;

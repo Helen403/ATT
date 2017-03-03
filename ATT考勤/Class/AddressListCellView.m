@@ -86,7 +86,7 @@
     if (!_img) {
         _img = [[UILabel alloc] init];
         _img.text = @"";
-        _img.font = H16;
+        _img.font = H14;
         _img.textColor = white_color;
         
     }

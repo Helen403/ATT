@@ -85,7 +85,7 @@
 -(UIImageView *)img{
     if (!_img) {
         _img = [[UIImageView alloc] init];
-        _img.image = ImageNamed(@"role_code_icon");
+        _img.image = ImageNamed(@"");
     }
     return _img;
 }

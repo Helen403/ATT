@@ -57,8 +57,7 @@
     self.backgroundColor = GX_BGCOLOR;
     
     [self addSubview:self.searchBar];
-   
-    
+
     [self addSubview:self.tableView];
     
     [self setNeedsUpdateConstraints];

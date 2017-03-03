@@ -10,7 +10,5 @@
 
 @interface LeaveView : HView
 
-
-
 @end
     

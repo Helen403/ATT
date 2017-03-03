@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
 }
 
 
@@ -47,13 +46,19 @@
     [self.view addSubview:self.leaveView];
 }
 
+-(void)h_viewWillAppear{
+    [self.leaveView h_viewWillAppear];
+}
+
 -(void)h_bindViewModel{
     
     [[self.leaveViewModel.submitclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
         
-        //        [self.navigationController popToRootViewControllerAnimated:NO];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:NO];
+            
+        });
         
-        [self.navigationController popViewControllerAnimated:NO];
     }];
     
 }
@@ -74,7 +79,5 @@
     return _leaveViewModel;
     
 }
-
-
 
 @end

@@ -13,10 +13,12 @@
 #import "ApplyManView.h"
 #import "LateModel.h"
 #import "JSTextView.h"
+#import "ApplyManViewModel.h"
+
 
 @interface LateView()
 
-@property(nonatomic,strong) LateViewModel *applicationViewModel;
+@property(nonatomic,strong) LateViewModel *lateViewModel;
 
 @property(nonatomic,strong) UILabel *applyTimeText;
 
@@ -36,6 +38,8 @@
 
 @property(nonatomic,strong) ApplyManView *applyManView;
 
+@property(nonatomic,strong) ApplyManViewModel *applyManViewModel;
+
 @property(nonatomic,strong) UIButton *finish;
 
 @property(nonatomic,strong) UIScrollView *scrollView;
@@ -47,7 +51,7 @@
 #pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
     
-    self.applicationViewModel = (LateViewModel *)viewModel;
+    self.lateViewModel = (LateViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
 
@@ -117,7 +121,6 @@
         make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        
     }];
     
     
@@ -152,18 +155,19 @@
 }
 
 -(void)h_bindViewModel{
-    
-    
+
 }
 
+-(void)h_viewWillAppear{
 
+}
 
 #pragma mark lazyload
--(LateViewModel *)applicationViewModel{
-    if (!_applicationViewModel) {
-        _applicationViewModel = [[LateViewModel alloc] init];
+-(LateViewModel *)lateViewModel{
+    if (!_lateViewModel) {
+        _lateViewModel = [[LateViewModel alloc] init];
     }
-    return _applicationViewModel;
+    return _lateViewModel;
 }
 
 
@@ -238,7 +242,10 @@
         _textView.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _textView.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
         _textView.textColor = MAIN_PAN_2;
-        _textView.text = @"迟到原因";//设置显示的文本内容
+        
+        
+        _textView.myPlaceholder = @"迟到原因";
+        _textView.myPlaceholderColor = [UIColor lightGrayColor];
         
         _textView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _textView.layer.borderWidth =1.0;
@@ -261,13 +268,20 @@
 
 -(ApplyManView *)applyManView{
     if (!_applyManView) {
-        _applyManView = [[ApplyManView alloc] init];
+        _applyManView = [[ApplyManView alloc] initWithViewModel:self.applyManViewModel];
         
         _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _applyManView.layer.borderWidth =1.0;
-        _applyManView.layer.cornerRadius =5.0;
+        _applyManView.layer.borderWidth = 1.0;
+        _applyManView.layer.cornerRadius = 5.0;
     }
     return _applyManView;
+}
+
+-(ApplyManViewModel *)applyManViewModel{
+    if (!_applyManViewModel) {
+        _applyManViewModel = [[ApplyManViewModel alloc] init];
+    }
+    return _applyManViewModel;
 }
 
 -(UIButton *)finish{
@@ -294,7 +308,11 @@
 }
 
 -(void)finish:(UIButton *)button{
-    [self.applicationViewModel.submitclickSubject sendNext:nil];
+    
+    
+    
+    
+    [self.lateViewModel.submitclickSubject sendNext:nil];
 }
 
 -(UIScrollView *)scrollView{

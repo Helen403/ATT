@@ -292,6 +292,16 @@ void DismissHud(void){
 
 }
 
++(NSString *)currentYearYMDHM{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    return str;
+    
+}
+
 
 +(NSString *)currentDateHMS{
     
@@ -719,13 +729,31 @@ void DismissHud(void){
     NSDate* theDate;
     NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
     
-    [formatter  setDateFormat:HQDateFormatter];
+    [formatter setDateFormat:HQDateFormatter];
 
     NSDate *date = [formatter dateFromString:str];
     theDate = [date dateByAddingTimeInterval:minute];
     
     return [formatter stringFromDate:theDate];
     
+}
+
++(NSTimeInterval)getDifferenceTime:(NSString *) beginTime endTime:(NSString *) endTime{
+
+    NSDateFormatter *dateFormatter= [[NSDateFormatter alloc]init];
+    
+    //要注意格式一定要统一
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+
+    
+    NSDate *beginD=[dateFormatter dateFromString:beginTime];
+
+    NSDate *endD=[dateFormatter dateFromString:endTime];
+    
+    NSTimeInterval value=[endD timeIntervalSinceDate:beginD];
+    
+    return value/60;
 }
 
 +(NSTimeInterval)getDateDiff:(NSString *)beginTime end:(NSString *)endTime{

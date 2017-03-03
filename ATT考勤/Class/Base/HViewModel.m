@@ -30,14 +30,7 @@
     return self;
 }
 
-//- (CMRequest *)request {
-//
-//    if (!_request) {
-//
-//        _request = [CMRequest request];
-//    }
-//    return _request;
-//}
+
 
 - (void)h_initialize {}
 
@@ -117,10 +110,6 @@
 }
 
 
-//Toast
-//-(void)toast:(NSString *)text{
-//    [Toast showWithText:text bottomOffset:60];
-//}
 
 -(NSDictionary *)getFilter:(NSString *)result filter:(NSString *)filter{
     

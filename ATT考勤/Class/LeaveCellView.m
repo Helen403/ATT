@@ -42,7 +42,7 @@
         return;
     }
     _leaveModel = leaveModel;
-    self.title.text = leaveModel.title;
+    self.title.text = leaveModel.workName;
 }
 
 #pragma mark lazyload

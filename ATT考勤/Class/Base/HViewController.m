@@ -29,8 +29,8 @@
         
         @strongify(viewController)
         [viewController h_addSubviews];
-        [viewController h_loadData];
         [viewController h_bindViewModel];
+        [viewController h_loadData];
     }];
     
     [[viewController rac_signalForSelector:@selector(viewWillAppear:)] subscribeNext:^(id x) {

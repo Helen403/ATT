@@ -9,13 +9,14 @@
 #import "LateController.h"
 #import "LateView.h"
 #import "LateViewModel.h"
+#import "ChoiceStaffTeamController.h"
 
 
 @interface LateController ()
 
-@property(nonatomic,strong) LateView *applicationView;
+@property(nonatomic,strong) LateView *lateView;
 
-@property(nonatomic,strong) LateViewModel *applicationViewModel;
+@property(nonatomic,strong) LateViewModel *lateViewModel;
 
 @end
 
@@ -28,50 +29,50 @@
 #pragma mark system
 -(void)updateViewConstraints{
     WS(weakSelf);
-    [self.applicationView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.lateView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf.view);
     }];
     
     [super updateViewConstraints];
-
+    
 }
 
 #pragma mark private
 -(void)h_layoutNavigation{
-
+    
     self.title = @"迟到申请";
 }
 
 -(void)h_addSubviews{
-    [self.view addSubview:self.applicationView];
+    [self.view addSubview:self.lateView];
 }
 
 -(void)h_bindViewModel{
+    
+    [[self.lateViewModel.submitclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
 
-    [[self.applicationViewModel.submitclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-
-//        [self.navigationController popToRootViewControllerAnimated:NO];
-        
         [self.navigationController popViewControllerAnimated:NO];
     }];
-
 }
 
+-(void)h_viewWillAppear{
+    [self.lateView h_viewWillAppear];
+}
 
 #pragma mark lazyload
--(LateView *)applicationView{
-    if (!_applicationView) {
-        _applicationView = [[LateView alloc] initWithViewModel:self.applicationViewModel];
+-(LateView *)lateView{
+    if (!_lateView) {
+        _lateView = [[LateView alloc] initWithViewModel:self.lateViewModel];
     }
-    return _applicationView;
+    return _lateView;
 }
 
--(LateViewModel *)applicationViewModel{
-    if (!_applicationViewModel) {
-        _applicationViewModel = [[LateViewModel alloc] init];
+-(LateViewModel *)lateViewModel{
+    if (!_lateViewModel) {
+        _lateViewModel = [[LateViewModel alloc] init];
     }
-    return _applicationViewModel;
-
+    return _lateViewModel;
+    
 }
 
 

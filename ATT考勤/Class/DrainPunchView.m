@@ -96,7 +96,7 @@
         make.top.equalTo(weakSelf.line2.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:150]));
     }];
     
     [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -12,6 +12,7 @@
 		7904A6F61E09236700D6E8D4 /* HTarBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7904A6F31E09236700D6E8D4 /* HTarBarViewController.m */; };
 		7904A6F71E09236700D6E8D4 /* HNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7904A6F51E09236700D6E8D4 /* HNavigationController.m */; };
 		7904A6FA1E0923A000D6E8D4 /* HButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7904A6F91E0923A000D6E8D4 /* HButtonView.m */; };
+		790A86951E696CAA00251677 /* OvertimeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790A86941E696CAA00251677 /* OvertimeCellView.m */; };
 		790D8ABD1E2F43E800DDA697 /* RefuseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D8ABC1E2F43E800DDA697 /* RefuseController.m */; };
 		790D8AC01E2F453800DDA697 /* AskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D8ABF1E2F453800DDA697 /* AskController.m */; };
 		790D8AC31E2F457700DDA697 /* AuditingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D8AC21E2F457700DDA697 /* AuditingController.m */; };
@@ -224,6 +225,10 @@
 		793FC9961E5687F50032F689 /* EmployeeTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 793FC9951E5687F50032F689 /* EmployeeTitle.m */; };
 		793FC9A01E56A6360032F689 /* ScanCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793FC99F1E56A6360032F689 /* ScanCodeController.m */; };
 		7943136B1E53F32B0071530C /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943136A1E53F32A0071530C /* Company.m */; };
+		7947F13D1E67BB1D00E68C83 /* ChoiceStaffTeamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F13C1E67BB1D00E68C83 /* ChoiceStaffTeamController.m */; };
+		7947F1401E67BB3900E68C83 /* ChoiceStaffTeamView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F13F1E67BB3900E68C83 /* ChoiceStaffTeamView.m */; };
+		7947F1431E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F1421E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m */; };
+		7947F14A1E67CD4300E68C83 /* ApplyManCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F1491E67CD4300E68C83 /* ApplyManCellView.m */; };
 		7949275C1E10A660007331CA /* BuildRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7949275B1E10A65F007331CA /* BuildRoleController.m */; };
 		7949275F1E10A67B007331CA /* BuildRoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7949275E1E10A67B007331CA /* BuildRoleView.m */; };
 		794927621E10A694007331CA /* BuildRoleViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794927611E10A694007331CA /* BuildRoleViewModel.m */; };
@@ -427,8 +432,13 @@
 		7985066D1E028AC600028C22 /* CMRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7985066C1E028AC600028C22 /* CMRequest.m */; };
 		798506701E028C1400028C22 /* HView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7985066F1E028C1400028C22 /* HView.m */; };
 		798506761E0294D400028C22 /* HViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 798506751E0294D400028C22 /* HViewModel.m */; };
+		79877F5F1E68F29F00437E77 /* ChoiceStaffTeamCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79877F5E1E68F29F00437E77 /* ChoiceStaffTeamCellView.m */; };
 		798FB46F1E543EAD003B40D7 /* MultiRolesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 798FB46E1E543EAD003B40D7 /* MultiRolesViewModel.m */; };
 		79AF688D1E0BD741000D9E48 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AF688C1E0BD741000D9E48 /* libsqlite3.tbd */; };
+		79BD12721E69144D00AC40CF /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD126F1E69144D00AC40CF /* NSDate+Extension.m */; };
+		79BD12731E69144D00AC40CF /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD12711E69144D00AC40CF /* UIView+Extension.m */; };
+		79BD12771E69145600AC40CF /* XHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD12751E69145600AC40CF /* XHDatePickerView.m */; };
+		79BD12781E69145600AC40CF /* XHDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD12761E69145600AC40CF /* XHDatePickerView.xib */; };
 		79DD27581E319D9F00923D19 /* MultiRolesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD27571E319D9F00923D19 /* MultiRolesController.m */; };
 		79DD275B1E319E2100923D19 /* MultiRolesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD275A1E319E2100923D19 /* MultiRolesView.m */; };
 		79DD27611E31A13800923D19 /* MultiRolesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD27601E31A13800923D19 /* MultiRolesModel.m */; };
@@ -490,6 +500,11 @@
 		79F43DA41E0D595300C4C932 /* CreateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F43DA31E0D595300C4C932 /* CreateController.m */; };
 		79F43DA71E0D597100C4C932 /* CreateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F43DA61E0D597100C4C932 /* CreateView.m */; };
 		79F43DAA1E0D598A00C4C932 /* CreateViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F43DA91E0D598A00C4C932 /* CreateViewModel.m */; };
+		79F46F231E68041100F2923F /* ApplyManViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F46F221E68041100F2923F /* ApplyManViewModel.m */; };
+		79F46F2D1E68186500F2923F /* ChoiceStaffController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F46F2C1E68186500F2923F /* ChoiceStaffController.m */; };
+		79F46F301E68187B00F2923F /* ChoiceStaffViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F46F2F1E68187B00F2923F /* ChoiceStaffViewModel.m */; };
+		79F46F331E68188F00F2923F /* ChoiceStaffView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F46F321E68188F00F2923F /* ChoiceStaffView.m */; };
+		79F46F361E6820B500F2923F /* ChoiceStaffCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F46F351E6820B500F2923F /* ChoiceStaffCellView.m */; };
 		79F4B6421E275DD3008CAA6E /* ContrastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F4B6411E275DD3008CAA6E /* ContrastView.m */; };
 		79F4B6451E275FDC008CAA6E /* ContrastCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F4B6441E275FDC008CAA6E /* ContrastCellView.m */; };
 		79F4B6481E276032008CAA6E /* ContrastModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F4B6471E276032008CAA6E /* ContrastModel.m */; };
@@ -637,6 +652,8 @@
 		7904A6F51E09236700D6E8D4 /* HNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNavigationController.m; sourceTree = "<group>"; };
 		7904A6F81E0923A000D6E8D4 /* HButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HButtonView.h; sourceTree = "<group>"; };
 		7904A6F91E0923A000D6E8D4 /* HButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HButtonView.m; sourceTree = "<group>"; };
+		790A86931E696CAA00251677 /* OvertimeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvertimeCellView.h; sourceTree = "<group>"; };
+		790A86941E696CAA00251677 /* OvertimeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OvertimeCellView.m; sourceTree = "<group>"; };
 		790D8ABB1E2F43E800DDA697 /* RefuseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefuseController.h; sourceTree = "<group>"; };
 		790D8ABC1E2F43E800DDA697 /* RefuseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefuseController.m; sourceTree = "<group>"; };
 		790D8ABE1E2F453800DDA697 /* AskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AskController.h; sourceTree = "<group>"; };
@@ -1008,6 +1025,14 @@
 		793FC99F1E56A6360032F689 /* ScanCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeController.m; sourceTree = "<group>"; };
 		794313691E53F32A0071530C /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
 		7943136A1E53F32A0071530C /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
+		7947F13B1E67BB1D00E68C83 /* ChoiceStaffTeamController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffTeamController.h; sourceTree = "<group>"; };
+		7947F13C1E67BB1D00E68C83 /* ChoiceStaffTeamController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceStaffTeamController.m; sourceTree = "<group>"; };
+		7947F13E1E67BB3900E68C83 /* ChoiceStaffTeamView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffTeamView.h; sourceTree = "<group>"; };
+		7947F13F1E67BB3900E68C83 /* ChoiceStaffTeamView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceStaffTeamView.m; sourceTree = "<group>"; };
+		7947F1411E67BB5000E68C83 /* ChoiceStaffTeamViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffTeamViewModel.h; sourceTree = "<group>"; };
+		7947F1421E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceStaffTeamViewModel.m; sourceTree = "<group>"; };
+		7947F1481E67CD4300E68C83 /* ApplyManCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyManCellView.h; sourceTree = "<group>"; };
+		7947F1491E67CD4300E68C83 /* ApplyManCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyManCellView.m; sourceTree = "<group>"; };
 		7949275A1E10A65F007331CA /* BuildRoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleController.h; sourceTree = "<group>"; };
 		7949275B1E10A65F007331CA /* BuildRoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildRoleController.m; sourceTree = "<group>"; };
 		7949275D1E10A67B007331CA /* BuildRoleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleView.h; sourceTree = "<group>"; };
@@ -1281,8 +1306,17 @@
 		798506711E028CAF00028C22 /* HViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HViewProtocol.h; sourceTree = "<group>"; };
 		798506741E0294D400028C22 /* HViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HViewModel.h; sourceTree = "<group>"; };
 		798506751E0294D400028C22 /* HViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HViewModel.m; sourceTree = "<group>"; };
+		79877F5D1E68F29F00437E77 /* ChoiceStaffTeamCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffTeamCellView.h; sourceTree = "<group>"; };
+		79877F5E1E68F29F00437E77 /* ChoiceStaffTeamCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceStaffTeamCellView.m; sourceTree = "<group>"; };
 		798FB46E1E543EAD003B40D7 /* MultiRolesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiRolesViewModel.m; sourceTree = "<group>"; };
 		79AF688C1E0BD741000D9E48 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		79BD126E1E69144D00AC40CF /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
+		79BD126F1E69144D00AC40CF /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
+		79BD12701E69144D00AC40CF /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		79BD12711E69144D00AC40CF /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		79BD12741E69145600AC40CF /* XHDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDatePickerView.h; sourceTree = "<group>"; };
+		79BD12751E69145600AC40CF /* XHDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDatePickerView.m; sourceTree = "<group>"; };
+		79BD12761E69145600AC40CF /* XHDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHDatePickerView.xib; sourceTree = "<group>"; };
 		79DD27561E319D9F00923D19 /* MultiRolesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRolesController.h; sourceTree = "<group>"; };
 		79DD27571E319D9F00923D19 /* MultiRolesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiRolesController.m; sourceTree = "<group>"; };
 		79DD27591E319E2100923D19 /* MultiRolesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRolesView.h; sourceTree = "<group>"; };
@@ -1400,6 +1434,16 @@
 		79F43DA61E0D597100C4C932 /* CreateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateView.m; sourceTree = "<group>"; };
 		79F43DA81E0D598A00C4C932 /* CreateViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewModel.h; sourceTree = "<group>"; };
 		79F43DA91E0D598A00C4C932 /* CreateViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewModel.m; sourceTree = "<group>"; };
+		79F46F211E68041100F2923F /* ApplyManViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyManViewModel.h; sourceTree = "<group>"; };
+		79F46F221E68041100F2923F /* ApplyManViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyManViewModel.m; sourceTree = "<group>"; };
+		79F46F2B1E68186500F2923F /* ChoiceStaffController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffController.h; sourceTree = "<group>"; };
+		79F46F2C1E68186500F2923F /* ChoiceStaffController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceStaffController.m; sourceTree = "<group>"; };
+		79F46F2E1E68187B00F2923F /* ChoiceStaffViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffViewModel.h; sourceTree = "<group>"; };
+		79F46F2F1E68187B00F2923F /* ChoiceStaffViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceStaffViewModel.m; sourceTree = "<group>"; };
+		79F46F311E68188F00F2923F /* ChoiceStaffView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffView.h; sourceTree = "<group>"; };
+		79F46F321E68188F00F2923F /* ChoiceStaffView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceStaffView.m; sourceTree = "<group>"; };
+		79F46F341E6820B500F2923F /* ChoiceStaffCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffCellView.h; sourceTree = "<group>"; };
+		79F46F351E6820B500F2923F /* ChoiceStaffCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceStaffCellView.m; sourceTree = "<group>"; };
 		79F4B6401E275DD3008CAA6E /* ContrastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContrastView.h; sourceTree = "<group>"; };
 		79F4B6411E275DD3008CAA6E /* ContrastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContrastView.m; sourceTree = "<group>"; };
 		79F4B6431E275FDC008CAA6E /* ContrastCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContrastCellView.h; sourceTree = "<group>"; };
@@ -2423,6 +2467,8 @@
 				794927631E10F124007331CA /* CompanyCode(公司码) */,
 				7904A6E61E09163800D6E8D4 /* Home(首页) */,
 				7949277F1E1108FE007331CA /* Apply(申请) */,
+				79F46F241E68174900F2923F /* ChoiceStaff(选择员工) */,
+				7947F1341E67BAC200E68C83 /* ChoiceStaffTeam(选择员工部门) */,
 				79F964AE1E2CB26E00838CC4 /* Cost(费用申请) */,
 				79F9649D1E2CB0B700838CC4 /* LeaveEarly(消早退申请) */,
 				79F9648D1E2CAE4F00838CC4 /* DrainPunch(漏打卡申请) */,
@@ -2795,6 +2841,7 @@
 		79367B051E1252DC00696A38 /* Late(迟到申请) */ = {
 			isa = PBXGroup;
 			children = (
+				7947F1471E67CD1600E68C83 /* ApplyManCellView */,
 				79367B141E1268AA00696A38 /* Other */,
 				79367B0A1E12537100696A38 /* Cell */,
 				79367B091E12536C00696A38 /* Model */,
@@ -2855,6 +2902,8 @@
 				79367B161E1268E200696A38 /* ProveView.m */,
 				79367B181E12692800696A38 /* ApplyManView.h */,
 				79367B191E12692800696A38 /* ApplyManView.m */,
+				79F46F211E68041100F2923F /* ApplyManViewModel.h */,
+				79F46F221E68041100F2923F /* ApplyManViewModel.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -3781,6 +3830,79 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		7947F1341E67BAC200E68C83 /* ChoiceStaffTeam(选择员工部门) */ = {
+			isa = PBXGroup;
+			children = (
+				7947F13A1E67BAFB00E68C83 /* Other */,
+				7947F1391E67BAF700E68C83 /* Cell */,
+				7947F1381E67BAF000E68C83 /* Model */,
+				7947F1371E67BAEC00E68C83 /* View */,
+				7947F1361E67BAE600E68C83 /* ViewController */,
+				7947F1351E67BAE000E68C83 /* ViewModel */,
+			);
+			name = "ChoiceStaffTeam(选择员工部门)";
+			path = ../app;
+			sourceTree = "<group>";
+		};
+		7947F1351E67BAE000E68C83 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7947F1411E67BB5000E68C83 /* ChoiceStaffTeamViewModel.h */,
+				7947F1421E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		7947F1361E67BAE600E68C83 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7947F13B1E67BB1D00E68C83 /* ChoiceStaffTeamController.h */,
+				7947F13C1E67BB1D00E68C83 /* ChoiceStaffTeamController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		7947F1371E67BAEC00E68C83 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7947F13E1E67BB3900E68C83 /* ChoiceStaffTeamView.h */,
+				7947F13F1E67BB3900E68C83 /* ChoiceStaffTeamView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7947F1381E67BAF000E68C83 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7947F1391E67BAF700E68C83 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				79877F5D1E68F29F00437E77 /* ChoiceStaffTeamCellView.h */,
+				79877F5E1E68F29F00437E77 /* ChoiceStaffTeamCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		7947F13A1E67BAFB00E68C83 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		7947F1471E67CD1600E68C83 /* ApplyManCellView */ = {
+			isa = PBXGroup;
+			children = (
+				7947F1481E67CD4300E68C83 /* ApplyManCellView.h */,
+				7947F1491E67CD4300E68C83 /* ApplyManCellView.m */,
+			);
+			name = ApplyManCellView;
+			sourceTree = "<group>";
+		};
 		794927551E10A5CB007331CA /* BuildRole(创建账户3) */ = {
 			isa = PBXGroup;
 			children = (
@@ -4530,6 +4652,20 @@
 			path = ../Helpers;
 			sourceTree = "<group>";
 		};
+		79BD126D1E69142900AC40CF /* XHDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				79BD12741E69145600AC40CF /* XHDatePickerView.h */,
+				79BD12751E69145600AC40CF /* XHDatePickerView.m */,
+				79BD12761E69145600AC40CF /* XHDatePickerView.xib */,
+				79BD126E1E69144D00AC40CF /* NSDate+Extension.h */,
+				79BD126F1E69144D00AC40CF /* NSDate+Extension.m */,
+				79BD12701E69144D00AC40CF /* UIView+Extension.h */,
+				79BD12711E69144D00AC40CF /* UIView+Extension.m */,
+			);
+			name = XHDatePicker;
+			sourceTree = "<group>";
+		};
 		79DD274F1E3199C600923D19 /* MultiRoles(多角色) */ = {
 			isa = PBXGroup;
 			children = (
@@ -5038,6 +5174,69 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		79F46F241E68174900F2923F /* ChoiceStaff(选择员工) */ = {
+			isa = PBXGroup;
+			children = (
+				79F46F2A1E68183D00F2923F /* Other */,
+				79F46F291E68183600F2923F /* Cell */,
+				79F46F281E68183100F2923F /* Model */,
+				79F46F271E68182B00F2923F /* View */,
+				79F46F261E68182100F2923F /* ViewController */,
+				79F46F251E68181900F2923F /* ViewModel */,
+			);
+			name = "ChoiceStaff(选择员工)";
+			sourceTree = "<group>";
+		};
+		79F46F251E68181900F2923F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79F46F2E1E68187B00F2923F /* ChoiceStaffViewModel.h */,
+				79F46F2F1E68187B00F2923F /* ChoiceStaffViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		79F46F261E68182100F2923F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79F46F2B1E68186500F2923F /* ChoiceStaffController.h */,
+				79F46F2C1E68186500F2923F /* ChoiceStaffController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		79F46F271E68182B00F2923F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79F46F311E68188F00F2923F /* ChoiceStaffView.h */,
+				79F46F321E68188F00F2923F /* ChoiceStaffView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		79F46F281E68183100F2923F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		79F46F291E68183600F2923F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				79F46F341E6820B500F2923F /* ChoiceStaffCellView.h */,
+				79F46F351E6820B500F2923F /* ChoiceStaffCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		79F46F2A1E68183D00F2923F /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		79F4B63C1E275D36008CAA6E /* Contrast(对比) */ = {
 			isa = PBXGroup;
 			children = (
@@ -5436,6 +5635,8 @@
 		79F964181E2CA26600838CC4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				790A86931E696CAA00251677 /* OvertimeCellView.h */,
+				790A86941E696CAA00251677 /* OvertimeCellView.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -6307,6 +6508,7 @@
 		83B8787B68883EECD9829725 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79BD126D1E69142900AC40CF /* XHDatePicker */,
 				79F366D11E651904000D531B /* JSTextView(有placeholder属性) */,
 				79F366D01E6518DC000D531B /* XML */,
 				79FCCC611E640BD3005329C6 /* L(百度定位偏移) */,
@@ -6466,6 +6668,7 @@
 				793B9E9E1E4807E400156CBE /* bg_4.png in Resources */,
 				794C77721E3204B800013243 /* emotion0061@2x.png in Resources */,
 				79FAFAB41E348FA400577917 /* TeamList.plist in Resources */,
+				79BD12781E69145600AC40CF /* XHDatePickerView.xib in Resources */,
 				79367B041E12220C00696A38 /* myapplytext.plist in Resources */,
 				794C77661E3204B800013243 /* emotion0049@2x.png in Resources */,
 				7937820C1E31E3AD00ABA7C9 /* ReceiverVoiceNodeDownloading.png in Resources */,
@@ -6743,6 +6946,7 @@
 				79F0A1521E13C2CE00A1B8AA /* JCAlertView.m in Sources */,
 				793BCB1F1E6654B000B743E9 /* ChangeSignNameView.m in Sources */,
 				79375D6B1E1E402C00E27934 /* CustomModel.m in Sources */,
+				79BD12731E69144D00AC40CF /* UIView+Extension.m in Sources */,
 				79345B941E1F25160007A348 /* MyOpinionViewModel.m in Sources */,
 				7937CC061E24891B00A4F82F /* AddressListController.m in Sources */,
 				79FAFACE1E34ACA800577917 /* SecurityViewModel.m in Sources */,
@@ -6775,6 +6979,7 @@
 				790D8AC01E2F453800DDA697 /* AskController.m in Sources */,
 				795AC4621E2C50D700C69308 /* NSNotificationCenter+YXAdd.m in Sources */,
 				79236B071E6558FD00A005C0 /* ChangeNameView.m in Sources */,
+				79F46F231E68041100F2923F /* ApplyManViewModel.m in Sources */,
 				79DD27651E31A15F00923D19 /* MultiRolesCellView.m in Sources */,
 				79F4F0751E1F808300115C3B /* DLFixedTabbarView.m in Sources */,
 				790D8AC31E2F457700DDA697 /* AuditingController.m in Sources */,
@@ -6788,6 +6993,7 @@
 				79F7D85D1E5AC987004DF0DB /* ChangeTelphoneViewModel.m in Sources */,
 				7964B3791E2EFC90001AC5E5 /* MeApplyController.m in Sources */,
 				79345B8E1E1F236C0007A348 /* MyOpinionController.m in Sources */,
+				790A86951E696CAA00251677 /* OvertimeCellView.m in Sources */,
 				798FB46F1E543EAD003B40D7 /* MultiRolesViewModel.m in Sources */,
 				79236B0D1E65648C00A005C0 /* AttendCardRecord.m in Sources */,
 				79EF94561E262F7100F8E9BC /* HASortItemView.m in Sources */,
@@ -6809,6 +7015,7 @@
 				7928BD711E0273A4009BB0B4 /* AppDelegate.m in Sources */,
 				79F4F07B1E1F85BC00115C3B /* MessageController.m in Sources */,
 				793500EC1E3051FF009ED8AA /* RippleView.m in Sources */,
+				79BD12721E69144D00AC40CF /* NSDate+Extension.m in Sources */,
 				79345B9A1E1F25420007A348 /* FeedbackView.m in Sources */,
 				7949276D1E10F19F007331CA /* CompanyCodeView.m in Sources */,
 				791A51FB1E55A1D800F7C026 /* XMLDictionary.m in Sources */,
@@ -6824,6 +7031,7 @@
 				7938682C1E0A2A8A004EC88A /* HomeViewModel.m in Sources */,
 				79EF941F1E26143200F8E9BC /* PersonalViewModel.m in Sources */,
 				79EF94281E26148A00F8E9BC /* PersonalHeadView.m in Sources */,
+				79F46F361E6820B500F2923F /* ChoiceStaffCellView.m in Sources */,
 				79F964731E2CAB6500838CC4 /* ResignationController.m in Sources */,
 				79FFB26A1E24DF3E00EC082F /* EmployeeViewModel.m in Sources */,
 				79EF94521E262F7100F8E9BC /* HARootScrollViewCell.m in Sources */,
@@ -6850,6 +7058,7 @@
 				79367AF71E11FD1800696A38 /* MyApplyController.m in Sources */,
 				79F8A4EB1E03C426004F8A8C /* LoginViewController.m in Sources */,
 				7934879C1E270BA100D074D7 /* FDCalendar.m in Sources */,
+				79F46F301E68187B00F2923F /* ChoiceStaffViewModel.m in Sources */,
 				79375D061E1DD8E300E27934 /* VersionView.m in Sources */,
 				7937652F1E14944000F7B34F /* DealWithController.m in Sources */,
 				79DD27711E31B74900923D19 /* MyMsgModel.m in Sources */,
@@ -6868,6 +7077,7 @@
 				7937CC0C1E24899000A4F82F /* AddressListViewModel.m in Sources */,
 				79FAFAAF1E348CA500577917 /* TeamListModel.m in Sources */,
 				79F366D41E6519C6000D531B /* JSTextView.m in Sources */,
+				79BD12771E69145600AC40CF /* XHDatePickerView.m in Sources */,
 				793487C91E27365200D074D7 /* CountModel.m in Sources */,
 				79F0A13B1E13990A00A1B8AA /* ZJScrollSegmentView.m in Sources */,
 				79F856221E02D561002D82F4 /* LSCoreToolCenter.m in Sources */,
@@ -6909,6 +7119,7 @@
 				7964B37C1E2F03BA001AC5E5 /* MeApplyViewModel.m in Sources */,
 				79EF94591E262F7100F8E9BC /* UIView+Extension.m in Sources */,
 				793487AB1E2711D400D074D7 /* CalendarModel.m in Sources */,
+				7947F1401E67BB3900E68C83 /* ChoiceStaffTeamView.m in Sources */,
 				79ED5E931E1CF76200BBC3D9 /* SetModel.m in Sources */,
 				7904A6F61E09236700D6E8D4 /* HTarBarViewController.m in Sources */,
 				79F366DA1E652AF7000D531B /* NoticeModel.m in Sources */,
@@ -6922,6 +7133,7 @@
 				7985066D1E028AC600028C22 /* CMRequest.m in Sources */,
 				798506701E028C1400028C22 /* HView.m in Sources */,
 				79F9DA8B1E5C3A1800625F19 /* AttendWorkShift.m in Sources */,
+				7947F14A1E67CD4300E68C83 /* ApplyManCellView.m in Sources */,
 				793BCB221E6654C500B743E9 /* ChangeSignNameViewModel.m in Sources */,
 				79F964A61E2CB11900838CC4 /* LeaveEarlyController.m in Sources */,
 				7964B3881E2F1977001AC5E5 /* ProcessedController.m in Sources */,
@@ -6958,6 +7170,7 @@
 				7904A6F71E09236700D6E8D4 /* HNavigationController.m in Sources */,
 				79282EAC1E0B7C7F00F4E050 /* ZJLeadingPageController.m in Sources */,
 				79EF94581E262F7100F8E9BC /* UIColor+RGBA.m in Sources */,
+				79F46F2D1E68186500F2923F /* ChoiceStaffController.m in Sources */,
 				79DD276D1E31B2F000923D19 /* MyMsgViewModel.m in Sources */,
 				793FC9A01E56A6360032F689 /* ScanCodeController.m in Sources */,
 				79EF94531E262F7100F8E9BC /* HARootScrollViewManager.m in Sources */,
@@ -6990,6 +7203,7 @@
 				79F0A1371E13990A00A1B8AA /* UIViewController+ZJScrollPageController.m in Sources */,
 				79F9642F1E2CA4A700838CC4 /* BusinessTravelController.m in Sources */,
 				79F964991E2CAEBC00838CC4 /* DrainPunchView.m in Sources */,
+				7947F13D1E67BB1D00E68C83 /* ChoiceStaffTeamController.m in Sources */,
 				794C772A1E3204B800013243 /* EmojiButtonView.m in Sources */,
 				79282EBB1E0B7DF000F4E050 /* ZJImageOnlyHUDView.m in Sources */,
 				79EF94621E2639AE00F8E9BC /* CalendarView.m in Sources */,
@@ -7035,6 +7249,7 @@
 				790D8AD81E2F4A4F00DDA697 /* AskCellView.m in Sources */,
 				79F4F0841E1F891C00115C3B /* MessageCellView.m in Sources */,
 				79F964091E2C9BF700838CC4 /* LeaveController.m in Sources */,
+				79F46F331E68188F00F2923F /* ChoiceStaffView.m in Sources */,
 				79F9647C1E2CABEB00838CC4 /* ResignationView.m in Sources */,
 				79F964321E2CA4C800838CC4 /* BusinessTravelViewModel.m in Sources */,
 				79282EBE1E0B7DF000F4E050 /* ZJProgressHUDView.m in Sources */,
@@ -7077,6 +7292,7 @@
 				79375D311E1DF7F600E27934 /* FunctionViewModel.m in Sources */,
 				79F9640F1E2C9C9E00838CC4 /* LeaveView.m in Sources */,
 				793710311E1C837F002F3E2E /* MineController.m in Sources */,
+				7947F1431E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m in Sources */,
 				79EF94221E26145200F8E9BC /* PersonalModel.m in Sources */,
 				790D8AF11E2F4F9D00DDA697 /* CopyCellView.m in Sources */,
 				793487BC1E271F3D00D074D7 /* ListCellView.m in Sources */,
@@ -7102,6 +7318,7 @@
 				7964B3971E2F1E0A001AC5E5 /* ApproveCellView.m in Sources */,
 				79F0A13A1E13990A00A1B8AA /* ZJScrollPageView.m in Sources */,
 				79F9648C1E2CAD5500838CC4 /* OffView.m in Sources */,
+				79877F5F1E68F29F00437E77 /* ChoiceStaffTeamCellView.m in Sources */,
 				79380A831E25D251004E7250 /* TeamAttendanceModel.m in Sources */,
 				796803371E11202C00CED421 /* MyApplyViewModel.m in Sources */,
 				79FAFAA31E348AF700577917 /* TeamListController.m in Sources */,

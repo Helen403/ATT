@@ -116,4 +116,8 @@ extern void DismissHud(void);
 
 +(NSString *)currentDateHMS;
 
++(NSString *)currentYearYMDHM;
+
++(NSTimeInterval)getDifferenceTime:(NSString *) beginTime endTime:(NSString *) endTime;
+
 @end
