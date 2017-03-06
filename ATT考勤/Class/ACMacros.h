@@ -5,6 +5,10 @@
 //  Copyright (c) 2015年 http://www.hangyequan.com. All rights reserved.
 //
 
+//http://192.168.1.101:8888/smart/ws
+//http://www.attonline.com.cn:8080/smart/
+
+
 #ifndef ACMacros_h
 #define ACMacros_h
 

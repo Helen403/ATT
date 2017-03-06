@@ -175,8 +175,7 @@
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
     }];
-    
-    
+
     [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.textView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
@@ -368,7 +367,6 @@
 }
 
 -(UIView *)line1{
-    
     if (!_line1) {
         _line1 = [[UIView alloc] init];
         _line1.backgroundColor = MAIN_LINE_COLOR;
@@ -466,8 +464,8 @@
     if (!_proveView) {
         _proveView = [[ProveView alloc] init];
         _proveView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _proveView.layer.borderWidth =1.0;
-        _proveView.layer.cornerRadius =5.0;
+        _proveView.layer.borderWidth = 1.0;
+        _proveView.layer.cornerRadius = 5.0;
     }
     return _proveView;
 }
@@ -505,7 +503,6 @@
         
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
         [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     
@@ -562,7 +559,6 @@
     [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
     [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
     [[HWPopTool sharedInstance] showWithPresentView:self.tableView animated:NO];
-    
 }
 
 
@@ -574,11 +570,9 @@
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[LeaveCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([LeaveCellView class])]];
-        _tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:170]);
-        
+        _tableView.scrollEnabled = NO;
     }
     return _tableView;
-    
 }
 
 
@@ -615,7 +609,7 @@
     self.sureTimeShowText.text = leaveModel.workName;
     self.workLsh = leaveModel.workLsh;
     [[HWPopTool sharedInstance] closeWithBlcok:^{
-        
+        [self.tableView reloadData];
     }];
 }
 
@@ -624,7 +618,10 @@
         _scrollView = [[UIScrollView alloc] init];
     }
     return _scrollView;
-    
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];
 }
 
 @end

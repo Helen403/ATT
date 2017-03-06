@@ -10,6 +10,7 @@
  *  本文件可放请求API 拼接的路径
  */
 
+
 // *********************************************************
 //登陆  登陆APP, 输入[手机号码],输出[用户信息]
 #define findUserByTelphone @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
@@ -94,7 +95,6 @@
 //个人信息 查找我的假期
 #define findMyHoldays @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
-
 //请假类型
 #define findAttendOffWorkType @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
@@ -103,4 +103,53 @@
 //加班补偿方式
 #define findAttendOverTimeWorkType @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
+//加班提交
+#define saveApplyOverTime @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
 
+//出差类型
+#define findAttendOffWorkType @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//出差提交
+#define saveApplyOutWork @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//外出类型
+#define findAttendGoOutWork @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//外出提交
+#define saveApplyGoOutWork @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//班次查询
+#define findAttendWorkShift @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//换班提交
+#define saveApplyChangeWork @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//调班申请提交
+#define saveApplySwapWork @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//辞职类型
+#define findAttendLeaveType @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//辞职申请提交
+#define saveApplyLeave @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//调休类型
+#define findAttendPaintLeaveType @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//调休申请
+#define saveApplyPaintLeave @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//漏打卡提交
+#define saveApplyForget @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//迟到提交
+#define saveApplyLate @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//早退提交
+#define saveApplyEarly @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//花费类型
+#define findAttendCostType @"http://www.attonline.com.cn:8080/smart/ws/IAttService"
+
+//花费提交
+#define saveApplyCost @"http://www.attonline.com.cn:8080/smart/ws/IAttService"

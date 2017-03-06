@@ -23,6 +23,8 @@
 #import "OvertimeModel.h"
 
 
+
+
 @interface OvertimeView()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) OvertimeViewModel *overtimeViewModel;
@@ -88,6 +90,8 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 
+@property(nonatomic,assign) NSInteger index;
+
 @end
 
 @implementation OvertimeView
@@ -119,7 +123,6 @@
         make.top.equalTo(weakSelf.timeView1.mas_bottom).offset(0);
     }];
     
-    
     [self.applyTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
         make.top.equalTo(padding);
@@ -144,7 +147,7 @@
     
     [self.lateTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.lateTimeText);
-         make.right.equalTo(weakSelf.line1);
+        make.right.equalTo(weakSelf.line1);
     }];
     
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -153,8 +156,6 @@
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
-    
-    
     
     [self.view1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.line2.mas_bottom).offset(0);
@@ -167,7 +168,7 @@
         make.centerY.equalTo(weakSelf.view1);
         make.left.equalTo(weakSelf.applyTimeText);
     }];
-
+    
     [self.back1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.view1);
         make.right.equalTo(0);
@@ -198,8 +199,6 @@
         make.left.equalTo(weakSelf.applyTimeText);
     }];
     
-    
-    
     [self.back2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.view2);
         make.right.equalTo(0);
@@ -217,31 +216,32 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
-    
-    
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.view2.mas_bottom).offset([self h_w:10]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
     }];
     
-    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.textView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
-    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
+    
+    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
+  
     [self.finish mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
+        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         
@@ -260,6 +260,10 @@
 -(void)h_setupViews{
     
     [self addSubview:self.scrollView];
+    
+    
+    [self.scrollView addSubview:self.timeView1];
+    [self.scrollView addSubview:self.timeView2];
     
     [self.scrollView addSubview:self.applyTimeText];
     [self.scrollView addSubview:self.applyTimeShowText];
@@ -294,6 +298,8 @@
 
 -(void)h_loadData{
     
+    self.index = 1;
+    
     //设置时间
     self.applyTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
     self.lateTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
@@ -304,8 +310,7 @@
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.overtimeViewModel.companyCode = companyCode;
     [self.overtimeViewModel.refreshDataCommand execute:nil];
-//    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.overtimeViewModel.arr.count);
-//    [self.tableView reloadData];
+    [self.scrollView endEditing:YES];
 }
 
 
@@ -313,17 +318,21 @@
     [[self.overtimeViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         dispatch_sync(dispatch_get_main_queue(), ^{
-         
-//            OvertimeModel *overTime = self.overtimeViewModel.arr[0];
-//            self.sureTimeShowText.text = overTime.workName;
-//            self.workLsh = overTime.workLsh;
+            
+            OvertimeModel *workType = self.overtimeViewModel.arrOverTimeWorkType[0];
+            
+            self.compensateShowText.text = workType.workName;
+            //            self.workLsh = overTime.workLsh;
+            
+            OvertimeModel *typeWork = self.overtimeViewModel.arrOverTimeTypeWork[0];
+            self.sureTimeShowText.text = typeWork.workName;
             
         });
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
-    
 }
+
 
 -(void)applyManViewRefresh:(NSNotification*) notification{
     NSMutableArray *arrTemp = [notification object];
@@ -339,7 +348,6 @@
 }
 
 
-
 #pragma mark lazyload
 -(OvertimeViewModel *)overtimeViewModel{
     if (!_overtimeViewModel) {
@@ -347,6 +355,60 @@
     }
     return _overtimeViewModel;
 }
+
+
+-(XHDatePickerView *)datepicker{
+    if (!_datepicker) {
+        _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
+            
+            NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            
+            if (startDateText.length > 0) {
+                self.applyTimeShowText.text = startDateText;
+            }
+            
+            if (endDateText.length > 0 ) {
+                self.lateTimeShowText.text = endDateText;
+            }
+            
+        }];
+        _datepicker.datePickerStyle = DateStyleShowYearMonthDayHourMinute;
+        _datepicker.dateType = DateTypeStartDate;
+        _datepicker.minLimitDate = [NSDate date:@"2017-02-01 12:22" WithFormat:@"yyyy-MM-dd HH:mm"];
+        _datepicker.maxLimitDate = [NSDate date:@"2020-12-12 12:12" WithFormat:@"yyyy-MM-dd HH:mm"];    }
+    return _datepicker;
+}
+
+-(UIView *)timeView1{
+    if (!_timeView1) {
+        _timeView1 = [[UIView alloc] init];
+        
+        _timeView1.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeClick1)];
+        [_timeView1 addGestureRecognizer:setTap];
+    }
+    return _timeView1;
+}
+
+-(void)timeClick1{
+    [self.datepicker show];
+}
+
+-(UIView *)timeView2{
+    if (!_timeView2) {
+        _timeView2 = [[UIView alloc] init];
+        _timeView2.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeClick2)];
+        [_timeView2 addGestureRecognizer:setTap];
+    }
+    return _timeView2;
+}
+
+-(void)timeClick2{
+    [self.datepicker show];
+}
+
 
 
 -(UILabel *)applyTimeText{
@@ -406,8 +468,6 @@
     return _line2;
 }
 
-
-
 -(UILabel *)sureTimeText{
     if (!_sureTimeText) {
         _sureTimeText = [[UILabel alloc] init];
@@ -422,7 +482,7 @@
 -(UILabel *)sureTimeShowText{
     if (!_sureTimeShowText) {
         _sureTimeShowText = [[UILabel alloc] init];
-        _sureTimeShowText.text = @"加班";
+        _sureTimeShowText.text = @"";
         _sureTimeShowText.font = H14;
         _sureTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -449,8 +509,8 @@
         
         _textView.myPlaceholderColor= [UIColor lightGrayColor];
         _textView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _textView.layer.borderWidth =1.0;
-        _textView.layer.cornerRadius =5.0;
+        _textView.layer.borderWidth = 1.0;
+        _textView.layer.cornerRadius = 5.0;
         _textView.font = H14;
         
     }
@@ -461,21 +521,28 @@
     if (!_proveView) {
         _proveView = [[ProveView alloc] init];
         _proveView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _proveView.layer.borderWidth =1.0;
-        _proveView.layer.cornerRadius =5.0;
+        _proveView.layer.borderWidth = 1.0;
+        _proveView.layer.cornerRadius = 5.0;
     }
     return _proveView;
 }
 
 -(ApplyManView *)applyManView{
     if (!_applyManView) {
-        _applyManView = [[ApplyManView alloc] init];
+        _applyManView = [[ApplyManView alloc] initWithViewModel:self.applyManViewModel];
         
         _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _applyManView.layer.borderWidth = 1.0;
         _applyManView.layer.cornerRadius = 5.0;
     }
     return _applyManView;
+}
+
+-(ApplyManViewModel *)applyManViewModel{
+    if (!_applyManViewModel) {
+        _applyManViewModel = [[ApplyManViewModel alloc] init];
+    }
+    return _applyManViewModel;
 }
 
 -(UIButton *)finish{
@@ -493,8 +560,6 @@
         
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
-        
         [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     
@@ -502,7 +567,34 @@
 }
 
 -(void)finish:(UIButton *)button{
-    [self.overtimeViewModel.submitclickSubject sendNext:nil];
+    
+    if ([self.applyTimeShowText.text isEqualToString:self.lateTimeShowText.text]) {
+        ShowMessage(@"请选择加班时间");
+        return;
+    }
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.overtimeViewModel.companyCode = companyCode;
+    self.overtimeViewModel.applyStartDatetime = self.applyTimeShowText.text;
+    self.overtimeViewModel.applyEndDatetime = self.lateTimeShowText.text;
+    self.overtimeViewModel.applyLenHours = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeText.text]];
+    
+    self.overtimeViewModel.applyReason = self.textView.text;
+    self.overtimeViewModel.applyStatus = @"0";
+    self.overtimeViewModel.flowInstanceId = @"0";
+    
+    self.overtimeViewModel.overType = self.sureTimeShowText.text;
+    self.overtimeViewModel.resultType = self.compensateShowText.text;
+    
+    self.overtimeViewModel.cuserCode = self.cuserCode;
+    self.overtimeViewModel.cuserName = self.cuserName;
+    self.overtimeViewModel.workLsh = self.workLsh;
+    self.overtimeViewModel.workName = self.sureTimeShowText.text;
+    UserModel *user =  getModel(@"user");
+    self.overtimeViewModel.applyUserCode = user.userCode;
+    self.overtimeViewModel.applyUserName = user.userNickName;
+
+    [self.overtimeViewModel.applyOverTimeCommand execute:nil];
 }
 
 
@@ -519,7 +611,7 @@
 -(UILabel *)compensateShowText{
     if (!_compensateShowText) {
         _compensateShowText = [[UILabel alloc] init];
-        _compensateShowText.text = @"调休";
+        _compensateShowText.text = @"";
         _compensateShowText.font = H14;
         _compensateShowText.textColor = MAIN_PAN_2;
     }
@@ -545,16 +637,41 @@
 -(UIView *)view1{
     if (!_view1) {
         _view1 = [[UIView alloc] init];
+        _view1.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewClick1)];
+        [_view1 addGestureRecognizer:setTap];
     }
     return _view1;
+}
+
+-(void)viewClick1{
+    self.index =  1;
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.overtimeViewModel.arrOverTimeTypeWork.count);
+    [self.tableView reloadData];
+    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
+    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
+    [[HWPopTool sharedInstance] showWithPresentView:self.tableView animated:NO];
 }
 
 -(UIView *)view2{
     if (!_view2) {
         _view2 = [[UIView alloc] init];
+        _view2.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(viewClick2)];
+        [_view2 addGestureRecognizer:setTap];
     }
     return _view2;
 }
+
+-(void)viewClick2{
+    self.index =  2;
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.overtimeViewModel.arrOverTimeWorkType.count);
+    [self.tableView reloadData];
+    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
+    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
+    [[HWPopTool sharedInstance] showWithPresentView:self.tableView animated:NO];
+}
+
 
 -(UIView *)line3{
     if (!_line3) {
@@ -588,8 +705,7 @@
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[OvertimeCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([OvertimeCellView class])]];
-        _tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:170]);
-        
+        _tableView.scrollEnabled = NO;
     }
     return _tableView;
     
@@ -603,9 +719,12 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.index ==1) {
+        return  self.overtimeViewModel.arrOverTimeTypeWork.count;
+    }else{
+        return self.overtimeViewModel.arrOverTimeWorkType.count;
+    }
     
-//    return self.overtimeViewModel.arr.count;
-    return 1;
 }
 
 #pragma mark tableViewDataSource
@@ -613,7 +732,11 @@
     
     OvertimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([OvertimeCellView class])] forIndexPath:indexPath];
     
-//    cell.overtimeModel = self.overtimeViewModel.arr[indexPath.row];
+    if (self.index == 1) {
+        cell.overtimeModel =  self.overtimeViewModel.arrOverTimeTypeWork[indexPath.row];
+    }else{
+        cell.overtimeModel =  self.overtimeViewModel.arrOverTimeWorkType[indexPath.row];
+    }
     
     return cell;
 }
@@ -625,15 +748,21 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    OvertimeModel *overtime =  self.overtimeViewModel.arr[indexPath.row];
-//    self.sureTimeShowText.text = overtime.workName;
-//    self.workLsh = overtime.workLsh;
-//    [[HWPopTool sharedInstance] closeWithBlcok:^{
-//        
-//    }];
+    
+    if (self.index == 1) {
+        OvertimeModel *overtime = self.overtimeViewModel.arrOverTimeTypeWork[indexPath.row];
+        self.sureTimeShowText.text = overtime.workName;
+    }else{
+        OvertimeModel *overtime = self.overtimeViewModel.arrOverTimeWorkType[indexPath.row];
+        self.compensateShowText.text = overtime.workName;
+    }
+    [[HWPopTool sharedInstance] closeWithBlcok:^{
+        [self.tableView reloadData];
+    }];
 }
 
 
-
+-(void)dealloc{
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];
+}
 @end

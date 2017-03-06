@@ -113,6 +113,11 @@
 
 -(NSDictionary *)getFilter:(NSString *)result filter:(NSString *)filter{
     
+    
+    if(result.length==0){
+        return nil;
+    }
+    
     NSString *str1 = [NSString stringWithFormat:@"<%@>",filter];
     NSRange range1 = [result rangeOfString:str1];//匹配得到的下标
     NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
@@ -134,6 +139,11 @@
 
 -(NSString *)getFilterStr:(NSString *)result filter:(NSString *)filter{
     
+    if(result.length==0){
+        return @"";
+    }
+    
+    
     NSString *str1 = [NSString stringWithFormat:@"<%@>",filter];
     NSRange range1 = [result rangeOfString:str1];//匹配得到的下标
     NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
@@ -153,6 +163,10 @@
 
 
 -(NSString *)getFilterOneStr:(NSString *)result filter:(NSString *)filter{
+    if(result.length==0){
+        return @"";
+    }
+    
     NSString *str1 = [NSString stringWithFormat:@"<%@>",filter];
     NSRange range1 = [result rangeOfString:str1];//匹配得到的下标
     NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
@@ -171,6 +185,9 @@
 }
 
 -(NSString *)getFilterStr:(NSString *)result filter1:(NSString *)filter1 filter2:(NSString *)filter2{
+    if(result.length==0){
+        return @"";
+    }
     
     NSRange range1 = [result rangeOfString:filter1];//匹配得到的下标
     NSRange range2 = [result rangeOfString:filter2];//匹配得到的下标
@@ -189,7 +206,9 @@
 
 -(NSDictionary *)getFilter:(NSString *)result filter1:(NSString *)filter1 filter2:(NSString *)filter2{
     
-    
+    if(result.length==0){
+        return nil;
+    }
     NSRange range1 = [result rangeOfString:filter1];//匹配得到的下标
     NSRange range2 = [result rangeOfString:filter2];//匹配得到的下标
     

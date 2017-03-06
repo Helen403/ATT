@@ -29,7 +29,6 @@
             [self.attendRecordSubject sendNext:nil];
         }
 
-        
     }];
     
     
@@ -39,8 +38,6 @@
             ShowMaskStatus(@"正在拼命加载");
         }
     }];
-    
-    
     
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();

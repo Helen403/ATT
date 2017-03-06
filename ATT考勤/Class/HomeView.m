@@ -282,7 +282,7 @@
     //检查网络
     [self isNetWorking];
     //定位
-    [self setLocation];
+    [self.locService startUserLocationService];
     
     self.cardPhase = 0; //打卡阶段
     self.timePoint = 1; //打卡时间点 A=1,B=2,C=3,D=4,E=5,F=6,G=7,H=8
@@ -309,7 +309,6 @@
                 self.clockMode = @"1";
                 self.netStatusText.text = @"当前无网络";
                 break;
-                
             }
                 
             case AFNetworkReachabilityStatusReachableViaWiFi:{
@@ -347,13 +346,6 @@
         
         self.netStatusText.text = [NSString stringWithFormat:@"当前连接WIFI:%@",str];
     }
-}
-
--(void)setLocation{
-    
-    //启动LocationService
-    [self.locService startUserLocationService];
-    
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
@@ -758,7 +750,7 @@
     if (locAddress.length>0) {
         self.locAddress = locAddress;
     }else{
-        [self setLocation];
+        [self.locService startUserLocationService];
         return;
     }
     
@@ -1092,7 +1084,6 @@
         _locService.distanceFilter=10;
     }
     return _locService;
-    
 }
 
 

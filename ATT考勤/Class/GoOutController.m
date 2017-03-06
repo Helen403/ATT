@@ -50,10 +50,11 @@
 -(void)h_bindViewModel{
     
     [[self.goOutViewModel.submitclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-        
-        //        [self.navigationController popToRootViewControllerAnimated:NO];
-        
-        [self.navigationController popViewControllerAnimated:NO];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:NO];
+            
+        });
+
     }];
     
 }

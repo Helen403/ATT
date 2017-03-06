@@ -35,7 +35,6 @@
     
     [self.applyOverTimeCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
-        
         DismissHud();
         
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
@@ -151,7 +150,7 @@
                 
                 @strongify(self);
                 
-                NSString *body =[NSString stringWithFormat: @"<saveApplyAskForLeave xmlns=\"http://service.webservice.vada.com/\">\
+                NSString *body =[NSString stringWithFormat: @"<saveApplyOverTime xmlns=\"http://service.webservice.vada.com/\">\
                                  <companyCode xmlns=\"\">%@</companyCode>\
                                  <applyStartDatetime xmlns=\"\">%@</applyStartDatetime>\
                                  <applyEndDatetime xmlns=\"\">%@</applyEndDatetime>\
@@ -159,15 +158,13 @@
                                  <applyReason xmlns=\"\">%@</applyReason>\
                                  <applyStatus xmlns=\"\">%@</applyStatus>\
                                  <flowInstanceId xmlns=\"\">%@</flowInstanceId>\
-                                 <copyUserCode xmlns=\"\">%@</copyUserCode>\
-                                 <copyUserName xmlns=\"\">%@</copyUserName>\
-                                 <workLsh xmlns=\"\">%@</workLsh>\
-                                 <workName xmlns=\"\">%@</workName>\
+                                 <overType xmlns=\"\">%@</overType>\
+                                 <resultType xmlns=\"\">%@</resultType>\
                                  <applyUserCode xmlns=\"\">%@</applyUserCode>\
                                  <applyUserName xmlns=\"\">%@</applyUserName>\
-                                 </saveApplyAskForLeave>",self.companyCode,self.applyStartDatetime,self.applyEndDatetime,self.applyLenHours,self.applyReason,self.applyStatus,self.flowInstanceId,self.cuserCode,self.cuserName,self.workLsh,self.workName,self.applyUserCode,self.applyUserName];
-                
-                [self SOAPData:findAttendOffWorkType soapBody:body success:^(NSString *result) {
+                                 </saveApplyOverTime>",self.companyCode,self.applyStartDatetime,self.applyEndDatetime,self.applyLenHours,self.applyReason,self.applyStatus,self.flowInstanceId,self.overType,self.resultType,self.applyUserCode,self.applyUserName];
+               
+                [self SOAPData:saveApplyOverTime soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];

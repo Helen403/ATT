@@ -10,4 +10,9 @@
 
 @interface BusinessTravelModel : NSObject
 
+@property (nonatomic , copy) NSString              * status;
+@property (nonatomic , copy) NSString              * companyCode;
+@property (nonatomic , copy) NSString              * workName;
+@property (nonatomic , copy) NSString              * workLsh;
+
 @end

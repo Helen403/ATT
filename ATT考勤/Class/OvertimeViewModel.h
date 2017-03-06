@@ -32,10 +32,16 @@
 @property(nonatomic,strong) NSString *applyReason;
 @property(nonatomic,strong) NSString *applyStatus;
 @property(nonatomic,strong) NSString *flowInstanceId;
+
+@property(nonatomic,strong) NSString *overType;
+@property(nonatomic,strong) NSString *resultType;
+
+
 @property(nonatomic,strong) NSString *cuserCode;
 @property(nonatomic,strong) NSString *cuserName;
 @property(nonatomic,strong) NSString *workLsh;
 @property(nonatomic,strong) NSString *workName;
 @property(nonatomic,strong) NSString *applyUserCode;
 @property(nonatomic,strong) NSString *applyUserName;
+
 @end

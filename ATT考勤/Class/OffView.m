@@ -12,7 +12,18 @@
 #import "ApplyManView.h"
 #import "JSTextView.h"
 
-@interface OffView()
+#import "XHDatePickerView.h"
+#import "NSDate+Extension.h"
+#import "ApplyManViewModel.h"
+#import "TeamListModel.h"
+#import "UserModel.h"
+
+#import "OffCellView.h"
+#import "OffModel.h"
+
+
+@interface OffView()<UITableViewDataSource,UITableViewDelegate>
+
 
 @property(nonatomic,strong) OffViewModel *offViewModel;
 
@@ -59,6 +70,29 @@
 
 @property(nonatomic,strong) UIScrollView *scrollView;
 
+
+@property(nonatomic,strong) ApplyManViewModel *applyManViewModel;
+
+@property(nonatomic,strong) UIView *timeView1;
+
+@property(nonatomic,strong) UIView *timeView2;
+
+@property(nonatomic,strong) XHDatePickerView *datepicker;
+
+@property(nonatomic,strong) NSString *cuserCode;
+
+@property(nonatomic,strong) NSString *cuserName;
+
+@property(nonatomic,strong) NSString *workLsh;
+
+@property(nonatomic,strong) UITableView *tableView;
+
+@property(nonatomic,assign) NSInteger index;
+
+@property(nonatomic,strong) NSString *shiftOldLsh;
+
+@property(nonatomic,strong) NSString *shiftNewLsh;
+
 @end
 
 @implementation OffView
@@ -76,6 +110,19 @@
     
     CGFloat padding = [self h_w:15];
     CGFloat length = [self h_w:160];
+    
+    
+    [self.timeView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.top.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
+    }];
+    
+    [self.timeView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakSelf.timeView1);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
+        make.top.equalTo(weakSelf.timeView1.mas_bottom).offset(0);
+    }];
     
     [self.applyTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
@@ -151,9 +198,7 @@
         make.centerY.equalTo(weakSelf.view2);
         make.left.equalTo(weakSelf.applyTimeText);
     }];
-    
-    
-    
+
     [self.back2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.view2);
         make.right.equalTo(0);
@@ -176,25 +221,28 @@
         make.top.equalTo(weakSelf.view2.mas_bottom).offset([self h_w:10]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
     }];
     
-    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+   
+    
+    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.textView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
-    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
+    
+    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
     [self.finish mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
+        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         
@@ -213,6 +261,8 @@
     
     [self addSubview:self.scrollView];
     
+    [self.scrollView addSubview:self.timeView1];
+    [self.scrollView addSubview:self.timeView2];
     [self.scrollView addSubview:self.applyTimeText];
     [self.scrollView addSubview:self.applyTimeShowText];
     [self.scrollView addSubview:self.line1];
@@ -241,9 +291,57 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_loadData{
+    
+    self.index = 0;
+    
+    //设置时间
+    self.applyTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
+    self.lateTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
+  
+    
+    self.cuserCode = @"";
+    self.cuserName = @"";
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.offViewModel.companyCode = companyCode;
+    [self.offViewModel.refreshDataCommand execute:nil];
+    
+}
+
+
 -(void)h_bindViewModel{
+    [[self.offViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.offViewModel.arr.count);
+            [self.tableView reloadData];
+            OffModel *off = self.offViewModel.arr[0];
+            self.sureTimeShowText.text = off.workName;
+            self.workLsh = off.workLsh;
+            
+            //            self.compensateShowText.text = move.shiftName;
+            //            self.shiftOldLsh = move.shiftLsh;
+            //            self.shiftNewLsh = move.shiftLsh;
+            
+        });
+    }];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
     
+}
+
+-(void)applyManViewRefresh:(NSNotification*) notification{
+    NSMutableArray *arrTemp = [notification object];
+    
+    for(int i = 0;i<arrTemp.count-1;i++){
+        TeamListModel *teamList = arrTemp[i];
+        self.cuserCode = [NSString stringWithFormat:@"%@,%@",self.cuserCode,teamList.empCode];
+        self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
+    }
+    
+    self.cuserCode = [self.cuserCode substringFromIndex:1];
+    self.cuserName = [self.cuserName substringFromIndex:1];
 }
 
 
@@ -254,6 +352,60 @@
         _offViewModel = [[OffViewModel alloc] init];
     }
     return _offViewModel;
+}
+
+-(XHDatePickerView *)datepicker{
+    if (!_datepicker) {
+        _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
+            
+            NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            
+            if (startDateText.length > 0) {
+                self.applyTimeShowText.text = startDateText;
+            }
+            
+            if (endDateText.length > 0) {
+                self.lateTimeShowText.text = endDateText;
+            }
+            self.compensateShowText.text = [NSString stringWithFormat:@"%.1f",([LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text]/60.f)];
+            
+        }];
+        _datepicker.datePickerStyle = DateStyleShowYearMonthDayHourMinute;
+        _datepicker.dateType = DateTypeStartDate;
+        _datepicker.minLimitDate = [NSDate date:@"2017-02-01 12:22" WithFormat:@"yyyy-MM-dd HH:mm"];
+        _datepicker.maxLimitDate = [NSDate date:@"2020-12-12 12:12" WithFormat:@"yyyy-MM-dd HH:mm"];    }
+    return _datepicker;
+}
+
+-(UIView *)timeView1{
+    if (!_timeView1) {
+        _timeView1 = [[UIView alloc] init];
+        
+        _timeView1.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeClick1)];
+        [_timeView1 addGestureRecognizer:setTap];
+    }
+    return _timeView1;
+}
+
+-(void)timeClick1{
+    [self.datepicker show];
+}
+
+-(UIView *)timeView2{
+    if (!_timeView2) {
+        _timeView2 = [[UIView alloc] init];
+        
+        _timeView2.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeClick2)];
+        [_timeView2 addGestureRecognizer:setTap];
+    }
+    return _timeView2;
+}
+
+-(void)timeClick2{
+    [self.datepicker show];
 }
 
 
@@ -270,7 +422,7 @@
 -(UILabel *)applyTimeShowText{
     if (!_applyTimeShowText) {
         _applyTimeShowText = [[UILabel alloc] init];
-        _applyTimeShowText.text = @"2016年12月25日 08:30:00";
+        _applyTimeShowText.text = @"";
         _applyTimeShowText.font = H14;
         _applyTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -299,7 +451,7 @@
 -(UILabel *)lateTimeShowText{
     if (!_lateTimeShowText) {
         _lateTimeShowText = [[UILabel alloc] init];
-        _lateTimeShowText.text = @"2016年12月25日 08:30:00";
+        _lateTimeShowText.text = @"";
         _lateTimeShowText.font = H14;
         _lateTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -328,7 +480,7 @@
 -(UILabel *)sureTimeShowText{
     if (!_sureTimeShowText) {
         _sureTimeShowText = [[UILabel alloc] init];
-        _sureTimeShowText.text = @"加班调休";
+        _sureTimeShowText.text = @"";
         _sureTimeShowText.font = H14;
         _sureTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -383,13 +535,20 @@
 
 -(ApplyManView *)applyManView{
     if (!_applyManView) {
-        _applyManView = [[ApplyManView alloc] init];
+        _applyManView = [[ApplyManView alloc] initWithViewModel:self.applyManViewModel];
         
         _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _applyManView.layer.borderWidth =1.0;
-        _applyManView.layer.cornerRadius =5.0;
+        _applyManView.layer.borderWidth = 1.0;
+        _applyManView.layer.cornerRadius = 5.0;
     }
     return _applyManView;
+}
+
+-(ApplyManViewModel *)applyManViewModel{
+    if (!_applyManViewModel) {
+        _applyManViewModel = [[ApplyManViewModel alloc] init];
+    }
+    return _applyManViewModel;
 }
 
 -(UIButton *)finish{
@@ -415,7 +574,39 @@
 }
 
 -(void)finish:(UIButton *)button{
-    [self.offViewModel.submitclickSubject sendNext:nil];
+    
+    if ([self.applyTimeShowText.text isEqualToString:self.lateTimeShowText.text]) {
+        ShowMessage(@"请选择调休时间");
+        return;
+    }
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.offViewModel.companyCode = companyCode;
+    self.offViewModel.applyStartDatetime = self.applyTimeShowText.text;
+    self.offViewModel.applyEndDatetime = self.lateTimeShowText.text;
+    self.offViewModel.applyLenHours = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeText.text]];
+    
+    self.offViewModel.applyReason = self.textView.text;
+    self.offViewModel.applyStatus = @"0";
+    self.offViewModel.flowInstanceId = @"0";
+    self.offViewModel.cuserCode = self.cuserCode;
+    self.offViewModel.cuserName = self.cuserName;
+    
+    
+    self.offViewModel.changeDatetime = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text]];
+    
+    self.offViewModel.shiftOldLsh = self.shiftOldLsh;
+    self.offViewModel.shiftOldName = self.sureTimeShowText.text;
+    
+    
+    self.offViewModel.workLsh = self.workLsh;
+    self.offViewModel.workName = self.sureTimeShowText.text;
+    
+    UserModel *user =  getModel(@"user");
+    self.offViewModel.applyUserCode = user.userCode;
+    self.offViewModel.applyUserName = user.userNickName;
+    
+    [self.offViewModel.applyPaintLeaveCommand execute:nil];
 }
 
 
@@ -433,7 +624,7 @@
 -(UILabel *)compensateShowText{
     if (!_compensateShowText) {
         _compensateShowText = [[UILabel alloc] init];
-        _compensateShowText.text = @"4";
+        _compensateShowText.text = @"";
         _compensateShowText.font = H14;
         _compensateShowText.textColor = MAIN_PAN_2;
     }
@@ -457,12 +648,77 @@
     return _back2;
 }
 
+
 -(UIView *)view1{
     if (!_view1) {
         _view1 = [[UIView alloc] init];
+        _view1.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(click1)];
+        [_view1 addGestureRecognizer:setTap];
     }
     return _view1;
 }
+
+-(void)click1{
+    
+    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
+    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
+    [[HWPopTool sharedInstance] showWithPresentView:self.tableView animated:NO];
+}
+
+
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = GX_BGCOLOR;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[OffCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([OffCellView class])]];
+        _tableView.scrollEnabled = NO;
+    }
+    return _tableView;
+}
+
+#pragma mark - delegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return self.offViewModel.arr.count;
+}
+
+#pragma mark tableViewDataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    OffCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([OffCellView class])] forIndexPath:indexPath];
+    
+    cell.offModel = self.offViewModel.arr[indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return [self h_w:40];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    OffModel *off = self.offViewModel.arr[indexPath.row];
+    
+    self.sureTimeShowText.text = off.workName;
+    
+    self.workLsh = off.workLsh;
+    [[HWPopTool sharedInstance] closeWithBlcok:^{
+        [self.tableView reloadData];
+    }];
+}
+
 
 -(UIView *)view2{
     if (!_view2) {
@@ -486,6 +742,10 @@
         _scrollView = [[UIScrollView alloc] init];
     }
     return _scrollView;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];
 }
 
 @end

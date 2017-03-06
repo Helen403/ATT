@@ -12,7 +12,18 @@
 #import "ApplyManView.h"
 #import "JSTextView.h"
 
-@interface CostView ()
+
+#import "XHDatePickerView.h"
+#import "NSDate+Extension.h"
+#import "ApplyManViewModel.h"
+#import "TeamListModel.h"
+#import "UserModel.h"
+
+#import "CostWorkModel.h"
+#import "CostModel.h"
+#import "CostCellView.h"
+
+@interface CostView ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) CostViewModel *costViewModel;
 
@@ -58,6 +69,27 @@
 
 @property(nonatomic,strong) UIScrollView *scrollView;
 
+@property(nonatomic,strong) ApplyManViewModel *applyManViewModel;
+
+@property(nonatomic,strong) UIView *timeView1;
+
+@property(nonatomic,strong) XHDatePickerView *datepicker;
+
+@property(nonatomic,strong) NSString *cuserCode;
+
+@property(nonatomic,strong) NSString *cuserName;
+
+@property(nonatomic,strong) NSString *workLsh;
+
+@property(nonatomic,strong) UITableView *tableView;
+
+@property(nonatomic,assign) NSInteger index;
+
+@property(nonatomic,strong) NSString *shiftOldLsh;
+
+@property(nonatomic,strong) NSString *shiftNewLsh;
+
+@property(nonatomic,strong) NSString *applyDeptCode;
 @end
 
 @implementation CostView
@@ -76,6 +108,14 @@
     CGFloat padding = [self h_w:15];
     CGFloat length = [self h_w:160];
     
+    
+    [self.timeView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.top.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
+    }];
+    
+ 
     [self.applyTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
         make.top.equalTo(padding);
@@ -172,31 +212,29 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
 
-    
-    
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.view2.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
     }];
     
-    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.textView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
-    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
+    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
     [self.finish mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
+        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         
@@ -215,6 +253,9 @@
     
     [self addSubview:self.scrollView];
     
+    
+    [self.scrollView addSubview:self.timeView1];
+ 
     [self.scrollView addSubview:self.applyTimeText];
     [self.scrollView addSubview:self.applyTimeShowText];
     [self.scrollView addSubview:self.line1];
@@ -251,9 +292,56 @@
     [self updateConstraintsIfNeeded];
 }
 
+
+-(void)h_loadData{
+    
+    self.index = 0;
+    
+    //设置时间
+    self.applyTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
+
+    self.cuserCode = @"";
+    self.cuserName = @"";
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.costViewModel.companyCode = companyCode;
+    [self.costViewModel.refreshDataCommand execute:nil];
+    
+}
+
+
 -(void)h_bindViewModel{
+    [[self.costViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+          
+            
+            CostModel *cost = self.costViewModel.arrDept[0];
+            self.lateTimeShowText.text = cost.deptNickName;
+            self.applyDeptCode = cost.deptCode;
+            
+            CostWorkModel *costWork = self.costViewModel.arrCostType[0];
+            self.compensateShowText.text = costWork.workName;
+            self.workLsh = costWork.workLsh;
+            
+        });
+    }];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
     
+}
+
+-(void)applyManViewRefresh:(NSNotification*) notification{
+    NSMutableArray *arrTemp = [notification object];
+    
+    for(int i = 0;i<arrTemp.count-1;i++){
+        TeamListModel *teamList = arrTemp[i];
+        self.cuserCode = [NSString stringWithFormat:@"%@,%@",self.cuserCode,teamList.empCode];
+        self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
+    }
+    
+    self.cuserCode = [self.cuserCode substringFromIndex:1];
+    self.cuserName = [self.cuserName substringFromIndex:1];
 }
 
 
@@ -266,6 +354,39 @@
     return _costViewModel;
 }
 
+-(XHDatePickerView *)datepicker{
+    if (!_datepicker) {
+        _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
+            
+            NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+//            NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            
+            if (startDateText.length > 0) {
+                self.applyTimeShowText.text = startDateText;
+            }
+
+        }];
+        _datepicker.datePickerStyle = DateStyleShowYearMonthDayHourMinute;
+        _datepicker.dateType = DateTypeStartDate;
+        _datepicker.minLimitDate = [NSDate date:@"2017-02-01 12:22" WithFormat:@"yyyy-MM-dd HH:mm"];
+        _datepicker.maxLimitDate = [NSDate date:@"2020-12-12 12:12" WithFormat:@"yyyy-MM-dd HH:mm"];    }
+    return _datepicker;
+}
+
+-(UIView *)timeView1{
+    if (!_timeView1) {
+        _timeView1 = [[UIView alloc] init];
+        
+        _timeView1.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeClick1)];
+        [_timeView1 addGestureRecognizer:setTap];
+    }
+    return _timeView1;
+}
+
+-(void)timeClick1{
+    [self.datepicker show];
+}
 
 -(UILabel *)applyTimeText{
     if (!_applyTimeText) {
@@ -280,7 +401,7 @@
 -(UILabel *)applyTimeShowText{
     if (!_applyTimeShowText) {
         _applyTimeShowText = [[UILabel alloc] init];
-        _applyTimeShowText.text = @"2016年12月25日 08:30:00";
+        _applyTimeShowText.text = @"";
         _applyTimeShowText.font = H14;
         _applyTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -309,7 +430,7 @@
 -(UILabel *)lateTimeShowText{
     if (!_lateTimeShowText) {
         _lateTimeShowText = [[UILabel alloc] init];
-        _lateTimeShowText.text = @"采购部门";
+        _lateTimeShowText.text = @"";
         _lateTimeShowText.font = H14;
         _lateTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -384,21 +505,28 @@
     if (!_proveView) {
         _proveView = [[ProveView alloc] init];
         _proveView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _proveView.layer.borderWidth =1.0;
-        _proveView.layer.cornerRadius =5.0;
+        _proveView.layer.borderWidth = 1.0;
+        _proveView.layer.cornerRadius = 5.0;
     }
     return _proveView;
 }
 
 -(ApplyManView *)applyManView{
     if (!_applyManView) {
-        _applyManView = [[ApplyManView alloc] init];
+        _applyManView = [[ApplyManView alloc] initWithViewModel:self.applyManViewModel];
         
         _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _applyManView.layer.borderWidth =1.0;
-        _applyManView.layer.cornerRadius =5.0;
+        _applyManView.layer.borderWidth = 1.0;
+        _applyManView.layer.cornerRadius = 5.0;
     }
     return _applyManView;
+}
+
+-(ApplyManViewModel *)applyManViewModel{
+    if (!_applyManViewModel) {
+        _applyManViewModel = [[ApplyManViewModel alloc] init];
+    }
+    return _applyManViewModel;
 }
 
 -(UIButton *)finish{
@@ -425,7 +553,37 @@
 }
 
 -(void)finish:(UIButton *)button{
-    [self.costViewModel.submitclickSubject sendNext:nil];
+
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.costViewModel.companyCode = companyCode;
+    self.costViewModel.applyStartDatetime = self.applyTimeShowText.text;
+    self.costViewModel.applyEndDatetime = self.lateTimeShowText.text;
+    self.costViewModel.applyLenHours = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeText.text]];
+    
+    self.costViewModel.applyReason = self.textView.text;
+    self.costViewModel.applyStatus = @"0";
+    self.costViewModel.flowInstanceId = @"0";
+    self.costViewModel.cuserCode = self.cuserCode;
+    self.costViewModel.cuserName = self.cuserName;
+    
+    
+    self.costViewModel.changeDatetime = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text]];
+    
+    self.costViewModel.shiftOldLsh = self.shiftOldLsh;
+    self.costViewModel.shiftOldName = self.sureTimeShowText.text;
+    
+    self.costViewModel.applyDeptCode = self.applyDeptCode;
+    self.costViewModel.applyDeptName =  self.compensateShowText.text;
+    
+    self.costViewModel.workLsh = self.workLsh;
+    self.costViewModel.workName = self.lateTimeShowText.text;
+    
+    UserModel *user =  getModel(@"user");
+    self.costViewModel.applyUserCode = user.userCode;
+    self.costViewModel.applyUserName = user.userNickName;
+    
+    [self.costViewModel.applyCostCommand execute:nil];
 }
 
 
@@ -442,7 +600,7 @@
 -(UILabel *)compensateShowText{
     if (!_compensateShowText) {
         _compensateShowText = [[UILabel alloc] init];
-        _compensateShowText.text = @"餐费";
+        _compensateShowText.text = @"";
         _compensateShowText.font = H14;
         _compensateShowText.textColor = MAIN_PAN_2;
     }
@@ -470,16 +628,110 @@
 -(UIView *)view1{
     if (!_view1) {
         _view1 = [[UIView alloc] init];
+        _view1.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(click1)];
+        [_view1 addGestureRecognizer:setTap];
     }
     return _view1;
 }
 
+-(void)click1{
+    self.index = 1;
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.costViewModel.arrDept.count);
+    [self.tableView reloadData];
+    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
+    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
+    [[HWPopTool sharedInstance] showWithPresentView:self.tableView animated:NO];
+}
+
+
 -(UIView *)view2{
     if (!_view2) {
         _view2 = [[UIView alloc] init];
+        _view2.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(click2)];
+        [_view2 addGestureRecognizer:setTap];
     }
     return _view2;
 }
+
+-(void)click2{
+    self.index = 2;
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.costViewModel.arrCostType.count);
+    [self.tableView reloadData];
+    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
+    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
+    [[HWPopTool sharedInstance] showWithPresentView:self.tableView animated:NO];
+}
+
+
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = GX_BGCOLOR;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[CostCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([CostCellView class])]];
+        _tableView.scrollEnabled = NO;
+    }
+    return _tableView;
+}
+
+#pragma mark - delegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    if (self.index == 1) {
+        return self.costViewModel.arrDept.count;
+    }else{
+        return self.costViewModel.arrCostType.count;
+    }
+ 
+}
+
+#pragma mark tableViewDataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CostCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([CostCellView class])] forIndexPath:indexPath];
+    
+    if (self.index == 1) {
+       cell.costModel = self.costViewModel.arrDept[indexPath.row];
+    }else{
+        cell.costWorkModel = self.costViewModel.arrCostType[indexPath.row];
+    }
+
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return [self h_w:40];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (self.index == 1) {
+        CostModel *costModel = self.costViewModel.arrDept[indexPath.row];
+        self.lateTimeShowText.text = costModel.deptNickName;
+        self.applyDeptCode = costModel.deptCode;
+        
+    }else{
+        CostWorkModel *costWork = self.costViewModel.arrCostType[indexPath.row];
+        self.compensateShowText.text = costWork.workName;
+        self.workLsh = costWork.workLsh;
+    }
+    
+    [[HWPopTool sharedInstance] closeWithBlcok:^{
+        [self.tableView reloadData];
+    }];
+}
+
 
 
 -(UIView *)line4{
@@ -495,6 +747,10 @@
         _scrollView = [[UIScrollView alloc] init];
     }
     return _scrollView;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];
 }
 
 @end

@@ -50,14 +50,16 @@
 -(void)h_bindViewModel{
     
     [[self.lateViewModel.submitclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-
-        [self.navigationController popViewControllerAnimated:NO];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+             [self.navigationController popViewControllerAnimated:NO];
+            
+        });
+       
     }];
 }
 
--(void)h_viewWillAppear{
-    [self.lateView h_viewWillAppear];
-}
+
 
 #pragma mark lazyload
 -(LateView *)lateView{
