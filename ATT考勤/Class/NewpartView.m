@@ -131,7 +131,7 @@
 }
 
 -(void)h_bindViewModel{
-    [self addDynamic:self];
+   
     
     //请求返回回来的验证码
     [[self.newpartViewModel.SMSbackSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {

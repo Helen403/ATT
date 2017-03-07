@@ -145,7 +145,7 @@
 }
 
 -(void)h_bindViewModel{
-    [self addDynamic:self];
+ 
 }
 
 #pragma mark lazyload

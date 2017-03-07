@@ -281,9 +281,7 @@
 }
 
 
--(void)h_viewWillAppear{
-    
-}
+
 
 #pragma mark lazyload
 -(LeaveViewModel *)leaveViewModel{

@@ -7570,7 +7570,7 @@
 					/usr/include/libxml2,
 				);
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Helen.ATT--";
 				PRODUCT_NAME = ATT;
@@ -7588,7 +7588,7 @@
 				DEVELOPMENT_TEAM = 7P42T6TU6M;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ATT考勤/PrefixHeader.pch";
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Helen.ATT--";
 				PRODUCT_NAME = ATT;

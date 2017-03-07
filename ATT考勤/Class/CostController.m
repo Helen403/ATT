@@ -53,11 +53,19 @@
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:NO];
+             [self.costView h_viewWillDisappear];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ApplyManViewRemove" object:nil];
         });
     }];
-    
 }
 
+-(void)h_viewWillAppear{
+    [self.costView h_viewWillAppear];
+}
+
+-(void)h_viewWillDisappear{
+   
+}
 
 #pragma mark lazyload
 -(CostView *)costView{
@@ -75,7 +83,9 @@
     
 }
 
-
+-(void)dealloc{
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManViewRemove" object:nil];
+}
 
 
 @end

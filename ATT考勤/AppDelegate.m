@@ -39,8 +39,6 @@
     
     /******************************************************************/
     
-    
-    
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstStart"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstStart"];
         
@@ -68,8 +66,6 @@
         self.window.backgroundColor = white_color;
         [self.window makeKeyAndVisible];
         self.window.rootViewController = leadController;
-        
-        
     }else{
       
         
@@ -121,9 +117,6 @@
     return YES;
 }
 
-
-
-
 -(void)setRoot{
     for (UIView *v in self.window.subviews) {
         [v removeFromSuperview];
@@ -131,25 +124,11 @@
     self.window.rootViewController = self.nav;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-  
-}
+- (void)applicationWillResignActive:(UIApplication *)application {}
+- (void)applicationDidEnterBackground:(UIApplication *)application {}
+- (void)applicationWillEnterForeground:(UIApplication *)application {}
+- (void)applicationDidBecomeActive:(UIApplication *)application {}
+- (void)applicationWillTerminate:(UIApplication *)application {}
 
 #pragma mark lazyload
 -(XCFNavigationController *)nav{
@@ -158,14 +137,13 @@
         [_nav addChildViewController:[[LoginViewController alloc] init]];
     }
     return _nav;
-    
 }
 
 
 - (void)onGetNetworkState:(int)iError
 {
     if (0 == iError) {
-        NSLog(@"联网成功");
+//        NSLog(@"联网成功");
     }
     else{
         NSLog(@"onGetNetworkState %d",iError);
@@ -175,7 +153,7 @@
 - (void)onGetPermissionState:(int)iError
 {
     if (0 == iError) {
-        NSLog(@"授权成功");
+//        NSLog(@"授权成功");
     }
     else {
         NSLog(@"onGetPermissionState %d",iError);

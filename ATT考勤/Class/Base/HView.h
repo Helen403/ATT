@@ -22,7 +22,7 @@
 //-(void)toast:(NSString *)text;
 
 
--(void)addDynamic:(UIView *)tmpView;
+//-(void)addDynamic:(UIView *)tmpView;
 
 
 @end

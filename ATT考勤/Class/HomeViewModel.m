@@ -12,6 +12,8 @@
 
 @implementation HomeViewModel
 
+
+
 #pragma mark private
 -(void)h_initialize{
     
@@ -19,14 +21,15 @@
         DismissHud();
         
         if (result.length<200) {
-            ShowMessage(@"没有上班规则明细");
+              NSNumber *row =[NSNumber numberWithInteger:2];
+            [self.attendFailSubject sendNext:row];
         }else{
             NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAttendRecordByUserDateResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAttendRecordByUserDateResponse>"];
             
             NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[AttendCardRecord class] rowRootName:@"AttendCardRecords"];
             self.arrAttendRecord = arr;
-            
-            [self.attendRecordSubject sendNext:nil];
+            NSNumber *row =[NSNumber numberWithInteger:1];
+            [self.attendRecordSubject sendNext:row];
         }
 
     }];
@@ -142,6 +145,13 @@
     return _attendRecordSubject;
 }
 
+-(RACSubject *)attendFailSubject{
+    if (!_attendFailSubject) {
+        _attendFailSubject = [RACSubject subject];
+    }
+    return _attendFailSubject;
+}
+
 #pragma mark lazyload
 -(RACCommand *)sendclickCommand{
     if (!_sendclickCommand) {
@@ -243,7 +253,6 @@
 }
 
 
-
 #pragma mark lazyload
 -(RACCommand *)findAttendRecordByUserDateCommand{
     if (!_findAttendRecordByUserDateCommand) {
@@ -289,8 +298,6 @@
 }
 
 
-
-
 #pragma mark lazyload
 -(RACCommand *)attendRecordCommand{
     if (!_attendRecordCommand) {
@@ -334,8 +341,5 @@
     }
     return _attendRecordCommand;
 }
-
-
-
 
 @end

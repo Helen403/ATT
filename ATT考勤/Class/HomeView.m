@@ -90,6 +90,10 @@
 
 @property(nonatomic,assign) NSInteger retCode;
 
+@property(nonatomic,strong) NSString *startDatetime;
+
+@property(nonatomic,strong) NSString *endDatetime;
+
 
 @end
 
@@ -348,42 +352,6 @@
     }
 }
 
--(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-    CLLocationCoordinate2D coord = [userLocation coordinate];
-    NSLog(@"经度:%f,纬度:%f",coord.latitude,coord.longitude);
-    
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation: userLocation.location completionHandler:^(NSArray *array, NSError *error) {
-        if (array.count > 0) {
-            CLPlacemark *placemark = [array objectAtIndex:0];
-            if (placemark != nil) {
-                //                NSString *city = placemark.locality;
-                //                //                NSLog(@"%@",city);
-                //                NSString *city1 = placemark.name;
-                //                //                NSLog(@"%@",city1);
-                //                self.locAddress = [NSString stringWithFormat:@"%@%@",city,city1];
-                NSDictionary *city2 = placemark.addressDictionary;
-                //                NSLog(@"%@",city2);
-                NSArray *dict = city2[@"FormattedAddressLines"];
-                NSString *str=  [dict objectAtIndex:0];
-                //                NSLog(@"%@",str);
-                //                NSString *city3 = placemark.region;
-                //                NSLog(@"%@",city3);
-                //找到了当前位置城市后就关闭服务
-                
-                
-                
-                [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"locAddress"];
-                
-                [self.locService stopUserLocationService];
-                
-            }
-        }
-    }];
-    
-    
-}
-
 
 //实现相关delegate 处理位置信息更新
 //处理方向变更信息
@@ -448,10 +416,6 @@
 -(void)h_bindViewModel{
     
     //设置时间
-    
-    [self addDynamic:self];
-    
-    
     [[self.homeViewModel.resultSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
         
         [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
@@ -463,56 +427,256 @@
             [self attendCardSuccess];
             
         });
-        
     }];
     
-    [[self.homeViewModel.attendRecordSuccessSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            self.punch.userInteractionEnabled = YES;
-            //设置时间
-            //            [self setTime];
-            
-        });
-        
-    }];
     
     [[self.homeViewModel.attendRecordSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
-        [self performSelectorOnMainThread:@selector(attendRecord) withObject:nil waitUntilDone:YES];
+        [self performSelectorOnMainThread:@selector(attendRecord:) withObject:x waitUntilDone:YES];
         
     }];
     
+    
+    
 }
--(void)attendRecord{
+-(void)attendRecord:(NSNumber *)num{
+    NSString *curDate =[LSCoreToolCenter currentYearType];// 当前日期
+    NSString *onworkdatetime = [NSString stringWithFormat:@"%@ %@:00", curDate,self.startDatetime]; // 上班时间
+    NSString *offworkdatetime = [NSString stringWithFormat:@"%@ %@:00", curDate,self.endDatetime];; // 下班时间
+    NSString *curDatetime = [LSCoreToolCenter curDate]; // 获取当前时间
     
-    if (self.homeViewModel.arrAttendRecord.count == 1) {
-        AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
-        //已经打过卡
-        if ([attendCardRecord1.cardStatus isEqualToString:@"0"]) {
-            self.status.text = @"状态:正常";
-            //            self.preImg =
+    
+    int retbackstatus=-1; //查询状态
+    NSString *retbackcardstatus_onwork=@"-1"; //上班打卡状态
+    NSString *retbackcardtime_onwork=@"-:-"; //上班打卡时间
+    NSString *retbackcardstatus_offwork=@"-1"; //上班打卡状态
+    NSString *retbackcardtime_offwork=@"-:-"; //下班打卡时间
+    if ([num intValue]==1) {
+        
+        //一条记录可能是上班的记录,也可能是下班的记录
+        if (self.homeViewModel.arrAttendRecord.count == 1) {
+            
+            
+            AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
+            
+            
+            NSString *carddatetime=[NSString stringWithFormat:@"%@ %@:00",attendCardRecord1.cardTime]; // 打卡时间
+            NSString *onworkbefore30 =[LSCoreToolCenter getDateAddMinuts:onworkdatetime time:-1*offSetCardArea];//上班标准时间-30分钟
+            NSString *onworkafter30 =[LSCoreToolCenter getDateAddMinuts:onworkdatetime time:offSetCardArea];//上班标准时间+30分钟
+            long onworkbeforediff =[LSCoreToolCenter getDateDiff:carddatetime end:onworkbefore30];
+            long onworkafterdiff =[LSCoreToolCenter getDateDiff:carddatetime end:onworkafter30];
+            //上班打过卡了
+            if(onworkafterdiff>0 && onworkbeforediff<=0){
+                
+                retbackstatus=1;
+                retbackcardstatus_onwork=attendCardRecord1.cardStatus;
+                retbackcardstatus_offwork = @"-1";
+                retbackcardtime_onwork= attendCardRecord1.cardTime;
+                retbackcardtime_offwork=self.endDatetime;
+                //上班漏打卡,下班打过一次卡
+            }else{
+                retbackstatus=2;
+                retbackcardstatus_onwork=@"-1";
+                retbackcardstatus_offwork=attendCardRecord1.cardStatus;
+                retbackcardtime_onwork=@"-:-";
+                retbackcardtime_offwork=attendCardRecord1.cardTime;
+            }
+            
+            
+            
+            
+            //        //已经打过卡
+            //        if ([attendCardRecord1.cardStatus isEqualToString:@"0"]) {
+            //            self.status.text = @"状态:正常";
+            //            //            self.preImg =
+            //        }
+            //        //早退
+            //        if ([attendCardRecord1.cardStatus isEqualToString:@"1"]){
+            //            self.status.text = @"状态:早退";
+            //        }
+            //        //迟到
+            //        if ([attendCardRecord1.cardStatus isEqualToString:@"2"]){
+            //            self.status.text = @"状态:迟到";
+            //        }
         }
-        //早退
-        if ([attendCardRecord1.cardStatus isEqualToString:@"1"]){
-            self.status.text = @"状态:早退";
+        
+        if (self.homeViewModel.arrAttendRecord.count == 2) {
+            AttendCardRecord *record_onwork = self.homeViewModel.arrAttendRecord[0];
+            AttendCardRecord *record_offwork = self.homeViewModel.arrAttendRecord[0];
+            
+            retbackstatus=3;
+            retbackcardstatus_onwork = record_onwork.cardStatus;
+            retbackcardstatus_offwork = record_offwork.cardStatus;
+            retbackcardtime_onwork = record_onwork.cardTime;
+            retbackcardtime_offwork = record_offwork.cardTime;
         }
-        //迟到
-        if ([attendCardRecord1.cardStatus isEqualToString:@"2"]){
-            self.status.text = @"状态:迟到";
+        
+    }else{
+        NSString *onworkafter30 =[LSCoreToolCenter getDateAddMinuts:onworkdatetime time:offSetCardArea];//上班标准时间+30分钟
+        NSString *offworkafter30 =[LSCoreToolCenter getDateAddMinuts:offworkdatetime time:offSetCardArea];//下班标准时间+30分钟
+        long onworkdiff =[LSCoreToolCenter getDateDiff:curDatetime end:onworkafter30];
+        long offworkdiff =[LSCoreToolCenter getDateDiff:curDatetime end:offworkafter30];
+        //在上班正常或者迟到的范围之内
+        if(onworkdiff>0){
+            
+            retbackstatus=4;
+            retbackcardstatus_onwork=@"-1";
+            retbackcardstatus_offwork=@"-1";
+            retbackcardtime_onwork=self.startDatetime;
+            retbackcardtime_offwork=self.endDatetime;
+            //上班漏打打卡了
+        }else{
+            //在下班正常的范围之内
+            if(offworkdiff>0){
+                
+                retbackstatus=5;
+                retbackcardstatus_onwork=@"-1";
+                retbackcardstatus_offwork=@"-1";
+                retbackcardtime_onwork=@"-:-";
+                retbackcardtime_offwork=self.endDatetime;
+            }else{
+                //下班漏打打卡了
+                
+                retbackstatus=6;
+                retbackcardstatus_onwork=@"-1";
+                retbackcardstatus_offwork=@"-1";
+                retbackcardtime_onwork=@"-:-";
+                retbackcardtime_offwork=@"-:-";
+            }
         }
+        
     }
     
-    if (self.homeViewModel.arrAttendRecord.count == 2) {
-        AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
-        AttendCardRecord *attendCardRecord2 = self.homeViewModel.arrAttendRecord[0];
-    }
+    switch(retbackstatus){
+        case 1:{ //上班打过卡了
+            if ([LSCoreToolCenter isDayOrNight:self.preText.text]) {
+                
+                self.preImg.image = ImageNamed(@"homepage_rest_gray");
+            } else {
+                
+                self.preImg.image = ImageNamed(@"homepage_work_gray");
+            }
+            if([@"0" isEqualToString: retbackcardstatus_onwork]){
+                
+                self.status.text = @"状态:正常";
+            }
+            if([@"1" isEqualToString:retbackcardstatus_onwork]){
+                
+                self.status.text = @"状态:早退";
+            }
+            if([@"2" isEqualToString:retbackcardstatus_onwork]){
+                
+                self.status.text = @"状态:迟到";
+            }
+            self.preText.text = retbackcardtime_onwork;
+            self.lastText.text = retbackcardtime_offwork;
+            
+            break;
+        }
+        case 2:{ //上班漏打卡,下班打过一次卡
+            if ([LSCoreToolCenter isDayOrNight:self.preText.text]) {
+                
+                self.preImg.image = ImageNamed(@"homepage_rest_gray");
+            } else {
+                
+                self.preImg.image = ImageNamed(@"homepage_work_gray");
+            }
+            if ([LSCoreToolCenter isDayOrNight:self.lastText.text]) {
+                
+                self.lastImg.image = ImageNamed(@"homepage_rest_gray");
+            } else {
+                
+                self.lastImg.image = ImageNamed(@"homepage_work_gray");
+            }
+            if([@"0" isEqualToString: retbackcardstatus_offwork]){
+                
+                self.status.text = @"状态:正常";
+            }
+            if([@"1" isEqualToString: retbackcardstatus_offwork]){
+                
+                self.status.text = @"状态:早退";
+            }
+            if([@"2" isEqualToString: retbackcardstatus_offwork]){
+                self.status.text = @"状态:迟到";
+            }
+            self.preText.text = retbackcardtime_onwork;
+            self.lastText.text = retbackcardtime_offwork;
+            break;
+        }
+        case 3:{ //上班打卡正常,下班打过卡了
+            if ([LSCoreToolCenter isDayOrNight:self.preText.text]) {
+                
+                self.preImg.image = ImageNamed(@"homepage_rest_gray");
+            } else {
+                
+                self.preImg.image = ImageNamed(@"homepage_work_gray");
+            }
+            if ([LSCoreToolCenter isDayOrNight:self.lastText.text]) {
+            
+                self.lastImg.image = ImageNamed(@"homepage_rest_gray");
+            } else {
+                self.lastImg.image = ImageNamed(@"homepage_work_gray");
+            }
+            if([@"0" isEqualToString:retbackcardstatus_offwork]){
+                
+                self.status.text = @"状态:正常";
+            }
+            if([@"1" isEqualToString:retbackcardstatus_offwork]){
+                self.status.text = @"状态:早退";
+            }
+            if([@"2" isEqualToString:retbackcardstatus_offwork]){
+                 self.status.text = @"状态:迟到";
+            }
+            self.preText.text = retbackcardtime_onwork;
+            self.lastText.text = retbackcardtime_offwork;
+            break;
+        }
+        case 4:{ //没打卡,在上班正常或者迟到的范围之内
+         
+            self.preText.text = retbackcardtime_onwork;
+            self.lastText.text = retbackcardtime_offwork;
+            break;
+        }
+        case 5:{ //没打卡,上班漏打打卡了,在下班正常的范围之内
+            if ([LSCoreToolCenter isDayOrNight:self.preText.text]) {
+                
+                self.preImg.image = ImageNamed(@"homepage_rest_gray");
+            } else {
+               
+                self.preImg.image = ImageNamed(@"homepage_work_gray");
+            }
+            self.preText.text = retbackcardtime_onwork;
+            self.lastText.text = retbackcardtime_offwork;
+            break;
+        }
+        case 6:{ //没打卡,上班漏打打卡了,下班漏打打卡了
+            if ([LSCoreToolCenter isDayOrNight:self.preText.text]) {
+               
+                self.preImg.image = ImageNamed(@"homepage_rest_gray");
+            } else {
+               
+                self.preImg.image = ImageNamed(@"homepage_work_gray");
+            }
+            if ([LSCoreToolCenter isDayOrNight:self.lastText.text]) {
+                
+                 self.lastImg.image = ImageNamed(@"homepage_rest_gray");
+            } else {
+               
+                self.lastImg.image = ImageNamed(@"homepage_work_gray");
+            }
+            self.preText.text = retbackcardtime_onwork;
+            self.lastText.text = retbackcardtime_offwork;
+            break;
+        }
+	}
+    
     
 }
 
 
 //打卡后更新界面
 -(void)attendCardSuccess{
-    
+    self.punch.userInteractionEnabled = YES;
     // A=1,B=2,C=3,D=4,E=5,F=6,G=7,H=8
     if(self.timePoint==1||self.timePoint==3||self.timePoint==5||self.timePoint==7){
         self.preText.text = [LSCoreToolCenter currentDateHMS];
@@ -548,7 +712,7 @@
 -(void)mainThread{
     EmpModel *empModel =  self.homeViewModel.empModel;
     Dept *dept = self.homeViewModel.dept;
-
+    
     self.name.text = empModel.empName;
     self.department.text = [NSString stringWithFormat:@"%@ %@",dept.deptNickName,empModel.position];
     
@@ -563,7 +727,7 @@
         AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
         self.preText.text = [NSString stringWithFormat:@"%@:00",detail1.workStartDatetime];
         self.lastText.text = [NSString stringWithFormat:@"%@:00",detail1.workEndDatetime];
-        self.cardPhase=0;
+        self.cardPhase = 0;
     }
     
     /**************************************************/
@@ -593,7 +757,7 @@
         AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
         AttendWorkShiftDetail *detail2 = self.homeViewModel.arr[1];
         AttendWorkShiftDetail *detail3 = self.homeViewModel.arr[2];
-
+        
         NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail2.workStartDatetime]; //取的第2次上班时间
         NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:-1*offSetCardArea];
         long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
@@ -697,6 +861,10 @@
     
     self.homeViewModel.cardDate = [LSCoreToolCenter currentYearType];
     self.homeViewModel.timePhase =[NSString stringWithFormat:@"%ld",(long)self.cardPhase];
+    
+    self.startDatetime = self.preText.text;
+    
+    self.endDatetime = self.lastText.text;
     
     [self.homeViewModel.findAttendRecordByUserDateCommand execute:nil];
     

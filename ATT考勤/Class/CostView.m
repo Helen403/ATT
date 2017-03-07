@@ -344,7 +344,12 @@
     self.cuserName = [self.cuserName substringFromIndex:1];
 }
 
+-(void)h_viewWillAppear{
+}
 
+-(void)h_viewWillDisappear{
+    self.applyManViewModel.arr = nil;
+}
 
 #pragma mark lazyload
 -(CostViewModel *)costViewModel{

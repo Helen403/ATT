@@ -28,7 +28,7 @@
     
     [self.Img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.title.mas_bottom).offset(10);
-        make.left.equalTo(15);
+        make.left.equalTo(weakSelf.title);
     }];
     
     [super updateConstraints];
@@ -62,7 +62,7 @@
 -(UIImageView *)Img{
     if (!_Img) {
         _Img = [[UIImageView alloc] init];
-        _Img.image = ImageNamed(@"role_code_icon");
+        _Img.image = ImageNamed(@"ic_a");
     }
     return _Img;
 }

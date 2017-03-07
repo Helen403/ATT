@@ -53,11 +53,19 @@
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:NO];
+             [self.leaveEarlyView h_viewWillDisappear];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ApplyManViewRemove" object:nil];
         });
     }];
-    
 }
 
+-(void)h_viewWillAppear{
+    [self.leaveEarlyView h_viewWillAppear];
+}
+
+-(void)h_viewWillDisappear{
+   
+}
 
 #pragma mark lazyload
 -(LeaveEarlyView *)leaveEarlyView{
@@ -76,5 +84,7 @@
 }
 
 
-
+-(void)dealloc{
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManViewRemove" object:nil];
+}
 @end

@@ -9,6 +9,7 @@
 #import "MyOpinionView.h"
 #import "MyOpinionViewModel.h"
 #import "JSTextView.h"
+#import "IQKeyboardManager.h"
 
 @interface MyOpinionView()<UITextFieldDelegate>
 
@@ -163,10 +164,20 @@
 }
 
 -(void)h_bindViewModel{
-    [self addDynamic:self];
+    
 }
 
--(void)h_refreash{
+
+-(void)h_viewWillAppear{
+    //打开键盘事件相应
+    
+    [IQKeyboardManager sharedManager].enable = NO;
+}
+
+-(void)h_viewWillDisappear{
+    //关闭键盘事件相应
+    
+    [IQKeyboardManager sharedManager].enable = YES;
 }
 
 

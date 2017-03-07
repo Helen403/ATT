@@ -68,7 +68,7 @@
         DismissHud();
         
         if (result.length<189) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"cardScore"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"cardScore"];
         }else{
             NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
             [[NSUserDefaults standardUserDefaults] setObject:xmlDoc forKey:@"cardScore"];

@@ -98,7 +98,7 @@
 }
 
 -(void)h_bindViewModel{
-    [self addDynamic:self];
+   
     
     //加入公司后弹出部门选择
     [[self.companyCodeViewModel.showClickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {

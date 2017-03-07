@@ -46,9 +46,13 @@
 
 }
 
--(void)h_viewWillAppear{
-    [self.myOpinionView h_refreash];
 
+-(void)h_viewWillAppear{
+    [self.myOpinionView h_viewWillAppear];
+}
+
+-(void)h_viewWillDisappear{
+     [self.myOpinionView h_viewWillDisappear];
 }
 
 

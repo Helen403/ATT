@@ -46,9 +46,7 @@
     [self.view addSubview:self.leaveView];
 }
 
--(void)h_viewWillAppear{
-    [self.leaveView h_viewWillAppear];
-}
+
 
 -(void)h_bindViewModel{
     

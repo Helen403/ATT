@@ -47,6 +47,7 @@
 -(void)h_setupViews{
 
     [self addSubview:self.tableView];
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }

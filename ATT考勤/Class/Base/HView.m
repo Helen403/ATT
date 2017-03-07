@@ -15,11 +15,9 @@
 {
     self = [super init];
     if (self) {
-        
         [self h_setupViews];
         [self h_loadData];
         [self h_bindViewModel];
-
     }
     return self;
 }
@@ -28,7 +26,6 @@
     
     self = [super init];
     if (self) {
-        
         [self h_setupViews];
         [self h_loadData];
         [self h_bindViewModel];
@@ -36,15 +33,13 @@
     return self;
 }
 
-- (void)h_setupViews {
-    
+- (void)h_setupViews{
 }
 
 - (void)h_loadData{
-
 }
 
-- (void)h_bindViewModel {
+- (void)h_bindViewModel{
 }
 
 - (void)h_addReturnKeyBoard {
@@ -84,6 +79,7 @@
 }
 
 -(void)addDynamic:(UIView *)tmpView{
+  
     self.tmpView = tmpView;
     self.tmpView.userInteractionEnabled = YES;
     UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClick:)];

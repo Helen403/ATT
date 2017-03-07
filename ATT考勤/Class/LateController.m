@@ -53,7 +53,7 @@
         
         dispatch_sync(dispatch_get_main_queue(), ^{
              [self.navigationController popViewControllerAnimated:NO];
-            
+           
         });
        
     }];
@@ -75,6 +75,10 @@
     }
     return _lateViewModel;
     
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManViewRemove" object:nil];
 }
 
 

@@ -219,7 +219,7 @@
 }
 
 -(void)h_bindViewModel{
-    [self addDynamic:self];
+    
     //密码错误
     [[self.loginViewModel.loginclickFail takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
@@ -236,7 +236,6 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             [[NSUserDefaults standardUserDefaults] setObject:self.useTextField.text forKey:@"userbackups"];
             [[NSUserDefaults standardUserDefaults] setObject:self.pwdTextField.text forKey:@"pwdbackups"];
-            
         });
     }];
     

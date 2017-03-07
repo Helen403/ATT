@@ -82,4 +82,6 @@
 
 @property(nonatomic,strong) RACSubject *attendRecordSubject;
 
+@property(nonatomic,strong) RACSubject *attendFailSubject;
+
 @end

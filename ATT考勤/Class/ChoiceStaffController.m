@@ -53,13 +53,16 @@
     [self.choiceStaffViewModel.refreshDataCommand execute:nil];
 }
 
-
 -(void)h_bindViewModel{
     [[self.choiceStaffViewModel.sendSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ApplyManView" object:self.choiceStaffViewModel.selectorPatnArray];
         NSArray *temArray = self.navigationController.viewControllers;
         [self.navigationController popToViewController:temArray[1] animated:NO];
     }];
+}
+
+-(void)h_viewWillDisappear{
+    self.choiceStaffViewModel.selectorPatnArray = nil;
 }
 
 #pragma mark lazyload

@@ -140,7 +140,7 @@
 -(UIImageView *)star{
     if (!_star) {
         _star = [[UIImageView alloc] init];
-        _star.image = ImageNamed(@"role_code_icon");
+//        _star.image = ImageNamed(@"role_code_icon");
     }
     return _star;
 }
