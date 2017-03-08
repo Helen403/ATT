@@ -23,7 +23,7 @@
 #import "CostModel.h"
 #import "CostCellView.h"
 
-@interface CostView ()<UITableViewDelegate,UITableViewDataSource>
+@interface CostView ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @property(nonatomic,strong) CostViewModel *costViewModel;
 
@@ -41,7 +41,7 @@
 
 @property(nonatomic,strong) UILabel *sureTimeText;
 
-@property(nonatomic,strong) UILabel *sureTimeShowText;
+@property(nonatomic,strong) UITextField *sureTimeShowText;
 
 @property(nonatomic,strong) UIView *line3;
 
@@ -90,6 +90,7 @@
 @property(nonatomic,strong) NSString *shiftNewLsh;
 
 @property(nonatomic,strong) NSString *applyDeptCode;
+
 @end
 
 @implementation CostView
@@ -149,9 +150,7 @@
         make.right.equalTo(0);
     }];
     
-    
     [self.lateTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
-        
        make.right.equalTo(weakSelf.back1.mas_left).offset(-[self h_w:10]);
              make.centerY.equalTo(weakSelf.view1);
     }];
@@ -163,7 +162,6 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
-    
     [self.sureTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.line2.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.applyTimeText);
@@ -171,7 +169,7 @@
     
     [self.sureTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.sureTimeText);
-        make.right.equalTo(weakSelf.line1);
+        make.right.equalTo(weakSelf.line1.mas_right).offset(-[self h_w:10]);
     }];
     
     [self.line3 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -390,6 +388,7 @@
 }
 
 -(void)timeClick1{
+    _datepicker = nil;
     [self.datepicker show];
 }
 
@@ -461,15 +460,87 @@
     
 }
 
--(UILabel *)sureTimeShowText{
+-(UITextField *)sureTimeShowText{
     if (!_sureTimeShowText) {
-        _sureTimeShowText = [[UILabel alloc] init];
-        _sureTimeShowText.text = @"0.00";
-        _sureTimeShowText.font = H14;
+        _sureTimeShowText = [[UITextField alloc] init];
+        _sureTimeShowText.backgroundColor = [UIColor clearColor];
+        //设置边框样式，只有设置了才会显示边框样式
+        
+        // 设置内容 -- 垂直居中
+        _sureTimeShowText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+         _sureTimeShowText.textAlignment = NSTextAlignmentRight;
+        
+        //当输入框没有内容时，水印提示 提示内容为password
+        _sureTimeShowText.placeholder = @"报销金额";
+        _sureTimeShowText.tintColor = MAIN_PAN_2;
         _sureTimeShowText.textColor = MAIN_PAN_2;
+        //修改account的placeholder的字体颜色、大小
+        [_sureTimeShowText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
+        [_sureTimeShowText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
+        //设置输入框内容的字体样式和大小
+        _sureTimeShowText.font = H14;
+        // 设置右边永远显示清除按钮
+//        _sureTimeShowText.clearButtonMode = UITextFieldViewModeAlways;
+    
+        // 5.监听文本框的文字改变
+        _sureTimeShowText.delegate = self;
     }
     return _sureTimeShowText;
 }
+
++ (BOOL)validateNumber:(NSString*)number text:(NSString *)textFieldText floatCount:(NSInteger)floatCount {
+    BOOL res = YES;
+    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
+    int i = 0;
+    if (number.length==0) {
+        //允许删除
+        return  YES;
+    }
+    while (i < number.length) {
+        //确保是数字
+        NSString * string = [number substringWithRange:NSMakeRange(i, 1)];
+        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+        if (range.length == 0) {
+            res = NO;
+            break;
+        }
+        i++;
+    }
+    if (textFieldText.length==0) {
+        //第一个不能是0和.
+        if ([number isEqualToString:@"0"]||[number isEqualToString:@"."]) {
+            return NO;
+        }
+    }
+    NSArray *array = [textFieldText componentsSeparatedByString:@"."];
+    NSInteger count = [array count] ;
+    //小数点只能有一个
+    if (count>1&&[number isEqualToString:@"."]) {
+        return NO;
+    }
+    //控制小数点后面的字数
+    if ([textFieldText rangeOfString:@"."].location!=NSNotFound) {
+        if (textFieldText.length-[textFieldText rangeOfString:@"."].location>floatCount) {
+            return NO;
+        }
+    }
+    return res;
+    
+}
+
+//-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//    
+//    if (textField==self.sureTimeShowText) {
+//        
+//        return [CommanTool validateNumber:string text:textField.text floatCount:1];
+//        
+//    }
+//    
+//    return YES;
+//    
+//}
+
+
 
 -(UIView *)line3{
     if (!_line3) {
@@ -549,8 +620,7 @@
         
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-      
-        
+
         [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     
@@ -559,6 +629,11 @@
 
 -(void)finish:(UIButton *)button{
 
+    if (self.sureTimeShowText.text.length==0) {
+        ShowMessage(@"请输入报销金额");
+        return;
+    }
+    
     
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.costViewModel.companyCode = companyCode;
@@ -583,6 +658,8 @@
     
     self.costViewModel.workLsh = self.workLsh;
     self.costViewModel.workName = self.lateTimeShowText.text;
+    
+    self.costViewModel.applyMoney = self.sureTimeShowText.text;
     
     UserModel *user =  getModel(@"user");
     self.costViewModel.applyUserCode = user.userCode;
@@ -736,8 +813,6 @@
         [self.tableView reloadData];
     }];
 }
-
-
 
 -(UIView *)line4{
     if (!_line4) {

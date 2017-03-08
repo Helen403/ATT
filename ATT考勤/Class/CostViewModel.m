@@ -162,11 +162,12 @@
                                  <copyUserCode xmlns=\"\">%@</copyUserCode>\
                                  <copyUserName xmlns=\"\">%@</copyUserName>\
                                  <workLsh xmlns=\"\">%@</workLsh>\
-                                 <copyUserName xmlns=\"\">%@</copyUserName>\
+                                 <workName xmlns=\"\">%@</workName>\
+                                  <applyMoney xmlns=\"\">%@</applyMoney>\
                                  <applyUserCode xmlns=\"\">%@</applyUserCode>\
                                  <applyUserName xmlns=\"\">%@</applyUserName>\
-                                 </saveApplyCost>",self.companyCode,self.applyStartDatetime,self.applyDeptCode,self.applyDeptName,self.applyReason,self.applyStatus,self.flowInstanceId,self.cuserCode,self.cuserName,self.workLsh,self.workName,self.applyUserCode,self.applyUserName];
-                
+                                 </saveApplyCost>",self.companyCode,self.applyStartDatetime,self.applyDeptCode,self.applyDeptName,self.applyReason,self.applyStatus,self.flowInstanceId,self.cuserCode,self.cuserName,self.workLsh,self.workName,self.applyMoney,self.applyUserCode,self.applyUserName];
+  
                 [self SOAPData:saveApplyCost soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];

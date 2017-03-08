@@ -14,7 +14,6 @@
 
 @property(nonatomic,strong) UILabel *title;
 
-@property(nonatomic,strong) UISwitch *on;
 
 @property(nonatomic,strong) UIView *line;
 
@@ -34,12 +33,12 @@
     }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-         make.centerY.equalTo(weakSelf);
+        make.centerY.equalTo(weakSelf);
         make.left.equalTo(weakSelf.img.mas_right).offset([self h_w:10]);
     }];
     
     [self.on mas_makeConstraints:^(MASConstraintMaker *make) {
-         make.centerY.equalTo(weakSelf);
+        make.centerY.equalTo(weakSelf);
         make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
     
@@ -72,6 +71,32 @@
     _messageModel = messageModel;
     self.img.image = ImageNamed(messageModel.img);
     self.title.text= messageModel.title;
+    if (self.index == 0) {
+        NSString *announce =  [[NSUserDefaults standardUserDefaults] objectForKey:@"findIsReceAnnounce"];
+        if ([announce isEqualToString:@"0"]) {
+            [self.on setOn:YES];
+        }else{
+            [self.on setOn:NO];
+        }
+    }
+    
+    if (self.index == 1) {
+        NSString *notice =  [[NSUserDefaults standardUserDefaults] objectForKey:@"findIsReceNotice"];
+        if ([notice isEqualToString:@"0"]) {
+            [self.on setOn:YES];
+        }else{
+            [self.on setOn:NO];
+        }
+    }
+    if (self.index == 2) {
+        NSString *news =  [[NSUserDefaults standardUserDefaults] objectForKey:@"findIsReceNews"];
+        if ([news isEqualToString:@"0"]) {
+            [self.on setOn:YES];
+        }else{
+            [self.on setOn:NO];
+        }
+    }
+    
 }
 
 
@@ -97,10 +122,40 @@
 -(UISwitch *)on{
     if (!_on) {
         _on = [[UISwitch alloc] init];
+        [_on addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     }
     return _on;
 }
 
+-(void) switchAction:(UISwitch *)sender{
+    if (self.index == 0) {
+       
+        if ([sender isOn]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"findIsReceAnnounce"];
+        }else{
+          [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"findIsReceAnnounce"];
+        }
+
+    }
+    
+    if (self.index == 1) {
+        if ([sender isOn]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"findIsReceNotice"];
+        }else{
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"findIsReceNotice"];
+        }
+
+      
+    }
+    if (self.index == 2) {
+        if ([sender isOn]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"findIsReceNews"];
+        }else{
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"findIsReceNews"];
+        }
+    }
+   
+}
 
 -(UIView *)line{
     if (!_line) {
@@ -108,6 +163,6 @@
         _line.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line;
-
+    
 }
 @end

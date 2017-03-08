@@ -42,9 +42,9 @@
         
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
         if ([xmlDoc isEqualToString:@"0"]) {
-            ShowMessage(@"出差申请成功");
+            ShowMessage(@"外出申请成功");
         }else{
-            ShowMessage(@"出差申请失败");
+            ShowMessage(@"外出申请失败");
         }
         [self.submitclickSubject sendNext:nil];
         

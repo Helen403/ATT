@@ -10,4 +10,18 @@
 
 @interface MyOpinionViewModel : HViewModel
 
+@property(nonatomic,strong) RACCommand *suggbackCommand;
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property(nonatomic,strong) NSString *suggTypeId;
+
+@property(nonatomic,strong) NSString *suggQuestion;
+
+@property(nonatomic,strong) NSString *suggTelphone;
+
+@property(nonatomic,strong) NSString *suggUserCode;
+
+@property(nonatomic,strong) NSString *suggDatetime;
+
 @end

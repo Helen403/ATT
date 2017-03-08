@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CMRequest.h"
+
 typedef enum : NSUInteger {
     HeaderRefresh_HasMoreData = 1,
     HeaderRefresh_HasNoMoreData,
@@ -29,7 +29,7 @@ typedef enum:NSUInteger{
 
 - (instancetype)initWithModel:(id)model;
 
-@property (strong, nonatomic)CMRequest *request;
+
 
 /**
  *  初始化

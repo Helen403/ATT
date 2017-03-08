@@ -170,13 +170,11 @@
 
 -(void)h_viewWillAppear{
     //打开键盘事件相应
-    
     [IQKeyboardManager sharedManager].enable = NO;
 }
 
 -(void)h_viewWillDisappear{
     //关闭键盘事件相应
-    
     [IQKeyboardManager sharedManager].enable = YES;
 }
 
@@ -188,7 +186,6 @@
     }
     return _myOpinionViewModel;
 }
-
 
 -(UILabel *)title{
     if (!_title) {
@@ -280,7 +277,6 @@
         _problem.textColor = MAIN_PAN_2;
     }
     return _problem;
-    
 }
 
 -(JSTextView *)input{
@@ -350,8 +346,6 @@
     return _phone;
 }
 
-
-
 -(void)textFieldDidBeginEditing:(UITextField *)textView{
 
     [UIView animateWithDuration:0.25 animations:^{
@@ -374,9 +368,6 @@
     }];
     
 }
-
-
-
 
 -(UILabel *)suggest{
     if (!_suggest) {
@@ -415,6 +406,7 @@
 }
 
 -(void)submit:(UIButton *)button{
+    
     
     
 }

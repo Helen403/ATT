@@ -12,7 +12,16 @@
 #import "ApplyManView.h"
 #import "JSTextView.h"
 
-@interface ResignationView()
+#import "XHDatePickerView.h"
+#import "NSDate+Extension.h"
+#import "ApplyManViewModel.h"
+#import "TeamListModel.h"
+#import "UserModel.h"
+
+#import "ResignationCellView.h"
+#import "ResignationModel.h"
+
+@interface ResignationView()<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong) ResignationViewModel *resignationViewModel;
 
@@ -48,6 +57,27 @@
 
 @property(nonatomic,strong) UIScrollView *scrollView;
 
+@property(nonatomic,strong) ApplyManViewModel *applyManViewModel;
+
+@property(nonatomic,strong) UIView *timeView1;
+
+@property(nonatomic,strong) UIView *timeView2;
+
+@property(nonatomic,strong) XHDatePickerView *datepicker;
+
+@property(nonatomic,strong) NSString *cuserCode;
+
+@property(nonatomic,strong) NSString *cuserName;
+
+@property(nonatomic,strong) NSString *workLsh;
+
+@property(nonatomic,strong) UITableView *tableView;
+
+@property(nonatomic,assign) NSInteger index;
+
+@property(nonatomic,strong) NSString *shiftOldLsh;
+
+@property(nonatomic,strong) NSString *shiftNewLsh;
 
 @end
 
@@ -66,6 +96,18 @@
     
     CGFloat padding = [self h_w:15];
     CGFloat length = [self h_w:160];
+    
+    [self.timeView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.top.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
+    }];
+    
+    [self.timeView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakSelf.timeView1);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
+        make.top.equalTo(weakSelf.timeView1.mas_bottom).offset(0);
+    }];
     
     [self.applyTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
@@ -129,30 +171,29 @@
         
     }];
     
-    
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.line3.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
     }];
     
-    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.textView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
-    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
+    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
     [self.finish mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
+        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         
@@ -171,13 +212,16 @@
     
     [self addSubview:self.scrollView];
     
+    
+    [self.scrollView addSubview:self.timeView1];
+    [self.scrollView addSubview:self.timeView2];
     [self.scrollView addSubview:self.applyTimeText];
     [self.scrollView addSubview:self.applyTimeShowText];
     [self.scrollView addSubview:self.line1];
     [self.scrollView addSubview:self.lateTimeText];
     [self.scrollView addSubview:self.lateTimeShowText];
     [self.scrollView addSubview:self.line2];
-
+    
     [self.scrollView addSubview:self.line3];
     [self.scrollView addSubview:self.textView];
     [self.scrollView addSubview:self.proveView];
@@ -194,9 +238,56 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_loadData{
+    
+    self.index = 0;
+    
+    //设置时间
+    self.applyTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
+    self.lateTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
+    
+    self.cuserCode = @"";
+    self.cuserName = @"";
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.resignationViewModel.companyCode = companyCode;
+    [self.resignationViewModel.refreshDataCommand execute:nil];
+    
+}
+
+
 -(void)h_bindViewModel{
+    [[self.resignationViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.resignationViewModel.arr.count);
+            [self.tableView reloadData];
+            ResignationModel *Resignation = self.resignationViewModel.arr[0];
+            self.sureTimeShowText.text = Resignation.workName;
+            self.workLsh = Resignation.workLsh;
+            
+            //            self.compensateShowText.text = move.shiftName;
+            //            self.shiftOldLsh = move.shiftLsh;
+            //            self.shiftNewLsh = move.shiftLsh;
+            
+        });
+    }];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
     
+}
+
+-(void)applyManViewRefresh:(NSNotification*) notification{
+    NSMutableArray *arrTemp = [notification object];
+    
+    for(int i = 0;i<arrTemp.count-1;i++){
+        TeamListModel *teamList = arrTemp[i];
+        self.cuserCode = [NSString stringWithFormat:@"%@,%@",self.cuserCode,teamList.empCode];
+        self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
+    }
+    
+    self.cuserCode = [self.cuserCode substringFromIndex:1];
+    self.cuserName = [self.cuserName substringFromIndex:1];
 }
 
 
@@ -207,6 +298,61 @@
         _resignationViewModel = [[ResignationViewModel alloc] init];
     }
     return _resignationViewModel;
+}
+
+-(XHDatePickerView *)datepicker{
+    if (!_datepicker) {
+        _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
+            
+            NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            
+            if (startDateText.length > 0) {
+                self.applyTimeShowText.text = startDateText;
+            }
+            
+            if (endDateText.length > 0) {
+                self.lateTimeShowText.text = endDateText;
+            }
+            
+        }];
+        _datepicker.datePickerStyle = DateStyleShowYearMonthDayHourMinute;
+        _datepicker.dateType = DateTypeStartDate;
+        _datepicker.minLimitDate = [NSDate date:@"2017-02-01 12:22" WithFormat:@"yyyy-MM-dd HH:mm"];
+        _datepicker.maxLimitDate = [NSDate date:@"2020-12-12 12:12" WithFormat:@"yyyy-MM-dd HH:mm"];    }
+    return _datepicker;
+}
+
+-(UIView *)timeView1{
+    if (!_timeView1) {
+        _timeView1 = [[UIView alloc] init];
+        
+        _timeView1.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeClick1)];
+        [_timeView1 addGestureRecognizer:setTap];
+    }
+    return _timeView1;
+}
+
+-(void)timeClick1{
+    _datepicker = nil;
+    [self.datepicker show];
+}
+
+-(UIView *)timeView2{
+    if (!_timeView2) {
+        _timeView2 = [[UIView alloc] init];
+        
+        _timeView2.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeClick2)];
+        [_timeView2 addGestureRecognizer:setTap];
+    }
+    return _timeView2;
+}
+
+-(void)timeClick2{
+    _datepicker = nil;
+    [self.datepicker show];
 }
 
 
@@ -223,7 +369,7 @@
 -(UILabel *)applyTimeShowText{
     if (!_applyTimeShowText) {
         _applyTimeShowText = [[UILabel alloc] init];
-        _applyTimeShowText.text = @"2016年12月25日 08:30:00";
+        _applyTimeShowText.text = @"";
         _applyTimeShowText.font = H14;
         _applyTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -242,7 +388,7 @@
 -(UILabel *)lateTimeText{
     if (!_lateTimeText) {
         _lateTimeText = [[UILabel alloc] init];
-        _lateTimeText.text = @"计划离岗时间";
+        _lateTimeText.text = @"辞职时间";
         _lateTimeText.textColor = MAIN_PAN_2;
         _lateTimeText.font = H14;
     }
@@ -252,7 +398,7 @@
 -(UILabel *)lateTimeShowText{
     if (!_lateTimeShowText) {
         _lateTimeShowText = [[UILabel alloc] init];
-        _lateTimeShowText.text = @"2016年12月25日 08:30:00";
+        _lateTimeShowText.text = @"";
         _lateTimeShowText.font = H14;
         _lateTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -281,7 +427,7 @@
 -(UILabel *)sureTimeShowText{
     if (!_sureTimeShowText) {
         _sureTimeShowText = [[UILabel alloc] init];
-        _sureTimeShowText.text = @"劳动合同期满";
+        _sureTimeShowText.text = @"";
         _sureTimeShowText.font = H14;
         _sureTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -310,8 +456,10 @@
         _textView.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _textView.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
         _textView.textColor = MAIN_PAN_2;
-        _textView.text = @"辞职理由";//设置显示的文本内容
         
+        
+        _textView.myPlaceholder = @"辞职理由";
+        _textView.myPlaceholderColor = [UIColor lightGrayColor];
         _textView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _textView.layer.borderWidth =1.0;
         _textView.layer.cornerRadius =5.0;
@@ -333,13 +481,20 @@
 
 -(ApplyManView *)applyManView{
     if (!_applyManView) {
-        _applyManView = [[ApplyManView alloc] init];
+        _applyManView = [[ApplyManView alloc] initWithViewModel:self.applyManViewModel];
         
         _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _applyManView.layer.borderWidth =1.0;
-        _applyManView.layer.cornerRadius =5.0;
+        _applyManView.layer.borderWidth = 1.0;
+        _applyManView.layer.cornerRadius = 5.0;
     }
     return _applyManView;
+}
+
+-(ApplyManViewModel *)applyManViewModel{
+    if (!_applyManViewModel) {
+        _applyManViewModel = [[ApplyManViewModel alloc] init];
+    }
+    return _applyManViewModel;
 }
 
 -(UIButton *)finish{
@@ -357,7 +512,6 @@
         
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-  
         
         [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
@@ -366,8 +520,40 @@
 }
 
 -(void)finish:(UIButton *)button{
-    [self.resignationViewModel.submitclickSubject sendNext:nil];
+    
+//    if ([self.applyTimeShowText.text isEqualToString:self.lateTimeShowText.text]) {
+//        ShowMessage(@"请选择辞职时间");
+//        return;
+//    }
+
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.resignationViewModel.companyCode = companyCode;
+    self.resignationViewModel.applyStartDatetime = self.applyTimeShowText.text;
+    self.resignationViewModel.applyEndDatetime = self.lateTimeShowText.text;
+    self.resignationViewModel.applyLenHours = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeText.text]];
+    
+    self.resignationViewModel.applyReason = self.textView.text;
+    self.resignationViewModel.applyStatus = @"0";
+    self.resignationViewModel.flowInstanceId = @"0";
+    self.resignationViewModel.cuserCode = self.cuserCode;
+    self.resignationViewModel.cuserName = self.cuserName;
+    
+    
+    self.resignationViewModel.changeDatetime =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text]];
+    
+    self.resignationViewModel.shiftOldLsh = self.shiftOldLsh;
+    self.resignationViewModel.shiftOldName = self.sureTimeShowText.text;
+
+    
+    self.resignationViewModel.workLsh = self.workLsh;
+    self.resignationViewModel.workName = self.sureTimeShowText.text;
+    UserModel *user =  getModel(@"user");
+    self.resignationViewModel.applyUserCode = user.userCode;
+    self.resignationViewModel.applyUserName = user.userNickName;
+    
+    [self.resignationViewModel.applyLeaveCommand execute:nil];
 }
+
 
 -(UIImageView *)back{
     if (!_back) {
@@ -380,8 +566,71 @@
 -(UIView *)view{
     if (!_view) {
         _view = [[UIView alloc] init];
+        _view.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(click1)];
+        [_view addGestureRecognizer:setTap];
     }
     return _view;
+}
+
+-(void)click1{
+    
+    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
+    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
+    [[HWPopTool sharedInstance] showWithPresentView:self.tableView animated:NO];
+}
+
+
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = GX_BGCOLOR;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[ResignationCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([ResignationCellView class])]];
+        _tableView.scrollEnabled = NO;
+    }
+    return _tableView;
+}
+
+#pragma mark - delegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return self.resignationViewModel.arr.count;
+}
+
+#pragma mark tableViewDataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    ResignationCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([ResignationCellView class])] forIndexPath:indexPath];
+    
+    cell.resignationModel = self.resignationViewModel.arr[indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return [self h_w:40];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    ResignationModel *resignation = self.resignationViewModel.arr[indexPath.row];
+    
+    self.sureTimeShowText.text = resignation.workName;
+    
+    self.workLsh = resignation.workLsh;
+    [[HWPopTool sharedInstance] closeWithBlcok:^{
+        [self.tableView reloadData];
+    }];
 }
 
 
@@ -390,6 +639,10 @@
         _scrollView = [[UIScrollView alloc] init];
     }
     return _scrollView;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];
 }
 
 @end

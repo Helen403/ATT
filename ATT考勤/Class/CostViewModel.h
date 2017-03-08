@@ -50,4 +50,6 @@
 
 @property(nonatomic,strong) NSString *applyDeptCode;
 @property(nonatomic,strong) NSString *applyDeptName;
+
+@property(nonatomic,strong) NSString *applyMoney;
 @end

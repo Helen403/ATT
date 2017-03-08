@@ -451,7 +451,7 @@
     NSString *retbackcardtime_onwork=@"-:-"; //上班打卡时间
     NSString *retbackcardstatus_offwork=@"-1"; //上班打卡状态
     NSString *retbackcardtime_offwork=@"-:-"; //下班打卡时间
-    if ([num intValue]==1) {
+    if ([num intValue] == 1) {
         
         //一条记录可能是上班的记录,也可能是下班的记录
         if (self.homeViewModel.arrAttendRecord.count == 1) {
@@ -460,7 +460,7 @@
             AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
             
             
-            NSString *carddatetime=[NSString stringWithFormat:@"%@ %@:00",attendCardRecord1.cardTime]; // 打卡时间
+            NSString *carddatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,attendCardRecord1.cardTime]; // 打卡时间
             NSString *onworkbefore30 =[LSCoreToolCenter getDateAddMinuts:onworkdatetime time:-1*offSetCardArea];//上班标准时间-30分钟
             NSString *onworkafter30 =[LSCoreToolCenter getDateAddMinuts:onworkdatetime time:offSetCardArea];//上班标准时间+30分钟
             long onworkbeforediff =[LSCoreToolCenter getDateDiff:carddatetime end:onworkbefore30];

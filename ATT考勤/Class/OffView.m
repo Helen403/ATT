@@ -390,6 +390,7 @@
 }
 
 -(void)timeClick1{
+    _datepicker = nil;
     [self.datepicker show];
 }
 
@@ -405,6 +406,7 @@
 }
 
 -(void)timeClick2{
+    _datepicker = nil;
     [self.datepicker show];
 }
 

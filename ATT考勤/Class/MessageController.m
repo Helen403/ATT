@@ -48,6 +48,14 @@
 
 }
 
+-(void)h_viewWillAppear{
+    [self.messageView h_viewWillAppear];
+}
+
+-(void)h_viewWillDisappear{
+    [self.messageView h_viewWillDisappear];
+}
+
 #pragma mark lazyload
 -(MessageView *)messageView{
     if (!_messageView) {

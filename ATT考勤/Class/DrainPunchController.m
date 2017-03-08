@@ -53,7 +53,6 @@
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:NO];
-             [self.drainPunchView h_viewWillDisappear];
         
         });
     }];

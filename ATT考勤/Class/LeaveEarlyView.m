@@ -12,6 +12,11 @@
 #import "ApplyManView.h"
 #import "JSTextView.h"
 
+#import "XHDatePickerView.h"
+#import "NSDate+Extension.h"
+#import "ApplyManViewModel.h"
+#import "TeamListModel.h"
+#import "UserModel.h"
 
 @interface LeaveEarlyView ()
 
@@ -39,6 +44,30 @@
 
 @property(nonatomic,strong) UIScrollView *scrollView;
 
+@property(nonatomic,strong) ApplyManViewModel *applyManViewModel;
+
+@property(nonatomic,strong) UIView *timeView1;
+
+@property(nonatomic,strong) UIView *timeView2;
+
+@property(nonatomic,strong) XHDatePickerView *datepicker;
+
+@property(nonatomic,strong) NSString *cuserCode;
+
+@property(nonatomic,strong) NSString *cuserName;
+
+@property(nonatomic,strong) NSString *workLsh;
+
+@property(nonatomic,strong) UITableView *tableView;
+
+@property(nonatomic,assign) NSInteger index;
+
+@property(nonatomic,strong) NSString *shiftOldLsh;
+
+@property(nonatomic,strong) NSString *shiftNewLsh;
+
+
+
 @end
 
 @implementation LeaveEarlyView
@@ -55,7 +84,19 @@
     WS(weakSelf);
     
     CGFloat padding = [self h_w:15];
-    CGFloat length = [self h_w:205];
+    CGFloat length = [self h_w:160];
+    
+    [self.timeView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.top.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
+    }];
+    
+    [self.timeView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakSelf.timeView1);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
+        make.top.equalTo(weakSelf.timeView1.mas_bottom).offset(0);
+    }];
     
     [self.applyTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
@@ -91,33 +132,31 @@
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
-    
 
-    
-    
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.line2.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
     }];
     
-    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.textView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
-    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
+    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
-    
+
     [self.finish mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
+        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         
@@ -136,6 +175,8 @@
     
     [self addSubview:self.scrollView];
     
+    [self.scrollView addSubview:self.timeView1];
+    [self.scrollView addSubview:self.timeView2];
     [self.scrollView addSubview:self.applyTimeText];
     [self.scrollView addSubview:self.applyTimeShowText];
     [self.scrollView addSubview:self.line1];
@@ -153,9 +194,63 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_loadData{
+    
+    self.index = 0;
+    
+    //设置时间
+    self.applyTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
+    self.lateTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
+    
+    
+    self.cuserCode = @"";
+    self.cuserName = @"";
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.leaveEarlyViewModel.companyCode = companyCode;
+    [self.leaveEarlyViewModel.refreshDataCommand execute:nil];
+    
+}
+
+
 -(void)h_bindViewModel{
+    [[self.leaveEarlyViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.leaveEarlyViewModel.arr.count);
+            [self.tableView reloadData];
+            //            OffModel *off = self.offViewModel.arr[0];
+            //            self.sureTimeShowText.text = off.workName;
+            //            self.workLsh = off.workLsh;
+            
+            //            self.compensateShowText.text = move.shiftName;
+            //            self.shiftOldLsh = move.shiftLsh;
+            //            self.shiftNewLsh = move.shiftLsh;
+            
+        });
+    }];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
+}
+
+-(void)applyManViewRefresh:(NSNotification*) notification{
+    NSMutableArray *arrTemp = [notification object];
     
+    for(int i = 0;i<arrTemp.count-1;i++){
+        TeamListModel *teamList = arrTemp[i];
+        self.cuserCode = [NSString stringWithFormat:@"%@,%@",self.cuserCode,teamList.empCode];
+        self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
+    }
+    
+    self.cuserCode = [self.cuserCode substringFromIndex:1];
+    self.cuserName = [self.cuserName substringFromIndex:1];
+}
+
+-(void)h_viewWillAppear{
+}
+
+-(void)h_viewWillDisappear{
+    self.applyManViewModel.arr = nil;
 }
 
 #pragma mark lazyload
@@ -166,6 +261,61 @@
     return _leaveEarlyViewModel;
 }
 
+
+-(XHDatePickerView *)datepicker{
+    if (!_datepicker) {
+        _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
+            
+            NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            
+            if (startDateText.length > 0) {
+                self.applyTimeShowText.text = startDateText;
+            }
+            
+            if (endDateText.length > 0) {
+                self.lateTimeShowText.text = endDateText;
+            }
+            
+            
+        }];
+        _datepicker.datePickerStyle = DateStyleShowYearMonthDayHourMinute;
+        _datepicker.dateType = DateTypeStartDate;
+        _datepicker.minLimitDate = [NSDate date:@"2017-02-01 12:22" WithFormat:@"yyyy-MM-dd HH:mm"];
+        _datepicker.maxLimitDate = [NSDate date:@"2020-12-12 12:12" WithFormat:@"yyyy-MM-dd HH:mm"];    }
+    return _datepicker;
+}
+
+-(UIView *)timeView1{
+    if (!_timeView1) {
+        _timeView1 = [[UIView alloc] init];
+        
+        _timeView1.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeClick1)];
+        [_timeView1 addGestureRecognizer:setTap];
+    }
+    return _timeView1;
+}
+
+-(void)timeClick1{
+    _datepicker = nil;
+    [self.datepicker show];
+}
+
+-(UIView *)timeView2{
+    if (!_timeView2) {
+        _timeView2 = [[UIView alloc] init];
+        
+        _timeView2.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeClick2)];
+        [_timeView2 addGestureRecognizer:setTap];
+    }
+    return _timeView2;
+}
+
+-(void)timeClick2{
+    [self.datepicker show];
+}
 
 -(UILabel *)applyTimeText{
     if (!_applyTimeText) {
@@ -265,13 +415,20 @@
 
 -(ApplyManView *)applyManView{
     if (!_applyManView) {
-        _applyManView = [[ApplyManView alloc] init];
+        _applyManView = [[ApplyManView alloc] initWithViewModel:self.applyManViewModel];
         
         _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _applyManView.layer.borderWidth =1.0;
-        _applyManView.layer.cornerRadius =5.0;
+        _applyManView.layer.borderWidth = 1.0;
+        _applyManView.layer.cornerRadius = 5.0;
     }
     return _applyManView;
+}
+
+-(ApplyManViewModel *)applyManViewModel{
+    if (!_applyManViewModel) {
+        _applyManViewModel = [[ApplyManViewModel alloc] init];
+    }
+    return _applyManViewModel;
 }
 
 -(UIButton *)finish{
@@ -297,8 +454,41 @@
 }
 
 -(void)finish:(UIButton *)button{
-    [self.leaveEarlyViewModel.submitclickSubject sendNext:nil];
+    
+    if ([self.applyTimeShowText.text isEqualToString:self.lateTimeShowText.text]) {
+        ShowMessage(@"请选择早退时间");
+        return;
+    }
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.leaveEarlyViewModel.companyCode = companyCode;
+    self.leaveEarlyViewModel.applyStartDatetime = self.applyTimeShowText.text;
+    self.leaveEarlyViewModel.applyEndDatetime = self.lateTimeShowText.text;
+    self.leaveEarlyViewModel.applyLenHours = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeText.text]];
+    
+    self.leaveEarlyViewModel.applyReason = self.textView.text;
+    self.leaveEarlyViewModel.applyStatus = @"0";
+    self.leaveEarlyViewModel.flowInstanceId = @"0";
+    self.leaveEarlyViewModel.cuserCode = self.cuserCode;
+    self.leaveEarlyViewModel.cuserName = self.cuserName;
+    
+    
+    self.leaveEarlyViewModel.changeDatetime = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text]];
+    
+    //    self.drainPunchViewModel.shiftOldLsh = self.shiftOldLsh;
+    //    self.drainPunchViewModel.shiftOldName = self.sureTimeShowText.text;
+    
+    
+    //    self.drainPunchViewModel.workLsh = self.workLsh;
+    //    self.drainPunchViewModel.workName = self.sureTimeShowText.text;
+    
+    UserModel *user =  getModel(@"user");
+    self.leaveEarlyViewModel.applyUserCode = user.userCode;
+    self.leaveEarlyViewModel.applyUserName = user.userNickName;
+    
+    [self.leaveEarlyViewModel.applyLateCommand execute:nil];
 }
+
 
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
@@ -307,6 +497,8 @@
     return _scrollView;
 }
 
-
+-(void)dealloc{
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];
+}
 
 @end

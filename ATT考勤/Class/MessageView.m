@@ -9,6 +9,7 @@
 #import "MessageView.h"
 #import "MessageViewModel.h"
 #import "MessageCellView.h"
+#import "UserModel.h"
 
 @interface MessageView()<UITableViewDataSource,UITableViewDelegate>
 
@@ -51,6 +52,30 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_bindViewModel{
+    [[self.messageViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+}
+
+
+-(void)h_viewWillAppear{
+    UserModel *user =  getModel(@"user");
+    self.messageViewModel.userCode = user.userCode;
+    [self.messageViewModel.refreshDataCommand execute:nil];
+}
+
+-(void)h_viewWillDisappear{
+
+    UserModel *user =  getModel(@"user");
+    self.messageViewModel.userCode = user.userCode;
+    [self.messageViewModel.modifyCommand execute:nil];
+}
+
+
 #pragma mark lazyload
 -(MessageViewModel *)messageViewModel{
     if (!_messageViewModel) {
@@ -66,7 +91,7 @@
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MessageCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([MessageCellView class])]];
-        
+        _tableView.scrollEnabled = NO;
     }
     return _tableView;
     
@@ -88,9 +113,9 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     MessageCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MessageCellView class])] forIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+     cell.index = indexPath.row;
     cell.messageModel = self.messageViewModel.arr[indexPath.row];
-    
     return cell;
 }
 
@@ -101,10 +126,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-       MessageCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MessageCellView class])] forIndexPath:indexPath];
-    cell.selected = NO;
-    NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    [self.messageViewModel.cellclickSubject sendNext:row];
+    
+ 
 }
 
 @end

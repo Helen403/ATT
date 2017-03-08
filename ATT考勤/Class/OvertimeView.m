@@ -92,6 +92,12 @@
 
 @property(nonatomic,assign) NSInteger index;
 
+@property(nonatomic,strong) NSString *overType;
+
+@property(nonatomic,strong) NSString *resultType;
+
+
+
 @end
 
 @implementation OvertimeView
@@ -239,7 +245,7 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
-  
+    
     [self.finish mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
@@ -322,10 +328,13 @@
             OvertimeModel *workType = self.overtimeViewModel.arrOverTimeWorkType[0];
             
             self.compensateShowText.text = workType.workName;
-            //            self.workLsh = overTime.workLsh;
+            self.resultType = workType.workLsh;
             
             OvertimeModel *typeWork = self.overtimeViewModel.arrOverTimeTypeWork[0];
             self.sureTimeShowText.text = typeWork.workName;
+            
+            self.overType = typeWork.workLsh;
+            
             
         });
     }];
@@ -392,6 +401,7 @@
 }
 
 -(void)timeClick1{
+    _datepicker = nil;
     [self.datepicker show];
 }
 
@@ -406,6 +416,7 @@
 }
 
 -(void)timeClick2{
+    _datepicker = nil;
     [self.datepicker show];
 }
 
@@ -583,8 +594,8 @@
     self.overtimeViewModel.applyStatus = @"0";
     self.overtimeViewModel.flowInstanceId = @"0";
     
-    self.overtimeViewModel.overType = self.sureTimeShowText.text;
-    self.overtimeViewModel.resultType = self.compensateShowText.text;
+    self.overtimeViewModel.overType = self.overType;
+    self.overtimeViewModel.resultType = self.resultType;
     
     self.overtimeViewModel.cuserCode = self.cuserCode;
     self.overtimeViewModel.cuserName = self.cuserName;
@@ -593,7 +604,7 @@
     UserModel *user =  getModel(@"user");
     self.overtimeViewModel.applyUserCode = user.userCode;
     self.overtimeViewModel.applyUserName = user.userNickName;
-
+    
     [self.overtimeViewModel.applyOverTimeCommand execute:nil];
 }
 
@@ -752,9 +763,12 @@
     if (self.index == 1) {
         OvertimeModel *overtime = self.overtimeViewModel.arrOverTimeTypeWork[indexPath.row];
         self.sureTimeShowText.text = overtime.workName;
+        
+        self.overType = overtime.workLsh;
     }else{
         OvertimeModel *overtime = self.overtimeViewModel.arrOverTimeWorkType[indexPath.row];
         self.compensateShowText.text = overtime.workName;
+        self.resultType = overtime.workLsh;
     }
     [[HWPopTool sharedInstance] closeWithBlcok:^{
         [self.tableView reloadData];
