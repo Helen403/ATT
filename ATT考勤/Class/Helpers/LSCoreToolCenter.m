@@ -271,6 +271,21 @@ void DismissHud(void){
 }
 
 //获取年月日
++(NSString *)currentYearMonth{
+    
+    NSCalendar * cal = [NSCalendar currentCalendar];
+    
+    NSUInteger unitFlags = NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear;
+    
+    NSDateComponents * conponent = [cal components:unitFlags fromDate:[NSDate date]];
+    NSInteger year=[conponent year];
+    NSInteger month=[conponent month];
+   
+    NSString * nsDateString= [NSString stringWithFormat:@"%4ld年%2ld月",(long)year,(long)month];
+    return nsDateString;
+}
+
+//获取年月日
 +(NSString *)curDate{
 
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -279,6 +294,17 @@ void DismissHud(void){
    NSString *str = [formatter stringFromDate:[NSDate date]];
     return str;
 }
+
+
++(NSString *)curDateYear{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy"];
+    
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    return str;
+}
+
 
 
 

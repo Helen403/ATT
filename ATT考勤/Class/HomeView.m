@@ -360,10 +360,8 @@
 }
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+//    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     
-    
-    //    ShowMessage(@"定位成功");
     NSString *currentLatitude = [[NSString alloc]
                                  initWithFormat:@"%f",
                                  userLocation.location.coordinate.latitude];
@@ -428,15 +426,12 @@
             
         });
     }];
-    
-    
+    //参加打卡
     [[self.homeViewModel.attendRecordSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         [self performSelectorOnMainThread:@selector(attendRecord:) withObject:x waitUntilDone:YES];
         
     }];
-    
-    
     
 }
 -(void)attendRecord:(NSNumber *)num{
@@ -455,8 +450,7 @@
         
         //一条记录可能是上班的记录,也可能是下班的记录
         if (self.homeViewModel.arrAttendRecord.count == 1) {
-            
-            
+
             AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
             
             
@@ -481,25 +475,7 @@
                 retbackcardtime_onwork=@"-:-";
                 retbackcardtime_offwork=attendCardRecord1.cardTime;
             }
-            
-            
-            
-            
-            //        //已经打过卡
-            //        if ([attendCardRecord1.cardStatus isEqualToString:@"0"]) {
-            //            self.status.text = @"状态:正常";
-            //            //            self.preImg =
-            //        }
-            //        //早退
-            //        if ([attendCardRecord1.cardStatus isEqualToString:@"1"]){
-            //            self.status.text = @"状态:早退";
-            //        }
-            //        //迟到
-            //        if ([attendCardRecord1.cardStatus isEqualToString:@"2"]){
-            //            self.status.text = @"状态:迟到";
-            //        }
         }
-        
         if (self.homeViewModel.arrAttendRecord.count == 2) {
             AttendCardRecord *record_onwork = self.homeViewModel.arrAttendRecord[0];
             AttendCardRecord *record_offwork = self.homeViewModel.arrAttendRecord[0];

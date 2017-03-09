@@ -351,7 +351,7 @@
     if (!_next) {
         _next = [[UIButton alloc] init];
         
-        [_next setTitle:@"提交" forState:UIControlStateNormal];
+        [_next setTitle:@"保存" forState:UIControlStateNormal];
         _next.titleLabel.textColor = white_color;
         _next.titleLabel.font = H20;
         [_next addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
@@ -419,7 +419,6 @@
         return;
     }
     
-
     self.changePasswordViewModel.telphone = user.userTelphone;
     self.changePasswordViewModel.newpassword = self.validateText.text;
     [self.changePasswordViewModel.sendclickCommand execute:nil];

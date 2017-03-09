@@ -120,4 +120,10 @@ extern void DismissHud(void);
 
 +(NSTimeInterval)getDifferenceTime:(NSString *) beginTime endTime:(NSString *) endTime;
 
++(NSString *) getCurrentTime;
+
++(NSString *)currentYearMonth;
+
++(NSString *)curDateYear;
+
 @end

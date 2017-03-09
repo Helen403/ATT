@@ -10,6 +10,7 @@
 #import "MyOpinionViewModel.h"
 #import "JSTextView.h"
 #import "IQKeyboardManager.h"
+#import "UserModel.h"
 
 @interface MyOpinionView()<UITextFieldDelegate>
 
@@ -407,6 +408,21 @@
 
 -(void)submit:(UIButton *)button{
     
+    if (self.input.text.length == 0) {
+        ShowMessage(@"请输入问题!");
+        return;
+    }
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    self.myOpinionViewModel.companyCode = companyCode;
+    self.myOpinionViewModel.suggTypeId = @"1";
+    self.myOpinionViewModel.suggQuestion = self.input.text;
+    self.myOpinionViewModel.suggTelphone = self.phone.text;
+    UserModel *user =  getModel(@"user");
+    self.myOpinionViewModel.suggUserCode = user.userCode;
+    self.myOpinionViewModel.suggDatetime = [LSCoreToolCenter getCurrentTime];
+    [self.myOpinionViewModel.suggbackCommand execute:nil];
     
     
 }

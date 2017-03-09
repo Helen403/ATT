@@ -24,4 +24,6 @@
 
 @property(nonatomic,strong) NSString *suggDatetime;
 
+@property(nonatomic,strong) RACSubject *submitclickSubject;
+
 @end

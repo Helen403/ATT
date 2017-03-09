@@ -15,9 +15,16 @@
     
     [self.suggbackCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
+
         
-//        [self.tableViewSubject sendNext:nil];
-        
+        NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
+        if ([xmlDoc isEqualToString:@"0"]) {
+            ShowMessage(@"意见反馈提交成功");
+        }else{
+            ShowMessage(@"意见反馈提交失败");
+        }
+        [self.submitclickSubject sendNext:nil];
+
     }];
     
     
@@ -44,28 +51,23 @@
                 
                 @strongify(self);
                 
-//                NSString *body =[NSString stringWithFormat: @"<saveApplyOverTime xmlns=\"http://service.webservice.vada.com/\">\
-//                                 <companyCode xmlns=\"\">%@</companyCode>\
-//                                 <applyStartDatetime xmlns=\"\">%@</applyStartDatetime>\
-//                                 <applyEndDatetime xmlns=\"\">%@</applyEndDatetime>\
-//                                 <applyLenHours xmlns=\"\">%@</applyLenHours>\
-//                                 <applyReason xmlns=\"\">%@</applyReason>\
-//                                 <applyStatus xmlns=\"\">%@</applyStatus>\
-//                                 <flowInstanceId xmlns=\"\">%@</flowInstanceId>\
-//                                 <overType xmlns=\"\">%@</overType>\
-//                                 <resultType xmlns=\"\">%@</resultType>\
-//                                 <applyUserCode xmlns=\"\">%@</applyUserCode>\
-//                                 <applyUserName xmlns=\"\">%@</applyUserName>\
-//                                 </saveApplyOverTime>",self.companyCode,self.applyStartDatetime,self.applyEndDatetime,self.applyLenHours,self.applyReason,self.applyStatus,self.flowInstanceId,self.overType,self.resultType,self.applyUserCode,self.applyUserName];
-//                
-//                [self SOAPData:saveApplyOverTime soapBody:body success:^(NSString *result) {
-//                    
-//                    [subscriber sendNext:result];
-//                    [subscriber sendCompleted];
-//                } failure:^(NSError *error) {
-//                    DismissHud();
-//                    ShowErrorStatus(@"请检查网络状态");
-//                }];
+                NSString *body =[NSString stringWithFormat: @"<saveSuggback xmlns=\"http://service.webservice.vada.com/\">\
+                                 <companyCode xmlns=\"\">%@</companyCode>\
+                                 <suggTypeId xmlns=\"\">%@</suggTypeId>\
+                                 <suggQuestion xmlns=\"\">%@</suggQuestion>\
+                                 <suggTelphone xmlns=\"\">%@</suggTelphone>\
+                                 <suggUserCode xmlns=\"\">%@</suggUserCode>\
+                                 <suggDatetime xmlns=\"\">%@</suggDatetime>\
+                                 </saveSuggback>",self.companyCode,self.suggTypeId,self.suggQuestion,self.suggTelphone,self.suggUserCode,self.suggDatetime];
+                
+                [self SOAPData:saveApplyOverTime soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                }];
                 
                 return nil;
             }];
@@ -74,5 +76,12 @@
     return _suggbackCommand;
 }
 
+
+-(RACSubject *)submitclickSubject{
+    if (!_submitclickSubject) {
+        _submitclickSubject = [RACSubject subject] ;
+    }
+    return _submitclickSubject;
+}
 
 @end
