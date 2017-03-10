@@ -16,7 +16,7 @@
 #import "LoginViewController.h"
 
 
-#import "ViewController.h"
+
 
 @interface AppDelegate ()
 
@@ -136,7 +136,7 @@
 -(XCFNavigationController *)nav{
     if (!_nav) {
         _nav = [[XCFNavigationController alloc] init];
-        [_nav addChildViewController:[[ViewController alloc] init]];
+        [_nav addChildViewController:[[LoginViewController alloc] init]];
     }
     return _nav;
 }

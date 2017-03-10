@@ -27,15 +27,21 @@ static NSString *cellID = @"cellID";
 
 @property(nonatomic,strong) MyWeekView *myWeekView;
 
+@property(nonatomic,strong) UIView *line1;
+
 @property(nonatomic,strong) UILabel *pre;
 
 @property(nonatomic,strong) UILabel *last;
 
 @property(nonatomic,strong) UILabel *title;
 
-@property(nonatomic,strong) UIView *line;
+@property(nonatomic,strong) UIView *line2;
 
 @property(nonatomic,assign) NSInteger index;
+
+@property(nonatomic,strong) NSIndexPath *indexPath;
+
+@property(nonatomic,strong) NSString *current;
 
 @end
 
@@ -47,6 +53,12 @@ static NSString *cellID = @"cellID";
 -(void)updateConstraints{
     
     WS(weakSelf);
+    
+    [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(0);
+        make.left.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
+    }];
     
     [self.pre mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
@@ -62,7 +74,6 @@ static NSString *cellID = @"cellID";
     }
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        
         make.left.equalTo(leftPadding);
         make.top.equalTo(weakSelf.pre);
         
@@ -73,21 +84,22 @@ static NSString *cellID = @"cellID";
         make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
     
-    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.pre.mas_bottom).offset(10);
         make.left.equalTo(0);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
     [self.myWeekView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.line.mas_bottom).offset(0);
+        make.top.equalTo(weakSelf.line2.mas_bottom).offset(0);
         make.left.equalTo(0);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:30]));
     }];
-    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    [self.collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.myWeekView.mas_bottom).offset(0);
         make.left.equalTo(0);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH/7*6));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH/7*(int)((int)ceil(self.arr.count/7))));
     }];
     
     [super updateConstraints];
@@ -95,14 +107,14 @@ static NSString *cellID = @"cellID";
 
 #pragma mark private
 -(void)h_setupViews{
-    self.currentDate = [NSData data];
+    
     //定义星期视图,若为周末则字体颜色为绿色
-    
-    
+    self.backgroundColor = [UIColor whiteColor];
+    [self addSubview:self.line1];
     [self addSubview:self.pre];
     [self addSubview:self.title];
     [self addSubview:self.last];
-    [self addSubview:self.line];
+    [self addSubview:self.line2];
     [self addSubview:self.myWeekView];
     [self addSubview:self.collectionView];
     
@@ -113,14 +125,14 @@ static NSString *cellID = @"cellID";
 
 
 -(void)h_loadData{
-    
+    self.currentDate = [NSData data];
     self.index = 0;
     self.title.text = [self getCurrentMonthTitle:self.index];
+    self.current = self.title.text;
     self.arr = [self getCurrentMonthInfo:self.index];
 }
 
 #pragma mark lazyload
-
 -(UILabel *)pre{
     if (!_pre) {
         _pre = [[UILabel alloc] init];
@@ -135,10 +147,21 @@ static NSString *cellID = @"cellID";
 }
 
 -(void)preClick{
-    self.index --;
+    --self.index;
     self.arr = [self getCurrentMonthInfo:self.index];
     self.title.text = [self getCurrentMonthTitle:self.index];
     [self.collectionView reloadData];
+    [self updateConstraints];
+    self.countBlock((int)ceil(self.arr.count/7));
+}
+
+-(void)lastClick{
+    ++self.index;
+    self.arr = [self getCurrentMonthInfo:self.index];
+    self.title.text = [self getCurrentMonthTitle:self.index];
+    [self.collectionView reloadData];
+    [self updateConstraints];
+    self.countBlock((int)ceil(self.arr.count/7));
 }
 
 -(UILabel *)title{
@@ -163,23 +186,21 @@ static NSString *cellID = @"cellID";
     }
     return _last;
 }
-
--(void)lastClick{
-    self.index ++;
-    self.arr = [self getCurrentMonthInfo:self.index];
-    self.title.text = [self getCurrentMonthTitle:self.index];
-    [self.collectionView reloadData];
-}
-
-
--(UIView *)line{
-    if (!_line) {
-        _line = [[UIView alloc] init];
-        _line.backgroundColor = MAIN_LINE_COLOR;
+-(UIView *)line2{
+    if (!_line2) {
+        _line2 = [[UIView alloc] init];
+        _line2.backgroundColor = MAIN_LINE_COLOR;
     }
-    return _line;
+    return _line2;
 }
 
+-(UIView *)line1{
+    if (!_line1) {
+        _line1 = [[UIView alloc] init];
+        _line1.backgroundColor = MAIN_LINE_COLOR;
+    }
+    return _line1;
+}
 
 -(MyWeekView *)myWeekView{
     if (!_myWeekView) {
@@ -197,10 +218,8 @@ static NSString *cellID = @"cellID";
         //头部始终在顶端
         layout.sectionHeadersPinToVisibleBounds = YES;
         //头部视图高度
-        
         layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = 0;
-        
         _collectionView.backgroundColor = [UIColor whiteColor];
         //注册表格
         [_collectionView registerClass:[LYWCollectionViewCell class] forCellWithReuseIdentifier:cellID];
@@ -218,13 +237,13 @@ static NSString *cellID = @"cellID";
     int yearTmp = [[LSCoreToolCenter curDateYear] intValue];
     
     //获取月份
-    int mounth = ((int)[self month1] + i)%12;
-    NSInteger d = (i+(int)[self month1])/12;
-    if (mounth==0&&d==1) {
+    int mounth = ((int)[LSCoreToolCenter month1] + i)%12;
+    NSInteger d = (i+(int)[LSCoreToolCenter month1])/12;
+    if (mounth == 0&&d==1) {
         d=0;
     }
-    if (mounth==0&&d>1) {
-        d = (i+(int)[self month1])/12-1;
+    if (mounth == 0&&d>1) {
+        d = (i+(int)[LSCoreToolCenter month1])/12-1;
     }
     
     NSDateComponents *components = [[NSDateComponents alloc]init];
@@ -235,11 +254,12 @@ static NSString *cellID = @"cellID";
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *nextDate = [calendar dateFromComponents:components];
     //获取该月第一天星期几
-    NSInteger firstDayInThisMounth = [self firstWeekdayInThisMonth:nextDate];
+    NSInteger firstDayInThisMounth = [LSCoreToolCenter firstWeekdayInThisMonth:nextDate];
     //该月的有多少天daysInThisMounth
-    NSInteger daysInThisMounth = [self totaldaysInMonth:nextDate];
+    NSInteger daysInThisMounth = [LSCoreToolCenter totaldaysInMonth:nextDate];
     NSString *string = [[NSString alloc]init];
     for (int j = 0; j < (daysInThisMounth > 29 && (firstDayInThisMounth == 6 || firstDayInThisMounth ==5) ? 42 : 35) ; j++) {
+        
         if (j < firstDayInThisMounth || j > daysInThisMounth + firstDayInThisMounth - 1) {
             string = @"";
             [arrTmp addObject:string];
@@ -249,23 +269,63 @@ static NSString *cellID = @"cellID";
         }
     }
     
+    if (daysInThisMounth==30&&(firstDayInThisMounth ==5)) {
+        for(int i = 35;i<arrTmp.count;i++){
+            [arrTmp removeObjectAtIndex:i];
+        }
+    }
+    
     return arrTmp;
 }
 
+//获得当前月份第一天星期几
+-(NSInteger)getCurrentFirstDayInMounth:(NSInteger)i{
+    NSInteger index=5;
+    int yearTmp = [[LSCoreToolCenter curDateYear] intValue];
+    
+    //获取月份
+    int mounth = ((int)[LSCoreToolCenter month1] + i)%12;
+    NSInteger d = (i+(int)[LSCoreToolCenter month1])/12;
+    if (mounth == 0&&d==1) {
+        d=0;
+    }
+    if (mounth == 0&&d>1) {
+        d = (i+(int)[LSCoreToolCenter month1])/12-1;
+    }
+    
+    NSDateComponents *components = [[NSDateComponents alloc]init];
+    //获取下个月的年月日信息,并将其转为date
+    components.month = mounth;
+    components.year = yearTmp+d + mounth/12;
+    components.day = 1;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *nextDate = [calendar dateFromComponents:components];
+    //获取该月第一天星期几
+    NSInteger firstDayInThisMounth = [LSCoreToolCenter firstWeekdayInThisMonth:nextDate];
+    
+    //该月的有多少天daysInThisMounth
+    NSInteger daysInThisMounth = [LSCoreToolCenter totaldaysInMonth:nextDate];
+    if(daysInThisMounth > 29 && (firstDayInThisMounth == 6 || firstDayInThisMounth == 5)){
+        index = 6;
+    }
+    
+    return index;
+}
 
+
+//或当前月标题
 -(NSString *)getCurrentMonthTitle:(NSInteger)i{
     int yearTmp = [[LSCoreToolCenter curDateYear] intValue];
     
     //获取月份
-    int mounth = ((int)[self month1] + i)%12;
-    NSInteger d = (i+(int)[self month1])/12;
+    int mounth = ((int)[LSCoreToolCenter month1] + i)%12;
+    NSInteger d = (i+(int)[LSCoreToolCenter month1])/12;
     if (mounth==0&&d==1) {
         d=0;
     }
     if (mounth==0&&d>1) {
-        d = (i+(int)[self month1])/12-1;
+        d = (i+(int)[LSCoreToolCenter month1])/12-1;
     }
-    
     NSDateComponents *components = [[NSDateComponents alloc]init];
     //获取下个月的年月日信息,并将其转为date
     components.month = mounth;
@@ -296,19 +356,28 @@ static NSString *cellID = @"cellID";
     
     cell.dateLable.text = self.arr[indexPath.row];
     NSDate *date = [[NSDate alloc] init];
-    NSInteger day = [self day:date];
-    if (day == [cell.dateLable.text intValue]) {
-        cell.selected = YES;
-    }
-    //设置单击后的颜色
+    NSInteger day = [LSCoreToolCenter day:date];
+    
+    //设置可点击的cell
     if(![cell.dateLable.text isEqualToString:@""]){
-        UIView *blackgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
-        blackgroundView.backgroundColor = [UIColor yellowColor];
-        cell.selectedBackgroundView = blackgroundView;
+        
         cell.userInteractionEnabled = YES;
     }else{
         cell.userInteractionEnabled = NO;
     }
+    
+    if ([self.current isEqualToString:self.title.text]) {
+        //设置今天高亮
+        if (day == [cell.dateLable.text intValue]) {
+            self.indexPath = indexPath;
+            cell.backgroundColor = [UIColor yellowColor];
+        }else{
+            cell.backgroundColor = [UIColor whiteColor];
+        }
+    }else{
+        cell.backgroundColor = [UIColor whiteColor];
+    }
+    
     return cell;
 }
 
@@ -323,58 +392,54 @@ static NSString *cellID = @"cellID";
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    LYWCollectionViewCell *cell = [self collectionView:_collectionView cellForItemAtIndexPath:indexPath];
-    NSLog(@"%@%@日",self.title.text,cell.dateLable.text);
     
-}
-
-
-/**
- *实现部分
- */
-#pragma mark -- 获取日
-- (NSInteger)day:(NSDate *)date{
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
-    return components.day;
-}
-
-#pragma mark -- 获取月
-- (NSInteger)month:(NSDate *)date{
+    if (indexPath == self.indexPath) {
+        return;
+    }
+    LYWCollectionViewCell *preCell =  (LYWCollectionViewCell *)[collectionView cellForItemAtIndexPath:self.indexPath];
     
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
-    return components.month;
-}
-
-- (NSInteger)month1{
-    NSDateComponents * conponent = [[NSCalendar currentCalendar] components: NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear fromDate:[NSDate date]];
+    preCell.backgroundColor =[UIColor whiteColor];
+    self.indexPath = indexPath;
     
-    return [conponent month];
+    LYWCollectionViewCell *currentCell =  (LYWCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    currentCell.backgroundColor = [UIColor yellowColor];
+    NSString *today = [self getToday:indexPath.row];
+    NSString *day = [ NSString stringWithFormat:@"%@%@日 %@",self.title.text,currentCell.dateLable.text,today];
+    self.calendarBlock(day);
 }
 
-#pragma mark -- 获取年
-- (NSInteger)year:(NSDate *)date{
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
-    return components.year;
+
+
+-(NSString *)getToday:(NSInteger )i{
+    NSString *str = @"";
+    switch (i%7) {
+        case 1:
+            str = @"星期一";
+            break;
+        case 2:
+            str = @"星期二";
+            break;
+        case 3:
+            str = @"星期三";
+            break;
+        case 4:
+            str = @"星期四";
+            break;
+        case 5:
+            str = @"星期五";
+            break;
+        case 6:
+            str = @"星期六";
+            break;
+        case 0:
+            str = @"星期日";
+            break;
+            
+    }
+    return str;
 }
 
-#pragma mark -- 获得当前月份第一天星期几
-- (NSInteger)firstWeekdayInThisMonth:(NSDate *)date{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    //设置每周的第一天从周几开始,默认为1,从周日开始
-    [calendar setFirstWeekday:1];//1.Sun. 2.Mon. 3.Thes. 4.Wed. 5.Thur. 6.Fri. 7.Sat.
-    NSDateComponents *comp = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
-    [comp setDay:1];
-    NSDate *firstDayOfMonthDate = [calendar dateFromComponents:comp];
-    NSUInteger firstWeekday = [calendar ordinalityOfUnit:NSCalendarUnitWeekday inUnit:NSCalendarUnitWeekOfMonth forDate:firstDayOfMonthDate];
-    //若设置从周日开始算起则需要减一,若从周一开始算起则不需要减
-    return firstWeekday - 1;
-}
-#pragma mark -- 获取当前月共有多少天
-
-- (NSInteger)totaldaysInMonth:(NSDate *)date{
-    NSRange daysInLastMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
-    return daysInLastMonth.length;
-}
 
 
 @end

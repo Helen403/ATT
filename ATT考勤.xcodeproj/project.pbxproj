@@ -214,7 +214,6 @@
 		793BCB221E6654C500B743E9 /* ChangeSignNameViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 793BCB211E6654C500B743E9 /* ChangeSignNameViewModel.m */; };
 		793BCB251E66604000B743E9 /* Bongo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 793BCB231E66604000B743E9 /* Bongo.mp3 */; };
 		793BCB261E66604000B743E9 /* Cuckoo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 793BCB241E66604000B743E9 /* Cuckoo.mp3 */; };
-		793D3AF01E70F15200266D9C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D3AEF1E70F15200266D9C /* ViewController.m */; };
 		793D3AF31E70F23300266D9C /* LYWCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D3AF21E70F23300266D9C /* LYWCollectionViewCell.m */; };
 		793D3AF91E712C0F00266D9C /* MyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D3AF81E712C0F00266D9C /* MyCalendarView.m */; };
 		793D3AFD1E712DAE00266D9C /* MyWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D3AFC1E712DAE00266D9C /* MyWeekView.m */; };
@@ -1005,8 +1004,6 @@
 		793BCB211E6654C500B743E9 /* ChangeSignNameViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeSignNameViewModel.m; sourceTree = "<group>"; };
 		793BCB231E66604000B743E9 /* Bongo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bongo.mp3; sourceTree = "<group>"; };
 		793BCB241E66604000B743E9 /* Cuckoo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Cuckoo.mp3; sourceTree = "<group>"; };
-		793D3AEE1E70F15200266D9C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		793D3AEF1E70F15200266D9C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		793D3AF11E70F23300266D9C /* LYWCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYWCollectionViewCell.h; sourceTree = "<group>"; };
 		793D3AF21E70F23300266D9C /* LYWCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYWCollectionViewCell.m; sourceTree = "<group>"; };
 		793D3AF71E712C0F00266D9C /* MyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCalendarView.h; sourceTree = "<group>"; };
@@ -2443,7 +2440,6 @@
 		7928BD9F1E0277AE009BB0B4 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				793D3AFA1E712C2200266D9C /* MyCalendar(我的日历) */,
 				7928BD6F1E0273A4009BB0B4 /* AppDelegate.h */,
 				7928BD701E0273A4009BB0B4 /* AppDelegate.m */,
 				79F8A4DE1E03C110004F8A8C /* StartApp.h */,
@@ -3755,8 +3751,6 @@
 		793D3AFA1E712C2200266D9C /* MyCalendar(我的日历) */ = {
 			isa = PBXGroup;
 			children = (
-				793D3AEE1E70F15200266D9C /* ViewController.h */,
-				793D3AEF1E70F15200266D9C /* ViewController.m */,
 				793D3AF11E70F23300266D9C /* LYWCollectionViewCell.h */,
 				793D3AF21E70F23300266D9C /* LYWCollectionViewCell.m */,
 				793D3AF71E712C0F00266D9C /* MyCalendarView.h */,
@@ -3765,6 +3759,7 @@
 				793D3AFC1E712DAE00266D9C /* MyWeekView.m */,
 			);
 			name = "MyCalendar(我的日历)";
+			path = "ATT考勤/app";
 			sourceTree = "<group>";
 		};
 		793FC9971E56A57B0032F689 /* ScanCode(扫码加入公司) */ = {
@@ -6536,6 +6531,7 @@
 		83B8787B68883EECD9829725 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				793D3AFA1E712C2200266D9C /* MyCalendar(我的日历) */,
 				79BD126D1E69142900AC40CF /* XHDatePicker */,
 				79F366D11E651904000D531B /* JSTextView(有placeholder属性) */,
 				79F366D01E6518DC000D531B /* XML */,
@@ -7077,7 +7073,6 @@
 				793849741E5BC70300EA2502 /* ChangePasswordController.m in Sources */,
 				79F0A1361E13990A00A1B8AA /* UIView+ZJFrame.m in Sources */,
 				7954BB361E5FDC9B00E03173 /* YYAudioTool.m in Sources */,
-				793D3AF01E70F15200266D9C /* ViewController.m in Sources */,
 				79EF94341E262DB900F8E9BC /* CheckController.m in Sources */,
 				79375D4D1E1E2DE600E27934 /* AboutCellView.m in Sources */,
 				795AC4681E2C50D700C69308 /* UIColor+YXAdd.m in Sources */,

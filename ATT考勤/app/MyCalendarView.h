@@ -10,4 +10,8 @@
 
 @interface MyCalendarView : HView
 
+@property (nonatomic, copy) void(^calendarBlock)(NSString *day);
+
+@property(nonatomic,copy) void(^countBlock)(NSInteger count);
+
 @end

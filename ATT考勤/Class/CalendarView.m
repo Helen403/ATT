@@ -8,18 +8,22 @@
 
 #import "CalendarView.h"
 #import "CheckViewModel.h"
-#import "FDCalendar.h"
+#import "MyCalendarView.h"
 #import "CalendarCellView.h"
 
 @interface CalendarView()<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong) CheckViewModel *checkViewModel;
 
-@property(nonatomic,strong) FDCalendar *calendar;
+@property(nonatomic,strong) MyCalendarView *myCalendarView;
 
 @property(nonatomic,strong) UITableView *tableView;
 
 @property(nonatomic,strong) UILabel *title;
+
+@property(nonatomic,strong) NSString *week;
+
+@property(nonatomic,assign) NSInteger count;
 
 @end
 
@@ -35,26 +39,32 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-    [self.calendar mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.myCalendarView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(0);
         make.top.equalTo(0);
         make.right.equalTo(0);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:320]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH/7*self.count+[self h_w:33]*2));
     }];
     
+    CGSize size = [LSCoreToolCenter getSizeWithText:@"2016年12月25日 星期五 白班" fontSize:14];
+    CGFloat leftPadding;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        leftPadding = (SCREEN_WIDTH -size.width)*0.5;
+    } else {
+        leftPadding = (SCREEN_WIDTH -size.width*2)*0.5;
+    }
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(weakSelf);
-        make.top.equalTo(weakSelf.calendar.mas_bottom).offset([self h_w:30]);
-//        make.top.equalTo(0);
+        make.left.equalTo(leftPadding);
+        make.top.equalTo(weakSelf.myCalendarView.mas_bottom).offset([self h_w:15]);
     }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(0);
         make.bottom.equalTo(0);
         make.right.equalTo(0);
     }];
-
+    
     
     [super updateConstraints];
 }
@@ -63,8 +73,9 @@
 -(void)h_setupViews{
     
     self.backgroundColor = GX_BGCOLOR;
+    self.count = [self getCurrentFirstDayInMounth:0];
     
-    [self addSubview:self.calendar];
+    [self addSubview:self.myCalendarView];
     [self addSubview:self.title];
     [self addSubview:self.tableView];
     
@@ -72,13 +83,30 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_loadData{
+    
+}
+
+
+-(void)h_bindViewModel{
+    WS(weakSelf);
+    self.myCalendarView.calendarBlock = ^(NSString *day){
+        weakSelf.title.text = day;
+    };
+    
+    self.myCalendarView.countBlock = ^(NSInteger count){
+        weakSelf.count = count;
+        [weakSelf updateConstraints];
+    };
+    
+}
 
 #pragma mark lazyload
--(FDCalendar *)calendar{
-    if (!_calendar) {
-        _calendar = [[FDCalendar alloc] initWithCurrentDate:[NSDate date]];
+-(MyCalendarView *)myCalendarView{
+    if (!_myCalendarView) {
+        _myCalendarView = [[MyCalendarView alloc] init];
     }
-    return _calendar;
+    return _myCalendarView;
 }
 
 -(CheckViewModel *)checkViewModel{
@@ -88,11 +116,13 @@
     return _checkViewModel;
 }
 
-
 -(UILabel *)title{
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.text = @"2016年12月25日 星期五 白班";
+        
+        NSString *time = [NSString stringWithFormat:@"%@ %@",[LSCoreToolCenter curDateYMD],[LSCoreToolCenter currentWeek]]
+        ;
+        _title.text = time ;
         _title.font = H14;
         _title.textColor = MAIN_PAN_2;
     }
@@ -130,7 +160,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CalendarCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([CalendarCellView class])] forIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.calendarModel = self.checkViewModel.arr[indexPath.row];
     
     return cell;
@@ -138,7 +168,6 @@
 
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     return [self h_w:40];
 }
 
@@ -146,6 +175,40 @@
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.checkViewModel.cellclickSubject sendNext:row];
+}
+
+
+//获得当前月份第一天星期几
+-(NSInteger)getCurrentFirstDayInMounth:(NSInteger)i{
+    NSInteger index=5;
+    int yearTmp = [[LSCoreToolCenter curDateYear] intValue];
+    
+    //获取月份
+    int mounth = ((int)[LSCoreToolCenter month1] + i)%12;
+    NSInteger d = (i+(int)[LSCoreToolCenter month1])/12;
+    if (mounth == 0&&d==1) {
+        d=0;
+    }
+    if (mounth == 0&&d>1) {
+        d = (i+(int)[LSCoreToolCenter month1])/12-1;
+    }
+    
+    NSDateComponents *components = [[NSDateComponents alloc]init];
+    //获取下个月的年月日信息,并将其转为date
+    components.month = mounth;
+    components.year = yearTmp+d + mounth/12;
+    components.day = 1;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *nextDate = [calendar dateFromComponents:components];
+    //获取该月第一天星期几
+    NSInteger firstDayInThisMounth = [LSCoreToolCenter firstWeekdayInThisMonth:nextDate];
+    //该月的有多少天daysInThisMounth
+    NSInteger daysInThisMounth = [LSCoreToolCenter totaldaysInMonth:nextDate];
+    if(daysInThisMounth > 29 && (firstDayInThisMounth == 6 || firstDayInThisMounth ==5)){
+        
+        index = 6;
+    }
+    return index;
 }
 
 @end

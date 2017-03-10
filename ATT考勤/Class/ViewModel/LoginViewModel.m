@@ -19,6 +19,12 @@
     @weakify(self);
     [self.loginclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
+        
+        if ([result isEqualToString:@"netFail"]) {
+            [self.netFailSubject sendNext:nil];
+            
+        }else{
+        
         if (result.length<200) {
           
             [self.loginNumclickFail sendNext:nil];
@@ -39,6 +45,7 @@
                 [self.loginclickFail sendNext:nil];
             }
             
+        }
         }
     }];
     
@@ -71,6 +78,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 return nil;
             }];
@@ -85,6 +94,13 @@
         _loginclickSubject = [RACSubject subject];
     }
     return _loginclickSubject;
+}
+
+-(RACSubject *)netFailSubject{
+    if (!_netFailSubject) {
+        _netFailSubject = [RACSubject subject];
+    }
+    return _netFailSubject;
 }
 
 -(RACSubject *)loginNumclickFail{

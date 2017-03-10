@@ -72,6 +72,7 @@
 #pragma mark private
 -(void)h_setupViews{
     
+    self.backgroundColor = [UIColor whiteColor];
     
     [self addSubview:self.week1];
     [self addSubview:self.week2];

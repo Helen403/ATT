@@ -239,8 +239,21 @@
         });
     }];
     
+    [[self.loginViewModel.netFailSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.login.enabled = YES;
+            self.login.backgroundColor = MAIN_ORANGER;
+            [self.login.layer setBorderColor:MAIN_ORANGER.CGColor];
+            
+        });
+
+    }];
     
 }
+
+
+
 
 -(void)mainThread{
     

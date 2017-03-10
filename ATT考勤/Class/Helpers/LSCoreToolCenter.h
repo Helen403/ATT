@@ -125,5 +125,27 @@ extern void DismissHud(void);
 +(NSString *)currentYearMonth;
 
 +(NSString *)curDateYear;
++(NSString *)curDateYMD;
+
+
+/**
+ *实现部分
+ */
+#pragma mark -- 获取日
++ (NSInteger)day:(NSDate *)date;
+
+#pragma mark -- 获取月
++ (NSInteger)month:(NSDate *)date;
+
++ (NSInteger)month1;
+#pragma mark -- 获取年
++ (NSInteger)year:(NSDate *)date;
+
+#pragma mark -- 获得当前月份第一天星期几
++ (NSInteger)firstWeekdayInThisMonth:(NSDate *)date;
+#pragma mark -- 获取当前月共有多少天
+
++ (NSInteger)totaldaysInMonth:(NSDate *)date;
+
 
 @end

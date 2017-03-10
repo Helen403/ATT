@@ -32,4 +32,6 @@
 
 @property(nonatomic,strong) RACSubject *sinaclickSubject;
 
+@property(nonatomic,strong) RACSubject *netFailSubject;
+
 @end
