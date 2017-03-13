@@ -21,11 +21,16 @@
 #import "SecurityController.h"
 
 
+#import "XCFNavigationController.h"
+#import "LoginViewController.h"
+
 @interface SetController ()
 
 @property(nonatomic,strong) SetView *setView;
 
 @property(nonatomic,strong) SetViewModel *setViewModel;
+
+@property(nonatomic,strong) XCFNavigationController *nav;
 
 @end
 
@@ -138,9 +143,19 @@
     }];
     
     [[self.setViewModel.exitclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-        [self.navigationController popToRootViewControllerAnimated:NO];
+        ShowMessage(@"退出账户成功");
+        [UIApplication sharedApplication].keyWindow.rootViewController =self.nav;
     }];
     
+}
+
+
+-(XCFNavigationController *)nav{
+    if (!_nav) {
+        _nav = [[XCFNavigationController alloc] init];
+        [_nav addChildViewController:[[LoginViewController alloc] init]];
+    }
+    return _nav;
 }
 
 #pragma mark lazyload

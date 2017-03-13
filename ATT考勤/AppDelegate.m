@@ -79,6 +79,7 @@
             // 这里可以直接使用SDWebimage等来请求服务器提供的广告图片(SDWebimage会处理好gif图片的显示)
             // 不过你需要注意选择SDWebimage的缓存策略
             imageView.image = [UIImage imageNamed:@"splash1"];
+
             
         } finishHandler:^(ZJLaunchAdCallbackType callbackType) {
             switch (callbackType) {
@@ -95,8 +96,6 @@
                     // 点击了跳过广告, 可以进入App
                 case ZJLaunchAdCallbackTypeClickSkipBtn:
                     [weakSelf setRoot];
-                    
-                    
                     break;
             }
         }];

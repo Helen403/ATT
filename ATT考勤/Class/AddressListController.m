@@ -55,10 +55,7 @@
     self.content.frame = CGRectMake(0, 0, SCREEN_WIDTH, 84);
     self.tableView.frame = CGRectMake(0,84,SCREEN_WIDTH, self.view.frame.size.height-84);
     
-    //发送请求
-    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
-    self.addressListViewModel.companyCode = companyCode;
-    [self.addressListViewModel.refreshDataCommand execute:nil];
+
 }
 
 -(void)h_bindViewModel{
@@ -99,7 +96,12 @@
 }
 
 -(void)h_viewWillAppear{
-   [self.tableView reloadData];
+    //发送请求
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.addressListViewModel.companyCode = companyCode;
+    [self.addressListViewModel.refreshDataCommand execute:nil];
+    
+   //[self.tableView reloadData];
 }
 
 #pragma mark lazyload
@@ -272,9 +274,9 @@
         AddressListCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AddressListCellView class])] forIndexPath:indexPath];
         
         cell.addressListModel = self.addressListViewModel.arr[indexPath.row];
+        cell.bgColor = randomColorA;
         return cell;
-    }else
-    {
+    }else{
         static NSString *identify = @"cellIdentify";
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
         
@@ -294,18 +296,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (tableView == self.tableView) {
-        AddressListCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AddressListCellView class])] forIndexPath:indexPath];
-        
-        cell.selected = NO;
-    }else
-    {
-        static NSString *identify = @"cellIdentify";
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
-        
-        cell.selected = NO;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 
-    }
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.addressListViewModel.cellclickSubject sendNext:row];
 }

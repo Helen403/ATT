@@ -222,6 +222,7 @@
         TeamListCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamListCellView class])] forIndexPath:indexPath];
         
         cell.teamListModel = self.teamListViewModel.arr[indexPath.row];
+        cell.bgColor = randomColorA;
         return cell;
     }else
     {
@@ -245,16 +246,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (tableView == self.tableView) {
-        TeamListCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamListCellView class])] forIndexPath:indexPath];
-        cell.selected = NO;
-        
-    }else
-    {
-        static NSString *identify = @"cellIdentify";
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
-        cell.selected = NO;
-    }
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.teamListViewModel.cellclickSubject sendNext:row];
 }

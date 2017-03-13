@@ -95,6 +95,7 @@
     [self.sure mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(weakSelf.bottomView.mas_right).offset(-[self h_w:10]);
         make.centerY.equalTo(weakSelf.bottomView);
+         make.size.equalTo(CGSizeMake([self h_w:65], [self h_w:30]));
     }];
     
     

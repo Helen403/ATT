@@ -10,26 +10,24 @@
 
 @interface TrajectoryModel : NSObject
 
-@property(nonatomic,strong) NSString *year;
 
-@property(nonatomic,strong) NSString *time1;
-
-@property(nonatomic,strong) NSString *content1;
-
-//经度
-@property(nonatomic,strong) NSString *longitude1;
-
-//纬度
-@property(nonatomic,strong) NSString *latitude1;
-
-@property(nonatomic,strong) NSString *time2;
-
-@property(nonatomic,strong) NSString *content2;
-
-//经度
-@property(nonatomic,strong) NSString *longitude2;
-
-//纬度
-@property(nonatomic,strong) NSString *latitude2;
+@property (nonatomic , copy) NSString              * cardTime;
+@property (nonatomic , copy) NSString              * cardDeviceName;
+@property (nonatomic , copy) NSString              * cardLsh;
+@property (nonatomic , copy) NSString              * deptName;
+@property (nonatomic , copy) NSString              * cardStatus;
+@property (nonatomic , copy) NSString              * cardDeviceType;
+@property (nonatomic , copy) NSString              * locLatitude;
+@property (nonatomic , copy) NSString              * timePoint;
+@property (nonatomic , copy) NSString              * deptCode;
+@property (nonatomic , copy) NSString              * cloclMode;
+@property (nonatomic , copy) NSString              * empCode;
+@property (nonatomic , copy) NSString              * userName;
+@property (nonatomic , copy) NSString              * cardDate;
+@property (nonatomic , copy) NSString              * locAddress;
+@property (nonatomic , copy) NSString              * locLongitude;
+@property (nonatomic , copy) NSString              * timePhase;
+@property (nonatomic , copy) NSString              * userCode;
+@property (nonatomic , copy) NSString              * companyCode;
 
 @end

@@ -51,6 +51,15 @@
 
 }
 
+
+-(void)h_viewWillDisappear{
+    [self.timeView h_viewWillDisappear];
+}
+
+-(void)h_viewWillAppear{
+    [self.timeView h_viewWillAppear];
+}
+
 #pragma mark lazyload
 -(TimeView *)timeView{
     if (!_timeView) {

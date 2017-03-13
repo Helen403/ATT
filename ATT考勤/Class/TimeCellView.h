@@ -13,4 +13,6 @@
 
 @property(nonatomic,strong) TimeModel *timeModel;
 
+@property(nonatomic,assign) NSInteger index;
+
 @end

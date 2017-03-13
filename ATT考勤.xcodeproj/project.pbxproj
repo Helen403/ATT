@@ -224,6 +224,9 @@
 		7943B3E61E6D095C004BF1B8 /* GoOutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943B3E51E6D095C004BF1B8 /* GoOutModel.m */; };
 		7943B3E91E6D0D6B004BF1B8 /* ShiftCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943B3E81E6D0D6B004BF1B8 /* ShiftCellView.m */; };
 		7943B3EC1E6D0D83004BF1B8 /* ShiftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943B3EB1E6D0D83004BF1B8 /* ShiftModel.m */; };
+		794620EB1E767E9E00873199 /* FeedbackCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620EA1E767E9E00873199 /* FeedbackCellView.m */; };
+		794620EF1E767F4300873199 /* FeedbackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620EE1E767F4300873199 /* FeedbackModel.m */; };
+		794620F21E76A2EC00873199 /* TimeSoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620F11E76A2EC00873199 /* TimeSoundView.m */; };
 		7947F13D1E67BB1D00E68C83 /* ChoiceStaffTeamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F13C1E67BB1D00E68C83 /* ChoiceStaffTeamController.m */; };
 		7947F1401E67BB3900E68C83 /* ChoiceStaffTeamView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F13F1E67BB3900E68C83 /* ChoiceStaffTeamView.m */; };
 		7947F1431E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F1421E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m */; };
@@ -1024,6 +1027,12 @@
 		7943B3E81E6D0D6B004BF1B8 /* ShiftCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiftCellView.m; sourceTree = "<group>"; };
 		7943B3EA1E6D0D83004BF1B8 /* ShiftModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShiftModel.h; sourceTree = "<group>"; };
 		7943B3EB1E6D0D83004BF1B8 /* ShiftModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiftModel.m; sourceTree = "<group>"; };
+		794620E91E767E9E00873199 /* FeedbackCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackCellView.h; sourceTree = "<group>"; };
+		794620EA1E767E9E00873199 /* FeedbackCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackCellView.m; sourceTree = "<group>"; };
+		794620ED1E767F4300873199 /* FeedbackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackModel.h; sourceTree = "<group>"; };
+		794620EE1E767F4300873199 /* FeedbackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackModel.m; sourceTree = "<group>"; };
+		794620F01E76A2EC00873199 /* TimeSoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSoundView.h; sourceTree = "<group>"; };
+		794620F11E76A2EC00873199 /* TimeSoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSoundView.m; sourceTree = "<group>"; };
 		7947F13B1E67BB1D00E68C83 /* ChoiceStaffTeamController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffTeamController.h; sourceTree = "<group>"; };
 		7947F13C1E67BB1D00E68C83 /* ChoiceStaffTeamController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceStaffTeamController.m; sourceTree = "<group>"; };
 		7947F13E1E67BB3900E68C83 /* ChoiceStaffTeamView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffTeamView.h; sourceTree = "<group>"; };
@@ -2554,6 +2563,7 @@
 			children = (
 				79345B881E1F22BB0007A348 /* Other */,
 				79345B871E1F22B50007A348 /* Cell */,
+				794620EC1E767F2700873199 /* Model */,
 				79345B851E1F22AA0007A348 /* View */,
 				79345B841E1F22A20007A348 /* ViewController */,
 				79345B831E1F22990007A348 /* ViewModel */,
@@ -2599,6 +2609,8 @@
 		79345B871E1F22B50007A348 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				794620E91E767E9E00873199 /* FeedbackCellView.h */,
+				794620EA1E767E9E00873199 /* FeedbackCellView.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -3094,6 +3106,8 @@
 		79375D101E1DE72100E27934 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				794620F01E76A2EC00873199 /* TimeSoundView.h */,
+				794620F11E76A2EC00873199 /* TimeSoundView.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -3821,6 +3835,15 @@
 			children = (
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		794620EC1E767F2700873199 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				794620ED1E767F4300873199 /* FeedbackModel.h */,
+				794620EE1E767F4300873199 /* FeedbackModel.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		7947F1341E67BAC200E68C83 /* ChoiceStaffTeam(选择员工部门) */ = {
@@ -6962,6 +6985,7 @@
 				790D8ABD1E2F43E800DDA697 /* RefuseController.m in Sources */,
 				795AC4771E2C51B400C69308 /* SMController.m in Sources */,
 				79FAFAA91E348BC800577917 /* TeamListView.m in Sources */,
+				794620EF1E767F4300873199 /* FeedbackModel.m in Sources */,
 				79F964551E2CA85300838CC4 /* ShiftViewModel.m in Sources */,
 				790D8ACC1E2F45CD00DDA697 /* AuditingView.m in Sources */,
 				793FC9961E5687F50032F689 /* EmployeeTitle.m in Sources */,
@@ -6984,6 +7008,7 @@
 				790D8AC01E2F453800DDA697 /* AskController.m in Sources */,
 				795AC4621E2C50D700C69308 /* NSNotificationCenter+YXAdd.m in Sources */,
 				79236B071E6558FD00A005C0 /* ChangeNameView.m in Sources */,
+				794620EB1E767E9E00873199 /* FeedbackCellView.m in Sources */,
 				79F46F231E68041100F2923F /* ApplyManViewModel.m in Sources */,
 				79DD27651E31A15F00923D19 /* MultiRolesCellView.m in Sources */,
 				79F4F0751E1F808300115C3B /* DLFixedTabbarView.m in Sources */,
@@ -7179,6 +7204,7 @@
 				79EF94581E262F7100F8E9BC /* UIColor+RGBA.m in Sources */,
 				79F46F2D1E68186500F2923F /* ChoiceStaffController.m in Sources */,
 				799231E61E6D63B60099C4F9 /* CostModel.m in Sources */,
+				794620F21E76A2EC00873199 /* TimeSoundView.m in Sources */,
 				79DD276D1E31B2F000923D19 /* MyMsgViewModel.m in Sources */,
 				793FC9A01E56A6360032F689 /* ScanCodeController.m in Sources */,
 				79EF94531E262F7100F8E9BC /* HARootScrollViewManager.m in Sources */,

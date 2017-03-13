@@ -14,6 +14,7 @@
 
 @property(nonatomic,strong) UILabel *title;
 
+@property(nonatomic,strong) UISwitch *on;
 
 @property(nonatomic,strong) UIView *line;
 

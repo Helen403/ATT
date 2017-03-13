@@ -691,6 +691,15 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[ShiftCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([ShiftCellView class])]];
         _tableView.scrollEnabled = NO;
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:40])];
+        view.backgroundColor = white_color;
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake([self h_w:10], 0, SCREEN_WIDTH, [self h_w:40])];
+        title.text = @"请选择";
+        title.font = H14;
+        title.textColor = MAIN_PAN_2;
+        [view addSubview:title];
+        title.centerY = [self h_w:20];
+        _tableView.tableHeaderView = view;
     }
     return _tableView;
 }

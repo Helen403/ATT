@@ -22,4 +22,17 @@
 
 @property(nonatomic,strong) RACSubject *cellclickSubject;
 
+//==========================================
+@property(nonatomic,strong) RACCommand *trajectoryCommand;
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property(nonatomic,strong) NSString *userCode;
+
+@property(nonatomic,strong) NSString *cardMonth;
+
+@property(nonatomic,strong) RACSubject *trajectorySubject;
+
+
+
 @end

@@ -123,7 +123,7 @@
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.bg.backgroundColor = self.bgColor;
+     self.bg.backgroundColor = self.bgColor;
      self.name.backgroundColor = self.bgColor;
 }
 

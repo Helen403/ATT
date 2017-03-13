@@ -17,11 +17,18 @@
 #import "MultiRolesController.h"
 
 
+
+
+
 @interface LoginViewController ()
 
 @property(nonatomic,strong) LoginView *loginView;
 
 @property(nonatomic,strong) LoginViewModel *loginViewModel;
+
+
+
+
 
 
 @end
@@ -42,11 +49,11 @@
 }
 
 
-
 -(void)viewDidLoad{
     [super viewDidLoad];
     
 }
+
 
 - (void)updateViewConstraints {
     
@@ -60,7 +67,7 @@
 
 #pragma mark -private
 -(void)h_layoutNavigation{
-   
+    
 }
 
 -(void)h_addSubviews{

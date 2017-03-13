@@ -98,7 +98,6 @@
         weakSelf.count = count;
         [weakSelf updateConstraints];
     };
-    
 }
 
 #pragma mark lazyload

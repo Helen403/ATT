@@ -44,6 +44,12 @@
 
 }
 
+-(void)h_viewWillAppear{
+    [self.feedbackView h_viewWillAppear];
+}
+
+
+
 #pragma mark lazyload
 -(FeedbackView *)feedbackView{
     if (!_feedbackView) {

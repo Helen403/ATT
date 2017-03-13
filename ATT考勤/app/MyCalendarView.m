@@ -76,7 +76,6 @@ static NSString *cellID = @"cellID";
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding);
         make.top.equalTo(weakSelf.pre);
-        
     }];
     
     [self.last mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -127,9 +126,9 @@ static NSString *cellID = @"cellID";
 -(void)h_loadData{
     self.currentDate = [NSData data];
     self.index = 0;
-    self.title.text = [self getCurrentMonthTitle:self.index];
+    self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
     self.current = self.title.text;
-    self.arr = [self getCurrentMonthInfo:self.index];
+    self.arr = [LSCoreToolCenter getCurrentMonthInfo:self.index];
 }
 
 #pragma mark lazyload
@@ -148,8 +147,8 @@ static NSString *cellID = @"cellID";
 
 -(void)preClick{
     --self.index;
-    self.arr = [self getCurrentMonthInfo:self.index];
-    self.title.text = [self getCurrentMonthTitle:self.index];
+    self.arr = [LSCoreToolCenter getCurrentMonthInfo:self.index];
+    self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
     [self.collectionView reloadData];
     [self updateConstraints];
     self.countBlock((int)ceil(self.arr.count/7));
@@ -157,8 +156,8 @@ static NSString *cellID = @"cellID";
 
 -(void)lastClick{
     ++self.index;
-    self.arr = [self getCurrentMonthInfo:self.index];
-    self.title.text = [self getCurrentMonthTitle:self.index];
+    self.arr = [LSCoreToolCenter getCurrentMonthInfo:self.index];
+    self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
     [self.collectionView reloadData];
     [self updateConstraints];
     self.countBlock((int)ceil(self.arr.count/7));
@@ -229,115 +228,6 @@ static NSString *cellID = @"cellID";
         
     }
     return _collectionView;
-}
-
-// i为0就是当月  i为－1就是上个月 i为1 就是下个月
--(NSMutableArray *)getCurrentMonthInfo:(NSInteger)i{
-    NSMutableArray *arrTmp = [NSMutableArray array];
-    int yearTmp = [[LSCoreToolCenter curDateYear] intValue];
-    
-    //获取月份
-    int mounth = ((int)[LSCoreToolCenter month1] + i)%12;
-    NSInteger d = (i+(int)[LSCoreToolCenter month1])/12;
-    if (mounth == 0&&d==1) {
-        d=0;
-    }
-    if (mounth == 0&&d>1) {
-        d = (i+(int)[LSCoreToolCenter month1])/12-1;
-    }
-    
-    NSDateComponents *components = [[NSDateComponents alloc]init];
-    //获取下个月的年月日信息,并将其转为date
-    components.month = mounth;
-    components.year = yearTmp+d + mounth/12;
-    components.day = 1;
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *nextDate = [calendar dateFromComponents:components];
-    //获取该月第一天星期几
-    NSInteger firstDayInThisMounth = [LSCoreToolCenter firstWeekdayInThisMonth:nextDate];
-    //该月的有多少天daysInThisMounth
-    NSInteger daysInThisMounth = [LSCoreToolCenter totaldaysInMonth:nextDate];
-    NSString *string = [[NSString alloc]init];
-    for (int j = 0; j < (daysInThisMounth > 29 && (firstDayInThisMounth == 6 || firstDayInThisMounth ==5) ? 42 : 35) ; j++) {
-        
-        if (j < firstDayInThisMounth || j > daysInThisMounth + firstDayInThisMounth - 1) {
-            string = @"";
-            [arrTmp addObject:string];
-        }else{
-            string = [NSString stringWithFormat:@"%ld",j - firstDayInThisMounth + 1];
-            [arrTmp addObject:string];
-        }
-    }
-    
-    if (daysInThisMounth==30&&(firstDayInThisMounth ==5)) {
-        for(int i = 35;i<arrTmp.count;i++){
-            [arrTmp removeObjectAtIndex:i];
-        }
-    }
-    
-    return arrTmp;
-}
-
-//获得当前月份第一天星期几
--(NSInteger)getCurrentFirstDayInMounth:(NSInteger)i{
-    NSInteger index=5;
-    int yearTmp = [[LSCoreToolCenter curDateYear] intValue];
-    
-    //获取月份
-    int mounth = ((int)[LSCoreToolCenter month1] + i)%12;
-    NSInteger d = (i+(int)[LSCoreToolCenter month1])/12;
-    if (mounth == 0&&d==1) {
-        d=0;
-    }
-    if (mounth == 0&&d>1) {
-        d = (i+(int)[LSCoreToolCenter month1])/12-1;
-    }
-    
-    NSDateComponents *components = [[NSDateComponents alloc]init];
-    //获取下个月的年月日信息,并将其转为date
-    components.month = mounth;
-    components.year = yearTmp+d + mounth/12;
-    components.day = 1;
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *nextDate = [calendar dateFromComponents:components];
-    //获取该月第一天星期几
-    NSInteger firstDayInThisMounth = [LSCoreToolCenter firstWeekdayInThisMonth:nextDate];
-    
-    //该月的有多少天daysInThisMounth
-    NSInteger daysInThisMounth = [LSCoreToolCenter totaldaysInMonth:nextDate];
-    if(daysInThisMounth > 29 && (firstDayInThisMounth == 6 || firstDayInThisMounth == 5)){
-        index = 6;
-    }
-    
-    return index;
-}
-
-
-//或当前月标题
--(NSString *)getCurrentMonthTitle:(NSInteger)i{
-    int yearTmp = [[LSCoreToolCenter curDateYear] intValue];
-    
-    //获取月份
-    int mounth = ((int)[LSCoreToolCenter month1] + i)%12;
-    NSInteger d = (i+(int)[LSCoreToolCenter month1])/12;
-    if (mounth==0&&d==1) {
-        d=0;
-    }
-    if (mounth==0&&d>1) {
-        d = (i+(int)[LSCoreToolCenter month1])/12-1;
-    }
-    NSDateComponents *components = [[NSDateComponents alloc]init];
-    //获取下个月的年月日信息,并将其转为date
-    components.month = mounth;
-    components.year = yearTmp+d + mounth/12;
-    components.day = 1;
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *nextDate = [calendar dateFromComponents:components];
-    NSDateFormatter *dateFormattor = [[NSDateFormatter alloc] init];
-    [dateFormattor setDateFormat:@"MM"];
-    
-    NSString *str = [dateFormattor stringFromDate:nextDate];
-    return [NSString stringWithFormat:@"%ld年%@月",yearTmp+d,str];;
 }
 
 //这两个不用说,返回cell个数及section个数

@@ -147,9 +147,7 @@ void DismissHud(void){
         FMResultSet *resultSet = [db executeQuery:@"select * from TableHelen where url=?;",key];
         //遍历结果集合
         
-        while ([resultSet  next])
-            
-        {
+        while ([resultSet  next]){
             result = [resultSet stringForColumn:@"value"];
         }
         
@@ -167,8 +165,7 @@ void DismissHud(void){
     
     //2.获得数据库
     FMDatabase *db = [FMDatabase databaseWithPath:fileName];
-    if ([db open])
-    {
+    if ([db open]){
         //如果表格存在 则销毁
         [db  executeUpdate:@"drop table if exists TableHelen;"];
     }
@@ -332,6 +329,24 @@ void DismissHud(void){
     NSString *str = [formatter stringFromDate:[NSDate date]];
     return str;
     
+}
+
++(NSString *)currentYearYM{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM"];
+    
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    return str;
+}
+
++(NSString *)currentYearY{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-"];
+    
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    return str;
 }
 
 
@@ -737,10 +752,6 @@ void DismissHud(void){
 
 
 
-
-
-
-
 //获取当前时间yyyyMMddHHmmss
 
 +(NSString *) getCurrentTime{
@@ -876,7 +887,118 @@ void DismissHud(void){
     return daysInLastMonth.length;
 }
 
++ (UIImage *)convertViewToImage:(UIView *)view
+{
+    UIGraphicsBeginImageContext(view.bounds.size);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return screenshot;
+}
 
+
+// i为0就是当月  i为－1就是上个月 i为1 就是下个月
++(NSMutableArray *)getCurrentMonthInfo:(NSInteger)i{
+    NSMutableArray *arrTmp = [NSMutableArray array];
+    int yearTmp = [[LSCoreToolCenter curDateYear] intValue];
+    
+    //获取月份
+    int mounth = ((int)[LSCoreToolCenter month1] + i)%12;
+    NSInteger d = (i+(int)[LSCoreToolCenter month1])/12;
+    if (mounth == 0&&d==1) {
+        d=0;
+    }
+    if (mounth == 0&&d>1) {
+        d = (i+(int)[LSCoreToolCenter month1])/12-1;
+    }
+    
+    NSDateComponents *components = [[NSDateComponents alloc]init];
+    //获取下个月的年月日信息,并将其转为date
+    components.month = mounth;
+    components.year = yearTmp+d + mounth/12;
+    components.day = 1;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *nextDate = [calendar dateFromComponents:components];
+    //获取该月第一天星期几
+    NSInteger firstDayInThisMounth = [LSCoreToolCenter firstWeekdayInThisMonth:nextDate];
+    //该月的有多少天daysInThisMounth
+    NSInteger daysInThisMounth = [LSCoreToolCenter totaldaysInMonth:nextDate];
+    NSString *string = [[NSString alloc]init];
+    for (int j = 0; j < (daysInThisMounth > 29 && (firstDayInThisMounth == 6 || firstDayInThisMounth ==5) ? 42 : 35) ; j++) {
+        
+        if (j < firstDayInThisMounth || j > daysInThisMounth + firstDayInThisMounth - 1) {
+            string = @"";
+            [arrTmp addObject:string];
+        }else{
+            string = [NSString stringWithFormat:@"%ld",j - firstDayInThisMounth + 1];
+            [arrTmp addObject:string];
+        }
+    }
+    
+    if (daysInThisMounth==30&&(firstDayInThisMounth ==5)) {
+        for(int i = 35;i<arrTmp.count;i++){
+            [arrTmp removeObjectAtIndex:i];
+        }
+    }
+    
+    return arrTmp;
+}
+
+
+
+//或当前月标题
++(NSString *)getCurrentMonthTitle:(NSInteger)i{
+    int yearTmp = [[LSCoreToolCenter curDateYear] intValue];
+    
+    //获取月份
+    int mounth = ((int)[LSCoreToolCenter month1] + i)%12;
+    NSInteger d = (i+(int)[LSCoreToolCenter month1])/12;
+    if (mounth==0&&d==1) {
+        d=0;
+    }
+    if (mounth==0&&d>1) {
+        d = (i+(int)[LSCoreToolCenter month1])/12-1;
+    }
+    NSDateComponents *components = [[NSDateComponents alloc]init];
+    //获取下个月的年月日信息,并将其转为date
+    components.month = mounth;
+    components.year = yearTmp+d + mounth/12;
+    components.day = 1;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *nextDate = [calendar dateFromComponents:components];
+    NSDateFormatter *dateFormattor = [[NSDateFormatter alloc] init];
+    [dateFormattor setDateFormat:@"MM"];
+    
+    NSString *str = [dateFormattor stringFromDate:nextDate];
+    return [NSString stringWithFormat:@"%ld年%@月",yearTmp+d,str];;
+}
+
++(NSString *)getCurrentYMonth:(NSInteger)i{
+    int yearTmp = [[LSCoreToolCenter curDateYear] intValue];
+    
+    //获取月份
+    int mounth = ((int)[LSCoreToolCenter month1] + i)%12;
+    NSInteger d = (i+(int)[LSCoreToolCenter month1])/12;
+    if (mounth==0&&d==1) {
+        d=0;
+    }
+    if (mounth==0&&d>1) {
+        d = (i+(int)[LSCoreToolCenter month1])/12-1;
+    }
+    NSDateComponents *components = [[NSDateComponents alloc]init];
+    //获取下个月的年月日信息,并将其转为date
+    components.month = mounth;
+    components.year = yearTmp+d + mounth/12;
+    components.day = 1;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *nextDate = [calendar dateFromComponents:components];
+    NSDateFormatter *dateFormattor = [[NSDateFormatter alloc] init];
+    [dateFormattor setDateFormat:@"MM"];
+    
+    NSString *str = [dateFormattor stringFromDate:nextDate];
+    return [NSString stringWithFormat:@"%ld-%@",yearTmp+d,str];;
+}
 
 
 @end

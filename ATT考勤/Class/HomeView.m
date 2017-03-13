@@ -64,8 +64,6 @@
 //时间
 @property(nonatomic,strong) NSTimer *timeNow;
 
-@property(nonatomic,strong) NSDateFormatter *formatter;
-
 @property(nonatomic,assign) CGFloat width;
 
 @property(nonatomic,strong) UIScrollView *scrollView;
@@ -431,6 +429,15 @@
         
         [self performSelectorOnMainThread:@selector(attendRecord:) withObject:x waitUntilDone:YES];
         
+    }];
+    
+    //没有记录
+    [[self.homeViewModel.attendFailSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+           self.status.text = @"状态:没有记录";
+        });
+     
     }];
     
 }
@@ -853,19 +860,12 @@
     [self.year setText: [LSCoreToolCenter currentYear]];
     
     //设置定时
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm:ss"];
-    self.formatter = formatter;
     self.timeNow = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeRun) userInfo:nil repeats:YES];
 }
 
 //时间变化
 - (void)timeRun{
-    
-    NSString *timetmp = [self.formatter stringFromDate:[NSDate date]];
-    
-    [self.time setText:timetmp];//时间在变化的语句
-    
+    [self.time setText:[LSCoreToolCenter currentDateHMS]];//时间在变化的语句
 }
 
 -(void)delayMethod{
@@ -1174,15 +1174,13 @@
     //关闭定时器
     [self.timeNow setFireDate:[NSDate distantFuture]];
     
-    NSString *timetmp = [self.formatter stringFromDate:[NSDate date]];
-    
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     
     self.homeViewModel.companyCode = companyCode;
     UserModel *user =  getModel(@"user");
     self.homeViewModel.userCode = user.userCode;
     self.homeViewModel.cardDate = [LSCoreToolCenter currentYearType];
-    self.homeViewModel.cardTime = timetmp;
+    self.homeViewModel.cardTime = [LSCoreToolCenter currentDateHMS];
     self.homeViewModel.cardDeviceType = @"IOS";
     self.homeViewModel.cardDeviceName = [LSCoreToolCenter deviceVersion];
     self.homeViewModel.empCode = empModel.empCode;
@@ -1298,7 +1296,7 @@
 -(UILabel *)status{
     if (!_status) {
         _status = [[UILabel alloc] init];
-        _status.text = @"状态:上班";
+        _status.text = @"";
         _status.font = H22;
     }
     
@@ -1309,7 +1307,7 @@
     
     if (!_preImg) {
         _preImg = [[UIImageView alloc] init];
-        _preImg.image = ImageNamed(@"homepage_work_orange");
+        _preImg.image = ImageNamed(@"");
     }
     return _preImg;
 }
@@ -1317,7 +1315,7 @@
 -(UILabel *)preText{
     if (!_preText) {
         _preText = [[UILabel alloc] init];
-        _preText.text = @"08:29:55";
+        _preText.text = @"";
     }
     return _preText;
 }
@@ -1325,7 +1323,7 @@
 -(UIImageView *)lastImg{
     if (!_lastImg) {
         _lastImg = [[UIImageView alloc] init];
-        _lastImg.image = ImageNamed(@"homepage_rest_orange");
+        _lastImg.image = ImageNamed(@"");
     }
     return _lastImg;
 }
@@ -1333,7 +1331,7 @@
 -(UILabel *)lastText{
     if (!_lastText) {
         _lastText = [[UILabel alloc] init];
-        _lastText.text = @"14:50:55";
+        _lastText.text = @"";
     }
     return _lastText;
 }
@@ -1360,7 +1358,7 @@
 -(UILabel *)week{
     if (!_week) {
         _week = [[UILabel alloc] init];
-        _week.text = @"星期五";
+        _week.text = @"";
         _week.font = H26;
         _week.textColor = RGBCOLOR(117, 117, 117);
     }
@@ -1370,7 +1368,7 @@
 -(UILabel *)time{
     if (!_time) {
         _time = [[UILabel alloc] init];
-        _time.text = @"14:50:55";
+        _time.text = [LSCoreToolCenter currentDateHMS];
         _time.font = HB42;
         _time.textColor = RGBCOLOR(80, 80, 80);
         
@@ -1380,7 +1378,7 @@
 -(UILabel *)year{
     if (!_year) {
         _year = [[UILabel alloc] init];
-        _year.text = @"2016年11月11日";
+        _year.text = @"";
         _year.font = H18;
         _year.textColor = RGBCOLOR(179, 180, 182);
     }
@@ -1420,7 +1418,7 @@
 -(UIImageView *)bg{
     if (!_bg) {
         _bg = [[UIImageView alloc] init];
-        //        _bg.image = ImageNamedBg;
+      
     }
     return _bg;
 }

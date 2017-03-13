@@ -48,14 +48,14 @@
     }];
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.year.mas_right).offset([self h_w:23]);
+        make.left.equalTo([self h_w:103]);
         make.top.equalTo(0);
-        make.size.equalTo(CGSizeMake([self h_w:1], SCREEN_WIDTH));
+        make.size.equalTo(CGSizeMake([self h_w:1], [self h_w:110]));
     }];
     
     [self.cir1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf.line);
-        make.top.equalTo([self h_w:10]);
+           make.centerY.equalTo(weakSelf.year);
         make.size.equalTo(CGSizeMake([self h_w:6], [self h_w:6]));
     }];
     
@@ -80,31 +80,31 @@
         make.top.equalTo(weakSelf.longitude1.mas_bottom).offset([self h_w:10]);
     }];
     
-    [self.cir2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(weakSelf.line);
-        make.top.equalTo(weakSelf.latitude1.mas_bottom).offset([self h_w:10]);
-        make.size.equalTo(CGSizeMake([self h_w:6], [self h_w:6]));
-    }];
-    
-    [self.time2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
-        make.top.equalTo(weakSelf.latitude1.mas_bottom).offset([self h_w:10]);
-    }];
-    
-    [self.content2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
-        make.top.equalTo(weakSelf.time2.mas_bottom).offset([self h_w:10]);
-    }];
-    
-    [self.longitude2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
-        make.top.equalTo(weakSelf.content2.mas_bottom).offset([self h_w:10]);
-    }];
-    
-    [self.latitude2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
-        make.top.equalTo(weakSelf.longitude2.mas_bottom).offset([self h_w:10]);
-    }];
+//    [self.cir2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(weakSelf.line);
+//        make.top.equalTo(weakSelf.latitude1.mas_bottom).offset([self h_w:10]);
+//        make.size.equalTo(CGSizeMake([self h_w:6], [self h_w:6]));
+//    }];
+//    
+//    [self.time2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
+//        make.top.equalTo(weakSelf.latitude1.mas_bottom).offset([self h_w:10]);
+//    }];
+//    
+//    [self.content2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
+//        make.top.equalTo(weakSelf.time2.mas_bottom).offset([self h_w:10]);
+//    }];
+//    
+//    [self.longitude2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
+//        make.top.equalTo(weakSelf.content2.mas_bottom).offset([self h_w:10]);
+//    }];
+//    
+//    [self.latitude2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
+//        make.top.equalTo(weakSelf.longitude2.mas_bottom).offset([self h_w:10]);
+//    }];
     [super updateConstraints];
 }
 
@@ -119,11 +119,11 @@
     [self addSubview:self.content1];
     [self addSubview:self.longitude1];
     [self addSubview:self.latitude1];
-    [self addSubview:self.cir2];
-    [self addSubview:self.time2];
-    [self addSubview:self.content2];
-    [self addSubview:self.longitude2];
-    [self addSubview:self.latitude2];
+//    [self addSubview:self.cir2];
+//    [self addSubview:self.time2];
+//    [self addSubview:self.content2];
+//    [self addSubview:self.longitude2];
+//    [self addSubview:self.latitude2];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -135,15 +135,15 @@
         return;
     }
     _trajectoryModel = trajectoryModel;
-    self.year.text = trajectoryModel.year;
-    self.time1.text = trajectoryModel.time1;
-    self.content1.text = trajectoryModel.content1;
-    self.longitude1.text = trajectoryModel.longitude1;
-    self.latitude1.text = trajectoryModel.latitude1;
-    self.time2.text = trajectoryModel.time2;
-    self.content2.text = trajectoryModel.content2;
-    self.longitude2.text = trajectoryModel.longitude2;
-    self.latitude2.text = trajectoryModel.latitude2;
+    self.year.text = trajectoryModel.cardDate;
+    self.time1.text = trajectoryModel.cardTime;
+    self.content1.text =[NSString stringWithFormat:@"位置:%@",trajectoryModel.locAddress];
+    self.longitude1.text =[NSString stringWithFormat:@"经度:%@",trajectoryModel.locLongitude];
+    self.latitude1.text =[NSString stringWithFormat:@"纬度:%@",trajectoryModel.locLatitude] ;
+//    self.time2.text = trajectoryModel.time2;
+//    self.content2.text = trajectoryModel.content2;
+//    self.longitude2.text = trajectoryModel.longitude2;
+//    self.latitude2.text = trajectoryModel.latitude2;
 }
 
 #pragma mark lazyload

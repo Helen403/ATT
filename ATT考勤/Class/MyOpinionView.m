@@ -42,6 +42,10 @@
 
 @property(nonatomic,strong) UIButton *submit;
 
+@property(nonatomic,strong) UILabel *textTmp;
+
+@property(nonatomic,strong) NSString *suggTypeId;
+
 @end
 
 @implementation MyOpinionView
@@ -101,25 +105,25 @@
     }];
     
     [self.problem mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.text4.mas_bottom).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.text4.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.text1);
     }];
     
     [self.input mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.problem.mas_bottom).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.problem.mas_bottom).offset([self h_w:15]);
         make.left.equalTo(weakSelf.text1);
         make.right.equalTo(weakSelf.text3);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
     }];
     
     [self.conn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.input.mas_bottom).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.input.mas_bottom).offset([self h_w:0]);
         make.left.equalTo(weakSelf.text1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
     }];
     
     [self.phone mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.conn.mas_bottom).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.conn.mas_bottom).offset([self h_w:0]);
         make.left.equalTo(weakSelf.text1);
         make.right.equalTo(weakSelf.text3);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:40]));
@@ -136,8 +140,7 @@
         make.left.equalTo(weakSelf.text1);
         make.right.equalTo(weakSelf.text3);
     }];
-    
-    
+
     
     [super updateConstraints];
 }
@@ -166,6 +169,10 @@
 
 -(void)h_bindViewModel{
     
+}
+
+-(void)h_loadData{
+    self.suggTypeId = @"0";
 }
 
 
@@ -206,8 +213,74 @@
         _text1.textColor = MAIN_PAN_2;
         _text1.textAlignment = NSTextAlignmentCenter;
         ViewBorderRadius(_text1, 5, 1, MAIN_LINE_COLOR);
+        _text1.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(text1Click)];
+        [_text1 addGestureRecognizer:setTap];
     }
     return _text1;
+}
+
+-(void)text1Click{
+
+     _text1.textColor = MAIN_PAN_RED;
+     ViewBorderRadius(_text1, 5, 1, MAIN_PAN_RED);
+    
+    self.textTmp.textColor = MAIN_PAN_2;
+    ViewBorderRadius(self.textTmp, 5, 1, MAIN_LINE_COLOR);
+    self.textTmp = self.text1;
+     self.suggTypeId = @"1";
+}
+-(void)text2Click{
+    _text2.textColor = MAIN_PAN_RED;
+    ViewBorderRadius(_text2, 5, 1, MAIN_PAN_RED);
+    
+    self.textTmp.textColor = MAIN_PAN_2;
+    ViewBorderRadius(self.textTmp, 5, 1, MAIN_LINE_COLOR);
+    self.textTmp = self.text2;
+    self.suggTypeId = @"2";
+}
+-(void)text3Click{
+    _text3.textColor = MAIN_PAN_RED;
+    ViewBorderRadius(_text3, 5, 1, MAIN_PAN_RED);
+    
+    self.textTmp.textColor = MAIN_PAN_2;
+    ViewBorderRadius(self.textTmp, 5, 1, MAIN_LINE_COLOR);
+    self.textTmp = self.text3;
+    self.suggTypeId = @"3";
+}
+-(void)text4Click{
+    _text4.textColor = MAIN_PAN_RED;
+    ViewBorderRadius(_text4, 5, 1, MAIN_PAN_RED);
+    
+    self.textTmp.textColor = MAIN_PAN_2;
+    ViewBorderRadius(self.textTmp, 5, 1, MAIN_LINE_COLOR);
+    self.textTmp = self.text4;
+    self.suggTypeId = @"4";
+}
+-(void)text5Click{
+    _text5.textColor = MAIN_PAN_RED;
+    ViewBorderRadius(_text5, 5, 1, MAIN_PAN_RED);
+    
+    self.textTmp.textColor = MAIN_PAN_2;
+    ViewBorderRadius(self.textTmp, 5, 1, MAIN_LINE_COLOR);
+    self.textTmp = self.text5;
+    self.suggTypeId = @"5";
+}
+-(void)text6Click{
+    _text6.textColor = MAIN_PAN_RED;
+    ViewBorderRadius(_text6, 5, 1, MAIN_PAN_RED);
+    
+    self.textTmp.textColor = MAIN_PAN_2;
+    ViewBorderRadius(self.textTmp, 5, 1, MAIN_LINE_COLOR);
+    self.textTmp = self.text6;
+    self.suggTypeId = @"6";
+}
+
+-(UILabel *)textTmp{
+    if (!_textTmp) {
+        _textTmp = [[UILabel alloc] init];
+    }
+    return _textTmp;
 }
 
 -(UILabel *)text2{
@@ -218,6 +291,9 @@
         _text2.textColor = MAIN_PAN_2;
         _text2.textAlignment = NSTextAlignmentCenter;
         ViewBorderRadius(_text2, 5, 1, MAIN_LINE_COLOR);
+        _text2.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(text2Click)];
+        [_text2 addGestureRecognizer:setTap];
     }
     return _text2;
 }
@@ -230,6 +306,9 @@
         _text3.textColor = MAIN_PAN_2;
         _text3.textAlignment = NSTextAlignmentCenter;
         ViewBorderRadius(_text3, 5, 1, MAIN_LINE_COLOR);
+        _text3.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(text3Click)];
+        [_text3 addGestureRecognizer:setTap];
     }
     return _text3;
 }
@@ -242,6 +321,9 @@
         _text4.textColor = MAIN_PAN_2;
         _text4.textAlignment = NSTextAlignmentCenter;
         ViewBorderRadius(_text4, 5, 1, MAIN_LINE_COLOR);
+        _text4.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(text4Click)];
+        [_text4 addGestureRecognizer:setTap];
     }
     return _text4;
 }
@@ -254,6 +336,9 @@
         _text5.textColor = MAIN_PAN_2;
         _text5.textAlignment = NSTextAlignmentCenter;
         ViewBorderRadius(_text5, 5, 1, MAIN_LINE_COLOR);
+        _text5.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(text5Click)];
+        [_text5 addGestureRecognizer:setTap];
     }
     return _text5;
 }
@@ -266,6 +351,9 @@
         _text6.textColor = MAIN_PAN_2;
         _text6.textAlignment = NSTextAlignmentCenter;
         ViewBorderRadius(_text6, 5, 1, MAIN_LINE_COLOR);
+        _text6.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(text6Click)];
+        [_text6 addGestureRecognizer:setTap];
     }
     return _text6;
 }
@@ -275,7 +363,7 @@
         _problem = [[UILabel alloc] init];
         _problem.text = @"请你描述您遇到的问题(不少于10个字)";
         _problem.font = H14;
-        _problem.textColor = MAIN_PAN_2;
+        _problem.textColor = MAIN_PAN_RED;
     }
     return _problem;
 }
@@ -285,10 +373,8 @@
         _input = [[JSTextView alloc] init];
         _input.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
         _input.editable = YES;        //是否允许编辑内容，默认为“YES”
-        //        _textView.delegate = self;       //设置代理方法的实现类
+       
         _input.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置字体名字和字体大小;
-        //        _textView.returnKeyType = UIReturnKeyDefault;//return键的类型
-        //        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
         _input.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _input.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
         _input.textColor = MAIN_PAN_2;
@@ -297,14 +383,11 @@
         _input.myPlaceholder=@"我遇到的问题是(如有需要,我们会与你留的联系方式和你取得联系,做意见的反馈)";
         
         //2.设置提醒文字颜色
-        
         _input.myPlaceholderColor= [UIColor lightGrayColor];
         _input.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _input.layer.borderWidth =1.0;
-        _input.layer.cornerRadius =5.0;
+        _input.layer.borderWidth = 1.0;
+        _input.layer.cornerRadius = 5.0;
         _input.font = H14;
-        
-        //_input.delegate = self;
         
     }
     return _input;
@@ -359,7 +442,6 @@
 }
 
 //完成编辑的时候下移回来（只要把offset重新设为0就行了）
-
 -(void)textFieldDidEndEditing:(UITextField *)textView{
 
     [UIView animateWithDuration:0.25 animations:^{
@@ -374,11 +456,10 @@
     if (!_suggest) {
         _suggest = [[UILabel alloc] init];
         _suggest.text = @"非常感谢您对本产品提出宝贵的意见，有了您的大力支持产品才能够更完善";
-        //        _suggest.lineBreakMode = UILineBreakModeWordWrap;
         [_suggest setLineBreakMode:NSLineBreakByWordWrapping];
         _suggest.numberOfLines = 0;
         _suggest.font = H14;
-        _suggest.textColor = MAIN_PAN_2;
+        _suggest.textColor = MAIN_PAN_RED;
     }
     return _suggest;
     
@@ -416,7 +497,7 @@
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     
     self.myOpinionViewModel.companyCode = companyCode;
-    self.myOpinionViewModel.suggTypeId = @"1";
+    self.myOpinionViewModel.suggTypeId = self.suggTypeId;
     self.myOpinionViewModel.suggQuestion = self.input.text;
     self.myOpinionViewModel.suggTelphone = self.phone.text;
     UserModel *user =  getModel(@"user");

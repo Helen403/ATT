@@ -19,6 +19,7 @@
 
 @property(nonatomic,strong) UIView *view;
 
+
 @end
 
 @implementation AddressListCellView
@@ -81,6 +82,30 @@
     
 }
 
+-(void)setBgColor:(UIColor *)bgColor{
+    if (!bgColor) {
+        return;
+    }
+    _bgColor = bgColor;
+    self.view.backgroundColor = bgColor;
+}
+
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+    
+    self.view.backgroundColor = self.bgColor;
+    self.img.backgroundColor = self.bgColor;
+}
+
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    self.view.backgroundColor = self.bgColor;
+    self.img.backgroundColor = self.bgColor;
+}
+
+
+
 #pragma mark lazyload
 -(UILabel *)img{
     if (!_img) {
@@ -96,7 +121,7 @@
 -(UIView *)view{
     if (!_view) {
         _view = [[UIView alloc] init];
-        _view.backgroundColor = randomColorA;
+
         ViewRadius(_view, [self h_w:18]);
     }
     return _view;

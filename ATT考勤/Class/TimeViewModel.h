@@ -10,9 +10,16 @@
 
 @interface TimeViewModel : HViewModel
 
-
 @property(nonatomic,strong) NSMutableArray *arr;
 
 @property(nonatomic,strong) RACSubject *cellclickSubject;
+
+@property(nonatomic,strong) RACSubject *tableViewSubject;
+
+@property(nonatomic,strong) RACCommand *modifyCommand;
+
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+@property(nonatomic,strong) NSString *userCode;
 
 @end

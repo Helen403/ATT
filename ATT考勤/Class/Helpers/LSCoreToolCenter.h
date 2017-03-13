@@ -148,4 +148,15 @@ extern void DismissHud(void);
 + (NSInteger)totaldaysInMonth:(NSDate *)date;
 
 
++ (UIImage *)convertViewToImage:(UIView *)view;
+
+
++(NSString *)currentYearYM;
++(NSString *)getCurrentMonthTitle:(NSInteger)i;
+
++(NSMutableArray *)getCurrentMonthInfo:(NSInteger)i;
+
++(NSString *)currentYearY;
+
++(NSString *)getCurrentYMonth:(NSInteger)i;
 @end

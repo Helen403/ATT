@@ -9,6 +9,7 @@
 #import "TimeView.h"
 #import "TimeViewModel.h"
 #import "TimeCellView.h"
+#import "UserModel.h"
 
 @interface TimeView()<UITableViewDataSource,UITableViewDelegate>
 
@@ -16,6 +17,7 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 
+//@property(nonatomic,strong)  *<#name#>
 
 @end
 
@@ -47,13 +49,34 @@
     [self updateConstraintsIfNeeded];
 }
 
+
+-(void)h_bindViewModel{
+    [[self.timeViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+}
+
+-(void)h_viewWillAppear{
+    UserModel *user =  getModel(@"user");
+    self.timeViewModel.userCode = user.userCode;
+    [self.timeViewModel.refreshDataCommand execute:nil];
+}
+
+-(void)h_viewWillDisappear{
+    UserModel *user =  getModel(@"user");
+    self.timeViewModel.userCode = user.userCode;
+    [self.timeViewModel.modifyCommand execute:nil];
+}
+
 #pragma mark lazyload
 -(TimeViewModel *)timeViewModel{
     if (!_timeViewModel) {
         _timeViewModel = [[TimeViewModel alloc] init];
     }
     return _timeViewModel;
-    
 }
 
 -(UITableView *)tableView{
@@ -65,10 +88,8 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[TimeCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([TimeCellView class])]];
         _tableView.scrollEnabled = NO;
-        
     }
     return _tableView;
-    
 }
 
 
@@ -87,7 +108,10 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     TimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TimeCellView class])] forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if(!(indexPath.row==1)){
+     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.index = indexPath.row;
     cell.timeModel = self.timeViewModel.arr[indexPath.row];
     
     return cell;
@@ -100,7 +124,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-   
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    NSLog(@"6666");
 }
 
 @end

@@ -69,7 +69,6 @@
 }
 
 -(void)h_viewWillDisappear{
-
     UserModel *user =  getModel(@"user");
     self.messageViewModel.userCode = user.userCode;
     [self.messageViewModel.modifyCommand execute:nil];
@@ -114,7 +113,7 @@
     
     MessageCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MessageCellView class])] forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-     cell.index = indexPath.row;
+    cell.index = indexPath.row;
     cell.messageModel = self.messageViewModel.arr[indexPath.row];
     return cell;
 }

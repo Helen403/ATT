@@ -170,3 +170,20 @@
 //修改同事通知
 #define modifyIsReceNews @"http://13822767713.xicp.net/smart/ws/IAttService"
 
+//获取考勤轨迹
+#define findAttendRecordByUserMonth @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//获取所有意见反馈
+#define findAllSuggbackByUser @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//获取声音提示
+#define findIsCardSound @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//获取手机是否震动
+#define findIsCardVarient @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//修改声音提示
+#define modifyIsCardSound @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//修改手机震动
+#define modifyIsCardVarient @"http://13822767713.xicp.net/smart/ws/IAttService"

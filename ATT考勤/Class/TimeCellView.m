@@ -101,8 +101,26 @@
         self.info.hidden = NO;
         self.info.text = timeModel.info;
     }
+    
+    
+    if (self.index == 0) {
+        NSString *cardSound =  [[NSUserDefaults standardUserDefaults] objectForKey:@"findIsCardSound"];
+        if ([cardSound isEqualToString:@"0"]) {
+            [self.on setOn:YES];
+        }else{
+            [self.on setOn:NO];
+        }
+    }
+    
+    if (self.index == 2) {
+        NSString *cardVarient =  [[NSUserDefaults standardUserDefaults] objectForKey:@"findIsCardVarient"];
+        if ([cardVarient isEqualToString:@"0"]) {
+            [self.on setOn:YES];
+        }else{
+            [self.on setOn:NO];
+        }
+    }
 }
-
 
 
 #pragma mark lazyload
@@ -125,14 +143,37 @@
     return _title;
 }
 
+
 -(UISwitch *)on{
     if (!_on) {
         _on = [[UISwitch alloc] init];
         _on.hidden = YES;
+        [_on addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     }
     return _on;
 }
 
+-(void) switchAction:(UISwitch *)sender{
+    if (self.index == 0) {
+        
+        if ([sender isOn]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"findIsCardSound"];
+        }else{
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"findIsCardSound"];
+        }
+        
+    }
+    
+  
+    if (self.index == 2) {
+        if ([sender isOn]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"findIsCardVarient"];
+        }else{
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"findIsCardVarient"];
+        }
+    }
+    
+}
 -(UIImageView *)back{
     if (!_back) {
         _back = [[UIImageView alloc] init];

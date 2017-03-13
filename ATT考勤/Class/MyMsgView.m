@@ -78,7 +78,7 @@
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MyMsgCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([MyMsgCellView class])]];
-        
+        _tableView.scrollEnabled = NO;
     }
     return _tableView;
     
@@ -114,9 +114,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    MyMsgCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MyMsgCellView class])] forIndexPath:indexPath];
-    
-    cell.selected = NO;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.myMsgViewModel.cellclickSubject sendNext:row];
 }

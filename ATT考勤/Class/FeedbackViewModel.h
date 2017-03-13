@@ -10,4 +10,14 @@
 
 @interface FeedbackViewModel : HViewModel
 
+@property(nonatomic,strong) RACCommand *feedbackCommand;
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property(nonatomic,strong) NSString *userCode;
+
+@property(nonatomic,strong) RACSubject *submitclickSubject;
+
+@property(nonatomic,strong) NSMutableArray *arr;
+
 @end

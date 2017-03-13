@@ -196,8 +196,7 @@
     MultiRolesModel *multiRoleModel = self.multiRolesViewModel.arr[indexPath.row];
     [[NSUserDefaults standardUserDefaults] setObject:multiRoleModel.companyCode forKey:@"companyCode"];
     [[NSUserDefaults standardUserDefaults] setObject:multiRoleModel.companyNickName forKey:@"companyNickName"];
-    NSLog(@"%@",multiRoleModel.companyNickName);
-    
+
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.multiRolesViewModel.cellclickSubject sendNext:row];
     

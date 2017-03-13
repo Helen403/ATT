@@ -8,19 +8,15 @@
 
 #import "FeedbackView.h"
 #import "FeedbackViewModel.h"
-#import "JSTextView.h"
+#import "FeedbackCellView.h"
+#import "UserModel.h"
 
-@interface FeedbackView()
+
+@interface FeedbackView()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) FeedbackViewModel *feedbackViewModel;
 
-@property(nonatomic,strong) UILabel *title;
-
-@property(nonatomic,strong) JSTextView *mySuggestion;
-
-@property(nonatomic,strong) UILabel *suggest;
-
-@property(nonatomic,strong) UIButton *addTo;
+@property(nonatomic,strong) UITableView *tableView;
 
 @end
 
@@ -36,28 +32,8 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-    [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([self h_w:10]);
-        make.left.equalTo([self h_w:10]);
-    }];
-    
-    [self.mySuggestion mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:10]);
-        make.left.equalTo([self h_w:10]);
-        make.right.equalTo(-[self h_w:10]);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
-    }];
-    
-    [self.suggest mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.mySuggestion.mas_bottom).offset([self h_w:10]);
-        make.left.equalTo([self h_w:10]);
-        
-    }];
-    
-    [self.addTo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.suggest.mas_bottom).offset([self h_w:10]);
-        make.left.equalTo([self h_w:10]);
-        make.right.equalTo(-[self h_w:10]);
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf);
     }];
     
     [super updateConstraints];
@@ -66,18 +42,34 @@
 #pragma mark private
 -(void)h_setupViews{
     
-    [self addSubview:self.title];
-    [self addSubview:self.mySuggestion];
-    [self addSubview:self.suggest];
-    [self addSubview:self.addTo];
-
+    [self addSubview:self.tableView];
+    
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
--(void)h_bindViewModel{
-   
+-(void)h_viewWillAppear{
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    self.feedbackViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.feedbackViewModel.userCode = user.userCode;
+    [self.feedbackViewModel.feedbackCommand execute:nil];
+    
+    
 }
+
+-(void)h_bindViewModel{
+    [[self.feedbackViewModel.submitclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            
+        });
+    }];
+}
+
 
 
 #pragma mark lazyload
@@ -88,78 +80,58 @@
     return _feedbackViewModel;
 }
 
--(UILabel *)title{
-    if (!_title) {
-        _title = [[UILabel alloc] init];
-        _title.text = @"我的意见";
-        _title.font = H14;
-        _title.textColor = MAIN_PAN_2;
-    }
-    return _title;
-}
 
--(JSTextView *)mySuggestion{
-    if (!_mySuggestion) {
-        _mySuggestion = [[JSTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:120])];
-        _mySuggestion.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
-        _mySuggestion.editable = YES;        //是否允许编辑内容，默认为“YES”
-        //        _textView.delegate = self;       //设置代理方法的实现类
-        _mySuggestion.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置字体名字和字体大小;
-        _mySuggestion.myPlaceholder=@"注册账户不能正常登陆";
-        
-        //2.设置提醒文字颜色
-        
-        _mySuggestion.myPlaceholderColor= [UIColor lightGrayColor];
-        //        _textView.returnKeyType = UIReturnKeyDefault;//return键的类型
-        //        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
-        _mySuggestion.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
-        _mySuggestion.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
-        _mySuggestion.textColor = MAIN_PAN_2;
-        //设置显示的文本内容
-        
-        _mySuggestion.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _mySuggestion.layer.borderWidth =1.0;
-        _mySuggestion.layer.cornerRadius =5.0;
-        _mySuggestion.font = H14;
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = GX_BGCOLOR;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[FeedbackCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([FeedbackCellView class])]];
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:80])];
+        v.backgroundColor = GX_BGCOLOR;
+        _tableView.tableFooterView = v;
         
     }
-    return _mySuggestion;
-}
-
--(UILabel *)suggest{
-    if (!_suggest) {
-        _suggest = [[UILabel alloc] init];
-        _suggest.text = @"非常感谢你提供的宝贵意见,请重新注册登陆";
-        _suggest.font = H14;
-        _suggest.textColor = MAIN_PAN_2;
-    }
-    return _suggest;
-}
-
--(UIButton *)addTo{
-    if (!_addTo) {
-        _addTo = [[UIButton alloc] init];
-        [_addTo setTitle:@"追加提交" forState:UIControlStateNormal];
-        _addTo.titleLabel.font = H22;
-        [_addTo addTarget:self action:@selector(addTo:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [_addTo.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
-        [_addTo.layer setCornerRadius:10];
-        
-        [_addTo.layer setBorderWidth:2];//设置边界的宽度
-        
-        [_addTo setBackgroundColor:MAIN_ORANGER];
-        //设置按钮的边界颜色
-        
-        
-        [_addTo.layer setBorderColor:MAIN_ORANGER.CGColor];
-    }
-    return _addTo;
-}
-
--(void)addTo:(UIButton *)button{
+    return _tableView;
     
 }
+
+
+#pragma mark - delegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return self.feedbackViewModel.arr.count;
+}
+
+#pragma mark tableViewDataSource
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    FeedbackCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([FeedbackCellView class])] forIndexPath:indexPath];
+    
+    cell.feedbackModel = self.feedbackViewModel.arr[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return [self h_w:195];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
+    //    [self.dealWithViewModel.cellclickSubject sendNext:row];
+}
+
 
 @end
