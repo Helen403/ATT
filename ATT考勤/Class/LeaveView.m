@@ -262,6 +262,9 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.leaveViewModel.arr.count);
             [self.tableView reloadData];
+            if (self.leaveViewModel.arr.count==0) {
+                return ;
+            }
             LeaveModel *leave = self.leaveViewModel.arr[0];
             self.sureTimeShowText.text = leave.workName;
             self.workLsh = leave.workLsh;
@@ -284,6 +287,9 @@
 -(void)ProveView:(NSNotification*) notification{
     NSMutableArray *arrTemp = [notification object];
     
+    if (arrTemp.count==0) {
+        return;
+    }
     self.stepUserCodes = @"";
     self.stepUserNames = @"";
     

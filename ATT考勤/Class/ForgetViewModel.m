@@ -17,6 +17,11 @@
     
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
           DismissHud();
+        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
+        
         if(result.length<200){
             ShowErrorStatus(@"该手机号没注册");
             [self.telphoneBackFailSubject sendNext:nil];
@@ -90,6 +95,8 @@
                         } failure:^(NSError *error) {
                             DismissHud();
                             ShowErrorStatus(@"请检查网络状态");
+                            [subscriber sendNext:@"netFail"];
+                            [subscriber sendCompleted];
                         }];
                     }
                 } failure:^(NSError *error) {

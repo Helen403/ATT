@@ -133,14 +133,17 @@
 
     //请求返回回来的验证码
     [[self.forgetViewModel.SMSbackSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
-        
-        self.backNumber = x;
-        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+             self.backNumber = x;
+            
+        });
     }];
     
     //手机号不符合
     [[self.forgetViewModel.telphoneBackFailSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-        self.useText.text = @"";
+        dispatch_sync(dispatch_get_main_queue(), ^{
+              self.useText.text = @"";
+        });
     }];
     
 }

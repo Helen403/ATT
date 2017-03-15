@@ -24,6 +24,9 @@
 
 @property(nonatomic,strong) UIView *view;
 
+@property(nonatomic,strong) UIView *titleView;
+
+@property(nonatomic,strong) UILabel *titleViewText;
 
 @end
 
@@ -34,7 +37,10 @@
     
     WS(weakSelf);
     [self.bgImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(weakSelf);
+        make.left.equalTo(0);
+        make.top.equalTo(0);
+        make.right.equalTo(0);
+        make.bottom.equalTo(weakSelf.mas_bottom).offset(-[self h_w:20]);
     }];
     
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,6 +69,17 @@
         make.right.equalTo(-[self h_w:10]);
     }];
     
+    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.bgImg.mas_bottom).offset(0);
+        make.left.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:20]));
+    }];
+    
+    [self.titleViewText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.titleView);
+        make.left.equalTo([self h_w:10]);
+    }];
+    
     [super updateConstraints];
 }
 
@@ -78,6 +95,8 @@
     [self addSubview:self.name];
     [self addSubview:self.autograph];
     [self addSubview:self.star];
+    [self addSubview:self.titleView];
+    [self addSubview:self.titleViewText];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -140,7 +159,7 @@
 -(UIImageView *)star{
     if (!_star) {
         _star = [[UIImageView alloc] init];
-//        _star.image = ImageNamed(@"role_code_icon");
+        //        _star.image = ImageNamed(@"role_code_icon");
     }
     return _star;
 }
@@ -164,6 +183,24 @@
         
     }
     return _img;
+}
+
+-(UIView *)titleView{
+    if (!_titleView) {
+        _titleView = [[UIView alloc] init];
+        _titleView.backgroundColor = GX_BGCOLOR;
+    }
+    return _titleView;
+}
+
+-(UILabel *)titleViewText{
+    if (!_titleViewText) {
+        _titleViewText = [[UILabel alloc] init];
+        _titleViewText.text = @"基本信息";
+        _titleViewText.font = H14;
+        _titleViewText.textColor = MAIN_PAN_3;
+    }
+    return _titleViewText;
 }
 
 @end

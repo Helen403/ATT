@@ -224,7 +224,9 @@
     if (self.index == 0) {
         self.index = 1;
     }
-    
+    if (self.informViewModel.arr.count==0) {
+        return;
+    }
     self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.informViewModel.arr.count];
     
     
@@ -275,7 +277,9 @@
     if (self.index > self.informViewModel.arr.count) {
         self.index = self.informViewModel.arr.count;
     }
-    
+    if (self.informViewModel.arr.count==0) {
+        return;
+    }
     self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.informViewModel.arr.count];
  
     NoticeModel *noticeModel = self.informViewModel.arr[0];

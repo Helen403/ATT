@@ -6728,7 +6728,7 @@
 				TargetAttributes = {
 					7928BD681E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = TMLDK3R5QN;
+						DevelopmentTeam = PLK9A7N26F;
 					};
 					7928BD811E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
@@ -7579,7 +7579,7 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = TMLDK3R5QN;
+				DEVELOPMENT_TEAM = PLK9A7N26F;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ATT考勤/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7616,7 +7616,7 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = TMLDK3R5QN;
+				DEVELOPMENT_TEAM = PLK9A7N26F;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ATT考勤/PrefixHeader.pch";
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;

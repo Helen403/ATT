@@ -311,7 +311,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     TeamModel *teamModel =  self.scanCodeViewModel.arr[indexPath.row];
     self.scanCodeViewModel.deptCode = teamModel.deptCode;
     [self.scanCodeViewModel.addTeamCommand execute:nil];

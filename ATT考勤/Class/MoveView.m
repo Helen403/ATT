@@ -314,6 +314,9 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.moveViewModel.arr.count);
             [self.tableView reloadData];
+            if (self.moveViewModel.arr.count == 0) {
+                return ;
+            }
             MoveModel *move = self.moveViewModel.arr[0];
             self.sureTimeShowText.text = move.shiftName;
             //            self.workLsh = leave.workLsh;
@@ -325,6 +328,12 @@
         });
     }];
     
+    [[self.moveViewModel.flowTemplateSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        
+        self.flowInstanceId = x;
+        
+    }];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ProveView:) name:@"ProveView" object:nil];
 }
@@ -334,6 +343,10 @@
     
     self.stepUserCodes = @"";
     self.stepUserNames = @"";
+    
+    if (arrTemp.count==0) {
+        return;
+    }
     
     for (ProveModel *prove in arrTemp) {
         

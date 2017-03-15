@@ -21,7 +21,8 @@
 
 #pragma mark - 初始化个人数据
 + (void)initPersonData {
-    
+    //初始化默认声音
+     [[NSUserDefaults standardUserDefaults] setObject:@"Bongo.mp3" forKey:@"Sound"];
 }
 
 

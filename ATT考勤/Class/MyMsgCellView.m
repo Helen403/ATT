@@ -77,7 +77,7 @@
 -(UIImageView *)img{
     if (!_img) {
         _img = [[UIImageView alloc] init];
-        _img.image = ImageNamed(@"remind_set_work_prompt_picture");
+        _img.image = ImageNamed(@"");
     }
     return _img;
 }

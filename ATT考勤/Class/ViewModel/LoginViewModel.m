@@ -20,7 +20,7 @@
     [self.loginclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
         
-        if ([result isEqualToString:@"netFail"]) {
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
             [self.netFailSubject sendNext:nil];
             
         }else{

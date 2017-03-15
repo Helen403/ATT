@@ -53,7 +53,7 @@ void ShowMessage(NSString *statues){
 void ShowErrorStatus(NSString *statues){
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD showErrorWithStatus:statues];
+//            [SVProgressHUD showErrorWithStatus:statues];
             
             
             //            [SVProgressHUD showProgress:0.5 status:@"上传"];

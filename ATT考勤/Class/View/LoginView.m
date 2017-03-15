@@ -252,9 +252,6 @@
     
 }
 
-
-
-
 -(void)mainThread{
     
     self.useTextField.text = @"";

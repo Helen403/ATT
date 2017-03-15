@@ -237,6 +237,13 @@
         });
     }];
     
+    [[self.drainPunchViewModel.flowTemplateSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        
+        self.flowInstanceId = x;
+        
+    }];
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ProveView:) name:@"ProveView" object:nil];
@@ -247,7 +254,9 @@
     
     self.stepUserCodes = @"";
     self.stepUserNames = @"";
-    
+    if (arrTemp.count==0) {
+        return;
+    }
     for (ProveModel *prove in arrTemp) {
         
         self.stepUserCodes = [NSString stringWithFormat:@"%@,%@",self.stepUserCodes,prove.whoisId];

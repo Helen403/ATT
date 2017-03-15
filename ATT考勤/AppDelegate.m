@@ -26,6 +26,10 @@
 
 @property(nonatomic,strong) NSString *telphone;
 
+@property(nonatomic,assign) Boolean flag;
+
+@property (nonatomic, strong) RACCommand *loginCommand;
+
 @end
 
 @implementation AppDelegate
@@ -33,8 +37,14 @@
 #pragma mark system
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [self h_initialize];
+    NSString *telphone = [[NSUserDefaults standardUserDefaults] objectForKey:@"myUser"];
+    if (telphone.length>0) {
+        self.telphone = telphone;
+        [self.loginclickCommand execute:nil];
+    }
     
-    /******************************************************************/
+    /*****************************************************/
     //请先启动BaiduMapManager
     _mapManager = [[BMKMapManager alloc]init];
     // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
@@ -43,7 +53,7 @@
         NSLog(@"manager start failed!");
     }
     
-    /******************************************************************/
+    /*******************************************************/
     
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstStart"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstStart"];
@@ -57,7 +67,7 @@
             
             // 设置按钮属性
             [cell.finishBtn setTitle:@"立即体验" forState:UIControlStateNormal];
-            [cell.finishBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+            [cell.finishBtn setTitleColor:white_color forState:UIControlStateNormal];
             
         } finishHandler:^(UIButton *finishBtn) {
             
@@ -126,19 +136,23 @@
     for (UIView *v in self.window.subviews) {
         [v removeFromSuperview];
     }
-
+    
     NSString *telphone = [[NSUserDefaults standardUserDefaults] objectForKey:@"myUser"];
     
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     NSString *companyNickName =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyNickName"];
-  
+    
     if (telphone.length>0&&companyCode.length>0&&companyNickName.length>0) {
-        self.telphone = telphone;
-        [self h_initialize];
-        [self.loginclickCommand execute:nil];
+        if (self.flag) {
+            [self rootController];
+        }else{
+            self.telphone = telphone;
+            [self.loginCommand execute:nil];
+        }
         
     }else{
-            self.window.rootViewController = self.nav;
+        [self CannotController];
+        
     }
     
 }
@@ -146,34 +160,29 @@
 #pragma mark private
 -(void)h_initialize{
     
-   
     [self.loginclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        DismissHud();
+        //        DismissHud();
         
-        if ([result isEqualToString:@"netFail"]) {
-            
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                self.window.rootViewController = self.nav;
-            });
-            
-        }else{
-            if (result.length<200) {
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    self.window.rootViewController = self.nav;
-                });
-            }else{
-                
-                NSDictionary *xmlDoc = [LSCoreToolCenter getFilter:result filter:@"User"];
-                
-                UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
-                
-                //存储对象
-                saveModel(model, @"user");
-                [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"createUserCode"];
-                [self rootController];
-                
-            }
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            self.flag = NO;
+            return ;
         }
+        
+        if (result.length<200) {
+            self.flag = NO;
+        }else{
+            
+            NSDictionary *xmlDoc = [LSCoreToolCenter getFilter:result filter:@"User"];
+            
+            UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
+            
+            //存储对象
+            saveModel(model, @"user");
+            [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"createUserCode"];
+            self.flag = YES;
+        }
+        
+        
     }];
     
     
@@ -184,12 +193,64 @@
         }
     }];
     
+    
+    [self.loginCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        DismissHud();
+        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            [self CannotController];
+            return ;
+        }
+        
+        if (result.length<200) {
+            [self CannotController];
+        }else{
+            
+            NSDictionary *xmlDoc = [LSCoreToolCenter getFilter:result filter:@"User"];
+            
+            UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
+            
+            //存储对象
+            saveModel(model, @"user");
+            [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"createUserCode"];
+            [self rootController];
+        }
+        
+        
+    }];
+    
+    
+    [[[self.loginCommand.executing skip:1] take:1] subscribeNext:^(id x) {
+        
+        if ([x isEqualToNumber:@(YES)]) {
+            // ShowMaskStatus(@"正在拼命加载");
+        }
+    }];
+    
 }
 
 -(void)rootController{
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    
+    if (![NSThread isMainThread]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
+        });
+    }else{
         [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
-    });
+    }
+}
+
+-(void)CannotController{
+    
+    if (![NSThread isMainThread]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.window.rootViewController = self.nav;
+        });
+    }else{
+        self.window.rootViewController = self.nav;
+    }
+    
+    
 }
 
 #pragma mark lazyload
@@ -246,7 +307,7 @@
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
                     DismissHud();
-                    ShowErrorStatus(@"请检查网络状态");
+                    //                    ShowErrorStatus(@"请检查网络状态");
                     [subscriber sendNext:@"netFail"];
                     [subscriber sendCompleted];
                 }];
@@ -257,6 +318,42 @@
     }
     return _loginclickCommand;
 }
+
+
+-(RACCommand *)loginCommand{
+    if (!_loginCommand) {
+        
+        _loginCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                NSString *body =[NSString stringWithFormat: @"<findUserByTelphone xmlns=\"http://service.webservice.vada.com/\">\
+                                 <telphone xmlns=\"\">%@</telphone>\
+                                 </findUserByTelphone>",self.telphone];
+                
+                [LSCoreToolCenter SOAPData:findUserByTelphone soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                }];
+                return nil;
+            }];
+        }];
+        
+    }
+    return _loginCommand;
+}
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 
 
 @end

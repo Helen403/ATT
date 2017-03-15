@@ -17,6 +17,10 @@
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return ;
+        }
+        
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAllAnnounceResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAllAnnounceResponse>"];
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[AnnouncementModel class] rowRootName:@"Announcements"];
@@ -54,11 +58,15 @@
                                  </findAllAnnounce>",self.companyCode];
                 
                 [self SOAPData:findAllAnnounce soapBody:body success:^(NSString *result) {
+                   
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                    ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;

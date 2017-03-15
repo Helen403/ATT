@@ -124,7 +124,7 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
     }];
     
- 
+    
     [self.applyTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
         make.top.equalTo(padding);
@@ -145,22 +145,22 @@
         make.top.equalTo(weakSelf.line1.mas_bottom).offset(0);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:45]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:45]));
     }];
     
     [self.lateTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.centerY.equalTo(weakSelf.view1);
+        make.centerY.equalTo(weakSelf.view1);
         make.left.equalTo(0);
     }];
     
     [self.back1 mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.centerY.equalTo(weakSelf.view1);
+        make.centerY.equalTo(weakSelf.view1);
         make.right.equalTo(0);
     }];
     
     [self.lateTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.right.equalTo(weakSelf.back1.mas_left).offset(-[self h_w:10]);
-             make.centerY.equalTo(weakSelf.view1);
+        make.right.equalTo(weakSelf.back1.mas_left).offset(-[self h_w:10]);
+        make.centerY.equalTo(weakSelf.view1);
     }];
     
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -217,7 +217,7 @@
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
-
+    
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.view2.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
@@ -261,7 +261,7 @@
     
     
     [self.scrollView addSubview:self.timeView1];
- 
+    
     [self.scrollView addSubview:self.applyTimeText];
     [self.scrollView addSubview:self.applyTimeShowText];
     [self.scrollView addSubview:self.line1];
@@ -305,7 +305,7 @@
     
     //设置时间
     self.applyTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
-
+    
     self.cuserCode = @"";
     self.cuserName = @"";
     
@@ -320,8 +320,10 @@
     [[self.costViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         dispatch_sync(dispatch_get_main_queue(), ^{
-          
             
+            if (self.costViewModel.arrDept.count==0) {
+                return ;
+            }
             CostModel *cost = self.costViewModel.arrDept[0];
             self.lateTimeShowText.text = cost.deptNickName;
             self.applyDeptCode = cost.deptCode;
@@ -333,6 +335,12 @@
         });
     }];
     
+    [[self.costViewModel.flowTemplateSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        
+        self.flowInstanceId = x;
+        
+    }];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ProveView:) name:@"ProveView" object:nil];
 }
@@ -342,7 +350,9 @@
     
     self.stepUserCodes = @"";
     self.stepUserNames = @"";
-    
+    if (arrTemp.count==0) {
+        return;
+    }
     for (ProveModel *prove in arrTemp) {
         
         self.stepUserCodes = [NSString stringWithFormat:@"%@,%@",self.stepUserCodes,prove.whoisId];
@@ -393,7 +403,7 @@
         _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
             
             NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-
+            
             if (startDateText.length > 0) {
                 
                 NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:startDateText endTime:self.lateTimeShowText.text]];
@@ -404,8 +414,8 @@
                 }
                 
             }
-
-
+            
+            
         }];
         _datepicker.datePickerStyle = DateStyleShowYearMonthDayHourMinute;
         _datepicker.dateType = DateTypeStartDate;
@@ -506,7 +516,7 @@
         
         // 设置内容 -- 垂直居中
         _sureTimeShowText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-         _sureTimeShowText.textAlignment = NSTextAlignmentRight;
+        _sureTimeShowText.textAlignment = NSTextAlignmentRight;
         
         //当输入框没有内容时，水印提示 提示内容为password
         _sureTimeShowText.placeholder = @"报销金额";
@@ -518,8 +528,8 @@
         //设置输入框内容的字体样式和大小
         _sureTimeShowText.font = H14;
         // 设置右边永远显示清除按钮
-//        _sureTimeShowText.clearButtonMode = UITextFieldViewModeAlways;
-         _sureTimeShowText.keyboardType = UIKeyboardTypePhonePad;
+        //        _sureTimeShowText.clearButtonMode = UITextFieldViewModeAlways;
+        _sureTimeShowText.keyboardType = UIKeyboardTypePhonePad;
         // 5.监听文本框的文字改变
         _sureTimeShowText.delegate = self;
     }
@@ -567,15 +577,15 @@
 }
 
 //-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//    
+//
 //    if (textField==self.sureTimeShowText) {
-//        
+//
 //        return [CommanTool validateNumber:string text:textField.text floatCount:1];
-//        
+//
 //    }
-//    
+//
 //    return YES;
-//    
+//
 //}
 
 
@@ -659,7 +669,7 @@
         
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-
+        
         [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     
@@ -667,7 +677,7 @@
 }
 
 -(void)finish:(UIButton *)button{
-
+    
     if (self.sureTimeShowText.text.length==0) {
         ShowMessage(@"请输入报销金额");
         return;
@@ -732,7 +742,7 @@
     if (!_back1) {
         _back1 = [[UIImageView alloc] init];
         _back1.image = ImageNamed(@"role_right_arrow");
-       
+        
     }
     return _back1;
 }
@@ -820,7 +830,7 @@
     }else{
         return self.costViewModel.arrCostType.count;
     }
- 
+    
 }
 
 #pragma mark tableViewDataSource
@@ -829,11 +839,11 @@
     CostCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([CostCellView class])] forIndexPath:indexPath];
     
     if (self.index == 1) {
-       cell.costModel = self.costViewModel.arrDept[indexPath.row];
+        cell.costModel = self.costViewModel.arrDept[indexPath.row];
     }else{
-       cell.costWorkModel = self.costViewModel.arrCostType[indexPath.row];
+        cell.costWorkModel = self.costViewModel.arrCostType[indexPath.row];
     }
-
+    
     return cell;
 }
 

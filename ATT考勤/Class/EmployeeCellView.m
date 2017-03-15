@@ -14,8 +14,6 @@
 
 @property(nonatomic,strong) UILabel *content;
 
-
-
 @property(nonatomic,strong) UIView *line;
 
 @end
@@ -26,16 +24,18 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-    [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:10]);
-        make.centerY.equalTo(weakSelf);
-    }];
     
     [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf);
-        make.left.equalTo(weakSelf.title.mas_right).offset([self h_w:10]);
+        make.top.equalTo([self h_w:10]);
+        make.left.equalTo([self h_w:10]);
     }];
     
+    
+    [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.content.mas_bottom).offset([self h_w:10]);
+        make.left.equalTo([self h_w:10]);
+    }];
+
     [self.show mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
         make.right.equalTo(-[self h_w:10]);
@@ -43,7 +43,7 @@
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.mas_bottom);
-        make.left.equalTo(weakSelf);
+        make.left.equalTo(0);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
@@ -70,26 +70,26 @@
     _employeeModel = employeeModel;
     
     switch (self.index) {
+//        case 0:
+//            self.content.text = employeeModel.empName;
+//            break;
+//        case 1:
+//            self.content.text = employeeModel.empSex;
+//            break;
+//    
+//        case 2:
+//            self.content.text = employeeModel.empBirthDate;
+//            break;
         case 0:
-            self.content.text = employeeModel.empName;
-            break;
-        case 1:
-            self.content.text = employeeModel.empSex;
-            break;
-    
-        case 2:
-            self.content.text = employeeModel.empBirthDate;
-            break;
-        case 3:
             self.content.text = employeeModel.position;
             break;
-        case 4:
+        case 1:
             self.content.text = employeeModel.empTelphone;
             break;
-        case 5:
+        case 2:
             self.content.text = employeeModel.empEmail;
             break;
-        case 6:
+        case 3:
             self.content.text = employeeModel.phoneDeviceName;
             break;
     }
@@ -114,8 +114,8 @@
     if (!_title) {
         _title = [[UILabel alloc] init];
         _title.text = @"";
-        _title.font = H14;
-        _title.textColor = MAIN_PAN_2;
+        _title.font = H12;
+        _title.textColor = MAIN_PAN;
     }
     return _title;
 }
@@ -124,7 +124,7 @@
     if (!_content) {
         _content = [[UILabel alloc] init];
         _content.text = @"";
-        _content.font = H14;
+        _content.font = H12;
         _content.textColor = MAIN_PAN_2;
     }
     return _content;

@@ -135,7 +135,6 @@
 -(void)mainThread{
     //设置多少页
 
-
     self.page.text = [NSString stringWithFormat:@"第1页/共%ld页",self.noticeViewModel.arr.count];
     AnnouncementModel *announcementModel = self.noticeViewModel.arr[0];
     self.title.text = announcementModel.msgSubject;
@@ -224,6 +223,9 @@
         self.index = 1;
     }
 
+    if (self.noticeViewModel.arr.count==0) {
+        return;
+    }
     self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.noticeViewModel.arr.count];
     AnnouncementModel *announcementModel = self.noticeViewModel.arr[self.index-1];
     self.title.text = announcementModel.msgSubject;
@@ -270,6 +272,10 @@
     self.index++;
     if (self.index > self.noticeViewModel.arr.count) {
         self.index = self.noticeViewModel.arr.count;
+    }
+    
+    if (self.noticeViewModel.arr.count==0) {
+        return;
     }
     
     self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.noticeViewModel.arr.count];

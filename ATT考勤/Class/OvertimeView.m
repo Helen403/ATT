@@ -331,6 +331,9 @@
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             
+            if (self.overtimeViewModel.arrOverTimeWorkType.count==0) {
+                return ;
+            }
             OvertimeModel *workType = self.overtimeViewModel.arrOverTimeWorkType[0];
             
             self.compensateShowText.text = workType.workName;
@@ -345,6 +348,12 @@
         });
     }];
     
+    [[self.overtimeViewModel.flowTemplateSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        
+        self.flowInstanceId = x;
+        
+    }];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ProveView:) name:@"ProveView" object:nil];
@@ -352,10 +361,12 @@
 
 -(void)ProveView:(NSNotification*) notification{
     NSMutableArray *arrTemp = [notification object];
-    
+   
     self.stepUserCodes = @"";
     self.stepUserNames = @"";
-    
+    if (arrTemp.count==0) {
+        return;
+    }
     for (ProveModel *prove in arrTemp) {
         
         self.stepUserCodes = [NSString stringWithFormat:@"%@,%@",self.stepUserCodes,prove.whoisId];

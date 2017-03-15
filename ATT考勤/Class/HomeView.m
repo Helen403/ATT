@@ -430,7 +430,7 @@
     //没有记录
     [[self.homeViewModel.attendFailSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            self.status.text = @"状态:没有记录";
+            self.status.text = @"状态:正常";
         });
         
     }];
@@ -699,6 +699,9 @@
     
     NSString *curDate = [LSCoreToolCenter currentYearType];
     NSString *curDatetime = [LSCoreToolCenter curDate];
+    if (self.homeViewModel.arr.count==0) {
+        return;
+    }
     if ([@"2" isEqualToString:count]) {
         AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
         self.preText.text = [NSString stringWithFormat:@"%@:00",detail1.workStartDatetime];
@@ -1149,7 +1152,7 @@
     if(self.retCode==-1){
         //        RingUtil.playLocalSound(R.raw.oper_error);
         if(SIMULATOR==0){
-            [YYAudioTool playMusic:@"oper_error.mp3"];
+//            [YYAudioTool playMusic:@"oper_error.mp3"];
         }
         ShowMessage(@"还不到打卡时间!");
         return;
@@ -1168,7 +1171,7 @@
     if(self.retCode==3){
         //        RingUtil.playLocalSound(R.raw.oper_error);
         if(SIMULATOR==0){
-            [YYAudioTool playMusic:@"oper_error.mp3"];
+//            [YYAudioTool playMusic:@"oper_error.mp3"];
         }
         ShowMessage(@"超过打卡时间了!");
         return;

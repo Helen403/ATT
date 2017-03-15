@@ -20,12 +20,12 @@
 #import "BusinessTravelView.h"
 #import "BusinessTravelCellView.h"
 
-#import "BMKLocationService.h"
+//#import "BMKLocationService.h"
 #import "ProveModel.h"
 
 
-@interface BusinessTravelView()<UITableViewDelegate,UITableViewDataSource,BMKLocationServiceDelegate>
-
+@interface BusinessTravelView()<UITableViewDelegate,UITableViewDataSource>
+//BMKLocationServiceDelegate
 @property(nonatomic,strong) BusinessTravelViewModel *businessTraveViewModel;
 
 @property(nonatomic,strong) UILabel *applyTimeText;
@@ -42,7 +42,7 @@
 
 @property(nonatomic,strong) UILabel *sureTimeText;
 
-@property(nonatomic,strong) UILabel *sureTimeShowText;
+@property(nonatomic,strong) UITextField *sureTimeShowText;
 
 @property(nonatomic,strong) UIView *line3;
 
@@ -87,7 +87,7 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 
-@property(nonatomic,strong) BMKLocationService *locService;
+//@property(nonatomic,strong) BMKLocationService *locService;
 
 @property(nonatomic,strong) NSString *stepUserCodes;
 
@@ -311,7 +311,7 @@
     self.businessTraveViewModel.companyCode = companyCode;
     [self.businessTraveViewModel.refreshDataCommand execute:nil];
     //定位
-    [self.locService startUserLocationService];
+//    [self.locService startUserLocationService];
 }
 
 
@@ -321,11 +321,20 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.businessTraveViewModel.arr.count);
             [self.tableView reloadData];
+            if (self.businessTraveViewModel.arr.count==0) {
+                return ;
+            }
             BusinessTravelModel *businessTravel = self.businessTraveViewModel.arr[0];
             self.compensateShowText.text = businessTravel.workName;
-//            self.workLsh = leave.workLsh;
+            self.workLsh = businessTravel.workLsh;
             
         });
+    }];
+    
+    [[self.businessTraveViewModel.flowTemplateSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        
+        self.flowInstanceId = x;
+        
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
@@ -337,7 +346,9 @@
     
     self.stepUserCodes = @"";
     self.stepUserNames = @"";
-    
+    if (arrTemp.count==0) {
+        return;
+    }
     for (ProveModel *prove in arrTemp) {
         
         self.stepUserCodes = [NSString stringWithFormat:@"%@,%@",self.stepUserCodes,prove.whoisId];
@@ -515,12 +526,30 @@
     
 }
 
--(UILabel *)sureTimeShowText{
+-(UITextField *)sureTimeShowText{
     if (!_sureTimeShowText) {
-        _sureTimeShowText = [[UILabel alloc] init];
-        _sureTimeShowText.text = @"";
-        _sureTimeShowText.font = H14;
+        _sureTimeShowText = [[UITextField alloc] init];
+        _sureTimeShowText.backgroundColor = [UIColor clearColor];
+        //设置边框样式，只有设置了才会显示边框样式
+        
+        // 设置内容 -- 垂直居中
+        _sureTimeShowText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        _sureTimeShowText.textAlignment = NSTextAlignmentRight;
+        
+        //当输入框没有内容时，水印提示 提示内容为password
+        _sureTimeShowText.placeholder = @"出差地点";
+        _sureTimeShowText.tintColor = MAIN_PAN_2;
         _sureTimeShowText.textColor = MAIN_PAN_2;
+        //修改account的placeholder的字体颜色、大小
+        [_sureTimeShowText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
+        [_sureTimeShowText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
+        //设置输入框内容的字体样式和大小
+        _sureTimeShowText.font = H14;
+        // 设置右边永远显示清除按钮
+        //        _sureTimeShowText.clearButtonMode = UITextFieldViewModeAlways;
+        _sureTimeShowText.keyboardType = UIKeyboardTypePhonePad;
+        // 5.监听文本框的文字改变
+//        _sureTimeShowText.delegate = self;
     }
     return _sureTimeShowText;
 }
@@ -618,12 +647,12 @@
     }
     
     if (self.sureTimeShowText.text.length==0) {
-        ShowMessage(@"定位不成功,正在重新定位");
+        ShowMessage(@"请输入出差地点");
         //定位
-        [self.locService startUserLocationService];
+//        [self.locService startUserLocationService];
         return;
     }
-    
+//
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.businessTraveViewModel.companyCode = companyCode;
     self.businessTraveViewModel.applyStartDatetime = self.applyTimeShowText.text;
@@ -637,7 +666,7 @@
     self.businessTraveViewModel.cuserName = self.cuserName;
     
     self.businessTraveViewModel.outAddress = self.sureTimeShowText.text;
-    self.businessTraveViewModel.outFinaceType = self.compensateShowText.text;
+    self.businessTraveViewModel.outFinaceType = self.workLsh;
  
     self.businessTraveViewModel.workLsh = self.workLsh;
     self.businessTraveViewModel.workName = self.sureTimeShowText.text;
@@ -784,76 +813,76 @@
 }
 
 
--(BMKLocationService *)locService{
-    if (!_locService) {
-        
-        _locService = [[BMKLocationService alloc] init];
-        _locService.delegate = self;
-        // 设置定位精确度到米
-        _locService.desiredAccuracy = kCLLocationAccuracyBest;
-        // 设置过滤器为无
-        //        _locService.distanceFilter = kCLDistanceFilterNone;
-        
-        _locService.distanceFilter=10;
-    }
-    return _locService;
-}
-
-
-//实现相关delegate 处理位置信息更新
-//处理方向变更信息
-- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation{
-    //NSLog(@"heading is %@",userLocation.heading);
-}
-//处理位置坐标更新
-- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
-    
-    
-    //    ShowMessage(@"定位成功");
-//    NSString *currentLatitude = [[NSString alloc]
-//                                 initWithFormat:@"%f",
-//                                 userLocation.location.coordinate.latitude];
+//-(BMKLocationService *)locService{
+//    if (!_locService) {
+//        
+//        _locService = [[BMKLocationService alloc] init];
+//        _locService.delegate = self;
+//        // 设置定位精确度到米
+//        _locService.desiredAccuracy = kCLLocationAccuracyBest;
+//        // 设置过滤器为无
+//        //        _locService.distanceFilter = kCLDistanceFilterNone;
+//        
+//        _locService.distanceFilter=10;
+//    }
+//    return _locService;
+//}
+//
+//
+////实现相关delegate 处理位置信息更新
+////处理方向变更信息
+//- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation{
+//    //NSLog(@"heading is %@",userLocation.heading);
+//}
+////处理位置坐标更新
+//- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
+//    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
 //    
-//    NSString *currentLongitude = [[NSString alloc]
-//                                  initWithFormat:@"%f",
-//                                  userLocation.location.coordinate.longitude];
-    
-//    self.locLongitude = currentLongitude;
 //    
-//    self.locLatitude = currentLatitude;
-    
-    
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation: userLocation.location completionHandler:^(NSArray *array, NSError *error) {
-        if (array.count > 0) {
-            CLPlacemark *placemark = [array objectAtIndex:0];
-            if (placemark != nil) {
-                //                NSString *city = placemark.locality;
-                //                //                NSLog(@"%@",city);
-                //                NSString *city1 = placemark.name;
-                //                //                NSLog(@"%@",city1);
-                //                self.locAddress = [NSString stringWithFormat:@"%@%@",city,city1];
-                NSDictionary *city2 = placemark.addressDictionary;
-                //                NSLog(@"%@",city2);
-                NSArray *dict = city2[@"FormattedAddressLines"];
-                NSString *str =  [dict objectAtIndex:0];
-                //                NSLog(@"%@",str);
-                //                NSString *city3 = placemark.region;
-                //                NSLog(@"%@",city3);
-                //找到了当前位置城市后就关闭服务
-                
-                self.sureTimeShowText.text = str;
-                
-//                [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"locAddress"];
-                
-                [self.locService stopUserLocationService];
-                
-            }
-        }
-    }];
-    
-}
+//    //    ShowMessage(@"定位成功");
+////    NSString *currentLatitude = [[NSString alloc]
+////                                 initWithFormat:@"%f",
+////                                 userLocation.location.coordinate.latitude];
+////    
+////    NSString *currentLongitude = [[NSString alloc]
+////                                  initWithFormat:@"%f",
+////                                  userLocation.location.coordinate.longitude];
+//    
+////    self.locLongitude = currentLongitude;
+////    
+////    self.locLatitude = currentLatitude;
+//    
+//    
+//    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+//    [geocoder reverseGeocodeLocation: userLocation.location completionHandler:^(NSArray *array, NSError *error) {
+//        if (array.count > 0) {
+//            CLPlacemark *placemark = [array objectAtIndex:0];
+//            if (placemark != nil) {
+//                //                NSString *city = placemark.locality;
+//                //                //                NSLog(@"%@",city);
+//                //                NSString *city1 = placemark.name;
+//                //                //                NSLog(@"%@",city1);
+//                //                self.locAddress = [NSString stringWithFormat:@"%@%@",city,city1];
+//                NSDictionary *city2 = placemark.addressDictionary;
+//                //                NSLog(@"%@",city2);
+//                NSArray *dict = city2[@"FormattedAddressLines"];
+//                NSString *str =  [dict objectAtIndex:0];
+//                //                NSLog(@"%@",str);
+//                //                NSString *city3 = placemark.region;
+//                //                NSLog(@"%@",city3);
+//                //找到了当前位置城市后就关闭服务
+//                
+//                self.sureTimeShowText.text = str;
+//                
+////                [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"locAddress"];
+//                
+//                [self.locService stopUserLocationService];
+//                
+//            }
+//        }
+//    }];
+//    
+//}
 
 -(void)dealloc{
     [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];

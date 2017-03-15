@@ -4,31 +4,7 @@
 <array>
 	<dict>
 		<key>title</key>
-		<string>姓名</string>
-		<key>content</key>
-		<string>诸葛亮</string>
-		<key>show</key>
-		<string>0</string>
-	</dict>
-	<dict>
-		<key>title</key>
-		<string>性别</string>
-		<key>content</key>
-		<string>男</string>
-		<key>show</key>
-		<string>0</string>
-	</dict>
-	<dict>
-		<key>title</key>
-		<string>生日</string>
-		<key>content</key>
-		<string>12月25日</string>
-		<key>show</key>
-		<string>0</string>
-	</dict>
-	<dict>
-		<key>title</key>
-		<string>岗位</string>
+		<string>职位</string>
 		<key>content</key>
 		<string>军师</string>
 		<key>show</key>

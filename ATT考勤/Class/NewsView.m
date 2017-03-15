@@ -135,9 +135,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NewCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([NewCellView class])] forIndexPath:indexPath];
-    
-    cell.selected = NO;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.newsViewModel.cellclickSubject sendNext:row];
 }
