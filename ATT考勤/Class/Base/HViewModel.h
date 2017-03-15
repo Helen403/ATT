@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "HViewModelProtocol.h"
 #import "XMLDictionary.h"
-#import "Toast.h"
+//#import "Toast.h"
 
 @interface HViewModel : NSObject <HViewModelProtocol>
 

@@ -481,7 +481,7 @@
         _sureTimeShowText.font = H14;
         // 设置右边永远显示清除按钮
 //        _sureTimeShowText.clearButtonMode = UITextFieldViewModeAlways;
-    
+         _sureTimeShowText.keyboardType = UIKeyboardTypePhonePad;
         // 5.监听文本框的文字改变
         _sureTimeShowText.delegate = self;
     }
@@ -583,6 +583,7 @@
         _proveView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _proveView.layer.borderWidth = 1.0;
         _proveView.layer.cornerRadius = 5.0;
+        _proveView.flowType = @"costWork";
     }
     return _proveView;
 }
@@ -702,7 +703,6 @@
     if (!_back2) {
         _back2 = [[UIImageView alloc] init];
         _back2.image = ImageNamed(@"role_right_arrow");
-        
     }
     return _back2;
 }
@@ -793,7 +793,7 @@
     if (self.index == 1) {
        cell.costModel = self.costViewModel.arrDept[indexPath.row];
     }else{
-        cell.costWorkModel = self.costViewModel.arrCostType[indexPath.row];
+       cell.costWorkModel = self.costViewModel.arrCostType[indexPath.row];
     }
 
     return cell;

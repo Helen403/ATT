@@ -15,12 +15,16 @@
 #import "XCFNavigationController.h"
 #import "LoginViewController.h"
 
-
-
+#import "UserModel.h"
+#import "XCFTabBarController.h"
 
 @interface AppDelegate ()
 
 @property (nonatomic,strong) XCFNavigationController *nav;
+
+@property (nonatomic, strong) RACCommand *loginclickCommand;
+
+@property(nonatomic,strong) NSString *telphone;
 
 @end
 
@@ -29,7 +33,7 @@
 #pragma mark system
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-   
+    
     /******************************************************************/
     //请先启动BaiduMapManager
     _mapManager = [[BMKMapManager alloc]init];
@@ -56,7 +60,7 @@
             [cell.finishBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
             
         } finishHandler:^(UIButton *finishBtn) {
- 
+            
             self.window.rootViewController = self.nav;
             
         }];
@@ -69,7 +73,7 @@
         [self.window makeKeyAndVisible];
         self.window.rootViewController = leadController;
     }else{
-      
+        
         
         //    NSString *adImageURLString = @"这是启动广告图片的URL";
         //    NSString *adURLString = @"这是点击广告图片后的广告URL";
@@ -79,7 +83,7 @@
             // 这里可以直接使用SDWebimage等来请求服务器提供的广告图片(SDWebimage会处理好gif图片的显示)
             // 不过你需要注意选择SDWebimage的缓存策略
             imageView.image = [UIImage imageNamed:@"splash1"];
-
+            
             
         } finishHandler:^(ZJLaunchAdCallbackType callbackType) {
             switch (callbackType) {
@@ -90,7 +94,7 @@
                     break;
                     //  展示广告图片结束, 可以进入App
                 case ZJLaunchAdCallbackTypeShowFinish:
-                   [weakSelf setRoot];
+                    [weakSelf setRoot];
                     break;
                     
                     // 点击了跳过广告, 可以进入App
@@ -112,9 +116,9 @@
         self.window.backgroundColor = [UIColor whiteColor];
         [self.window makeKeyAndVisible];
         self.window.rootViewController = launchVc;
-       
+        
     }
-
+    
     return YES;
 }
 
@@ -122,14 +126,71 @@
     for (UIView *v in self.window.subviews) {
         [v removeFromSuperview];
     }
-    self.window.rootViewController = self.nav;
+
+    NSString *telphone = [[NSUserDefaults standardUserDefaults] objectForKey:@"myUser"];
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    NSString *companyNickName =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyNickName"];
+  
+    if (telphone.length>0&&companyCode.length>0&&companyNickName.length>0) {
+        self.telphone = telphone;
+        [self h_initialize];
+        [self.loginclickCommand execute:nil];
+        
+    }else{
+            self.window.rootViewController = self.nav;
+    }
+    
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {}
-- (void)applicationDidEnterBackground:(UIApplication *)application {}
-- (void)applicationWillEnterForeground:(UIApplication *)application {}
-- (void)applicationDidBecomeActive:(UIApplication *)application {}
-- (void)applicationWillTerminate:(UIApplication *)application {}
+#pragma mark private
+-(void)h_initialize{
+    
+   
+    [self.loginclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        DismissHud();
+        
+        if ([result isEqualToString:@"netFail"]) {
+            
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                self.window.rootViewController = self.nav;
+            });
+            
+        }else{
+            if (result.length<200) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    self.window.rootViewController = self.nav;
+                });
+            }else{
+                
+                NSDictionary *xmlDoc = [LSCoreToolCenter getFilter:result filter:@"User"];
+                
+                UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
+                
+                //存储对象
+                saveModel(model, @"user");
+                [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"createUserCode"];
+                [self rootController];
+                
+            }
+        }
+    }];
+    
+    
+    [[[self.loginclickCommand.executing skip:1] take:1] subscribeNext:^(id x) {
+        
+        if ([x isEqualToNumber:@(YES)]) {
+            // ShowMaskStatus(@"正在拼命加载");
+        }
+    }];
+    
+}
+
+-(void)rootController{
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [UIApplication sharedApplication].keyWindow.rootViewController =[[XCFTabBarController alloc] init];
+    });
+}
 
 #pragma mark lazyload
 -(XCFNavigationController *)nav{
@@ -144,7 +205,7 @@
 - (void)onGetNetworkState:(int)iError
 {
     if (0 == iError) {
-//        NSLog(@"联网成功");
+        //        NSLog(@"联网成功");
     }
     else{
         NSLog(@"onGetNetworkState %d",iError);
@@ -154,11 +215,47 @@
 - (void)onGetPermissionState:(int)iError
 {
     if (0 == iError) {
-//        NSLog(@"授权成功");
+        //        NSLog(@"授权成功");
     }
     else {
         NSLog(@"onGetPermissionState %d",iError);
     }
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {}
+- (void)applicationDidEnterBackground:(UIApplication *)application {}
+- (void)applicationWillEnterForeground:(UIApplication *)application {}
+- (void)applicationDidBecomeActive:(UIApplication *)application {}
+- (void)applicationWillTerminate:(UIApplication *)application {}
+
+#pragma mark lazyload
+-(RACCommand *)loginclickCommand{
+    if (!_loginclickCommand) {
+        
+        _loginclickCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                NSString *body =[NSString stringWithFormat: @"<findUserByTelphone xmlns=\"http://service.webservice.vada.com/\">\
+                                 <telphone xmlns=\"\">%@</telphone>\
+                                 </findUserByTelphone>",self.telphone];
+                
+                [LSCoreToolCenter SOAPData:findUserByTelphone soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                }];
+                return nil;
+            }];
+        }];
+        
+    }
+    return _loginclickCommand;
 }
 
 

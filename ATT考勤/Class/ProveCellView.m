@@ -1,26 +1,25 @@
 //
-//  ApplyManCellView.m
+//  ProveCellView.m
 //  ATT考勤
 //
-//  Created by Helen on 17/3/2.
+//  Created by Helen on 17/3/14.
 //  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "ApplyManCellView.h"
+#import "ProveCellView.h"
 
-
-@interface ApplyManCellView()
+@interface ProveCellView()
 
 @property(nonatomic,strong) UILabel *name;
 
 @property(nonatomic,strong) UIView *bg;
 
+
 @end
 
-@implementation ApplyManCellView
+@implementation ProveCellView
 
 #pragma mark system
-
 -(void)updateConstraints{
     
     WS(weakSelf);
@@ -39,8 +38,7 @@
 
 #pragma mark private
 -(void)h_setupViews{
-
-
+    
     [self addSubview:self.bg];
     [self addSubview:self.name];
     
@@ -49,17 +47,21 @@
 }
 
 #pragma mark dataload
-
-
--(void)setTeamListModel:(TeamListModel *)teamListModel{
-    if (!teamListModel) {
+-(void)setProveModel:(ProveModel *)proveModel{
+    if (!proveModel) {
         return;
     }
-    _teamListModel = teamListModel;
-    if (teamListModel.empName.length==3) {
-        self.name.text = [teamListModel.empName  substringFromIndex:1];
+    _proveModel = proveModel;
+    
+    if ([LSCoreToolCenter PureLetters:proveModel.whois]) {
+         self.name.text = proveModel.whois;
     }else{
-        self.name.text = teamListModel.empName;
+        if (proveModel.whois.length==3) {
+            self.name.text = [proveModel.whois  substringFromIndex:1];
+        }else{
+            self.name.text = proveModel.whois;
+        }
+    
     }
 
     self.bg.backgroundColor = randomColorA;
@@ -84,6 +86,5 @@
     }
     return _bg;
 }
-
 
 @end

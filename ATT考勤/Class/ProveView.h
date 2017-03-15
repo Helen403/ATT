@@ -10,4 +10,6 @@
 
 @interface ProveView : HView
 
+@property(nonatomic,strong) NSString *flowType;
+
 @end

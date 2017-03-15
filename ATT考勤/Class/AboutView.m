@@ -113,7 +113,7 @@
     AboutCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AboutCellView class])] forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.aboutModel = self.aboutViewModel.arr[indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 

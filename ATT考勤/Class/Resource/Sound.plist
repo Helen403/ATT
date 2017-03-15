@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Bongo.mp3</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Cuckoo.mp3</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>msg_ding.mp3</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>msg_dingdong.mp3</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>msg_door.mp3</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>msg_tip.mp3</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>msg_water.mp3</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>offwork_auto.mp3</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>offwork_succ.mp3</string>
+	</dict>
+</array>
+</plist>

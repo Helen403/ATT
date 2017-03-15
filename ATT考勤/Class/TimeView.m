@@ -10,6 +10,10 @@
 #import "TimeViewModel.h"
 #import "TimeCellView.h"
 #import "UserModel.h"
+#import "TimeSoundView.h"
+#import "TimeSoundViewModel.h"
+
+
 
 @interface TimeView()<UITableViewDataSource,UITableViewDelegate>
 
@@ -17,7 +21,9 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 
-//@property(nonatomic,strong)  *<#name#>
+@property(nonatomic,strong) TimeSoundView *timeSoundView;
+
+@property(nonatomic,strong) TimeSoundViewModel *timeSoundViewModel;
 
 @end
 
@@ -42,7 +48,6 @@
 
 
 -(void)h_setupViews{
-    
     [self addSubview:self.tableView];
     
     [self setNeedsUpdateConstraints];
@@ -50,9 +55,16 @@
 }
 
 
+-(void)h_loadData{
+    WS(weakSelf);
+    self.timeSoundView.clickBlock = ^(NSInteger count){
+        [weakSelf.tableView reloadData];
+    };
+
+}
+
 -(void)h_bindViewModel{
     [[self.timeViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-        
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
@@ -109,7 +121,7 @@
     
     TimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TimeCellView class])] forIndexPath:indexPath];
     if(!(indexPath.row==1)){
-     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+       cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.index = indexPath.row;
     cell.timeModel = self.timeViewModel.arr[indexPath.row];
@@ -125,7 +137,31 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSLog(@"6666");
+    [self click1];
 }
+
+-(void)click1{
+    self.timeSoundView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, self.timeSoundViewModel.arr.count*[self h_w:40]);
+    [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
+    [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
+    [[HWPopTool sharedInstance] showWithPresentView:self.timeSoundView animated:NO];
+
+}
+
+
+-(TimeSoundView *)timeSoundView{
+    if (!_timeSoundView) {
+        _timeSoundView = [[TimeSoundView alloc] initWithViewModel:self.timeSoundViewModel];
+    }
+    return _timeSoundView;
+}
+
+-(TimeSoundViewModel *)timeSoundViewModel{
+    if (!_timeSoundViewModel) {
+        _timeSoundViewModel = [[TimeSoundViewModel alloc] init];
+    }
+    return _timeSoundViewModel;
+}
+
 
 @end

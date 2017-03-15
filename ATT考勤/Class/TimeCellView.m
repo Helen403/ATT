@@ -112,6 +112,12 @@
         }
     }
     
+    if (self.index == 1) {
+        NSString *sound =  [[NSUserDefaults standardUserDefaults] objectForKey:@"Sound"];
+        self.info.text = sound;
+    }
+    
+    
     if (self.index == 2) {
         NSString *cardVarient =  [[NSUserDefaults standardUserDefaults] objectForKey:@"findIsCardVarient"];
         if ([cardVarient isEqualToString:@"0"]) {

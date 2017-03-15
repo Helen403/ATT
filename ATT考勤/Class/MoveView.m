@@ -524,6 +524,7 @@
         _proveView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _proveView.layer.borderWidth =1.0;
         _proveView.layer.cornerRadius =5.0;
+        _proveView.flowType = @"swapWork";
     }
     return _proveView;
 }

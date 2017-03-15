@@ -48,6 +48,7 @@
 }
 
 -(void)h_loadData{
+    
     self.choiceStaffViewModel.companyCode = self.companyCode;
     self.choiceStaffViewModel.deptCode = self.deptCode;
     [self.choiceStaffViewModel.refreshDataCommand execute:nil];
@@ -65,14 +66,23 @@
     self.choiceStaffViewModel.selectorPatnArray = nil;
 }
 
+-(void)setTitleTeam:(NSString *)titleTeam{
+    if (!titleTeam) {
+        return;
+    }
+    _titleTeam = titleTeam;
+    self.choiceStaffView.teamTitle = self.titleTeam;
+}
+
 #pragma mark lazyload
 -(ChoiceStaffView *)choiceStaffView{
     if (!_choiceStaffView) {
         _choiceStaffView = [[ChoiceStaffView alloc] initWithViewModel:self.choiceStaffViewModel];
-        _choiceStaffView.teamTitle = self.titleTeam;
+        
     }
     return _choiceStaffView;
 }
+
 
 -(ChoiceStaffViewModel *)choiceStaffViewModel{
     if (!_choiceStaffViewModel) {

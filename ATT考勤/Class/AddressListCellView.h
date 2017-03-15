@@ -13,6 +13,6 @@
 
 @property(nonatomic,strong) AddressListModel *addressListModel;
 
-@property(nonatomic,strong) UIColor *bgColor;
+
 
 @end

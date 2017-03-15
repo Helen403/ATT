@@ -224,6 +224,8 @@
 		7943B3E61E6D095C004BF1B8 /* GoOutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943B3E51E6D095C004BF1B8 /* GoOutModel.m */; };
 		7943B3E91E6D0D6B004BF1B8 /* ShiftCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943B3E81E6D0D6B004BF1B8 /* ShiftCellView.m */; };
 		7943B3EC1E6D0D83004BF1B8 /* ShiftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943B3EB1E6D0D83004BF1B8 /* ShiftModel.m */; };
+		7945747E1E77D72E00EB379F /* ProveCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7945747D1E77D72E00EB379F /* ProveCellView.m */; };
+		794574831E77D97F00EB379F /* ProveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794574821E77D97F00EB379F /* ProveModel.m */; };
 		794620EB1E767E9E00873199 /* FeedbackCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620EA1E767E9E00873199 /* FeedbackCellView.m */; };
 		794620EF1E767F4300873199 /* FeedbackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620EE1E767F4300873199 /* FeedbackModel.m */; };
 		794620F21E76A2EC00873199 /* TimeSoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620F11E76A2EC00873199 /* TimeSoundView.m */; };
@@ -378,6 +380,10 @@
 		794E047B1E2321E600CFE3A3 /* StatisticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794E047A1E2321E600CFE3A3 /* StatisticsModel.m */; };
 		794E047E1E23220B00CFE3A3 /* StatisticsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794E047D1E23220B00CFE3A3 /* StatisticsCellView.m */; };
 		794E04801E2323BF00CFE3A3 /* Statistics.plist in Resources */ = {isa = PBXBuildFile; fileRef = 794E047F1E2323BF00CFE3A3 /* Statistics.plist */; };
+		7953AB011E78EF1C00149105 /* TimeSoundCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7953AB001E78EF1C00149105 /* TimeSoundCellView.m */; };
+		7953AB031E78F06D00149105 /* Sound.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7953AB021E78F06D00149105 /* Sound.plist */; };
+		7953AB071E78F25800149105 /* TimeSoundModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7953AB061E78F25800149105 /* TimeSoundModel.m */; };
+		7953AB0B1E78F2C000149105 /* TimeSoundViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7953AB0A1E78F2C000149105 /* TimeSoundViewModel.m */; };
 		7954BB251E5FCCE900E03173 /* msg_ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB171E5FCCE900E03173 /* msg_ding.mp3 */; };
 		7954BB261E5FCCE900E03173 /* msg_dingdong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB181E5FCCE900E03173 /* msg_dingdong.mp3 */; };
 		7954BB271E5FCCE900E03173 /* msg_door.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7954BB191E5FCCE900E03173 /* msg_door.mp3 */; };
@@ -1027,6 +1033,10 @@
 		7943B3E81E6D0D6B004BF1B8 /* ShiftCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiftCellView.m; sourceTree = "<group>"; };
 		7943B3EA1E6D0D83004BF1B8 /* ShiftModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShiftModel.h; sourceTree = "<group>"; };
 		7943B3EB1E6D0D83004BF1B8 /* ShiftModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShiftModel.m; sourceTree = "<group>"; };
+		7945747C1E77D72E00EB379F /* ProveCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProveCellView.h; sourceTree = "<group>"; };
+		7945747D1E77D72E00EB379F /* ProveCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProveCellView.m; sourceTree = "<group>"; };
+		794574811E77D97F00EB379F /* ProveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProveModel.h; sourceTree = "<group>"; };
+		794574821E77D97F00EB379F /* ProveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProveModel.m; sourceTree = "<group>"; };
 		794620E91E767E9E00873199 /* FeedbackCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackCellView.h; sourceTree = "<group>"; };
 		794620EA1E767E9E00873199 /* FeedbackCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackCellView.m; sourceTree = "<group>"; };
 		794620ED1E767F4300873199 /* FeedbackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackModel.h; sourceTree = "<group>"; };
@@ -1214,6 +1224,13 @@
 		794E047C1E23220B00CFE3A3 /* StatisticsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsCellView.h; sourceTree = "<group>"; };
 		794E047D1E23220B00CFE3A3 /* StatisticsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsCellView.m; sourceTree = "<group>"; };
 		794E047F1E2323BF00CFE3A3 /* Statistics.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Statistics.plist; sourceTree = "<group>"; };
+		7953AAFF1E78EF1C00149105 /* TimeSoundCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSoundCellView.h; sourceTree = "<group>"; };
+		7953AB001E78EF1C00149105 /* TimeSoundCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSoundCellView.m; sourceTree = "<group>"; };
+		7953AB021E78F06D00149105 /* Sound.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Sound.plist; sourceTree = "<group>"; };
+		7953AB051E78F25800149105 /* TimeSoundModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSoundModel.h; sourceTree = "<group>"; };
+		7953AB061E78F25800149105 /* TimeSoundModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSoundModel.m; sourceTree = "<group>"; };
+		7953AB091E78F2C000149105 /* TimeSoundViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSoundViewModel.h; sourceTree = "<group>"; };
+		7953AB0A1E78F2C000149105 /* TimeSoundViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSoundViewModel.m; sourceTree = "<group>"; };
 		7954BB171E5FCCE900E03173 /* msg_ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = msg_ding.mp3; sourceTree = "<group>"; };
 		7954BB181E5FCCE900E03173 /* msg_dingdong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = msg_dingdong.mp3; sourceTree = "<group>"; };
 		7954BB191E5FCCE900E03173 /* msg_door.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = msg_door.mp3; sourceTree = "<group>"; };
@@ -2845,6 +2862,7 @@
 				79FAFAB31E348FA400577917 /* TeamList.plist */,
 				79FAFAD81E34B12200577917 /* Security.plist */,
 				791C76681E5160CF003B1E54 /* BuildRole.plist */,
+				7953AB021E78F06D00149105 /* Sound.plist */,
 			);
 			name = File;
 			sourceTree = "<group>";
@@ -2852,6 +2870,7 @@
 		79367B051E1252DC00696A38 /* Late(迟到申请) */ = {
 			isa = PBXGroup;
 			children = (
+				7945747B1E77D6C600EB379F /* ProveView */,
 				7947F1471E67CD1600E68C83 /* ApplyManCellView */,
 				79367B141E1268AA00696A38 /* Other */,
 				79367B0A1E12537100696A38 /* Cell */,
@@ -3048,6 +3067,9 @@
 		79375D0A1E1DE6E200E27934 /* Time(定时提醒) */ = {
 			isa = PBXGroup;
 			children = (
+				7953AB081E78F29600149105 /* TimeSoundViewModel */,
+				7953AB041E78F23F00149105 /* TimeSoundModel */,
+				7953AAFE1E78EED000149105 /* TimeSoundCell */,
 				79375D101E1DE72100E27934 /* Other */,
 				79375D0F1E1DE71B00E27934 /* Cell */,
 				79375D0E1E1DE71700E27934 /* Model */,
@@ -3837,6 +3859,33 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		7945747B1E77D6C600EB379F /* ProveView */ = {
+			isa = PBXGroup;
+			children = (
+				794574801E77D95F00EB379F /* Model */,
+				7945747F1E77D95700EB379F /* Cell */,
+			);
+			name = ProveView;
+			sourceTree = "<group>";
+		};
+		7945747F1E77D95700EB379F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7945747C1E77D72E00EB379F /* ProveCellView.h */,
+				7945747D1E77D72E00EB379F /* ProveCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		794574801E77D95F00EB379F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				794574811E77D97F00EB379F /* ProveModel.h */,
+				794574821E77D97F00EB379F /* ProveModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		794620EC1E767F2700873199 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -4357,6 +4406,33 @@
 			children = (
 			);
 			name = Other;
+			sourceTree = "<group>";
+		};
+		7953AAFE1E78EED000149105 /* TimeSoundCell */ = {
+			isa = PBXGroup;
+			children = (
+				7953AAFF1E78EF1C00149105 /* TimeSoundCellView.h */,
+				7953AB001E78EF1C00149105 /* TimeSoundCellView.m */,
+			);
+			name = TimeSoundCell;
+			sourceTree = "<group>";
+		};
+		7953AB041E78F23F00149105 /* TimeSoundModel */ = {
+			isa = PBXGroup;
+			children = (
+				7953AB051E78F25800149105 /* TimeSoundModel.h */,
+				7953AB061E78F25800149105 /* TimeSoundModel.m */,
+			);
+			name = TimeSoundModel;
+			sourceTree = "<group>";
+		};
+		7953AB081E78F29600149105 /* TimeSoundViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7953AB091E78F2C000149105 /* TimeSoundViewModel.h */,
+				7953AB0A1E78F2C000149105 /* TimeSoundViewModel.m */,
+			);
+			name = TimeSoundViewModel;
 			sourceTree = "<group>";
 		};
 		7954BB331E5FDC8500E03173 /* YYAudioTool */ = {
@@ -6652,7 +6728,7 @@
 				TargetAttributes = {
 					7928BD681E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 7P42T6TU6M;
+						DevelopmentTeam = TMLDK3R5QN;
 					};
 					7928BD811E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
@@ -6836,6 +6912,7 @@
 				794C777D1E3204B800013243 /* emotion0072@2x.png in Resources */,
 				794C77941E3204B800013243 /* liaotian_ic_biaoqing_press.png in Resources */,
 				794C77521E3204B800013243 /* emotion0029@2x.png in Resources */,
+				7953AB031E78F06D00149105 /* Sound.plist in Resources */,
 				794C774C1E3204B800013243 /* emotion0023@2x.png in Resources */,
 				794C779C1E3204B800013243 /* liaotian_ic_gengduo_press@3x.png in Resources */,
 				794C77991E3204B800013243 /* liaotian_ic_gengduo_nor@3x.png in Resources */,
@@ -7012,6 +7089,7 @@
 				79F46F231E68041100F2923F /* ApplyManViewModel.m in Sources */,
 				79DD27651E31A15F00923D19 /* MultiRolesCellView.m in Sources */,
 				79F4F0751E1F808300115C3B /* DLFixedTabbarView.m in Sources */,
+				7945747E1E77D72E00EB379F /* ProveCellView.m in Sources */,
 				790D8AC31E2F457700DDA697 /* AuditingController.m in Sources */,
 				791711751E236853003D15C1 /* TeamView.m in Sources */,
 				79375D031E1DD8CF00E27934 /* VersionController.m in Sources */,
@@ -7145,6 +7223,7 @@
 				794E04781E23207900CFE3A3 /* StatisticsViewModel.m in Sources */,
 				79282EA21E0B65C600F4E050 /* LoginView.m in Sources */,
 				7964B3821E2F0720001AC5E5 /* MeApplyModel.m in Sources */,
+				7953AB0B1E78F2C000149105 /* TimeSoundViewModel.m in Sources */,
 				79F9DA851E5C1C1C00625F19 /* EmpModel.m in Sources */,
 				79F0A14C1E13B1E300A1B8AA /* PendingModel.m in Sources */,
 				79375D2B1E1DF7CC00E27934 /* FunctionController.m in Sources */,
@@ -7153,6 +7232,7 @@
 				794C772D1E3204B800013243 /* InputToolbar.m in Sources */,
 				7964B37C1E2F03BA001AC5E5 /* MeApplyViewModel.m in Sources */,
 				79EF94591E262F7100F8E9BC /* UIView+Extension.m in Sources */,
+				7953AB011E78EF1C00149105 /* TimeSoundCellView.m in Sources */,
 				793487AB1E2711D400D074D7 /* CalendarModel.m in Sources */,
 				7947F1401E67BB3900E68C83 /* ChoiceStaffTeamView.m in Sources */,
 				79ED5E931E1CF76200BBC3D9 /* SetModel.m in Sources */,
@@ -7213,6 +7293,7 @@
 				793D3AF91E712C0F00266D9C /* MyCalendarView.m in Sources */,
 				79345B971E1F252A0007A348 /* FeedbackViewModel.m in Sources */,
 				79282EBD1E0B7DF000F4E050 /* ZJProgressHUD.m in Sources */,
+				794574831E77D97F00EB379F /* ProveModel.m in Sources */,
 				794E047B1E2321E600CFE3A3 /* StatisticsModel.m in Sources */,
 				79375D441E1E2B1600E27934 /* AboutController.m in Sources */,
 				7964B37F1E2F03CD001AC5E5 /* MeApplyView.m in Sources */,
@@ -7295,6 +7376,7 @@
 				79F9647C1E2CABEB00838CC4 /* ResignationView.m in Sources */,
 				79F964321E2CA4C800838CC4 /* BusinessTravelViewModel.m in Sources */,
 				79282EBE1E0B7DF000F4E050 /* ZJProgressHUDView.m in Sources */,
+				7953AB071E78F25800149105 /* TimeSoundModel.m in Sources */,
 				79F7D8601E5AC9A8004DF0DB /* ChangeTelphoneView.m in Sources */,
 				79F0A1381E13990A00A1B8AA /* ZJCollectionView.m in Sources */,
 				79F8560D1E02C216002D82F4 /* HTableViewCell.m in Sources */,
@@ -7497,7 +7579,7 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7P42T6TU6M;
+				DEVELOPMENT_TEAM = TMLDK3R5QN;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ATT考勤/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7534,7 +7616,7 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7P42T6TU6M;
+				DEVELOPMENT_TEAM = TMLDK3R5QN;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ATT考勤/PrefixHeader.pch";
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;

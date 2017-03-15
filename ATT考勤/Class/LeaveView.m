@@ -281,8 +281,6 @@
 }
 
 
-
-
 #pragma mark lazyload
 -(LeaveViewModel *)leaveViewModel{
     if (!_leaveViewModel) {
@@ -377,7 +375,7 @@
 -(UILabel *)lateTimeText{
     if (!_lateTimeText) {
         _lateTimeText = [[UILabel alloc] init];
-        _lateTimeText.text = @"迟到时间";
+        _lateTimeText.text = @"结束时间";
         _lateTimeText.textColor = MAIN_PAN_2;
         _lateTimeText.font = H14;
     }
@@ -466,6 +464,7 @@
         _proveView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _proveView.layer.borderWidth = 1.0;
         _proveView.layer.cornerRadius = 5.0;
+        _proveView.flowType = @"offwork";
     }
     return _proveView;
 }

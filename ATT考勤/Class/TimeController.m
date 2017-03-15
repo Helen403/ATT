@@ -40,24 +40,20 @@
     self.title = @"定时提醒";
 }
 
-
 -(void)h_addSubviews{
-
     [self.view addSubview:self.timeView];
-
 }
 
 -(void)h_bindViewModel{
 
 }
 
+-(void)h_viewWillAppear{
+    [self.timeView h_viewWillAppear];
+}
 
 -(void)h_viewWillDisappear{
     [self.timeView h_viewWillDisappear];
-}
-
--(void)h_viewWillAppear{
-    [self.timeView h_viewWillAppear];
 }
 
 #pragma mark lazyload
@@ -73,7 +69,6 @@
         _timeViewModel = [[TimeViewModel alloc] init];
     }
     return _timeViewModel;
-
 }
 
 

@@ -37,6 +37,8 @@
 
 @property(nonatomic,strong) UIButton *sure;
 
+@property(nonatomic,assign) Boolean flag;
+
 @end
 
 @implementation ChoiceStaffView
@@ -104,7 +106,7 @@
     [self.sure mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(weakSelf.bottomView.mas_right).offset(-[self h_w:10]);
         make.centerY.equalTo(weakSelf.bottomView);
-           make.size.equalTo(CGSizeMake([self h_w:65], [self h_w:30]));
+        make.size.equalTo(CGSizeMake([self h_w:65], [self h_w:30]));
     }];
     
     [super updateConstraints];
@@ -136,9 +138,24 @@
 
 
 -(void)h_loadData{
-    self.titleTeam.text = self.teamTitle;
+    
     
 }
+
+
+//-(void)setTitleTeam:(UILabel *)titleTeam{
+//     self.titleTeam.text = self.teamTitle;
+//}
+
+-(void)setTeamTitle:(NSString *)teamTitle{
+    if (!teamTitle) {
+        return;
+    }
+    _teamTitle = teamTitle;
+    self.titleTeam.text = teamTitle;
+    
+}
+
 
 -(void)h_bindViewModel{
     
@@ -207,9 +224,39 @@
     if (!_selectView) {
         _selectView = [[UIView alloc] init];
         _selectView.backgroundColor = white_color;
+        _selectView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectClick)];
+        [_selectView addGestureRecognizer:setTap];
     }
     return _selectView;
 }
+
+-(void)selectClick{
+    if (!self.flag) {
+        self.cir.image = ImageNamed(@"abc_normal");
+        self.flag = YES;
+        [self.choiceStaffViewModel.selectorPatnArray removeAllObjects];
+        for (int i = 0; i < self.choiceStaffViewModel.arr.count; i++) {
+            NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
+            UITableViewCell *cell = (UITableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+            cell.selected = NO;
+            
+            [self.tableView deselectRowAtIndexPath:path animated:NO];
+        }
+    }else{
+        self.cir.image = ImageNamed(@"abc_press");
+        self.flag = NO;
+        [self.choiceStaffViewModel.selectorPatnArray removeAllObjects];
+        for (int i = 0; i < self.choiceStaffViewModel.arr.count; i++) {
+            NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
+            UITableViewCell *cell = (UITableViewCell *)[self.tableView cellForRowAtIndexPath:path];
+            cell.selected = YES;
+            [self.choiceStaffViewModel.selectorPatnArray addObject:self.choiceStaffViewModel.arr[i]];//添加到选中列表
+            
+        }
+    }
+}
+
 
 -(UIView *)bg{
     if (!_bg) {
@@ -235,7 +282,7 @@
         _hintText.textColor = MAIN_PAN_2;
     }
     return _hintText;
-
+    
 }
 
 
@@ -264,7 +311,7 @@
     if (self.choiceStaffViewModel.selectorPatnArray.count > 0) {
         for(int i = 0;i<self.choiceStaffViewModel.selectorPatnArray.count;i++){
             
-           TeamListModel *teamListModel = self.choiceStaffViewModel.selectorPatnArray[i];
+            TeamListModel *teamListModel = self.choiceStaffViewModel.selectorPatnArray[i];
         }
         
         [self.choiceStaffViewModel.sendSubject sendNext:nil];
@@ -292,6 +339,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[ChoiceStaffCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([ChoiceStaffCellView class])]];
         _tableView.editing = YES;
+        _tableView.scrollEnabled = NO;
     }
     return _tableView;
     
@@ -326,8 +374,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-
+    
+    
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     //选中数据
     [self.choiceStaffViewModel.selectorPatnArray addObject:self.choiceStaffViewModel.arr[indexPath.row]];

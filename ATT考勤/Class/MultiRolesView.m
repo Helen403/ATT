@@ -11,7 +11,6 @@
 #import "MultiRolesCellView.h"
 #import "UserModel.h"
 
-
 @interface MultiRolesView()<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong) UITableView *tableView;

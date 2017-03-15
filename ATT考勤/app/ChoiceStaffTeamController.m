@@ -48,15 +48,16 @@
 
 -(void)h_bindViewModel{
     [[self.choiceStaffTeamViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-  
+        
         [self performSelectorOnMainThread:@selector(mainThread:) withObject:x waitUntilDone:YES];
     }];
 }
 
 -(void)mainThread:(NSNumber *)x{
     ChoiceStaffController *choiceStaff = [[ChoiceStaffController alloc] init];
+    
     TeamModel *teamModel =self.choiceStaffTeamViewModel.arr[[x intValue]];
-    choiceStaff.titleTeam = teamModel.deptFullName;
+    choiceStaff.titleTeam = teamModel.deptNickName;
     choiceStaff.deptCode =  teamModel.deptCode;
     choiceStaff.companyCode = teamModel.companyCode;
     [self.navigationController pushViewController:choiceStaff animated:NO];

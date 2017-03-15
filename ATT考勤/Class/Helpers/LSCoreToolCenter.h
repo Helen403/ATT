@@ -159,4 +159,13 @@ extern void DismissHud(void);
 +(NSString *)currentYearY;
 
 +(NSString *)getCurrentYMonth:(NSInteger)i;
+
+//SOAP请求
++(void)SOAPData:(NSString *)url soapBody:(NSString *)soapBody success:(void (^)(NSString *result))success failure:(void(^)(NSError *error))failure;
+
++(NSDictionary *)getFilter:(NSString *)result filter:(NSString *)filter;
+
++(NSString *)getFilterStr:(NSString *)result filter1:(NSString *)filter1 filter2:(NSString *)filter2;
+
++(BOOL)PureLetters:(NSString*)str;
 @end

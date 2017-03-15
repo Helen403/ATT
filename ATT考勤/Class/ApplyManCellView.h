@@ -13,6 +13,6 @@
 
 @property(nonatomic,strong) TeamListModel *teamListModel;
 
-@property(nonatomic,assign) NSInteger index;
+
 
 @end

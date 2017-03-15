@@ -27,15 +27,16 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-    [self.img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:10]);
-        make.centerY.equalTo(weakSelf);
-    }];
-    
+
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-       make.left.equalTo([self h_w:8]);
+        make.left.equalTo([self h_w:8]);
         make.size.equalTo(CGSizeMake([self h_w:36], [self h_w:36]));
+    }];
+    
+    [self.img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf);
+        make.centerX.equalTo(weakSelf.view);
     }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {

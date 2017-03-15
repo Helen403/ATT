@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) RACCommand *loginclickCommand;
 
-@property(nonatomic,strong) NSString *user;
+@property(nonatomic,strong) NSString *telphone;
 
 @property(nonatomic,strong) NSString *pwd;
 

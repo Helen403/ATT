@@ -143,11 +143,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    MineCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MineCellView class])] forIndexPath:indexPath];
-    cell.selected = NO;
-    cell.mineModel = self.mineViewModel.arr[indexPath.row];
-    cell.index = indexPath.row;
-    cell.userModel = self.userModel;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.mineViewModel.cellclickSubject sendNext:row];
 }

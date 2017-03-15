@@ -10,4 +10,7 @@
 
 @interface TimeSoundView : HView
 
+@property(nonatomic,copy) void(^clickBlock)(NSInteger count);
+
+
 @end

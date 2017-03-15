@@ -19,6 +19,7 @@
 
 @property(nonatomic,strong) UIView *view;
 
+@property(nonatomic,strong) UIColor *bgColor;
 
 @end
 
@@ -79,29 +80,21 @@
     
     self.title.text = addressListModel.empName;
     self.number.text = addressListModel.empTelphone;
-    
-}
-
--(void)setBgColor:(UIColor *)bgColor{
-    if (!bgColor) {
-        return;
-    }
-    _bgColor = bgColor;
-    self.view.backgroundColor = bgColor;
+    self.view.backgroundColor = addressListModel.empColor;
 }
 
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     
-    self.view.backgroundColor = self.bgColor;
-    self.img.backgroundColor = self.bgColor;
+    self.view.backgroundColor = self.addressListModel.empColor;
+    self.img.backgroundColor = self.addressListModel.empColor;
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.view.backgroundColor = self.bgColor;
-    self.img.backgroundColor = self.bgColor;
+    self.view.backgroundColor = self.addressListModel.empColor;
+    self.img.backgroundColor = self.addressListModel.empColor;
 }
 
 
@@ -121,7 +114,7 @@
 -(UIView *)view{
     if (!_view) {
         _view = [[UIView alloc] init];
-
+        
         ViewRadius(_view, [self h_w:18]);
     }
     return _view;

@@ -43,4 +43,6 @@
 @property (nonatomic , copy) NSString              * companyCode;
 @property (nonatomic , copy) NSString              * fullTimeProfession;
 
+@property (nonatomic ,strong) UIColor              *empColor;
+
 @end

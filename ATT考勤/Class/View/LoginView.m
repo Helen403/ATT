@@ -437,7 +437,7 @@
     
     if (self.useTextField.text.length>0&&self.pwdTextField.text.length>0) {
         //点击后不然再点击
-        self.loginViewModel.user = self.useTextField.text;
+        self.loginViewModel.telphone = self.useTextField.text;
         self.loginViewModel.pwd = self.pwdTextField.text;
         //登陆成功后发送按钮
         [self.loginViewModel.loginclickCommand execute:nil];

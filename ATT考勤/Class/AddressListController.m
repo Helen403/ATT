@@ -54,8 +54,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.content.frame = CGRectMake(0, 0, SCREEN_WIDTH, 84);
     self.tableView.frame = CGRectMake(0,84,SCREEN_WIDTH, self.view.frame.size.height-84);
-    
-
 }
 
 -(void)h_bindViewModel{
@@ -96,13 +94,19 @@
 }
 
 -(void)h_viewWillAppear{
+    if (self.addressListViewModel.arr.count == 0) {
+        [self h_loadData];
+    }
+}
+
+-(void)h_loadData{
+    ShowMaskStatus(@"正在拼命加载");
     //发送请求
-    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    NSString *companyCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.addressListViewModel.companyCode = companyCode;
     [self.addressListViewModel.refreshDataCommand execute:nil];
-    
-   //[self.tableView reloadData];
 }
+
 
 #pragma mark lazyload
 -(AddressListView *)addressListView{
@@ -274,7 +278,7 @@
         AddressListCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([AddressListCellView class])] forIndexPath:indexPath];
         
         cell.addressListModel = self.addressListViewModel.arr[indexPath.row];
-        cell.bgColor = randomColorA;
+        
         return cell;
     }else{
         static NSString *identify = @"cellIdentify";

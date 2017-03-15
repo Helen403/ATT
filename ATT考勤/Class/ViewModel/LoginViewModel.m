@@ -36,10 +36,12 @@
             NSString *password = [self.pwd md5String];
             
             @strongify(self);
-            if ([self.user isEqualToString:model.userTelphone]&&[password isEqualToString:model.userPassword]) {
+            if ([self.telphone isEqualToString:model.userTelphone]&&[password isEqualToString:model.userPassword]) {
                 //存储对象
                 saveModel(model, @"user");
                 [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"createUserCode"];
+                  [[NSUserDefaults standardUserDefaults] setObject:self.telphone forKey:@"myUser"];
+                
                 [self.loginclickSubject sendNext:nil];
             }else{
                 [self.loginclickFail sendNext:nil];
@@ -69,7 +71,7 @@
                 
                 NSString *body =[NSString stringWithFormat: @"<findUserByTelphone xmlns=\"http://service.webservice.vada.com/\">\
                                  <telphone xmlns=\"\">%@</telphone>\
-                                 </findUserByTelphone>",self.user];
+                                 </findUserByTelphone>",self.telphone];
                 
                 [self SOAPData:findUserByTelphone soapBody:body success:^(NSString *result) {
                     

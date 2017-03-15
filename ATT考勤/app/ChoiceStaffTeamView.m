@@ -54,24 +54,24 @@
         make.top.equalTo([self h_w:10]);
     }];
     
-    [self.selectView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(0);
-        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:10]);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:50]));
-    }];
+//    [self.selectView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(0);
+//        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:10]);
+//        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:50]));
+//    }];
+//    
+//    [self.cir mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(10);
+//        make.centerY.equalTo(weakSelf.selectView);
+//    }];
     
-    [self.cir mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(10);
-        make.centerY.equalTo(weakSelf.selectView);
-    }];
-    
-    [self.select mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.cir.mas_right).offset([self h_w:10]);
-        make.centerY.equalTo(weakSelf.selectView);
-    }];
+//    [self.select mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(weakSelf.title.mas_right).offset([self h_w:10]);
+//        make.centerY.equalTo(weakSelf.selectView);
+//    }];
     
     [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.selectView.mas_bottom).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:10]);
         make.left.equalTo(0);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH,(self.choiceStaffTeamViewModel.arr.count)*[self h_w:50]));
     }];
@@ -254,7 +254,7 @@
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[ChoiceStaffTeamCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([ChoiceStaffTeamCellView class])]];
-        
+        _tableView.scrollEnabled = NO;
     }
     return _tableView;
     
@@ -268,7 +268,6 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     return self.choiceStaffTeamViewModel.arr.count;
 }
 
@@ -289,10 +288,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ChoiceStaffTeamCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([ChoiceStaffTeamCellView class])] forIndexPath:indexPath];
-    
-    cell.teamModel = self.choiceStaffTeamViewModel.arr[indexPath.row];
-    cell.selected = NO;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.choiceStaffTeamViewModel.cellclickSubject sendNext:row];
 }

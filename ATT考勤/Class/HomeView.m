@@ -322,7 +322,7 @@
             }
                 
             case AFNetworkReachabilityStatusReachableViaWWAN:{
-                self.clockMode = @"WWAN";
+                self.clockMode = @"GPS";
                 //                NSLog(@"无线网络");
                 [self setWWAN];
                 break;
@@ -335,6 +335,7 @@
 
 -(void)setWWAN{
     self.netStatusText.text = @"当前连接GPS";
+    self.netStatusImg.image = ImageNamed(@"location");
 }
 
 -(void)setWIFINAME{
@@ -347,6 +348,7 @@
         //        NSString *str3 = [[ NSString alloc] initWithData:info[@"SSIDDATA"] encoding:NSUTF8StringEncoding];
         
         self.netStatusText.text = [NSString stringWithFormat:@"当前连接WIFI:%@",str];
+        self.netStatusImg.image = ImageNamed(@"wifi");
     }
 }
 
@@ -358,7 +360,7 @@
 }
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-//    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    //    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     
     NSString *currentLatitude = [[NSString alloc]
                                  initWithFormat:@"%f",
@@ -394,7 +396,7 @@
                 
                 
                 
-                [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"locAddress"];
+                self.locAddress = str;
                 
                 [self.locService stopUserLocationService];
                 
@@ -402,11 +404,6 @@
         }
     }];
     
-}
-
-
--(void)addresses:(NSString *)str{
-    self.locAddress = str;
 }
 
 -(void)h_bindViewModel{
@@ -428,23 +425,21 @@
     [[self.homeViewModel.attendRecordSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         [self performSelectorOnMainThread:@selector(attendRecord:) withObject:x waitUntilDone:YES];
-        
     }];
     
     //没有记录
     [[self.homeViewModel.attendFailSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            
-           self.status.text = @"状态:没有记录";
+            self.status.text = @"状态:没有记录";
         });
-     
+        
     }];
     
 }
 -(void)attendRecord:(NSNumber *)num{
     NSString *curDate =[LSCoreToolCenter currentYearType];// 当前日期
-    NSString *onworkdatetime = [NSString stringWithFormat:@"%@ %@:00", curDate,self.startDatetime]; // 上班时间
-    NSString *offworkdatetime = [NSString stringWithFormat:@"%@ %@:00", curDate,self.endDatetime];; // 下班时间
+    NSString *onworkdatetime = [NSString stringWithFormat:@"%@ %@", curDate,self.startDatetime]; // 上班时间
+    NSString *offworkdatetime = [NSString stringWithFormat:@"%@ %@", curDate,self.endDatetime];; // 下班时间
     NSString *curDatetime = [LSCoreToolCenter curDate]; // 获取当前时间
     
     
@@ -457,11 +452,11 @@
         
         //一条记录可能是上班的记录,也可能是下班的记录
         if (self.homeViewModel.arrAttendRecord.count == 1) {
-
+            
             AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
             
             
-            NSString *carddatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,attendCardRecord1.cardTime]; // 打卡时间
+            NSString *carddatetime=[NSString stringWithFormat:@"%@ %@",curDate,attendCardRecord1.cardTime]; // 打卡时间
             NSString *onworkbefore30 =[LSCoreToolCenter getDateAddMinuts:onworkdatetime time:-1*offSetCardArea];//上班标准时间-30分钟
             NSString *onworkafter30 =[LSCoreToolCenter getDateAddMinuts:onworkdatetime time:offSetCardArea];//上班标准时间+30分钟
             long onworkbeforediff =[LSCoreToolCenter getDateDiff:carddatetime end:onworkbefore30];
@@ -513,18 +508,18 @@
             if(offworkdiff>0){
                 
                 retbackstatus=5;
-                retbackcardstatus_onwork=@"-1";
-                retbackcardstatus_offwork=@"-1";
-                retbackcardtime_onwork=@"-:-";
-                retbackcardtime_offwork=self.endDatetime;
+                retbackcardstatus_onwork = @"-1";
+                retbackcardstatus_offwork = @"-1";
+                retbackcardtime_onwork = @"-:-";
+                retbackcardtime_offwork = self.endDatetime;
             }else{
                 //下班漏打打卡了
                 
                 retbackstatus=6;
-                retbackcardstatus_onwork=@"-1";
-                retbackcardstatus_offwork=@"-1";
-                retbackcardtime_onwork=@"-:-";
-                retbackcardtime_offwork=@"-:-";
+                retbackcardstatus_onwork = @"-1";
+                retbackcardstatus_offwork = @"-1";
+                retbackcardtime_onwork = @"-:-";
+                retbackcardtime_offwork = @"-:-";
             }
         }
         
@@ -595,7 +590,7 @@
                 self.preImg.image = ImageNamed(@"homepage_work_gray");
             }
             if ([LSCoreToolCenter isDayOrNight:self.lastText.text]) {
-            
+                
                 self.lastImg.image = ImageNamed(@"homepage_rest_gray");
             } else {
                 self.lastImg.image = ImageNamed(@"homepage_work_gray");
@@ -608,14 +603,14 @@
                 self.status.text = @"状态:早退";
             }
             if([@"2" isEqualToString:retbackcardstatus_offwork]){
-                 self.status.text = @"状态:迟到";
+                self.status.text = @"状态:迟到";
             }
             self.preText.text = retbackcardtime_onwork;
             self.lastText.text = retbackcardtime_offwork;
             break;
         }
         case 4:{ //没打卡,在上班正常或者迟到的范围之内
-         
+            
             self.preText.text = retbackcardtime_onwork;
             self.lastText.text = retbackcardtime_offwork;
             break;
@@ -625,7 +620,7 @@
                 
                 self.preImg.image = ImageNamed(@"homepage_rest_gray");
             } else {
-               
+                
                 self.preImg.image = ImageNamed(@"homepage_work_gray");
             }
             self.preText.text = retbackcardtime_onwork;
@@ -634,26 +629,24 @@
         }
         case 6:{ //没打卡,上班漏打打卡了,下班漏打打卡了
             if ([LSCoreToolCenter isDayOrNight:self.preText.text]) {
-               
+                
                 self.preImg.image = ImageNamed(@"homepage_rest_gray");
             } else {
-               
+                
                 self.preImg.image = ImageNamed(@"homepage_work_gray");
             }
             if ([LSCoreToolCenter isDayOrNight:self.lastText.text]) {
                 
-                 self.lastImg.image = ImageNamed(@"homepage_rest_gray");
+                self.lastImg.image = ImageNamed(@"homepage_rest_gray");
             } else {
-               
+                
                 self.lastImg.image = ImageNamed(@"homepage_work_gray");
             }
             self.preText.text = retbackcardtime_onwork;
             self.lastText.text = retbackcardtime_offwork;
             break;
         }
-	}
-    
-    
+    }
 }
 
 
@@ -874,29 +867,49 @@
 
 //点击打卡
 -(void)onClickImage{
-    if(SIMULATOR==0){
+    if(SIMULATOR == 0){
         //开始播放/继续播放
-        //        [YYAudioTool playMusic:@"msg_ding.mp3"];
-        [YYAudioTool playMusic:@"Cuckoo.mp3"];
+        NSString *sound =  [[NSUserDefaults standardUserDefaults] objectForKey:@"Sound"];
+        [YYAudioTool playMusic:sound];
         
     }
     self.punch.image = ImageNamed(@"homepage_clock_button_press");
     [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.6f];
     
-    
     EmpModel *empModel = self.homeViewModel.empModel;
     Dept *dept = self.homeViewModel.dept;
-    NSString *locAddress =  [[NSUserDefaults standardUserDefaults] objectForKey:@"locAddress"];
+    
     if (!empModel&&!dept) {
         return;
     }
     
-    if (locAddress.length>0) {
-        self.locAddress = locAddress;
+    if(SIMULATOR==1){
+        self.locAddress = @"模拟器测试地址";
+        self.locLongitude = @"113.406002";
+        self.locLatitude = @"22.516568";
+    }
+    
+    if (self.locAddress.length>0&&self.locLongitude.length>0&&self.locLatitude.length>0) {
+        
     }else{
+        ShowMessage(@"定位不成功 请在本机 设置－隐私－定位服务开启");
         [self.locService startUserLocationService];
         return;
     }
+    
+    //判读两点间的距离
+    //第一个坐标
+    //    CLLocation *current = [[CLLocation alloc] initWithLatitude:22.516568 longitude:113.406002];
+    //    //第二个坐标
+    //    CLLocation *before = [[CLLocation alloc] initWithLatitude:self.locLatitude.doubleValue longitude:self.locLongitude.doubleValue];
+    //    // 计算距离
+    //    CLLocationDistance meters=[current distanceFromLocation:before];
+    //    NSLog(@"%f",meters);
+    //
+    //    if (meters>200) {
+    //        ShowMessage(@"还没到打卡的范围");
+    //        return;
+    //    }
     
     if ([self.clockMode isEqualToString:@"1"]) {
         ShowErrorStatus(@"请检查网络");
@@ -919,7 +932,6 @@
     NSString *areaStartAfter = [LSCoreToolCenter getDateAddMinuts:phaseStartDateTime time:offSetCardArea]; //开始点后30分钟
     NSString *areaEndBefore = [LSCoreToolCenter getDateAddMinuts:phaseEndDateTime time:-1*offSetCardArea];//结束点前30分钟
     NSString *areaEndAfter = [LSCoreToolCenter getDateAddMinuts:phaseEndDateTime time:offSetCardArea];//结束点后30分钟
-    
     
     AttendWorkShift *shift = self.homeViewModel.attendWorkShift;
     long diffLate = 1; //正数为打卡正常,负数为迟到
@@ -1128,11 +1140,10 @@
                     }
                 }
             }
-            //----------------------------------------------------------------------
+            //--------------------------------------------------------------
             break;
         }
     }
-    
     
     //==================================================
     if(self.retCode==-1){
@@ -1152,7 +1163,6 @@
     }
     if(self.retCode==2){
         
-        
         ShowMessage(@"超过上班时间,您迟到了!");
     }
     if(self.retCode==3){
@@ -1163,8 +1173,6 @@
         ShowMessage(@"超过打卡时间了!");
         return;
     }
-    
-    
     
     /*************************************************/
     
@@ -1189,10 +1197,6 @@
     self.homeViewModel.deptName = dept.deptFullName;
     self.homeViewModel.locLongitude = self.locLongitude;
     self.homeViewModel.locLatitude = self.locLatitude;
-    if(SIMULATOR == 1){
-        self.homeViewModel.locLongitude = @"1.0000";
-        self.homeViewModel.locLatitude = @"1.0000";;
-    }
     
     self.homeViewModel.locAddress = self.locAddress;
     self.homeViewModel.clockMode = self.clockMode;
@@ -1201,7 +1205,6 @@
     self.homeViewModel.cardStatus = [NSString stringWithFormat:@"%ld",(long)self.retCode];
     
     [self.homeViewModel.attendRecordCommand execute:nil];
-    
 }
 
 
@@ -1255,7 +1258,6 @@
     [self.homeViewModel.setClickSubject sendNext:nil];
 }
 
-
 -(UIImageView *)headImg{
     if (!_headImg) {
         _headImg = [[UIImageView alloc] init];
@@ -1263,11 +1265,9 @@
         _headImg.userInteractionEnabled = YES;
         UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadClick)];
         [_headImg addGestureRecognizer:setTap];
-        
     }
     return _headImg;
 }
-
 
 -(void)HeadClick{
     [self.homeViewModel.headclickSubject sendNext:nil];
@@ -1279,7 +1279,6 @@
         _name = [[UILabel alloc] init];
         _name.text = @"";
         _name.font = H14;
-        
     }
     return _name;
 }
@@ -1288,7 +1287,6 @@
     if (!_department) {
         _department = [[UILabel alloc] init];
         _department.text = @"";
-        
     }
     return _department;
 }
@@ -1418,7 +1416,7 @@
 -(UIImageView *)bg{
     if (!_bg) {
         _bg = [[UIImageView alloc] init];
-      
+        
     }
     return _bg;
 }
