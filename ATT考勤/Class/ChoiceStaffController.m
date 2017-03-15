@@ -93,4 +93,8 @@
 }
 
 
+-(void)dealloc{
+     [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];
+}
+
 @end

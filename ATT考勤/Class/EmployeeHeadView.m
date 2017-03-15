@@ -90,7 +90,7 @@
     }
     _employeeModel = employeeModel;
     self.name.text = employeeModel.empName;
-    self.autograph.text = employeeModel.empSex;
+    self.autograph.text = employeeModel.position;
     if (employeeModel.empName.length==3) {
         self.img.text = [employeeModel.empName substringFromIndex:1];
     }else{
@@ -149,10 +149,9 @@
     if (!_view) {
         _view = [[UIView alloc] init];
         _view.backgroundColor = randomColorA;
-        ViewRadius(_view, [self h_w:28]);
+        ViewRadius(_view, [self h_w:30]);
     }
     return _view;
-    
 }
 
 

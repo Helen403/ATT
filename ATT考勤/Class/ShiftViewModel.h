@@ -46,4 +46,11 @@
 @property(nonatomic,strong) NSString *shiftNewLsh;
 @property(nonatomic,strong) NSString *shiftNewName;
 
+
+@property(nonatomic,strong) RACCommand *flowTemplateCommand;
+@property(nonatomic,strong) NSString *flowTypeName;
+@property(nonatomic,strong) NSString *stepUserCodes;
+@property(nonatomic,strong) NSString *stepUserNames;
+
+@property(nonatomic,strong) RACSubject *flowTemplateSubject;
 @end

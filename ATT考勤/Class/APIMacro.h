@@ -187,3 +187,7 @@
 
 //修改手机震动
 #define modifyIsCardVarient @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+
+//审批人模版
+#define saveFlowTemplate @"http://13822767713.xicp.net/smart/ws/IAttService"

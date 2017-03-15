@@ -66,7 +66,16 @@
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[TimeSoundCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([TimeSoundCellView class])]];
-        
+        _tableView.scrollEnabled = NO;
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:40])];
+        view.backgroundColor = white_color;
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake([self h_w:10], 0, SCREEN_WIDTH, [self h_w:40])];
+        title.text = @"请选择";
+        title.font = H14;
+        title.textColor = MAIN_PAN_2;
+        [view addSubview:title];
+        title.centerY = [self h_w:20];
+        _tableView.tableHeaderView = view;
     }
     return _tableView;
     
@@ -102,10 +111,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-   
+    
     [[HWPopTool sharedInstance] closeWithBlcok:^{
         TimeSoundModel *timeSound = self.timeSoundViewModel.arr[indexPath.row];
-       [[NSUserDefaults standardUserDefaults] setObject:timeSound.title forKey:@"Sound"];
+        [[NSUserDefaults standardUserDefaults] setObject:timeSound.title forKey:@"Sound"];
         self.clickBlock(0);
     }];
 }

@@ -52,4 +52,12 @@
 @property(nonatomic,strong) NSString *applyDeptName;
 
 @property(nonatomic,strong) NSString *applyMoney;
+
+
+@property(nonatomic,strong) RACCommand *flowTemplateCommand;
+@property(nonatomic,strong) NSString *flowTypeName;
+@property(nonatomic,strong) NSString *stepUserCodes;
+@property(nonatomic,strong) NSString *stepUserNames;
+
+@property(nonatomic,strong) RACSubject *flowTemplateSubject;
 @end

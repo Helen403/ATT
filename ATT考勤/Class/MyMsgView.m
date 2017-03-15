@@ -48,9 +48,7 @@
 
 
 -(void)h_bindViewModel{
-    //    [[self.myMsgViewModel.findAnnounceNumberSuccessSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
-    //
-    //    }];
+
     
 }
 

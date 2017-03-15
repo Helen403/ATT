@@ -100,13 +100,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    CustomCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([CustomCellView class])] forIndexPath:indexPath];
-    cell.selected = NO;
-    if (indexPath.section == 0) {
-        cell.customModel = self.customViewModel.arr[indexPath.row];
-    }else{
-        cell.customModel = self.customViewModel.arr[indexPath.row+2];
-    }
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.customViewModel.cellclickSubject sendNext:row];
 }

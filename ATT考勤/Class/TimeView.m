@@ -100,6 +100,8 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[TimeCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([TimeCellView class])]];
         _tableView.scrollEnabled = NO;
+    
+      
     }
     return _tableView;
 }
@@ -136,8 +138,13 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    [self click1];
+    
+    if (indexPath.row==1) {
+          [self click1];
+    }
+  
 }
 
 -(void)click1{

@@ -144,8 +144,8 @@
 -(void)onClick:(UITapGestureRecognizer *)setTap{
    UIView *view = [setTap view];
     if ([view tag] == 4) {
-        NSString *allString = [NSString stringWithFormat:@"%@", self.employeeModel.empTelphone];
-        
+        NSString *allString = [NSString stringWithFormat:@"tel:%@", self.employeeModel.empTelphone];
+        ShowMessage(allString);
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
     }
    

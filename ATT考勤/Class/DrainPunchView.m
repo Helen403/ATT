@@ -13,6 +13,13 @@
 #import "JSTextView.h"
 
 
+#import "XHDatePickerView.h"
+#import "NSDate+Extension.h"
+#import "ApplyManViewModel.h"
+#import "TeamListModel.h"
+#import "UserModel.h"
+#import "ProveModel.h"
+
 @interface DrainPunchView()
 
 @property(nonatomic,strong) DrainPunchViewModel *drainPunchViewModel;
@@ -39,6 +46,35 @@
 
 @property(nonatomic,strong) UIScrollView *scrollView;
 
+@property(nonatomic,strong) ApplyManViewModel *applyManViewModel;
+
+@property(nonatomic,strong) UIView *timeView1;
+
+@property(nonatomic,strong) UIView *timeView2;
+
+@property(nonatomic,strong) XHDatePickerView *datepicker;
+
+@property(nonatomic,strong) NSString *cuserCode;
+
+@property(nonatomic,strong) NSString *cuserName;
+
+@property(nonatomic,strong) NSString *workLsh;
+
+@property(nonatomic,strong) UITableView *tableView;
+
+@property(nonatomic,assign) NSInteger index;
+
+@property(nonatomic,strong) NSString *shiftOldLsh;
+
+@property(nonatomic,strong) NSString *shiftNewLsh;
+
+
+@property(nonatomic,strong) NSString *stepUserCodes;
+
+@property(nonatomic,strong) NSString *stepUserNames;
+
+@property(nonatomic,strong) NSString *flowInstanceId;
+
 @end
 
 
@@ -56,7 +92,19 @@
     WS(weakSelf);
     
     CGFloat padding = [self h_w:15];
-    CGFloat length = [self h_w:205];
+    CGFloat length = [self h_w:160];
+    
+    [self.timeView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.top.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
+    }];
+    
+    [self.timeView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakSelf.timeView1);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:48]));
+        make.top.equalTo(weakSelf.timeView1.mas_bottom).offset(0);
+    }];
     
     [self.applyTimeText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
@@ -96,25 +144,25 @@
         make.top.equalTo(weakSelf.line2.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:150]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
     }];
     
-    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.textView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
-    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
+    [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
-    
+
     [self.finish mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
+        make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         
@@ -133,6 +181,9 @@
     
     [self addSubview:self.scrollView];
     
+    
+    [self.scrollView addSubview:self.timeView1];
+    [self.scrollView addSubview:self.timeView2];
     [self.scrollView addSubview:self.applyTimeText];
     [self.scrollView addSubview:self.applyTimeShowText];
     [self.scrollView addSubview:self.line1];
@@ -150,12 +201,84 @@
     [self updateConstraintsIfNeeded];
 }
 
--(void)h_bindViewModel{
+-(void)h_loadData{
     
+    self.index = 0;
+    
+    //设置时间
+    self.applyTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
+    self.lateTimeShowText.text = [LSCoreToolCenter currentYearYMDHM];
+    
+    
+    self.cuserCode = @"";
+    self.cuserName = @"";
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.drainPunchViewModel.companyCode = companyCode;
+    [self.drainPunchViewModel.refreshDataCommand execute:nil];
     
 }
 
 
+-(void)h_bindViewModel{
+    [[self.drainPunchViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.drainPunchViewModel.arr.count);
+            [self.tableView reloadData];
+//            OffModel *off = self.offViewModel.arr[0];
+//            self.sureTimeShowText.text = off.workName;
+//            self.workLsh = off.workLsh;
+            
+            //            self.compensateShowText.text = move.shiftName;
+            //            self.shiftOldLsh = move.shiftLsh;
+            //            self.shiftNewLsh = move.shiftLsh;
+            
+        });
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ProveView:) name:@"ProveView" object:nil];
+}
+
+-(void)ProveView:(NSNotification*) notification{
+    NSMutableArray *arrTemp = [notification object];
+    
+    self.stepUserCodes = @"";
+    self.stepUserNames = @"";
+    
+    for (ProveModel *prove in arrTemp) {
+        
+        self.stepUserCodes = [NSString stringWithFormat:@"%@,%@",self.stepUserCodes,prove.whoisId];
+        self.stepUserNames = [NSString stringWithFormat:@"%@,%@",self.stepUserNames,prove.whois];
+    }
+    
+    self.stepUserCodes = [self.stepUserCodes substringFromIndex:1];
+    self.stepUserNames = [self.stepUserNames substringFromIndex:1];
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.drainPunchViewModel.companyCode = companyCode;
+    self.drainPunchViewModel.flowTypeName = @"forgetWork";
+    self.drainPunchViewModel.stepUserCodes= self.stepUserCodes;
+    self.drainPunchViewModel.stepUserNames = self.stepUserNames;
+    [self.drainPunchViewModel.flowTemplateCommand execute:nil];
+}
+
+
+
+-(void)applyManViewRefresh:(NSNotification*) notification{
+    NSMutableArray *arrTemp = [notification object];
+    
+    for(int i = 0;i<arrTemp.count;i++){
+        TeamListModel *teamList = arrTemp[i];
+        self.cuserCode = [NSString stringWithFormat:@"%@,%@",self.cuserCode,teamList.empCode];
+        self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
+    }
+    
+    self.cuserCode = [self.cuserCode substringFromIndex:1];
+    self.cuserName = [self.cuserName substringFromIndex:1];
+}
 
 #pragma mark lazyload
 -(DrainPunchViewModel *)drainPunchViewModel{
@@ -163,6 +286,75 @@
         _drainPunchViewModel = [[DrainPunchViewModel alloc] init];
     }
     return _drainPunchViewModel;
+}
+
+-(XHDatePickerView *)datepicker{
+    if (!_datepicker) {
+        _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
+            
+            NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            
+            if (startDateText.length > 0) {
+                
+                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:startDateText endTime:self.lateTimeShowText.text]];
+                if (str.doubleValue>0) {
+                    self.applyTimeShowText.text = startDateText;
+                }else{
+                    ShowMessage(@"请选择正确时间");
+                }
+                
+            }
+            
+            if (endDateText.length > 0 ) {
+                
+                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:endDateText]];
+                if (str.doubleValue>0) {
+                    self.lateTimeShowText.text = endDateText;
+                }else{
+                    ShowMessage(@"请选择正确时间");
+                }
+            }
+            
+            
+        }];
+        _datepicker.datePickerStyle = DateStyleShowYearMonthDayHourMinute;
+        _datepicker.dateType = DateTypeStartDate;
+        _datepicker.minLimitDate = [NSDate date:@"2017-02-01 12:22" WithFormat:@"yyyy-MM-dd HH:mm"];
+        _datepicker.maxLimitDate = [NSDate date:@"2020-12-12 12:12" WithFormat:@"yyyy-MM-dd HH:mm"];    }
+    return _datepicker;
+}
+
+-(UIView *)timeView1{
+    if (!_timeView1) {
+        _timeView1 = [[UIView alloc] init];
+        
+        _timeView1.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeClick1)];
+        [_timeView1 addGestureRecognizer:setTap];
+    }
+    return _timeView1;
+}
+
+-(void)timeClick1{
+    _datepicker = nil;
+    [self.datepicker show];
+}
+
+-(UIView *)timeView2{
+    if (!_timeView2) {
+        _timeView2 = [[UIView alloc] init];
+        
+        _timeView2.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeClick2)];
+        [_timeView2 addGestureRecognizer:setTap];
+    }
+    return _timeView2;
+}
+
+-(void)timeClick2{
+    _datepicker = nil;
+    [self.datepicker show];
 }
 
 
@@ -179,7 +371,7 @@
 -(UILabel *)applyTimeShowText{
     if (!_applyTimeShowText) {
         _applyTimeShowText = [[UILabel alloc] init];
-        _applyTimeShowText.text = @"2016年12月25日 08:30:00";
+        _applyTimeShowText.text = @"";
         _applyTimeShowText.font = H14;
         _applyTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -208,7 +400,7 @@
 -(UILabel *)lateTimeShowText{
     if (!_lateTimeShowText) {
         _lateTimeShowText = [[UILabel alloc] init];
-        _lateTimeShowText.text = @"2016年12月25日 08:30:00";
+        _lateTimeShowText.text = @"";
         _lateTimeShowText.font = H14;
         _lateTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -257,19 +449,29 @@
         _proveView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _proveView.layer.borderWidth =1.0;
         _proveView.layer.cornerRadius =5.0;
+         _proveView.flowType = @"forgetWork";
     }
     return _proveView;
 }
 
 -(ApplyManView *)applyManView{
     if (!_applyManView) {
-        _applyManView = [[ApplyManView alloc] init];
+        _applyManView = [[ApplyManView alloc] initWithViewModel:self.applyManViewModel];
         
         _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _applyManView.layer.borderWidth =1.0;
-        _applyManView.layer.cornerRadius =5.0;
+        _applyManView.layer.borderWidth = 1.0;
+        _applyManView.layer.cornerRadius = 5.0;
+    
     }
     return _applyManView;
+}
+
+-(ApplyManViewModel *)applyManViewModel{
+    if (!_applyManViewModel) {
+        _applyManViewModel = [[ApplyManViewModel alloc] init];
+       
+    }
+    return _applyManViewModel;
 }
 
 -(UIButton *)finish{
@@ -295,7 +497,39 @@
 }
 
 -(void)finish:(UIButton *)button{
-    [self.drainPunchViewModel.submitclickSubject sendNext:nil];
+    
+    if ([self.applyTimeShowText.text isEqualToString:self.lateTimeShowText.text]) {
+        ShowMessage(@"请选择漏打卡时间");
+        return;
+    }
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.drainPunchViewModel.companyCode = companyCode;
+    self.drainPunchViewModel.applyStartDatetime = self.applyTimeShowText.text;
+    self.drainPunchViewModel.applyEndDatetime = self.lateTimeShowText.text;
+    self.drainPunchViewModel.applyLenHours = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeText.text]];
+    
+    self.drainPunchViewModel.applyReason = self.textView.text;
+    self.drainPunchViewModel.applyStatus = @"0";
+    self.drainPunchViewModel.flowInstanceId = self.flowInstanceId;
+    self.drainPunchViewModel.cuserCode = self.cuserCode;
+    self.drainPunchViewModel.cuserName = self.cuserName;
+    
+    
+    self.drainPunchViewModel.changeDatetime = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text]];
+    
+//    self.drainPunchViewModel.shiftOldLsh = self.shiftOldLsh;
+//    self.drainPunchViewModel.shiftOldName = self.sureTimeShowText.text;
+    
+    
+//    self.drainPunchViewModel.workLsh = self.workLsh;
+//    self.drainPunchViewModel.workName = self.sureTimeShowText.text;
+    
+    UserModel *user =  getModel(@"user");
+    self.drainPunchViewModel.applyUserCode = user.userCode;
+    self.drainPunchViewModel.applyUserName = user.userNickName;
+    
+    [self.drainPunchViewModel.applyForgetCommand execute:nil];
 }
 
 -(UIScrollView *)scrollView{
@@ -305,4 +539,9 @@
     return _scrollView;
 }
 
+
+-(void)dealloc{
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ProveView" object:nil];
+}
 @end

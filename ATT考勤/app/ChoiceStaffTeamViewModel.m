@@ -8,6 +8,7 @@
 
 #import "ChoiceStaffTeamViewModel.h"
 #import "TeamModel.h"
+#import "TeamListModel.h"
 
 
 @implementation ChoiceStaffTeamViewModel
@@ -17,12 +18,8 @@
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
          DismissHud();
-        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAllDeptByCompanyCodeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAllDeptByCompanyCodeResponse>"];
-
-        NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[TeamModel class] rowRootName:@"Depts"];
-        self.arr = arr;
-        
-        [self.tableViewSubject sendNext:xmlDoc];
+  
+        [self.tableViewSubject sendNext:nil];
         
        
     }];
@@ -49,14 +46,44 @@
                 
                 @strongify(self);
                 
-                NSString *body =[NSString stringWithFormat: @"<findAllDeptByCompanyCode xmlns=\"http://service.webservice.vada.com/\">\
-                                 <companyCode xmlns=\"\">%@</companyCode>\
-                                 </findAllDeptByCompanyCode>",self.companyCode];
+                NSString *body1 =[NSString stringWithFormat: @"<findAllDeptByCompanyCode xmlns=\"http://service.webservice.vada.com/\">\
+                                  <companyCode xmlns=\"\">%@</companyCode>\
+                                  </findAllDeptByCompanyCode>",self.companyCode];
                 
-                [self SOAPData:findAllDeptByCompanyCode soapBody:body success:^(NSString *result) {
+                [self SOAPData:findAllDeptByCompanyCode soapBody:body1 success:^(NSString *result1) {
+                    NSString *xmlDoc1 = [self getFilterStr:result1 filter1:@"<ns2:findAllDeptByCompanyCodeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAllDeptByCompanyCodeResponse>"];
                     
-                    [subscriber sendNext:result];
-                    [subscriber sendCompleted];
+                    
+                    NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc1 class:[TeamModel class] rowRootName:@"Depts"];
+                    NSMutableArray *arr = [NSMutableArray array];
+                    
+                    for(int i = 0;i<arrTmp.count;i++){
+                        TeamModel *team = arrTmp[i];
+                        NSString *body2 =[NSString stringWithFormat: @"<findAllEmpByCompanyDeptCode xmlns=\"http://service.webservice.vada.com/\">\
+                                          <companyCode xmlns=\"\">%@</companyCode>\
+                                          <deptCode xmlns=\"\">%@</deptCode>\
+                                          </findAllEmpByCompanyDeptCode>",team.companyCode,team.deptCode];
+                        
+                        [self SOAPData:findAllEmpByCompanyDeptCode soapBody:body2 success:^(NSString *result2) {
+                            NSString *xmlDoc2 = [self getFilterStr:result2 filter1:@"<ns2:findAllEmpByCompanyDeptCodeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAllEmpByCompanyDeptCodeResponse>"];
+                            
+                            
+                            NSMutableArray *arrT = [LSCoreToolCenter xmlToArray:xmlDoc2 class:[TeamListModel class] rowRootName:@"Emps"];
+                            team.deptCount =[NSString stringWithFormat:@"%lu",(unsigned long)arrT.count] ;
+                            [arr addObject:team];
+                            if (i==arrTmp.count-1) {
+                                self.arr = arr;
+                                [subscriber sendNext:nil];
+                                [subscriber sendCompleted];
+                            }
+                            
+                        } failure:^(NSError *error) {
+                            DismissHud();
+                            ShowErrorStatus(@"请检查网络状态");
+                        }];
+                        
+                    }
+                    
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");

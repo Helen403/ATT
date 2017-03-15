@@ -22,7 +22,7 @@
 #import "OvertimeCellView.h"
 #import "OvertimeModel.h"
 
-
+#import "ProveModel.h"
 
 
 @interface OvertimeView()<UITableViewDelegate,UITableViewDataSource>
@@ -97,6 +97,12 @@
 @property(nonatomic,strong) NSString *resultType;
 
 
+
+@property(nonatomic,strong) NSString *stepUserCodes;
+
+@property(nonatomic,strong) NSString *stepUserNames;
+
+@property(nonatomic,strong) NSString *flowInstanceId;
 
 @end
 
@@ -340,7 +346,33 @@
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ProveView:) name:@"ProveView" object:nil];
 }
+
+-(void)ProveView:(NSNotification*) notification{
+    NSMutableArray *arrTemp = [notification object];
+    
+    self.stepUserCodes = @"";
+    self.stepUserNames = @"";
+    
+    for (ProveModel *prove in arrTemp) {
+        
+        self.stepUserCodes = [NSString stringWithFormat:@"%@,%@",self.stepUserCodes,prove.whoisId];
+        self.stepUserNames = [NSString stringWithFormat:@"%@,%@",self.stepUserNames,prove.whois];
+    }
+    
+    self.stepUserCodes = [self.stepUserCodes substringFromIndex:1];
+    self.stepUserNames = [self.stepUserNames substringFromIndex:1];
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.overtimeViewModel.companyCode = companyCode;
+    self.overtimeViewModel.flowTypeName = @"overWork";
+    self.overtimeViewModel.stepUserCodes= self.stepUserCodes;
+    self.overtimeViewModel.stepUserNames = self.stepUserNames;
+    [self.overtimeViewModel.flowTemplateCommand execute:nil];
+}
+
 
 
 -(void)applyManViewRefresh:(NSNotification*) notification{
@@ -374,12 +406,26 @@
             NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
             
             if (startDateText.length > 0) {
-                self.applyTimeShowText.text = startDateText;
+                
+                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:startDateText endTime:self.lateTimeShowText.text]];
+                if (str.doubleValue>0) {
+                    self.applyTimeShowText.text = startDateText;
+                }else{
+                    ShowMessage(@"请选择正确时间");
+                }
+                
             }
             
             if (endDateText.length > 0 ) {
-                self.lateTimeShowText.text = endDateText;
+                
+                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:endDateText]];
+                if (str.doubleValue>0) {
+                    self.lateTimeShowText.text = endDateText;
+                }else{
+                    ShowMessage(@"请选择正确时间");
+                }
             }
+            
             
         }];
         _datepicker.datePickerStyle = DateStyleShowYearMonthDayHourMinute;
@@ -587,11 +633,11 @@
     self.overtimeViewModel.companyCode = companyCode;
     self.overtimeViewModel.applyStartDatetime = self.applyTimeShowText.text;
     self.overtimeViewModel.applyEndDatetime = self.lateTimeShowText.text;
-    self.overtimeViewModel.applyLenHours = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeText.text]];
+    self.overtimeViewModel.applyLenHours = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text]];
     
     self.overtimeViewModel.applyReason = self.textView.text;
     self.overtimeViewModel.applyStatus = @"0";
-    self.overtimeViewModel.flowInstanceId = @"0";
+    self.overtimeViewModel.flowInstanceId =self.flowInstanceId;
     
     self.overtimeViewModel.overType = self.overType;
     self.overtimeViewModel.resultType = self.resultType;
@@ -786,5 +832,6 @@
 
 -(void)dealloc{
     [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ProveView" object:nil];
 }
 @end

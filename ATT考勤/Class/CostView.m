@@ -23,6 +23,8 @@
 #import "CostModel.h"
 #import "CostCellView.h"
 
+#import "ProveModel.h"
+
 @interface CostView ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @property(nonatomic,strong) CostViewModel *costViewModel;
@@ -90,6 +92,12 @@
 @property(nonatomic,strong) NSString *shiftNewLsh;
 
 @property(nonatomic,strong) NSString *applyDeptCode;
+
+@property(nonatomic,strong) NSString *stepUserCodes;
+
+@property(nonatomic,strong) NSString *stepUserNames;
+
+@property(nonatomic,strong) NSString *flowInstanceId;
 
 @end
 
@@ -326,13 +334,36 @@
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applyManViewRefresh:) name:@"ApplyManView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ProveView:) name:@"ProveView" object:nil];
+}
+
+-(void)ProveView:(NSNotification*) notification{
+    NSMutableArray *arrTemp = [notification object];
     
+    self.stepUserCodes = @"";
+    self.stepUserNames = @"";
+    
+    for (ProveModel *prove in arrTemp) {
+        
+        self.stepUserCodes = [NSString stringWithFormat:@"%@,%@",self.stepUserCodes,prove.whoisId];
+        self.stepUserNames = [NSString stringWithFormat:@"%@,%@",self.stepUserNames,prove.whois];
+    }
+    
+    self.stepUserCodes = [self.stepUserCodes substringFromIndex:1];
+    self.stepUserNames = [self.stepUserNames substringFromIndex:1];
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.costViewModel.companyCode = companyCode;
+    self.costViewModel.flowTypeName = @"costWork";
+    self.costViewModel.stepUserCodes= self.stepUserCodes;
+    self.costViewModel.stepUserNames = self.stepUserNames;
+    [self.costViewModel.flowTemplateCommand execute:nil];
 }
 
 -(void)applyManViewRefresh:(NSNotification*) notification{
     NSMutableArray *arrTemp = [notification object];
     
-    for(int i = 0;i<arrTemp.count-1;i++){
+    for(int i = 0;i<arrTemp.count;i++){
         TeamListModel *teamList = arrTemp[i];
         self.cuserCode = [NSString stringWithFormat:@"%@,%@",self.cuserCode,teamList.empCode];
         self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
@@ -362,11 +393,18 @@
         _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
             
             NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-//            NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-            
+
             if (startDateText.length > 0) {
-                self.applyTimeShowText.text = startDateText;
+                
+                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:startDateText endTime:self.lateTimeShowText.text]];
+                if (str.doubleValue>0) {
+                    self.applyTimeShowText.text = startDateText;
+                }else{
+                    ShowMessage(@"请选择正确时间");
+                }
+                
             }
+
 
         }];
         _datepicker.datePickerStyle = DateStyleShowYearMonthDayHourMinute;
@@ -644,7 +682,7 @@
     
     self.costViewModel.applyReason = self.textView.text;
     self.costViewModel.applyStatus = @"0";
-    self.costViewModel.flowInstanceId = @"0";
+    self.costViewModel.flowInstanceId = self.flowInstanceId;
     self.costViewModel.cuserCode = self.cuserCode;
     self.costViewModel.cuserName = self.cuserName;
     
@@ -840,6 +878,7 @@
 
 -(void)dealloc{
     [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];
+    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ProveView" object:nil];
 }
 
 @end

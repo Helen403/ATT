@@ -80,7 +80,7 @@
     FunctionCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([FunctionCellView class])] forIndexPath:indexPath];
     
     cell.functionModel = self.functionViewModel.arr[indexPath.section];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -91,9 +91,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FunctionCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([FunctionCellView class])] forIndexPath:indexPath];
-    
-    cell.selected = NO;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.functionViewModel.cellclickSubject sendNext:row];
 }
