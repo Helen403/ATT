@@ -44,7 +44,7 @@
 #pragma mark private
 -(void)h_setupViews{
 
-    self.backgroundColor = GX_BGCOLOR;
+    self.backgroundColor = white_color;
     [self addSubview:self.tableView];
     
     [self setNeedsUpdateConstraints];
@@ -70,7 +70,7 @@
         _tableView = [[UITableView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = GX_BGCOLOR;
+        _tableView.backgroundColor = white_color;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MyExamineTableCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([MyExamineTableCellView class])]];
         _tableView.scrollEnabled = NO;

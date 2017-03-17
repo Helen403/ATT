@@ -35,6 +35,8 @@
 
 @property(nonatomic,strong) UIView *line3;
 
+@property(nonatomic,strong) UIView *line4;
+
 @property(nonatomic,strong) UILabel *ThirdText;
 
 @property(nonatomic,strong) UIImageView *weixin;
@@ -102,6 +104,13 @@
         make.size.equalTo(CGSizeMake(length-[self h_w:30], [self h_w:25]));
     }];
     
+//    [self.line4 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(leftPadding);
+//        make.right.equalTo(-leftPadding);
+//        make.top.equalTo(weakSelf.pwdTextField.mas_bottom).offset([self h_w:20]);
+//        make.size.equalTo(CGSizeMake(SCREEN_WIDTH,1));
+//    }];
+    
     [self.eyes mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.pwdImg);
         make.left.equalTo(weakSelf.pwdTextField.mas_right).offset([self h_w:2]);
@@ -115,13 +124,14 @@
     }];
     
     [self.forgetText mas_makeConstraints:^(MASConstraintMaker *make) {
+       
         make.top.equalTo(weakSelf.login.mas_bottom).offset([self h_w:15]);
-        make.left.equalTo(weakSelf.line1);
+        make.right.equalTo(weakSelf.line1);
     }];
     
     [self.registerText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.login.mas_bottom).offset([self h_w:15]);
-        make.right.equalTo(weakSelf.line1);
+        make.left.equalTo(weakSelf.line1);
     }];
     
     
@@ -201,6 +211,7 @@
     [self addSubview:self.QQ];
     [self addSubview:self.sina];
     [self addSubview:self.eyes];
+    [self addSubview:self.line4];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -477,7 +488,7 @@
 -(UILabel *)registerText{
     if (!_registerText) {
         _registerText = [[UILabel alloc] init];
-        _registerText.text = @"快速注册";
+        _registerText.text = @"立即注册";
         _registerText.textColor = MAIN_ORANGER;
         _registerText.font = H14;
         //添加点击事件
@@ -507,6 +518,13 @@
         _line3.backgroundColor = MAIN_GRAY;
     }
     return _line3;
+}
+-(UIView *)line4{
+    if (!_line4) {
+        _line4 = [[UIView alloc] init];
+        _line4.backgroundColor = MAIN_GRAY;
+    }
+    return _line4;
 }
 
 -(UILabel *)ThirdText{

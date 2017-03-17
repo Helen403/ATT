@@ -18,6 +18,8 @@
 #import "UserModel.h"
 #import "XCFTabBarController.h"
 
+#import "NavigationView.h"
+
 @interface AppDelegate ()
 
 @property (nonatomic,strong) XCFNavigationController *nav;
@@ -29,6 +31,8 @@
 @property(nonatomic,assign) Boolean flag;
 
 @property (nonatomic, strong) RACCommand *loginCommand;
+
+@property(nonatomic,strong) NavigationView *navigationView;
 
 @end
 
@@ -92,7 +96,7 @@
         ZJLaunchAdController *launchVc = [[ZJLaunchAdController alloc] initWithLaunchImage:nil setAdImageHandler:^(UIImageView *imageView) {
             // 这里可以直接使用SDWebimage等来请求服务器提供的广告图片(SDWebimage会处理好gif图片的显示)
             // 不过你需要注意选择SDWebimage的缓存策略
-            imageView.image = [UIImage imageNamed:@"splash1"];
+            imageView.image =  [LSCoreToolCenter convertViewToImage:self.navigationView];
             
             
         } finishHandler:^(ZJLaunchAdCallbackType callbackType) {
@@ -354,6 +358,14 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
+
+-(NavigationView *)navigationView{
+    if (!_navigationView) {
+        _navigationView = [[NavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        
+    }
+    return _navigationView;
+}
 
 
 @end

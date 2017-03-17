@@ -43,7 +43,7 @@
         make.left.equalTo([self h_w:0]);
         make.right.equalTo(-[self h_w:0]);
         make.top.equalTo([self h_w:0]);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:140]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:180]));
     }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -151,7 +151,7 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:60];
+    return [self h_w:80];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

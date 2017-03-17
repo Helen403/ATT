@@ -40,13 +40,13 @@
         make.left.equalTo(0);
         make.top.equalTo(0);
         make.right.equalTo(0);
-        make.bottom.equalTo(weakSelf.mas_bottom).offset(-[self h_w:20]);
+        make.bottom.equalTo(weakSelf.mas_bottom).offset(-[self h_w:30]);
     }];
     
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
-        make.bottom.equalTo(-[self h_w:15]);
-        make.size.equalTo(CGSizeMake([self h_w:60], [self h_w:60]));
+        make.bottom.equalTo(weakSelf.bgImg).offset(-[self h_w:15]);
+        make.size.equalTo(CGSizeMake([self h_w:44], [self h_w:44]));
     }];
     
     [self.img mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -56,12 +56,12 @@
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.view.mas_right).offset([self h_w:10]);
-        make.top.equalTo(weakSelf.view.mas_top).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.view.mas_top).offset([self h_w:7]);
     }];
     
     [self.autograph mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.view.mas_right).offset([self h_w:10]);
-        make.top.equalTo(weakSelf.name.mas_bottom).offset([self h_w:6]);
+        make.top.equalTo(weakSelf.name.mas_bottom).offset([self h_w:4]);
     }];
     
     [self.star mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,7 +72,7 @@
     [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.bgImg.mas_bottom).offset(0);
         make.left.equalTo(0);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:20]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:30]));
     }];
     
     [self.titleViewText mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -122,7 +122,7 @@
 -(UIImageView *)bgImg{
     if (!_bgImg) {
         _bgImg = [[UIImageView alloc] init];
-        _bgImg.backgroundColor = MAIN_ORANGER;
+        _bgImg.image = ImageNamed(@"star");
     }
     return _bgImg;
 }
@@ -140,7 +140,7 @@
     if (!_name) {
         _name = [[UILabel alloc] init];
         //        _name.text = @"黄慧";
-        _name.font = H20;
+        _name.font = H14;
         _name.textColor = white_color;
     }
     return _name;
@@ -150,7 +150,7 @@
     if (!_autograph) {
         _autograph = [[UILabel alloc] init];
         //        _autograph.text = @"树欲静而风不止";
-        _autograph.font = H14;
+        _autograph.font = H12;
         _autograph.textColor = white_color;
     }
     return _autograph;
@@ -168,7 +168,7 @@
     if (!_view) {
         _view = [[UIView alloc] init];
         _view.backgroundColor = randomColorA;
-        ViewRadius(_view, [self h_w:30]);
+        ViewRadius(_view, [self h_w:22]);
     }
     return _view;
 }
@@ -178,9 +178,8 @@
     if (!_img) {
         _img = [[UILabel alloc] init];
         _img.text = @"";
-        _img.font = H20;
+        _img.font = H16;
         _img.textColor = white_color;
-        
     }
     return _img;
 }
@@ -197,7 +196,7 @@
     if (!_titleViewText) {
         _titleViewText = [[UILabel alloc] init];
         _titleViewText.text = @"基本信息";
-        _titleViewText.font = H14;
+        _titleViewText.font = H13;
         _titleViewText.textColor = MAIN_PAN_3;
     }
     return _titleViewText;

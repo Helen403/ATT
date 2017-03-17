@@ -22,6 +22,7 @@
     return self;
 }
 
+
 - (instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel {
     
     self = [super init];

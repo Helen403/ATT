@@ -11,13 +11,11 @@
 #import "ProveView.h"
 #import "ApplyManView.h"
 #import "JSTextView.h"
-
 #import "XHDatePickerView.h"
 #import "NSDate+Extension.h"
 #import "ApplyManViewModel.h"
 #import "TeamListModel.h"
 #import "UserModel.h"
-
 #import "ResignationCellView.h"
 #import "ResignationModel.h"
 #import "ProveModel.h"
@@ -658,6 +656,7 @@
         [view addSubview:title];
         title.centerY = [self h_w:20];
         _tableView.tableHeaderView = view;
+        ViewRadius(_tableView, 5);
     }
     return _tableView;
 }

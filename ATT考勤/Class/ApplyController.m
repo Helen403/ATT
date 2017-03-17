@@ -7,15 +7,9 @@
 //
 
 #import "ApplyController.h"
-
-
-
 #import "MyApplyController.h"
 #import "MyExamineController.h"
-
 #import "ZJScrollPageView.h"
-
-
 
 @interface ApplyController ()<ZJScrollPageViewDelegate>
 

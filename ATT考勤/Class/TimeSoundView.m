@@ -76,6 +76,7 @@
         [view addSubview:title];
         title.centerY = [self h_w:20];
         _tableView.tableHeaderView = view;
+        ViewRadius(_tableView, 5);
     }
     return _tableView;
     
@@ -118,10 +119,6 @@
         self.clickBlock(0);
     }];
 }
-
-
-
-
 
 
 @end

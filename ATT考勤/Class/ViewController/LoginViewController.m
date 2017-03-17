@@ -19,17 +19,11 @@
 
 
 
-
 @interface LoginViewController ()
 
 @property(nonatomic,strong) LoginView *loginView;
 
 @property(nonatomic,strong) LoginViewModel *loginViewModel;
-
-
-
-
-
 
 @end
 
@@ -53,7 +47,6 @@
     [super viewDidLoad];
     
 }
-
 
 - (void)updateViewConstraints {
     
@@ -114,7 +107,6 @@
         ShowMessage(@"微信");
         
     }];
-    
     
     //QQ点击
     [[self.loginViewModel.qqclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {

@@ -263,7 +263,7 @@
 -(void)h_setupViews{
     
     [self addSubview:self.scrollView];
-
+    
     
     [self.scrollView addSubview:self.timeView1];
     [self.scrollView addSubview:self.timeView2];
@@ -649,7 +649,8 @@
     self.shiftViewModel.cuserName = self.cuserName;
     
     
-    self.shiftViewModel.changeDatetime =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text]];
+    //    self.shiftViewModel.changeDatetime =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text]];
+    self.shiftViewModel.changeDatetime = [LSCoreToolCenter currentYearYMDHM];
     
     self.shiftViewModel.shiftOldLsh = self.shiftOldLsh;
     self.shiftViewModel.shiftOldName = self.sureTimeShowText.text;
@@ -757,6 +758,7 @@
         [view addSubview:title];
         title.centerY = [self h_w:20];
         _tableView.tableHeaderView = view;
+        ViewRadius(_tableView, 5);
     }
     return _tableView;
 }

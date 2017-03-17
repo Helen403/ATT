@@ -311,7 +311,7 @@
     if (self.choiceStaffViewModel.selectorPatnArray.count > 0) {
         for(int i = 0;i<self.choiceStaffViewModel.selectorPatnArray.count;i++){
             
-            TeamListModel *teamListModel = self.choiceStaffViewModel.selectorPatnArray[i];
+//            TeamListModel *teamListModel = self.choiceStaffViewModel.selectorPatnArray[i];
         }
         
         [self.choiceStaffViewModel.sendSubject sendNext:nil];

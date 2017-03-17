@@ -556,7 +556,7 @@
         //        _sureTimeShowText.clearButtonMode = UITextFieldViewModeAlways;
         _sureTimeShowText.keyboardType = UIKeyboardTypePhonePad;
         // 5.监听文本框的文字改变
-        _sureTimeShowText.delegate = self;
+//        _sureTimeShowText.delegate = self;
     }
     return _sureTimeShowText;
 }
@@ -766,6 +766,7 @@
         [view addSubview:title];
         title.centerY = [self h_w:20];
         _tableView.tableHeaderView = view;
+        ViewRadius(_tableView, 5);
     }
     return _tableView;
 }

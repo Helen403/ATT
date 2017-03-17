@@ -11,18 +11,14 @@
 #import "ProveView.h"
 #import "ApplyManView.h"
 #import "JSTextView.h"
-
-
 #import "XHDatePickerView.h"
 #import "NSDate+Extension.h"
 #import "ApplyManViewModel.h"
 #import "TeamListModel.h"
 #import "UserModel.h"
-
 #import "CostWorkModel.h"
 #import "CostModel.h"
 #import "CostCellView.h"
-
 #import "ProveModel.h"
 
 @interface CostView ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
@@ -321,7 +317,7 @@
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             
-            if (self.costViewModel.arrDept.count==0) {
+            if (self.costViewModel.arrDept.count == 0) {
                 return ;
             }
             CostModel *cost = self.costViewModel.arrDept[0];
@@ -683,6 +679,10 @@
         return;
     }
     
+    if (self.sureTimeText.text.intValue==0||self.sureTimeText.text.intValue<0) {
+        ShowMessage(@"费用金额不正确");
+        return;
+    }
     
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.costViewModel.companyCode = companyCode;
@@ -813,6 +813,7 @@
         [view addSubview:title];
         title.centerY = [self h_w:20];
         _tableView.tableHeaderView = view;
+        ViewRadius(_tableView, 5);
     }
     return _tableView;
 }

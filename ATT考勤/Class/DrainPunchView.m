@@ -11,8 +11,6 @@
 #import "ProveView.h"
 #import "ApplyManView.h"
 #import "JSTextView.h"
-
-
 #import "XHDatePickerView.h"
 #import "NSDate+Extension.h"
 #import "ApplyManViewModel.h"

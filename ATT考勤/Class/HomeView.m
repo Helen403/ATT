@@ -921,8 +921,8 @@
     }
     
     /*************************************************/
-    AttendWorkShift *attendWorkShift = self.homeViewModel.attendWorkShift;
-    NSString *count =  attendWorkShift.daySignCount;
+//    AttendWorkShift *attendWorkShift = self.homeViewModel.attendWorkShift;
+//    NSString *count =  attendWorkShift.daySignCount;
     
     NSString *curDate = [LSCoreToolCenter currentYearType]; // 当前日期
     NSString *curDatetime = [LSCoreToolCenter curDate]; // 获取当前时间

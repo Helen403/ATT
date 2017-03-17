@@ -214,6 +214,9 @@
 		793BCB221E6654C500B743E9 /* ChangeSignNameViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 793BCB211E6654C500B743E9 /* ChangeSignNameViewModel.m */; };
 		793BCB251E66604000B743E9 /* Bongo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 793BCB231E66604000B743E9 /* Bongo.mp3 */; };
 		793BCB261E66604000B743E9 /* Cuckoo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 793BCB241E66604000B743E9 /* Cuckoo.mp3 */; };
+		793BF1DB1E7A03B900FBD784 /* lamp.png in Resources */ = {isa = PBXBuildFile; fileRef = 793BF1DA1E7A03B900FBD784 /* lamp.png */; };
+		793BF1DD1E7A051900FBD784 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 793BF1DC1E7A051900FBD784 /* star.png */; };
+		793BF1E01E7A1DD100FBD784 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793BF1DF1E7A1DD100FBD784 /* NavigationView.m */; };
 		793D3AF31E70F23300266D9C /* LYWCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D3AF21E70F23300266D9C /* LYWCollectionViewCell.m */; };
 		793D3AF91E712C0F00266D9C /* MyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D3AF81E712C0F00266D9C /* MyCalendarView.m */; };
 		793D3AFD1E712DAE00266D9C /* MyWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D3AFC1E712DAE00266D9C /* MyWeekView.m */; };
@@ -1013,6 +1016,10 @@
 		793BCB211E6654C500B743E9 /* ChangeSignNameViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeSignNameViewModel.m; sourceTree = "<group>"; };
 		793BCB231E66604000B743E9 /* Bongo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bongo.mp3; sourceTree = "<group>"; };
 		793BCB241E66604000B743E9 /* Cuckoo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Cuckoo.mp3; sourceTree = "<group>"; };
+		793BF1DA1E7A03B900FBD784 /* lamp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lamp.png; sourceTree = "<group>"; };
+		793BF1DC1E7A051900FBD784 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		793BF1DE1E7A1DD100FBD784 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavigationView.h; path = ../../NavigationView.h; sourceTree = "<group>"; };
+		793BF1DF1E7A1DD100FBD784 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavigationView.m; path = ../../NavigationView.m; sourceTree = "<group>"; };
 		793D3AF11E70F23300266D9C /* LYWCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYWCollectionViewCell.h; sourceTree = "<group>"; };
 		793D3AF21E70F23300266D9C /* LYWCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYWCollectionViewCell.m; sourceTree = "<group>"; };
 		793D3AF71E712C0F00266D9C /* MyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCalendarView.h; sourceTree = "<group>"; };
@@ -1810,6 +1817,8 @@
 		7904A6EB1E091F9C00D6E8D4 /* Nav */ = {
 			isa = PBXGroup;
 			children = (
+				793BF1DE1E7A1DD100FBD784 /* NavigationView.h */,
+				793BF1DF1E7A1DD100FBD784 /* NavigationView.m */,
 				793765471E14A78400F7B34F /* UIBarButtonItem+Extension.h */,
 				793765481E14A78400F7B34F /* UIBarButtonItem+Extension.m */,
 				793765401E14A45800F7B34F /* XCFNavigationController.h */,
@@ -3719,6 +3728,8 @@
 		793B9E881E48054000156CBE /* ImageJPG */ = {
 			isa = PBXGroup;
 			children = (
+				793BF1DA1E7A03B900FBD784 /* lamp.png */,
+				793BF1DC1E7A051900FBD784 /* star.png */,
 			);
 			name = ImageJPG;
 			sourceTree = "<group>";
@@ -6798,6 +6809,7 @@
 				791C76691E5160CF003B1E54 /* BuildRole.plist in Resources */,
 				794C776C1E3204B800013243 /* emotion0055@2x.png in Resources */,
 				794C77601E3204B800013243 /* emotion0043@2x.png in Resources */,
+				793BF1DD1E7A051900FBD784 /* star.png in Resources */,
 				79F964C21E2CBDFF00838CC4 /* Leave.plist in Resources */,
 				7937820B1E31E3AD00ABA7C9 /* ReceiverTextNodeBkg@2x.png in Resources */,
 				794C776B1E3204B800013243 /* emotion0054@2x.png in Resources */,
@@ -6884,6 +6896,7 @@
 				794C77701E3204B800013243 /* emotion0059@2x.png in Resources */,
 				794C77611E3204B800013243 /* emotion0044@2x.png in Resources */,
 				7954BB291E5FCCE900E03173 /* msg_water.mp3 in Resources */,
+				793BF1DB1E7A03B900FBD784 /* lamp.png in Resources */,
 				7937653D1E14987F00F7B34F /* DealWith.plist in Resources */,
 				794C773E1E3204B800013243 /* emotion0009@2x.png in Resources */,
 				794C77A51E3204B800013243 /* liaotian_ic_press@3x.png in Resources */,
@@ -7137,6 +7150,7 @@
 				79F43DAA1E0D598A00C4C932 /* CreateViewModel.m in Sources */,
 				793782181E31E79B00ABA7C9 /* ChatViewModel.m in Sources */,
 				79DD27741E31B76B00923D19 /* MyMsgCellView.m in Sources */,
+				793BF1E01E7A1DD100FBD784 /* NavigationView.m in Sources */,
 				7938682C1E0A2A8A004EC88A /* HomeViewModel.m in Sources */,
 				79EF941F1E26143200F8E9BC /* PersonalViewModel.m in Sources */,
 				79EF94281E26148A00F8E9BC /* PersonalHeadView.m in Sources */,

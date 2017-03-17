@@ -26,13 +26,13 @@
     WS(weakSelf);
     
     [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([self h_w:10]);
+        make.top.equalTo([self h_w:20]);
         make.left.equalTo([self h_w:10]);
     }];
     
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.content.mas_bottom).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.content.mas_bottom).offset([self h_w:18]);
         make.left.equalTo([self h_w:10]);
     }];
 
@@ -143,13 +143,13 @@
 
 -(void)onClick:(UITapGestureRecognizer *)setTap{
    UIView *view = [setTap view];
-    if ([view tag] == 4) {
+    if ([view tag] == 0) {
         NSString *allString = [NSString stringWithFormat:@"tel:%@", self.employeeModel.empTelphone];
         ShowMessage(allString);
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
     }
    
-    if ([view tag] == 5) {
+    if ([view tag] == 2) {
         ShowMessage(@"暂时没开通邮箱");
     }
 }

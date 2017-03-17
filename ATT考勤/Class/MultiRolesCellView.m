@@ -69,7 +69,7 @@
 -(UIImageView *)img{
     if (!_img) {
         _img = [[UIImageView alloc] init];
-        _img.image = ImageNamed(@"information_company_gray");
+        _img.image = ImageNamed(@"switch_role_company");
     }
     return _img;
 }

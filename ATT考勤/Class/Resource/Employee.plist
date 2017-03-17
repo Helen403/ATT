@@ -4,19 +4,19 @@
 <array>
 	<dict>
 		<key>title</key>
-		<string>职位</string>
-		<key>content</key>
-		<string>军师</string>
-		<key>show</key>
-		<string>0</string>
-	</dict>
-	<dict>
-		<key>title</key>
 		<string>手机</string>
 		<key>content</key>
 		<string>13850890798</string>
 		<key>show</key>
 		<string>tel</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>职位</string>
+		<key>content</key>
+		<string>军师</string>
+		<key>show</key>
+		<string>0</string>
 	</dict>
 	<dict>
 		<key>title</key>
@@ -28,7 +28,7 @@
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>设备</string>
+		<string>绑定设备</string>
 		<key>content</key>
 		<string>iphone6</string>
 		<key>show</key>
