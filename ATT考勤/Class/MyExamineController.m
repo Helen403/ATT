@@ -9,10 +9,13 @@
 #import "MyExamineController.h"
 #import "MyExamineViewModel.h"
 #import "MyExamineView.h"
-#import "TreatController.h"
+//#import "TreatController.h"
 #import "ProcessedController.h"
 #import "RefuseController.h"
 #import "CopyController.h"
+
+
+#import "LateTreatmentController.h"
 
 @interface MyExamineController ()
 
@@ -56,7 +59,7 @@
         switch ([x integerValue]) {
                 //待处理
             case 0:{
-                TreatController *treat = [[TreatController alloc] init];
+                LateTreatmentController *treat = [[LateTreatmentController alloc] init];
                 
                 [self.navigationController pushViewController:treat animated:NO];
                 break;

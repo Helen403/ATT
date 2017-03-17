@@ -71,12 +71,16 @@
     }
     _teamListModel = teamListModel;
 
-    
-    if (teamListModel.empName.length==3) {
-        self.img.text = [teamListModel.empName  substringFromIndex:1];
+    if ([LSCoreToolCenter PureLetters:teamListModel.empName]) {
+       self.img.text = teamListModel.empName;
     }else{
-        self.img.text = teamListModel.empName;
+        if (teamListModel.empName.length==3) {
+            self.img.text = [teamListModel.empName  substringFromIndex:1];
+        }else{
+            self.img.text = teamListModel.empName;
+        }
     }
+
     
     self.title.text = teamListModel.empName;
     self.number.text = teamListModel.empTelphone;

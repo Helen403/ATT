@@ -72,12 +72,16 @@
     }
     _addressListModel = addressListModel;
     
-    if (addressListModel.empName.length==3) {
-        self.img.text = [addressListModel.empName  substringFromIndex:1];
+    if ([LSCoreToolCenter PureLetters:addressListModel.empName]) {
+           self.img.text = addressListModel.empName;
     }else{
-        self.img.text = addressListModel.empName;
+        if (addressListModel.empName.length==3) {
+            self.img.text = [addressListModel.empName  substringFromIndex:1];
+        }else{
+            self.img.text = addressListModel.empName;
+        }
     }
-    
+
     self.title.text = addressListModel.empName;
     self.number.text = addressListModel.empTelphone;
     self.view.backgroundColor = addressListModel.empColor;

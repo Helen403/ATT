@@ -382,7 +382,7 @@
         self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
     }
     
-    self.cuserCode = [self.cuserCode substringFromIndex:1];
+//    self.cuserCode = [self.cuserCode substringFromIndex:1];
     self.cuserName = [self.cuserName substringFromIndex:1];
 }
 

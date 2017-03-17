@@ -110,11 +110,18 @@
     _employeeModel = employeeModel;
     self.name.text = employeeModel.empName;
     self.autograph.text = employeeModel.position;
-    if (employeeModel.empName.length==3) {
-        self.img.text = [employeeModel.empName substringFromIndex:1];
+    if ([LSCoreToolCenter PureLetters:employeeModel.empName]) {
+          self.img.text = employeeModel.empName;
     }else{
-        self.img.text = employeeModel.empName;
+        if (employeeModel.empName.length==3) {
+            self.img.text = [employeeModel.empName substringFromIndex:1];
+        }else{
+            self.img.text = employeeModel.empName;
+        }
     }
+
+    
+  
 }
 
 

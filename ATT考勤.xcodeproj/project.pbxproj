@@ -232,6 +232,16 @@
 		794620EB1E767E9E00873199 /* FeedbackCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620EA1E767E9E00873199 /* FeedbackCellView.m */; };
 		794620EF1E767F4300873199 /* FeedbackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620EE1E767F4300873199 /* FeedbackModel.m */; };
 		794620F21E76A2EC00873199 /* TimeSoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620F11E76A2EC00873199 /* TimeSoundView.m */; };
+		7947BC8A1E7BB89B00EE8EA6 /* LateTreatmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BC891E7BB89B00EE8EA6 /* LateTreatmentController.m */; };
+		7947BC8D1E7BB8C900EE8EA6 /* LateTreatmentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BC8C1E7BB8C900EE8EA6 /* LateTreatmentViewModel.m */; };
+		7947BC901E7BB8E100EE8EA6 /* LateTreatmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BC8F1E7BB8E100EE8EA6 /* LateTreatmentView.m */; };
+		7947BC941E7BBA9C00EE8EA6 /* LateTreatmentCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BC931E7BBA9C00EE8EA6 /* LateTreatmentCellView.m */; };
+		7947BC971E7BBD8000EE8EA6 /* LateTreatmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BC961E7BBD8000EE8EA6 /* LateTreatmentModel.m */; };
+		7947BCA11E7BDF9300EE8EA6 /* AlreadyTreatmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BCA01E7BDF9300EE8EA6 /* AlreadyTreatmentController.m */; };
+		7947BCA41E7BE03200EE8EA6 /* AlreadyTreatmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BCA31E7BE03200EE8EA6 /* AlreadyTreatmentView.m */; };
+		7947BCA71E7BE07600EE8EA6 /* AlreadyTreatmentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BCA61E7BE07600EE8EA6 /* AlreadyTreatmentViewModel.m */; };
+		7947BCAA1E7BE09200EE8EA6 /* AlreadyTreatmentCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BCA91E7BE09200EE8EA6 /* AlreadyTreatmentCellView.m */; };
+		7947BCAD1E7BE16400EE8EA6 /* AlreadyTreatmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BCAC1E7BE16400EE8EA6 /* AlreadyTreatmentModel.m */; };
 		7947F13D1E67BB1D00E68C83 /* ChoiceStaffTeamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F13C1E67BB1D00E68C83 /* ChoiceStaffTeamController.m */; };
 		7947F1401E67BB3900E68C83 /* ChoiceStaffTeamView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F13F1E67BB3900E68C83 /* ChoiceStaffTeamView.m */; };
 		7947F1431E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F1421E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m */; };
@@ -1050,6 +1060,26 @@
 		794620EE1E767F4300873199 /* FeedbackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackModel.m; sourceTree = "<group>"; };
 		794620F01E76A2EC00873199 /* TimeSoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSoundView.h; sourceTree = "<group>"; };
 		794620F11E76A2EC00873199 /* TimeSoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSoundView.m; sourceTree = "<group>"; };
+		7947BC881E7BB89B00EE8EA6 /* LateTreatmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LateTreatmentController.h; sourceTree = "<group>"; };
+		7947BC891E7BB89B00EE8EA6 /* LateTreatmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LateTreatmentController.m; sourceTree = "<group>"; };
+		7947BC8B1E7BB8C900EE8EA6 /* LateTreatmentViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LateTreatmentViewModel.h; sourceTree = "<group>"; };
+		7947BC8C1E7BB8C900EE8EA6 /* LateTreatmentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LateTreatmentViewModel.m; sourceTree = "<group>"; };
+		7947BC8E1E7BB8E100EE8EA6 /* LateTreatmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LateTreatmentView.h; sourceTree = "<group>"; };
+		7947BC8F1E7BB8E100EE8EA6 /* LateTreatmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LateTreatmentView.m; sourceTree = "<group>"; };
+		7947BC921E7BBA9C00EE8EA6 /* LateTreatmentCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LateTreatmentCellView.h; sourceTree = "<group>"; };
+		7947BC931E7BBA9C00EE8EA6 /* LateTreatmentCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LateTreatmentCellView.m; sourceTree = "<group>"; };
+		7947BC951E7BBD8000EE8EA6 /* LateTreatmentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LateTreatmentModel.h; sourceTree = "<group>"; };
+		7947BC961E7BBD8000EE8EA6 /* LateTreatmentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LateTreatmentModel.m; sourceTree = "<group>"; };
+		7947BC9F1E7BDF9300EE8EA6 /* AlreadyTreatmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadyTreatmentController.h; sourceTree = "<group>"; };
+		7947BCA01E7BDF9300EE8EA6 /* AlreadyTreatmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlreadyTreatmentController.m; sourceTree = "<group>"; };
+		7947BCA21E7BE03200EE8EA6 /* AlreadyTreatmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadyTreatmentView.h; sourceTree = "<group>"; };
+		7947BCA31E7BE03200EE8EA6 /* AlreadyTreatmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlreadyTreatmentView.m; sourceTree = "<group>"; };
+		7947BCA51E7BE07600EE8EA6 /* AlreadyTreatmentViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadyTreatmentViewModel.h; sourceTree = "<group>"; };
+		7947BCA61E7BE07600EE8EA6 /* AlreadyTreatmentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlreadyTreatmentViewModel.m; sourceTree = "<group>"; };
+		7947BCA81E7BE09200EE8EA6 /* AlreadyTreatmentCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadyTreatmentCellView.h; sourceTree = "<group>"; };
+		7947BCA91E7BE09200EE8EA6 /* AlreadyTreatmentCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlreadyTreatmentCellView.m; sourceTree = "<group>"; };
+		7947BCAB1E7BE16400EE8EA6 /* AlreadyTreatmentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlreadyTreatmentModel.h; sourceTree = "<group>"; };
+		7947BCAC1E7BE16400EE8EA6 /* AlreadyTreatmentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlreadyTreatmentModel.m; sourceTree = "<group>"; };
 		7947F13B1E67BB1D00E68C83 /* ChoiceStaffTeamController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffTeamController.h; sourceTree = "<group>"; };
 		7947F13C1E67BB1D00E68C83 /* ChoiceStaffTeamController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceStaffTeamController.m; sourceTree = "<group>"; };
 		7947F13E1E67BB3900E68C83 /* ChoiceStaffTeamView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceStaffTeamView.h; sourceTree = "<group>"; };
@@ -2517,6 +2547,8 @@
 				79F964131E2CA21900838CC4 /* Overtime(加班申请) */,
 				790D8ADC1E2F4EB100DDA697 /* Copy(抄送我的) */,
 				790D8AB41E2F41F700DDA697 /* Refuse(已拒绝) */,
+				7947BC981E7BDBCF00EE8EA6 /* AlreadyTreatment(已处理) */,
+				7947BC821E7B925900EE8EA6 /* LateTreatment(待处理) */,
 				7980A8DE1E13598000F3F289 /* Pending(待处理) */,
 				793765261E14935600F7B34F /* Approve(已处理) */,
 				793710281E1C82E8002F3E2E /* Mine(我的信息) */,
@@ -3904,6 +3936,136 @@
 				794620EE1E767F4300873199 /* FeedbackModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		7947BC821E7B925900EE8EA6 /* LateTreatment(待处理) */ = {
+			isa = PBXGroup;
+			children = (
+				7947BC871E7B97F400EE8EA6 /* Other */,
+				7947BC911E7BBA7900EE8EA6 /* Cell */,
+				7947BC861E7B94BB00EE8EA6 /* Model */,
+				7947BC851E7B928A00EE8EA6 /* View */,
+				7947BC841E7B927B00EE8EA6 /* ViewController */,
+				7947BC831E7B927400EE8EA6 /* ViewModel */,
+			);
+			name = "LateTreatment(待处理)";
+			sourceTree = "<group>";
+		};
+		7947BC831E7B927400EE8EA6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7947BC8B1E7BB8C900EE8EA6 /* LateTreatmentViewModel.h */,
+				7947BC8C1E7BB8C900EE8EA6 /* LateTreatmentViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		7947BC841E7B927B00EE8EA6 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7947BC881E7BB89B00EE8EA6 /* LateTreatmentController.h */,
+				7947BC891E7BB89B00EE8EA6 /* LateTreatmentController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		7947BC851E7B928A00EE8EA6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7947BC8E1E7BB8E100EE8EA6 /* LateTreatmentView.h */,
+				7947BC8F1E7BB8E100EE8EA6 /* LateTreatmentView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7947BC861E7B94BB00EE8EA6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7947BC951E7BBD8000EE8EA6 /* LateTreatmentModel.h */,
+				7947BC961E7BBD8000EE8EA6 /* LateTreatmentModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7947BC871E7B97F400EE8EA6 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		7947BC911E7BBA7900EE8EA6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7947BC921E7BBA9C00EE8EA6 /* LateTreatmentCellView.h */,
+				7947BC931E7BBA9C00EE8EA6 /* LateTreatmentCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		7947BC981E7BDBCF00EE8EA6 /* AlreadyTreatment(已处理) */ = {
+			isa = PBXGroup;
+			children = (
+				7947BC9E1E7BDDA900EE8EA6 /* Other */,
+				7947BC9D1E7BDD8900EE8EA6 /* Cell */,
+				7947BC9C1E7BDD1200EE8EA6 /* Model */,
+				7947BC9B1E7BDCA800EE8EA6 /* View */,
+				7947BC9A1E7BDC5300EE8EA6 /* ViewController */,
+				7947BC991E7BDC1C00EE8EA6 /* ViewModel */,
+			);
+			name = "AlreadyTreatment(已处理)";
+			sourceTree = "<group>";
+		};
+		7947BC991E7BDC1C00EE8EA6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7947BCA51E7BE07600EE8EA6 /* AlreadyTreatmentViewModel.h */,
+				7947BCA61E7BE07600EE8EA6 /* AlreadyTreatmentViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		7947BC9A1E7BDC5300EE8EA6 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7947BC9F1E7BDF9300EE8EA6 /* AlreadyTreatmentController.h */,
+				7947BCA01E7BDF9300EE8EA6 /* AlreadyTreatmentController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		7947BC9B1E7BDCA800EE8EA6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7947BCA21E7BE03200EE8EA6 /* AlreadyTreatmentView.h */,
+				7947BCA31E7BE03200EE8EA6 /* AlreadyTreatmentView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7947BC9C1E7BDD1200EE8EA6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7947BCAB1E7BE16400EE8EA6 /* AlreadyTreatmentModel.h */,
+				7947BCAC1E7BE16400EE8EA6 /* AlreadyTreatmentModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7947BC9D1E7BDD8900EE8EA6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7947BCA81E7BE09200EE8EA6 /* AlreadyTreatmentCellView.h */,
+				7947BCA91E7BE09200EE8EA6 /* AlreadyTreatmentCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		7947BC9E1E7BDDA900EE8EA6 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		7947F1341E67BAC200E68C83 /* ChoiceStaffTeam(选择员工部门) */ = {
@@ -7151,6 +7313,7 @@
 				793782181E31E79B00ABA7C9 /* ChatViewModel.m in Sources */,
 				79DD27741E31B76B00923D19 /* MyMsgCellView.m in Sources */,
 				793BF1E01E7A1DD100FBD784 /* NavigationView.m in Sources */,
+				7947BC8D1E7BB8C900EE8EA6 /* LateTreatmentViewModel.m in Sources */,
 				7938682C1E0A2A8A004EC88A /* HomeViewModel.m in Sources */,
 				79EF941F1E26143200F8E9BC /* PersonalViewModel.m in Sources */,
 				79EF94281E26148A00F8E9BC /* PersonalHeadView.m in Sources */,
@@ -7196,6 +7359,7 @@
 				7943B3EC1E6D0D83004BF1B8 /* ShiftModel.m in Sources */,
 				796310E91E0D2B3A001462AF /* NewpartViewController.m in Sources */,
 				794CB48A1E56EDFB00403387 /* ScanCodeModel.m in Sources */,
+				7947BCAD1E7BE16400EE8EA6 /* AlreadyTreatmentModel.m in Sources */,
 				79375D2E1E1DF7E400E27934 /* FunctionView.m in Sources */,
 				792134791E4B15CA00C25A67 /* GDataXMLNode.m in Sources */,
 				7937CC0C1E24899000A4F82F /* AddressListViewModel.m in Sources */,
@@ -7235,6 +7399,7 @@
 				793D3AF31E70F23300266D9C /* LYWCollectionViewCell.m in Sources */,
 				795AC4691E2C50D700C69308 /* UILabel+YXAdd.m in Sources */,
 				794E04781E23207900CFE3A3 /* StatisticsViewModel.m in Sources */,
+				7947BCA11E7BDF9300EE8EA6 /* AlreadyTreatmentController.m in Sources */,
 				79282EA21E0B65C600F4E050 /* LoginView.m in Sources */,
 				7964B3821E2F0720001AC5E5 /* MeApplyModel.m in Sources */,
 				7953AB0B1E78F2C000149105 /* TimeSoundViewModel.m in Sources */,
@@ -7346,9 +7511,12 @@
 				7937CC091E24893800A4F82F /* AddressListView.m in Sources */,
 				79ED5E881E1CE56400BBC3D9 /* SetView.m in Sources */,
 				793604C21E5D43C80006646E /* ZJQRScannerView.m in Sources */,
+				7947BC941E7BBA9C00EE8EA6 /* LateTreatmentCellView.m in Sources */,
 				79FCCC641E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m in Sources */,
 				799231D11E6D44D40099C4F9 /* ResignationCellView.m in Sources */,
 				79FAFAD11E34ACBA00577917 /* SecurityView.m in Sources */,
+				7947BC8A1E7BB89B00EE8EA6 /* LateTreatmentController.m in Sources */,
+				7947BCAA1E7BE09200EE8EA6 /* AlreadyTreatmentCellView.m in Sources */,
 				790D8AEE1E2F4F4D00DDA697 /* CopyToMeModel.m in Sources */,
 				7928BD6E1E0273A4009BB0B4 /* main.m in Sources */,
 				79F4B6511E277071008CAA6E /* TrajectoryView.m in Sources */,
@@ -7394,6 +7562,7 @@
 				79F7D8601E5AC9A8004DF0DB /* ChangeTelphoneView.m in Sources */,
 				79F0A1381E13990A00A1B8AA /* ZJCollectionView.m in Sources */,
 				79F8560D1E02C216002D82F4 /* HTableViewCell.m in Sources */,
+				7947BCA71E7BE07600EE8EA6 /* AlreadyTreatmentViewModel.m in Sources */,
 				796803341E111F7400CED421 /* MyExamineView.m in Sources */,
 				790D8AE51E2F4F0500DDA697 /* CopyController.m in Sources */,
 				79375D501E1E2E3800E27934 /* AboutModel.m in Sources */,
@@ -7415,9 +7584,11 @@
 				794C772B1E3204B800013243 /* EmojiCollectionViewCell.m in Sources */,
 				7938496E1E5BC6CC00EA2502 /* ChangePasswordViewModel.m in Sources */,
 				79F964961E2CAEA400838CC4 /* DrainPunchController.m in Sources */,
+				7947BCA41E7BE03200EE8EA6 /* AlreadyTreatmentView.m in Sources */,
 				796803311E111F4F00CED421 /* MyApplyView.m in Sources */,
 				794927621E10A694007331CA /* BuildRoleViewModel.m in Sources */,
 				79F7D8501E5AC297004DF0DB /* CompanyCodeCellView.m in Sources */,
+				7947BC971E7BBD8000EE8EA6 /* LateTreatmentModel.m in Sources */,
 				790D8AFB1E2F55EB00DDA697 /* MyMsgController.m in Sources */,
 				791711901E237CAB003D15C1 /* InformViewModel.m in Sources */,
 				79DD27581E319D9F00923D19 /* MultiRolesController.m in Sources */,
@@ -7432,6 +7603,7 @@
 				793710311E1C837F002F3E2E /* MineController.m in Sources */,
 				7947F1431E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m in Sources */,
 				799231D71E6D4E0D0099C4F9 /* OffCellView.m in Sources */,
+				7947BC901E7BB8E100EE8EA6 /* LateTreatmentView.m in Sources */,
 				79EF94221E26145200F8E9BC /* PersonalModel.m in Sources */,
 				790D8AF11E2F4F9D00DDA697 /* CopyCellView.m in Sources */,
 				793487BC1E271F3D00D074D7 /* ListCellView.m in Sources */,

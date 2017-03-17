@@ -191,3 +191,6 @@
 
 //审批人模版
 #define saveFlowTemplate @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+#define findApplyUnProc @"http://13822767713.xicp.net/smart/ws/IAttService"
+
