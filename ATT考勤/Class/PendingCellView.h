@@ -7,11 +7,9 @@
 //
 
 #import "HTableViewCell.h"
-#import "PendingModel.h"
-
-
+#import "FlowStepChecksModel.h"
 @interface PendingCellView : HTableViewCell
 
-@property(nonatomic,strong) PendingModel *pendingModel;
+@property(nonatomic,strong) FlowStepChecksModel *flowStepChecksModel;
 
 @end

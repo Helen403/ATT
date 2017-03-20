@@ -19,5 +19,7 @@
 @property (nonatomic , copy) NSString              * applyDate;
 @property (nonatomic , copy) NSString              * applyStatus;
 
+@property(nonatomic  , strong) UIColor *empColor;
+
 
 @end

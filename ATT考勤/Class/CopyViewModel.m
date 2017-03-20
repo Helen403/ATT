@@ -11,18 +11,84 @@
 
 @implementation CopyViewModel
 
+#pragma mark private
+-(void)h_initialize{
+    
+    [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        
+        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findApplyCopysTomeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findApplyCopysTomeResponse>"];
+        
+        NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[CopyToMeModel class] rowRootName:@"FlowCheckModels"];
+        
+        NSMutableArray *arr = [NSMutableArray array];
+        NSInteger count = arrTmp.count;
+        for(int i = 0;i<count;i++){
+            CopyToMeModel *refuseModel = arrTmp[i];
+            refuseModel.empColor = randomColorA;
+            [arr addObject:refuseModel];
+        }
+        self.arr = arr;
+        [self.tableViewSubject sendNext:nil];
+        DismissHud();
+    }];
+    
+    
+    [[[self.refreshDataCommand.executing skip:1] take:1] subscribeNext:^(id x) {
+        
+        if ([x isEqualToNumber:@(YES)]) {
+            ShowMaskStatus(@"正在拼命加载");
+        }
+    }];
+    
+}
+
+- (RACCommand *)refreshDataCommand {
+    
+    if (!_refreshDataCommand) {
+        
+        @weakify(self);
+        _refreshDataCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                
+                NSString *body =[NSString stringWithFormat: @"<findApplyCopysTome xmlns=\"http://service.webservice.vada.com/\">\
+                                 <companyCode xmlns=\"\">%@</companyCode>\
+                                 <userCode xmlns=\"\">%@</userCode>\
+                                 </findApplyCopysTome>",self.companyCode,self.userCode];
+                
+                [self SOAPData:findApplyCopysTome soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                }];
+                
+                return nil;
+            }];
+        }];
+    }
+    return _refreshDataCommand;
+}
+
 -(NSMutableArray *)arr{
     if (!_arr) {
         _arr = [NSMutableArray array];
-        //读取plist
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DealWith" ofType:@"plist"];
-        
-        NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
-        
-        _arr = [CopyToMeModel mj_objectArrayWithKeyValuesArray:data];
     }
     return _arr;
 }
+
+-(RACSubject *)tableViewSubject{
+    if (!_tableViewSubject) {
+        _tableViewSubject = [RACSubject subject] ;
+    }
+    return _tableViewSubject;
+}
+
 
 -(RACSubject *)cellclickSubject{
     if (!_cellclickSubject) {
@@ -30,6 +96,5 @@
     }
     return _cellclickSubject;
 }
-
 
 @end

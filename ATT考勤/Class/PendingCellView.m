@@ -37,23 +37,23 @@
     }];
     
     [self.cir mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([self h_w:18]);
+        make.top.equalTo([self h_w:12]);
         make.centerX.equalTo(weakSelf.line);
         make.size.equalTo(CGSizeMake([self h_w:10], [self h_w:10]));
     }];
     
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([self h_w:15]);
+           make.centerY.equalTo(weakSelf.cir);
         make.left.equalTo(weakSelf.cir.mas_right).offset([self h_w:10]);
     }];
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([self h_w:35]);
+        make.top.equalTo(weakSelf.time.mas_bottom).offset([self h_w:4]);
         make.left.equalTo(weakSelf.time);
     }];
     [self.status mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([self h_w:55]);
-        make.left.equalTo(weakSelf.name);
+         make.top.equalTo(weakSelf.name.mas_bottom).offset([self h_w:4]);
+        make.left.equalTo(weakSelf.time);
     }];
 
     [super updateConstraints];
@@ -75,15 +75,17 @@
 }
 
 #pragma mark loadingdata
--(void)setPendingModel:(PendingModel *)pendingModel{
-    if (!pendingModel) {
+
+
+-(void)setFlowStepChecksModel:(FlowStepChecksModel *)flowStepChecksModel{
+    if (!flowStepChecksModel) {
         return;
     }
-    _pendingModel = pendingModel;
-    
-    self.time.text = pendingModel.time;
-    self.name.text = pendingModel.name;
-    self.status.text = pendingModel.status;
+
+    _flowStepChecksModel = flowStepChecksModel;
+    self.time.text = flowStepChecksModel.stepUserName;
+    self.name.text =[NSString stringWithFormat:@"意见:%@",flowStepChecksModel.stepCheckMsg];
+    self.status.text =[NSString stringWithFormat:@"时间:%@",flowStepChecksModel.stepCheckDate] ;
 }
 
 #pragma mark lazyload

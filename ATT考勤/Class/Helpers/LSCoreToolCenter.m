@@ -1050,6 +1050,8 @@ void DismissHud(void){
     return xmlDoc;
 }
 
+
+
 +(NSString *)getFilterStr:(NSString *)result filter1:(NSString *)filter1 filter2:(NSString *)filter2{
     if(result.length==0){
         return @"";
@@ -1062,7 +1064,7 @@ void DismissHud(void){
         result = [result substringFromIndex:range1.location+range1.length];
     } @catch (NSException *exception) {
         result = @"";
-        ShowMessage(@"请检查网络");
+       
     } @finally {
         
     }

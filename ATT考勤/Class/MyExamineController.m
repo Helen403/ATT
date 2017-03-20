@@ -10,12 +10,13 @@
 #import "MyExamineViewModel.h"
 #import "MyExamineView.h"
 //#import "TreatController.h"
-#import "ProcessedController.h"
+//#import "ProcessedController.h"
 #import "RefuseController.h"
 #import "CopyController.h"
 
 
 #import "LateTreatmentController.h"
+#import "AlreadyTreatmentController.h"
 
 @interface MyExamineController ()
 
@@ -67,9 +68,9 @@
                 //已处理
             case 1:{
                 
-                ProcessedController *processed = [[ProcessedController alloc] init];
+                AlreadyTreatmentController *already = [[AlreadyTreatmentController alloc] init];
                 
-                [self.navigationController pushViewController:processed animated:NO];
+                [self.navigationController pushViewController:already animated:NO];
                 break;
             }
                 //已拒绝

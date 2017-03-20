@@ -14,17 +14,10 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 
-@property(nonatomic,strong) PendingCellViewModel *pendingCellViewModel;
-
 @end
 
 @implementation LogisticsView
-#pragma mark system
--(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
 
-    self.pendingCellViewModel = (PendingCellViewModel *)viewModel;
-    return [super initWithViewModel:viewModel];
-}
 
 -(void)updateConstraints{
     
@@ -33,7 +26,7 @@
         make.left.equalTo(0);
         make.right.equalTo(0);
         make.bottom.equalTo(0);
-        make.top.equalTo(3);
+        make.top.equalTo(0);
     }];
     
     [super updateConstraints];
@@ -52,6 +45,15 @@
 
 -(void)h_bindViewModel{
     
+}
+
+#pragma mark dataload
+-(void)setArr:(NSMutableArray *)arr{
+    if (!arr) {
+        return;
+    }
+    _arr = arr;
+    [self.tableView reloadData];
 }
 
 
@@ -80,14 +82,14 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.pendingCellViewModel.arr.count;
+    return self.arr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     PendingCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([PendingCellView class])] forIndexPath:indexPath];
-    
-    cell.pendingModel = self.pendingCellViewModel.arr[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.flowStepChecksModel = self.arr[indexPath.row];
     
     return cell;
 }
@@ -95,23 +97,16 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:80];
+    return [self h_w:73];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    [self.pendingCellViewModel.cellclickSubject sendNext:row];
+    
+//    NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
+//    [self.pendingCellViewModel.cellclickSubject sendNext:row];
 }
 
 
--(PendingCellViewModel *)pendingCellViewModel{
-    if (!_pendingCellViewModel) {
-        _pendingCellViewModel = [[PendingCellViewModel alloc] init];
-    }
-    return _pendingCellViewModel;
-
-}
 
 
 @end

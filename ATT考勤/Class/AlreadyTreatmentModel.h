@@ -11,6 +11,7 @@
 @interface AlreadyTreatmentModel : NSObject
 
 
+
 @property (nonatomic , copy) NSString              * applyDateDesc;
 @property (nonatomic , copy) NSString              * userName;
 @property (nonatomic , copy) NSString              * userCode;
@@ -20,4 +21,5 @@
 @property (nonatomic , copy) NSString              * applyDate;
 @property (nonatomic , copy) NSString              * applyStatus;
 
+@property(nonatomic  , strong) UIColor *empColor;
 @end

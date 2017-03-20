@@ -9,6 +9,7 @@
 #import "LateTreatmentController.h"
 #import "LateTreatmentView.h"
 #import "LateTreatmentViewModel.h"
+#import "ApprovalTreatmentController.h"
 
 @interface LateTreatmentController ()
 
@@ -22,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
 }
 
 #pragma mark system
@@ -46,6 +47,18 @@
 }
 
 -(void)h_bindViewModel{
+    [[self.lateTreatmentViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+       
+        
+        ApprovalTreatmentController *approvalTreatement = [[ApprovalTreatmentController alloc] init];
+        
+        approvalTreatement.indexTmp = x.intValue;
+        approvalTreatement.arr = self.lateTreatmentViewModel.arr;
+        
+        [self.navigationController pushViewController:approvalTreatement animated:NO];
+
+    }];
     
 }
 

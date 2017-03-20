@@ -926,7 +926,10 @@
     
     NSString *curDate = [LSCoreToolCenter currentYearType]; // 当前日期
     NSString *curDatetime = [LSCoreToolCenter curDate]; // 获取当前时间
-    
+
+    if (self.homeViewModel.arr.count==0) {
+        return;
+    }
     AttendWorkShiftDetail *detail = self.homeViewModel.arr[self.cardPhase]; //获取对应阶段打卡时间
     
     NSString *phaseStartDateTime = [NSString stringWithFormat:@"%@ %@:00",curDate,detail.workStartDatetime];//阶段开始日期时间

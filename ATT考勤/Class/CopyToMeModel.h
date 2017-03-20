@@ -10,10 +10,15 @@
 
 @interface CopyToMeModel : NSObject
 
-@property(nonatomic,strong) NSString *imgtext;
+@property (nonatomic , copy) NSString              * applyDateDesc;
+@property (nonatomic , copy) NSString              * userName;
+@property (nonatomic , copy) NSString              * userCode;
+@property (nonatomic , copy) NSString              * applyLsh;
+@property (nonatomic , copy) NSString              * applyMsg;
+@property (nonatomic , copy) NSString              * applyType;
+@property (nonatomic , copy) NSString              * applyDate;
+@property (nonatomic , copy) NSString              * applyStatus;
 
-@property(nonatomic,strong) NSString *title;
-
-@property(nonatomic,strong) NSString *number;
+@property(nonatomic  , strong) UIColor *empColor;
 
 @end

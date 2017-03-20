@@ -11,7 +11,6 @@
 
 @implementation LateTreatmentViewModel
 
-
 #pragma mark private
 -(void)h_initialize{
     
@@ -19,7 +18,15 @@
         
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findApplyUnProcResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findApplyUnProcResponse>"];
         
-        NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[LateTreatmentModel class] rowRootName:@"FlowCheckModels"];
+        NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[LateTreatmentModel class] rowRootName:@"FlowCheckModels"];
+     
+        NSMutableArray *arr = [NSMutableArray array];
+        NSInteger count = arrTmp.count;
+        for(int i = 0;i<count;i++){
+            LateTreatmentModel *lateTreatment = arrTmp[i];
+            lateTreatment.empColor = randomColorA;
+            [arr addObject:lateTreatment];
+        }
         self.arr = arr;
         [self.tableViewSubject sendNext:nil];
         DismissHud();
@@ -32,9 +39,7 @@
             ShowMaskStatus(@"正在拼命加载");
         }
     }];
-    
-    
-    
+
 }
 
 - (RACCommand *)refreshDataCommand {
@@ -84,6 +89,13 @@
     return _tableViewSubject;
 }
 
+
+-(RACSubject *)cellclickSubject{
+    if (!_cellclickSubject) {
+        _cellclickSubject = [RACSubject subject];
+    }
+    return _cellclickSubject;
+}
 
 
 @end

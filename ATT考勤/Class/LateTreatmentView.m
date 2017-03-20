@@ -52,7 +52,7 @@
     
     self.lateTreatmentViewModel.companyCode = companyCode;
     UserModel *user =  getModel(@"user");
-    self.lateTreatmentViewModel.userCode = user.userCode;
+    self.lateTreatmentViewModel.userCode = @"3";
     [self.lateTreatmentViewModel.refreshDataCommand execute:nil];
 }
 
@@ -121,7 +121,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    //    [self.dealWithViewModel.cellclickSubject sendNext:row];
+    [self.lateTreatmentViewModel.cellclickSubject sendNext:row];
 }
 
 

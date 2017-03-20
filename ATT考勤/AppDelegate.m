@@ -150,8 +150,9 @@
         if (self.flag) {
             [self rootController];
         }else{
-            self.telphone = telphone;
-            [self.loginCommand execute:nil];
+//            self.telphone = telphone;
+//            [self.loginCommand execute:nil];
+            [self CannotController];
         }
         
     }else{

@@ -87,7 +87,6 @@
         [_collectionView registerClass:[MyApplyCollectionView class] forCellWithReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([MyApplyCollectionView class])]];
         
         [_collectionView registerClass:[MyApplyFootView class]forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
-      
     }
     
     return _collectionView;

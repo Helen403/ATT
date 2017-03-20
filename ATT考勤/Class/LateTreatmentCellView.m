@@ -101,7 +101,22 @@
     self.title.text = lateTreatmentMode.applyDateDesc;
     self.result.text = [NSString stringWithFormat:@"%@ %@",lateTreatmentMode.applyType,lateTreatmentMode.applyMsg] ;
 //    self.time.text = lateTreatmentMode.applyDate;
+    self.bgView.backgroundColor = lateTreatmentMode.empColor;
+}
 
+
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+    
+    self.bgView.backgroundColor = self.lateTreatmentModel.empColor;
+    self.name.backgroundColor = self.lateTreatmentModel.empColor;
+}
+
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    self.bgView.backgroundColor = self.lateTreatmentModel.empColor;
+    self.name.backgroundColor = self.lateTreatmentModel.empColor;
 }
 
 
@@ -110,7 +125,6 @@
     if (!_bgView) {
         _bgView = [[UIView alloc] init];
         ViewRadius(_bgView, [self h_w:22]);
-        _bgView.backgroundColor = randomColorA;
     }
     return _bgView;
 }

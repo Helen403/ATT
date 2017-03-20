@@ -20,4 +20,7 @@
 
 @property(nonatomic,strong) RACSubject *tableViewSubject;
 
+@property(nonatomic,strong) RACSubject *cellclickSubject;
+
+
 @end

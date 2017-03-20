@@ -7,15 +7,15 @@
 //
 
 #import "RefuseController.h"
-#import "ZJScrollPageView.h"
-#import "AskController.h"
-#import "AuditingController.h"
+#import "RefuseView.h"
+#import "RefuseViewModel.h"
+#import "RefuseDetailsController.h"
 
-@interface RefuseController ()<ZJScrollPageViewDelegate>
+@interface RefuseController ()
 
-@property(strong, nonatomic)NSArray<NSString *> *titles;
+@property(nonatomic,strong) RefuseView *refuseView;
 
-@property(strong, nonatomic)NSMutableArray<HViewController<ZJScrollPageViewChildVcDelegate> *> *childVcs;
+@property(nonatomic,strong) RefuseViewModel *refuseViewModel;
 
 @end
 
@@ -24,65 +24,55 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
+#pragma mark system
+-(void)updateViewConstraints{
+    WS(weakSelf);
+    
+    [self.refuseView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(weakSelf.view);
+    }];
+    [super updateViewConstraints];
+}
 
 #pragma mark private
 -(void)h_layoutNavigation{
     self.title = @"已拒绝";
 }
 
+
 -(void)h_addSubviews{
-    
-    //必要的设置, 如果没有设置可能导致内容显示不正常
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    ZJSegmentStyle *style = [[ZJSegmentStyle alloc] init];
-    //显示滚动条
-    style.showLine = YES;
-    // 颜色渐变
-    style.gradualChangeTitleColor = YES;
-    style.autoAdjustTitlesWidth = YES;
-    style.adjustCoverOrLineWidth = YES;
-    style.selectedTitleColor = MAIN_ORANGER;
-    self.titles = @[@"我申请的",
-                    @"我审批的",
-                    ];
-    // 初始化
-    ZJScrollPageView *scrollPageView = [[ZJScrollPageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) segmentStyle:style titles:self.titles parentViewController:self delegate:self];
-    
-    [self.view addSubview:scrollPageView];
-    
+    [self.view addSubview:self.refuseView];
 }
 
-- (NSInteger)numberOfChildViewControllers {
-    return self.titles.count;
-}
-
-
-- (UIViewController<ZJScrollPageViewChildVcDelegate> *)childViewController:(UIViewController<ZJScrollPageViewChildVcDelegate> *)reuseViewController forIndex:(NSInteger)index {
-    
-    
-    UIViewController<ZJScrollPageViewChildVcDelegate> *childVc = reuseViewController;
-    
-    if (!childVc) {
-        childVc = [self.childVcs objectAtIndex:index];
-    }
-    
-    return childVc;
-}
-
-- (BOOL)shouldAutomaticallyForwardAppearanceMethods {
-    return NO;
+-(void)h_bindViewModel{
+    [[self.refuseViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        RefuseDetailsController *refuseDetails = [[RefuseDetailsController alloc] init];
+        
+        refuseDetails.indexTmp = x.intValue;
+        refuseDetails.arr = self.refuseViewModel.arr;
+        
+        [self.navigationController pushViewController:refuseDetails animated:NO];
+        
+    }];
 }
 
 #pragma mark lazyload
--(NSMutableArray<HViewController<ZJScrollPageViewChildVcDelegate> *> *)childVcs{
-    if (!_childVcs) {
-        _childVcs = [NSMutableArray array];
-        [_childVcs addObject:[[AskController alloc] init]];
-        [_childVcs addObject:[[AuditingController alloc] init]];
+-(RefuseView *)refuseView{
+    if (!_refuseView) {
+        _refuseView = [[RefuseView alloc] initWithViewModel:self.refuseViewModel];
     }
-    return _childVcs;
+    return _refuseView;
 }
+
+-(RefuseViewModel *)refuseViewModel{
+    if (!_refuseViewModel) {
+        _refuseViewModel = [[RefuseViewModel alloc] init];
+    }
+    return _refuseViewModel;
+
+}
+
 
 
 

@@ -192,5 +192,25 @@
 //审批人模版
 #define saveFlowTemplate @"http://13822767713.xicp.net/smart/ws/IAttService"
 
+//待处理
 #define findApplyUnProc @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//通过审批
+#define findFormByApplyId @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//审批通过id
+#define findFlowStepCheckById @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//流程审批
+#define updateCheckFlow @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//已经审批
+#define findApplyAlreadyProc @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//已拒绝
+#define findApplyRefused @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//抄送我的
+#define findApplyCopysTome @"http://13822767713.xicp.net/smart/ws/IAttService"
+
 

@@ -1,13 +1,13 @@
 //
-//  AuditingView.h
+//  RefuseView.h
 //  ATT考勤
 //
-//  Created by Helen on 17/1/18.
+//  Created by Helen on 17/3/20.
 //  Copyright © 2017年 Helen. All rights reserved.
 //
 
 #import "HView.h"
 
-@interface AuditingView : HView
+@interface RefuseView : HView
 
 @end

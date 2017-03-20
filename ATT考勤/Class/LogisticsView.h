@@ -10,4 +10,6 @@
 
 @interface LogisticsView : HView
 
+@property(nonatomic,strong) NSMutableArray *arr;
+
 @end

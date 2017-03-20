@@ -9,6 +9,7 @@
 #import "CopyController.h"
 #import "CopyView.h"
 #import "CopyViewModel.h"
+#import "CopyDetailsController.h"
 
 @interface CopyController ()
 
@@ -46,7 +47,16 @@
 }
 
 -(void)h_bindViewModel{
-    
+    [[self.toViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        CopyDetailsController *copyDetails = [[CopyDetailsController alloc] init];
+        
+        copyDetails.indexTmp = x.intValue;
+        copyDetails.arr = self.toViewModel.arr;
+        
+        [self.navigationController pushViewController:copyDetails animated:NO];
+        
+    }];
 }
 
 #pragma mark lazyload
