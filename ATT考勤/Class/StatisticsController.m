@@ -12,6 +12,7 @@
 
 #import "TeamAttendanceController.h"
 #import "PersonalController.h"
+#import "DailyController.h"
 
 @interface StatisticsController ()
 
@@ -51,17 +52,30 @@
     
     [[self.statisticsViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
-        if ([x intValue] == 0) {
-
-            PersonalController *personal = [[PersonalController alloc] init];
-            
-            [self.navigationController pushViewController:personal animated:NO];
-        }else{
-            
-            TeamAttendanceController *team = [[TeamAttendanceController alloc] init];
-            
-            [self.navigationController pushViewController:team animated:NO];
+        switch ([x intValue]) {
+            case 0:{
+                DailyController *daily = [[DailyController alloc] init];
+                
+                [self.navigationController pushViewController:daily animated:NO];
+                break;
+            }
+            case 1:{
+                PersonalController *personal = [[PersonalController alloc] init];
+                
+                [self.navigationController pushViewController:personal animated:NO];
+                 break;
+            }
         }
+        
+//        if ( == 0) {
+//
+//          
+//        }else{
+//            
+//            TeamAttendanceController *team = [[TeamAttendanceController alloc] init];
+//            
+//            [self.navigationController pushViewController:team animated:NO];
+//        }
         
         
     }];

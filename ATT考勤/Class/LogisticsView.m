@@ -8,7 +8,7 @@
 
 #import "LogisticsView.h"
 #import "PendingCellView.h"
-#import "PendingCellViewModel.h"
+
 
 @interface LogisticsView()<UITableViewDataSource,UITableViewDelegate>
 

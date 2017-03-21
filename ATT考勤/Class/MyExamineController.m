@@ -9,12 +9,8 @@
 #import "MyExamineController.h"
 #import "MyExamineViewModel.h"
 #import "MyExamineView.h"
-//#import "TreatController.h"
-//#import "ProcessedController.h"
 #import "RefuseController.h"
 #import "CopyController.h"
-
-
 #import "LateTreatmentController.h"
 #import "AlreadyTreatmentController.h"
 

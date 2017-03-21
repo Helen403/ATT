@@ -8,17 +8,20 @@
 
 #import "CopyCellView.h"
 
+
 @interface CopyCellView()
 
-@property(nonatomic,strong) UIImageView *Img;
+@property(nonatomic,strong) UIView *bgView;
+
+@property(nonatomic,strong) UILabel *name;
 
 @property(nonatomic,strong) UILabel *title;
 
+@property(nonatomic,strong) UILabel *result;
+
+@property(nonatomic,strong) UILabel *time;
+
 @property(nonatomic,strong) UIImageView *back;
-
-@property(nonatomic,strong) UILabel *number;
-
-@property(nonatomic,strong) UIView *line;
 
 @end
 
@@ -28,92 +31,135 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-    [self.Img mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
         make.left.equalTo([self h_w:10]);
-        make.size.equalTo(CGSizeMake([self h_w:25], [self h_w:25]));
+        make.size.equalTo(CGSizeMake([self h_w:44], [self h_w:44]));
+    }];
+    
+    [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.bgView);
+        make.centerX.equalTo(weakSelf.bgView);
     }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf);
-        make.left.equalTo(weakSelf.Img.mas_right).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.bgView);
+        make.left.equalTo(weakSelf.bgView.mas_right).offset([self h_w:10]);
+    }];
+    
+    [self.result mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakSelf.bgView.mas_right).offset([self h_w:10]);
+        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:10]);
     }];
     
     [self.back mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.right.equalTo(-[self h_w:10]);
+        make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
     
-    [self.number mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
         make.right.equalTo(weakSelf.back.mas_left).offset(-[self h_w:10]);
     }];
     
-    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.mas_bottom).offset(-[self h_w:1]);
-        make.left.equalTo(weakSelf);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 1));
-    }];
     
     [super updateConstraints];
 }
 
-
 #pragma mark private
 -(void)h_setupViews{
     
-    
-    [self addSubview:self.Img];
+    [self addSubview:self.bgView];
+    [self addSubview:self.name];
     [self addSubview:self.title];
-    [self addSubview:self.number];
+    [self addSubview:self.time];
     [self addSubview:self.back];
-    [self addSubview:self.line];
+    [self addSubview:self.result];
+    
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
 
-#pragma mark loaddata
+#pragma mark dataload
 -(void)setToMeModel:(CopyToMeModel *)toMeModel{
     if (!toMeModel) {
         return;
     }
     _toMeModel = toMeModel;
-    self.Img.image = ImageNamed(toMeModel.imgtext);
-    self.title.text = toMeModel.title;
-    self.number.text = toMeModel.number;
+    if ([LSCoreToolCenter PureLetters:toMeModel.userName]) {
+        self.name.text = toMeModel.userName;
+    }else{
+        if (toMeModel.userName.length==3) {
+            self.name.text = [toMeModel.userName  substringFromIndex:1];
+        }else{
+            self.name.text = toMeModel.userName;
+        }
+    }
     
+    self.title.text = toMeModel.applyDateDesc;
+    self.result.text = [NSString stringWithFormat:@"%@ %@",toMeModel.applyType,toMeModel.applyMsg] ;
+    //    self.time.text = lateTreatmentMode.applyDate;
+    self.bgView.backgroundColor = toMeModel.empColor;
 }
 
 
--(UIImageView *)Img{
-    if (!_Img) {
-        _Img = [[UIImageView alloc] init];
-        _Img.image = ImageNamed(@"role_code_icon");
+
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+    
+    self.bgView.backgroundColor = self.toMeModel.empColor;
+    self.name.backgroundColor = self.toMeModel.empColor;
+}
+
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    self.bgView.backgroundColor = self.toMeModel.empColor;
+    self.name.backgroundColor = self.toMeModel.empColor;
+}
+
+
+#pragma mark lazyload
+-(UIView *)bgView{
+    if (!_bgView) {
+        _bgView = [[UIView alloc] init];
+        ViewRadius(_bgView, [self h_w:22]);
     }
-    return _Img;
+    return _bgView;
+}
+
+
+-(UILabel *)name{
+    if (!_name) {
+        _name = [[UILabel alloc] init];
+        _name.text = @"";
+        _name.font = H14;
+        _name.textColor = white_color;
+    }
+    return _name;
 }
 
 -(UILabel *)title{
     if (!_title) {
         _title = [[UILabel alloc] init];
+        _title.text = @"";
         _title.font = H14;
         _title.textColor = MAIN_PAN_2;
-        _title.text = @"待处理";
     }
     return _title;
-    
 }
 
--(UILabel *)number{
-    if (!_number) {
-        _number = [[UILabel alloc] init];
-        _number.text = @"1";
-        _number.textColor = MAIN_PAN_2;
-        _number.font = H14;
+
+-(UILabel *)time{
+    if (!_time) {
+        _time = [[UILabel alloc] init];
+        _time.text = @"";
+        _time.font = H14;
+        _time.textColor = MAIN_PAN_2;
     }
-    return _number;
+    return _time;
 }
 
 -(UIImageView *)back{
@@ -124,12 +170,14 @@
     return _back;
 }
 
--(UIView *)line{
-    if (!_line) {
-        _line = [[UIView alloc] init];
-        _line.backgroundColor = BG_COLOR;
+-(UILabel *)result{
+    if (!_result) {
+        _result = [[UILabel alloc] init];
+        _result.text = @"";
+        _result.font = H14;
+        _result.textColor = MAIN_PAN_3;
     }
-    return _line;
+    return _result;
 }
 
 

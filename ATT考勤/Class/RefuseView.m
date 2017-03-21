@@ -52,7 +52,7 @@
     
     self.refuseViewModel.companyCode = companyCode;
     UserModel *user =  getModel(@"user");
-    self.refuseViewModel.userCode = @"3";
+    self.refuseViewModel.userCode = user.userCode;
     [self.refuseViewModel.refreshDataCommand execute:nil];
 }
 

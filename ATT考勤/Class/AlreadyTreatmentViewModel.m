@@ -13,21 +13,27 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
-        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findApplyAlreadyProcResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findApplyAlreadyProcResponse>"];
-        
-        NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[AlreadyTreatmentModel class] rowRootName:@"FlowCheckModels"];
-        
-        NSMutableArray *arr = [NSMutableArray array];
-        NSInteger count = arrTmp.count;
-        for(int i = 0;i<count;i++){
-            AlreadyTreatmentModel *already = arrTmp[i];
-            already.empColor = randomColorA;
-            [arr addObject:already];
-        }
-        self.arr = arr;
-        [self.tableViewSubject sendNext:nil];
         DismissHud();
+        if (result.length<200) {
+            ShowMessage(@"没有更多数据");
+        }else{
+            NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findApplyAlreadyProcResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findApplyAlreadyProcResponse>"];
+            
+            NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[AlreadyTreatmentModel class] rowRootName:@"FlowCheckModels"];
+            
+            NSMutableArray *arr = [NSMutableArray array];
+            NSInteger count = arrTmp.count;
+            for(int i = 0;i<count;i++){
+                AlreadyTreatmentModel *already = arrTmp[i];
+                already.empColor = randomColorA;
+                [arr addObject:already];
+            }
+            self.arr = arr;
+            [self.tableViewSubject sendNext:nil];
+        }
+        
+        
+        
     }];
     
     

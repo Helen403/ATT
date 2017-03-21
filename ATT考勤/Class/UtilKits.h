@@ -31,6 +31,7 @@
 #import "Categories.h"
 //#import "PINCache.h"
 #import "HWPopTool.h"
+#import "UITableView+FDTemplateLayoutCell.h"
 
 
 #endif /* UtilKits_h */

@@ -56,7 +56,7 @@
     
     self.copyViewModel.companyCode = companyCode;
     UserModel *user =  getModel(@"user");
-    self.copyViewModel.userCode = @"3";
+    self.copyViewModel.userCode = user.userCode;
     [self.copyViewModel.refreshDataCommand execute:nil];
 }
 

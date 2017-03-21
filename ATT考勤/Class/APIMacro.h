@@ -213,4 +213,5 @@
 //抄送我的
 #define findApplyCopysTome @"http://13822767713.xicp.net/smart/ws/IAttService"
 
-
+//考勤日报
+#define findMyDayReport @"http://13822767713.xicp.net/smart/ws/IAttService"

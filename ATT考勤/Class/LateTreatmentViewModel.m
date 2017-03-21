@@ -15,21 +15,28 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
-        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findApplyUnProcResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findApplyUnProcResponse>"];
-        
-        NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[LateTreatmentModel class] rowRootName:@"FlowCheckModels"];
-     
-        NSMutableArray *arr = [NSMutableArray array];
-        NSInteger count = arrTmp.count;
-        for(int i = 0;i<count;i++){
-            LateTreatmentModel *lateTreatment = arrTmp[i];
-            lateTreatment.empColor = randomColorA;
-            [arr addObject:lateTreatment];
-        }
-        self.arr = arr;
-        [self.tableViewSubject sendNext:nil];
         DismissHud();
+        if (result.length<188) {
+            ShowMessage(@"没有更多数据");
+        }else{
+            
+            NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findApplyUnProcResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findApplyUnProcResponse>"];
+            
+            NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[LateTreatmentModel class] rowRootName:@"FlowCheckModels"];
+            
+            NSMutableArray *arr = [NSMutableArray array];
+            NSInteger count = arrTmp.count;
+            for(int i = 0;i<count;i++){
+                LateTreatmentModel *lateTreatment = arrTmp[i];
+                lateTreatment.empColor = randomColorA;
+                [arr addObject:lateTreatment];
+            }
+            self.arr = arr;
+            [self.tableViewSubject sendNext:nil];
+        }
+        
+       
+     
     }];
     
     

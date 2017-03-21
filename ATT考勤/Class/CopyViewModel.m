@@ -15,21 +15,25 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
-        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findApplyCopysTomeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findApplyCopysTomeResponse>"];
-        
-        NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[CopyToMeModel class] rowRootName:@"FlowCheckModels"];
-        
-        NSMutableArray *arr = [NSMutableArray array];
-        NSInteger count = arrTmp.count;
-        for(int i = 0;i<count;i++){
-            CopyToMeModel *refuseModel = arrTmp[i];
-            refuseModel.empColor = randomColorA;
-            [arr addObject:refuseModel];
-        }
-        self.arr = arr;
-        [self.tableViewSubject sendNext:nil];
         DismissHud();
+        if (result.length<200) {
+            ShowMessage(@"没有更多数据");
+        }else{
+            NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findApplyCopysTomeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findApplyCopysTomeResponse>"];
+            
+            NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[CopyToMeModel class] rowRootName:@"FlowCheckModels"];
+            
+            NSMutableArray *arr = [NSMutableArray array];
+            NSInteger count = arrTmp.count;
+            for(int i = 0;i<count;i++){
+                CopyToMeModel *refuseModel = arrTmp[i];
+                refuseModel.empColor = randomColorA;
+                [arr addObject:refuseModel];
+            }
+            self.arr = arr;
+            [self.tableViewSubject sendNext:nil];
+        }
+        
     }];
     
     

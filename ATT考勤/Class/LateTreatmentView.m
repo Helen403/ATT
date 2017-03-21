@@ -52,7 +52,7 @@
     
     self.lateTreatmentViewModel.companyCode = companyCode;
     UserModel *user =  getModel(@"user");
-    self.lateTreatmentViewModel.userCode = @"3";
+    self.lateTreatmentViewModel.userCode = user.userCode;
     [self.lateTreatmentViewModel.refreshDataCommand execute:nil];
 }
 
