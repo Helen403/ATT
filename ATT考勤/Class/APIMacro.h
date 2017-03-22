@@ -215,3 +215,19 @@
 
 //考勤日报
 #define findMyDayReport @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//考勤日报详情
+#define findMyDayReportDetail @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//考勤周报
+#define findMyWeekReport @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//考勤周报详情
+#define findMyMonthReportDetail @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//考勤月报
+#define findMyMonthReport @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//考勤月报详情
+#define findMyMonthReportDetail @"http://13822767713.xicp.net/smart/ws/IAttService"
+

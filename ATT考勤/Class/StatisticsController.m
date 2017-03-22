@@ -13,6 +13,8 @@
 #import "TeamAttendanceController.h"
 #import "PersonalController.h"
 #import "DailyController.h"
+#import "WeekController.h"
+#import "MonthController.h"
 
 @interface StatisticsController ()
 
@@ -53,18 +55,28 @@
     [[self.statisticsViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         switch ([x intValue]) {
+                //考勤日报
             case 0:{
                 DailyController *daily = [[DailyController alloc] init];
                 
                 [self.navigationController pushViewController:daily animated:NO];
                 break;
             }
+                //考勤周报
             case 1:{
-                PersonalController *personal = [[PersonalController alloc] init];
+                WeekController *week = [[WeekController alloc] init];
                 
-                [self.navigationController pushViewController:personal animated:NO];
+                [self.navigationController pushViewController:week animated:NO];
                  break;
             }
+                //考勤月报
+            case 2:{
+                MonthController *month = [[MonthController alloc] init];
+                
+                [self.navigationController pushViewController:month animated:NO];
+                break;
+            }
+                
         }
         
 //        if ( == 0) {

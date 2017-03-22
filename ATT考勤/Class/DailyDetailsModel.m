@@ -9,5 +9,12 @@
 #import "DailyDetailsModel.h"
 
 @implementation DailyDetailsModel
-
++ (NSDictionary *)objectClassInArray{
+    return @{
+             @"cardDetaillist" : @"CardDetaillist",
+             };
+}
 @end
+
+
+

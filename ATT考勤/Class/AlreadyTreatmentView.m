@@ -52,7 +52,7 @@
     
     self.alreadyTreatmentViewModel.companyCode = companyCode;
     UserModel *user =  getModel(@"user");
-    self.alreadyTreatmentViewModel.userCode = @"3";
+    self.alreadyTreatmentViewModel.userCode = user.userCode;
     [self.alreadyTreatmentViewModel.refreshDataCommand execute:nil];
 }
 

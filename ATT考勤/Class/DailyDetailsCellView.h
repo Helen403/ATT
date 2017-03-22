@@ -7,10 +7,10 @@
 //
 
 #import "HTableViewCell.h"
-#import "DailyDetailsModel.h"
+#import "CardDetaillist.h"
 
 @interface DailyDetailsCellView : HTableViewCell
 
-@property(nonatomic,strong) DailyDetailsModel *dailyDetailsModel;
+@property(nonatomic,strong) CardDetaillist *cardDetaillist;
 
 @end

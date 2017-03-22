@@ -9,6 +9,8 @@
 #import "DailyController.h"
 #import "DailyView.h"
 #import "DailyViewModel.h"
+#import "DailyDetailsController.h"
+#import "DailyModel.h"
 
 @interface DailyController ()
 
@@ -22,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+    
 }
 
 #pragma mark system
@@ -46,7 +48,16 @@
 }
 
 -(void)h_bindViewModel{
-    
+    [[self.dailyViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        DailyDetailsController *dailyDetails = [[DailyDetailsController alloc] init];
+        DailyModel *dailyModel = self.dailyViewModel.arr[x.intValue];
+        dailyDetails.busDate = dailyModel.cardDate;
+        [self.navigationController pushViewController:dailyDetails animated:NO];
+        
+        
+        
+    }];
 }
 
 #pragma mark lazyload

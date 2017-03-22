@@ -168,4 +168,8 @@ extern void DismissHud(void);
 +(NSString *)getFilterStr:(NSString *)result filter1:(NSString *)filter1 filter2:(NSString *)filter2;
 
 +(BOOL)PureLetters:(NSString*)str;
+
++(NSString *)getFormatter:(NSString *)str;
++(NSString *)getFormatterYMD:(NSString *)str;
++(NSString *)getFormatterYM:(NSString *)str;
 @end

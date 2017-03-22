@@ -37,7 +37,7 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-    self.title = @"考勤日报详情";
+    
 }
 
 
@@ -48,6 +48,16 @@
 -(void)h_bindViewModel{
     
 }
+
+-(void)setBusDate:(NSString *)busDate{
+    if (!busDate) {
+        return;
+    }
+    _busDate = busDate;
+    self.dailyDetailsView.busDate = busDate;
+    self.title = [LSCoreToolCenter getFormatterYMD:busDate];
+}
+
 
 #pragma mark lazyload
 -(DailyDetailsView *)dailyDetailsView{

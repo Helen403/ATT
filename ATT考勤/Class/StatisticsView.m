@@ -97,8 +97,6 @@
     }else{
         cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+7];
     }
-    
-    
     return cell;
 }
 
@@ -109,17 +107,16 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-     StatisticsCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([StatisticsCellView class])] forIndexPath:indexPath];
-    cell.selected = NO;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    NSNumber *row;
     if (indexPath.section == 0) {
-        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row];
+        row = [NSNumber numberWithInteger:indexPath.row];
     }else if(indexPath.section == 1){
-        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+3];
+        row = [NSNumber numberWithInteger:indexPath.row+3];
     }else{
-        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+7];
+        row = [NSNumber numberWithInteger:indexPath.row+7];
     }
-    
-    NSNumber *row =[NSNumber numberWithInteger:indexPath.section];
+
     [self.statisticsViewModel.cellclickSubject sendNext:row];
 }
 

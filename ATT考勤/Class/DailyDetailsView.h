@@ -10,4 +10,6 @@
 
 @interface DailyDetailsView : HView
 
+@property(nonatomic,strong) NSString *busDate;
+
 @end

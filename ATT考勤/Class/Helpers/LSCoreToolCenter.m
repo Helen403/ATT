@@ -751,10 +751,7 @@ void DismissHud(void){
     return deviceString;
 }
 
-
-
 //获取当前时间yyyyMMddHHmmss
-
 +(NSString *) getCurrentTime{
 
     NSDate *date=[[NSDate alloc] init];
@@ -767,6 +764,43 @@ void DismissHud(void){
 
     return curTime;
 }
+
++(NSString *)getFormatter:(NSString *)str {
+    
+    
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate *theDate = [formatter dateFromString:str];
+    [formatter setDateFormat:@"MM月dd日"];
+    return [formatter stringFromDate:theDate];
+}
+
++(NSString *)getFormatterYM:(NSString *)str {
+    
+    
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    
+    [formatter setDateFormat:@"yyyy-MM"];
+    
+    NSDate *theDate = [formatter dateFromString:str];
+    [formatter setDateFormat:@"yyyy年dd月"];
+    return [formatter stringFromDate:theDate];
+}
+
++(NSString *)getFormatterYMD:(NSString *)str {
+    
+    
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate *theDate = [formatter dateFromString:str];
+    [formatter setDateFormat:@"yyyy年MM月dd日"];
+    return [formatter stringFromDate:theDate];
+}
+
 
 +(NSString *)getDateAddMinuts:(NSString *)str time:(NSInteger )minute{
 

@@ -10,8 +10,6 @@
 #import "DailyModel.h"
 
 @implementation DailyViewModel
-
-
 #pragma mark private
 -(void)h_initialize{
     
@@ -60,12 +58,7 @@
                 
                 [self SOAPData:findMyDayReport soapBody:body success:^(NSString *result) {
                     
-//                    NSBundle *b = [NSBundle mainBundle];
-//                    NSString *path = [b pathForResource:@"test" ofType:@".xml"];
-//                  
-//                    NSData *data = [NSData dataWithContentsOfFile:path];
-//                    NSString *result1  =[[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//                    NSLog(@"%@",result1);
+
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
@@ -91,4 +84,11 @@
     return _successSubject;
 }
 
+
+-(RACSubject *)cellclickSubject{
+    if (!_cellclickSubject) {
+        _cellclickSubject = [RACSubject subject];
+    }
+    return _cellclickSubject;
+}
 @end

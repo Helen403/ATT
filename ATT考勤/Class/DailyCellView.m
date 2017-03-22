@@ -141,7 +141,6 @@
         make.right.equalTo(weakSelf.bgView.mas_right).offset(-[self h_w:10]);
     }];
     
-    
     [super updateConstraints];
 }
 
@@ -183,7 +182,8 @@
         return;
     }
     _dailyModel = dailyModel;
-    self.time.text = dailyModel.cardDate;
+
+    self.time.text = [LSCoreToolCenter getFormatterYMD:dailyModel.cardDate];
     self.shift.text = [NSString stringWithFormat:@"班次:%@",dailyModel.shiftName];
     Boolean flag = NO;
     if (![dailyModel.earlyWorkCount isEqualToString:@"0"]) {

@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CardDetaillist.h"
 
 @interface DailyDetailsModel : NSObject
+
+@property (nonatomic , strong) NSArray<CardDetaillist *>              * cardDetaillist;
+@property (nonatomic , copy) NSString              * signCount;
+@property (nonatomic , copy) NSString              * goOutWorkHours;
+@property (nonatomic , copy) NSString              * overWorkHours;
+@property (nonatomic , copy) NSString              * workHours;
+@property (nonatomic , copy) NSString              * shiftName;
 
 @end

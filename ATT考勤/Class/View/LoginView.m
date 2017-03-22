@@ -274,8 +274,7 @@
 }
 
 -(void)failClick{
-    
-   
+
     self.pwdTextField.text = @"";
     self.login.enabled = YES;
     self.login.backgroundColor = MAIN_ORANGER;
@@ -346,10 +345,8 @@
 
 
 -(void)textFieldDidDeleteBackward:(UITextField *)textField{
-    
 
 }
-
 
 - (BOOL)validateNumber:(NSString*)number {
     BOOL res = YES;

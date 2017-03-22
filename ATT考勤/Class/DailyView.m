@@ -60,7 +60,7 @@
     
     self.dailyViewModel.companyCode = companyCode;
     UserModel *user =  getModel(@"user");
-    self.dailyViewModel.userCode = @"3";
+    self.dailyViewModel.userCode = user.userCode;
     
     [self.dailyViewModel.refreshDataCommand execute:nil];
 }
@@ -119,9 +119,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    //    [self.dealWithViewModel.cellclickSubject sendNext:row];
+    [self.dailyViewModel.cellclickSubject sendNext:row];
  
 }
 

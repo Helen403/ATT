@@ -20,4 +20,6 @@
 
 @property(nonatomic,strong) RACSubject *successSubject;
 
+@property(nonatomic,strong) RACSubject *cellclickSubject;
+
 @end

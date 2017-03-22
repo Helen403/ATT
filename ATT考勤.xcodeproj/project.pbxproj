@@ -243,6 +243,30 @@
 		7947F1401E67BB3900E68C83 /* ChoiceStaffTeamView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F13F1E67BB3900E68C83 /* ChoiceStaffTeamView.m */; };
 		7947F1431E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F1421E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m */; };
 		7947F14A1E67CD4300E68C83 /* ApplyManCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947F1491E67CD4300E68C83 /* ApplyManCellView.m */; };
+		7948EE411E821466009ACE51 /* CardDetaillist.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE401E821466009ACE51 /* CardDetaillist.m */; };
+		7948EE441E82227B009ACE51 /* DailyDetailsHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE431E82227B009ACE51 /* DailyDetailsHeadView.m */; };
+		7948EE471E822295009ACE51 /* DailyDetailsFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE461E822295009ACE51 /* DailyDetailsFootView.m */; };
+		7948EE511E82520D009ACE51 /* TeamReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE501E82520D009ACE51 /* TeamReportController.m */; };
+		7948EE541E82522A009ACE51 /* TeamReportViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE531E82522A009ACE51 /* TeamReportViewModel.m */; };
+		7948EE571E82523D009ACE51 /* TeamReportView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE561E82523D009ACE51 /* TeamReportView.m */; };
+		7948EE5A1E825252009ACE51 /* TeamReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE591E825252009ACE51 /* TeamReportModel.m */; };
+		7948EE5D1E825282009ACE51 /* TeamReportCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE5C1E825282009ACE51 /* TeamReportCellView.m */; };
+		7948EE671E825491009ACE51 /* WeekController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE661E825491009ACE51 /* WeekController.m */; };
+		7948EE6A1E8254AC009ACE51 /* WeekViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE691E8254AC009ACE51 /* WeekViewModel.m */; };
+		7948EE6D1E8254BD009ACE51 /* WeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE6C1E8254BD009ACE51 /* WeekView.m */; };
+		7948EE701E8254D0009ACE51 /* WeekModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE6F1E8254D0009ACE51 /* WeekModel.m */; };
+		7948EE731E8254E1009ACE51 /* WeekCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE721E8254E1009ACE51 /* WeekCellView.m */; };
+		7948EE801E825DF9009ACE51 /* MonthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE7F1E825DF9009ACE51 /* MonthController.m */; };
+		7948EE831E825E1F009ACE51 /* MonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE821E825E1F009ACE51 /* MonthView.m */; };
+		7948EE861E825E39009ACE51 /* MonthViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE851E825E39009ACE51 /* MonthViewModel.m */; };
+		7948EE891E825E60009ACE51 /* MonthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE881E825E60009ACE51 /* MonthModel.m */; };
+		7948EE8C1E825E80009ACE51 /* MonthCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE8B1E825E80009ACE51 /* MonthCellView.m */; };
+		7948EE961E825F19009ACE51 /* WeekDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE951E825F19009ACE51 /* WeekDetailsController.m */; };
+		7948EE991E825F31009ACE51 /* WeekDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE981E825F31009ACE51 /* WeekDetailsView.m */; };
+		7948EE9C1E825F51009ACE51 /* WeekDetailsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE9B1E825F51009ACE51 /* WeekDetailsViewModel.m */; };
+		7948EE9F1E825F6A009ACE51 /* WeekDetalisModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EE9E1E825F6A009ACE51 /* WeekDetalisModel.m */; };
+		7948EEA21E825FC2009ACE51 /* WeekDetailsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EEA11E825FC2009ACE51 /* WeekDetailsCellView.m */; };
+		7948EEA51E826C92009ACE51 /* WeekDetailsHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7948EEA41E826C92009ACE51 /* WeekDetailsHeadView.m */; };
 		7949275C1E10A660007331CA /* BuildRoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7949275B1E10A65F007331CA /* BuildRoleController.m */; };
 		7949275F1E10A67B007331CA /* BuildRoleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7949275E1E10A67B007331CA /* BuildRoleView.m */; };
 		794927621E10A694007331CA /* BuildRoleViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794927611E10A694007331CA /* BuildRoleViewModel.m */; };
@@ -635,7 +659,6 @@
 		79FB799C1E80B27F00F7588A /* DailyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FB799B1E80B27F00F7588A /* DailyModel.m */; };
 		79FB799F1E80B29500F7588A /* DailyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FB799E1E80B29500F7588A /* DailyViewModel.m */; };
 		79FB79A21E80B48C00F7588A /* DailyCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FB79A11E80B48C00F7588A /* DailyCellView.m */; };
-		79FB79A61E81249D00F7588A /* test.xml in Resources */ = {isa = PBXBuildFile; fileRef = 79FB79A51E81249D00F7588A /* test.xml */; };
 		79FC77DC1E56E7C50018C222 /* ScanCodeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC77DB1E56E7C40018C222 /* ScanCodeViewModel.m */; };
 		79FCCC641E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FCCC631E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m */; };
 		79FFB2591E24BA7E00EC082F /* AddressListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB2581E24BA7E00EC082F /* AddressListCellView.m */; };
@@ -1093,6 +1116,54 @@
 		7947F1421E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceStaffTeamViewModel.m; sourceTree = "<group>"; };
 		7947F1481E67CD4300E68C83 /* ApplyManCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyManCellView.h; sourceTree = "<group>"; };
 		7947F1491E67CD4300E68C83 /* ApplyManCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyManCellView.m; sourceTree = "<group>"; };
+		7948EE3F1E821466009ACE51 /* CardDetaillist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardDetaillist.h; sourceTree = "<group>"; };
+		7948EE401E821466009ACE51 /* CardDetaillist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardDetaillist.m; sourceTree = "<group>"; };
+		7948EE421E82227B009ACE51 /* DailyDetailsHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyDetailsHeadView.h; sourceTree = "<group>"; };
+		7948EE431E82227B009ACE51 /* DailyDetailsHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyDetailsHeadView.m; sourceTree = "<group>"; };
+		7948EE451E822295009ACE51 /* DailyDetailsFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyDetailsFootView.h; sourceTree = "<group>"; };
+		7948EE461E822295009ACE51 /* DailyDetailsFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyDetailsFootView.m; sourceTree = "<group>"; };
+		7948EE4F1E82520D009ACE51 /* TeamReportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamReportController.h; sourceTree = "<group>"; };
+		7948EE501E82520D009ACE51 /* TeamReportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamReportController.m; sourceTree = "<group>"; };
+		7948EE521E82522A009ACE51 /* TeamReportViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamReportViewModel.h; sourceTree = "<group>"; };
+		7948EE531E82522A009ACE51 /* TeamReportViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamReportViewModel.m; sourceTree = "<group>"; };
+		7948EE551E82523D009ACE51 /* TeamReportView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamReportView.h; sourceTree = "<group>"; };
+		7948EE561E82523D009ACE51 /* TeamReportView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamReportView.m; sourceTree = "<group>"; };
+		7948EE581E825252009ACE51 /* TeamReportModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamReportModel.h; sourceTree = "<group>"; };
+		7948EE591E825252009ACE51 /* TeamReportModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamReportModel.m; sourceTree = "<group>"; };
+		7948EE5B1E825282009ACE51 /* TeamReportCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamReportCellView.h; sourceTree = "<group>"; };
+		7948EE5C1E825282009ACE51 /* TeamReportCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamReportCellView.m; sourceTree = "<group>"; };
+		7948EE651E825491009ACE51 /* WeekController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekController.h; sourceTree = "<group>"; };
+		7948EE661E825491009ACE51 /* WeekController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekController.m; sourceTree = "<group>"; };
+		7948EE681E8254AC009ACE51 /* WeekViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekViewModel.h; sourceTree = "<group>"; };
+		7948EE691E8254AC009ACE51 /* WeekViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekViewModel.m; sourceTree = "<group>"; };
+		7948EE6B1E8254BD009ACE51 /* WeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekView.h; sourceTree = "<group>"; };
+		7948EE6C1E8254BD009ACE51 /* WeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekView.m; sourceTree = "<group>"; };
+		7948EE6E1E8254D0009ACE51 /* WeekModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekModel.h; sourceTree = "<group>"; };
+		7948EE6F1E8254D0009ACE51 /* WeekModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekModel.m; sourceTree = "<group>"; };
+		7948EE711E8254E1009ACE51 /* WeekCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekCellView.h; sourceTree = "<group>"; };
+		7948EE721E8254E1009ACE51 /* WeekCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekCellView.m; sourceTree = "<group>"; };
+		7948EE7E1E825DF9009ACE51 /* MonthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthController.h; sourceTree = "<group>"; };
+		7948EE7F1E825DF9009ACE51 /* MonthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthController.m; sourceTree = "<group>"; };
+		7948EE811E825E1F009ACE51 /* MonthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthView.h; sourceTree = "<group>"; };
+		7948EE821E825E1F009ACE51 /* MonthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthView.m; sourceTree = "<group>"; };
+		7948EE841E825E39009ACE51 /* MonthViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthViewModel.h; sourceTree = "<group>"; };
+		7948EE851E825E39009ACE51 /* MonthViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthViewModel.m; sourceTree = "<group>"; };
+		7948EE871E825E60009ACE51 /* MonthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthModel.h; sourceTree = "<group>"; };
+		7948EE881E825E60009ACE51 /* MonthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthModel.m; sourceTree = "<group>"; };
+		7948EE8A1E825E80009ACE51 /* MonthCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthCellView.h; sourceTree = "<group>"; };
+		7948EE8B1E825E80009ACE51 /* MonthCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthCellView.m; sourceTree = "<group>"; };
+		7948EE941E825F19009ACE51 /* WeekDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekDetailsController.h; sourceTree = "<group>"; };
+		7948EE951E825F19009ACE51 /* WeekDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekDetailsController.m; sourceTree = "<group>"; };
+		7948EE971E825F31009ACE51 /* WeekDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekDetailsView.h; sourceTree = "<group>"; };
+		7948EE981E825F31009ACE51 /* WeekDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekDetailsView.m; sourceTree = "<group>"; };
+		7948EE9A1E825F51009ACE51 /* WeekDetailsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekDetailsViewModel.h; sourceTree = "<group>"; };
+		7948EE9B1E825F51009ACE51 /* WeekDetailsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekDetailsViewModel.m; sourceTree = "<group>"; };
+		7948EE9D1E825F6A009ACE51 /* WeekDetalisModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekDetalisModel.h; sourceTree = "<group>"; };
+		7948EE9E1E825F6A009ACE51 /* WeekDetalisModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekDetalisModel.m; sourceTree = "<group>"; };
+		7948EEA01E825FC2009ACE51 /* WeekDetailsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekDetailsCellView.h; sourceTree = "<group>"; };
+		7948EEA11E825FC2009ACE51 /* WeekDetailsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekDetailsCellView.m; sourceTree = "<group>"; };
+		7948EEA31E826C92009ACE51 /* WeekDetailsHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeekDetailsHeadView.h; sourceTree = "<group>"; };
+		7948EEA41E826C92009ACE51 /* WeekDetailsHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekDetailsHeadView.m; sourceTree = "<group>"; };
 		7949275A1E10A65F007331CA /* BuildRoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleController.h; sourceTree = "<group>"; };
 		7949275B1E10A65F007331CA /* BuildRoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildRoleController.m; sourceTree = "<group>"; };
 		7949275D1E10A67B007331CA /* BuildRoleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildRoleView.h; sourceTree = "<group>"; };
@@ -1738,7 +1809,6 @@
 		79FB799E1E80B29500F7588A /* DailyViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyViewModel.m; sourceTree = "<group>"; };
 		79FB79A01E80B48C00F7588A /* DailyCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyCellView.h; sourceTree = "<group>"; };
 		79FB79A11E80B48C00F7588A /* DailyCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyCellView.m; sourceTree = "<group>"; };
-		79FB79A51E81249D00F7588A /* test.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = test.xml; path = Font/test.xml; sourceTree = "<group>"; };
 		79FC77DA1E56E7C40018C222 /* ScanCodeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeViewModel.h; sourceTree = "<group>"; };
 		79FC77DB1E56E7C40018C222 /* ScanCodeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeViewModel.m; sourceTree = "<group>"; };
 		79FCCC621E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84ConvertToGCJ02ForAMapView.h; sourceTree = "<group>"; };
@@ -1855,6 +1925,8 @@
 			children = (
 				7901EEF11E8159290020FAA3 /* DailyDetailsModel.h */,
 				7901EEF21E8159290020FAA3 /* DailyDetailsModel.m */,
+				7948EE3F1E821466009ACE51 /* CardDetaillist.h */,
+				7948EE401E821466009ACE51 /* CardDetaillist.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1871,6 +1943,10 @@
 		7901EEE11E8152830020FAA3 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				7948EE421E82227B009ACE51 /* DailyDetailsHeadView.h */,
+				7948EE431E82227B009ACE51 /* DailyDetailsHeadView.m */,
+				7948EE451E822295009ACE51 /* DailyDetailsFootView.h */,
+				7948EE461E822295009ACE51 /* DailyDetailsFootView.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -2657,6 +2733,10 @@
 				791EE6FC1E1F9D5E000BA8B8 /* Notice(公司公告) */,
 				791711691E2367CC003D15C1 /* Team(部门通讯) */,
 				79FAFA9A1E34892200577917 /* TeamList(部门列表) */,
+				7948EE481E8251BF009ACE51 /* TeamReport(部门考勤周报) */,
+				7948EE771E825D77009ACE51 /* Month(考勤月报) */,
+				7948EE8D1E825EC3009ACE51 /* WeekDetails(考勤周报详情) */,
+				7948EE5E1E825438009ACE51 /* Week(考勤周报) */,
 				7901EEDB1E81516A0020FAA3 /* DailyDetails(考勤日报详情) */,
 				79FB798D1E80B15300F7588A /* Daily(考勤日报) */,
 				794E04691E231FCD00CFE3A3 /* Statistics(统计) */,
@@ -4231,6 +4311,268 @@
 			name = ApplyManCellView;
 			sourceTree = "<group>";
 		};
+		7948EE481E8251BF009ACE51 /* TeamReport(部门考勤周报) */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE4E1E8251F9009ACE51 /* Other */,
+				7948EE4D1E8251F2009ACE51 /* Cell */,
+				7948EE4C1E8251EC009ACE51 /* Model */,
+				7948EE4B1E8251E9009ACE51 /* View */,
+				7948EE4A1E8251E2009ACE51 /* ViewController */,
+				7948EE491E8251DB009ACE51 /* ViewModel */,
+			);
+			name = "TeamReport(部门考勤周报)";
+			sourceTree = "<group>";
+		};
+		7948EE491E8251DB009ACE51 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE521E82522A009ACE51 /* TeamReportViewModel.h */,
+				7948EE531E82522A009ACE51 /* TeamReportViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		7948EE4A1E8251E2009ACE51 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE4F1E82520D009ACE51 /* TeamReportController.h */,
+				7948EE501E82520D009ACE51 /* TeamReportController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		7948EE4B1E8251E9009ACE51 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE551E82523D009ACE51 /* TeamReportView.h */,
+				7948EE561E82523D009ACE51 /* TeamReportView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7948EE4C1E8251EC009ACE51 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE581E825252009ACE51 /* TeamReportModel.h */,
+				7948EE591E825252009ACE51 /* TeamReportModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7948EE4D1E8251F2009ACE51 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE5B1E825282009ACE51 /* TeamReportCellView.h */,
+				7948EE5C1E825282009ACE51 /* TeamReportCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		7948EE4E1E8251F9009ACE51 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		7948EE5E1E825438009ACE51 /* Week(考勤周报) */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE641E825478009ACE51 /* Other */,
+				7948EE631E825474009ACE51 /* Cell */,
+				7948EE621E825467009ACE51 /* Model */,
+				7948EE611E825462009ACE51 /* View */,
+				7948EE601E82545D009ACE51 /* ViewController */,
+				7948EE5F1E825455009ACE51 /* ViewModel */,
+			);
+			name = "Week(考勤周报)";
+			sourceTree = "<group>";
+		};
+		7948EE5F1E825455009ACE51 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE681E8254AC009ACE51 /* WeekViewModel.h */,
+				7948EE691E8254AC009ACE51 /* WeekViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		7948EE601E82545D009ACE51 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE651E825491009ACE51 /* WeekController.h */,
+				7948EE661E825491009ACE51 /* WeekController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		7948EE611E825462009ACE51 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE6B1E8254BD009ACE51 /* WeekView.h */,
+				7948EE6C1E8254BD009ACE51 /* WeekView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7948EE621E825467009ACE51 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE6E1E8254D0009ACE51 /* WeekModel.h */,
+				7948EE6F1E8254D0009ACE51 /* WeekModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7948EE631E825474009ACE51 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE711E8254E1009ACE51 /* WeekCellView.h */,
+				7948EE721E8254E1009ACE51 /* WeekCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		7948EE641E825478009ACE51 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		7948EE771E825D77009ACE51 /* Month(考勤月报) */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE7D1E825DA9009ACE51 /* Other */,
+				7948EE7C1E825DA4009ACE51 /* Cell */,
+				7948EE7B1E825D9E009ACE51 /* Model */,
+				7948EE7A1E825D99009ACE51 /* View */,
+				7948EE791E825D91009ACE51 /* ViewController */,
+				7948EE781E825D88009ACE51 /* ViewModel */,
+			);
+			name = "Month(考勤月报)";
+			sourceTree = "<group>";
+		};
+		7948EE781E825D88009ACE51 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE841E825E39009ACE51 /* MonthViewModel.h */,
+				7948EE851E825E39009ACE51 /* MonthViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		7948EE791E825D91009ACE51 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE7E1E825DF9009ACE51 /* MonthController.h */,
+				7948EE7F1E825DF9009ACE51 /* MonthController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		7948EE7A1E825D99009ACE51 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE811E825E1F009ACE51 /* MonthView.h */,
+				7948EE821E825E1F009ACE51 /* MonthView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7948EE7B1E825D9E009ACE51 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE871E825E60009ACE51 /* MonthModel.h */,
+				7948EE881E825E60009ACE51 /* MonthModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7948EE7C1E825DA4009ACE51 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE8A1E825E80009ACE51 /* MonthCellView.h */,
+				7948EE8B1E825E80009ACE51 /* MonthCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		7948EE7D1E825DA9009ACE51 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		7948EE8D1E825EC3009ACE51 /* WeekDetails(考勤周报详情) */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE931E825EFA009ACE51 /* Other */,
+				7948EE921E825EF5009ACE51 /* Cell */,
+				7948EE911E825EF0009ACE51 /* Model */,
+				7948EE901E825EED009ACE51 /* View */,
+				7948EE8F1E825EE6009ACE51 /* ViewController */,
+				7948EE8E1E825EE1009ACE51 /* ViewModel */,
+			);
+			name = "WeekDetails(考勤周报详情)";
+			sourceTree = "<group>";
+		};
+		7948EE8E1E825EE1009ACE51 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE9A1E825F51009ACE51 /* WeekDetailsViewModel.h */,
+				7948EE9B1E825F51009ACE51 /* WeekDetailsViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		7948EE8F1E825EE6009ACE51 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE941E825F19009ACE51 /* WeekDetailsController.h */,
+				7948EE951E825F19009ACE51 /* WeekDetailsController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		7948EE901E825EED009ACE51 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE971E825F31009ACE51 /* WeekDetailsView.h */,
+				7948EE981E825F31009ACE51 /* WeekDetailsView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7948EE911E825EF0009ACE51 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7948EE9D1E825F6A009ACE51 /* WeekDetalisModel.h */,
+				7948EE9E1E825F6A009ACE51 /* WeekDetalisModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7948EE921E825EF5009ACE51 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7948EEA01E825FC2009ACE51 /* WeekDetailsCellView.h */,
+				7948EEA11E825FC2009ACE51 /* WeekDetailsCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		7948EE931E825EFA009ACE51 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				7948EEA31E826C92009ACE51 /* WeekDetailsHeadView.h */,
+				7948EEA41E826C92009ACE51 /* WeekDetailsHeadView.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		794927551E10A5CB007331CA /* BuildRole(创建账户3) */ = {
 			isa = PBXGroup;
 			children = (
@@ -5471,7 +5813,6 @@
 		79F05E081E03BD5B00F335DA /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				79FB79A51E81249D00F7588A /* test.xml */,
 				79367B021E12219700696A38 /* File */,
 				79F05E0C1E03BD9A00F335DA /* Videos */,
 				79F05E0B1E03BD8900F335DA /* Sound */,
@@ -7414,7 +7755,6 @@
 				794C77981E3204B800013243 /* liaotian_ic_gengduo_nor@2x.png in Resources */,
 				79FAC3911E51CE92009DE784 /* Icon.png in Resources */,
 				7954BB301E5FCCE900E03173 /* oper_error.mp3 in Resources */,
-				79FB79A61E81249D00F7588A /* test.xml in Resources */,
 				794C77431E3204B800013243 /* emotion0014@2x.png in Resources */,
 				794C77371E3204B800013243 /* emotion0002@2x.png in Resources */,
 				794C77A21E3204B800013243 /* liaotian_ic_jianpan_press@3x.png in Resources */,
@@ -7562,6 +7902,7 @@
 				79375D6B1E1E402C00E27934 /* CustomModel.m in Sources */,
 				79BD12731E69144D00AC40CF /* UIView+Extension.m in Sources */,
 				79345B941E1F25160007A348 /* MyOpinionViewModel.m in Sources */,
+				7948EE511E82520D009ACE51 /* TeamReportController.m in Sources */,
 				7937CC061E24891B00A4F82F /* AddressListController.m in Sources */,
 				79FAFACE1E34ACA800577917 /* SecurityViewModel.m in Sources */,
 				79380A801E25D1EC004E7250 /* TeamAttendanceViewModel.m in Sources */,
@@ -7571,10 +7912,12 @@
 				790D8ABD1E2F43E800DDA697 /* RefuseController.m in Sources */,
 				795AC4771E2C51B400C69308 /* SMController.m in Sources */,
 				79FAFAA91E348BC800577917 /* TeamListView.m in Sources */,
+				7948EEA21E825FC2009ACE51 /* WeekDetailsCellView.m in Sources */,
 				794620EF1E767F4300873199 /* FeedbackModel.m in Sources */,
 				79F964551E2CA85300838CC4 /* ShiftViewModel.m in Sources */,
 				793FC9961E5687F50032F689 /* EmployeeTitle.m in Sources */,
 				79F964861E2CAD3500838CC4 /* OffController.m in Sources */,
+				7948EE411E821466009ACE51 /* CardDetaillist.m in Sources */,
 				795AC47B1E2C584900C69308 /* PBLocation.m in Sources */,
 				793782201E31F4D700ABA7C9 /* KeyBordVIew.m in Sources */,
 				791EE7051E1F9E07000BA8B8 /* NoticeController.m in Sources */,
@@ -7600,6 +7943,7 @@
 				79E079E81E7FDDCC000BB48C /* RefuseView.m in Sources */,
 				79F4F0751E1F808300115C3B /* DLFixedTabbarView.m in Sources */,
 				7945747E1E77D72E00EB379F /* ProveCellView.m in Sources */,
+				7948EE441E82227B009ACE51 /* DailyDetailsHeadView.m in Sources */,
 				791711751E236853003D15C1 /* TeamView.m in Sources */,
 				79375D031E1DD8CF00E27934 /* VersionController.m in Sources */,
 				79DD276A1E31B2DA00923D19 /* MyMsgView.m in Sources */,
@@ -7622,14 +7966,18 @@
 				793487C61E27363B00D074D7 /* CountView.m in Sources */,
 				79367B1A1E12692800696A38 /* ApplyManView.m in Sources */,
 				79ED5E781E1CCC0500BBC3D9 /* MineModel.m in Sources */,
+				7948EE5A1E825252009ACE51 /* TeamReportModel.m in Sources */,
 				7934879D1E270BA100D074D7 /* FDCalendarItem.m in Sources */,
 				79DD27611E31A13800923D19 /* MultiRolesModel.m in Sources */,
+				7948EE471E822295009ACE51 /* DailyDetailsFootView.m in Sources */,
 				79E079EE1E7FDE1C000BB48C /* RefuseCellView.m in Sources */,
 				7917118A1E237C7D003D15C1 /* InformController.m in Sources */,
 				79F7D85A1E5AC96F004DF0DB /* ChangeTelphoneController.m in Sources */,
 				794B5B7E1E4BFCCC006B858A /* UserModel.m in Sources */,
 				7928BD711E0273A4009BB0B4 /* AppDelegate.m in Sources */,
+				7948EE9C1E825F51009ACE51 /* WeekDetailsViewModel.m in Sources */,
 				79F4F07B1E1F85BC00115C3B /* MessageController.m in Sources */,
+				7948EE5D1E825282009ACE51 /* TeamReportCellView.m in Sources */,
 				793500EC1E3051FF009ED8AA /* RippleView.m in Sources */,
 				79BD12721E69144D00AC40CF /* NSDate+Extension.m in Sources */,
 				79345B9A1E1F25420007A348 /* FeedbackView.m in Sources */,
@@ -7658,6 +8006,7 @@
 				79EF94521E262F7100F8E9BC /* HARootScrollViewCell.m in Sources */,
 				7943B3E31E6D0946004BF1B8 /* GoOutCellView.m in Sources */,
 				794927781E10FB6E007331CA /* ForgetPwdController.m in Sources */,
+				7948EE9F1E825F6A009ACE51 /* WeekDetalisModel.m in Sources */,
 				79F8561C1E02C689002D82F4 /* HCollectionViewCell.m in Sources */,
 				79367B171E1268E200696A38 /* ProveView.m in Sources */,
 				79FA39441E1346BC00B8D3A7 /* MyExamineCellViewModel.m in Sources */,
@@ -7701,6 +8050,7 @@
 				79FAFAAF1E348CA500577917 /* TeamListModel.m in Sources */,
 				79F366D41E6519C6000D531B /* JSTextView.m in Sources */,
 				79BD12771E69145600AC40CF /* XHDatePickerView.m in Sources */,
+				7948EE8C1E825E80009ACE51 /* MonthCellView.m in Sources */,
 				793487C91E27365200D074D7 /* CountModel.m in Sources */,
 				79F0A13B1E13990A00A1B8AA /* ZJScrollSegmentView.m in Sources */,
 				79F856221E02D561002D82F4 /* LSCoreToolCenter.m in Sources */,
@@ -7734,6 +8084,7 @@
 				793D3AF31E70F23300266D9C /* LYWCollectionViewCell.m in Sources */,
 				795AC4691E2C50D700C69308 /* UILabel+YXAdd.m in Sources */,
 				794E04781E23207900CFE3A3 /* StatisticsViewModel.m in Sources */,
+				7948EE571E82523D009ACE51 /* TeamReportView.m in Sources */,
 				7947BCA11E7BDF9300EE8EA6 /* AlreadyTreatmentController.m in Sources */,
 				79282EA21E0B65C600F4E050 /* LoginView.m in Sources */,
 				7953AB0B1E78F2C000149105 /* TimeSoundViewModel.m in Sources */,
@@ -7774,6 +8125,7 @@
 				79F964521E2CA83B00838CC4 /* ShiftController.m in Sources */,
 				79362F651E0CB1C800F9B769 /* ForgetController.m in Sources */,
 				79EF94541E262F7100F8E9BC /* HAScrollNavBar.m in Sources */,
+				7948EE541E82522A009ACE51 /* TeamReportViewModel.m in Sources */,
 				79EF94511E262F7100F8E9BC /* HARootScrollView.m in Sources */,
 				79ED5E851E1CE53F00BBC3D9 /* SetController.m in Sources */,
 				79FFE7481E80078100681683 /* CopyDetailsViewModel.m in Sources */,
@@ -7782,12 +8134,14 @@
 				794E04751E23206000CFE3A3 /* StatisticsView.m in Sources */,
 				79FB799C1E80B27F00F7588A /* DailyModel.m in Sources */,
 				79F964381E2CA4E600838CC4 /* BusinessTravelModel.m in Sources */,
+				7948EEA51E826C92009ACE51 /* WeekDetailsHeadView.m in Sources */,
 				79F964121E2C9D9300838CC4 /* LeaveModel.m in Sources */,
 				79367B0D1E12539400696A38 /* LateController.m in Sources */,
 				79F9649C1E2CAEC900838CC4 /* DrainPunchViewModel.m in Sources */,
 				79FFB2671E24DF1800EC082F /* EmployeeController.m in Sources */,
 				7964B38E1E2F1A05001AC5E5 /* ApproveViewModel.m in Sources */,
 				79F9641C1E2CA28300838CC4 /* OvertimeController.m in Sources */,
+				7948EE961E825F19009ACE51 /* WeekDetailsController.m in Sources */,
 				791EE6F81E1F9392000BA8B8 /* NewsModel.m in Sources */,
 				791C76641E515E1B003B1E54 /* BuildRoleCellView.m in Sources */,
 				79345B8B1E1F22E20007A348 /* SuggestionController.m in Sources */,
@@ -7819,6 +8173,7 @@
 				79236B0A1E65591000A005C0 /* ChangeNameViewModel.m in Sources */,
 				793868291E0A29F5004EC88A /* HomeView.m in Sources */,
 				79F856161E02C3F3002D82F4 /* HTableViewHeaderFooterView.m in Sources */,
+				7948EE731E8254E1009ACE51 /* WeekCellView.m in Sources */,
 				79E07A011E7FDF1F000BB48C /* RefuseDetailsModel.m in Sources */,
 				7964B3941E2F1B8F001AC5E5 /* ApproveModel.m in Sources */,
 				791C76671E515FFF003B1E54 /* BuildRoleModel.m in Sources */,
@@ -7833,6 +8188,7 @@
 				79F9642F1E2CA4A700838CC4 /* BusinessTravelController.m in Sources */,
 				79F964991E2CAEBC00838CC4 /* DrainPunchView.m in Sources */,
 				79E079FE1E7FDF0B000BB48C /* RefuseDetailsView.m in Sources */,
+				7948EE6D1E8254BD009ACE51 /* WeekView.m in Sources */,
 				7947F13D1E67BB1D00E68C83 /* ChoiceStaffTeamController.m in Sources */,
 				794C772A1E3204B800013243 /* EmojiButtonView.m in Sources */,
 				79E079CA1E7F78EE000BB48C /* ApprovalTreamentModel.m in Sources */,
@@ -7873,6 +8229,7 @@
 				791EE6F51E1F931B000BA8B8 /* NewCellView.m in Sources */,
 				799231DA1E6D4E230099C4F9 /* OffModel.m in Sources */,
 				79367AFA1E11FD4300696A38 /* MyExamineController.m in Sources */,
+				7948EE6A1E8254AC009ACE51 /* WeekViewModel.m in Sources */,
 				79FFB26D1E24DF5600EC082F /* EmployeeView.m in Sources */,
 				79E079D81E7FD0A2000BB48C /* AlreadyDetailsController.m in Sources */,
 				7968033A1E11206D00CED421 /* MyExamineViewModel.m in Sources */,
@@ -7908,6 +8265,7 @@
 				79375D501E1E2E3800E27934 /* AboutModel.m in Sources */,
 				796310E61E0D2ACC001462AF /* NewpartView.m in Sources */,
 				794927861E110978007331CA /* ApplyController.m in Sources */,
+				7948EE861E825E39009ACE51 /* MonthViewModel.m in Sources */,
 				79F964B71E2CB2B000838CC4 /* CostController.m in Sources */,
 				79375D341E1DFC5500E27934 /* FunctionCellView.m in Sources */,
 				793765321E14946400F7B34F /* DealWithViewModel.m in Sources */,
@@ -7925,22 +8283,28 @@
 				7938496E1E5BC6CC00EA2502 /* ChangePasswordViewModel.m in Sources */,
 				79F964961E2CAEA400838CC4 /* DrainPunchController.m in Sources */,
 				7947BCA41E7BE03200EE8EA6 /* AlreadyTreatmentView.m in Sources */,
+				7948EE801E825DF9009ACE51 /* MonthController.m in Sources */,
 				796803311E111F4F00CED421 /* MyApplyView.m in Sources */,
 				794927621E10A694007331CA /* BuildRoleViewModel.m in Sources */,
 				79F7D8501E5AC297004DF0DB /* CompanyCodeCellView.m in Sources */,
+				7948EE831E825E1F009ACE51 /* MonthView.m in Sources */,
 				7947BC971E7BBD8000EE8EA6 /* LateTreatmentModel.m in Sources */,
 				790D8AFB1E2F55EB00DDA697 /* MyMsgController.m in Sources */,
 				791711901E237CAB003D15C1 /* InformViewModel.m in Sources */,
+				7948EE701E8254D0009ACE51 /* WeekModel.m in Sources */,
 				79DD27581E319D9F00923D19 /* MultiRolesController.m in Sources */,
 				7916F7C71E2C587B00518DBB /* HWPopTool.m in Sources */,
 				7901EEE71E81558E0020FAA3 /* PendingCellView.m in Sources */,
 				79EF941C1E26130C00F8E9BC /* PersonalView.m in Sources */,
 				79F4F0731E1F808300115C3B /* DLCustomSlideView.m in Sources */,
 				79EF944F1E262F7100F8E9BC /* HACursor.m in Sources */,
+				7948EE991E825F31009ACE51 /* WeekDetailsView.m in Sources */,
 				79F964621E2CA9CB00838CC4 /* MoveController.m in Sources */,
+				7948EE671E825491009ACE51 /* WeekController.m in Sources */,
 				79FAFAD71E34AD5100577917 /* SecurityCellView.m in Sources */,
 				79375D311E1DF7F600E27934 /* FunctionViewModel.m in Sources */,
 				79F9640F1E2C9C9E00838CC4 /* LeaveView.m in Sources */,
+				7948EE891E825E60009ACE51 /* MonthModel.m in Sources */,
 				793710311E1C837F002F3E2E /* MineController.m in Sources */,
 				7947F1431E67BB5000E68C83 /* ChoiceStaffTeamViewModel.m in Sources */,
 				799231D71E6D4E0D0099C4F9 /* OffCellView.m in Sources */,
