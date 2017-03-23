@@ -9,6 +9,7 @@
 #import "TrajectoryView.h"
 #import "CheckViewModel.h"
 #import "TrajectoryCellView.h"
+#import "UserModel.h"
 
 @interface TrajectoryView()<UITableViewDataSource,UITableViewDelegate>
 
@@ -16,11 +17,20 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 
+
+
+@property(nonatomic,strong) UIView *line1;
+
+@property(nonatomic,strong) UILabel *pre;
+
+@property(nonatomic,strong) UILabel *last;
+
 @property(nonatomic,strong) UILabel *title;
 
-@property(nonatomic,strong) UIImageView *pre;
+@property(nonatomic,strong) UIView *line2;
 
-@property(nonatomic,strong) UIImageView *last;
+
+@property(nonatomic,assign) NSInteger index;
 
 @end
 
@@ -36,21 +46,40 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-    [self.pre mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:20]);
-        make.top.equalTo([self h_w:7]);
+    [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(0);
+        make.left.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
+    [self.pre mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo([self h_w:10]);
+        make.top.equalTo([self h_w:10]);
+    }];
+    
+    CGSize size = [LSCoreToolCenter getSizeWithText:@"2017年12月" fontSize:14];
+    CGFloat leftPadding;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        leftPadding = (SCREEN_WIDTH -size.width)*0.5;
+    } else {
+        leftPadding = (SCREEN_WIDTH -size.width*2)*0.5;
+    }
+    
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf.pre);
-        make.centerX.equalTo(weakSelf);
+        make.left.equalTo(leftPadding);
+        make.top.equalTo(weakSelf.pre);
     }];
     
     [self.last mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(-[self h_w:20]);
-        make.top.equalTo([self h_w:7]);
+        make.top.equalTo(weakSelf.pre);
+        make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
     
+    [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.pre.mas_bottom).offset(10);
+        make.left.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
+    }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(0);
@@ -64,17 +93,43 @@
 #pragma mark private
 -(void)h_setupViews{
     
-    
-    self.backgroundColor = MAIN_ORANGER;
-    
+    self.backgroundColor = white_color;
+    [self addSubview:self.line1];
     [self addSubview:self.pre];
     [self addSubview:self.title];
     [self addSubview:self.last];
+    [self addSubview:self.line2];
     [self addSubview:self.tableView];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
+
+-(void)h_loadData{
+    self.index = 0;
+    self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    self.checkViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.checkViewModel.userCode = user.userCode;
+    self.checkViewModel.cardMonth = [LSCoreToolCenter currentYearYM];
+    [self.checkViewModel.trajectoryCommand execute:nil];
+}
+
+
+-(void)h_bindViewModel{
+    [[self.checkViewModel.trajectorySubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            
+        });
+        
+    }];
+}
+
 
 #pragma mark lazyload
 -(CheckViewModel *)checkViewModel{
@@ -84,40 +139,97 @@
     return _checkViewModel;
 }
 
--(UIImageView *)pre{
+-(UILabel *)pre{
     if (!_pre) {
-        _pre = [[UIImageView alloc] init];
-        _pre.image = ImageNamed(@"icon_previous");
+        _pre = [[UILabel alloc] init];
+        _pre.text = @"< 上月";
+        _pre.font = H14;
+        _pre.textColor = MAIN_PAN_2;
+        _pre.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(preClick)];
+        [_pre addGestureRecognizer:setTap];
     }
     return _pre;
 }
 
--(UIImageView *)last{
-    if (!_last) {
-        _last = [[UIImageView alloc] init];
-        _last.image = ImageNamed(@"icon_next");
-    }
-    return _last;
+-(void)preClick{
+    --self.index;
+    ShowMaskStatus(@"正在拼命加载");
+    self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    self.checkViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.checkViewModel.userCode = user.userCode;
+    self.checkViewModel.cardMonth = [LSCoreToolCenter getCurrentYMonth:self.index];
+    [self.checkViewModel.trajectoryCommand execute:nil];
+    
+}
+
+-(void)lastClick{
+    ++self.index;
+    ShowMaskStatus(@"正在拼命加载");
+    self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    self.checkViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.checkViewModel.userCode = user.userCode;
+    self.checkViewModel.cardMonth = [LSCoreToolCenter getCurrentYMonth:self.index];
+    [self.checkViewModel.trajectoryCommand execute:nil];
+    
 }
 
 -(UILabel *)title{
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.text = @"2016年12月2日";
-        _title.font = H16;
-        _title.textColor = white_color;
+        _title.text = @"";
+        _title.font = H14;
+        _title.textColor = MAIN_PAN_2;
     }
     return _title;
 }
+
+-(UILabel *)last{
+    if (!_last) {
+        _last = [[UILabel alloc] init];
+        _last.text = @"下月 >";
+        _last.font = H14;
+        _last.textColor = MAIN_PAN_2;
+        _last.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lastClick)];
+        [_last addGestureRecognizer:setTap];
+    }
+    return _last;
+}
+-(UIView *)line2{
+    if (!_line2) {
+        _line2 = [[UIView alloc] init];
+        _line2.backgroundColor = MAIN_LINE_COLOR;
+    }
+    return _line2;
+}
+
+-(UIView *)line1{
+    if (!_line1) {
+        _line1 = [[UIView alloc] init];
+        _line1.backgroundColor = MAIN_LINE_COLOR;
+    }
+    return _line1;
+}
+
 
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = GX_BGCOLOR;
+        _tableView.backgroundColor = white_color;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[TrajectoryCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([TrajectoryCellView class])]];
+         _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT*0.15)];
         
     }
     return _tableView;
@@ -142,21 +254,22 @@
     TrajectoryCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TrajectoryCellView class])] forIndexPath:indexPath];
     
     cell.trajectoryModel = self.checkViewModel.arrTrajectory[indexPath.row];
-     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  
     return cell;
 }
 
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:220];
+    return [self h_w:110];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
- 
-    NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-        [self.checkViewModel.cellclickSubject sendNext:row];
 }
+
+
+
 
 
 @end

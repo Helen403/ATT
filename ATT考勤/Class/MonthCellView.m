@@ -75,44 +75,44 @@
     }];
     
     [self.shift mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:10]);
+        make.centerX.equalTo(weakSelf.bgView);
         make.top.equalTo([self h_w:10]);
     }];
     
     [self.earlyWork mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.shift.mas_bottom).offset([self h_w:6]);
-        make.left.equalTo(weakSelf.shift);
+        make.left.equalTo([self h_w:10]);
         make.bottom.equalTo(weakSelf.forgetWork.mas_top);
     }];
     
     [self.forgetWork mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.earlyWork.mas_bottom).offset([self h_w:6]);
-        make.left.equalTo(weakSelf.shift);
+        make.left.equalTo(weakSelf.earlyWork);
         make.bottom.equalTo(weakSelf.lateWork.mas_top);
     }];
     [self.lateWork mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.forgetWork.mas_bottom).offset([self h_w:6]);
-        make.left.equalTo(weakSelf.shift);
+        make.left.equalTo(weakSelf.earlyWork);
         make.bottom.equalTo(weakSelf.goOutWork.mas_top);
     }];
     [self.goOutWork mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.lateWork.mas_bottom).offset([self h_w:6]);
-        make.left.equalTo(weakSelf.shift);
+        make.left.equalTo(weakSelf.earlyWork);
         make.bottom.equalTo(weakSelf.offWork.mas_top);
     }];
     [self.offWork mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.goOutWork.mas_bottom).offset([self h_w:6]);
-        make.left.equalTo(weakSelf.shift);
+        make.left.equalTo(weakSelf.earlyWork);
         make.bottom.equalTo(weakSelf.outWork.mas_top);
     }];
     [self.outWork mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.offWork.mas_bottom).offset([self h_w:6]);
-        make.left.equalTo(weakSelf.shift);
+        make.left.equalTo(weakSelf.earlyWork);
         make.bottom.equalTo(weakSelf.overWork.mas_top);
     }];
     [self.overWork mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.outWork.mas_bottom).offset([self h_w:6]);
-        make.left.equalTo(weakSelf.shift);
+        make.left.equalTo(weakSelf.earlyWork);
         make.bottom.equalTo(weakSelf.line.mas_top).offset(-[self h_w:6]);
     }];
     
@@ -134,7 +134,7 @@
     }];
     [self.detailsText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.details);
-        make.left.equalTo(weakSelf.shift);
+        make.left.equalTo(weakSelf.earlyWork);
     }];
     
     [self.back mas_makeConstraints:^(MASConstraintMaker *make) {

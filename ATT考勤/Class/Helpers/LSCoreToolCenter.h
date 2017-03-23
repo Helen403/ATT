@@ -172,4 +172,5 @@ extern void DismissHud(void);
 +(NSString *)getFormatter:(NSString *)str;
 +(NSString *)getFormatterYMD:(NSString *)str;
 +(NSString *)getFormatterYM:(NSString *)str;
++(NSString *) getCurrentTimeYMD;
 @end

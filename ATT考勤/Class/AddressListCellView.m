@@ -19,7 +19,6 @@
 
 @property(nonatomic,strong) UIView *view;
 
-@property(nonatomic,strong) UIColor *bgColor;
 
 @end
 
@@ -128,7 +127,7 @@
 -(UILabel *)title{
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.text = @"反馈类型";
+        _title.text = @"";
         _title.font = H14;
         _title.textColor = MAIN_PAN_2;
     }
@@ -138,7 +137,7 @@
 -(UILabel *)number{
     if (!_number) {
         _number = [[UILabel alloc] init];
-        _number.text = @"反馈类型";
+        _number.text = @"";
         _number.font = H14;
         _number.textColor = MAIN_PAN_2;
     }

@@ -223,11 +223,40 @@
 #define findMyWeekReport @"http://13822767713.xicp.net/smart/ws/IAttService"
 
 //考勤周报详情
-#define findMyMonthReportDetail @"http://13822767713.xicp.net/smart/ws/IAttService"
+#define findMyWeekReportDetail @"http://13822767713.xicp.net/smart/ws/IAttService"
 
 //考勤月报
 #define findMyMonthReport @"http://13822767713.xicp.net/smart/ws/IAttService"
 
 //考勤月报详情
 #define findMyMonthReportDetail @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+
+//考勤部门日报
+#define findDeptDayReport  @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//考勤部门日报详情
+#define findDeptDayReportDetail @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//考勤部门周报
+#define findDeptWeekReport @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//考勤部门月报
+#define findDeptMonthReport @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//考勤部门外勤
+#define findDeptOutReport @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//考勤部门外勤详情
+#define findDeptOutDetailReport @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//英雄榜
+#define findSortEmpHours @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//签到英雄榜
+#define findSortEmpSign @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//
+#define findDeptRedBlack @"http://13822767713.xicp.net/smart/ws/IAttService"
+
 

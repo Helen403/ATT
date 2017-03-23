@@ -765,6 +765,19 @@ void DismissHud(void){
     return curTime;
 }
 
++(NSString *) getCurrentTimeYMD{
+    
+    NSDate *date=[[NSDate alloc] init];
+    
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    
+    [formatter  setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *curTime=[formatter stringFromDate:date];
+    
+    return curTime;
+}
+
 +(NSString *)getFormatter:(NSString *)str {
     
     
@@ -785,7 +798,7 @@ void DismissHud(void){
     [formatter setDateFormat:@"yyyy-MM"];
     
     NSDate *theDate = [formatter dateFromString:str];
-    [formatter setDateFormat:@"yyyy年dd月"];
+    [formatter setDateFormat:@"yyyy年MM月"];
     return [formatter stringFromDate:theDate];
 }
 

@@ -13,6 +13,4 @@
 
 @property(nonatomic,strong) AddressListModel *addressListModel;
 
-
-
 @end

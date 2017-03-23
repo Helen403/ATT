@@ -20,7 +20,7 @@
             return ;
         }
         
-        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findMyMonthReportDetailResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findMyMonthReportDetailResponse>"];
+        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findMyWeekReportDetailResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findMyWeekReportDetailResponse>"];
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[WeekDetalisModel class] rowRootName:@"MyWeekReportDetailModels"];
         self.arr = arr;
@@ -52,14 +52,14 @@
                 
                 @strongify(self);
                 
-                NSString *body =[NSString stringWithFormat: @"<findMyMonthReportDetail xmlns=\"http://service.webservice.vada.com/\">\
+                NSString *body =[NSString stringWithFormat: @"<findMyWeekReportDetail xmlns=\"http://service.webservice.vada.com/\">\
                                  <companyCode xmlns=\"\">%@</companyCode>\
                                  <userCode xmlns=\"\">%@</userCode>\
                                  <startDate xmlns=\"\">%@</startDate>\
                                   <endDate xmlns=\"\">%@</endDate>\
-                                 </findMyMonthReportDetail>",self.companyCode,self.userCode,self.startDate,self.endDate];
+                                 </findMyWeekReportDetail>",self.companyCode,self.userCode,self.startDate,self.endDate];
                 
-                [self SOAPData:findMyMonthReportDetail soapBody:body success:^(NSString *result) {
+                [self SOAPData:findMyWeekReportDetail soapBody:body success:^(NSString *result) {
                     
                     
                     [subscriber sendNext:result];

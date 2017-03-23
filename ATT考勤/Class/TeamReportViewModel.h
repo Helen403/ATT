@@ -10,4 +10,16 @@
 
 @interface TeamReportViewModel : HViewModel
 
+@property(nonatomic,strong) NSMutableArray *arr;
+
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property(nonatomic,strong) NSString *userCode;
+
+@property(nonatomic,strong) RACSubject *successSubject;
+
+@property(nonatomic,strong) RACSubject *cellclickSubject;
+
 @end

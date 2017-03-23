@@ -10,11 +10,19 @@
 #import "StatisticsView.h"
 #import "StatisticsViewModel.h"
 
-#import "TeamAttendanceController.h"
-#import "PersonalController.h"
+//#import "TeamAttendanceController.h"
+//#import "PersonalController.h"
 #import "DailyController.h"
 #import "WeekController.h"
 #import "MonthController.h"
+#import "TeamDailyController.h"
+#import "TeamReportController.h"
+#import "TeamMonthController.h"
+#import "TeamOutWorkController.h"
+#import "HeroController.h"
+#import "SignController.h"
+#import "TeamRedBlackController.h"
+
 
 @interface StatisticsController ()
 
@@ -76,20 +84,58 @@
                 [self.navigationController pushViewController:month animated:NO];
                 break;
             }
+                //部门考勤日报
+            case 3:{
+                TeamDailyController *teamDaily = [[TeamDailyController alloc] init];
                 
+                [self.navigationController pushViewController:teamDaily animated:NO];
+                break;
+            }
+                //部门考勤周报
+            case 4:{
+                TeamReportController *teamReport = [[TeamReportController alloc] init];
+                
+                [self.navigationController pushViewController:teamReport animated:NO];
+                break;
+            }
+                //部门考勤月报
+            case 5:{
+                TeamMonthController *teamMonth = [[TeamMonthController alloc] init];
+                
+                [self.navigationController pushViewController:teamMonth animated:NO];
+                break;
+            }
+                //部门考勤外勤
+            case 6:{
+                TeamOutWorkController *teamOutWork = [[TeamOutWorkController alloc] init];
+                
+                [self.navigationController pushViewController:teamOutWork animated:NO];
+                break;
+            }
+                //工时英雄榜
+            case 7:{
+                HeroController *hero = [[HeroController alloc] init];
+                
+                [self.navigationController pushViewController:hero animated:NO];
+                break;
+            }
+                //签到英雄榜
+            case 8:{
+                SignController *sign = [[SignController alloc] init];
+                
+                [self.navigationController pushViewController:sign animated:NO];
+                break;
+            }
+                //部门红黑榜
+            case 9:{
+                TeamRedBlackController *teamRedBlack = [[TeamRedBlackController alloc] init];
+                
+                [self.navigationController pushViewController:teamRedBlack animated:NO];
+                break;
+            }
+              
+             
         }
-        
-//        if ( == 0) {
-//
-//          
-//        }else{
-//            
-//            TeamAttendanceController *team = [[TeamAttendanceController alloc] init];
-//            
-//            [self.navigationController pushViewController:team animated:NO];
-//        }
-        
-        
     }];
 }
 
