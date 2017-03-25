@@ -9,6 +9,8 @@
 #import "TeamOutWorkController.h"
 #import "TeamOutWorkViewModel.h"
 #import "TeamOutWorkView.h"
+#import "TeamOutWorkModel.h"
+#import "TeamOutWorkDetailsController.h"
 
 @interface TeamOutWorkController ()
 
@@ -22,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+    
 }
 
 #pragma mark system
@@ -46,6 +48,17 @@
 }
 
 -(void)h_bindViewModel{
+    [[self.teamOutWorkViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        TeamOutWorkModel *teamOutWorkModel = self.teamOutWorkViewModel.arr[x.intValue];
+        
+        TeamOutWorkDetailsController *teamOutWorkDetails = [[TeamOutWorkDetailsController alloc] init];
+        
+        teamOutWorkDetails.deptCode =  teamOutWorkModel.deptCode;
+        teamOutWorkDetails.startDate =  teamOutWorkModel.startDate;
+        teamOutWorkDetails.endDate =  teamOutWorkModel.endDate;
+        [self.navigationController pushViewController:teamOutWorkDetails animated:NO];
+    }];
     
 }
 

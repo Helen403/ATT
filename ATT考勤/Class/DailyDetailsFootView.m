@@ -16,24 +16,53 @@
 
 @property(nonatomic,strong) UILabel *workHours;
 
+@property(nonatomic,strong) UIView *line;
+
 @end
 
 @implementation DailyDetailsFootView
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = white_color;
-        [self addSubview:self.goOutWorkHours];
-        self.goOutWorkHours.frame = CGRectMake(SCREEN_WIDTH*0.06, 0, SCREEN_WIDTH, [self h_w:30]);
-        [self addSubview:self.overWorkHours];
-        self.overWorkHours.frame = CGRectMake(SCREEN_WIDTH*0.06, [self h_w:30], SCREEN_WIDTH, [self h_w:30]);
-        [self addSubview:self.workHours];
-        self.workHours.frame = CGRectMake(SCREEN_WIDTH*0.06, [self h_w:30]*2, SCREEN_WIDTH, [self h_w:30]);
-    }
-    return self;
+
+#pragma mark system
+-(void)updateConstraints{
+    
+    WS(weakSelf);
+    [self.goOutWorkHours mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo([self h_w:10]);
+        make.top.equalTo([self h_w:10]);
+    }];
+    [self.overWorkHours mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo([self h_w:10]);
+        make.top.equalTo(weakSelf.goOutWorkHours.mas_bottom).offset([self h_w:10]);
+    }];
+    
+    [self.workHours mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo([self h_w:10]);
+        make.top.equalTo(weakSelf.overWorkHours.mas_bottom).offset([self h_w:10]);
+    }];
+    
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(weakSelf.mas_bottom).offset(-[self h_w:1]);
+        make.left.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
+    }];
+    [super updateConstraints];
 }
 
+#pragma mark private
+-(void)h_setupViews{
+    [self addSubview:self.goOutWorkHours];
+    [self addSubview:self.overWorkHours];
+    [self addSubview:self.workHours];
+    [self addSubview:self.line];
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
+}
+
+#pragma mark lazyload
+
+
+
+#pragma mark dataload
 -(void)setDailyDetailsModel:(DailyDetailsModel *)dailyDetailsModel{
     if (!dailyDetailsModel) {
         return;
@@ -73,6 +102,14 @@
         _workHours.textColor = MAIN_PAN_2;
     }
     return _workHours;
+}
+
+-(UIView *)line{
+    if (!_line) {
+        _line = [[UIView alloc] init];
+        _line.backgroundColor = MAIN_LINE_COLOR;
+    }
+    return _line;
 }
 
 @end

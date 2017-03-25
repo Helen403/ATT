@@ -23,5 +23,5 @@
 @property (nonatomic , copy) NSString              * earlyWorkCount;
 @property (nonatomic , copy) NSString              * overWorkCount;
 @property (nonatomic , copy) NSString              * outWorkCount;
-
+@property(nonatomic,strong) NSString *normalRate;
 @end

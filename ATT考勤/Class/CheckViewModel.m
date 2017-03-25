@@ -21,7 +21,9 @@
     
     [self.trajectoryCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         if (result.length<200) {
             NSNumber *row =[NSNumber numberWithInteger:2];
             
@@ -67,14 +69,7 @@
 -(NSMutableArray *)arrTrajectory{
     if (!_arrTrajectory) {
         _arrTrajectory = [NSMutableArray array];
-        
-        //读取plist
-        //        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Trajectory" ofType:@"plist"];
-        //
-        //        NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
-        //
-        //        _arrTrajectory= [TrajectoryModel mj_objectArrayWithKeyValuesArray:data];
-        
+
     }
     return _arrTrajectory;
 }
@@ -155,6 +150,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 return nil;
             }];

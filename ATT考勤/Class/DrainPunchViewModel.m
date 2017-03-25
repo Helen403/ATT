@@ -15,7 +15,10 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
+         DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAttendPaintLeaveTypeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAttendPaintLeaveTypeResponse>"];
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[DrainPunchModel class] rowRootName:@"AttendPaidLeaveWorks"];
@@ -23,7 +26,7 @@
         
         [self.tableViewSubject sendNext:xmlDoc];
         
-        DismissHud();
+       
     }];
     
     [[[self.refreshDataCommand.executing skip:1] take:1] subscribeNext:^(id x) {
@@ -37,7 +40,9 @@
     [self.applyForgetCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
 
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
         if ([xmlDoc isEqualToString:@"0"]) {
             ShowMessage(@"漏打卡申请成功");
@@ -59,7 +64,9 @@
     [self.flowTemplateCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
         if ([xmlDoc isEqualToString:@"-1"]) {
             ShowMessage(@"审批人没设置");
@@ -133,6 +140,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;
@@ -175,6 +184,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;
@@ -211,6 +222,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;

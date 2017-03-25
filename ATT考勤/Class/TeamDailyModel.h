@@ -22,4 +22,6 @@
 @property (nonatomic , copy) NSString              * goOutWorkCount;
 @property (nonatomic , copy) NSString              * overWorkCount;
 
+@property(nonatomic,strong) NSString *normalRate;
+
 @end

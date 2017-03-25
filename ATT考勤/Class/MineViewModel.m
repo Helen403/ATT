@@ -18,6 +18,9 @@
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
         DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         if (result.length<200) {
             
             [self.failSubject sendNext:nil];
@@ -45,7 +48,9 @@
     
     [self.findSignCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
            DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         if (result.length<189) {
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"signName"];
         }else{
@@ -66,7 +71,9 @@
     
     [self.cardScoreCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         if (result.length<189) {
             [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"cardScore"];
         }else{
@@ -87,7 +94,9 @@
     
     [self.myHoldaysCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         if (result.length<189) {
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"findMyHoldays"];
         }else{
@@ -155,6 +164,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;
@@ -210,6 +221,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;
@@ -243,6 +256,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;
@@ -276,6 +291,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;

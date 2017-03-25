@@ -188,7 +188,7 @@
     _teamMonthModel = teamMonthModel;
     self.time.text =[NSString stringWithFormat:@"%@",[LSCoreToolCenter getFormatterYM:teamMonthModel.week]];
     self.team.text = [NSString stringWithFormat:@"%@",teamMonthModel.deptName];
-    self.attend.text = @"出勤率为80%";
+    self.attend.text = [NSString stringWithFormat:@"出勤率为%.2f%%",teamMonthModel.normalRate.floatValue] ;
     self.lateWorkCount.text = [NSString stringWithFormat:@"迟到:%@人",teamMonthModel.lateWorkCount];
     self.earlyWorkCount.text = [NSString stringWithFormat:@"早退:%@人",teamMonthModel.earlyWorkCount];
     self.forgetWorkCount.text = [NSString stringWithFormat:@"漏打卡:%@人",teamMonthModel.forgetWorkCount];

@@ -191,7 +191,7 @@
     _teamDailyModel = teamDailyModel;
     self.time.text = [LSCoreToolCenter getFormatterYMD:teamDailyModel.busDate];
     self.team.text = [NSString stringWithFormat:@"%@(%@人)",teamDailyModel.deptName,teamDailyModel.deptPersonCount] ;
-    self.attend.text = @"出勤率为80%";
+    self.attend.text =[NSString stringWithFormat:@"出勤率为%.2f%%",teamDailyModel.normalRate.floatValue] ;
     self.lateWorkCount.text = [NSString stringWithFormat:@"迟到:%@人",teamDailyModel.lateWorkCount];
     self.earlyWorkCount.text = [NSString stringWithFormat:@"早退:%@人",teamDailyModel.earlyWorkCount];
     self.forgetWorkCount.text = [NSString stringWithFormat:@"漏打卡:%@人",teamDailyModel.forgetWorkCount];

@@ -15,15 +15,17 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
+         DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAttendWorkShiftResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAttendWorkShiftResponse>"];
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[ShiftModel class] rowRootName:@"AttendWorkShifts"];
         self.arr = arr;
         
         [self.tableViewSubject sendNext:xmlDoc];
-        
-        DismissHud();
+       
     }];
     
     
@@ -36,10 +38,10 @@
     
     
     [self.applyChangeWorkCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
-       
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
         if ([xmlDoc isEqualToString:@"0"]) {
             ShowMessage(@"换班申请成功");
@@ -52,15 +54,15 @@
     
     
     [[[self.applyChangeWorkCommand.executing skip:1] take:1] subscribeNext:^(id x) {
-        
         if ([x isEqualToNumber:@(YES)]) {
             ShowMaskStatus(@"正在拼命加载");
         }
     }];
     [self.flowTemplateCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
         if ([xmlDoc isEqualToString:@"-1"]) {
             ShowMessage(@"审批人没设置");
@@ -135,6 +137,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;
@@ -172,7 +176,7 @@
                                  <applyUserCode xmlns=\"\">%@</applyUserCode>\
                                  <applyUserName xmlns=\"\">%@</applyUserName>\
                                  </saveApplyChangeWork>",self.companyCode,self.applyStartDatetime,self.applyEndDatetime,self.applyReason,self.applyStatus,self.flowInstanceId,self.changeDatetime,self.shiftOldLsh,self.shiftOldName,self.shiftNewLsh,self.shiftNewName,self.applyUserCode,self.applyUserName];
-//                NSLog(@"%@",body);
+
                 [self SOAPData:saveApplyOutWork soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
@@ -180,6 +184,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;
@@ -217,6 +223,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;

@@ -15,7 +15,10 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
+         DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAttendGoOutWorkResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAttendGoOutWorkResponse>"];
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[GoOutModel class] rowRootName:@"AttendGoOutWorks"];
@@ -23,7 +26,7 @@
         
         [self.tableViewSubject sendNext:xmlDoc];
         
-        DismissHud();
+       
     }];
     
     
@@ -36,10 +39,10 @@
     
     
     [self.applyGoOutWorkCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
-        
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
         if ([xmlDoc isEqualToString:@"0"]) {
             ShowMessage(@"外出申请成功");
@@ -60,7 +63,9 @@
     [self.flowTemplateCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
         if ([xmlDoc isEqualToString:@"-1"]) {
             ShowMessage(@"审批人没设置");
@@ -134,6 +139,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;
@@ -169,7 +176,7 @@
                                  <applyUserCode xmlns=\"\">%@</applyUserCode>\
                                  <applyUserName xmlns=\"\">%@</applyUserName>\
                                  </saveApplyGoOutWork>",self.companyCode,self.applyStartDatetime,self.applyEndDatetime,self.applyLenHours,self.applyReason,self.applyStatus,self.flowInstanceId,self.outAddress,self.outtype,self.applyUserCode,self.applyUserName];
-                //NSLog(@"%@",body);
+              
                 [self SOAPData:saveApplyOutWork soapBody:body success:^(NSString *result) {
                     
                     [subscriber sendNext:result];
@@ -177,6 +184,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;
@@ -214,6 +223,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;

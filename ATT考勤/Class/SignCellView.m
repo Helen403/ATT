@@ -55,7 +55,7 @@
     
     [self.number mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
-        make.left.equalTo(SCREEN_WIDTH/3*2+[self h_w:10]);
+        make.left.equalTo(SCREEN_WIDTH/3*2+[self h_w:30]);
     }];
     [super updateConstraints];
 }

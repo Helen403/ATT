@@ -16,7 +16,9 @@
     
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
-
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterStr:result filter:@"String"];
         NSLog(@"%@",xmlDoc);
         [self.SMSbackSubject sendNext:xmlDoc];
@@ -33,8 +35,9 @@
     
     [self.changeTelphoneCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
-        
-        NSLog(@"%@",result);
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         
         GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:result options:0 error:nil];
         GDataXMLElement *xmlEle = [xmlDoc rootElement];
@@ -114,6 +117,8 @@
                         } failure:^(NSError *error) {
                             DismissHud();
                             ShowErrorStatus(@"请检查网络状态");
+                            [subscriber sendNext:@"netFail"];
+                            [subscriber sendCompleted];
                         }];
                     }
                     
@@ -172,6 +177,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 return nil;
             }];

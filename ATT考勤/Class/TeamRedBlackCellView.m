@@ -10,6 +10,10 @@
 
 @interface TeamRedBlackCellView()
 
+@property(nonatomic,strong) UILabel *rank;
+
+@property(nonatomic,strong) UILabel *sum;
+
 @property(nonatomic,strong) UIImageView *img;
 
 @property(nonatomic,strong) UILabel *department;
@@ -36,12 +40,25 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-[self h_w:40], [self h_w:170]));
     }];
     
+    
     [self.department mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
         make.left.equalTo(weakSelf.img.mas_left).offset(SCREEN_WIDTH*0.05);
         make.size.equalTo(CGSizeMake([self h_w:120], [self h_w:40]));
         
     }];
+    
+    [self.rank mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(weakSelf.department);
+        make.bottom.equalTo(weakSelf.department.mas_top).offset(-[self h_w:20]);
+    }];
+    
+    [self.sum mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(weakSelf.department);
+        make.top.equalTo(weakSelf.department.mas_bottom).offset([self h_w:20]);
+    }];
+    
+    
     [self.attend mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.department.mas_right).offset(SCREEN_WIDTH*0.17);
         make.top.equalTo(weakSelf.img.mas_top).offset([self h_w:0]);
@@ -70,6 +87,8 @@
 
 #pragma mark private
 -(void)h_setupViews{
+    [self addSubview:self.rank];
+    [self addSubview:self.sum];
     [self addSubview:self.img];
     [self addSubview:self.department];
     [self addSubview:self.attend];
@@ -88,46 +107,25 @@
     }
     _teamRedBlackModel = teamRedBlackModel;
     
-    
-    switch (self.index) {
-        case 0:{
-            self.img.image = ImageNamed(@"red_bg");
-            self.department.text =[NSString stringWithFormat:@"1 %@",teamRedBlackModel.deptName];
-            self.attend.text = [NSString stringWithFormat:@"出勤率:%@",teamRedBlackModel.sumScore];
-            self.late.text = [NSString stringWithFormat:@"迟到次数:%@次",teamRedBlackModel.normalCount];
-            self.early.text = [NSString stringWithFormat:@"早退次数:%@次",teamRedBlackModel.overWorkCount];
-            self.forget.text = [NSString stringWithFormat:@"其他:%@次",teamRedBlackModel.otherWorkCount];
-            break;
-        }
-        case 1:{
-            self.img.image = ImageNamed(@"greed_bg");
-            self.department.text =[NSString stringWithFormat:@"2 %@",teamRedBlackModel.deptName];
-            self.attend.text = [NSString stringWithFormat:@"出勤率:%@",teamRedBlackModel.sumScore];
-            self.late.text = [NSString stringWithFormat:@"迟到次数:%@次",teamRedBlackModel.normalCount];
-            self.early.text = [NSString stringWithFormat:@"早退次数:%@次",teamRedBlackModel.overWorkCount];
-            self.forget.text = [NSString stringWithFormat:@"其他:%@次",teamRedBlackModel.otherWorkCount];
-            break;
-        }
-        case 2:{
-            self.img.image = ImageNamed(@"black_bg");
-            self.department.text =[NSString stringWithFormat:@"3 %@",teamRedBlackModel.deptName];
-            self.attend.text = [NSString stringWithFormat:@"出勤率:%@",teamRedBlackModel.sumScore];
-            self.late.text = [NSString stringWithFormat:@"迟到次数:%@次",teamRedBlackModel.normalCount];
-            self.early.text = [NSString stringWithFormat:@"早退次数:%@次",teamRedBlackModel.overWorkCount];
-            self.forget.text = [NSString stringWithFormat:@"其他:%@次",teamRedBlackModel.otherWorkCount];
-            break;
-        }
-            
-        default:{
-            self.img.image = ImageNamed(@"black_bg");
-            self.department.text =[NSString stringWithFormat:@"%@",teamRedBlackModel.deptName];
-            self.attend.text = [NSString stringWithFormat:@"出勤率:%@",teamRedBlackModel.sumScore];
-            self.late.text = [NSString stringWithFormat:@"迟到次数:%@次",teamRedBlackModel.normalCount];
-            self.early.text = [NSString stringWithFormat:@"早退次数:%@次",teamRedBlackModel.overWorkCount];
-            self.forget.text = [NSString stringWithFormat:@"其他:%@次",teamRedBlackModel.otherWorkCount];
-            break;
-        }
+    self.sum.text = [NSString stringWithFormat:@"总分:%@",teamRedBlackModel.sumScore] ;
+    self.rank.text =[NSString stringWithFormat:@"第%ld名",(long)self.index+1];
+    self.department.text =[NSString stringWithFormat:@"%@",teamRedBlackModel.deptName];
+    self.attend.text = [NSString stringWithFormat:@"正常出勤:%@次",teamRedBlackModel.normalCount];
+    self.late.text = [NSString stringWithFormat:@"累计加班:%@次",teamRedBlackModel.overWorkCount];
+    self.early.text = [NSString stringWithFormat:@"迟到早退:%@次",teamRedBlackModel.earlyLateWorkCount];
+    self.forget.text = [NSString stringWithFormat:@"其他:%@次",teamRedBlackModel.otherWorkCount];
+    if (self.index == 0) {
+        self.img.image = ImageNamed(@"red_bg");
+        
+    }else if(self.index == self.count-1){
+        self.img.image = ImageNamed(@"black_bg");
+        
+    }else{
+        self.img.image = ImageNamed(@"greed_bg");
     }
+    
+    
+    
 }
 
 #pragma mark lazyload
@@ -153,7 +151,7 @@
 -(UILabel *)attend{
     if (!_attend) {
         _attend = [[UILabel alloc] init];
-       
+        
         _attend.textAlignment = NSTextAlignmentCenter;
         _attend.text = @"";
         _attend.font = H14;
@@ -195,6 +193,26 @@
         _forget.textColor = white_color;
     }
     return _forget;
+}
+
+-(UILabel *)rank{
+    if (!_rank) {
+        _rank = [[UILabel alloc] init];
+        _rank.text = @"";
+        _rank.font = H14;
+        _rank.textColor = MAIN_PAN_2;
+    }
+    return _rank;
+}
+
+-(UILabel *)sum{
+    if (!_sum) {
+        _sum = [[UILabel alloc] init];
+        _sum.text = @"";
+        _sum.font = H14;
+        _sum.textColor = MAIN_PAN_2;
+    }
+    return _sum;
 }
 
 @end

@@ -95,6 +95,8 @@
 
 @property(nonatomic,strong) NSString *flowInstanceId;
 
+@property(nonatomic,assign) NSInteger dataIndex;
+
 @end
 
 @implementation CostView
@@ -255,7 +257,6 @@
     
     [self addSubview:self.scrollView];
     
-    
     [self.scrollView addSubview:self.timeView1];
     
     [self.scrollView addSubview:self.applyTimeText];
@@ -374,8 +375,6 @@
         self.cuserCode = [NSString stringWithFormat:@"%@,%@",self.cuserCode,teamList.empCode];
         self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
     }
-    
-//    self.cuserCode = [self.cuserCode substringFromIndex:1];
     self.cuserName = [self.cuserName substringFromIndex:1];
 }
 
@@ -398,17 +397,13 @@
     if (!_datepicker) {
         _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
             
-            NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-            
-            if (startDateText.length > 0) {
-                
-                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:startDateText endTime:self.lateTimeShowText.text]];
-                if (str.doubleValue>0) {
+            switch (self.dataIndex) {
+                case 1:{
+                    NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
                     self.applyTimeShowText.text = startDateText;
-                }else{
-                    ShowMessage(@"请选择正确时间");
+                    break;
                 }
-                
+           
             }
             
             
@@ -433,6 +428,8 @@
 
 -(void)timeClick1{
     _datepicker = nil;
+    self.dataIndex = 1;
+    [self.datepicker setDateType:DateTypeStartDate];
     [self.datepicker show];
 }
 
@@ -509,11 +506,9 @@
         _sureTimeShowText = [[UITextField alloc] init];
         _sureTimeShowText.backgroundColor = [UIColor clearColor];
         //设置边框样式，只有设置了才会显示边框样式
-        
         // 设置内容 -- 垂直居中
         _sureTimeShowText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         _sureTimeShowText.textAlignment = NSTextAlignmentRight;
-        
         //当输入框没有内容时，水印提示 提示内容为password
         _sureTimeShowText.placeholder = @"报销金额";
         _sureTimeShowText.tintColor = MAIN_PAN_2;
@@ -524,7 +519,6 @@
         //设置输入框内容的字体样式和大小
         _sureTimeShowText.font = H14;
         // 设置右边永远显示清除按钮
-        //        _sureTimeShowText.clearButtonMode = UITextFieldViewModeAlways;
         _sureTimeShowText.keyboardType = UIKeyboardTypePhonePad;
         // 5.监听文本框的文字改变
         _sureTimeShowText.delegate = self;
@@ -572,20 +566,6 @@
     
 }
 
-//-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//
-//    if (textField==self.sureTimeShowText) {
-//
-//        return [CommanTool validateNumber:string text:textField.text floatCount:1];
-//
-//    }
-//
-//    return YES;
-//
-//}
-
-
-
 -(UIView *)line3{
     if (!_line3) {
         _line3 = [[UIView alloc] init];
@@ -597,24 +577,17 @@
 -(JSTextView *)textView{
     if (!_textView) {
         _textView  = [[JSTextView alloc] init];
-        //        _textView.backgroundColor = yellow_color;
-        
         _textView.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
         _textView.editable = YES;        //是否允许编辑内容，默认为“YES”
-        //        _textView.delegate = self;       //设置代理方法的实现类
-        _textView.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置字体名字和字体大小;
-        //        _textView.returnKeyType = UIReturnKeyDefault;//return键的类型
-        //        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
+        _textView.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置
         _textView.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _textView.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
         _textView.textColor = MAIN_PAN_2;
-        
         _textView.myPlaceholder = @"报销内容";
         _textView.myPlaceholderColor = [UIColor lightGrayColor];
-        
         _textView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _textView.layer.borderWidth =1.0;
-        _textView.layer.cornerRadius =5.0;
+        _textView.layer.borderWidth = 1.0;
+        _textView.layer.cornerRadius = 5.0;
         _textView.font = H14;
         
     }
@@ -635,7 +608,6 @@
 -(ApplyManView *)applyManView{
     if (!_applyManView) {
         _applyManView = [[ApplyManView alloc] initWithViewModel:self.applyManViewModel];
-        
         _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _applyManView.layer.borderWidth = 1.0;
         _applyManView.layer.cornerRadius = 5.0;
@@ -656,19 +628,13 @@
         [_finish setTitle:@"提交申请" forState:UIControlStateNormal];
         _finish.titleLabel.font = H22;
         [_finish addTarget:self action:@selector(finish:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_finish.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_finish.layer setCornerRadius:10];
-        
         [_finish.layer setBorderWidth:2];//设置边界的宽度
-        
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
         [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
-    
     return _finish;
 }
 
@@ -767,7 +733,7 @@
 
 -(void)click1{
     self.index = 1;
-    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.costViewModel.arrDept.count);
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*(self.costViewModel.arrDept.count+1));
     [self.tableView reloadData];
     [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
     [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;

@@ -13,5 +13,5 @@
 @property (nonatomic , copy) NSString              * cardTime;
 @property (nonatomic , copy) NSString              * cardStatus;
 @property (nonatomic , copy) NSString              * cardDate;
-
+@property (nonatomic , copy) NSString              * cardNormalDatetime;
 @end

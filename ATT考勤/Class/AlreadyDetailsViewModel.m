@@ -17,6 +17,9 @@
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findFlowStepCheckByIdResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findFlowStepCheckByIdResponse>"];
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[FlowStepChecksModel class] rowRootName:@"FlowStepChecks"];
@@ -74,11 +77,15 @@
                     } failure:^(NSError *error) {
                         DismissHud();
                         ShowErrorStatus(@"请检查网络状态");
+                        [subscriber sendNext:@"netFail"];
+                        [subscriber sendCompleted];
                     }];
                     
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;

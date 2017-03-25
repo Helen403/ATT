@@ -48,7 +48,6 @@
 
 @property(nonatomic,strong) UIScrollView *scrollView;
 
-
 @property(nonatomic,strong) UIView *timeView1;
 
 @property(nonatomic,strong) UIView *timeView2;
@@ -61,8 +60,6 @@
 
 @property(nonatomic,strong) NSString *workLsh;
 
-@property(nonatomic,strong) UITableView *tableView;
-
 @property(nonatomic,assign) NSInteger index;
 
 @property(nonatomic,strong) NSString *shiftOldLsh;
@@ -74,6 +71,8 @@
 @property(nonatomic,strong) NSString *stepUserNames;
 
 @property(nonatomic,strong) NSString *flowInstanceId;
+
+@property(nonatomic,assign) NSInteger dataIndex;
 
 @end
 
@@ -224,15 +223,7 @@
     [[self.lateViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         dispatch_sync(dispatch_get_main_queue(), ^{
-//            self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.drainPunchViewModel.arr.count);
-//            [self.tableView reloadData];
-            //            OffModel *off = self.offViewModel.arr[0];
-            //            self.sureTimeShowText.text = off.workName;
-            //            self.workLsh = off.workLsh;
-            
-            //            self.compensateShowText.text = move.shiftName;
-            //            self.shiftOldLsh = move.shiftLsh;
-            //            self.shiftNewLsh = move.shiftLsh;
+
             
         });
     }];
@@ -283,8 +274,6 @@
         self.cuserCode = [NSString stringWithFormat:@"%@,%@",self.cuserCode,teamList.empCode];
         self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
     }
-    
-//    self.cuserCode = [self.cuserCode substringFromIndex:1];
     self.cuserName = [self.cuserName substringFromIndex:1];
 }
 
@@ -302,27 +291,16 @@
     if (!_datepicker) {
         _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
             
-            NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-            NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-            
-            if (startDateText.length > 0) {
-                
-                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:startDateText endTime:self.lateTimeShowText.text]];
-                if (str.doubleValue>0) {
+            switch (self.dataIndex) {
+                case 1:{
+                    NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
                     self.applyTimeShowText.text = startDateText;
-                }else{
-                    ShowMessage(@"请选择正确时间");
+                    break;
                 }
-                
-            }
-            
-            if (endDateText.length > 0 ) {
-                
-                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:endDateText]];
-                if (str.doubleValue>0) {
+                case 2:{
+                    NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
                     self.lateTimeShowText.text = endDateText;
-                }else{
-                    ShowMessage(@"请选择正确时间");
+                    break;
                 }
             }
             
@@ -348,6 +326,8 @@
 
 -(void)timeClick1{
     _datepicker = nil;
+    self.dataIndex = 1;
+    [self.datepicker setDateType:DateTypeStartDate];
     [self.datepicker show];
 }
 
@@ -363,6 +343,8 @@
 
 -(void)timeClick2{
     _datepicker = nil;
+    self.dataIndex = 2;
+    [self.datepicker setDateType:DateTypeEndDate];
     [self.datepicker show];
 }
 
@@ -430,22 +412,16 @@
         
         _textView.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
         _textView.editable = YES;        //是否允许编辑内容，默认为“YES”
-        
-        _textView.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置字体名字和字体大小;
-        //        _textView.returnKeyType = UIReturnKeyDefault;//return键的类型
-        //        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
+        _textView.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置
         _textView.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _textView.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
         _textView.textColor = MAIN_PAN_2;
-
         _textView.myPlaceholder = @"迟到原因";
         _textView.myPlaceholderColor = [UIColor lightGrayColor];
-        
         _textView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
-        _textView.layer.borderWidth =1.0;
-        _textView.layer.cornerRadius =5.0;
+        _textView.layer.borderWidth = 1.0;
+        _textView.layer.cornerRadius = 5.0;
         _textView.font = H14;
-        
     }
     return _textView;
 }
@@ -464,7 +440,6 @@
 -(ApplyManView *)applyManView{
     if (!_applyManView) {
         _applyManView = [[ApplyManView alloc] initWithViewModel:self.applyManViewModel];
-        
         _applyManView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _applyManView.layer.borderWidth = 1.0;
         _applyManView.layer.cornerRadius = 5.0;
@@ -485,27 +460,29 @@
         [_finish setTitle:@"提交申请" forState:UIControlStateNormal];
         _finish.titleLabel.font = H22;
         [_finish addTarget:self action:@selector(finish:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_finish.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_finish.layer setCornerRadius:10];
-        
         [_finish.layer setBorderWidth:2];//设置边界的宽度
-        
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
         [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
-    
     return _finish;
 }
 
 -(void)finish:(UIButton *)button{
     
-    if ([self.applyTimeShowText.text isEqualToString:self.lateTimeShowText.text]) {
-        ShowMessage(@"请选择漏打卡时间");
-        return;
-    }
+//    if ([self.applyTimeShowText.text isEqualToString:self.lateTimeShowText.text]) {
+//        ShowMessage(@"请选择漏打卡时间");
+//        return;
+//    }
+//    
+    
+//    NSInteger a = [LSCoreToolCenter dateTimeDifferenceWithStartTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text];
+//    if (a<0) {
+//        ShowMessage(@"结束时间小于开始时间");
+//        return;
+//    }
     
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.lateViewModel.companyCode = companyCode;
@@ -521,13 +498,6 @@
     
     
     self.lateViewModel.changeDatetime = [NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text]];
-    
-    //    self.drainPunchViewModel.shiftOldLsh = self.shiftOldLsh;
-    //    self.drainPunchViewModel.shiftOldName = self.sureTimeShowText.text;
-    
-    
-    //    self.drainPunchViewModel.workLsh = self.workLsh;
-    //    self.drainPunchViewModel.workName = self.sureTimeShowText.text;
     
     UserModel *user =  getModel(@"user");
     self.lateViewModel.applyUserCode = user.userCode;

@@ -11,10 +11,6 @@
 
 @implementation MyMsgViewModel
 
-
-
-
-
 -(NSMutableArray *)arr{
     if (!_arr) {
         _arr = [NSMutableArray array];

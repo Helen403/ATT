@@ -84,4 +84,13 @@
 
 @property(nonatomic,strong) RACSubject *attendFailSubject;
 
+/**************************************/
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+@property(nonatomic,strong) RACSubject *personalSubject;
+
+@property(nonatomic,strong) RACSubject *notSubject;
+
+@property(nonatomic,strong) RACCommand *scheduCommand;
+
 @end

@@ -80,7 +80,8 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
 
 -(void)setupUI {
     self.segmentView.selectedSegmentIndex = 0;
-    [self.segmentView addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+//    self.segmentView.enabled = NO;
+    //[self.segmentView addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     
     self.buttomView.layer.cornerRadius = 10;
     self.buttomView.layer.masksToBounds = YES;
@@ -97,9 +98,7 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
     self.backgroundColor = RGBA(0, 0, 0, 0);
     [self layoutIfNeeded];
     
-   
-    
-    
+
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self];
     
     [self.showYearView addSubview:self.datePicker];
@@ -456,7 +455,7 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
     }
     
     
-    NSLog(@"%@",self.scrollToDate);
+    //NSLog(@"%@",self.scrollToDate);
 }
 
 -(void)yearChange:(NSInteger)row {
@@ -652,10 +651,12 @@ typedef void(^doneBlock)(NSDate *,NSDate *);
     switch (dateType) {
         case DateTypeStartDate:
             self.segmentView.selectedSegmentIndex = 0;
+            [self.segmentView setEnabled:NO forSegmentAtIndex:1];//设置指定索引选项不可选
             break;
             
         default:
             self.segmentView.selectedSegmentIndex = 1;
+             [self.segmentView setEnabled:NO forSegmentAtIndex:0];//设置指定索引选项不可选
             break;
     }
 }

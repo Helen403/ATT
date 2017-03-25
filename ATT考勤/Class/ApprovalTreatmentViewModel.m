@@ -19,6 +19,9 @@
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findFlowStepCheckByIdResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findFlowStepCheckByIdResponse>"];
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[FlowStepChecksModel class] rowRootName:@"FlowStepChecks"];
@@ -29,16 +32,13 @@
     }];
     
     
-    [[[self.refreshDataCommand.executing skip:1] take:1] subscribeNext:^(id x) {
-        
-        //        if ([x isEqualToNumber:@(YES)]) {
-        //
-        //        }
-    }];
+
     
     [self.updateCheckFlowCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
         if ([xmlDoc isEqualToString:@"0"]) {
             ShowMessage(@"审批成功");
@@ -99,11 +99,15 @@
                     } failure:^(NSError *error) {
                         DismissHud();
                         ShowErrorStatus(@"请检查网络状态");
+                        [subscriber sendNext:@"netFail"];
+                        [subscriber sendCompleted];
                     }];
                     
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;
@@ -142,6 +146,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 

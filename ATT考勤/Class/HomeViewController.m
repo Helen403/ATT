@@ -23,21 +23,11 @@
 
 @implementation HomeViewController
 
--(void)viewWillAppear:(BOOL)animated{
-    
-    [self hideNavigationBar:YES animated:NO];
-    [super viewWillAppear:animated];
-}
 
--(void)viewWillDisappear:(BOOL)animated{
-    [self hideNavigationBar:NO animated:NO];
-    
-    [super viewWillDisappear:animated];
-}
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-   
+    
 }
 
 #pragma mark system
@@ -53,7 +43,12 @@
 }
 
 -(void)h_viewWillAppear{
+    [self hideNavigationBar:YES animated:NO];
     [self.homeView h_loadData];
+}
+
+-(void)h_viewWillDisappear{
+    [self hideNavigationBar:NO animated:NO];
 }
 
 #pragma mark private
@@ -75,7 +70,7 @@
         SetController *set = [[SetController alloc] init];
         [self.navigationController pushViewController:set animated:NO];
     }];
-
+    
 }
 
 

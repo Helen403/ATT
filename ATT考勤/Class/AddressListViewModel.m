@@ -16,7 +16,10 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
+           DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAllEmpByCompanyCodeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAllEmpByCompanyCodeResponse>"];
         
         NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[AddressListModel class] rowRootName:@"Emps"];
@@ -31,16 +34,10 @@
         
         [self.tableViewSubject sendNext:xmlDoc];
         
-        DismissHud();
+     
     }];
     
-    
-    [[[self.refreshDataCommand.executing skip:1] take:1] subscribeNext:^(id x) {
-        
-//        if ([x isEqualToNumber:@(YES)]) {
-//            
-//        }
-    }];
+
     
 }
 
@@ -97,6 +94,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;

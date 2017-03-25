@@ -814,6 +814,18 @@ void DismissHud(void){
     return [formatter stringFromDate:theDate];
 }
 
++(NSString *)getFormatterYMDHM:(NSString *)str {
+    
+    
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSDate *theDate = [formatter dateFromString:str];
+    [formatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
+    return [formatter stringFromDate:theDate];
+}
+
 
 +(NSString *)getDateAddMinuts:(NSString *)str time:(NSInteger )minute{
 
@@ -1146,5 +1158,20 @@ void DismissHud(void){
     UIGraphicsEndImageContext();
     return image;
 }
+
+/**
+ * 开始到结束的时间差
+ */
++ (NSInteger)dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime{
+    NSDateFormatter *date = [[NSDateFormatter alloc]init];
+    [date setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSDate *startD =[date dateFromString:startTime];
+    NSDate *endD = [date dateFromString:endTime];
+    NSTimeInterval start = [startD timeIntervalSince1970]*1;
+    NSTimeInterval end = [endD timeIntervalSince1970]*1;
+    NSTimeInterval value = end - start;
+    return value;
+}
+
 
 @end

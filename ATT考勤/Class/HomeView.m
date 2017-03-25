@@ -36,17 +36,14 @@
 
 @property(nonatomic,strong) UILabel *status;
 
-//上一个时间段图片
 @property(nonatomic,strong) UIImageView *preImg;
 
 @property(nonatomic,strong) UILabel *preText;
 
-//下一个时间段图片
 @property(nonatomic,strong) UIImageView *lastImg;
 
 @property(nonatomic,strong) UILabel *lastText;
 
-//包裹下面的view
 @property(nonatomic,strong) UIView *view;
 
 @property(nonatomic,strong) UIImageView *punch;
@@ -61,7 +58,6 @@
 
 @property(nonatomic,strong) UILabel *netStatusText;
 
-//时间
 @property(nonatomic,strong) NSTimer *timeNow;
 
 @property(nonatomic,assign) CGFloat width;
@@ -69,7 +65,6 @@
 @property(nonatomic,strong) UIScrollView *scrollView;
 
 @property(nonatomic,strong) UIImageView *bg;
-
 
 @property(nonatomic,strong) NSString *locLongitude;
 
@@ -80,7 +75,6 @@
 @property(nonatomic,strong) BMKLocationService *locService;
 
 @property(nonatomic,strong) NSString *clockMode;
-
 
 @property(nonatomic,assign) NSInteger cardPhase;
 
@@ -271,14 +265,15 @@
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     
     self.homeViewModel.companyCode = companyCode;
-    UserModel *user =  getModel(@"user");
+    UserModel *user = getModel(@"user");
+    self.name.text = user.userRealName;
     self.homeViewModel.userCode = user.userCode;
     NSMutableArray *arr = [LSCoreToolCenter currentYearArr];
     self.homeViewModel.curYear = arr[0];
     self.homeViewModel.curMonth = arr[1];
     self.homeViewModel.curDay = arr[2];
     
-    [self.homeViewModel.sendclickCommand execute:nil];
+    [self.homeViewModel.refreshDataCommand execute:nil];
     //设置时间
     [self setTime];
     //检查网络
@@ -292,10 +287,8 @@
 }
 
 -(void)isNetWorking{
-    
     //开启网络指示器，开始监听
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    
     // 检测网络连接的单例,网络变化时的回调方法
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status){
         switch (status) {
@@ -304,29 +297,20 @@
                 self.netStatusText.text = @"当前无网络";
                 break;
             }
-                
             case AFNetworkReachabilityStatusNotReachable:{
-                
-                //                NSLog(@"无网络");
                 self.clockMode = @"1";
                 self.netStatusText.text = @"当前无网络";
                 break;
             }
-                
             case AFNetworkReachabilityStatusReachableViaWiFi:{
                 self.clockMode = @"WIFI";
-                //                NSLog(@"WiFi网络");
                 [self setWIFINAME];
                 break;
-                
             }
-                
             case AFNetworkReachabilityStatusReachableViaWWAN:{
                 self.clockMode = @"GPS";
-                //                NSLog(@"无线网络");
                 [self setWWAN];
                 break;
-                
             }
         }
     }];
@@ -344,9 +328,6 @@
     for (NSString *ifnam in ifs) {
         info = (__bridge_transfer id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam);
         NSString *str = info[@"SSID"];
-        //        NSString *str2 = info[@"BSSID"];
-        //        NSString *str3 = [[ NSString alloc] initWithData:info[@"SSIDDATA"] encoding:NSUTF8StringEncoding];
-        
         self.netStatusText.text = [NSString stringWithFormat:@"当前连接WIFI:%@",str];
         self.netStatusImg.image = ImageNamed(@"wifi");
     }
@@ -355,12 +336,10 @@
 
 //实现相关delegate 处理位置信息更新
 //处理方向变更信息
-- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation{
-    //NSLog(@"heading is %@",userLocation.heading);
-}
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation{}
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-    //    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+
     
     NSString *currentLatitude = [[NSString alloc]
                                  initWithFormat:@"%f",
@@ -380,26 +359,11 @@
         if (array.count > 0) {
             CLPlacemark *placemark = [array objectAtIndex:0];
             if (placemark != nil) {
-                //                NSString *city = placemark.locality;
-                //                //                NSLog(@"%@",city);
-                //                NSString *city1 = placemark.name;
-                //                //                NSLog(@"%@",city1);
-                //                self.locAddress = [NSString stringWithFormat:@"%@%@",city,city1];
                 NSDictionary *city2 = placemark.addressDictionary;
-                //                NSLog(@"%@",city2);
                 NSArray *dict = city2[@"FormattedAddressLines"];
                 NSString *str=  [dict objectAtIndex:0];
-                //                NSLog(@"%@",str);
-                //                NSString *city3 = placemark.region;
-                //                NSLog(@"%@",city3);
-                //找到了当前位置城市后就关闭服务
-                
-                
-                
                 self.locAddress = str;
-                
                 [self.locService stopUserLocationService];
-                
             }
         }
     }];
@@ -432,10 +396,35 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             self.status.text = @"状态:正常";
         });
-        
+    }];
+    
+    //更新个人信息
+    [[self.homeViewModel.personalSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+          [self performSelectorOnMainThread:@selector(personInfo) withObject:nil waitUntilDone:YES];
+    }];
+    
+    //没有排班的
+    [[self.homeViewModel.notSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.status.text = @"状态:休息";
+            self.preImg.image = ImageNamed(@"homepage_work_gray");
+            self.preText.text = @"-:-";
+            self.lastImg.image = ImageNamed(@"homepage_rest_gray");
+            self.lastText.text = @"-:-";
+        });
+       
     }];
     
 }
+
+//个人信息
+-(void)personInfo{
+    EmpModel *empModel =  self.homeViewModel.empModel;
+    Dept *dept = self.homeViewModel.dept;
+    
+    self.department.text = [NSString stringWithFormat:@"%@ %@",dept.deptNickName,empModel.position];
+}
+
 -(void)attendRecord:(NSNumber *)num{
     NSString *curDate =[LSCoreToolCenter currentYearType];// 当前日期
     NSString *onworkdatetime = [NSString stringWithFormat:@"%@ %@", curDate,self.startDatetime]; // 上班时间
@@ -454,7 +443,6 @@
         if (self.homeViewModel.arrAttendRecord.count == 1) {
             
             AttendCardRecord *attendCardRecord1 = self.homeViewModel.arrAttendRecord[0];
-            
             
             NSString *carddatetime=[NSString stringWithFormat:@"%@ %@",curDate,attendCardRecord1.cardTime]; // 打卡时间
             NSString *onworkbefore30 =[LSCoreToolCenter getDateAddMinuts:onworkdatetime time:-1*offSetCardArea];//上班标准时间-30分钟
@@ -481,7 +469,6 @@
         if (self.homeViewModel.arrAttendRecord.count == 2) {
             AttendCardRecord *record_onwork = self.homeViewModel.arrAttendRecord[0];
             AttendCardRecord *record_offwork = self.homeViewModel.arrAttendRecord[0];
-            
             retbackstatus=3;
             retbackcardstatus_onwork = record_onwork.cardStatus;
             retbackcardstatus_offwork = record_offwork.cardStatus;
@@ -496,7 +483,6 @@
         long offworkdiff =[LSCoreToolCenter getDateDiff:curDatetime end:offworkafter30];
         //在上班正常或者迟到的范围之内
         if(onworkdiff>0){
-            
             retbackstatus=4;
             retbackcardstatus_onwork=@"-1";
             retbackcardstatus_offwork=@"-1";
@@ -506,7 +492,6 @@
         }else{
             //在下班正常的范围之内
             if(offworkdiff>0){
-                
                 retbackstatus=5;
                 retbackcardstatus_onwork = @"-1";
                 retbackcardstatus_offwork = @"-1";
@@ -514,7 +499,6 @@
                 retbackcardtime_offwork = self.endDatetime;
             }else{
                 //下班漏打打卡了
-                
                 retbackstatus=6;
                 retbackcardstatus_onwork = @"-1";
                 retbackcardstatus_offwork = @"-1";
@@ -686,14 +670,7 @@
 
 
 -(void)mainThread{
-    EmpModel *empModel =  self.homeViewModel.empModel;
-    Dept *dept = self.homeViewModel.dept;
-    
-    self.name.text = empModel.empName;
-    self.department.text = [NSString stringWithFormat:@"%@ %@",dept.deptNickName,empModel.position];
-    
-    /*********************************************/
-    //    Dept *deptTmp =  self.homeViewModel.dept;
+
     AttendWorkShift *attendWorkShift = self.homeViewModel.attendWorkShift;
     NSString *count =  attendWorkShift.daySignCount;
     
@@ -1230,8 +1207,6 @@
         // 设置定位精确度到米
         _locService.desiredAccuracy = kCLLocationAccuracyBest;
         // 设置过滤器为无
-        //        _locService.distanceFilter = kCLDistanceFilterNone;
-        
         _locService.distanceFilter=10;
     }
     return _locService;
@@ -1422,7 +1397,6 @@
 -(UIImageView *)bg{
     if (!_bg) {
         _bg = [[UIImageView alloc] init];
-        
     }
     return _bg;
 }

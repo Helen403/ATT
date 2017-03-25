@@ -1,45 +1,52 @@
 //
-//  TeamOutWorkDetailsView.m
+//  TeamRedBlackView.m
 //  ATT考勤
 //
 //  Created by Helen on 17/3/23.
 //  Copyright © 2017年 Helen. All rights reserved.
 //
 
-#import "TeamOutWorkDetailsView.h"
-#import "TeamOutWorkDetailsCellView.h"
-#import "TeamOutWorkDetailsViewModel.h"
+#import "TeamRedBlackView.h"
+#import "TeamRedBlackCellView.h"
+#import "TeamRedBlackViewModel.h"
 
 
-@interface TeamOutWorkDetailsView()<UITableViewDelegate,UITableViewDataSource>
 
-@property(nonatomic,strong) TeamOutWorkDetailsViewModel *teamOutWorkDetailsViewModel;
+@interface TeamRedBlackView()<UITableViewDelegate,UITableViewDataSource>
+
+@property(nonatomic,strong) TeamRedBlackViewModel *teamRedBlackViewModel;
 
 @property(nonatomic,strong) UITableView *tableView;
+
+
 
 @end
 
 
-@implementation TeamOutWorkDetailsView
+@implementation TeamRedBlackView
 
 #pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
     
-    self.teamOutWorkDetailsViewModel = (TeamOutWorkDetailsViewModel *)viewModel;
+    self.teamRedBlackViewModel = (TeamRedBlackViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
 
 -(void)updateConstraints{
     
-    WS(weakSelf);
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(weakSelf);
+        make.top.equalTo(0);
+        make.left.equalTo(0);
+        make.right.equalTo(0);
+        make.bottom.equalTo(0);
+        
     }];
     [super updateConstraints];
 }
 
 #pragma mark private
 -(void)h_setupViews{
+    
     
     [self addSubview:self.tableView];
     
@@ -48,7 +55,7 @@
 }
 
 -(void)h_bindViewModel{
-    [[self.teamOutWorkDetailsViewModel.successSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+    [[self.teamRedBlackViewModel.successSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -56,32 +63,20 @@
     }];
 }
 
--(void)setEndDate:(NSString *)endDate{
-    if (!endDate) {
-        return;
-    }
-    _endDate = endDate;
+-(void)h_loadData{
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     
-    self.teamOutWorkDetailsViewModel.companyCode = companyCode;
-    
-    self.teamOutWorkDetailsViewModel.deptCode = self.deptCode;
-    self.teamOutWorkDetailsViewModel.startDate = self.startDate;
-    self.teamOutWorkDetailsViewModel.endDate = endDate;
-    [self.teamOutWorkDetailsViewModel.refreshDataCommand execute:nil];
-}
-
--(void)h_loadData{
-   
+    self.teamRedBlackViewModel.companyCode = companyCode;
+    [self.teamRedBlackViewModel.refreshDataCommand execute:nil];
 }
 
 
 #pragma mark lazyload
--(TeamOutWorkDetailsViewModel *)teamOutWorkDetailsViewModel{
-    if (!_teamOutWorkDetailsViewModel) {
-        _teamOutWorkDetailsViewModel = [[TeamOutWorkDetailsViewModel alloc] init];
+-(TeamRedBlackViewModel *)teamRedBlackViewModel{
+    if (!_teamRedBlackViewModel) {
+        _teamRedBlackViewModel = [[TeamRedBlackViewModel alloc] init];
     }
-    return _teamOutWorkDetailsViewModel;
+    return _teamRedBlackViewModel;
 }
 
 -(UITableView *)tableView{
@@ -91,7 +86,7 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = white_color;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[TeamOutWorkDetailsCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamOutWorkDetailsCellView class])]];
+        [_tableView registerClass:[TeamRedBlackCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamRedBlackCellView class])]];
         
     }
     return _tableView;
@@ -107,15 +102,17 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.teamOutWorkDetailsViewModel.arr.count;
+    return self.teamRedBlackViewModel.arr.count;
 }
 
 #pragma mark tableViewDataSource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    TeamOutWorkDetailsCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamOutWorkDetailsCellView class])] forIndexPath:indexPath];
+    TeamRedBlackCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamRedBlackCellView class])] forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.teamOutWorkDetailsModel = self.teamOutWorkDetailsViewModel.arr[indexPath.row];
+    cell.count = self.teamRedBlackViewModel.arr.count;
+    cell.index = indexPath.row;
+    cell.teamRedBlackModel = self.teamRedBlackViewModel.arr[indexPath.row];
     
     return cell;
 }
@@ -123,12 +120,17 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:150];
+    return [self h_w:180];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    [self.teamOutWorkDetailsViewModel.cellclickSubject sendNext:row];
+    [self.teamRedBlackViewModel.cellclickSubject sendNext:row];
 }
+
+
+
+
+
 @end

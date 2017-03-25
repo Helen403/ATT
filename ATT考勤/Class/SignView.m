@@ -39,7 +39,7 @@
         make.top.equalTo(0);
         make.left.equalTo(0);
         make.right.equalTo(0);
-         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
+         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:100]));
     }];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

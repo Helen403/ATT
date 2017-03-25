@@ -238,7 +238,7 @@
         self.overWork.text = @"";
     }
     if (!flag) {
-        self.earlyWork.text = @"正常";
+        self.earlyWork.text = @"出勤正常";
     }
 }
 

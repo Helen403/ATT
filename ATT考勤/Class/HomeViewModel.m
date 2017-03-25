@@ -19,9 +19,11 @@
     
     [self.findAttendRecordByUserDateCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         if (result.length<200) {
-              NSNumber *row =[NSNumber numberWithInteger:2];
+            NSNumber *row =[NSNumber numberWithInteger:2];
             [self.attendFailSubject sendNext:row];
         }else{
             NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAttendRecordByUserDateResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAttendRecordByUserDateResponse>"];
@@ -31,7 +33,7 @@
             NSNumber *row =[NSNumber numberWithInteger:1];
             [self.attendRecordSubject sendNext:row];
         }
-
+        
     }];
     
     
@@ -45,27 +47,27 @@
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
         
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         
-        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findPersonShiftDetailResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findPersonShiftDetailResponse>"];
-        
-        NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[AttendWorkShiftDetail class] rowRootName:@"AttendWorkShiftDetails"];
-        self.arr = arr;
-        
-        [self.resultSubject sendNext:nil];
-        
-    }];
-    
-    
-    [[[self.sendclickCommand.executing skip:1] take:1] subscribeNext:^(id x) {
-        
-        if ([x isEqualToNumber:@(YES)]) {
-            ShowMaskStatus(@"正在拼命加载");
+        if (result.length<200) {
+            return ;
+        }else{
+            NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findPersonShiftDetailResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findPersonShiftDetailResponse>"];
+            
+            NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[AttendWorkShiftDetail class] rowRootName:@"AttendWorkShiftDetails"];
+            self.arr = arr;
+            [self.resultSubject sendNext:nil];
         }
     }];
     
     
     [self.attendRecordCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:result options:0 error:nil];
         GDataXMLElement *xmlEle = [xmlDoc rootElement];
         NSArray *array = [xmlEle children];
@@ -100,6 +102,43 @@
         }
     }];
     
+    
+    [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
+        [self.personalSubject sendNext:nil];
+        [self.scheduCommand execute:nil];
+        
+    }];
+    
+    [[[self.refreshDataCommand.executing skip:1] take:1] subscribeNext:^(id x) {
+        
+        if ([x isEqualToNumber:@(YES)]) {
+            ShowMaskStatus(@"正在拼命加载");
+        }
+    }];
+    
+    [self.scheduCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
+        
+        NSDictionary *xmlDoc = [self getFilter:result filter:@"AttendWorkShift"];
+        
+        AttendWorkShift *attendWorkShift = [AttendWorkShift mj_objectWithKeyValues:xmlDoc];
+        self.attendWorkShift = attendWorkShift;
+        if ([attendWorkShift.shiftNickName isEqualToString:@"未排班"]) {
+            //未排班
+            [self.notSubject sendNext:nil];
+            
+        }else{
+            self.shiftLsh = attendWorkShift.shiftLsh;
+            [self.sendclickCommand execute:nil];
+        }
+ 
+    }];
     
 }
 
@@ -159,92 +198,24 @@
         _sendclickCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-                NSString *body1 =[NSString stringWithFormat: @"<findEmpByUserCode xmlns=\"http://service.webservice.vada.com/\">\
-                                  <companyCode xmlns=\"\">%@</companyCode>\
-                                  <userCode xmlns=\"\">%@</userCode>\
-                                  </findEmpByUserCode>",self.companyCode,self.userCode];
                 
-                [self SOAPData:findEmpByUserCode soapBody:body1 success:^(NSString *result) {
+                NSString *body4 =[NSString stringWithFormat: @"<findPersonShiftDetail xmlns=\"http://service.webservice.vada.com/\">\
+                                  <shiftLsh xmlns=\"\">%@</shiftLsh>\
+                                  </findPersonShiftDetail>",self.shiftLsh];
+                
+                
+                [self SOAPData:findPersonShiftDetail soapBody:body4 success:^(NSString *result) {
                     
-                    NSDictionary *xmlDoc = [self getFilter:result filter:@"Emp"];
-                    
-                    EmpModel *empModel = [EmpModel mj_objectWithKeyValues:xmlDoc];
-                    self.empModel = empModel;
-                    
-                    self.deptCode = empModel.deptCode;
-                    self.empCode = empModel.empCode;
-                    
-                    [[NSUserDefaults standardUserDefaults] setObject:empModel.empTelphone forKey:@"empTelphone"];
-                    /************************************************/
-                    NSString *body2 =[NSString stringWithFormat: @"<findDeptByDeptCode xmlns=\"http://service.webservice.vada.com/\">\
-                                      <companyCode xmlns=\"\">%@</companyCode>\
-                                      <deptCode xmlns=\"\">%@</deptCode>\
-                                      </findDeptByDeptCode>",self.companyCode,self.deptCode];
-                    
-                    [self SOAPData:findEmpByUserCode soapBody:body2 success:^(NSString *result) {
-                        
-                        
-                        NSDictionary *xmlDoc = [self getFilter:result filter:@"Dept"];
-                        
-                        Dept *dept = [Dept mj_objectWithKeyValues:xmlDoc];
-                        
-                        self.dept = dept;
-                        
-                        /************************************************/
-                        NSString *body3 =[NSString stringWithFormat: @"<findPersonShiftWorkPlan xmlns=\"http://service.webservice.vada.com/\">\
-                                          <companyCode xmlns=\"\">%@</companyCode>\
-                                          <empCode xmlns=\"\">%@</empCode>\
-                                          <curYear xmlns=\"\">%@</curYear>\
-                                          <curMonth xmlns=\"\">%@</curMonth>\
-                                          <curDay xmlns=\"\">%@</curDay>\
-                                          </findPersonShiftWorkPlan>",self.companyCode,self.empCode,self.curYear,self.curMonth,self.curDay];
-                        
-                        
-                        [self SOAPData:findPersonShiftWorkPlan soapBody:body3 success:^(NSString *result) {
-                            
-                            if (result.length<250) {
-                                
-                                ShowMessage(@"请通知管理员没有工作安排");
-                                [subscriber sendCompleted];
-                            }else{
-                                
-                                NSDictionary *xmlDoc = [self getFilter:result filter:@"AttendWorkShift"];
-                                
-                                AttendWorkShift *attendWorkShift = [AttendWorkShift mj_objectWithKeyValues:xmlDoc];
-                                self.attendWorkShift = attendWorkShift;
-                                
-                                self.shiftLsh = attendWorkShift.shiftLsh;
-                                
-                                /*************************************/
-                                NSString *body4 =[NSString stringWithFormat: @"<findPersonShiftDetail xmlns=\"http://service.webservice.vada.com/\">\
-                                                  <shiftLsh xmlns=\"\">%@</shiftLsh>\
-                                                  </findPersonShiftDetail>",self.shiftLsh];
-                                
-                                
-                                [self SOAPData:findPersonShiftDetail soapBody:body4 success:^(NSString *result) {
-                                    
-                                    [subscriber sendNext:result];
-                                    [subscriber sendCompleted];
-                                    
-                                } failure:^(NSError *error) {
-                                    DismissHud();
-                                    ShowErrorStatus(@"请检查网络状态");
-                                }];
-                            }
-                        } failure:^(NSError *error) {
-                            DismissHud();
-                            ShowErrorStatus(@"请检查网络状态");
-                        }];
-                        
-                    } failure:^(NSError *error) {
-                        DismissHud();
-                        ShowErrorStatus(@"请检查网络状态");
-                    }];
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
                     
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
+                
                 return nil;
             }];
         }];
@@ -274,6 +245,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 return nil;
             }];
@@ -333,6 +306,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 return nil;
             }];
@@ -341,5 +316,127 @@
     }
     return _attendRecordCommand;
 }
+
+
+- (RACCommand *)refreshDataCommand {
+    
+    if (!_refreshDataCommand) {
+        
+        @weakify(self);
+        _refreshDataCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                
+                NSString *body1 =[NSString stringWithFormat: @"<findEmpByUserCode xmlns=\"http://service.webservice.vada.com/\">\
+                                  <companyCode xmlns=\"\">%@</companyCode>\
+                                  <userCode xmlns=\"\">%@</userCode>\
+                                  </findEmpByUserCode>",self.companyCode,self.userCode];
+                
+                [self SOAPData:findEmpByUserCode soapBody:body1 success:^(NSString *result) {
+                    
+                    NSDictionary *xmlDoc = [self getFilter:result filter:@"Emp"];
+                    
+                    EmpModel *empModel = [EmpModel mj_objectWithKeyValues:xmlDoc];
+                    self.empModel = empModel;
+                    
+                    self.deptCode = empModel.deptCode;
+                    self.empCode = empModel.empCode;
+                    
+                    [[NSUserDefaults standardUserDefaults] setObject:empModel.empTelphone forKey:@"empTelphone"];
+                    /************************************************/
+                    NSString *body2 =[NSString stringWithFormat: @"<findDeptByDeptCode xmlns=\"http://service.webservice.vada.com/\">\
+                                      <companyCode xmlns=\"\">%@</companyCode>\
+                                      <deptCode xmlns=\"\">%@</deptCode>\
+                                      </findDeptByDeptCode>",self.companyCode,self.deptCode];
+                    
+                    [self SOAPData:findEmpByUserCode soapBody:body2 success:^(NSString *result) {
+                        
+                        
+                        NSDictionary *xmlDoc = [self getFilter:result filter:@"Dept"];
+                        
+                        Dept *dept = [Dept mj_objectWithKeyValues:xmlDoc];
+                        
+                        self.dept = dept;
+                        [subscriber sendNext:result];
+                        [subscriber sendCompleted];
+                        
+                    } failure:^(NSError *error) {
+                        DismissHud();
+                        ShowErrorStatus(@"请检查网络状态");
+                        [subscriber sendNext:@"netFail"];
+                        [subscriber sendCompleted];
+                    }];
+                    
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                }];
+                
+                
+                return nil;
+            }];
+        }];
+    }
+    return _refreshDataCommand;
+}
+
+
+- (RACCommand *)scheduCommand {
+    
+    if (!_scheduCommand) {
+        
+        @weakify(self);
+        _scheduCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                NSString *body3 =[NSString stringWithFormat: @"<findPersonShiftWorkPlan xmlns=\"http://service.webservice.vada.com/\">\
+                                  <companyCode xmlns=\"\">%@</companyCode>\
+                                  <empCode xmlns=\"\">%@</empCode>\
+                                  <curYear xmlns=\"\">%@</curYear>\
+                                  <curMonth xmlns=\"\">%@</curMonth>\
+                                  <curDay xmlns=\"\">%@</curDay>\
+                                  </findPersonShiftWorkPlan>",self.companyCode,self.empCode,self.curYear,self.curMonth,self.curDay];
+                
+                
+                [self SOAPData:findPersonShiftWorkPlan soapBody:body3 success:^(NSString *result) {
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                    
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                }];
+                return nil;
+            }];
+        }];
+    }
+    return _scheduCommand;
+}
+
+
+-(RACSubject *)personalSubject{
+    if (!_personalSubject) {
+        _personalSubject = [RACSubject subject] ;
+    }
+    return _personalSubject;
+}
+
+-(RACSubject *)notSubject{
+    if (!_notSubject) {
+        _notSubject = [RACSubject subject];
+    }
+    return _notSubject;
+}
+
 
 @end

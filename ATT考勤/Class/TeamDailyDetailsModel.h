@@ -15,4 +15,6 @@
 @property (nonatomic , copy) NSString              * empCode;
 @property (nonatomic , copy) NSString              * cardTime;
 
+
+
 @end

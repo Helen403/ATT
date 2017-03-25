@@ -16,7 +16,9 @@
     
     [self.feedbackCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAllSuggbackByUserResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAllSuggbackByUserResponse>"];
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[FeedbackModel class] rowRootName:@"SuggBacks"];
@@ -62,6 +64,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;

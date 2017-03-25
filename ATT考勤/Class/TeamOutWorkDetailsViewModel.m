@@ -20,12 +20,16 @@
             return ;
         }
         
-        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findDeptOutReportResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findDeptOutReportResponse>"];
-        
-        NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[TeamOutWorkDetailsModel class] rowRootName:@"DeptOutReportModels"];
-        self.arr = arr;
-        [self.successSubject sendNext:result];
-        
+        if (result.length<200) {
+            ShowMessage(@"没有更多数据");
+        }else{
+            NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findDeptOutDetailReportResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findDeptOutDetailReportResponse>"];
+            
+            NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[TeamOutWorkDetailsModel class] rowRootName:@"DeptOutReportDetailModels"];
+            self.arr = arr;
+            [self.successSubject sendNext:result];
+        }
+
     }];
     
     

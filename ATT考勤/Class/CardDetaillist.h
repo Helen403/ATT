@@ -11,4 +11,6 @@
 @interface CardDetaillist : NSObject
 @property (nonatomic , copy) NSString              * cardStatus;
 @property (nonatomic , copy) NSString              * cardRealDatetime;
+
+@property (nonatomic , copy) NSString              * cardNormalDatetime;
 @end

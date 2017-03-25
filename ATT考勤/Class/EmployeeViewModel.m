@@ -17,13 +17,17 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+           DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findEmpByCodeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findEmpByCodeResponse>"];
-//        NSLog(@"%@",result);
+
 
         [self.tableViewSubject sendNext:xmlDoc];
         
-        DismissHud();
+     
     }];
     
     
@@ -89,9 +93,11 @@
                     [subscriber sendCompleted];
                     
                 } failure:^(NSError *error) {
-                   
+                   DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
-                    DismissHud();
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                    
                 }];
                 
                 return nil;

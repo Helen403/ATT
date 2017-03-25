@@ -173,4 +173,7 @@ extern void DismissHud(void);
 +(NSString *)getFormatterYMD:(NSString *)str;
 +(NSString *)getFormatterYM:(NSString *)str;
 +(NSString *) getCurrentTimeYMD;
++(NSString *)getFormatterYMDHM:(NSString *)str;
+
++ (NSInteger)dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime;
 @end

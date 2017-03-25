@@ -7,7 +7,10 @@
 //
 
 #import "HTableViewCell.h"
+#import "TeamOutWorkDetailsModel.h"
 
 @interface TeamOutWorkDetailsCellView : HTableViewCell
+
+@property(nonatomic,strong) TeamOutWorkDetailsModel *teamOutWorkDetailsModel;
 
 @end

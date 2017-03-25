@@ -13,9 +13,10 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:result options:0 error:nil];
         GDataXMLElement *xmlEle = [xmlDoc rootElement];
         NSArray *array = [xmlEle children];
@@ -72,9 +73,10 @@
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                    
+                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
-                    DismissHud();
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 
                 return nil;

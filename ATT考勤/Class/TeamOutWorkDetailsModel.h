@@ -10,4 +10,15 @@
 
 @interface TeamOutWorkDetailsModel : NSObject
 
+@property (nonatomic , copy) NSString              * outAddress;
+@property (nonatomic , copy) NSString              * endDate;
+@property (nonatomic , copy) NSString              * locLatitude;
+@property (nonatomic , copy) NSString              * startDate;
+@property (nonatomic , copy) NSString              * empCode;
+@property (nonatomic , copy) NSString              * month;
+@property (nonatomic , copy) NSString              * locAddress;
+@property (nonatomic , copy) NSString              * locLongitude;
+@property (nonatomic , copy) NSString              * cloclMode;
+@property (nonatomic , copy) NSString              * empName;
+
 @end

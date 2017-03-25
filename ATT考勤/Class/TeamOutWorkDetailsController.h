@@ -10,4 +10,10 @@
 
 @interface TeamOutWorkDetailsController : HViewController
 
+@property(nonatomic,strong) NSString *deptCode;
+
+@property(nonatomic,strong) NSString *startDate;
+
+@property(nonatomic,strong) NSString *endDate;
+
 @end

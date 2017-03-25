@@ -15,10 +15,11 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-
-        [self.successSubject sendNext:result];
-        
         DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
+        [self.successSubject sendNext:result];
     }];
     
     
@@ -113,20 +114,24 @@
                             [subscriber sendNext:result];
                             [subscriber sendCompleted];
                         } failure:^(NSError *error) {
-                            
-                            ShowErrorStatus(@"请检查网络状态");
                             DismissHud();
+                            ShowErrorStatus(@"请检查网络状态");
+                            [subscriber sendNext:@"netFail"];
+                            [subscriber sendCompleted];
                         }];
                     } failure:^(NSError *error) {
-                        
-                        ShowErrorStatus(@"请检查网络状态");
                         DismissHud();
+                        ShowErrorStatus(@"请检查网络状态");
+                        [subscriber sendNext:@"netFail"];
+                        [subscriber sendCompleted];
                     }];
                     
                 } failure:^(NSError *error) {
-                    
-                    ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                    
                 }];
                 
                 return nil;

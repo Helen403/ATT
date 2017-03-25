@@ -189,7 +189,7 @@
     _teamReportModel = teamReportModel;
     self.time.text =[NSString stringWithFormat:@"%@(%@-%@)",teamReportModel.week,[LSCoreToolCenter getFormatter:teamReportModel.startDate],[LSCoreToolCenter getFormatter:teamReportModel.endDate]];
     self.team.text = [NSString stringWithFormat:@"%@",teamReportModel.deptName];
-    self.attend.text = @"出勤率为80%";
+    self.attend.text = [NSString stringWithFormat:@"出勤率为%.2f%%",teamReportModel.normalRate.floatValue] ;
     self.lateWorkCount.text = [NSString stringWithFormat:@"迟到:%@人",teamReportModel.lateWorkCount];
     self.earlyWorkCount.text = [NSString stringWithFormat:@"早退:%@人",teamReportModel.earlyWorkCount];
     self.forgetWorkCount.text = [NSString stringWithFormat:@"漏打卡:%@人",teamReportModel.forgetWorkCount];

@@ -478,10 +478,10 @@
 }
 
 -(void)disagree:(UIButton *)button{
-    if (self.examineTextView.text.length == 0) {
-        ShowMessage(@"请入审批意见");
-        return;
-    }
+//    if (self.examineTextView.text.length == 0) {
+//        ShowMessage(@"请入审批意见");
+//        return;
+//    }
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.approvalTreatmentViewModel.companyCode = companyCode;
     UserModel *user =  getModel(@"user");
@@ -494,14 +494,15 @@
     self.approvalTreatmentViewModel.stepCheckStatus = @"1";
     self.approvalTreatmentViewModel.stepCheckMsg = self.examineTextView.text;
     [self.approvalTreatmentViewModel.updateCheckFlowCommand execute:nil];
+    [self last];
     
 }
 
 -(void)agree:(UIButton *)button{
-    if (self.examineTextView.text.length == 0) {
-        ShowMessage(@"请入审批意见");
-        return;
-    }
+//    if (self.examineTextView.text.length == 0) {
+//        ShowMessage(@"请入审批意见");
+//        return;
+//    }
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.approvalTreatmentViewModel.companyCode = companyCode;
     UserModel *user =  getModel(@"user");
@@ -514,6 +515,7 @@
     self.approvalTreatmentViewModel.stepCheckStatus = @"0";
     self.approvalTreatmentViewModel.stepCheckMsg = self.examineTextView.text;
     [self.approvalTreatmentViewModel.updateCheckFlowCommand execute:nil];
+    [self last];
     
 }
 
@@ -557,7 +559,7 @@
         
         [_preBtn setTitle:@"  上一页  " forState:UIControlStateNormal];
         _preBtn.titleLabel.font = H14;
-        [_preBtn addTarget:self action:@selector(pre:) forControlEvents:UIControlEventTouchUpInside];
+        [_preBtn addTarget:self action:@selector(pre) forControlEvents:UIControlEventTouchUpInside];
         
         [_preBtn.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
         
@@ -592,7 +594,7 @@
         
         [_lastBtn setTitle:@"  下一页  " forState:UIControlStateNormal];
         _lastBtn.titleLabel.font = H14;
-        [_lastBtn addTarget:self action:@selector(last:) forControlEvents:UIControlEventTouchUpInside];
+        [_lastBtn addTarget:self action:@selector(last) forControlEvents:UIControlEventTouchUpInside];
         
         [_lastBtn.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
         
@@ -609,7 +611,7 @@
     return _lastBtn;
 }
 
--(void)pre:(UIButton *)button{
+-(void)pre{
     --self.indexTmp;
     if (self.indexTmp<0) {
         self.indexTmp=0;
@@ -618,7 +620,7 @@
     [self refreash:self.indexTmp];
 }
 
--(void)last:(UIButton *)button{
+-(void)last{
     ++self.indexTmp;
     if (self.indexTmp==self.approvalTreatmentViewModel.lateArr.count) {
         self.indexTmp=self.approvalTreatmentViewModel.lateArr.count-1;

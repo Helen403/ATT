@@ -20,27 +20,51 @@
 
 @implementation DailyDetailsHeadView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = white_color;
-        [self addSubview:self.shift];
-        self.shift.frame = CGRectMake(SCREEN_WIDTH*0.07, 0, SCREEN_WIDTH, frame.size.height);
 
-        [self addSubview:self.count];
-        self.count.frame = CGRectMake(SCREEN_WIDTH/2+SCREEN_WIDTH*0.07, 0, SCREEN_WIDTH, frame.size.height);
-        [self addSubview:self.line];
-        self.line.frame = CGRectMake(0, frame.size.height-[self h_w:1], SCREEN_WIDTH, [self h_w:1]);
-    }
-    return self;
+#pragma mark system
+
+
+-(void)updateConstraints{
+    
+    WS(weakSelf);
+    [self.shift mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo([self h_w:20]);
+        make.centerY.equalTo(weakSelf);
+    }];
+    
+    [self.count mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf);
+        make.left.equalTo(SCREEN_WIDTH/2);
+    }];
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(weakSelf.mas_bottom).offset(-[self h_w:1]);
+        make.left.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
+    }];
+    [super updateConstraints];
 }
 
+#pragma mark private
+-(void)h_setupViews{
+    
+    [self addSubview:self.shift];
+    [self addSubview:self.count];
+    [self addSubview:self.line];
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
+}
+
+#pragma mark lazyload
+
+
+
+
+#pragma mark dataload
 -(void)setDailyDetailsModel:(DailyDetailsModel *)dailyDetailsModel{
     if (!dailyDetailsModel) {
         return;
     }
-     _dailyDetailsModel = dailyDetailsModel;
+    _dailyDetailsModel = dailyDetailsModel;
     self.shift.text = [NSString stringWithFormat:@"班次:%@",dailyDetailsModel.shiftName];
     self.count.text = [NSString stringWithFormat:@"打卡:%@次",dailyDetailsModel.signCount];
 }
@@ -52,7 +76,7 @@
         _shift.text = @"";
         _shift.font = H14;
         _shift.textColor = MAIN_PAN_2;
-     
+        
     }
     return _shift;
 }

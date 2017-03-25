@@ -37,16 +37,31 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
+    [self.dailyDetailsHeadView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.top.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:50]));
+    }];
+    [self.dailyDetailsFootView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.dailyDetailsHeadView.mas_bottom).offset(0);
+        make.left.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:90]));
+    }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(weakSelf);
+        make.top.equalTo(weakSelf.dailyDetailsFootView.mas_bottom).offset(0);
+        make.left.equalTo(0);
+        make.bottom.equalTo(0);
+        make.right.equalTo(0);
+        
     }];
     [super updateConstraints];
 }
 
 #pragma mark private
 -(void)h_setupViews{
-    
+    [self addSubview:self.dailyDetailsHeadView];
     [self addSubview:self.tableView];
+    [self addSubview:self.dailyDetailsFootView];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -101,8 +116,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[DailyDetailsCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([DailyDetailsCellView class])]];
         _tableView.scrollEnabled = NO;
-        _tableView.tableHeaderView = self.dailyDetailsHeadView;
-        _tableView.tableFooterView = self.dailyDetailsFootView;
+        
     }
     return _tableView;
     
@@ -144,14 +158,14 @@
 
 -(DailyDetailsHeadView *)dailyDetailsHeadView{
     if (!_dailyDetailsHeadView) {
-        _dailyDetailsHeadView = [[DailyDetailsHeadView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:40])];
+        _dailyDetailsHeadView = [[DailyDetailsHeadView alloc] init];
     }
     return _dailyDetailsHeadView;
 }
 
 -(DailyDetailsFootView *)dailyDetailsFootView{
     if (!_dailyDetailsFootView) {
-        _dailyDetailsFootView = [[DailyDetailsFootView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:220])];
+        _dailyDetailsFootView = [[DailyDetailsFootView alloc] init];
     }
     return _dailyDetailsFootView;
 }

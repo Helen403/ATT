@@ -14,7 +14,9 @@
     
     [self.sendclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
-        
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
         NSString *xmlDoc = [self getFilterStr:result filter:@"String"];
         if ([xmlDoc isEqualToString:@"0"]) {
             ShowMessage(@"修改成功");
@@ -56,6 +58,8 @@
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
                 }];
                 return nil;
             }];

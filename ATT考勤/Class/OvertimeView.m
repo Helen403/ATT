@@ -12,16 +12,13 @@
 #import "ProveView.h"
 #import "ApplyManView.h"
 #import "JSTextView.h"
-
 #import "XHDatePickerView.h"
 #import "NSDate+Extension.h"
 #import "ApplyManViewModel.h"
 #import "TeamListModel.h"
 #import "UserModel.h"
-
 #import "OvertimeCellView.h"
 #import "OvertimeModel.h"
-
 #import "ProveModel.h"
 
 
@@ -44,8 +41,6 @@
 @property(nonatomic,strong) UILabel *sureTimeText;
 
 @property(nonatomic,strong) UILabel *sureTimeShowText;
-
-
 
 @property(nonatomic,strong) JSTextView *textView;
 
@@ -96,13 +91,13 @@
 
 @property(nonatomic,strong) NSString *resultType;
 
-
-
 @property(nonatomic,strong) NSString *stepUserCodes;
 
 @property(nonatomic,strong) NSString *stepUserNames;
 
 @property(nonatomic,strong) NSString *flowInstanceId;
+
+@property(nonatomic,assign) NSInteger dataIndex;
 
 @end
 
@@ -335,14 +330,14 @@
                 return ;
             }
             OvertimeModel *workType = self.overtimeViewModel.arrOverTimeWorkType[0];
-            
-            self.compensateShowText.text = workType.workName;
-            self.resultType = workType.workLsh;
-            
+
             OvertimeModel *typeWork = self.overtimeViewModel.arrOverTimeTypeWork[0];
-            self.sureTimeShowText.text = typeWork.workName;
             
-            self.overType = typeWork.workLsh;
+            self.sureTimeShowText.text = workType.workName;
+            self.overType = workType.workLsh;
+            
+            self.compensateShowText.text = typeWork.workName;
+            self.resultType = typeWork.workLsh;
             
             
         });
@@ -395,7 +390,6 @@
         self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
     }
     
-//    self.cuserCode = [self.cuserCode substringFromIndex:1];
     self.cuserName = [self.cuserName substringFromIndex:1];
 }
 
@@ -412,28 +406,16 @@
 -(XHDatePickerView *)datepicker{
     if (!_datepicker) {
         _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
-            
-            NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-            NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-            
-            if (startDateText.length > 0) {
-                
-                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:startDateText endTime:self.lateTimeShowText.text]];
-                if (str.doubleValue>0) {
+            switch (self.dataIndex) {
+                case 1:{
+                    NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
                     self.applyTimeShowText.text = startDateText;
-                }else{
-                    ShowMessage(@"请选择正确时间");
+                    break;
                 }
-                
-            }
-            
-            if (endDateText.length > 0 ) {
-                
-                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:endDateText]];
-                if (str.doubleValue>0) {
+                case 2:{
+                    NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
                     self.lateTimeShowText.text = endDateText;
-                }else{
-                    ShowMessage(@"请选择正确时间");
+                    break;
                 }
             }
             
@@ -459,6 +441,8 @@
 
 -(void)timeClick1{
     _datepicker = nil;
+    self.dataIndex = 1;
+    [self.datepicker setDateType:DateTypeStartDate];
     [self.datepicker show];
 }
 
@@ -474,6 +458,8 @@
 
 -(void)timeClick2{
     _datepicker = nil;
+    self.dataIndex = 2;
+    [self.datepicker setDateType:DateTypeEndDate];
     [self.datepicker show];
 }
 
@@ -563,16 +549,11 @@
         
         _textView.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
         _textView.editable = YES;        //是否允许编辑内容，默认为“YES”
-        //        _textView.delegate = self;       //设置代理方法的实现类
-        _textView.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置字体名字和字体大小;
-        //        _textView.returnKeyType = UIReturnKeyDefault;//return键的类型
-        //        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
+        _textView.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置
         _textView.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _textView.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
         _textView.textColor = MAIN_PAN_2;
-        
         _textView.myPlaceholder = @"加班原因";//设置显示的文本内容
-        
         _textView.myPlaceholderColor= [UIColor lightGrayColor];
         _textView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _textView.layer.borderWidth = 1.0;
@@ -618,13 +599,9 @@
         [_finish setTitle:@"提交申请" forState:UIControlStateNormal];
         _finish.titleLabel.font = H22;
         [_finish addTarget:self action:@selector(finish:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_finish.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_finish.layer setCornerRadius:10];
-        
         [_finish.layer setBorderWidth:2];//设置边界的宽度
-        
         [_finish setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
         [_finish.layer setBorderColor:MAIN_ORANGER.CGColor];
@@ -639,6 +616,13 @@
         ShowMessage(@"请选择加班时间");
         return;
     }
+    
+    NSInteger a = [LSCoreToolCenter dateTimeDifferenceWithStartTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text];
+    if (a<0) {
+        ShowMessage(@"申请时间小于开始时间");
+        return;
+    }
+    
     
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.overtimeViewModel.companyCode = companyCode;
@@ -713,7 +697,7 @@
 
 -(void)viewClick1{
     self.index =  1;
-    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.overtimeViewModel.arrOverTimeTypeWork.count);
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*(self.overtimeViewModel.arrOverTimeTypeWork.count+1));
     [self.tableView reloadData];
     [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
     [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
@@ -732,7 +716,7 @@
 
 -(void)viewClick2{
     self.index =  2;
-    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.overtimeViewModel.arrOverTimeWorkType.count);
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*(self.overtimeViewModel.arrOverTimeWorkType.count+1));
     [self.tableView reloadData];
     [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
     [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;
@@ -797,9 +781,9 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (self.index ==1) {
-        return  self.overtimeViewModel.arrOverTimeTypeWork.count;
-    }else{
         return self.overtimeViewModel.arrOverTimeWorkType.count;
+    }else{
+         return self.overtimeViewModel.arrOverTimeTypeWork.count;
     }
     
 }
@@ -810,9 +794,10 @@
     OvertimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([OvertimeCellView class])] forIndexPath:indexPath];
     
     if (self.index == 1) {
-        cell.overtimeModel =  self.overtimeViewModel.arrOverTimeTypeWork[indexPath.row];
+         cell.overtimeModel =  self.overtimeViewModel.arrOverTimeWorkType[indexPath.row];
+   
     }else{
-        cell.overtimeModel =  self.overtimeViewModel.arrOverTimeWorkType[indexPath.row];
+         cell.overtimeModel =  self.overtimeViewModel.arrOverTimeTypeWork[indexPath.row];
     }
     
     return cell;
@@ -827,14 +812,17 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (self.index == 1) {
-        OvertimeModel *overtime = self.overtimeViewModel.arrOverTimeTypeWork[indexPath.row];
-        self.sureTimeShowText.text = overtime.workName;
+        OvertimeModel *overtimeModel =  self.overtimeViewModel.arrOverTimeWorkType[indexPath.row];
         
-        self.overType = overtime.workLsh;
+ 
+
+        self.sureTimeShowText.text = overtimeModel.workName;
+        self.overType = overtimeModel.workLsh;
     }else{
-        OvertimeModel *overtime = self.overtimeViewModel.arrOverTimeWorkType[indexPath.row];
-        self.compensateShowText.text = overtime.workName;
-        self.resultType = overtime.workLsh;
+      OvertimeModel *overtimeModel =  self.overtimeViewModel.arrOverTimeTypeWork[indexPath.row];
+
+        self.compensateShowText.text = overtimeModel.workName;
+        self.resultType = overtimeModel.workLsh;
     }
     [[HWPopTool sharedInstance] closeWithBlcok:^{
         [self.tableView reloadData];

@@ -11,7 +11,6 @@
 #import "ProveView.h"
 #import "ApplyManView.h"
 #import "JSTextView.h"
-
 #import "XHDatePickerView.h"
 #import "NSDate+Extension.h"
 #import "ApplyManViewModel.h"
@@ -19,13 +18,11 @@
 #import "UserModel.h"
 #import "BusinessTravelView.h"
 #import "BusinessTravelCellView.h"
-
-//#import "BMKLocationService.h"
 #import "ProveModel.h"
 
 
 @interface BusinessTravelView()<UITableViewDelegate,UITableViewDataSource>
-//BMKLocationServiceDelegate
+
 @property(nonatomic,strong) BusinessTravelViewModel *businessTraveViewModel;
 
 @property(nonatomic,strong) UILabel *applyTimeText;
@@ -60,8 +57,6 @@
 
 @property(nonatomic,strong) UIView *line4;
 
-//@property(nonatomic,strong) UIImageView *back1;
-
 @property(nonatomic,strong) UIImageView *back2;
 
 @property(nonatomic,strong) UIView *view1;
@@ -69,7 +64,6 @@
 @property(nonatomic,strong) UIView *view2;
 
 @property(nonatomic,strong) UIScrollView *scrollView;
-
 
 @property(nonatomic,strong) ApplyManViewModel *applyManViewModel;
 
@@ -87,13 +81,13 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 
-//@property(nonatomic,strong) BMKLocationService *locService;
-
 @property(nonatomic,strong) NSString *stepUserCodes;
 
 @property(nonatomic,strong) NSString *stepUserNames;
 
 @property(nonatomic,strong) NSString *flowInstanceId;
+
+@property(nonatomic,assign) NSInteger dataIndex;
 
 @end
 
@@ -173,11 +167,6 @@
         make.centerY.equalTo(weakSelf.view1);
         make.left.equalTo(weakSelf.applyTimeText);
     }];
-    
-//    [self.back1 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(weakSelf.view1);
-//        make.right.equalTo(0);
-//    }];
     
     [self.sureTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
@@ -280,7 +269,6 @@
     
     [self.view1 addSubview:self.sureTimeText];
     [self.view1 addSubview:self.sureTimeShowText];
-//    [self.view1 addSubview:self.back1];
     [self.view1 addSubview:self.line3];
     
     [self.view2 addSubview:self.compensateText];
@@ -310,8 +298,6 @@
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.businessTraveViewModel.companyCode = companyCode;
     [self.businessTraveViewModel.refreshDataCommand execute:nil];
-    //定位
-//    [self.locService startUserLocationService];
 }
 
 
@@ -319,7 +305,7 @@
     [[self.businessTraveViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         dispatch_sync(dispatch_get_main_queue(), ^{
-            self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.businessTraveViewModel.arr.count);
+            self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*(self.businessTraveViewModel.arr.count+1));
             [self.tableView reloadData];
             if (self.businessTraveViewModel.arr.count==0) {
                 return ;
@@ -374,8 +360,6 @@
         self.cuserCode = [NSString stringWithFormat:@"%@,%@",self.cuserCode,teamList.empCode];
         self.cuserName = [NSString stringWithFormat:@"%@,%@",self.cuserName,teamList.empName];
     }
-    
-//    self.cuserCode = [self.cuserCode substringFromIndex:1];
     self.cuserName = [self.cuserName substringFromIndex:1];
 }
 
@@ -393,27 +377,16 @@
     if (!_datepicker) {
         _datepicker =  [[XHDatePickerView alloc] initWithCompleteBlock:^(NSDate *startDate,NSDate *endDate) {
             
-            NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-            NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-            
-            if (startDateText.length > 0) {
-                
-                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:startDateText endTime:self.lateTimeShowText.text]];
-                if (str.doubleValue>0) {
+            switch (self.dataIndex) {
+                case 1:{
+                    NSString *startDateText = [startDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
                     self.applyTimeShowText.text = startDateText;
-                }else{
-                    ShowMessage(@"请选择正确时间");
+                    break;
                 }
-                
-            }
-            
-            if (endDateText.length > 0 ) {
-                
-                NSString *str =[NSString stringWithFormat:@"%f",[LSCoreToolCenter getDifferenceTime:self.applyTimeShowText.text endTime:endDateText]];
-                if (str.doubleValue>0) {
+                case 2:{
+                    NSString *endDateText = [endDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
                     self.lateTimeShowText.text = endDateText;
-                }else{
-                    ShowMessage(@"请选择正确时间");
+                    break;
                 }
             }
             
@@ -440,6 +413,8 @@
 
 -(void)timeClick1{
     _datepicker = nil;
+    self.dataIndex = 1;
+    [self.datepicker setDateType:DateTypeStartDate];
     [self.datepicker show];
 }
 
@@ -455,6 +430,8 @@
 
 -(void)timeClick2{
     _datepicker = nil;
+    self.dataIndex = 2;
+    [self.datepicker setDateType:DateTypeEndDate];
     [self.datepicker show];
 }
 
@@ -545,11 +522,6 @@
         [_sureTimeShowText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
         //设置输入框内容的字体样式和大小
         _sureTimeShowText.font = H14;
-        // 设置右边永远显示清除按钮
-        //        _sureTimeShowText.clearButtonMode = UITextFieldViewModeAlways;
-        _sureTimeShowText.keyboardType = UIKeyboardTypePhonePad;
-        // 5.监听文本框的文字改变
-//        _sureTimeShowText.delegate = self;
     }
     return _sureTimeShowText;
 }
@@ -565,21 +537,14 @@
 -(JSTextView *)textView{
     if (!_textView) {
         _textView  = [[JSTextView alloc] init];
-        //        _textView.backgroundColor = yellow_color;
-        
         _textView.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
         _textView.editable = YES;        //是否允许编辑内容，默认为“YES”
-        //        _textView.delegate = self;       //设置代理方法的实现类
-        _textView.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置字体名字和字体大小;
-        //        _textView.returnKeyType = UIReturnKeyDefault;//return键的类型
-        //        _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
+        _textView.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置
         _textView.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
         _textView.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
         _textView.textColor = MAIN_PAN_2;
-        
         _textView.myPlaceholder = @"出差理由";
         _textView.myPlaceholderColor = [UIColor lightGrayColor];
-        
         _textView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
         _textView.layer.borderWidth =1.0;
         _textView.layer.cornerRadius =5.0;
@@ -648,11 +613,15 @@
     
     if (self.sureTimeShowText.text.length==0) {
         ShowMessage(@"请输入出差地点");
-        //定位
-//        [self.locService startUserLocationService];
         return;
     }
-//
+
+    NSInteger a = [LSCoreToolCenter dateTimeDifferenceWithStartTime:self.applyTimeShowText.text endTime:self.lateTimeShowText.text];
+    if (a<0) {
+        ShowMessage(@"开始时间小于开始时间");
+        return;
+    }
+    
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.businessTraveViewModel.companyCode = companyCode;
     self.businessTraveViewModel.applyStartDatetime = self.applyTimeShowText.text;
@@ -698,13 +667,6 @@
     return _compensateShowText;
 }
 
-//-(UIImageView *)back1{
-//    if (!_back1) {
-//        _back1 = [[UIImageView alloc] init];
-//        _back1.image = ImageNamed(@"role_right_arrow");
-//    }
-//    return _back1;
-//}
 
 -(UIImageView *)back2{
     if (!_back2) {
@@ -813,77 +775,6 @@
     return _scrollView;
 }
 
-
-//-(BMKLocationService *)locService{
-//    if (!_locService) {
-//        
-//        _locService = [[BMKLocationService alloc] init];
-//        _locService.delegate = self;
-//        // 设置定位精确度到米
-//        _locService.desiredAccuracy = kCLLocationAccuracyBest;
-//        // 设置过滤器为无
-//        //        _locService.distanceFilter = kCLDistanceFilterNone;
-//        
-//        _locService.distanceFilter=10;
-//    }
-//    return _locService;
-//}
-//
-//
-////实现相关delegate 处理位置信息更新
-////处理方向变更信息
-//- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation{
-//    //NSLog(@"heading is %@",userLocation.heading);
-//}
-////处理位置坐标更新
-//- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-//    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
-//    
-//    
-//    //    ShowMessage(@"定位成功");
-////    NSString *currentLatitude = [[NSString alloc]
-////                                 initWithFormat:@"%f",
-////                                 userLocation.location.coordinate.latitude];
-////    
-////    NSString *currentLongitude = [[NSString alloc]
-////                                  initWithFormat:@"%f",
-////                                  userLocation.location.coordinate.longitude];
-//    
-////    self.locLongitude = currentLongitude;
-////    
-////    self.locLatitude = currentLatitude;
-//    
-//    
-//    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-//    [geocoder reverseGeocodeLocation: userLocation.location completionHandler:^(NSArray *array, NSError *error) {
-//        if (array.count > 0) {
-//            CLPlacemark *placemark = [array objectAtIndex:0];
-//            if (placemark != nil) {
-//                //                NSString *city = placemark.locality;
-//                //                //                NSLog(@"%@",city);
-//                //                NSString *city1 = placemark.name;
-//                //                //                NSLog(@"%@",city1);
-//                //                self.locAddress = [NSString stringWithFormat:@"%@%@",city,city1];
-//                NSDictionary *city2 = placemark.addressDictionary;
-//                //                NSLog(@"%@",city2);
-//                NSArray *dict = city2[@"FormattedAddressLines"];
-//                NSString *str =  [dict objectAtIndex:0];
-//                //                NSLog(@"%@",str);
-//                //                NSString *city3 = placemark.region;
-//                //                NSLog(@"%@",city3);
-//                //找到了当前位置城市后就关闭服务
-//                
-//                self.sureTimeShowText.text = str;
-//                
-////                [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"locAddress"];
-//                
-//                [self.locService stopUserLocationService];
-//                
-//            }
-//        }
-//    }];
-//    
-//}
 
 -(void)dealloc{
     [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManView" object:nil];
