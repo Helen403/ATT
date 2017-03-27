@@ -20,5 +20,10 @@
 
 @property(nonatomic,strong) RACSubject *tableViewSubject;
 
+@property(nonatomic,strong) RACCommand *CrefreshDataCommand;
+
+@property(nonatomic,strong) NSMutableArray *arrTmp;
+
+@property(nonatomic,assign) NSInteger index;
 
 @end

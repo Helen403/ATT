@@ -256,7 +256,14 @@
 //签到英雄榜
 #define findSortEmpSign @"http://13822767713.xicp.net/smart/ws/IAttService"
 
-//
+//红黑榜
 #define findDeptRedBlack @"http://13822767713.xicp.net/smart/ws/IAttService"
 
+//公告通知通过ID
+#define findAnnounceById @"http://13822767713.xicp.net/smart/ws/IAttService"
 
+//通知通过ID
+#define findNoticesById @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//寻找消息列表
+#define findMyMsgList @"http://13822767713.xicp.net/smart/ws/IAttService"

@@ -70,8 +70,6 @@
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[DealWithCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([DealWithCellView class])]];
-        
-        
     }
     return _tableView;
     
@@ -108,10 +106,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    DealWithCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([DealWithCellView class])] forIndexPath:indexPath];
-    
-    cell.dealWithModel = self.dealWithViewModel.arr[indexPath.row];
-    cell.selected = NO;
+    [tableView deleteSections:indexPath withRowAnimation:NO];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.dealWithViewModel.cellclickSubject sendNext:row];
 }

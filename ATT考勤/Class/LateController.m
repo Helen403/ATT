@@ -59,6 +59,14 @@
     }];
 }
 
+-(void)setEndDate:(NSString *)endDate{
+    if (!endDate) {
+        return;
+    }
+    _endDate = endDate;
+    self.lateView.startDate = self.startDate;
+    self.lateView.endDate = endDate;
+}
 
 
 #pragma mark lazyload

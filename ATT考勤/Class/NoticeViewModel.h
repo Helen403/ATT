@@ -7,6 +7,7 @@
 //
 
 #import "HViewModel.h"
+#import "AnnouncementModel.h"
 
 @interface NoticeViewModel : HViewModel
 
@@ -14,8 +15,16 @@
 
 @property(nonatomic,strong) NSString *companyCode;
 
+@property(nonatomic,strong) NSString *userCode;
+
 @property(nonatomic,strong) RACSubject *successSubject;
 
-@property(nonatomic,strong) NSMutableArray *arr;
+
+
+@property(nonatomic,strong) NSMutableArray *preArr;
+
+@property(nonatomic,assign) NSInteger index;
+
+@property(nonatomic,strong) AnnouncementModel *announcement;
 
 @end

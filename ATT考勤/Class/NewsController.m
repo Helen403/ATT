@@ -10,9 +10,10 @@
 #import "NewsViewModel.h"
 #import "NewsView.h"
 
-#import "InformController.h"
-#import "NoticeController.h"
 #import "MyMsgController.h"
+#import "NoticeListController.h"
+
+#import "InformListController.h"
 
 @interface NewsController ()
 
@@ -56,14 +57,14 @@
         switch (row) {
                 //公司公告
             case 0:{
-                NoticeController *notice = [[NoticeController alloc] init];
+                NoticeListController *notice = [[NoticeListController alloc] init];
                 
                 [self.navigationController pushViewController:notice animated:NO];
                  break;
             }
                    //公司通知
             case 1:{
-                InformController *inform = [[InformController alloc] init];
+                InformListController *inform = [[InformListController alloc] init];
                 
                 [self.navigationController pushViewController:inform animated:NO];
                 break;

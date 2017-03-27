@@ -84,7 +84,6 @@
     self.Img.image = ImageNamed(dealWithModel.imgtext);
     self.title.text = dealWithModel.title;
     self.number.text = dealWithModel.number;
-
 }
 
 

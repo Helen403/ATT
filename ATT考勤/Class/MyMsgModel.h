@@ -18,4 +18,11 @@
 
 @property(nonatomic,strong) NSString *time;
 
+
+@property (nonatomic , copy) NSString              * msgSize;
+@property (nonatomic , copy) NSString              * msgUserCode;
+@property (nonatomic , copy) NSString              * msgUserName;
+@property (nonatomic , copy) NSString              * msgLast;
+@property (nonatomic , copy) NSString              * msgDate;
+
 @end

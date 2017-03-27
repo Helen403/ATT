@@ -10,4 +10,6 @@
 
 @interface InformView : HView
 
+@property(nonatomic,assign) NSInteger index;
+
 @end

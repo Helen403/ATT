@@ -186,11 +186,10 @@
     
     self.time.text =  [LSCoreToolCenter getFormatterYM:monthModel.month];
     
-    self.shift.text = [NSString stringWithFormat:@"本月总工时%@小时",monthModel.weekHours];
+    self.shift.text = [NSString stringWithFormat:@"本月总工时%.2f小时",monthModel.weekHours.floatValue];
     self.earlyWork.text = [NSString stringWithFormat:@"本月早退次数:%@次",monthModel.earlyWorkCount] ;
     self.forgetWork.text = [NSString stringWithFormat:@"本月漏打次数:%@次",monthModel.forgetWorkCount] ;
 
-    
     self.lateWork.text = [NSString stringWithFormat:@"本月迟到次数:%@次",monthModel.lateWorkCount] ;
     
     self.goOutWork.text = [NSString stringWithFormat:@"本月外出次数:%@次",monthModel.goOutWorkCount];

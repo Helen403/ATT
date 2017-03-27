@@ -83,7 +83,6 @@
 }
 
 -(void)mainThreadback:(NSNumber *)num{
-    
     EmployeeController *employee = [[EmployeeController alloc] init];
     employee.addressListModel= self.addressListViewModel.arr[[num intValue]];
     [self.navigationController pushViewController:employee animated:NO];

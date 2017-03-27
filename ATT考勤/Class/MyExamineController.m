@@ -44,8 +44,12 @@
 
 
 -(void)h_addSubviews{
-    
     [self.view addSubview:self.myExamineView];
+}
+
+
+-(void)h_viewWillAppear{
+    [self.myExamineView h_viewWillAppear];
 }
 
 -(void)h_bindViewModel{

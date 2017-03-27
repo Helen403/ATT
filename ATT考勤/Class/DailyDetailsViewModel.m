@@ -12,6 +12,7 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+   
         DismissHud();
         if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
             return ;

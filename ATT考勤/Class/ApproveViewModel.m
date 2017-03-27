@@ -14,8 +14,7 @@
 -(NSMutableArray *)arr{
     if (!_arr) {
         _arr = [NSMutableArray array];
-        
-    
+ 
            //读取plist
         NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DealWith" ofType:@"plist"];
         

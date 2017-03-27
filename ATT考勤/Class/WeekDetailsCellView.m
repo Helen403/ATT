@@ -7,6 +7,9 @@
 //
 
 #import "WeekDetailsCellView.h"
+#import "LeaveEarlyController.h"
+#import "LateController.h"
+#import "DrainPunchController.h"
 
 @interface WeekDetailsCellView()
 
@@ -80,12 +83,9 @@
     }
     
     if ([weekDetalisModel.cardStatus isEqualToString:@"0"]) {
-        
         self.state.hidden = YES;
-        
     }
     if ([weekDetalisModel.cardStatus isEqualToString:@"1"]) {
-        
         [self.state setTitle:@"消早退" forState:UIControlStateNormal];
         self.state.hidden = NO;
     }
@@ -96,7 +96,7 @@
     }
     if ([weekDetalisModel.cardStatus isEqualToString:@"3"]) {
         
-        [self.state setTitle:@"漏打卡" forState:UIControlStateNormal];
+        [self.state setTitle:@"补打卡" forState:UIControlStateNormal];
         self.state.hidden = NO;
     }
     
@@ -136,25 +136,54 @@
 -(UIButton *)state{
     if (!_state) {
         _state = [[UIButton alloc] init];
-        //[_startButton setTitle:@"登   录" forState:UIControlStateNormal];
         _state.titleLabel.font = H14;
-        [_state addTarget:self action:@selector(stateClick:) forControlEvents:UIControlEventTouchUpInside];
-        
+        [_state addTarget:self action:@selector(stateClick) forControlEvents:UIControlEventTouchUpInside];
         [_state.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_state.layer setCornerRadius:10];
-        
         [_state.layer setBorderWidth:2];//设置边界的宽度
-        
         [_state setBackgroundColor:MAIN_ORANGER];
-        
         [_state.layer setBorderColor:MAIN_ORANGER.CGColor];
         _state.hidden = YES;
     }
     return _state;
 }
 
--(void)stateClick:(UIButton *)button{
+-(void)stateClick{
+
+    //消早退
+    if ([self.weekDetalisModel.cardStatus isEqualToString:@"1"]) {
+        
+        LeaveEarlyController *leaveEarly = [[LeaveEarlyController alloc] init];
+      
+        leaveEarly.startDate = [NSString stringWithFormat:@"%@ %@",self.weekDetalisModel.busDate,[self.weekDetalisModel.cardTime substringFromIndex:3]];
+        leaveEarly.endDate =[NSString stringWithFormat:@"%@ %@:00",self.weekDetalisModel.busDate,self.weekDetalisModel.cardNormalDatetime] ;
+        UITabBarController *tabBarVc = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UINavigationController *nav = (UINavigationController *)tabBarVc.selectedViewController;
+        [nav pushViewController:leaveEarly animated:NO];
+        
+    }
+    //消迟到
+    if ([self.weekDetalisModel.cardStatus isEqualToString:@"2"]) {
+        
+        
+        LateController *late = [[LateController alloc] init];
+        late.startDate = [NSString stringWithFormat:@"%@ %@",self.weekDetalisModel.busDate,[self.weekDetalisModel.cardTime substringFromIndex:3]];
+        late.endDate =[NSString stringWithFormat:@"%@ %@:00",self.weekDetalisModel.busDate,self.weekDetalisModel.cardNormalDatetime] ;
+        UITabBarController *tabBarVc = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UINavigationController *nav = (UINavigationController *)tabBarVc.selectedViewController;
+        [nav pushViewController:late animated:NO];
+        
+    }
+    //漏打卡
+    if ([self.weekDetalisModel.cardStatus isEqualToString:@"3"]) {
+        
+        DrainPunchController *drainPunch = [[DrainPunchController alloc] init];
+        drainPunch.startDate = [NSString stringWithFormat:@"%@ %@",self.weekDetalisModel.busDate,[self.weekDetalisModel.cardTime substringFromIndex:3]];
+        drainPunch.endDate =[NSString stringWithFormat:@"%@ %@:00",self.weekDetalisModel.busDate,self.weekDetalisModel.cardNormalDatetime] ;
+        UITabBarController *tabBarVc = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UINavigationController *nav = (UINavigationController *)tabBarVc.selectedViewController;
+        [nav pushViewController:drainPunch animated:NO];
+    }
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "MyExamineView.h"
 #import "MyExamineViewModel.h"
 #import "MyExamineTableCellView.h"
+#import "UserModel.h"
 
 @interface MyExamineView()<UITableViewDataSource,UITableViewDelegate>
 
@@ -51,9 +52,37 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_loadData{
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    self.myExamineViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.myExamineViewModel.userCode = user.userCode;
+    [self.myExamineViewModel.LrefreshDataCommand execute:nil];
+    [self.myExamineViewModel.ArefreshDataCommand execute:nil];
+    [self.myExamineViewModel.RrefreshDataCommand execute:nil];
+    [self.myExamineViewModel.CrefreshDataCommand execute:nil];
+}
+
+-(void)h_viewWillAppear{
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    self.myExamineViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.myExamineViewModel.userCode = user.userCode;
+    [self.myExamineViewModel.LrefreshDataCommand execute:nil];
+    [self.myExamineViewModel.ArefreshDataCommand execute:nil];
+    [self.myExamineViewModel.RrefreshDataCommand execute:nil];
+    [self.myExamineViewModel.CrefreshDataCommand execute:nil];
+}
 
 -(void)h_bindViewModel{
 
+    [[self.myExamineViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
 }
 
 
@@ -74,8 +103,6 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MyExamineTableCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([MyExamineTableCellView class])]];
         _tableView.scrollEnabled = NO;
-        
-        
     }
     return _tableView;
 

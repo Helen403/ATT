@@ -46,7 +46,7 @@
     NSString *head = [LSCoreToolCenter getFormatter:self.startDate];
     NSString *end =  [LSCoreToolCenter getFormatter:self.endDate];
     self.time.text = [NSString stringWithFormat:@"%@-%@",head,end];
-    self.workHours.text = [NSString stringWithFormat:@"工作时间:%@分钟",weekHours];
+    self.workHours.text = [NSString stringWithFormat:@"工作时间:%.2f小时",weekHours.floatValue];
 }
 
 #pragma mark lazydata

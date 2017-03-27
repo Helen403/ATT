@@ -6,7 +6,7 @@
 		<key>title</key>
 		<string>待处理</string>
 		<key>hint</key>
-		<string>3</string>
+		<string>0</string>
 		<key>imgtext</key>
 		<string>approve_cc_picture</string>
 	</dict>
@@ -22,7 +22,7 @@
 		<key>title</key>
 		<string>已拒绝</string>
 		<key>hint</key>
-		<string>1</string>
+		<string>0</string>
 		<key>imgtext</key>
 		<string>approve_reject_picture</string>
 	</dict>
@@ -30,7 +30,7 @@
 		<key>title</key>
 		<string>抄送我的</string>
 		<key>hint</key>
-		<string>4</string>
+		<string>0</string>
 		<key>imgtext</key>
 		<string>approve_manage_picture_gary</string>
 	</dict>

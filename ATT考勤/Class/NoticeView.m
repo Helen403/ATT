@@ -9,6 +9,7 @@
 #import "NoticeView.h"
 #import "NoticeViewModel.h"
 #import "AnnouncementModel.h"
+#import "UserModel.h"
 
 @interface NoticeView()
 
@@ -28,8 +29,7 @@
 
 @property(nonatomic,strong) UIButton *lastBtn;
 
-@property(nonatomic,assign) NSInteger index;
-
+@property(nonatomic,assign) NSInteger indexTmp;
 
 @end
 
@@ -69,8 +69,9 @@
     
     
     [self.preBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf).offset(-[self h_w:10]);
+        make.bottom.equalTo(weakSelf).offset(-[self h_w:15]);
         make.left.equalTo(weakSelf).offset([self h_w:10]);
+        make.size.equalTo(CGSizeMake([self h_w:90], [self h_w:35]));
     }];
     
     [self.page mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,7 +82,7 @@
     [self.lastBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.preBtn);
         make.right.equalTo(-[self h_w:10]);
-        
+        make.size.equalTo(CGSizeMake([self h_w:90], [self h_w:35]));
     }];
     
     [super updateConstraints];
@@ -104,25 +105,19 @@
 }
 
 -(void)h_loadData{
-    
-    self.index = 1;
-    
-    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
-    self.noticeViewModel.companyCode = companyCode;
-    
-    [self.noticeViewModel.refreshDataCommand execute:nil];
-    
+ 
 }
 
--(void)h_refreash{
-    self.index = 1;
-    
+-(void)setIndex:(NSInteger)index{
+    _index = index;
+    self.indexTmp = index;
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.noticeViewModel.companyCode = companyCode;
-    
+    UserModel *user = getModel(@"user");
+    self.noticeViewModel.userCode = user.userCode;
+    self.noticeViewModel.index = index;
     [self.noticeViewModel.refreshDataCommand execute:nil];
 }
-
 
 -(void)h_bindViewModel{
 
@@ -135,11 +130,11 @@
 -(void)mainThread{
     //设置多少页
 
-    self.page.text = [NSString stringWithFormat:@"第1页/共%ld页",self.noticeViewModel.arr.count];
-    AnnouncementModel *announcementModel = self.noticeViewModel.arr[0];
-    self.title.text = announcementModel.msgSubject;
+    self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.indexTmp+1,self.noticeViewModel.preArr.count];
+    AnnouncementModel *announcementModel = self.noticeViewModel.announcement;
+    self.title.text = announcementModel.msgTitle;
     self.content.text = announcementModel.msgContent;
-    self.name.text =  announcementModel.msgSenderName;
+    self.name.text =  announcementModel.msgOffice;
     self.time.text = announcementModel.msgPublishDate;
 }
 
@@ -200,17 +195,11 @@
         [_preBtn setTitle:@" 上一页 " forState:UIControlStateNormal];
         _preBtn.titleLabel.font = H14;
         [_preBtn addTarget:self action:@selector(pre:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_preBtn.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_preBtn.layer setCornerRadius:10];
-        
         [_preBtn.layer setBorderWidth:2];//设置边界的宽度
-        
         [_preBtn setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
-        
         [_preBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
         
     }
@@ -218,20 +207,21 @@
 }
 
 -(void)pre:(UIButton *)button{
-    self.index--;
-    if (self.index == 0) {
-        self.index = 1;
+    self.indexTmp--;
+    if (self.indexTmp < 0) {
+        self.indexTmp = 0;
     }
 
-    if (self.noticeViewModel.arr.count==0) {
+    if (self.noticeViewModel.preArr.count==0) {
         return;
     }
-    self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.noticeViewModel.arr.count];
-    AnnouncementModel *announcementModel = self.noticeViewModel.arr[self.index-1];
-    self.title.text = announcementModel.msgSubject;
-    self.content.text = announcementModel.msgContent;
-    self.name.text =  announcementModel.msgSenderName;
-    self.time.text = announcementModel.msgPublishDate;
+
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.noticeViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.noticeViewModel.userCode = user.userCode;
+    self.noticeViewModel.index = self.indexTmp;
+    [self.noticeViewModel.refreshDataCommand execute:nil];
 }
 
 -(UILabel *)page{
@@ -250,17 +240,11 @@
         [_lastBtn setTitle:@" 下一页 " forState:UIControlStateNormal];
         _lastBtn.titleLabel.font = H14;
         [_lastBtn addTarget:self action:@selector(last:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_lastBtn.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_lastBtn.layer setCornerRadius:10];
-        
         [_lastBtn.layer setBorderWidth:2];//设置边界的宽度
-        
         [_lastBtn setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
-        
         [_lastBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
         
     }
@@ -268,23 +252,19 @@
 }
 
 -(void)last:(UIButton *)button{
-    
-    self.index++;
-    if (self.index > self.noticeViewModel.arr.count) {
-        self.index = self.noticeViewModel.arr.count;
+    self.indexTmp++;
+    if (self.indexTmp > self.noticeViewModel.preArr.count-1) {
+        self.indexTmp = self.noticeViewModel.preArr.count-1;
     }
-    
-    if (self.noticeViewModel.arr.count==0) {
+    if (self.noticeViewModel.preArr.count==0) {
         return;
     }
-    
-    self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.noticeViewModel.arr.count];
-    AnnouncementModel *announcementModel = self.noticeViewModel.arr[self.index-1];
-    self.title.text = announcementModel.msgSubject;
-    self.content.text = announcementModel.msgContent;
-    self.name.text =  announcementModel.msgSenderName;
-    self.time.text = announcementModel.msgPublishDate;
-
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.noticeViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.noticeViewModel.userCode = user.userCode;
+    self.noticeViewModel.index = self.indexTmp;
+    [self.noticeViewModel.refreshDataCommand execute:nil];
 }
 
 

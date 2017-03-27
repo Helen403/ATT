@@ -59,7 +59,6 @@
     self.weekDetailsView.endDate = endDate;
     
     self.title = self.week;
-    
 }
 
 #pragma mark lazyload

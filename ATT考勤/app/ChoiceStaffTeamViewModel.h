@@ -20,5 +20,9 @@
 
 @property(nonatomic,strong) RACSubject *cellclickSubject;
 
+@property(nonatomic,strong) RACCommand *CrefreshDataCommand;
 
+@property(nonatomic,strong) NSMutableArray *arrTmp;
+
+@property(nonatomic,assign) NSInteger index;
 @end

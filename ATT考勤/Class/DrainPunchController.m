@@ -58,7 +58,14 @@
     }];
 }
 
-
+-(void)setEndDate:(NSString *)endDate{
+    if (!endDate) {
+        return;
+    }
+    _endDate = endDate;
+    self.drainPunchView.startDate = self.startDate;
+    self.drainPunchView.endDate = endDate;
+}
 
 #pragma mark lazyload
 -(DrainPunchView *)drainPunchView{

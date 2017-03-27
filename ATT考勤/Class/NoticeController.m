@@ -51,9 +51,15 @@
 
 }
 
--(void)h_viewWillAppear{
-    [self.noticeView h_refreash];
 
+-(void)setArr:(NSMutableArray *)arr{
+    if (!arr) {
+        return;
+    }
+    _arr = arr;
+
+    self.noticeViewModel.preArr = arr;
+    self.noticeView.index = self.index;
 }
 
 

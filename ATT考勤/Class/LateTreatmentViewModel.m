@@ -37,9 +37,6 @@
             self.arr = arr;
             [self.tableViewSubject sendNext:nil];
         }
-        
-       
-     
     }];
     
     
@@ -79,7 +76,6 @@
                     [subscriber sendNext:@"netFail"];
                     [subscriber sendCompleted];
                 }];
-                
                 return nil;
             }];
         }];

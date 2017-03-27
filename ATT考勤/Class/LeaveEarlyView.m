@@ -249,7 +249,6 @@
         return;
     }
     for (ProveModel *prove in arrTemp) {
-        
         self.stepUserCodes = [NSString stringWithFormat:@"%@,%@",self.stepUserCodes,prove.whoisId];
         self.stepUserNames = [NSString stringWithFormat:@"%@,%@",self.stepUserNames,prove.whois];
     }
@@ -276,11 +275,13 @@
     self.cuserName = [self.cuserName substringFromIndex:1];
 }
 
--(void)h_viewWillAppear{
-}
-
--(void)h_viewWillDisappear{
-    self.applyManViewModel.arr = nil;
+-(void)setEndDate:(NSString *)endDate{
+    if (!endDate) {
+        return;
+    }
+    _endDate = endDate;
+    self.applyTimeShowText.text = self.startDate;
+    self.lateTimeShowText.text = endDate;
 }
 
 #pragma mark lazyload

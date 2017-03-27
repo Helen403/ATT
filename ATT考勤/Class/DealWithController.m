@@ -43,9 +43,7 @@
 
 -(void)h_bindViewModel{
 
-
 }
-
 
 #pragma mark lazyload
 -(DealWithView *)dealWithView{

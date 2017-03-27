@@ -46,29 +46,21 @@
 }
 
 -(void)h_addSubviews{
-    
     [self.view addSubview:self.teamView];
 }
 
 -(void)h_bindViewModel{
     [[self.teamViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-        
         TeamListController *teamList = [[TeamListController alloc] init];
-
         TeamModel *teamModel =self.teamViewModel.arr[[x intValue]];
-        
         teamList.deptCode =  teamModel.deptCode;
         teamList.companyCode = teamModel.companyCode;
         [self.navigationController pushViewController:teamList animated:NO];
-        
     }];
 
 }
 
--(void)h_viewWillAppear{
 
-    [self.teamView h_refreash];
-}
 
 #pragma mark lazyload
 -(TeamView *)teamView{

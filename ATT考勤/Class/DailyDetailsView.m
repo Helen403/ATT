@@ -138,7 +138,9 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     DailyDetailsCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([DailyDetailsCellView class])] forIndexPath:indexPath];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.busDate = self.busDate;
     cell.cardDetaillist = self.dailyDetailsViewModel.dailyDetailsModel.cardDetaillist[indexPath.row];
     
     return cell;
@@ -152,8 +154,6 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    //    NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    //    [self.dealWithViewModel.cellclickSubject sendNext:row];
 }
 
 -(DailyDetailsHeadView *)dailyDetailsHeadView{

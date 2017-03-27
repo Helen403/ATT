@@ -9,21 +9,12 @@
 #import "DealWithViewModel.h"
 #import "DealWithModel.h"
 
+
 @implementation DealWithViewModel
 
--(NSMutableArray *)arr{
-    if (!_arr) {
-        _arr = [NSMutableArray array];
-           //读取plist
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DealWith" ofType:@"plist"];
-        
-        NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
-        
-       _arr= [DealWithModel mj_objectArrayWithKeyValuesArray:data];
-   
-    }
-    return _arr;
-}
+
+
+
 
 -(RACSubject *)cellclickSubject{
     
@@ -31,6 +22,21 @@
         _cellclickSubject = [RACSubject subject];
     }
     return _cellclickSubject;
+}
+
+
+-(NSMutableArray *)arr{
+    if (!_arr) {
+        _arr = [NSMutableArray array];
+        //读取plist
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DealWith" ofType:@"plist"];
+        
+        NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
+        
+        _arr= [DealWithModel mj_objectArrayWithKeyValuesArray:data];
+        
+    }
+    return _arr;
 }
 
 

@@ -10,4 +10,8 @@
 
 @interface LeaveEarlyController : HViewController
 
+@property(nonatomic,strong) NSString *startDate;
+
+@property(nonatomic,strong) NSString *endDate;
+
 @end

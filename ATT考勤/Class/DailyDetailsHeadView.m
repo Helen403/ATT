@@ -66,7 +66,7 @@
     }
     _dailyDetailsModel = dailyDetailsModel;
     self.shift.text = [NSString stringWithFormat:@"班次:%@",dailyDetailsModel.shiftName];
-    self.count.text = [NSString stringWithFormat:@"打卡:%@次",dailyDetailsModel.signCount];
+    self.count.text = [NSString stringWithFormat:@"打卡次数:%@次",dailyDetailsModel.signCount];
 }
 
 #pragma mark lazyload

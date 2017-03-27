@@ -7,7 +7,7 @@
 //
 
 #import "InformViewModel.h"
-#import "NoticeModel.h"
+#import "InformListModel.h"
 
 @implementation InformViewModel
 
@@ -15,18 +15,15 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        
+        DismissHud();
         if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
             return ;
         }
+        NSDictionary *xmlDoc = [self getFilter:result filter:@"Notices"];
         
-        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAllNoticesResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAllNoticesResponse>"];
-        
-        NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[NoticeModel class] rowRootName:@"Notices"];
-        self.arr = arr;
+        NoticeModel *noticeModel = [NoticeModel mj_objectWithKeyValues:xmlDoc];
+        self.noticeModel = noticeModel;
         [self.successSubject sendNext:result];
-        
-        DismissHud();
     }];
     
     
@@ -52,16 +49,21 @@
                 
                 @strongify(self);
                 
-                NSString *body =[NSString stringWithFormat: @"<findAllNotices xmlns=\"http://service.webservice.vada.com/\">\
-                                 <companyCode xmlns=\"\">%@</companyCode>\
-                                 </findAllNotices>",self.companyCode];
+                InformListModel *inform = self.preArr[self.index];
                 
-                [self SOAPData:findAllNotices soapBody:body success:^(NSString *result) {
+                NSString *body =[NSString stringWithFormat: @"<findNoticesById xmlns=\"http://service.webservice.vada.com/\">\
+                                 <companyCode xmlns=\"\">%@</companyCode>\
+                                 <msgId xmlns=\"\">%@</msgId>\
+                                 <userCode xmlns=\"\">%@</userCode>\
+                                 </findNoticesById>",self.companyCode,inform.msgId,self.userCode];
+                
+                [self SOAPData:findNoticesById soapBody:body success:^(NSString *result) {
+                    
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
                 } failure:^(NSError *error) {
-                    ShowErrorStatus(@"请检查网络状态");
                     DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
                     [subscriber sendNext:@"netFail"];
                     [subscriber sendCompleted];
                 }];
@@ -70,7 +72,6 @@
             }];
         }];
     }
-    
     return _refreshDataCommand;
 }
 
@@ -83,12 +84,10 @@
     return _successSubject;
 }
 
-
--(NSMutableArray *)arr{
-    if (!_arr) {
-        _arr = [NSMutableArray array];
+-(NSMutableArray *)preArr{
+    if (!_preArr) {
+        _preArr = [NSMutableArray array] ;
     }
-    return _arr;
-    
+    return _preArr;
 }
 @end

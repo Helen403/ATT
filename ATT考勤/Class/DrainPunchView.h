@@ -10,4 +10,8 @@
 
 @interface DrainPunchView : HView
 
+@property(nonatomic,strong) NSString *startDate;
+
+@property(nonatomic,strong) NSString *endDate;
+
 @end

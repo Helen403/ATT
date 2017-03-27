@@ -13,4 +13,6 @@
 
 @property(nonatomic,strong) CardDetaillist *cardDetaillist;
 
+@property(nonatomic,strong) NSString *busDate;
+
 @end

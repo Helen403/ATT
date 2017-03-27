@@ -9,6 +9,8 @@
 #import "InformView.h"
 #import "InformViewModel.h"
 #import "NoticeModel.h"
+#import "UserModel.h"
+
 
 @interface InformView()
 
@@ -28,7 +30,7 @@
 
 @property(nonatomic,strong) UIButton *lastBtn;
 
-@property(nonatomic,assign) NSInteger index;
+@property(nonatomic,assign) NSInteger indexTmp;
 
 @end
 
@@ -53,7 +55,7 @@
         make.left.equalTo([self h_w:10]);
         make.right.equalTo(-[self h_w:10]);
         make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:15]);
-        // make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:130]));
+        
     }];
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -68,8 +70,9 @@
     
     
     [self.preBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf).offset(-[self h_w:10]);
+        make.bottom.equalTo(weakSelf).offset(-[self h_w:15]);
         make.left.equalTo(weakSelf).offset([self h_w:10]);
+         make.size.equalTo(CGSizeMake([self h_w:90], [self h_w:35]));
     }];
     
     [self.page mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -80,7 +83,7 @@
     [self.lastBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.preBtn);
         make.right.equalTo(-[self h_w:10]);
-        
+         make.size.equalTo(CGSizeMake([self h_w:90], [self h_w:35]));
     }];
     
     [super updateConstraints];
@@ -96,31 +99,23 @@
     [self addSubview:self.preBtn];
     [self addSubview:self.page];
     [self addSubview:self.lastBtn];
-    
-    
+
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
 
-
 -(void)h_loadData{
-    
-    self.index = 1;
-    
-    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
-    self.informViewModel.companyCode = companyCode;
-    
-    [self.informViewModel.refreshDataCommand execute:nil];
     
 }
 
-
--(void)h_refreash{
-    self.index = 1;
-    
+-(void)setIndex:(NSInteger)index{
+    _index = index;
+    self.indexTmp = index;
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.informViewModel.companyCode = companyCode;
-    
+    UserModel *user = getModel(@"user");
+    self.informViewModel.userCode = user.userCode;
+    self.informViewModel.index = index;
     [self.informViewModel.refreshDataCommand execute:nil];
 }
 
@@ -134,16 +129,13 @@
 
 -(void)mainThread{
     //设置多少页
-    
-    
-    self.page.text = [NSString stringWithFormat:@"第1页/共%ld页",self.informViewModel.arr.count];
-    NoticeModel *noticeModel = self.informViewModel.arr[0];
-    self.title.text = noticeModel.msgReciverNames;
-    self.content.text = noticeModel.msgContent;
-    self.name.text =  noticeModel.msgSenderName;
-    self.time.text = noticeModel.msgSendDate;
+    self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.indexTmp+1,self.informViewModel.preArr.count];
+    NoticeModel *NoticeModel = self.informViewModel.noticeModel;
+    self.title.text = NoticeModel.msgTitle;
+    self.content.text = NoticeModel.msgContent;
+    self.name.text =  NoticeModel.msgOffice;
+    self.time.text = NoticeModel.msgPublishDate;
 }
-
 
 #pragma mark lazyload
 -(InformViewModel *)informViewModel{
@@ -170,8 +162,7 @@
         _content.font = H18;
         _content.textColor = MAIN_PAN_2;
         //自动折行设置
-        _content.lineBreakMode = NSLineBreakByWordWrapping;
-        
+        [_content setLineBreakMode:NSLineBreakByWordWrapping];
         _content.numberOfLines = 0;
     }
     return _content;
@@ -203,16 +194,11 @@
         [_preBtn setTitle:@" 上一页 " forState:UIControlStateNormal];
         _preBtn.titleLabel.font = H14;
         [_preBtn addTarget:self action:@selector(pre:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_preBtn.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_preBtn.layer setCornerRadius:10];
-        
         [_preBtn.layer setBorderWidth:2];//设置边界的宽度
-        
         [_preBtn setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-
         [_preBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
         
     }
@@ -220,22 +206,21 @@
 }
 
 -(void)pre:(UIButton *)button{
-    self.index--;
-    if (self.index == 0) {
-        self.index = 1;
+    self.indexTmp--;
+    if (self.indexTmp < 0) {
+        self.indexTmp = 0;
     }
-    if (self.informViewModel.arr.count==0) {
+    
+    if (self.informViewModel.preArr.count==0) {
         return;
     }
-    self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.informViewModel.arr.count];
     
-    
-    NoticeModel *noticeModel = self.informViewModel.arr[0];
-    self.title.text = noticeModel.msgReciverNames;
-    self.content.text = noticeModel.msgContent;
-    self.name.text =  noticeModel.msgSenderName;
-    self.time.text = noticeModel.msgSendDate;
-    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.informViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.informViewModel.userCode = user.userCode;
+    self.informViewModel.index = self.indexTmp;
+    [self.informViewModel.refreshDataCommand execute:nil];
 }
 
 -(UILabel *)page{
@@ -254,17 +239,11 @@
         [_lastBtn setTitle:@" 下一页 " forState:UIControlStateNormal];
         _lastBtn.titleLabel.font = H14;
         [_lastBtn addTarget:self action:@selector(last:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_lastBtn.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_lastBtn.layer setCornerRadius:10];
-        
         [_lastBtn.layer setBorderWidth:2];//设置边界的宽度
-        
         [_lastBtn setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-   
-        
         [_lastBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
         
     }
@@ -272,20 +251,18 @@
 }
 
 -(void)last:(UIButton *)button{
-   
-    self.index++;
-    if (self.index > self.informViewModel.arr.count) {
-        self.index = self.informViewModel.arr.count;
+    self.indexTmp++;
+    if (self.indexTmp > self.informViewModel.preArr.count-1) {
+        self.indexTmp = self.informViewModel.preArr.count-1;
     }
-    if (self.informViewModel.arr.count==0) {
+    if (self.informViewModel.preArr.count==0) {
         return;
     }
-    self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.index,self.informViewModel.arr.count];
- 
-    NoticeModel *noticeModel = self.informViewModel.arr[0];
-    self.title.text = noticeModel.msgReciverNames;
-    self.content.text = noticeModel.msgContent;
-    self.name.text =  noticeModel.msgSenderName;
-    self.time.text = noticeModel.msgSendDate;
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.informViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.informViewModel.userCode = user.userCode;
+    self.informViewModel.index = self.indexTmp;
+    [self.informViewModel.refreshDataCommand execute:nil];
 }
 @end

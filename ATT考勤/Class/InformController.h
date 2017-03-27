@@ -10,4 +10,8 @@
 
 @interface InformController : HViewController
 
+@property(nonatomic,strong) NSMutableArray *arr;
+
+@property(nonatomic,assign) NSInteger index;
+
 @end

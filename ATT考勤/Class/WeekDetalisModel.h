@@ -10,8 +10,9 @@
 
 @interface WeekDetalisModel : NSObject
 
-@property (nonatomic , copy) NSString              * cardTime;
+@property (nonatomic , copy) NSString              * busDate;
 @property (nonatomic , copy) NSString              * cardStatus;
 @property (nonatomic , copy) NSString              * cardDate;
 @property (nonatomic , copy) NSString              * cardNormalDatetime;
+@property (nonatomic , copy) NSString              * cardTime;
 @end

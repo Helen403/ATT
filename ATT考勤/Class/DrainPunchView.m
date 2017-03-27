@@ -128,7 +128,7 @@
     
     [self.lateTimeShowText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.lateTimeText);
-        make.left.equalTo(weakSelf.applyTimeShowText);
+         make.right.equalTo(weakSelf.line1);
     }];
     
     [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -216,6 +216,15 @@
     self.drainPunchViewModel.companyCode = companyCode;
     [self.drainPunchViewModel.refreshDataCommand execute:nil];
     
+}
+
+-(void)setEndDate:(NSString *)endDate{
+    if (!endDate) {
+        return;
+    }
+    _endDate = endDate;
+    self.applyTimeShowText.text = [LSCoreToolCenter currentYearYMDHMS];
+    self.lateTimeShowText.text = endDate;
 }
 
 
@@ -349,7 +358,7 @@
 -(UILabel *)applyTimeText{
     if (!_applyTimeText) {
         _applyTimeText = [[UILabel alloc] init];
-        _applyTimeText.text = @"漏打时间";
+        _applyTimeText.text = @"申请时间";
         _applyTimeText.textColor = MAIN_PAN_2;
         _applyTimeText.font = H14;
     }

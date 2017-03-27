@@ -11,6 +11,7 @@
 #import "ChatViewModel.h"
 #import "InputToolbar.h"
 #import "UIView+Extension.h"
+#import "IQKeyboardManager.h"
 
 
 @interface ChatController ()<UITableViewDelegate,UITableViewDataSource,MoreButtonViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,InputToolbarDelegate>
@@ -31,7 +32,6 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-
 }
 
 #pragma mark private
@@ -46,12 +46,19 @@
     [self tableViewScrollCurrentIndexPath];
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
+
+-(void)h_viewWillAppear{
+    //打开键盘事件相应
+    [IQKeyboardManager sharedManager].enable = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
 }
+
+-(void)h_viewWillDisappear{
+    //关闭键盘事件相应
+    [IQKeyboardManager sharedManager].enable = YES;
+}
+
 
 -(void)keyboardShow:(NSNotification *)note{
     CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];

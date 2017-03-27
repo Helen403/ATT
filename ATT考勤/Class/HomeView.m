@@ -879,17 +879,18 @@
     
     //判读两点间的距离
     //第一个坐标
-    //    CLLocation *current = [[CLLocation alloc] initWithLatitude:22.516568 longitude:113.406002];
-    //    //第二个坐标
-    //    CLLocation *before = [[CLLocation alloc] initWithLatitude:self.locLatitude.doubleValue longitude:self.locLongitude.doubleValue];
-    //    // 计算距离
-    //    CLLocationDistance meters=[current distanceFromLocation:before];
-    //    NSLog(@"%f",meters);
-    //
-    //    if (meters>200) {
-    //        ShowMessage(@"还没到打卡的范围");
-    //        return;
-    //    }
+        CLLocation *current = [[CLLocation alloc] initWithLatitude:22.516568 longitude:113.406002];
+        //第二个坐标
+        CLLocation *before = [[CLLocation alloc] initWithLatitude:self.locLatitude.doubleValue longitude:self.locLongitude.doubleValue];
+        // 计算距离
+        CLLocationDistance meters=[current distanceFromLocation:before];
+        ShowMessage([NSString stringWithFormat:@"距离公司%.2f米",meters]);
+//        NSLog(@"%f",meters);
+    
+//        if (meters>200) {
+//            ShowMessage(@"还没到打卡的范围");
+//            return;
+//        }
     
     if ([self.clockMode isEqualToString:@"1"]) {
         ShowErrorStatus(@"请检查网络");

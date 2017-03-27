@@ -123,6 +123,7 @@
     
     WeekDetailsCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([WeekDetailsCellView class])] forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+   
     cell.index = indexPath.row;
     cell.weekDetalisModel = self.weekDetailsViewModel.arr[indexPath.row];
     

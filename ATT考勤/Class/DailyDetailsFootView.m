@@ -27,16 +27,16 @@
     
     WS(weakSelf);
     [self.goOutWorkHours mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:10]);
+        make.left.equalTo([self h_w:20]);
         make.top.equalTo([self h_w:10]);
     }];
     [self.overWorkHours mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:10]);
+        make.left.equalTo(weakSelf.goOutWorkHours);
         make.top.equalTo(weakSelf.goOutWorkHours.mas_bottom).offset([self h_w:10]);
     }];
     
     [self.workHours mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:10]);
+        make.left.equalTo(weakSelf.goOutWorkHours);
         make.top.equalTo(weakSelf.overWorkHours.mas_bottom).offset([self h_w:10]);
     }];
     

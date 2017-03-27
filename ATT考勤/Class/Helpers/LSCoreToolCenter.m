@@ -332,6 +332,16 @@ void DismissHud(void){
     
 }
 
++(NSString *)currentYearYMDHMS{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    return str;
+    
+}
+
 +(NSString *)currentYearYM{
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

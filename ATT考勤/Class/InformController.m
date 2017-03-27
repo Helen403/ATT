@@ -50,12 +50,16 @@
 
 }
 
--(void)h_viewWillAppear{
-
-    [self.informView h_refreash];
+-(void)setArr:(NSMutableArray *)arr{
+    if (!arr) {
+        return;
+    }
+    _arr = arr;
+    
+    self.informViewModel.preArr = arr;
+    self.informView.index = self.index;
 }
-
-
+#pragma mark lazydata
 -(InformView *)informView{
     if (!_informView) {
         _informView = [[InformView alloc] initWithViewModel:self.informViewModel];

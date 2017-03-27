@@ -219,6 +219,16 @@
 }
 
 
+-(void)setEndDate:(NSString *)endDate{
+    if (!endDate) {
+        return;
+    }
+    _endDate = endDate;
+    self.applyTimeShowText.text = self.startDate;
+    self.lateTimeShowText.text = endDate;
+}
+
+
 -(void)h_bindViewModel{
     [[self.lateViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
@@ -303,8 +313,6 @@
                     break;
                 }
             }
-            
-            
         }];
         _datepicker.datePickerStyle = DateStyleShowYearMonthDayHourMinute;
         _datepicker.dateType = DateTypeStartDate;
@@ -352,7 +360,7 @@
 -(UILabel *)applyTimeText{
     if (!_applyTimeText) {
         _applyTimeText = [[UILabel alloc] init];
-        _applyTimeText.text = @"申请时间";
+        _applyTimeText.text = @"迟到时间";
         _applyTimeText.textColor = MAIN_PAN_2;
         _applyTimeText.font = H14;
     }
@@ -362,7 +370,7 @@
 -(UILabel *)applyTimeShowText{
     if (!_applyTimeShowText) {
         _applyTimeShowText = [[UILabel alloc] init];
-        _applyTimeShowText.text = @"2016年12月25日 08:30:00";
+        _applyTimeShowText.text = @"";
         _applyTimeShowText.font = H14;
         _applyTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -381,7 +389,7 @@
 -(UILabel *)lateTimeText{
     if (!_lateTimeText) {
         _lateTimeText = [[UILabel alloc] init];
-        _lateTimeText.text = @"迟到时间";
+        _lateTimeText.text = @"正常时间";
         _lateTimeText.textColor = MAIN_PAN_2;
         _lateTimeText.font = H14;
     }
@@ -391,7 +399,7 @@
 -(UILabel *)lateTimeShowText{
     if (!_lateTimeShowText) {
         _lateTimeShowText = [[UILabel alloc] init];
-        _lateTimeShowText.text = @"2016年12月25日 08:30:00";
+        _lateTimeShowText.text = @"";
         _lateTimeShowText.font = H14;
         _lateTimeShowText.textColor = MAIN_PAN_2;
     }
@@ -409,7 +417,6 @@
 -(JSTextView *)textView{
     if (!_textView) {
         _textView  = [[JSTextView alloc] init];
-        
         _textView.scrollEnabled = NO;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
         _textView.editable = YES;        //是否允许编辑内容，默认为“YES”
         _textView.font=[UIFont fontWithName:@"Arial" size:18.0]; //设置
@@ -505,7 +512,6 @@
     
     [self.lateViewModel.applyLateCommand execute:nil];
 }
-
 
 -(UIScrollView *)scrollView{
     if (!_scrollView) {

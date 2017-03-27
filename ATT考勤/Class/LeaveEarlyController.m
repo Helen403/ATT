@@ -39,7 +39,6 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-    
     self.title = @"销早退申请";
 }
 
@@ -47,24 +46,23 @@
     [self.view addSubview:self.leaveEarlyView];
 }
 
+-(void)setEndDate:(NSString *)endDate{
+    if (!endDate) {
+        return;
+    }
+    _endDate = endDate;
+    self.leaveEarlyView.startDate = self.startDate;
+    self.leaveEarlyView.endDate = endDate;
+}
+
+
 -(void)h_bindViewModel{
     
     [[self.leaveEarlyViewModel.submitclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
-        
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:NO];
-             [self.leaveEarlyView h_viewWillDisappear];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"ApplyManViewRemove" object:nil];
         });
     }];
-}
-
--(void)h_viewWillAppear{
-    [self.leaveEarlyView h_viewWillAppear];
-}
-
--(void)h_viewWillDisappear{
-   
 }
 
 #pragma mark lazyload
@@ -83,8 +81,4 @@
     
 }
 
-
--(void)dealloc{
-    [[NSNotificationCenter  defaultCenter] removeObserver:self  name:@"ApplyManViewRemove" object:nil];
-}
 @end
