@@ -12,11 +12,13 @@
 #import "InputToolbar.h"
 #import "UIView+Extension.h"
 #import "IQKeyboardManager.h"
+#import "UserModel.h"
+#import "IconView.h"
+#import <AVFoundation/AVFoundation.h>
 
 
 @interface ChatController ()<UITableViewDelegate,UITableViewDataSource,MoreButtonViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,InputToolbarDelegate>
-
-@property (nonatomic, strong) NSMutableArray *resultArray;
+@property(nonatomic,strong) NSTimer *timeNow;
 
 @property(nonatomic,strong) UITableView *tableView;
 
@@ -25,6 +27,12 @@
 @property (nonatomic,strong)InputToolbar *inputToolbar;
 
 @property (nonatomic,assign)CGFloat inputToolbarY;
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property(nonatomic,strong) NSString *userCode;
+
+@property(nonatomic,strong) AVAudioPlayer *player;
 
 @end
 
@@ -42,32 +50,36 @@
 -(void)h_addSubviews{
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.inputToolbar];
-    //滚动到最底下
-    [self tableViewScrollCurrentIndexPath];
 }
-
 
 -(void)h_viewWillAppear{
     //打开键盘事件相应
-    [IQKeyboardManager sharedManager].enable = NO;
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)h_viewWillDisappear{
     //关闭键盘事件相应
-    [IQKeyboardManager sharedManager].enable = YES;
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    //关闭定时器
+    [self.timeNow setFireDate:[NSDate distantFuture]];
 }
 
 
 -(void)keyboardShow:(NSNotification *)note{
     CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGFloat deltaY=keyBoardRect.size.height;
-
-    [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
-        
-        self.tableView.transform=CGAffineTransformMakeTranslation(0, -deltaY);
-    }];
+    CGFloat deltaY = keyBoardRect.size.height;
+    
+    if (self.chatViewModel.arr.count>4) {
+        [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+            
+            self.tableView.transform=CGAffineTransformMakeTranslation(0, -deltaY);
+        }];
+    }
+    
 }
 
 -(void)keyboardHide:(NSNotification *)note{
@@ -76,28 +88,27 @@
     }];
 }
 
-
 -(InputToolbar *)inputToolbar{
     if (!_inputToolbar) {
         _inputToolbar = [InputToolbar shareInstance];
         _inputToolbar.textViewMaxVisibleLine = 4;
         _inputToolbar.width = self.view.width;
-
-           _inputToolbar.height = [self h_w:49];
+        
+        _inputToolbar.height = [self h_w:49];
         
         if (isPad) {
             _inputToolbar.y = self.view.height - _inputToolbar.height-[self h_w:7];
         }else{
             _inputToolbar.y = self.view.height - _inputToolbar.height-[self h_w:60];
         }
-
+        
         _inputToolbar.delegate = self;
         [_inputToolbar setMorebuttonViewDelegate:self];
         
         WS(weakSelf);
         _inputToolbar.sendContent = ^(NSObject *content){
             
-//            NSLog(@"发射成功☀️:---%@",content);
+            //            NSLog(@"发射成功☀️:---%@",content);
             
             [weakSelf sendMsg:((NSAttributedString *)content).string];
         };
@@ -108,29 +119,63 @@
         [_inputToolbar resetInputToolbar];
     }
     return _inputToolbar;
-
+    
 }
 
+-(void)setMyMsgModel:(MyMsgModel *)myMsgModel{
+    if (!myMsgModel) {
+        return;
+    }
+    _myMsgModel = myMsgModel;
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.companyCode = companyCode;
+    UserModel *user = getModel(@"user");
+    self.userCode = user.userCode;
+    //设置定时
+    self.timeNow = [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(h_loadData) userInfo:nil repeats:YES];
+}
+
+-(void)h_loadData{
+    self.chatViewModel.companyCode = self.companyCode;
+    self.chatViewModel.userCode = self.userCode;
+    self.chatViewModel.targetId = self.myMsgModel.msgUserCode;
+    [self.chatViewModel.refreshDataCommand execute:nil];
+}
+
+-(void)h_bindViewModel{
+    [[self.chatViewModel.successSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            [self.tableView reloadData];
+            //滚动到最底下
+            [self tableViewScrollCurrentIndexPath];
+        });
+    }];
+}
 
 -(void)sendMsg:(NSString *)content{
-    ChatModel *chat = [[ChatModel alloc] init];
-    chat.judge = @"0";
-    chat.img = @"photo1";
-    chat.name = @"helen";
-    chat.content = content;
-    
-    
-    [self.resultArray addObject:chat];
-    [self.tableView reloadData];
-    //滚动到最底下
-    [self tableViewScrollCurrentIndexPath];
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.chatViewModel.companyCode = companyCode;
+    UserModel *user = getModel(@"user");
+    self.chatViewModel.msgSenderId = user.userCode;
+    self.chatViewModel.msgSenderName = user.userRealName;
+    self.chatViewModel.msgReceId = self.myMsgModel.msgUserCode;
+    self.chatViewModel.msgReceName =self.myMsgModel.msgUserName;
+    self.chatViewModel.msgSendDate = [LSCoreToolCenter currentYearYMDHMS];
+    self.chatViewModel.msgType = @"1";
+    self.chatViewModel.msgContents = content;
+    self.chatViewModel.msgVolumnTime = @"0";
+    [self.chatViewModel.sendCommand execute:nil];
 }
 
 -(void)tableViewScrollCurrentIndexPath{
-    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:self.resultArray.count-1 inSection:0];
+    if (self.chatViewModel.arr.count<1) {
+        return;
+    }
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:self.chatViewModel.arr.count-1 inSection:0];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
-
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     self.inputToolbar.isBecomeFirstResponder = NO;
@@ -169,14 +214,6 @@
 
 
 #pragma mark lazyload
--(NSMutableArray *)resultArray{
-    if (!_resultArray) {
-        _resultArray = [NSMutableArray array];
-        [_resultArray addObjectsFromArray:self.chatViewModel.arr];
-    }
-    return _resultArray;
-}
-
 -(ChatViewModel *)chatViewModel{
     if (!_chatViewModel) {
         _chatViewModel = [[ChatViewModel alloc] init];
@@ -192,10 +229,9 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = white_color;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-[self h_w:49]);
+        _tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-[self h_w:100]);
     }
     return _tableView;
-    
 }
 
 
@@ -225,9 +261,9 @@
     bubbleImageView.frame = CGRectMake(0.0f, 14.0f, bubbleText.frame.size.width+30.0f, bubbleText.frame.size.height+20.0f);
     
     if(fromSelf)
-        returnView.frame = CGRectMake(SCREEN_WIDTH-position-(bubbleText.frame.size.width+30.0f), 0.0f, bubbleText.frame.size.width+30.0f, bubbleText.frame.size.height+30.0f);
+        returnView.frame = CGRectMake(SCREEN_WIDTH-position-(bubbleText.frame.size.width+30.0f), [self h_w:15], bubbleText.frame.size.width+30.0f, bubbleText.frame.size.height+30.0f);
     else
-        returnView.frame = CGRectMake(position, 0.0f, bubbleText.frame.size.width+30.0f, bubbleText.frame.size.height+30.0f);
+        returnView.frame = CGRectMake(position, [self h_w:15], bubbleText.frame.size.width+30.0f, bubbleText.frame.size.height+30.0f);
     
     [returnView addSubview:bubbleImageView];
     [returnView addSubview:bubbleText];
@@ -243,10 +279,11 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.tag = indexRow;
+    [button addTarget:self action:@selector(playMp3:) forControlEvents:UIControlEventTouchUpInside];
     if(fromSelf)
-        button.frame =CGRectMake(SCREEN_WIDTH-position-yuyinwidth, 10, yuyinwidth, 54);
+        button.frame = CGRectMake(SCREEN_WIDTH-position-yuyinwidth, [self h_w:30], yuyinwidth, [self h_w:54]);
     else
-        button.frame =CGRectMake(position, 10, yuyinwidth, 54);
+        button.frame =CGRectMake(position, [self h_w:30], yuyinwidth, [self h_w:54]);
     
     //image偏移量
     UIEdgeInsets imageInsert;
@@ -270,72 +307,102 @@
     return button;
 }
 
+-(void)playMp3:(UIButton *)button{
+    NSInteger indexRow = button.tag;
+    ChatModel *model = self.chatViewModel.arr[indexRow];
+    [self playMusic:model.msgContents];
+}
+
+-(void)playMusic:(NSString *)urlMusic1{
+    NSString *urlStr = urlMusic1;
+    NSURL *url = [[NSURL alloc]initWithString:urlStr];
+    NSData * audioData = [NSData dataWithContentsOfURL:url];
+    
+    //将数据保存到本地指定位置
+    NSString *docDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@.mp3", docDirPath , @"Temp"];
+    [audioData writeToFile:filePath atomically:YES];
+    
+    //播放本地音乐
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+    [self.player play];
+}
+
+
 #pragma UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.resultArray.count;
+    return self.chatViewModel.arr.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    ChatModel *model = self.resultArray[indexPath.row];
+    ChatModel *model = self.chatViewModel.arr[indexPath.row];
+    if ([model.msgType isEqualToString:@"2"]) {
+        
+        return [self h_w:84];
+        
+    }{
+        CGSize size = [model.msgContents sizeWithFont:H14 constrainedToSize:CGSizeMake(180.0f, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
+        return size.height+[self h_w:70];
+    }
     
-    CGSize size = [model.content sizeWithFont:H14 constrainedToSize:CGSizeMake(180.0f, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
-    
-    return size.height+[self h_w:30];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    ChatModel *model = self.resultArray[indexPath.row];
-    if ([model.judge isEqualToString:@"0"]) {
-        static NSString *CellIdentifier1 = @"Cell1";
-       
-        UITableViewCell *cell = nil;
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier1];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UIImageView * photo = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-60, 10, 50, 50)];
-            [cell addSubview:photo];
-            photo.image = ImageNamed(model.img);
-            
-            
-            if ([model.content isEqualToString:@"0"]) {
-                [cell addSubview:[self yuyinView:1 from:YES withIndexRow:indexPath.row withPosition:65]];
-            }else{
-                [cell addSubview:[self bubbleView:model.content from:YES withPosition:65]];
-            }
-            
+    ChatModel *model = self.chatViewModel.arr[indexPath.row];
+    if (![model.msgSenderId isEqualToString:self.myMsgModel.msgUserCode]){
+        
+        UITableViewCell *cell = [[UITableViewCell alloc]init];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UILabel *time = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:30])];
+        time.text = model.msgSendDate;
+        time.textColor = MAIN_PAN_2;
+        time.font = H14;
+        time.textAlignment = NSTextAlignmentCenter;
+        
+        [cell addSubview:time];
+        IconView * icon = [[IconView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-[self h_w:60], [self h_w:23], [self h_w:50], [self h_w:50])];
+        [cell addSubview:icon];
+        
+        [icon setContent:model.msgSenderName and:yellow_color];
+        
+        if ([model.msgType isEqualToString:@"2"]) {
+            [cell addSubview:[self yuyinView:model.msgVolumnTime.intValue from:YES withIndexRow:indexPath.row withPosition:65]];
+        }else{
+            [cell addSubview:[self bubbleView:model.msgContents from:YES withPosition:65]];
         }
         return cell;
-        
     }else{
-        static NSString *CellIdentifier2 = @"Cell2";
-
-         UITableViewCell *cell = nil;
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UIImageView * photo = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 50, 50)];
-            [cell addSubview:photo];
-            photo.image = ImageNamed(model.img);
-            
-            if ([model.content isEqualToString:@"0"]) {
-                [cell addSubview:[self yuyinView:1 from:NO withIndexRow:indexPath.row withPosition:65]];
-            }else{
-                [cell addSubview:[self bubbleView:model.content from:NO withPosition:65]];
-            }
- 
+        UITableViewCell *cell = [[UITableViewCell alloc]init];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UILabel *time = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:30])];
+        time.text = model.msgSendDate;
+        time.textColor = MAIN_PAN_2;
+        time.font = H14;
+        time.textAlignment = NSTextAlignmentCenter;
+        [cell addSubview:time];
+        IconView * icon = [[IconView alloc] initWithFrame:CGRectMake(10, [self h_w:23], [self h_w:50], [self h_w:50])];
+        
+        [cell addSubview:icon];
+        [icon setContent:self.myMsgModel.msgUserName and:purple_color];
+        
+        if ([model.msgType isEqualToString:@"2"]) {
+            [cell addSubview:[self yuyinView:model.msgVolumnTime.intValue from:NO withIndexRow:indexPath.row withPosition:65]];
+        } else {
+            [cell addSubview:[self bubbleView:model.msgContents from:NO withPosition:65]];
         }
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
 }
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{

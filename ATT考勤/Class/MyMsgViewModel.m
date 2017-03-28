@@ -18,11 +18,13 @@
         if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
             return ;
         }
-        NSDictionary *xmlDoc = [self getFilter:result filter:@"Announcement"];
+      
+        NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findMyMsgListResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findMyMsgListResponse>"];
         
-        MyMsgModel *announcement = [MyMsgModel mj_objectWithKeyValues:xmlDoc];
+        NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[MyMsgModel class] rowRootName:@"MsgListModels"];
+        self.arr = arr;
      
-        [self.successSubject sendNext:result];
+        [self.successSubject sendNext:nil];
         
     }];
     
@@ -85,13 +87,6 @@
 -(NSMutableArray *)arr{
     if (!_arr) {
         _arr = [NSMutableArray array];
-        
-        //读取plist
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"MyMsg" ofType:@"plist"];
-        
-        NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
-        
-        _arr = [MyMsgModel mj_objectArrayWithKeyValuesArray:data];
     }
     return _arr;
 }
@@ -103,7 +98,5 @@
     }
     return _cellclickSubject;
 }
-
-
 
 @end

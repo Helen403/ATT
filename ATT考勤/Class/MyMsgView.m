@@ -9,6 +9,7 @@
 #import "MyMsgView.h"
 #import "MyMsgViewModel.h"
 #import "MyMsgCellView.h"
+#import "UserModel.h"
 
 
 @interface MyMsgView()<UITableViewDataSource,UITableViewDelegate>
@@ -48,14 +49,20 @@
 
 
 -(void)h_bindViewModel{
-
-    
+    [[self.myMsgViewModel.successSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            
+        });
+    }];
 }
 
-
-
--(void)h_refreash{
-    [self.tableView reloadData];
+-(void)h_loadData{
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.myMsgViewModel.companyCode = companyCode;
+    UserModel *user =  getModel(@"user");
+    self.myMsgViewModel.userCode = user.userCode;
+    [self.myMsgViewModel.refreshDataCommand execute:nil];
 }
 
 

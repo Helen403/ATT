@@ -9,13 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @interface ChatModel : NSObject
-//0为自己  1为别人
-@property(nonatomic,strong) NSString *judge;
 
-@property(nonatomic,strong) NSString *img;
-
-@property(nonatomic,strong) NSString *name;
-
-@property(nonatomic,strong) NSString *content;
+@property (nonatomic , copy) NSString              * msgSenderName;
+@property (nonatomic , copy) NSString              * msgType;
+@property (nonatomic , copy) NSString              * msgVolumnTime;
+@property (nonatomic , copy) NSString              * msgSendDate;
+@property (nonatomic , copy) NSString              * msgReceName;
+@property (nonatomic , copy) NSString              * companyCode;
+@property (nonatomic , copy) NSString              * msgReceDate;
+@property (nonatomic , copy) NSString              * msgId;
+@property (nonatomic , copy) NSString              * msgContents;
+@property (nonatomic , copy) NSString              * msgReceId;
+@property (nonatomic , copy) NSString              * msgSenderId;
 
 @end

@@ -9,8 +9,7 @@
 #import "MyMsgController.h"
 #import "MyMsgViewModel.h"
 #import "MyMsgView.h"
-
-
+#import "MyMsgModel.h"
 #import "ChatController.h"
 
 @interface MyMsgController ()
@@ -47,21 +46,21 @@
     [self.view addSubview:self.myMsgView];
 }
 
+-(void)h_viewWillAppear{
+    [self.myMsgView h_loadData];
+}
 
 
 -(void)h_bindViewModel{
     [[self.myMsgViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-        
+       
         ChatController *chat = [[ChatController alloc] init];
-        
+        chat.myMsgModel = self.myMsgViewModel.arr[x.intValue];
         [self.navigationController pushViewController:chat animated:NO];
         
     }];
 }
 
--(void)h_viewWillAppear{
-    [self.myMsgView h_refreash];
-}
 
 #pragma mark lazyload
 -(MyMsgView *)myMsgView{

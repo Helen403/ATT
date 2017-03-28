@@ -84,7 +84,7 @@
         xmlDoc = [NSDictionary dictionaryWithXMLString:result];
     } @catch (NSException *exception) {
         xmlDoc = nil;
-        ShowMessage(@"请检查网络");
+       // ShowMessage(@"请检查网络");
     } @finally {
         
     }
@@ -106,7 +106,7 @@
         result = [result substringFromIndex:range1.location+range1.length];
     } @catch (NSException *exception) {
         result = @"";
-        ShowMessage(@"请检查网络");
+       // ShowMessage(@"请检查网络");
     } @finally {
         
     }
@@ -128,7 +128,7 @@
         result = [result substringFromIndex:range1.location+range1.length];
     } @catch (NSException *exception) {
         result = @"";
-        ShowMessage(@"请检查网络");
+       // ShowMessage(@"请检查网络");
     } @finally {
         
     }
@@ -147,7 +147,7 @@
         result = [result substringFromIndex:range1.location+range1.length];
     } @catch (NSException *exception) {
         result = @"";
-        ShowMessage(@"请检查网络");
+//        ShowMessage(@"请检查网络");
     } @finally {
         
     }
@@ -158,7 +158,7 @@
 -(NSDictionary *)getFilter:(NSString *)result filter1:(NSString *)filter1 filter2:(NSString *)filter2{
     
     if(result.length==0){
-        ShowMessage(@"请检查网络");
+        //ShowMessage(@"请检查网络");
         return nil;
     }
     NSDictionary *xmlDoc;
@@ -171,7 +171,7 @@
         xmlDoc = [NSDictionary dictionaryWithXMLString:result];
     } @catch (NSException *exception) {
         xmlDoc = nil;
-        ShowMessage(@"请检查网络");
+        //ShowMessage(@"请检查网络");
     } @finally {
         
     }

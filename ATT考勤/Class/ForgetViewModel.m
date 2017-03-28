@@ -28,7 +28,7 @@
         }else{
             
             NSString *xmlDoc = [self getFilterStr:result filter:@"String"];
-            NSLog(@"%@",xmlDoc);
+           
             [self.SMSbackSubject sendNext:xmlDoc];
         }
     }];

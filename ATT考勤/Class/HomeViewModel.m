@@ -346,7 +346,7 @@
                     self.empCode = empModel.empCode;
                     
                     [[NSUserDefaults standardUserDefaults] setObject:empModel.empTelphone forKey:@"empTelphone"];
-                    /************************************************/
+                    /*******************************************/
                     NSString *body2 =[NSString stringWithFormat: @"<findDeptByDeptCode xmlns=\"http://service.webservice.vada.com/\">\
                                       <companyCode xmlns=\"\">%@</companyCode>\
                                       <deptCode xmlns=\"\">%@</deptCode>\

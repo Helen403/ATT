@@ -177,4 +177,5 @@ extern void DismissHud(void);
 
 + (NSInteger)dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime;
 +(NSString *)currentYearYMDHMS;
+
 @end

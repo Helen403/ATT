@@ -267,3 +267,9 @@
 
 //寻找消息列表
 #define findMyMsgList @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//聊天
+#define findMyMsg @"http://13822767713.xicp.net/smart/ws/IAttService"
+//发送
+#define saveMessage @"http://13822767713.xicp.net/smart/ws/IAttService"
+

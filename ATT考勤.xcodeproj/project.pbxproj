@@ -704,6 +704,7 @@
 		79FA39411E13439000B8D3A7 /* MyExamineTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA39401E13439000B8D3A7 /* MyExamineTableCellView.m */; };
 		79FA39441E1346BC00B8D3A7 /* MyExamineCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA39431E1346BC00B8D3A7 /* MyExamineCellViewModel.m */; };
 		79FA39471E13478600B8D3A7 /* MyExamineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA39461E13478600B8D3A7 /* MyExamineModel.m */; };
+		79FA3F401E8A12EA001F5B1A /* IconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FA3F3F1E8A12EA001F5B1A /* IconView.m */; };
 		79FAC3911E51CE92009DE784 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FAC38F1E51CE92009DE784 /* Icon.png */; };
 		79FAC3921E51CE92009DE784 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79FAC3901E51CE92009DE784 /* Icon@2x.png */; };
 		79FAFAA31E348AF700577917 /* TeamListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FAFAA21E348AF600577917 /* TeamListController.m */; };
@@ -1963,6 +1964,8 @@
 		79FA39431E1346BC00B8D3A7 /* MyExamineCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyExamineCellViewModel.m; sourceTree = "<group>"; };
 		79FA39451E13478600B8D3A7 /* MyExamineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyExamineModel.h; sourceTree = "<group>"; };
 		79FA39461E13478600B8D3A7 /* MyExamineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyExamineModel.m; sourceTree = "<group>"; };
+		79FA3F3E1E8A12EA001F5B1A /* IconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconView.h; sourceTree = "<group>"; };
+		79FA3F3F1E8A12EA001F5B1A /* IconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconView.m; sourceTree = "<group>"; };
 		79FAC38F1E51CE92009DE784 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		79FAC3901E51CE92009DE784 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		79FAFAA11E348AF600577917 /* TeamListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamListController.h; sourceTree = "<group>"; };
@@ -3943,6 +3946,8 @@
 			children = (
 				7937821E1E31F4D700ABA7C9 /* KeyBordVIew.h */,
 				7937821F1E31F4D700ABA7C9 /* KeyBordVIew.m */,
+				79FA3F3E1E8A12EA001F5B1A /* IconView.h */,
+				79FA3F3F1E8A12EA001F5B1A /* IconView.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -9028,6 +9033,7 @@
 				79282EAB1E0B7C7F00F4E050 /* ZJLeadingPageCell.m in Sources */,
 				7964B38B1E2F19B3001AC5E5 /* ApproveController.m in Sources */,
 				793765491E14A78400F7B34F /* UIBarButtonItem+Extension.m in Sources */,
+				79FA3F401E8A12EA001F5B1A /* IconView.m in Sources */,
 				79F43DA71E0D597100C4C932 /* CreateView.m in Sources */,
 				79F964221E2CA2BC00838CC4 /* OvertimeView.m in Sources */,
 				791EE6EC1E1F9259000BA8B8 /* NewsController.m in Sources */,

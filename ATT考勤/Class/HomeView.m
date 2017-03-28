@@ -655,11 +655,9 @@
     }
     //打卡状态
     if(self.retCode==0){
-        
         self.status.text =@"状态:正常";
     }
     if(self.retCode==1){
-        
         self.status.text =@"状态:早退";
     }
     if(self.retCode==2){

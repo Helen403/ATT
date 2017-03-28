@@ -7,7 +7,10 @@
 //
 
 #import "HViewController.h"
+#import "MyMsgModel.h"
 
 @interface ChatController : HViewController
+
+@property(nonatomic,strong) MyMsgModel *myMsgModel;
 
 @end
