@@ -77,7 +77,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 3;
+        return 5;
     }else if(section == 1){
         return 4;
     }else{
@@ -93,9 +93,9 @@
     if (indexPath.section == 0) {
         cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row];
     }else if(indexPath.section == 1){
-        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+3];
+        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+5];
     }else{
-        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+7];
+        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+9];
     }
     return cell;
 }
@@ -112,9 +112,9 @@
     if (indexPath.section == 0) {
         row = [NSNumber numberWithInteger:indexPath.row];
     }else if(indexPath.section == 1){
-        row = [NSNumber numberWithInteger:indexPath.row+3];
+        row = [NSNumber numberWithInteger:indexPath.row+5];
     }else{
-        row = [NSNumber numberWithInteger:indexPath.row+7];
+        row = [NSNumber numberWithInteger:indexPath.row+9];
     }
 
     [self.statisticsViewModel.cellclickSubject sendNext:row];

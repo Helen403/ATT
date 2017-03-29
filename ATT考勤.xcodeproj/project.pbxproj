@@ -724,8 +724,19 @@
 		79FB799C1E80B27F00F7588A /* DailyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FB799B1E80B27F00F7588A /* DailyModel.m */; };
 		79FB799F1E80B29500F7588A /* DailyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FB799E1E80B29500F7588A /* DailyViewModel.m */; };
 		79FB79A21E80B48C00F7588A /* DailyCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FB79A11E80B48C00F7588A /* DailyCellView.m */; };
+		79FBD32B1E8BF19B004CEC0E /* MyContrastController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBD32A1E8BF19B004CEC0E /* MyContrastController.m */; };
+		79FBD32E1E8BF1AF004CEC0E /* MyContrastViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBD32D1E8BF1AF004CEC0E /* MyContrastViewModel.m */; };
+		79FBD3311E8BF1C0004CEC0E /* MyContrastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBD3301E8BF1C0004CEC0E /* MyContrastView.m */; };
+		79FBD3341E8BF1D0004CEC0E /* MyContrastModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBD3331E8BF1D0004CEC0E /* MyContrastModel.m */; };
+		79FBD3371E8BF1DE004CEC0E /* MyContrastCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBD3361E8BF1DE004CEC0E /* MyContrastCellView.m */; };
+		79FBD33A1E8BF287004CEC0E /* MyTrajectoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBD3391E8BF287004CEC0E /* MyTrajectoryController.m */; };
+		79FBD33D1E8BF2FC004CEC0E /* MyTrajectoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBD33C1E8BF2FC004CEC0E /* MyTrajectoryViewModel.m */; };
+		79FBD3401E8BF30A004CEC0E /* MyTrajectoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBD33F1E8BF30A004CEC0E /* MyTrajectoryView.m */; };
+		79FBD3431E8BF31B004CEC0E /* MyTrajectoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBD3421E8BF31B004CEC0E /* MyTrajectoryModel.m */; };
+		79FBD3461E8BF330004CEC0E /* MyTrajectoryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBD3451E8BF330004CEC0E /* MyTrajectoryCellView.m */; };
 		79FC77DC1E56E7C50018C222 /* ScanCodeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC77DB1E56E7C40018C222 /* ScanCodeViewModel.m */; };
 		79FCCC641E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FCCC631E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m */; };
+		79FD0DEB1E8BB13400F48F32 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FD0DEA1E8BB13400F48F32 /* libmp3lame.a */; };
 		79FFB2591E24BA7E00EC082F /* AddressListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB2581E24BA7E00EC082F /* AddressListCellView.m */; };
 		79FFB25C1E24BB0400EC082F /* AddressListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB25B1E24BB0400EC082F /* AddressListModel.m */; };
 		79FFB25E1E24BC3D00EC082F /* AddressList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79FFB25D1E24BC3D00EC082F /* AddressList.plist */; };
@@ -2000,10 +2011,32 @@
 		79FB799E1E80B29500F7588A /* DailyViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyViewModel.m; sourceTree = "<group>"; };
 		79FB79A01E80B48C00F7588A /* DailyCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyCellView.h; sourceTree = "<group>"; };
 		79FB79A11E80B48C00F7588A /* DailyCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyCellView.m; sourceTree = "<group>"; };
+		79FBD3291E8BF19B004CEC0E /* MyContrastController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContrastController.h; sourceTree = "<group>"; };
+		79FBD32A1E8BF19B004CEC0E /* MyContrastController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContrastController.m; sourceTree = "<group>"; };
+		79FBD32C1E8BF1AF004CEC0E /* MyContrastViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContrastViewModel.h; sourceTree = "<group>"; };
+		79FBD32D1E8BF1AF004CEC0E /* MyContrastViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContrastViewModel.m; sourceTree = "<group>"; };
+		79FBD32F1E8BF1C0004CEC0E /* MyContrastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContrastView.h; sourceTree = "<group>"; };
+		79FBD3301E8BF1C0004CEC0E /* MyContrastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContrastView.m; sourceTree = "<group>"; };
+		79FBD3321E8BF1D0004CEC0E /* MyContrastModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContrastModel.h; sourceTree = "<group>"; };
+		79FBD3331E8BF1D0004CEC0E /* MyContrastModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContrastModel.m; sourceTree = "<group>"; };
+		79FBD3351E8BF1DE004CEC0E /* MyContrastCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContrastCellView.h; sourceTree = "<group>"; };
+		79FBD3361E8BF1DE004CEC0E /* MyContrastCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyContrastCellView.m; sourceTree = "<group>"; };
+		79FBD3381E8BF287004CEC0E /* MyTrajectoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTrajectoryController.h; sourceTree = "<group>"; };
+		79FBD3391E8BF287004CEC0E /* MyTrajectoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTrajectoryController.m; sourceTree = "<group>"; };
+		79FBD33B1E8BF2FC004CEC0E /* MyTrajectoryViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTrajectoryViewModel.h; sourceTree = "<group>"; };
+		79FBD33C1E8BF2FC004CEC0E /* MyTrajectoryViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTrajectoryViewModel.m; sourceTree = "<group>"; };
+		79FBD33E1E8BF30A004CEC0E /* MyTrajectoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTrajectoryView.h; sourceTree = "<group>"; };
+		79FBD33F1E8BF30A004CEC0E /* MyTrajectoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTrajectoryView.m; sourceTree = "<group>"; };
+		79FBD3411E8BF31B004CEC0E /* MyTrajectoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTrajectoryModel.h; sourceTree = "<group>"; };
+		79FBD3421E8BF31B004CEC0E /* MyTrajectoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTrajectoryModel.m; sourceTree = "<group>"; };
+		79FBD3441E8BF330004CEC0E /* MyTrajectoryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTrajectoryCellView.h; sourceTree = "<group>"; };
+		79FBD3451E8BF330004CEC0E /* MyTrajectoryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTrajectoryCellView.m; sourceTree = "<group>"; };
 		79FC77DA1E56E7C40018C222 /* ScanCodeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeViewModel.h; sourceTree = "<group>"; };
 		79FC77DB1E56E7C40018C222 /* ScanCodeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeViewModel.m; sourceTree = "<group>"; };
 		79FCCC621E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84ConvertToGCJ02ForAMapView.h; sourceTree = "<group>"; };
 		79FCCC631E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84ConvertToGCJ02ForAMapView.m; sourceTree = "<group>"; };
+		79FD0DE91E8BB13400F48F32 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
+		79FD0DEA1E8BB13400F48F32 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		79FFB2571E24BA7E00EC082F /* AddressListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListCellView.h; sourceTree = "<group>"; };
 		79FFB2581E24BA7E00EC082F /* AddressListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListCellView.m; sourceTree = "<group>"; };
 		79FFB25A1E24BB0400EC082F /* AddressListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListModel.h; sourceTree = "<group>"; };
@@ -2040,6 +2073,7 @@
 				7921347D1E4B176C00C25A67 /* libxml2.tbd in Frameworks */,
 				7921347B1E4B174E00C25A67 /* libxml2.2.tbd in Frameworks */,
 				79AF688D1E0BD741000D9E48 /* libsqlite3.tbd in Frameworks */,
+				79FD0DEB1E8BB13400F48F32 /* libmp3lame.a in Frameworks */,
 				79F8A4DD1E03C0C1004F8A8C /* libz.tbd in Frameworks */,
 				153979DCD9B3B0F66F09E1B1 /* libPods-ATT考勤.a in Frameworks */,
 			);
@@ -2994,6 +3028,8 @@
 				7980E64A1E83A37C000FACB4 /* TeamMonth(部门考勤月报) */,
 				7948EE481E8251BF009ACE51 /* TeamReport(部门考勤周报) */,
 				795A973D1E8379FF00F9A4B8 /* TeamDailyDetails(部门考勤日报详情) */,
+				79FBD31C1E8BF113004CEC0E /* MyTrajectory(我的考勤轨迹) */,
+				79FBD31B1E8BF0BC004CEC0E /* MyContrast(我的考勤对比) */,
 				795A97241E835E2600F9A4B8 /* TeamDaily(部门考勤日报) */,
 				795A970B1E83536900F9A4B8 /* MonthDetails(考勤月报详情) */,
 				7948EE771E825D77009ACE51 /* Month(考勤月报) */,
@@ -8266,6 +8302,136 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		79FBD31B1E8BF0BC004CEC0E /* MyContrast(我的考勤对比) */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD3221E8BF15C004CEC0E /* Other */,
+				79FBD3211E8BF158004CEC0E /* Cell */,
+				79FBD3201E8BF153004CEC0E /* Model */,
+				79FBD31F1E8BF14F004CEC0E /* View */,
+				79FBD31E1E8BF148004CEC0E /* ViewController */,
+				79FBD31D1E8BF141004CEC0E /* ViewModel */,
+			);
+			name = "MyContrast(我的考勤对比)";
+			sourceTree = "<group>";
+		};
+		79FBD31C1E8BF113004CEC0E /* MyTrajectory(我的考勤轨迹) */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD3281E8BF17B004CEC0E /* Other */,
+				79FBD3271E8BF178004CEC0E /* Cell */,
+				79FBD3261E8BF172004CEC0E /* Model */,
+				79FBD3251E8BF16D004CEC0E /* View */,
+				79FBD3241E8BF167004CEC0E /* ViewController */,
+				79FBD3231E8BF161004CEC0E /* ViewModel */,
+			);
+			name = "MyTrajectory(我的考勤轨迹)";
+			sourceTree = "<group>";
+		};
+		79FBD31D1E8BF141004CEC0E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD32C1E8BF1AF004CEC0E /* MyContrastViewModel.h */,
+				79FBD32D1E8BF1AF004CEC0E /* MyContrastViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		79FBD31E1E8BF148004CEC0E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD3291E8BF19B004CEC0E /* MyContrastController.h */,
+				79FBD32A1E8BF19B004CEC0E /* MyContrastController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		79FBD31F1E8BF14F004CEC0E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD32F1E8BF1C0004CEC0E /* MyContrastView.h */,
+				79FBD3301E8BF1C0004CEC0E /* MyContrastView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		79FBD3201E8BF153004CEC0E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD3321E8BF1D0004CEC0E /* MyContrastModel.h */,
+				79FBD3331E8BF1D0004CEC0E /* MyContrastModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		79FBD3211E8BF158004CEC0E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD3351E8BF1DE004CEC0E /* MyContrastCellView.h */,
+				79FBD3361E8BF1DE004CEC0E /* MyContrastCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		79FBD3221E8BF15C004CEC0E /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		79FBD3231E8BF161004CEC0E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD33B1E8BF2FC004CEC0E /* MyTrajectoryViewModel.h */,
+				79FBD33C1E8BF2FC004CEC0E /* MyTrajectoryViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		79FBD3241E8BF167004CEC0E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD3381E8BF287004CEC0E /* MyTrajectoryController.h */,
+				79FBD3391E8BF287004CEC0E /* MyTrajectoryController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		79FBD3251E8BF16D004CEC0E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD33E1E8BF30A004CEC0E /* MyTrajectoryView.h */,
+				79FBD33F1E8BF30A004CEC0E /* MyTrajectoryView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		79FBD3261E8BF172004CEC0E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD3411E8BF31B004CEC0E /* MyTrajectoryModel.h */,
+				79FBD3421E8BF31B004CEC0E /* MyTrajectoryModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		79FBD3271E8BF178004CEC0E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				79FBD3441E8BF330004CEC0E /* MyTrajectoryCellView.h */,
+				79FBD3451E8BF330004CEC0E /* MyTrajectoryCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		79FBD3281E8BF17B004CEC0E /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		79FCCC611E640BD3005329C6 /* L(百度定位偏移) */ = {
 			isa = PBXGroup;
 			children = (
@@ -8273,6 +8439,13 @@
 				79FCCC631E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m */,
 			);
 			name = "L(百度定位偏移)";
+			sourceTree = "<group>";
+		};
+		79FD0DE81E8BB12300F48F32 /* Lame */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Lame;
 			sourceTree = "<group>";
 		};
 		79FFB25F1E24DCEA00EC082F /* Employee(员工信息) */ = {
@@ -8410,6 +8583,9 @@
 		83B8787B68883EECD9829725 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79FD0DE91E8BB13400F48F32 /* lame.h */,
+				79FD0DEA1E8BB13400F48F32 /* libmp3lame.a */,
+				79FD0DE81E8BB12300F48F32 /* Lame */,
 				793D3AFA1E712C2200266D9C /* MyCalendar(我的日历) */,
 				79BD126D1E69142900AC40CF /* XHDatePicker */,
 				79F366D11E651904000D531B /* JSTextView(有placeholder属性) */,
@@ -8853,6 +9029,7 @@
 				79FAFAA91E348BC800577917 /* TeamListView.m in Sources */,
 				7948EEA21E825FC2009ACE51 /* WeekDetailsCellView.m in Sources */,
 				794620EF1E767F4300873199 /* FeedbackModel.m in Sources */,
+				79FBD3461E8BF330004CEC0E /* MyTrajectoryCellView.m in Sources */,
 				79F964551E2CA85300838CC4 /* ShiftViewModel.m in Sources */,
 				7980E65C1E83A7AC000FACB4 /* TeamMonthModel.m in Sources */,
 				793FC9961E5687F50032F689 /* EmployeeTitle.m in Sources */,
@@ -8918,6 +9095,7 @@
 				79F7D85A1E5AC96F004DF0DB /* ChangeTelphoneController.m in Sources */,
 				7980E6B51E83C8EF000FACB4 /* TeamOutWorkDetailsModel.m in Sources */,
 				794B5B7E1E4BFCCC006B858A /* UserModel.m in Sources */,
+				79FBD3371E8BF1DE004CEC0E /* MyContrastCellView.m in Sources */,
 				7928BD711E0273A4009BB0B4 /* AppDelegate.m in Sources */,
 				7980E6CD1E83D31B000FACB4 /* TeamRedBlackView.m in Sources */,
 				7948EE9C1E825F51009ACE51 /* WeekDetailsViewModel.m in Sources */,
@@ -8932,6 +9110,7 @@
 				7949276D1E10F19F007331CA /* CompanyCodeView.m in Sources */,
 				793D3AFD1E712DAE00266D9C /* MyWeekView.m in Sources */,
 				791A51FB1E55A1D800F7C026 /* XMLDictionary.m in Sources */,
+				79FBD3431E8BF31B004CEC0E /* MyTrajectoryModel.m in Sources */,
 				79F4F07E1E1F85E200115C3B /* MessageView.m in Sources */,
 				794E047E1E23220B00CFE3A3 /* StatisticsCellView.m in Sources */,
 				79362F681E0CB1E500F9B769 /* ForgetView.m in Sources */,
@@ -8981,6 +9160,7 @@
 				79F46F301E68187B00F2923F /* ChoiceStaffViewModel.m in Sources */,
 				79375D061E1DD8E300E27934 /* VersionView.m in Sources */,
 				7937652F1E14944000F7B34F /* DealWithController.m in Sources */,
+				79FBD32B1E8BF19B004CEC0E /* MyContrastController.m in Sources */,
 				794214C01E88E822000A3AE8 /* NoticeListView.m in Sources */,
 				79DD27711E31B74900923D19 /* MyMsgModel.m in Sources */,
 				79F4F0781E1F808300115C3B /* DLUtility.m in Sources */,
@@ -8995,6 +9175,7 @@
 				794CB48A1E56EDFB00403387 /* ScanCodeModel.m in Sources */,
 				7947BCAD1E7BE16400EE8EA6 /* AlreadyTreatmentModel.m in Sources */,
 				79375D2E1E1DF7E400E27934 /* FunctionView.m in Sources */,
+				79FBD33D1E8BF2FC004CEC0E /* MyTrajectoryViewModel.m in Sources */,
 				792134791E4B15CA00C25A67 /* GDataXMLNode.m in Sources */,
 				7980E67F1E83BC5C000FACB4 /* HeroController.m in Sources */,
 				7937CC0C1E24899000A4F82F /* AddressListViewModel.m in Sources */,
@@ -9128,6 +9309,7 @@
 				7980E6821E83BC7E000FACB4 /* HeroViewModel.m in Sources */,
 				793FC9A01E56A6360032F689 /* ScanCodeController.m in Sources */,
 				7980E6D01E83D32C000FACB4 /* TeamRedBlackModel.m in Sources */,
+				79FBD33A1E8BF287004CEC0E /* MyTrajectoryController.m in Sources */,
 				79EF94531E262F7100F8E9BC /* HARootScrollViewManager.m in Sources */,
 				7916F7CA1E2CCC6700518DBB /* LeaveCellView.m in Sources */,
 				793782241E31F5E800ABA7C9 /* UIImage+StrethImage.m in Sources */,
@@ -9145,6 +9327,7 @@
 				79F0A1391E13990A00A1B8AA /* ZJContentView.m in Sources */,
 				79FAFAB21E348D0C00577917 /* TeamListCellView.m in Sources */,
 				79FFE7451E80076B00681683 /* CopyDetailsView.m in Sources */,
+				79FBD3311E8BF1C0004CEC0E /* MyContrastView.m in Sources */,
 				79F4F0741E1F808300115C3B /* DLSlideView.m in Sources */,
 				79236B0A1E65591000A005C0 /* ChangeNameViewModel.m in Sources */,
 				794214C31E88E831000A3AE8 /* NoticeListModel.m in Sources */,
@@ -9176,6 +9359,7 @@
 				790721951E69A19B0009AD35 /* BusinessTravelCellView.m in Sources */,
 				799231CE1E6D3FF40099C4F9 /* MoveModel.m in Sources */,
 				79EF94621E2639AE00F8E9BC /* CalendarView.m in Sources */,
+				79FBD3401E8BF30A004CEC0E /* MyTrajectoryView.m in Sources */,
 				79F43DA41E0D595300C4C932 /* CreateController.m in Sources */,
 				7980E6751E83B290000FACB4 /* TeamOutWorkCellView.m in Sources */,
 				79375D471E1E2B5600E27934 /* AboutView.m in Sources */,
@@ -9211,6 +9395,7 @@
 				791EE6F51E1F931B000BA8B8 /* NewCellView.m in Sources */,
 				799231DA1E6D4E230099C4F9 /* OffModel.m in Sources */,
 				79367AFA1E11FD4300696A38 /* MyExamineController.m in Sources */,
+				79FBD3341E8BF1D0004CEC0E /* MyContrastModel.m in Sources */,
 				7948EE6A1E8254AC009ACE51 /* WeekViewModel.m in Sources */,
 				79FFB26D1E24DF5600EC082F /* EmployeeView.m in Sources */,
 				79E079D81E7FD0A2000BB48C /* AlreadyDetailsController.m in Sources */,
@@ -9259,6 +9444,7 @@
 				793765321E14946400F7B34F /* DealWithViewModel.m in Sources */,
 				795A973C1E8367E100F9A4B8 /* TeamDailySectionHeadView.m in Sources */,
 				79375D131E1DE73800E27934 /* TimeController.m in Sources */,
+				79FBD32E1E8BF1AF004CEC0E /* MyContrastViewModel.m in Sources */,
 				79375D091E1DD8FA00E27934 /* VersionViewModel.m in Sources */,
 				79367B131E1253C200696A38 /* LateViewModel.m in Sources */,
 				79F9640C1E2C9C8000838CC4 /* LeaveViewModel.m in Sources */,
@@ -9472,6 +9658,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = PLK9A7N26F;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ATT考勤/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9495,6 +9682,10 @@
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Helen.ATT--";
 				PRODUCT_NAME = ATT;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -9509,10 +9700,15 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = PLK9A7N26F;
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ATT考勤/PrefixHeader.pch";
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Helen.ATT--";
 				PRODUCT_NAME = ATT;
 				TARGETED_DEVICE_FAMILY = "1,2";

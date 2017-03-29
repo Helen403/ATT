@@ -141,10 +141,11 @@
     
     EmployeeCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([EmployeeCellView class])] forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.employeeModel = self.model;
-    cell.employeeTitle = self.employeeViewModel.arr[indexPath.row];
     cell.index = indexPath.row;
     cell.show.tag = indexPath.row;
+    cell.employeeModel = self.model;
+    cell.employeeTitle = self.employeeViewModel.arr[indexPath.row];
+    
     return cell;
 }
 

@@ -41,4 +41,17 @@
 
 @property(nonatomic,strong) NSString *msgVolumnTime;
 
+//==================================
+
+@property(nonatomic,strong) RACCommand *updataCommand;
+
+@property(nonatomic,strong) NSString *fileName;
+
+@property(nonatomic,strong) NSString *content;
+
+@property(nonatomic,strong) NSString *fileType;
+
+
+@property(nonatomic,strong) RACSubject *fileSubject;
+
 @end

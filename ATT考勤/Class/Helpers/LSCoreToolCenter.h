@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <objc/runtime.h>
-
+#import <AVFoundation/AVFoundation.h>
+#import "lame.h"
 
 @interface LSCoreToolCenter : NSObject
 
@@ -20,6 +21,11 @@ extern void ShowMessage(NSString *statues);
 extern void ShowProgress(CGFloat progress);
 extern void DismissHud(void);
 
++ (NSData *)audio_PCMtoMP3:(NSString *)recordUrl;
++ (NSString *)Base64StrWithMp3Data:(NSData *)data;
++(BOOL)isBlankString:(NSString *)string;
++(void)playMusic:(NSString *)urlMusic1;
++(NSString *)currentYearYMDHMSA;
 
 //插入数据库
 +(void)insertSQLByStringKey:(NSString *)key Value:(NSString *)value;

@@ -53,7 +53,7 @@ void ShowMessage(NSString *statues){
 void ShowErrorStatus(NSString *statues){
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-//            [SVProgressHUD showErrorWithStatus:statues];
+            //            [SVProgressHUD showErrorWithStatus:statues];
             
             
             //            [SVProgressHUD showProgress:0.5 status:@"上传"];
@@ -278,18 +278,18 @@ void DismissHud(void){
     NSDateComponents * conponent = [cal components:unitFlags fromDate:[NSDate date]];
     NSInteger year=[conponent year];
     NSInteger month=[conponent month];
-   
+    
     NSString * nsDateString= [NSString stringWithFormat:@"%4ld年%2ld月",(long)year,(long)month];
     return nsDateString;
 }
 
 //获取年月日
 +(NSString *)curDate{
-
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-   
-   NSString *str = [formatter stringFromDate:[NSDate date]];
+    
+    NSString *str = [formatter stringFromDate:[NSDate date]];
     return str;
 }
 
@@ -319,7 +319,7 @@ void DismissHud(void){
     
     NSString *str = [formatter stringFromDate:[NSDate date]];
     return str;
-
+    
 }
 
 +(NSString *)currentYearYMDHM{
@@ -336,6 +336,16 @@ void DismissHud(void){
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSString *str = [formatter stringFromDate:[NSDate date]];
+    return str;
+    
+}
+
++(NSString *)currentYearYMDHMSA{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMddHHmmss"];
     
     NSString *str = [formatter stringFromDate:[NSDate date]];
     return str;
@@ -763,15 +773,15 @@ void DismissHud(void){
 
 //获取当前时间yyyyMMddHHmmss
 +(NSString *) getCurrentTime{
-
+    
     NSDate *date=[[NSDate alloc] init];
-
+    
     NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-
+    
     [formatter  setDateFormat:HQDateFormatter];
-
+    
     NSString *curTime=[formatter stringFromDate:date];
-
+    
     return curTime;
 }
 
@@ -838,12 +848,12 @@ void DismissHud(void){
 
 
 +(NSString *)getDateAddMinuts:(NSString *)str time:(NSInteger )minute{
-
+    
     NSDate* theDate;
     NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
     
     [formatter setDateFormat:HQDateFormatter];
-
+    
     NSDate *date = [formatter dateFromString:str];
     theDate = [date dateByAddingTimeInterval:minute];
     
@@ -852,16 +862,16 @@ void DismissHud(void){
 }
 
 +(NSTimeInterval)getDifferenceTime:(NSString *) beginTime endTime:(NSString *) endTime{
-
+    
     NSDateFormatter *dateFormatter= [[NSDateFormatter alloc]init];
     
     //要注意格式一定要统一
     
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-
+    
     
     NSDate *beginD=[dateFormatter dateFromString:beginTime];
-
+    
     NSDate *endD=[dateFormatter dateFromString:endTime];
     
     NSTimeInterval value=[endD timeIntervalSinceDate:beginD];
@@ -1133,7 +1143,7 @@ void DismissHud(void){
         result = [result substringFromIndex:range1.location+range1.length];
     } @catch (NSException *exception) {
         result = @"";
-       
+        
     } @finally {
         
     }
@@ -1150,14 +1160,10 @@ void DismissHud(void){
         if((c<'A'||c>'Z')&&(c<'a'||c>'z'))
             
             return NO;
-        
     }
-    
     return YES;
     
 }
-
-
 
 +(UIImage*)convertViewToImage:(UIView*)v{
     CGSize s = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -1183,5 +1189,123 @@ void DismissHud(void){
     return value;
 }
 
+
++ (NSData *)audio_PCMtoMP3:(NSString *)recordUrl{
+    
+    NSData *voiceData;
+    
+    // self.audioFileSavePath
+    
+    //    NSString *mp3FileName = [_recordUrl lastPathComponent];
+    
+    //    NSLog(@"%@",[_recordUrl lastPathComponent]);
+    
+    //    mp3FileName = [mp3FileName stringByAppendingString:@".mp3"];
+    
+    NSString *mp3FilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"record.mp3"];
+    
+    //   _recordUrl = [NSTemporaryDirectory() stringByAppendingString:@"record.caf"];  _recordUrl是音频存储路径
+    
+    @try {
+        
+        int read, write;
+        
+        FILE *pcm = fopen([recordUrl cStringUsingEncoding:1], "rb");  //source 被转换的音频文件位置
+        
+        fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
+        
+        FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], "wb");  //output 输出生成的Mp3文件位置
+        
+        const int PCM_SIZE = 8192;
+        
+        const int MP3_SIZE = 8192;
+        
+        short int pcm_buffer[PCM_SIZE*2];
+        
+        unsigned char mp3_buffer[MP3_SIZE];
+        
+        lame_t lame = lame_init();
+        
+        lame_set_in_samplerate(lame, 11025.0);
+        
+        lame_set_VBR(lame, vbr_default);
+        
+        lame_init_params(lame);
+        
+        do {
+            read = fread(pcm_buffer, 2*sizeof(short int), PCM_SIZE, pcm);
+            
+            if (read == 0)
+                write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+            else
+                write = lame_encode_buffer_interleaved(lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+            fwrite(mp3_buffer, write, 1, mp3);
+        } while (read != 0);
+        lame_close(lame);
+        fclose(mp3);
+        fclose(pcm);
+        
+    }@catch (NSException *exception) {
+        
+        NSLog(@"%@",[exception description]);
+        
+    }@finally {
+        
+        recordUrl = mp3FilePath;
+        
+        NSLog(@"MP3生成成功: %@",recordUrl);
+        
+        voiceData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:recordUrl]];
+        
+        [[NSFileManager defaultManager] removeItemAtURL:[NSURL fileURLWithPath:recordUrl] error:nil]; // 生成文件移除原文件
+        
+    }
+    return voiceData;
+    
+}
+
+// 二进制文件转为base64的字符串
++ (NSString *)Base64StrWithMp3Data:(NSData *)data{
+    if (!data) {
+        NSLog(@"Mp3Data 不能为空");
+        return nil;
+    }
+    //    NSString *str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSString *str = [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    return str;
+}
+
++(BOOL)isBlankString:(NSString *)string {
+    if (string == nil || string == NULL) {
+        return YES;
+    }
+    if ([string isKindOfClass:[NSNull class]]) {
+        return YES;
+    }
+    if ([[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0) {
+        return YES;
+    }
+    return NO;
+}
+
+
+
+
++(void)playMusic:(NSString *)urlMusic1{
+    NSString *urlStr = urlMusic1;
+    NSURL *url = [[NSURL alloc]initWithString:urlStr];
+    NSData * audioData = [NSData dataWithContentsOfURL:url];
+    
+    //将数据保存到本地指定位置
+    NSString *docDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@.mp3", docDirPath , @"Temp"];
+    
+    [audioData writeToFile:filePath atomically:YES];
+    
+    //播放本地音乐
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+    [player play];
+}
 
 @end

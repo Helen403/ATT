@@ -7,6 +7,8 @@
 //
 
 #import "EmployeeCellView.h"
+#import "ChatController.h"
+#import "MyMsgModel.h"
 
 @interface EmployeeCellView()
 
@@ -15,6 +17,8 @@
 @property(nonatomic,strong) UILabel *content;
 
 @property(nonatomic,strong) UIView *line;
+
+@property(nonatomic,strong) UIImageView *chat;
 
 @end
 
@@ -47,6 +51,11 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
+    [self.chat mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.centerY.equalTo(weakSelf);
+        make.right.equalTo(weakSelf.show.mas_left).offset(-[self h_w:10]);
+    }];
+    
     [super updateConstraints];
 }
 
@@ -57,6 +66,8 @@
     [self addSubview:self.content];
     [self addSubview:self.show];
     [self addSubview:self.line];
+    [self addSubview:self.chat];
+    
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -70,21 +81,12 @@
     _employeeModel = employeeModel;
     
     switch (self.index) {
-//        case 0:
-//            self.content.text = employeeModel.empName;
-//            break;
-//        case 1:
-//            self.content.text = employeeModel.empSex;
-//            break;
-//    
-//        case 2:
-//            self.content.text = employeeModel.empBirthDate;
-//            break;
+
         case 0:
-            self.content.text = employeeModel.position;
+            self.content.text = employeeModel.empTelphone;
             break;
         case 1:
-            self.content.text = employeeModel.empTelphone;
+            self.content.text = employeeModel.position;
             break;
         case 2:
             self.content.text = employeeModel.empEmail;
@@ -104,9 +106,13 @@
     }
     _employeeTitle = employeeTitle;
     self.title.text = employeeTitle.title;
-//    self.content.text = employeeModel.content;
     self.show.image = ImageNamed(employeeTitle.show);
 
+    if (self.index ==0) {
+        self.chat.hidden = NO;
+    }else{
+        self.chat.hidden = YES;
+    }
 }
 
 #pragma mark lazyload
@@ -136,7 +142,6 @@
         _show.userInteractionEnabled = YES;
         UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClick:)];
         [_show addGestureRecognizer:setTap];
-        
     }
     return _show;
 }
@@ -149,6 +154,19 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
     }
    
+    if ([view tag] == 1) {
+        
+        MyMsgModel *msg = [[MyMsgModel alloc] init];
+        msg.msgUserName = self.employeeModel.empName;
+        msg.msgUserCode = self.employeeModel.empId;
+        
+        ChatController *chat = [[ChatController alloc] init];
+        chat.myMsgModel = msg;
+        UITabBarController *tabBarVc = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UINavigationController *nav = (UINavigationController *)tabBarVc.selectedViewController;
+        [nav pushViewController:chat animated:NO];
+    }
+    
     if ([view tag] == 2) {
         ShowMessage(@"暂时没开通邮箱");
     }
@@ -160,6 +178,19 @@
         _line.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line;
+}
+
+-(UIImageView *)chat{
+    if (!_chat) {
+        _chat = [[UIImageView alloc] init];
+        _chat.image = ImageNamed(@"message");
+        _chat.hidden = YES;
+        _chat.tag = 1;
+        _chat.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClick:)];
+        [_chat addGestureRecognizer:setTap];
+    }
+    return _chat;
 }
 
 @end

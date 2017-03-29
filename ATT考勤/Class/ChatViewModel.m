@@ -27,7 +27,7 @@
             self.arr = arr;
             [self.successSubject sendNext:nil];
         }
-
+        
     }];
     
     
@@ -44,11 +44,18 @@
             return ;
         }
         
-//        NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
-//        if ([xmlDoc isEqualToString:@"0"]) {
-//             //[self.successSubject sendNext:nil];
-//        }
-       
+        
+        
+    }];
+    
+    [self.updataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return ;
+        }
+        NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
+        
+        [self.fileSubject sendNext:xmlDoc];
+        
     }];
 }
 
@@ -90,6 +97,41 @@
 }
 
 
+- (RACCommand *)updataCommand {
+    
+    if (!_updataCommand) {
+        
+        @weakify(self);
+        _updataCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                
+                NSString *body =[NSString stringWithFormat: @"<uploadFile xmlns=\"http://service.webservice.vada.com/\">\
+                                 <fileName xmlns=\"\">%@</fileName>\
+                                 <content xmlns=\"\">%@</content>\
+                                 <fileType xmlns=\"\">%@</fileType>\
+                                 </uploadFile>",self.fileName,self.content,self.fileType];
+                
+                [self SOAPData:findMyMsg soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                }];
+                return nil;
+            }];
+        }];
+    }
+    return _updataCommand;
+}
+
 - (RACCommand *)sendCommand {
     
     if (!_sendCommand) {
@@ -107,12 +149,12 @@
                                  <companyCode xmlns=\"\">%@</companyCode>\
                                  <msgSenderId xmlns=\"\">%@</msgSenderId>\
                                  <msgSenderName xmlns=\"\">%@</msgSenderName>\
-                                  <msgReceId xmlns=\"\">%@</msgReceId>\
-                                  <msgReceName xmlns=\"\">%@</msgReceName>\
-                                  <msgSendDate xmlns=\"\">%@</msgSendDate>\
-                                  <msgType xmlns=\"\">%@</msgType>\
-                                  <msgContents xmlns=\"\">%@</msgContents>\
-                                  <msgVolumnTime xmlns=\"\">%@</msgVolumnTime>\
+                                 <msgReceId xmlns=\"\">%@</msgReceId>\
+                                 <msgReceName xmlns=\"\">%@</msgReceName>\
+                                 <msgSendDate xmlns=\"\">%@</msgSendDate>\
+                                 <msgType xmlns=\"\">%@</msgType>\
+                                 <msgContents xmlns=\"\">%@</msgContents>\
+                                 <msgVolumnTime xmlns=\"\">%@</msgVolumnTime>\
                                  </saveMessage>",self.companyCode,self.msgSenderId,self.msgSenderName,self.msgReceId,self.msgReceName,self.msgSendDate,self.msgType,self.msgContents,self.msgVolumnTime];
                 
                 [self SOAPData:saveMessage soapBody:body success:^(NSString *result) {
@@ -146,6 +188,13 @@
         _arr = [NSMutableArray array];
     }
     return _arr;
+}
+
+-(RACSubject *)fileSubject{
+    if (!_fileSubject) {
+        _fileSubject = [RACSubject subject];
+    }
+    return _fileSubject;
 }
 
 @end

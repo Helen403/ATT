@@ -14,7 +14,6 @@
 #import "IQKeyboardManager.h"
 #import "UserModel.h"
 #import "IconView.h"
-#import <AVFoundation/AVFoundation.h>
 
 
 @interface ChatController ()<UITableViewDelegate,UITableViewDataSource,MoreButtonViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,InputToolbarDelegate>
@@ -32,7 +31,7 @@
 
 @property(nonatomic,strong) NSString *userCode;
 
-@property(nonatomic,strong) AVAudioPlayer *player;
+@property(nonatomic,assign) NSInteger time;
 
 @end
 
@@ -110,7 +109,7 @@
             
             //            NSLog(@"发射成功☀️:---%@",content);
             
-            [weakSelf sendMsg:((NSAttributedString *)content).string];
+            [weakSelf sendMsg:((NSAttributedString *)content).string andType:@"1" andVolumnTime:@"0"];
         };
         
         _inputToolbar.inputToolbarFrameChange = ^(CGFloat height,CGFloat orignY){
@@ -152,9 +151,42 @@
             [self tableViewScrollCurrentIndexPath];
         });
     }];
+    WS(weakSelf);
+    self.inputToolbar.voiceRecord = ^(NSURL *file,NSInteger time){
+        //NSString *str = [file absoluteString];
+       //NSLog(@"地址%@ 时间%ld",str,(long)time);
+        [weakSelf commitVoiceNotice:file and:time];
+    };
+    [[self.chatViewModel.fileSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            [self sendMsg:x andType:@"2" andVolumnTime:[NSString stringWithFormat:@"%ld",(long)self.time]];
+        });
+    }];
 }
 
--(void)sendMsg:(NSString *)content{
+- (void)commitVoiceNotice:(NSURL *)Path and:(NSInteger)time{
+    self.time = time;
+    [LSCoreToolCenter audio_PCMtoMP3:Path];
+    NSData *data = [NSData dataWithContentsOfFile:Path];
+ 
+    NSString *base64Str = [LSCoreToolCenter Base64StrWithMp3Data:data];
+    
+    if ([LSCoreToolCenter isBlankString:base64Str]) {
+        return;
+    }
+    self.chatViewModel.fileName =[NSString stringWithFormat:@"%@%@.mp3",self.userCode,[LSCoreToolCenter currentYearYMDHMSA]];
+    self.chatViewModel.content = base64Str;
+    self.chatViewModel.fileType = @"ios_audio";
+    
+    [self.chatViewModel.updataCommand execute:nil];
+   
+}
+
+
+
+-(void)sendMsg:(NSString *)content andType:(NSString *)index andVolumnTime:(NSString *)time{
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.chatViewModel.companyCode = companyCode;
     UserModel *user = getModel(@"user");
@@ -163,9 +195,9 @@
     self.chatViewModel.msgReceId = self.myMsgModel.msgUserCode;
     self.chatViewModel.msgReceName =self.myMsgModel.msgUserName;
     self.chatViewModel.msgSendDate = [LSCoreToolCenter currentYearYMDHMS];
-    self.chatViewModel.msgType = @"1";
+    self.chatViewModel.msgType = index;
     self.chatViewModel.msgContents = content;
-    self.chatViewModel.msgVolumnTime = @"0";
+    self.chatViewModel.msgVolumnTime = time;
     [self.chatViewModel.sendCommand execute:nil];
 }
 
@@ -310,23 +342,7 @@
 -(void)playMp3:(UIButton *)button{
     NSInteger indexRow = button.tag;
     ChatModel *model = self.chatViewModel.arr[indexRow];
-    [self playMusic:model.msgContents];
-}
-
--(void)playMusic:(NSString *)urlMusic1{
-    NSString *urlStr = urlMusic1;
-    NSURL *url = [[NSURL alloc]initWithString:urlStr];
-    NSData * audioData = [NSData dataWithContentsOfURL:url];
-    
-    //将数据保存到本地指定位置
-    NSString *docDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@.mp3", docDirPath , @"Temp"];
-    [audioData writeToFile:filePath atomically:YES];
-    
-    //播放本地音乐
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
-    [self.player play];
+    [LSCoreToolCenter playMusic:model.msgContents];
 }
 
 
@@ -370,7 +386,7 @@
         IconView * icon = [[IconView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-[self h_w:60], [self h_w:23], [self h_w:50], [self h_w:50])];
         [cell addSubview:icon];
         
-        [icon setContent:model.msgSenderName and:yellow_color];
+        [icon setContent:model.msgSenderName and:orange_color];
         
         if ([model.msgType isEqualToString:@"2"]) {
             [cell addSubview:[self yuyinView:model.msgVolumnTime.intValue from:YES withIndexRow:indexPath.row withPosition:65]];

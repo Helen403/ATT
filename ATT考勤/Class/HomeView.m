@@ -468,7 +468,7 @@
         }
         if (self.homeViewModel.arrAttendRecord.count == 2) {
             AttendCardRecord *record_onwork = self.homeViewModel.arrAttendRecord[0];
-            AttendCardRecord *record_offwork = self.homeViewModel.arrAttendRecord[0];
+            AttendCardRecord *record_offwork = self.homeViewModel.arrAttendRecord[1];
             retbackstatus=3;
             retbackcardstatus_onwork = record_onwork.cardStatus;
             retbackcardstatus_offwork = record_offwork.cardStatus;
