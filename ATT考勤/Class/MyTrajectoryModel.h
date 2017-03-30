@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface MyTrajectoryModel : NSObject
-
 @property (nonatomic , copy) NSString              * cardTime;
 @property (nonatomic , copy) NSString              * cardDeviceName;
 @property (nonatomic , copy) NSString              * cardLsh;

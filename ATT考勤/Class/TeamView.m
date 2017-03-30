@@ -2,7 +2,7 @@
 //  TeamView.m
 //  ATT考勤
 //
-//  Created by Helen on 17/1/9.
+//  Created by Helen on 17/1/22.
 //  Copyright © 2017年 Helen. All rights reserved.
 //
 
@@ -44,7 +44,24 @@
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
+    
 }
+
+-(void)h_loadData{
+    NSString *companyCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.teamViewModel.companyCode = companyCode;
+    [self.teamViewModel.refreshDataCommand execute:nil];
+}
+
+-(void)h_bindViewModel{
+    [[self.teamViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            
+        });
+    }];
+}
+
 
 #pragma mark lazyload
 -(TeamViewModel *)teamViewModel{
@@ -62,21 +79,16 @@
         _tableView.backgroundColor = GX_BGCOLOR;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[TeamCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamCellView class])]];
-        
     }
     return _tableView;
-    
 }
-
 
 #pragma mark - delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
     return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     return self.teamViewModel.arr.count;
 }
 
@@ -97,7 +109,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.teamViewModel.cellclickSubject sendNext:row];
 }

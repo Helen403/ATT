@@ -961,7 +961,6 @@ void DismissHud(void){
     return firstWeekday - 1;
 }
 #pragma mark -- 获取当前月共有多少天
-
 + (NSInteger)totaldaysInMonth:(NSDate *)date{
     NSRange daysInLastMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
     return daysInLastMonth.length;
@@ -995,6 +994,7 @@ void DismissHud(void){
     NSInteger firstDayInThisMounth = [LSCoreToolCenter firstWeekdayInThisMonth:nextDate];
     //该月的有多少天daysInThisMounth
     NSInteger daysInThisMounth = [LSCoreToolCenter totaldaysInMonth:nextDate];
+    
     NSString *string = [[NSString alloc]init];
     for (int j = 0; j < (daysInThisMounth > 29 && (firstDayInThisMounth == 6 || firstDayInThisMounth ==5) ? 42 : 35) ; j++) {
         
@@ -1069,6 +1069,31 @@ void DismissHud(void){
     
     NSString *str = [dateFormattor stringFromDate:nextDate];
     return [NSString stringWithFormat:@"%ld-%@",yearTmp+d,str];;
+}
+
+
++(NSInteger )getCurrentPreMonth:(NSInteger)i{
+    int yearTmp = [[LSCoreToolCenter curDateYear] intValue];
+    
+    //获取月份
+    int mounth = ((int)[LSCoreToolCenter month1] + i)%12;
+    NSInteger d = (i+(int)[LSCoreToolCenter month1])/12;
+    if (mounth==0&&d==1) {
+        d=0;
+    }
+    if (mounth==0&&d>1) {
+        d = (i+(int)[LSCoreToolCenter month1])/12-1;
+    }
+    NSDateComponents *components = [[NSDateComponents alloc]init];
+    //获取下个月的年月日信息,并将其转为date
+    components.month = mounth;
+    components.year = yearTmp+d + mounth/12;
+    components.day = 1;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *nextDate = [calendar dateFromComponents:components];
+    //该月的有多少天daysInThisMounth
+    NSInteger daysInThisMounth = [LSCoreToolCenter totaldaysInMonth:nextDate];
+    return daysInThisMounth;
 }
 
 

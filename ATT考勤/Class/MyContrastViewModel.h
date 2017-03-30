@@ -12,5 +12,14 @@
 
 @property(nonatomic,strong) NSMutableArray *arrContrast;
 
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+@property(nonatomic,strong) RACSubject *successSubject;
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property(nonatomic,strong) NSString *userCode;
+
+@property(nonatomic,strong) NSString *cardMonth;
 
 @end

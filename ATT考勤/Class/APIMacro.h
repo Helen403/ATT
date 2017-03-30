@@ -273,3 +273,6 @@
 //发送
 #define saveMessage @"http://13822767713.xicp.net/smart/ws/IAttService"
 
+//对比
+#define findAttendWorkHourByUserMonth @"http://13822767713.xicp.net/smart/ws/IAttService"
+

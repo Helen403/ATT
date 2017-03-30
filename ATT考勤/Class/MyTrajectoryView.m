@@ -86,7 +86,7 @@
         make.left.equalTo(0);
         make.right.equalTo(0);
         make.bottom.equalTo(0);
-        make.top.equalTo(weakSelf.pre.mas_bottom).offset([self h_w:7]);
+        make.top.equalTo(weakSelf.line2.mas_bottom).offset(0);
     }];
     [super updateConstraints];
 }
@@ -127,10 +127,8 @@
             [self.tableView reloadData];
             
         });
-        
     }];
 }
-
 
 #pragma mark lazyload
 -(MyTrajectoryViewModel *)myTrajectoryViewModel{

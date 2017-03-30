@@ -24,15 +24,9 @@
 
 @property(nonatomic,strong) UILabel *latitude1;
 
-@property(nonatomic,strong) UIView *cir2;
 
-@property(nonatomic,strong) UILabel *time2;
 
-@property(nonatomic,strong) UILabel *content2;
-
-@property(nonatomic,strong) UILabel *longitude2;
-
-@property(nonatomic,strong) UILabel *latitude2;
+@property(nonatomic,strong) UILabel *num;
 
 @end
 
@@ -55,8 +49,13 @@
     
     [self.cir1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf.line);
-           make.centerY.equalTo(weakSelf.year);
-        make.size.equalTo(CGSizeMake([self h_w:6], [self h_w:6]));
+        make.centerY.equalTo(weakSelf.year);
+        make.size.equalTo(CGSizeMake([self h_w:10], [self h_w:10]));
+    }];
+    
+    [self.num mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.cir1);
+        make.centerX.equalTo(weakSelf.cir1);
     }];
     
     [self.time1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -80,31 +79,7 @@
         make.top.equalTo(weakSelf.longitude1.mas_bottom).offset([self h_w:10]);
     }];
     
-//    [self.cir2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.equalTo(weakSelf.line);
-//        make.top.equalTo(weakSelf.latitude1.mas_bottom).offset([self h_w:10]);
-//        make.size.equalTo(CGSizeMake([self h_w:6], [self h_w:6]));
-//    }];
-//    
-//    [self.time2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
-//        make.top.equalTo(weakSelf.latitude1.mas_bottom).offset([self h_w:10]);
-//    }];
-//    
-//    [self.content2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
-//        make.top.equalTo(weakSelf.time2.mas_bottom).offset([self h_w:10]);
-//    }];
-//    
-//    [self.longitude2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
-//        make.top.equalTo(weakSelf.content2.mas_bottom).offset([self h_w:10]);
-//    }];
-//    
-//    [self.latitude2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
-//        make.top.equalTo(weakSelf.longitude2.mas_bottom).offset([self h_w:10]);
-//    }];
+    
     [super updateConstraints];
 }
 
@@ -119,11 +94,8 @@
     [self addSubview:self.content1];
     [self addSubview:self.longitude1];
     [self addSubview:self.latitude1];
-//    [self addSubview:self.cir2];
-//    [self addSubview:self.time2];
-//    [self addSubview:self.content2];
-//    [self addSubview:self.longitude2];
-//    [self addSubview:self.latitude2];
+    [self addSubview:self.num];
+    
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -140,10 +112,8 @@
     self.content1.text =[NSString stringWithFormat:@"位置:%@",trajectoryModel.locAddress];
     self.longitude1.text =[NSString stringWithFormat:@"经度:%@",trajectoryModel.locLongitude];
     self.latitude1.text =[NSString stringWithFormat:@"纬度:%@",trajectoryModel.locLatitude] ;
-//    self.time2.text = trajectoryModel.time2;
-//    self.content2.text = trajectoryModel.content2;
-//    self.longitude2.text = trajectoryModel.longitude2;
-//    self.latitude2.text = trajectoryModel.latitude2;
+    
+    
 }
 
 #pragma mark lazyload
@@ -161,19 +131,12 @@
     if (!_cir1) {
         _cir1 = [[UIView alloc] init];
         _cir1.backgroundColor = MAIN_ORANGER;
-        ViewRadius(_cir1, [self h_w:3]);
+        ViewRadius(_cir1, [self h_w:5]);
     }
     return _cir1;
 }
 
--(UIView *)cir2{
-    if (!_cir2) {
-        _cir2 = [[UIView alloc] init];
-        _cir2.backgroundColor = MAIN_ORANGER;
-        ViewRadius(_cir2, [self h_w:3]);
-    }
-    return _cir2;
-}
+
 
 -(UIView *)line{
     if (!_line) {
@@ -186,83 +149,59 @@
 -(UILabel *)time1{
     if (!_time1) {
         _time1 = [[UILabel alloc] init];
-        _time1.text = @"反馈类型";
+        _time1.text = @"";
         _time1.font = H14;
         _time1.textColor = MAIN_PAN_2;
     }
     return _time1;
 }
 
-
--(UILabel *)time2{
-    if (!_time2) {
-        _time2 = [[UILabel alloc] init];
-        _time2.text = @"反馈类型";
-        _time2.font = H14;
-        _time2.textColor = MAIN_PAN_2;
+-(UILabel *)num{
+    if (!_num) {
+        _num = [[UILabel alloc] init];
+        _num.text = @"";
+        _num.font = H10;
+        _num.textColor = white_color;
     }
-    return _time2;
+    return _num;
 }
+
 
 -(UILabel *)content1{
     if (!_content1) {
         _content1 = [[UILabel alloc] init];
-        _content1.text = @"反馈类型";
+        _content1.text = @"";
         _content1.font = H14;
         _content1.textColor = MAIN_PAN_2;
     }
     return _content1;
 }
 
--(UILabel *)content2{
-    if (!_content2) {
-        _content2 = [[UILabel alloc] init];
-        _content2.text = @"反馈类型";
-        _content2.font = H14;
-        _content2.textColor = MAIN_PAN_2;
-    }
-    return _content2;
-}
+
 
 -(UILabel *)longitude1{
     if (!_longitude1) {
         _longitude1 = [[UILabel alloc] init];
-        _longitude1.text = @"反馈类型";
+        _longitude1.text = @"";
         _longitude1.font = H14;
         _longitude1.textColor = MAIN_PAN_2;
     }
     return _longitude1;
 }
 
--(UILabel *)longitude2{
-    if (!_longitude2) {
-        _longitude2 = [[UILabel alloc] init];
-        _longitude2.text = @"反馈类型";
-        _longitude2.font = H14;
-        _longitude2.textColor = MAIN_PAN_2;
-    }
-    return _longitude2;
-}
 
 -(UILabel *)latitude1{
     if (!_latitude1) {
         _latitude1 = [[UILabel alloc] init];
-        _latitude1.text = @"反馈类型";
+        _latitude1.text = @"";
         _latitude1.font = H14;
         _latitude1.textColor = MAIN_PAN_2;
     }
     return _latitude1;
 }
 
--(UILabel *)latitude2{
-    if (!_latitude2) {
-        _latitude2 = [[UILabel alloc] init];
-        _latitude2.text = @"反馈类型";
-        _latitude2.font = H14;
-        _latitude2.textColor = MAIN_PAN_2;
-    }
-    return _latitude2;
-}
+
+
 
 
 @end

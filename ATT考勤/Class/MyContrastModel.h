@@ -10,10 +10,10 @@
 
 @interface MyContrastModel : NSObject
 
-@property(nonatomic,strong) NSString *title;
+@property (nonatomic , copy) NSString              * curMonthHours;
+@property (nonatomic , copy) NSString              * befMonthHours;
+@property (nonatomic , copy) NSString              * month;
+@property (nonatomic , copy) NSString              * day;
 
-@property(nonatomic,strong) NSString *sum;
-
-@property(nonatomic,strong) NSString *current;
 
 @end

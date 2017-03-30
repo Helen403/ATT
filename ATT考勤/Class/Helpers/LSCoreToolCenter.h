@@ -27,6 +27,8 @@ extern void DismissHud(void);
 +(void)playMusic:(NSString *)urlMusic1;
 +(NSString *)currentYearYMDHMSA;
 
++(NSInteger )getCurrentPreMonth:(NSInteger)i;
+
 //插入数据库
 +(void)insertSQLByStringKey:(NSString *)key Value:(NSString *)value;
 //查询数据库

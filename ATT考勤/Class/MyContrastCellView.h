@@ -13,4 +13,6 @@
 
 @property(nonatomic,strong) MyContrastModel *myContrastModel;
 
+@property(nonatomic,strong) NSString *average;
+
 @end

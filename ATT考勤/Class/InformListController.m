@@ -41,9 +41,12 @@
     self.title = @"公司通知";
 }
 
-
 -(void)h_addSubviews{
     [self.view addSubview:self.informListView];
+}
+
+-(void)h_viewWillAppear{
+    [self.informListView h_loadData];
 }
 
 -(void)h_bindViewModel{

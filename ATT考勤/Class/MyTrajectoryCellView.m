@@ -27,6 +27,8 @@
 
 @property(nonatomic,strong) UILabel *latitude1;
 
+@property(nonatomic,strong) UILabel *num;
+
 @end
 
 @implementation MyTrajectoryCellView
@@ -49,9 +51,14 @@
     [self.cir1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf.line);
         make.centerY.equalTo(weakSelf.year);
-        make.size.equalTo(CGSizeMake([self h_w:6], [self h_w:6]));
+        make.size.equalTo(CGSizeMake([self h_w:16], [self h_w:16]));
     }];
     
+    [self.num mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf.cir1);
+        make.centerX.equalTo(weakSelf.cir1);
+    }];
+
     [self.time1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
         make.top.equalTo([self h_w:10]);
@@ -60,6 +67,7 @@
     [self.content1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.line.mas_right).offset([self h_w:10]);
         make.top.equalTo(weakSelf.time1.mas_bottom).offset([self h_w:10]);
+        make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
     
     [self.longitude1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -78,7 +86,7 @@
 
 #pragma mark private
 -(void)h_setupViews{
-
+    
     [self addSubview:self.year];
     [self addSubview:self.cir1];
     [self addSubview:self.line];
@@ -86,7 +94,8 @@
     [self addSubview:self.content1];
     [self addSubview:self.longitude1];
     [self addSubview:self.latitude1];
-
+    [self addSubview:self.num];
+    
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -98,16 +107,33 @@
         return;
     }
     _myTrajectoryModel = myTrajectoryModel;
-    self.year.text = myTrajectoryModel.cardDate;
-    self.time1.text =[NSString stringWithFormat:@"时间:%@",myTrajectoryModel.cardTime] ;
+    
+    if([myTrajectoryModel.timePoint isEqualToString:@"1"]||[myTrajectoryModel.timePoint isEqualToString:@"3"]||[myTrajectoryModel.timePoint isEqualToString:@"5"]||[myTrajectoryModel.timePoint isEqualToString:@"7"]){
+        self.time1.text =[NSString stringWithFormat:@"上班:%@",myTrajectoryModel.cardTime] ;
+        self.year.text = myTrajectoryModel.cardDate;
+        self.year.textColor = MAIN_PAN_2;
+        
+    }else{
+        self.year.text = myTrajectoryModel.cardDate;
+        self.year.textColor = white_color;
+        self.time1.text =[NSString stringWithFormat:@"下班:%@",myTrajectoryModel.cardTime] ;
+    }
+    self.num.text = myTrajectoryModel.timePoint;
     self.content1.text =[NSString stringWithFormat:@"位置:%@",myTrajectoryModel.locAddress];
     self.longitude1.text =[NSString stringWithFormat:@"经度:%@",myTrajectoryModel.locLongitude];
     self.latitude1.text =[NSString stringWithFormat:@"纬度:%@",myTrajectoryModel.locLatitude] ;
-
 }
 
-
 #pragma mark lazyload
+-(UILabel *)num{
+    if (!_num) {
+        _num = [[UILabel alloc] init];
+        _num.text = @"";
+        _num.font = H10;
+        _num.textColor = white_color;
+    }
+    return _num;
+}
 -(UILabel *)year{
     if (!_year) {
         _year = [[UILabel alloc] init];
@@ -122,12 +148,10 @@
     if (!_cir1) {
         _cir1 = [[UIView alloc] init];
         _cir1.backgroundColor = MAIN_ORANGER;
-        ViewRadius(_cir1, [self h_w:3]);
+        ViewRadius(_cir1, [self h_w:8]);
     }
     return _cir1;
 }
-
-
 
 -(UIView *)line{
     if (!_line) {
