@@ -68,12 +68,28 @@
         });
     }];
     
+    [[self.mineViewModel.fileSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            [self h_refreash];
+        });
+    }];
+    
+    [[self.mineViewModel.imgSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+    
 }
 
 
 -(void)h_loadData{
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.mineViewModel.companyCode = companyCode;
     self.userModel = getModel(@"user");
     self.mineViewModel.userCode = self.userModel.userCode;
+    [self.mineViewModel.findImageCommand execute:nil];
     [self.mineViewModel.findSignCommand execute:nil];
     [self.mineViewModel.cardScoreCommand execute:nil];
     [self.mineViewModel.myHoldaysCommand execute:nil];
@@ -81,8 +97,11 @@
 }
 
 -(void)h_refreash{
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.mineViewModel.companyCode = companyCode;
     self.userModel = getModel(@"user");
     self.mineViewModel.telphone = self.userModel.userTelphone;
+    [self.mineViewModel.findImageCommand execute:nil];
     [self.mineViewModel.refreshDataCommand execute:nil];
     [self.mineViewModel.findSignCommand execute:nil];
     [self.mineViewModel.cardScoreCommand execute:nil];

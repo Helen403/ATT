@@ -16,9 +16,15 @@
 #import "sys/utsname.h"
 #import "ZJProgressHUD.h"
 #import "XMLDictionary.h"
+#import "YYAudioTool.h"
 
 
 #define HQDateFormatter @"yyyy-MM-dd HH:mm:ss"
+
+/**
+ *存放所有的音乐播放器
+ */
+static NSMutableDictionary *_musices;
 
 @implementation LSCoreToolCenter
 
@@ -1314,23 +1320,96 @@ void DismissHud(void){
 }
 
 
-
-
 +(void)playMusic:(NSString *)urlMusic1{
     NSString *urlStr = urlMusic1;
     NSURL *url = [[NSURL alloc]initWithString:urlStr];
     NSData * audioData = [NSData dataWithContentsOfURL:url];
-    
+     AVAudioPlayer *ppo = [[AVAudioPlayer alloc] initWithData:audioData error:nil];
+    [ppo play];
     //将数据保存到本地指定位置
     NSString *docDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@.mp3", docDirPath , @"Temp"];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@.mp3", docDirPath , @"temp1"];
+    [self deleteOldRecordFileAtPath:filePath];
     
+
     [audioData writeToFile:filePath atomically:YES];
+   
     
     //播放本地音乐
     NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
-    [player play];
+   //BOOL bb=  [YYAudioTool playMusic:filePath];
+    
+   // [self playMusicWithUrl:fileURL];
+   // AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+   //[player play];
 }
+
+
++(void)deleteOldRecordFileAtPath:(NSString *)pathStr{
+    NSFileManager* fileManager=[NSFileManager defaultManager];
+    
+    BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:pathStr];
+    if (!blHave) {
+        NSLog(@"不存在");
+        return ;
+    }else {
+        NSLog(@"存在");
+        BOOL blDele= [fileManager removeItemAtPath:pathStr error:nil];
+        if (blDele) {
+            NSLog(@"删除成功");
+        }else {
+            NSLog(@"删除失败");
+        }
+    }
+}
+
+/**
+ *播放音乐文件
+ */
++ (BOOL)playMusicWithUrl:(NSURL *)fileUrl
+{
+    //其他播放器停止播放
+
+    
+    if (!fileUrl) return NO;
+    
+    AVAudioSession *session=[AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];  //此处需要恢复设置回放标志，否则会导致其它播放声音也会变小
+    [session setActive:YES error:nil];
+    
+    AVAudioPlayer *player=[self musices][fileUrl];
+    
+    if (!player) {
+        //2.2创建播放器
+        player=[[AVAudioPlayer alloc]initWithContentsOfURL:fileUrl error:nil];
+    }
+    
+   // player.delegate = self;
+    
+    if (![player prepareToPlay]){
+        NSLog(@"缓冲失败--");
+        //        [self myToast:@"播放器缓冲失败"];
+        return NO;
+    }
+    
+    [player play];
+    
+    //2.4存入字典
+    [self musices][fileUrl]=player;
+    
+    
+    //NSLog(@"musices:%@ musices",self.musices);
+    
+    return YES;//正在播放，那么就返回YES
+}
+
++ (NSMutableDictionary *)musices
+{
+    if (_musices==nil) {
+        _musices=[NSMutableDictionary dictionary];
+    }
+    return _musices;
+}
+
 
 @end

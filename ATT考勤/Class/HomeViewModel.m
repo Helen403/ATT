@@ -140,6 +140,15 @@
  
     }];
     
+    [self.findImageCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return ;
+        }
+        NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
+        [[NSUserDefaults standardUserDefaults] setObject:xmlDoc forKey:@"imgIcon"];
+        [self.findImgSubject sendNext:nil];
+    }];
+    
 }
 
 -(RACSubject *)resultSubject{
@@ -437,6 +446,49 @@
     }
     return _notSubject;
 }
+
+- (RACCommand *)findImageCommand {
+    
+    if (!_findImageCommand) {
+        
+        @weakify(self);
+        _findImageCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                
+                NSString *body =[NSString stringWithFormat: @"<findMyImage xmlns=\"http://service.webservice.vada.com/\">\
+                                 <userCode xmlns=\"\">%@</userCode>\
+                                 </findMyImage>",self.userCode];
+                
+                [self SOAPData:findMyImage soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                }];
+                
+                return nil;
+            }];
+        }];
+    }
+    
+    return _findImageCommand;
+}
+
+-(RACSubject *)findImgSubject{
+    if (!_findImgSubject) {
+        _findImgSubject = [RACSubject subject] ;
+    }
+    return _findImgSubject;
+}
+
 
 
 @end

@@ -20,6 +20,7 @@
 		7907A2991E84045D00B63C16 /* black_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7907A2961E84045D00B63C16 /* black_bg.png */; };
 		7907A29A1E84045D00B63C16 /* greed_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7907A2971E84045D00B63C16 /* greed_bg.png */; };
 		7907A29B1E84045D00B63C16 /* red_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7907A2981E84045D00B63C16 /* red_bg.png */; };
+		790834251E8D4B5000771BCC /* ATT考勤 in Frameworks */ = {isa = PBXBuildFile; fileRef = 790834241E8D4B5000771BCC /* ATT考勤 */; };
 		790A86951E696CAA00251677 /* OvertimeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790A86941E696CAA00251677 /* OvertimeCellView.m */; };
 		790D8ABD1E2F43E800DDA697 /* RefuseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D8ABC1E2F43E800DDA697 /* RefuseController.m */; };
 		790D8AE51E2F4F0500DDA697 /* CopyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D8AE41E2F4F0500DDA697 /* CopyController.m */; };
@@ -792,6 +793,7 @@
 		7907A2961E84045D00B63C16 /* black_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_bg.png; sourceTree = "<group>"; };
 		7907A2971E84045D00B63C16 /* greed_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greed_bg.png; sourceTree = "<group>"; };
 		7907A2981E84045D00B63C16 /* red_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_bg.png; sourceTree = "<group>"; };
+		790834241E8D4B5000771BCC /* ATT考勤 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "ATT考勤"; sourceTree = "<group>"; };
 		790A86931E696CAA00251677 /* OvertimeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OvertimeCellView.h; sourceTree = "<group>"; };
 		790A86941E696CAA00251677 /* OvertimeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OvertimeCellView.m; sourceTree = "<group>"; };
 		790D8ABB1E2F43E800DDA697 /* RefuseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefuseController.h; sourceTree = "<group>"; };
@@ -2072,6 +2074,7 @@
 			files = (
 				7921347D1E4B176C00C25A67 /* libxml2.tbd in Frameworks */,
 				7921347B1E4B174E00C25A67 /* libxml2.2.tbd in Frameworks */,
+				790834251E8D4B5000771BCC /* ATT考勤 in Frameworks */,
 				79AF688D1E0BD741000D9E48 /* libsqlite3.tbd in Frameworks */,
 				79FD0DEB1E8BB13400F48F32 /* libmp3lame.a in Frameworks */,
 				79F8A4DD1E03C0C1004F8A8C /* libz.tbd in Frameworks */,
@@ -8583,6 +8586,7 @@
 		83B8787B68883EECD9829725 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				790834241E8D4B5000771BCC /* ATT考勤 */,
 				79FD0DE91E8BB13400F48F32 /* lame.h */,
 				79FD0DEA1E8BB13400F48F32 /* libmp3lame.a */,
 				79FD0DE81E8BB12300F48F32 /* Lame */,
@@ -8684,7 +8688,7 @@
 				TargetAttributes = {
 					7928BD681E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = TMLDK3R5QN;
+						DevelopmentTeam = PLK9A7N26F;
 					};
 					7928BD811E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
@@ -9657,27 +9661,18 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = TMLDK3R5QN;
+				DEVELOPMENT_TEAM = PLK9A7N26F;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/BaiduMapKit/BaiduMapKit\"",
+					/usr/lib/libxml2.dylib,
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ATT考勤/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/BaiduMapKit\"",
-					"\"${PODS_ROOT}/Headers/Public/FMDB\"",
-					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
-					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
-					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
-					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
-					"\"${PODS_ROOT}/Headers/Public/NetworkEye\"",
-					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
-					"\"${PODS_ROOT}/Headers/Public/ReactiveCocoa\"",
-					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
-					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"\"${PODS_ROOT}/Headers/Public/TYAlertController\"",
-					"\"${PODS_ROOT}/Headers/Public/TZImagePickerController\"",
-					/usr/include/libxml2,
+					"<Multiple",
+					"values>",
+					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
@@ -9686,10 +9681,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_LIBTOOLFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "Helen.ATT--";
 				PRODUCT_NAME = ATT;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/** $(SDKROOT)/usr/include/libxml2";
 			};
 			name = Debug;
 		};
@@ -9699,9 +9695,19 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = TMLDK3R5QN;
+				DEVELOPMENT_TEAM = PLK9A7N26F;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/BaiduMapKit/BaiduMapKit\"",
+					/usr/lib/libxml2.dylib,
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ATT考勤/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"<Multiple",
+					"values>",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -9709,10 +9715,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_LIBTOOLFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "Helen.ATT--";
 				PRODUCT_NAME = ATT;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/** $(SDKROOT)/usr/include/libxml2";
 			};
 			name = Release;
 		};

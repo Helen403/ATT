@@ -251,9 +251,9 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     MyTrajectoryCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MyTrajectoryCellView class])] forIndexPath:indexPath];
-    
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.myTrajectoryModel = self.myTrajectoryViewModel.arrTrajectory[indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     
     return cell;
 }
@@ -261,7 +261,7 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:110];
+    return [self h_w:130];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

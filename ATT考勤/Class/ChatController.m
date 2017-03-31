@@ -14,6 +14,7 @@
 #import "IQKeyboardManager.h"
 #import "UserModel.h"
 #import "IconView.h"
+#import "FSAudioStream.h"
 
 
 @interface ChatController ()<UITableViewDelegate,UITableViewDataSource,MoreButtonViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,InputToolbarDelegate>
@@ -30,8 +31,6 @@
 @property(nonatomic,strong) NSString *companyCode;
 
 @property(nonatomic,strong) NSString *userCode;
-
-@property(nonatomic,assign) NSInteger time;
 
 @end
 
@@ -75,7 +74,7 @@
     if (self.chatViewModel.arr.count>4) {
         [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
             
-            self.tableView.transform=CGAffineTransformMakeTranslation(0, -deltaY);
+            self.tableView.transform = CGAffineTransformMakeTranslation(0, -deltaY);
         }];
     }
     
@@ -153,22 +152,13 @@
     }];
     WS(weakSelf);
     self.inputToolbar.voiceRecord = ^(NSURL *file,NSInteger time){
-        //NSString *str = [file absoluteString];
-       //NSLog(@"地址%@ 时间%ld",str,(long)time);
         [weakSelf commitVoiceNotice:file and:time];
     };
-    [[self.chatViewModel.fileSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSString *x) {
-        
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            
-            [self sendMsg:x andType:@"2" andVolumnTime:[NSString stringWithFormat:@"%ld",(long)self.time]];
-        });
-    }];
+
 }
 
 - (void)commitVoiceNotice:(NSURL *)Path and:(NSInteger)time{
-    self.time = time;
-    [LSCoreToolCenter audio_PCMtoMP3:Path];
+
     NSData *data = [NSData dataWithContentsOfFile:Path];
  
     NSString *base64Str = [LSCoreToolCenter Base64StrWithMp3Data:data];
@@ -180,11 +170,11 @@
     self.chatViewModel.content = base64Str;
     self.chatViewModel.fileType = @"ios_audio";
     
-    [self.chatViewModel.updataCommand execute:nil];
-   
+    NSString *str = [NSString stringWithFormat:@"%@audio/%@",vadaMusic,self.chatViewModel.fileName];
+ 
+   [self sendMsg:str andType:@"2" andVolumnTime:[NSString stringWithFormat:@"%ld",(long)time]];
+    
 }
-
-
 
 -(void)sendMsg:(NSString *)content andType:(NSString *)index andVolumnTime:(NSString *)time{
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
@@ -252,7 +242,6 @@
     }
     return _chatViewModel;
 }
-
 
 -(UITableView *)tableView{
     if (!_tableView) {
@@ -342,9 +331,19 @@
 -(void)playMp3:(UIButton *)button{
     NSInteger indexRow = button.tag;
     ChatModel *model = self.chatViewModel.arr[indexRow];
-    [LSCoreToolCenter playMusic:model.msgContents];
-}
 
+    FSAudioStream *audioStream = [[FSAudioStream alloc]initWithUrl:[NSURL URLWithString:model.msgContents]];
+    audioStream.onFailure=^(FSAudioStreamError error,NSString *description){
+        NSLog(@"播放过程中发生错误，错误信息：,description");
+    };
+    audioStream.onCompletion=^(){
+        NSLog(@"播放完成!");
+    };
+    [audioStream setVolume:1];//设置声音
+    
+    [audioStream play];
+   
+}
 
 #pragma UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -359,9 +358,7 @@
     
     ChatModel *model = self.chatViewModel.arr[indexPath.row];
     if ([model.msgType isEqualToString:@"2"]) {
-        
         return [self h_w:84];
-        
     }{
         CGSize size = [model.msgContents sizeWithFont:H14 constrainedToSize:CGSizeMake(180.0f, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
         return size.height+[self h_w:70];

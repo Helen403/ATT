@@ -40,5 +40,29 @@
 @property(nonatomic,strong) RACCommand *myHoldaysCommand;
 
 
+//======================================
+@property(nonatomic,strong) RACCommand *updataCommand;
 
+@property(nonatomic,strong) NSString *fileName;
+
+@property(nonatomic,strong) NSString *content;
+
+@property(nonatomic,strong) NSString *fileType;
+
+
+@property(nonatomic,strong) RACSubject *fileSubject;
+
+
+//=====================================
+
+@property(nonatomic,strong) NSString *companyCode;
+@property(nonatomic,strong) NSString *imagePath;
+@property(nonatomic,strong) RACCommand *modifyMyImageCommand;
+
+//=================================
+
+@property(nonatomic,strong) RACCommand *findImageCommand;
+
+
+@property(nonatomic,strong) RACSubject *imgSubject;
 @end

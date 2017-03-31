@@ -93,4 +93,10 @@
 
 @property(nonatomic,strong) RACCommand *scheduCommand;
 
+
+
+@property(nonatomic,strong) RACCommand *findImageCommand;
+
+@property(nonatomic,strong) RACSubject *findImgSubject;
+
 @end

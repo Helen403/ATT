@@ -19,6 +19,7 @@
 #import "XCFTabBarController.h"
 
 #import "NavigationView.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()
 

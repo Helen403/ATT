@@ -35,7 +35,7 @@
 //
 //   -lxml2
 
-#import <libxml/tree.h>
+#import "libxml/tree.h"
 #import <libxml/parser.h>
 #import <libxml/xmlstring.h>
 #import <libxml/xpath.h>

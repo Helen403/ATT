@@ -274,6 +274,8 @@
     self.homeViewModel.curDay = arr[2];
     
     [self.homeViewModel.refreshDataCommand execute:nil];
+    [self.homeViewModel.findImageCommand execute:nil];
+    
     //设置时间
     [self setTime];
     //检查网络
@@ -413,6 +415,16 @@
             self.lastText.text = @"-:-";
         });
        
+    }];
+    
+    [[self.homeViewModel.findImgSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            NSString *icon = [[NSUserDefaults standardUserDefaults] objectForKey:@"imgIcon"];
+            if (icon != nil) {
+                [self.headImg sd_setImageWithURL:[NSURL URLWithString:icon]];
+            }
+        });
     }];
     
 }
@@ -1242,6 +1254,7 @@
     if (!_headImg) {
         _headImg = [[UIImageView alloc] init];
         _headImg.image = ImageNamed(@"homepage_head_portrait_base");
+        ViewRadius(_headImg, 3);
         _headImg.userInteractionEnabled = YES;
         UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(HeadClick)];
         [_headImg addGestureRecognizer:setTap];

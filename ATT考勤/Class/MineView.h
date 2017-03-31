@@ -10,4 +10,6 @@
 
 @interface MineView : HView
 
+
+
 @end

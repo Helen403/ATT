@@ -276,3 +276,11 @@
 //对比
 #define findAttendWorkHourByUserMonth @"http://13822767713.xicp.net/smart/ws/IAttService"
 
+//音频
+#define vadaMusic @"http://13822767713.xicp.net/smart/"
+
+//修改我的头像
+#define modifyMyImage @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//寻找我的头像
+#define findMyImage @"http://13822767713.xicp.net/smart/ws/IAttService"

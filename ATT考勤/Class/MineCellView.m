@@ -43,6 +43,7 @@
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
         make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:30]);
+         make.size.equalTo(CGSizeMake([self h_w:30], [self h_w:30]));
     }];
     
     [self.back mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -105,9 +106,13 @@
     }
     _userModel = userModel;
     switch (self.index) {
-            //
+            //我的头像
         case 0:{
             
+            NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:@"imgIcon"];
+            if (str != nil) {
+                [self.icon sd_setImageWithURL:[NSURL URLWithString:str]];
+            }
             break;
         }
             //我的名字
@@ -129,7 +134,6 @@
         }
             //我的积分
         case 4:{
-            
             NSString *cardScore =  [[NSUserDefaults standardUserDefaults] objectForKey:@"cardScore"];
             self.info.text = cardScore;
             
@@ -138,7 +142,6 @@
             //我的排班
         case 5:{
             self.info.text = userModel.userEmail;
-            
             break;
         }
             //我的假期
@@ -177,6 +180,7 @@
 -(UIImageView *)icon{
     if (!_icon) {
         _icon = [[UIImageView alloc] init];
+        ViewRadius(_icon, 3);
     }
     return _icon;
     

@@ -43,7 +43,9 @@
         if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
             return ;
         }
-        
+        if([self.msgType isEqualToString:@"2"]){
+            [self.updataCommand execute:nil];
+        }
         
         
     }];
@@ -52,9 +54,9 @@
         if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
             return ;
         }
-        NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
+        //NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
         
-        [self.fileSubject sendNext:xmlDoc];
+       // [self.fileSubject sendNext:xmlDoc];
         
     }];
 }

@@ -62,12 +62,7 @@
     }];
     
     
-    [[[self.findSignCommand.executing skip:1] take:1] subscribeNext:^(id x) {
-        
-        if ([x isEqualToNumber:@(YES)]) {
-            ShowMaskStatus(@"正在拼命加载");
-        }
-    }];
+ 
     
     [self.cardScoreCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
@@ -85,13 +80,7 @@
     }];
     
     
-    [[[self.cardScoreCommand.executing skip:1] take:1] subscribeNext:^(id x) {
-        
-        if ([x isEqualToNumber:@(YES)]) {
-            ShowMaskStatus(@"正在拼命加载");
-        }
-    }];
-    
+  
     [self.myHoldaysCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
         DismissHud();
         if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
@@ -107,14 +96,44 @@
         
     }];
     
-    
-    [[[self.myHoldaysCommand.executing skip:1] take:1] subscribeNext:^(id x) {
-        
-        if ([x isEqualToNumber:@(YES)]) {
-            ShowMaskStatus(@"正在拼命加载");
+
+    [self.updataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return ;
         }
+       // NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
+        
+        //[self.fileSubject sendNext:nil];
+        [self.modifyMyImageCommand execute:nil];
     }];
     
+    [self.modifyMyImageCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return ;
+        }
+        // NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
+        
+        [self.fileSubject sendNext:nil];
+        
+    }];
+    
+    [self.findImageCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return ;
+        }
+         NSString *xmlDoc = [self getFilterOneStr:result filter:@"String"];
+        [[NSUserDefaults standardUserDefaults] setObject:xmlDoc forKey:@"imgIcon"];
+        [self.imgSubject sendNext:nil];
+        
+    }];
+    
+}
+
+-(RACSubject *)fileSubject{
+    if (!_fileSubject) {
+        _fileSubject = [RACSubject subject] ;
+    }
+    return _fileSubject;
 }
 
 
@@ -175,6 +194,81 @@
     
     return _refreshDataCommand;
 }
+
+- (RACCommand *)modifyMyImageCommand {
+    
+    if (!_modifyMyImageCommand) {
+        
+        @weakify(self);
+        _modifyMyImageCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                
+                NSString *body =[NSString stringWithFormat: @"<modifyMyImage xmlns=\"http://service.webservice.vada.com/\">\
+                                 <companyCode xmlns=\"\">%@</companyCode>\
+                                 <userCode xmlns=\"\">%@</userCode>\
+                                 <imagePath xmlns=\"\">%@</imagePath>\
+                                 </modifyMyImage>",self.companyCode,self.userCode,self.imagePath];
+                
+                [self SOAPData:modifyMyImage soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                }];
+                
+                return nil;
+            }];
+        }];
+    }
+    
+    return _modifyMyImageCommand;
+}
+
+
+- (RACCommand *)findImageCommand {
+    
+    if (!_findImageCommand) {
+        
+        @weakify(self);
+        _findImageCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                
+                NSString *body =[NSString stringWithFormat: @"<findMyImage xmlns=\"http://service.webservice.vada.com/\">\
+                                 <userCode xmlns=\"\">%@</userCode>\
+                                 </findMyImage>",self.userCode];
+                
+                [self SOAPData:findMyImage soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                }];
+                
+                return nil;
+            }];
+        }];
+    }
+    
+    return _findImageCommand;
+}
+
+
 
 -(RACSubject *)successSubject{
     if (!_successSubject) {
@@ -302,5 +396,49 @@
     
     return _myHoldaysCommand;
 }
+
+
+- (RACCommand *)updataCommand {
+    
+    if (!_updataCommand) {
+        
+        @weakify(self);
+        _updataCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                
+                NSString *body =[NSString stringWithFormat: @"<uploadFile xmlns=\"http://service.webservice.vada.com/\">\
+                                 <fileName xmlns=\"\">%@</fileName>\
+                                 <content xmlns=\"\">%@</content>\
+                                 <fileType xmlns=\"\">%@</fileType>\
+                                 </uploadFile>",self.fileName,self.content,self.fileType];
+                
+                [self SOAPData:findMyMsg soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                }];
+                return nil;
+            }];
+        }];
+    }
+    return _updataCommand;
+}
+
+-(RACSubject *)imgSubject{
+    if (!_imgSubject) {
+        _imgSubject = [RACSubject subject];
+    }
+    return _imgSubject;
+}
+
 
 @end

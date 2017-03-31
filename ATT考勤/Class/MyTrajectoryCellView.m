@@ -8,9 +8,6 @@
 
 #import "MyTrajectoryCellView.h"
 
-
-
-
 @interface MyTrajectoryCellView()
 
 @property(nonatomic,strong) UILabel *year;
@@ -45,7 +42,7 @@
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:103]);
         make.top.equalTo(0);
-        make.size.equalTo(CGSizeMake([self h_w:1], [self h_w:110]));
+        make.size.equalTo(CGSizeMake([self h_w:1], [self h_w:130]));
     }];
     
     [self.cir1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -179,6 +176,7 @@
         _content1 = [[UILabel alloc] init];
         _content1.text = @"";
         _content1.font = H14;
+        _content1.numberOfLines = 0;
         _content1.textColor = MAIN_PAN_2;
     }
     return _content1;

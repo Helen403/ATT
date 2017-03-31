@@ -13,6 +13,7 @@
 #import "TZImagePickerController.h"
 #import "ChangeNameController.h"
 #import "ChangeSignNameController.h"
+#import "UserModel.h"
 
 
 @interface MineController ()<TZImagePickerControllerDelegate>
@@ -20,6 +21,8 @@
 @property(nonatomic,strong) MineView *mineView;
 
 @property(nonatomic,strong) MineViewModel *mineViewModel;
+
+@property(nonatomic,strong) TZImagePickerController *imagePickerVc;
 
 @end
 
@@ -58,9 +61,8 @@
     [[self.mineViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         switch ([x intValue]) {
-                //上传头像
+            //上传头像
             case 0:{
-                
                 [self imagePicker];
                 break;
             }
@@ -87,11 +89,7 @@
                 [self.navigationController pushViewController:check animated:NO];
                 break;
             }
-                
-            default:
-                break;
         }
-        
     }];
 }
 
@@ -99,14 +97,38 @@
  *  上传头像
  */
 -(void)imagePicker{
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    [self presentViewController:self.imagePickerVc animated:YES completion:nil];
+}
+
+-(TZImagePickerController *)imagePickerVc{
+    if (!_imagePickerVc) {
+        _imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+        _imagePickerVc.sortAscendingByModificationDate = NO;
+        _imagePickerVc.photoWidth = 300.0;
+        _imagePickerVc.photoPreviewMaxWidth = 300.0;
+    }
+    return _imagePickerVc;
+}
+
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
+    UIImage *img = photos[0];
+    NSData *data = UIImagePNGRepresentation(img);
+    NSString *base64Str = [LSCoreToolCenter Base64StrWithMp3Data:data];
     
-    // You can get the photos by block, the same as by delegate.
-    // 你可以通过block或者代理，来得到用户选择的照片.
-    //    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets) {
-    //
-    //    }];
-    [self presentViewController:imagePickerVc animated:YES completion:nil];
+    if ([LSCoreToolCenter isBlankString:base64Str]) {
+        return;
+    }
+    UserModel *userModel = getModel(@"user");
+    self.mineViewModel.fileName =[NSString stringWithFormat:@"%@%@.png",userModel.userCode,[LSCoreToolCenter currentYearYMDHMSA]];
+    self.mineViewModel.content = base64Str;
+    self.mineViewModel.fileType = @"image";
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    NSString *imagePath = [NSString stringWithFormat:@"%@portrait/%@",vadaMusic,self.mineViewModel.fileName];
+    self.mineViewModel.userCode = userModel.userCode;
+    self.mineViewModel.companyCode =  companyCode;
+    self.mineViewModel.imagePath = imagePath;
+    [self.mineViewModel.updataCommand execute:nil];
 }
 
 #pragma mark lazyload
