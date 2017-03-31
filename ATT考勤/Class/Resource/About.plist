@@ -3,22 +3,28 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>address</key>
+		<string></string>
 		<key>img</key>
 		<string>about_us_company_name_picture</string>
 		<key>title</key>
 		<string>公司名称</string>
 		<key>info</key>
-		<string>中山市韦达信息有限公司</string>
+		<string>中山市韦达信息技术有限公司</string>
 	</dict>
 	<dict>
+		<key>address</key>
+		<string>广东省中山市东区亨尾大街3号中山软件园1号楼508室</string>
 		<key>img</key>
 		<string>about_us_company_address_picture</string>
 		<key>title</key>
 		<string>公司地址</string>
 		<key>info</key>
-		<string>广东省中山市东区软件园</string>
+		<string></string>
 	</dict>
 	<dict>
+		<key>address</key>
+		<string></string>
 		<key>img</key>
 		<string>about_us_company_url_picture</string>
 		<key>title</key>
@@ -27,10 +33,12 @@
 		<string>www.attonline.com.cn</string>
 	</dict>
 	<dict>
+		<key>address</key>
+		<string></string>
 		<key>img</key>
 		<string>about_us_product_agreement_picture</string>
 		<key>title</key>
-		<string>产品使用协议</string>
+		<string>产品使用许可协议</string>
 		<key>info</key>
 		<string></string>
 	</dict>

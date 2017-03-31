@@ -11,9 +11,17 @@
 #define InputToolbarHeight 49
 #define NavigationHeight 64
 
+#define kFakeTimerDuration       0.2
+#define kMaxRecordDuration       60     //最长录音时长
+#define kRemainCountingDuration  10     //剩余多少秒开始倒计时
+
 #import "InputToolbar.h"
 #import "UIView+Extension.h"
 #import <AVFoundation/AVFoundation.h>
+#import "UIImage+BBVoiceRecord.h"
+#import "UIColor+BBVoiceRecord.h"
+#import "BBVoiceRecordController.h"
+
 
 @interface InputToolbar ()<UITextViewDelegate,EmojiButtonViewDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic, assign)CGFloat textInputHeight;
@@ -42,6 +50,16 @@
 @property (nonatomic, strong) AVAudioRecorder *recorder;//录音器
 @property (nonatomic, strong) AVAudioPlayer *player; //播放器
 @property (nonatomic, strong) NSURL *recordFileUrl; //文件地址
+
+//==================================
+
+@property (nonatomic, assign) BBVoiceRecordState currentRecordState;
+
+@property (nonatomic, strong) NSTimer *fakeTimer;
+
+@property (nonatomic, strong) BBVoiceRecordController *voiceRecordCtrl;
+@property (nonatomic, assign) float duration;
+@property (nonatomic, assign) BOOL canceled;
 
 @end
 
@@ -86,8 +104,12 @@
     if (gestureRecognizer.state ==  UIGestureRecognizerStateBegan) {
         
         NSLog(@"UIGestureRecognizerStateBegan");
+        self.voiceLabel.text = @"松手停止录音";
+        self.currentRecordState = BBVoiceRecordState_Recording;
+        self.voiceLabel.backgroundColor = [UIColor colorWithHex:0xC6C7CA];
         self.countDown = 0;
         [self startRecordNotice];
+        [self startFakeTimer];
     }
     
     if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
@@ -96,32 +118,73 @@
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
         NSLog(@"UIGestureRecognizerStateEnded");
+        self.currentRecordState = BBVoiceRecordState_ReleaseToCancel;
+        self.voiceLabel.text = @"按住 说话";
+        self.voiceLabel.backgroundColor = white_color;
         [self stopRecordNotice];
-        
+        [self stopFakeTimer];
     }
-    
 }
+
+- (void)startFakeTimer{
+    if (_fakeTimer) {
+        [_fakeTimer invalidate];
+        _fakeTimer = nil;
+    }
+    self.fakeTimer = [NSTimer scheduledTimerWithTimeInterval:kFakeTimerDuration target:self selector:@selector(onFakeTimerTimeOut) userInfo:nil repeats:YES];
+    [_fakeTimer fire];
+}
+
+- (void)onFakeTimerTimeOut{
+    self.duration += kFakeTimerDuration;
+    NSLog(@"+++duration+++ %f",self.duration);
+    float remainTime = kMaxRecordDuration-self.duration;
+    //if ((int)remainTime == 0) {
+      //  self.currentRecordState = BBVoiceRecordState_Normal;
+        //[self dispatchVoiceState];
+    //}else{
+        
+        float fakePower = (float)(1+arc4random()%99)/100;
+        [self.voiceRecordCtrl showRecordCounting:fakePower];
+       // [self.voiceRecordCtrl updatePower:fakePower];
+   // }
+}
+
+- (void)stopFakeTimer{
+    if (_fakeTimer) {
+        [_fakeTimer invalidate];
+        _fakeTimer = nil;
+    }
+}
+
+
+
+- (void)dispatchVoiceState
+{
+    if (_currentRecordState == BBVoiceRecordState_Recording) {
+        self.canceled = NO;
+        [self startFakeTimer];
+    }
+    else if (_currentRecordState == BBVoiceRecordState_Normal){
+       // [self resetState];
+    }
+   // [_btnRecord updateRecordButtonStyle:_currentRecordState];
+    [self.voiceRecordCtrl updateUIWithRecordState:_currentRecordState];
+}
+
 
 -(void)startRecordNotice{
     NSLog(@"开始录音");
-    
     [self addTimer];
-    
     AVAudioSession *session =[AVAudioSession sharedInstance];
     NSError *sessionError;
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
-    
     if (session == nil) {
-        
         NSLog(@"Error creating session: %@",[sessionError description]);
-        
     }else{
         [session setActive:YES error:nil];
     }
-    
     self.session = session;
-    
-    
     //1.获取沙盒地址
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     self.filePath = [path stringByAppendingString:@"/RRecord.wav"];
@@ -158,6 +221,13 @@
     }
 }
 
+- (BBVoiceRecordController *)voiceRecordCtrl{
+    if (_voiceRecordCtrl == nil) {
+        _voiceRecordCtrl = [BBVoiceRecordController new];
+    }
+    return _voiceRecordCtrl;
+}
+
 -(void)stopRecordNotice{
     [self removeTimer];
     NSLog(@"停止录音");
@@ -168,12 +238,7 @@
     
     NSFileManager *manager = [NSFileManager defaultManager];
     if ([manager fileExistsAtPath:self.filePath]){
-        
-        //_noticeLabel.text = [NSString stringWithFormat:@"录了 %ld 秒,文件大小为 %.2fKb",COUNTDOWN - (long)countDown,[[manager attributesOfItemAtPath:filePath error:nil] fileSize]/1024.0];
         self.voiceRecord(self.recordFileUrl,self.countDown);
-
-        
-       [self PlayRecord:nil];
     }else{
         //_noticeLabel.text = @"最多录60秒";
     }
@@ -196,22 +261,6 @@
 }
 
 
-- (void)PlayRecord:(id)sender {
-    
-    NSLog(@"播放录音");
-    [self.recorder stop];
-    
-    if ([self.player isPlaying])return;
-    
-    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recordFileUrl error:nil];
-    //NSData *data = self.player.data;
-    
-    NSLog(@"%li",self.player.data.length/1024);
-    
-    [self.session setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [self.player play];
-    
-}
 
 
 /**

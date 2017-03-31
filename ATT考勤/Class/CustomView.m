@@ -18,6 +18,8 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 
+@property(nonatomic,strong) UIWebView *webView;
+
 @end
 
 @implementation CustomView
@@ -31,9 +33,19 @@
 
 -(void)updateConstraints{
     
-    WS(weakSelf);
+    WS(weakSelf)
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(weakSelf);
+        make.top.equalTo(0);
+        make.right.equalTo(0);
+        make.left.equalTo(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 4*[self h_w:50]));
+    }];
+    
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.tableView.mas_bottom).offset(0);
+        make.right.equalTo(0);
+        make.left.equalTo(0);
+        make.bottom.equalTo(0);
     }];
     
     [super updateConstraints];
@@ -43,6 +55,7 @@
 -(void)h_setupViews{
     
     [self addSubview:self.tableView];
+    [self addSubview:self.webView];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -58,10 +71,8 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[CustomCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([CustomCellView class])]];
         _tableView.scrollEnabled = NO;
-        
     }
     return _tableView;
-    
 }
 
 
@@ -75,7 +86,7 @@
     if (section == 0) {
         return 2;
     }else {
-        return 4;
+        return 0;
     }
 }
 
@@ -87,7 +98,7 @@
     if (indexPath.section == 0) {
         cell.customModel = self.customViewModel.arr[indexPath.row];
     }else{
-        cell.customModel = self.customViewModel.arr[indexPath.row+2];
+        // cell.customModel = self.customViewModel.arr[indexPath.row+2];
     }
     
     return cell;
@@ -96,7 +107,7 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:40];
+    return [self h_w:50];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -118,6 +129,7 @@
     UIView *headView = [[UIView alloc]init];
     headView.backgroundColor = BG_COLOR;
     UILabel *text = [[UILabel alloc] init];
+    
     text.font = H14;
     text.textColor = MAIN_PAN_2;
     if (section == 0) {
@@ -125,10 +137,26 @@
     }else{
         text.text = @"常见问题";
     }
-    text.frame = CGRectMake([self h_w:10], 0, SCREEN_WIDTH, [self h_w:40]);
-    [headView addSubview:text];
+    text.frame = CGRectMake([self h_w:10], 0, SCREEN_WIDTH, [self h_w:50]);
     [headView addSubview:text];
     return headView;
 }
+
+
+#pragma mark lazyload
+-(UIWebView *)webView{
+    if (!_webView) {
+        _webView = [[UIWebView alloc] init];
+        _webView.scalesPageToFit = YES;//自动对页面进行缩放以适应屏幕
+        //_webView.detectsPhoneNumbers = YES;//自动检测网页上的电话号码，单击可以拨打
+        NSURL* url = [NSURL URLWithString:faqaa1];//创建URL
+        NSURLRequest* request = [NSURLRequest requestWithURL:url];//创建NSURLRequest
+        [_webView loadRequest:request];//加载
+    }
+    return _webView;
+}
+
+
+
 
 @end

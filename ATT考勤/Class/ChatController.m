@@ -334,10 +334,10 @@
 
     FSAudioStream *audioStream = [[FSAudioStream alloc]initWithUrl:[NSURL URLWithString:model.msgContents]];
     audioStream.onFailure=^(FSAudioStreamError error,NSString *description){
-        NSLog(@"播放过程中发生错误，错误信息：,description");
+        //NSLog(@"播放过程中发生错误，错误信息：,description");
     };
     audioStream.onCompletion=^(){
-        NSLog(@"播放完成!");
+       // NSLog(@"播放完成!");
     };
     [audioStream setVolume:1];//设置声音
     

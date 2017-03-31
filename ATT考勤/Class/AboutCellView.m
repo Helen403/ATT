@@ -18,6 +18,8 @@
 
 @property(nonatomic,strong) UIView *line;
 
+@property(nonatomic,strong) UILabel *address;
+
 @end
 
 @implementation AboutCellView
@@ -41,6 +43,13 @@
         make.right.equalTo(-[self h_w:10]);
     }];
     
+    [self.address mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.centerY.equalTo(weakSelf);
+        make.right.equalTo(-[self h_w:10]);
+        make.left.equalTo(SCREEN_WIDTH*0.4);
+         make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5, [self h_w:40]));
+    }];
+    
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(weakSelf.mas_bottom);
         make.left.equalTo(weakSelf);
@@ -58,6 +67,7 @@
     [self addSubview:self.title];
     [self addSubview:self.info];
     [self addSubview:self.line];
+    [self addSubview:self.address];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -74,9 +84,9 @@
     self.icon.image = ImageNamed(aboutModel.img);
     self.title.text = aboutModel.title;
     self.info.text = aboutModel.info;
+    self.address.text = aboutModel.address;
 
 }
-
 
 #pragma mark lazyload
 -(UIImageView *)icon{
@@ -92,7 +102,7 @@
         _title = [[UILabel alloc] init];
         _title.font = H14;
         _title.textColor = MAIN_PAN_2;
-        _title.text = @"公司名称";
+        _title.text = @"";
     }
     return _title;
 }
@@ -102,7 +112,7 @@
         _info = [[UILabel alloc] init];
         _info.font = H14;
         _info.textColor = MAIN_PAN_2;
-        _info.text = @"公司名称";
+        _info.text = @"";
     }
     return _info;
 }
@@ -113,6 +123,18 @@
         _line.backgroundColor = MAIN_LINE_COLOR;
     }
     return _line;
+}
+
+-(UILabel *)address{
+    if (!_address) {
+        _address = [[UILabel alloc] init];
+        _address.font = H14;
+        _address.textColor = MAIN_PAN_2;
+        _address.text = @"";
+        _address.numberOfLines = 0;
+        _address.textAlignment = NSTextAlignmentRight;
+    }
+    return _address;
 }
 
 

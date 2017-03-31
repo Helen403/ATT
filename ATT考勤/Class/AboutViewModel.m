@@ -21,7 +21,6 @@
         NSMutableArray *data = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
         
         _arr= [AboutModel mj_objectArrayWithKeyValuesArray:data];
-        
     }
     return _arr;
 }

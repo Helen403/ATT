@@ -284,3 +284,15 @@
 
 //寻找我的头像
 #define findMyImage @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//产品介绍
+#define funcaa1 @"http://13822767713.xicp.net/smart/phone/product"
+
+//客服中心
+#define faqaa1 @"http://13822767713.xicp.net/smart/phone/faq"
+
+//公司官网
+#define NetLine @"http://www.attonline.com.cn"
+
+//产品协议
+#define AgreementLine @"http://13822767713.xicp.net/smart/phone/licence"

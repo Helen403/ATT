@@ -9,6 +9,7 @@
 #import "CustomController.h"
 #import "CustomViewModel.h"
 #import "CustomView.h"
+#import "CustomModel.h"
 
 
 @interface CustomController ()
@@ -46,7 +47,11 @@
 }
 
 -(void)h_bindViewModel{
-
+    [[self.customViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        CustomModel *customModel = self.customViewModel.arr[x.integerValue];
+        NSString *allString = [NSString stringWithFormat:@"tel:%@",[customModel.content substringFromIndex:6]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
+    }];
 
 }
 

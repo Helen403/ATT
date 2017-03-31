@@ -9,6 +9,8 @@
 #import "AboutController.h"
 #import "AboutView.h"
 #import "AboutViewModel.h"
+#import "AgreementController.h"
+#import "NetController.h"
 
 
 @interface AboutController()
@@ -27,12 +29,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+    
 }
 
 #pragma mark system
 -(void)updateViewConstraints{
-
+    
     WS(weakSelf);
     [self.aboutView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf.view);
@@ -44,7 +46,7 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-
+    
     self.title = @"关于我们";
 }
 
@@ -54,7 +56,28 @@
 }
 
 -(void)h_bindViewModel{
-
+    
+    [[self.aboutViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        switch (x.intValue) {
+                //公司官网
+            case 2:{
+               
+                NetController *application = [[NetController alloc] init];
+                
+                [self.navigationController pushViewController:application animated:NO];
+                break;
+            }
+                //协议
+            case 3:{
+                AgreementController *application = [[AgreementController alloc] init];
+                
+                [self.navigationController pushViewController:application animated:NO];
+                break;
+                
+            }
+        }
+    }];
 }
 
 

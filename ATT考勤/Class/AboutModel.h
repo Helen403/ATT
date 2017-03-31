@@ -17,4 +17,6 @@
 @property(nonatomic,strong) NSString *info;
 
 
+@property(nonatomic,strong) NSString *address;
+
 @end

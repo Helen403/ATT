@@ -150,7 +150,7 @@
    UIView *view = [setTap view];
     if ([view tag] == 0) {
         NSString *allString = [NSString stringWithFormat:@"tel:%@", self.employeeModel.empTelphone];
-        ShowMessage(allString);
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
     }
    

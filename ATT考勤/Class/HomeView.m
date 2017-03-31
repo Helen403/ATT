@@ -461,6 +461,7 @@
             NSString *onworkafter30 =[LSCoreToolCenter getDateAddMinuts:onworkdatetime time:offSetCardArea];//上班标准时间+30分钟
             long onworkbeforediff =[LSCoreToolCenter getDateDiff:carddatetime end:onworkbefore30];
             long onworkafterdiff =[LSCoreToolCenter getDateDiff:carddatetime end:onworkafter30];
+            
             //上班打过卡了
             if(onworkafterdiff>0 && onworkbeforediff<=0){
                 

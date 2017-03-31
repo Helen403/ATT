@@ -23,14 +23,14 @@
             return;
         }
         if (result.length<200) {
-            NSNumber *row =[NSNumber numberWithInteger:2];
-            [self.attendFailSubject sendNext:row];
+            //NSNumber *row =[NSNumber numberWithInteger:2];
+            [self.attendFailSubject sendNext:nil];
         }else{
             NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAttendRecordByUserDateResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAttendRecordByUserDateResponse>"];
             
             NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[AttendCardRecord class] rowRootName:@"AttendCardRecords"];
             self.arrAttendRecord = arr;
-            NSNumber *row =[NSNumber numberWithInteger:1];
+            NSNumber *row =[NSNumber numberWithInteger:arr.count];
             [self.attendRecordSubject sendNext:row];
         }
         

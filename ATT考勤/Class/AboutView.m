@@ -61,7 +61,11 @@
 -(UIView *)view{
     if (!_view) {
         _view = [[UIView alloc] init];
+        _view.backgroundColor = white_color;
         _view.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:270]);
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, [self h_w:270]-[self h_w:1], SCREEN_WIDTH, [self h_w:1])];
+        line.backgroundColor = MAIN_LINE_COLOR;
+        [_view addSubview:line];
         [_view addSubview:self.twoDimension];
     }
     return _view;
@@ -70,8 +74,9 @@
 -(UIImageView *)twoDimension{
     if (!_twoDimension) {
         _twoDimension = [[UIImageView alloc] init];
-        _twoDimension.image = ImageNamed(@"2e2bb1e0");
-        _twoDimension.frame = CGRectMake((SCREEN_WIDTH-[self h_w:250])*0.5, [self h_w:10], [self h_w:250], [self h_w:250]);
+        _twoDimension.image = ImageNamed(@"two");
+        _twoDimension.frame = CGRectMake(0, 0, [self h_w:130], [self h_w:130]);
+        _twoDimension.center = CGPointMake(SCREEN_WIDTH*0.5, [self h_w:270]*0.5);
     }
     return _twoDimension;
     
@@ -125,7 +130,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-  
+    NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
+    [self.aboutViewModel.cellclickSubject sendNext:row];
 }
+
+
 
 @end
