@@ -99,7 +99,6 @@
     }
 }
 
-
 -(void)setUserModel:(UserModel *)userModel{
     if (!userModel) {
         return;
@@ -111,7 +110,7 @@
             
             NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:@"imgIcon"];
             if (str != nil) {
-                [self.icon sd_setImageWithURL:[NSURL URLWithString:str]];
+                [self.icon sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:ImageNamed(defaultImg)];
             }
             break;
         }
@@ -135,20 +134,19 @@
             //我的积分
         case 4:{
             NSString *cardScore =  [[NSUserDefaults standardUserDefaults] objectForKey:@"cardScore"];
-            self.info.text = cardScore;
+            self.info.text =[NSString stringWithFormat:@"%@分",cardScore] ;
             
             break;
         }
             //我的排班
         case 5:{
-            self.info.text = userModel.userEmail;
+            self.info.text = @"";
             break;
         }
             //我的假期
         case 6:{
             NSString *myHoldays =  [[NSUserDefaults standardUserDefaults] objectForKey:@"findMyHoldays"];
-            self.info.text = myHoldays;
-            
+            self.info.text = [NSString stringWithFormat:@"%@分钟",myHoldays];
             break;
         }
     }

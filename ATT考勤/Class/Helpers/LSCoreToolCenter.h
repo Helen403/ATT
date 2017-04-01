@@ -26,6 +26,7 @@ extern void DismissHud(void);
 +(BOOL)isBlankString:(NSString *)string;
 +(void)playMusic:(NSString *)urlMusic1;
 +(NSString *)currentYearYMDHMSA;
++(NSInteger)getCurrentWeek;
 
 +(NSInteger )getCurrentPreMonth:(NSInteger)i;
 

@@ -49,6 +49,8 @@
 
 
 -(void)h_viewWillAppear{
+    
+    
     [self.myExamineView h_viewWillAppear];
 }
 

@@ -296,3 +296,6 @@
 
 //产品协议
 #define AgreementLine @"http://13822767713.xicp.net/smart/phone/licence"
+
+//寻找所有假期
+#define findAllHolidayByMonth @"http://13822767713.xicp.net/smart/ws/IAttService"

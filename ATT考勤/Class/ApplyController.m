@@ -65,6 +65,14 @@
 }
 
 
+-(void)h_viewWillAppear{
+    if (_childVcs.count>0) {
+       MyExamineController *myExamine  = (MyExamineController *)[self.childVcs objectAtIndex:1];
+        [myExamine h_viewWillAppear];
+    }
+    
+}
+
 - (UIViewController<ZJScrollPageViewChildVcDelegate> *)childViewController:(UIViewController<ZJScrollPageViewChildVcDelegate> *)reuseViewController forIndex:(NSInteger)index {
     
     

@@ -927,6 +927,26 @@ void DismissHud(void){
 }
 
 
++(NSInteger)getCurrentWeek{
+
+    NSDate*date = [NSDate date];
+    
+    
+    NSCalendar*calendar = [NSCalendar currentCalendar];
+    
+    
+    NSDateComponents*comps;
+    
+    
+    // 年月日获得
+
+    comps =[calendar components:(NSWeekCalendarUnit | NSWeekdayCalendarUnit |NSWeekdayOrdinalCalendarUnit)
+                       fromDate:date];
+
+    NSInteger week = [comps week]; // 今年的第几周
+    return week;
+}
+
 /**
  *实现部分
  */

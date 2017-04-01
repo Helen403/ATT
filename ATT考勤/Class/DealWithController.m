@@ -45,6 +45,10 @@
 
 }
 
+-(void)h_viewWillAppear{
+    //[self.dealWithView h_loadData];
+}
+
 #pragma mark lazyload
 -(DealWithView *)dealWithView{
     if (!_dealWithView) {

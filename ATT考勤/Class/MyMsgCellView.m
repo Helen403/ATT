@@ -85,7 +85,15 @@
     _myMsgModel = myMsgModel;
     self.img.image = ImageNamed(@"remind_set_vioce_prompt_picture");
     self.title.text = myMsgModel.msgUserName;
-    self.content.text = myMsgModel.msgLast;
+    if([myMsgModel.msgLast rangeOfString:@".mp3"].location !=NSNotFound){
+        //NSLog(@"yes");
+        self.content.text = @"语音内容";
+    }
+    else{
+        //NSLog(@"no");
+        self.content.text = myMsgModel.msgLast;
+    }
+    
     self.time.text = myMsgModel.msgDate;
     self.count.text = myMsgModel.msgSize;
 }
@@ -93,15 +101,12 @@
 
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
-    
     self.count.backgroundColor = MAIN_RED;
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
     self.count.backgroundColor = MAIN_RED;
-    
 }
 
 

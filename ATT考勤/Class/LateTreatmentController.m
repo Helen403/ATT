@@ -48,8 +48,7 @@
 
 -(void)h_bindViewModel{
     [[self.lateTreatmentViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-        
-       
+
         
         ApprovalTreatmentController *approvalTreatement = [[ApprovalTreatmentController alloc] init];
         
@@ -60,6 +59,10 @@
 
     }];
     
+}
+
+-(void)h_viewWillAppear{
+    [self.lateTreatmentView h_loadData];
 }
 
 #pragma mark lazyload

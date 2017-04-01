@@ -43,6 +43,10 @@ static NSString *cellID = @"cellID";
 
 @property(nonatomic,strong) NSString *current;
 
+@property(nonatomic,strong) UILabel *today;
+
+@property(nonatomic,strong) UILabel *week;
+
 @end
 
 
@@ -76,6 +80,16 @@ static NSString *cellID = @"cellID";
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(leftPadding);
         make.top.equalTo(weakSelf.pre);
+    }];
+    
+    [self.today mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.pre);
+        make.right.equalTo(weakSelf.title.mas_left).offset(-[self h_w:10]);
+    }];
+    
+    [self.week mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.pre);
+        make.left.equalTo(weakSelf.title.mas_right).offset([self h_w:10]);
     }];
     
     [self.last mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -115,6 +129,8 @@ static NSString *cellID = @"cellID";
     [self addSubview:self.last];
     [self addSubview:self.line2];
     [self addSubview:self.myWeekView];
+    [self addSubview:self.today];
+    [self addSubview:self.week];
     [self addSubview:self.collectionView];
     
     
@@ -129,6 +145,7 @@ static NSString *cellID = @"cellID";
     self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
     self.current = self.title.text;
     self.arr = [LSCoreToolCenter getCurrentMonthInfo:self.index];
+    self.week.text =[NSString stringWithFormat:@"第%ld周",(long)[LSCoreToolCenter getCurrentWeek]] ;
 }
 
 #pragma mark lazyload
@@ -173,6 +190,16 @@ static NSString *cellID = @"cellID";
     return _title;
 }
 
+-(UILabel *)week{
+    if (!_week) {
+        _week = [[UILabel alloc] init];
+        _week.text = @"";
+        _week.font = H14;
+        _week.textColor = MAIN_PAN_2;
+    }
+    return _week;
+}
+
 -(UILabel *)last{
     if (!_last) {
         _last = [[UILabel alloc] init];
@@ -185,6 +212,18 @@ static NSString *cellID = @"cellID";
     }
     return _last;
 }
+
+-(UILabel *)today{
+    if (!_today) {
+        _today = [[UILabel alloc] init];
+        _today.text = @"今天";
+        _today.font = H14;
+        _today.textColor = MAIN_PAN_2;
+    }
+    return _today;
+}
+
+
 -(UIView *)line2{
     if (!_line2) {
         _line2 = [[UIView alloc] init];
@@ -243,7 +282,8 @@ static NSString *cellID = @"cellID";
 //这里是自定义cell,非常简单的自定义
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     LYWCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    
+    cell.layer.borderColor=[UIColor darkGrayColor].CGColor;
+    cell.layer.borderWidth=0.3;
     cell.dateLable.text = self.arr[indexPath.row];
     NSDate *date = [[NSDate alloc] init];
     NSInteger day = [LSCoreToolCenter day:date];

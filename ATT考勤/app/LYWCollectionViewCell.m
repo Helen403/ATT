@@ -7,6 +7,7 @@
 //
 
 #import "LYWCollectionViewCell.h"
+#import "TriangleView.h"
 
 @implementation LYWCollectionViewCell
 
@@ -16,7 +17,10 @@
         [_dateLable setTextAlignment:NSTextAlignmentCenter];
         [_dateLable setFont:[UIFont systemFontOfSize:17]];
         _dateLable.textColor = [UIColor blackColor];
+        TriangleView *triangleView =  [[TriangleView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width/2, frame.size.height/2)];
+        
         [self addSubview:_dateLable];
+        [self addSubview:triangleView];
     }
     return self;
 }

@@ -155,6 +155,7 @@
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.copyDetailsViewModel.companyCode = companyCode;
     self.copyDetailsViewModel.indexTmp = indexTmp;
+    self.indexTmp = indexTmp;
     [self.copyDetailsViewModel.refreshDataCommand execute:nil];
 }
 

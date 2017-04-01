@@ -153,6 +153,7 @@
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.refuseDetailsViewModel.companyCode = companyCode;
     self.refuseDetailsViewModel.indexTmp = indexTmp;
+    self.indexTmp = indexTmp;
     [self.refuseDetailsViewModel.refreshDataCommand execute:nil];
 }
 

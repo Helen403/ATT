@@ -21,6 +21,7 @@
 #import "NavigationView.h"
 #import <AVFoundation/AVFoundation.h>
 
+
 @interface AppDelegate ()
 
 @property (nonatomic,strong) XCFNavigationController *nav;
@@ -35,6 +36,7 @@
 
 @property(nonatomic,strong) NavigationView *navigationView;
 
+
 @end
 
 @implementation AppDelegate
@@ -42,7 +44,9 @@
 #pragma mark system
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    //注册本地通知
     [self h_initialize];
+    
     NSString *telphone = [[NSUserDefaults standardUserDefaults] objectForKey:@"myUser"];
     if (telphone.length>0) {
         self.telphone = telphone;
@@ -151,8 +155,8 @@
         if (self.flag) {
             [self rootController];
         }else{
-//            self.telphone = telphone;
-//            [self.loginCommand execute:nil];
+            //            self.telphone = telphone;
+            //            [self.loginCommand execute:nil];
             [self CannotController];
         }
         
@@ -368,6 +372,7 @@
     }
     return _navigationView;
 }
+
 
 
 @end

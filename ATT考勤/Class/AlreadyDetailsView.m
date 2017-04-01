@@ -154,6 +154,7 @@
     ShowMaskStatus(@"正在拼命加载");
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.alreadyDetailsViewModel.companyCode = companyCode;
+    self.indexTmp = indexTmp;
     self.alreadyDetailsViewModel.indexTmp = indexTmp;
     [self.alreadyDetailsViewModel.refreshDataCommand execute:nil];
 }
@@ -167,6 +168,7 @@
             
             NSString *apType = lateTreatment.applyType;
             self.title.text = [NSString stringWithFormat:@"类型:%@",apType];
+            
             self.name.text = [NSString stringWithFormat:@"姓名:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.userName];
             
             

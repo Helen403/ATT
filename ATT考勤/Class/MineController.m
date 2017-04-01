@@ -14,6 +14,7 @@
 #import "ChangeNameController.h"
 #import "ChangeSignNameController.h"
 #import "UserModel.h"
+#import "MySchedulieController.h"
 
 
 @interface MineController ()<TZImagePickerControllerDelegate>
@@ -83,6 +84,14 @@
                 
                 break;
             }
+                //我的排班
+            case 5:{
+                MySchedulieController *mySchedulie = [[MySchedulieController alloc] init];
+                
+                [self.navigationController pushViewController:mySchedulie animated:NO];
+                
+                break;
+            }
                 //跳转到考勤
             case 7:{
                 CheckController *check = [[CheckController alloc] init];
@@ -104,8 +113,10 @@
     if (!_imagePickerVc) {
         _imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
         _imagePickerVc.sortAscendingByModificationDate = NO;
-        _imagePickerVc.photoWidth = 300.0;
-        _imagePickerVc.photoPreviewMaxWidth = 300.0;
+//        _imagePickerVc.allowCrop = YES;
+//        _imagePickerVc.cropRect = CGRectMake(0, (SCREEN_HEIGHT-SCREEN_WIDTH)/2, SCREEN_WIDTH, SCREEN_WIDTH);
+        _imagePickerVc.photoWidth = 300;
+        _imagePickerVc.photoPreviewMaxWidth = 300;
     }
     return _imagePickerVc;
 }

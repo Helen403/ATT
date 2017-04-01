@@ -341,7 +341,7 @@
 - (void)didUpdateUserHeading:(BMKUserLocation *)userLocation{}
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-
+    
     
     NSString *currentLatitude = [[NSString alloc]
                                  initWithFormat:@"%f",
@@ -402,7 +402,7 @@
     
     //更新个人信息
     [[self.homeViewModel.personalSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-          [self performSelectorOnMainThread:@selector(personInfo) withObject:nil waitUntilDone:YES];
+        [self performSelectorOnMainThread:@selector(personInfo) withObject:nil waitUntilDone:YES];
     }];
     
     //没有排班的
@@ -414,7 +414,7 @@
             self.lastImg.image = ImageNamed(@"homepage_rest_gray");
             self.lastText.text = @"-:-";
         });
-       
+        
     }];
     
     [[self.homeViewModel.findImgSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
@@ -422,7 +422,8 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             NSString *icon = [[NSUserDefaults standardUserDefaults] objectForKey:@"imgIcon"];
             if (icon != nil) {
-                [self.headImg sd_setImageWithURL:[NSURL URLWithString:icon]];
+                [self.headImg sd_setImageWithURL:[NSURL URLWithString:icon ] placeholderImage:ImageNamed(defaultImg)];
+                
             }
         });
     }];
@@ -449,8 +450,9 @@
     NSString *retbackcardtime_onwork=@"-:-"; //上班打卡时间
     NSString *retbackcardstatus_offwork=@"-1"; //上班打卡状态
     NSString *retbackcardtime_offwork=@"-:-"; //下班打卡时间
-    if ([num intValue] == 1) {
-        
+    
+    
+    if(self.homeViewModel.arrAttendRecord.count==1||self.homeViewModel.arrAttendRecord.count==2){
         //一条记录可能是上班的记录,也可能是下班的记录
         if (self.homeViewModel.arrAttendRecord.count == 1) {
             
@@ -490,10 +492,14 @@
         }
         
     }else{
+        
+        
+        
         NSString *onworkafter30 =[LSCoreToolCenter getDateAddMinuts:onworkdatetime time:offSetCardArea];//上班标准时间+30分钟
         NSString *offworkafter30 =[LSCoreToolCenter getDateAddMinuts:offworkdatetime time:offSetCardArea];//下班标准时间+30分钟
         long onworkdiff =[LSCoreToolCenter getDateDiff:curDatetime end:onworkafter30];
         long offworkdiff =[LSCoreToolCenter getDateDiff:curDatetime end:offworkafter30];
+        
         //在上班正常或者迟到的范围之内
         if(onworkdiff>0){
             retbackstatus=4;
@@ -520,8 +526,8 @@
             }
         }
         
+        
     }
-    
     switch(retbackstatus){
         case 1:{ //上班打过卡了
             if ([LSCoreToolCenter isDayOrNight:self.preText.text]) {
@@ -681,7 +687,7 @@
 
 
 -(void)mainThread{
-
+    
     AttendWorkShift *attendWorkShift = self.homeViewModel.attendWorkShift;
     NSString *count =  attendWorkShift.daySignCount;
     
@@ -890,18 +896,18 @@
     
     //判读两点间的距离
     //第一个坐标
-        CLLocation *current = [[CLLocation alloc] initWithLatitude:22.516568 longitude:113.406002];
-        //第二个坐标
-        CLLocation *before = [[CLLocation alloc] initWithLatitude:self.locLatitude.doubleValue longitude:self.locLongitude.doubleValue];
-        // 计算距离
-        CLLocationDistance meters=[current distanceFromLocation:before];
-        ShowMessage([NSString stringWithFormat:@"距离公司%.2f米",meters]);
-//        NSLog(@"%f",meters);
+    CLLocation *current = [[CLLocation alloc] initWithLatitude:22.516568 longitude:113.406002];
+    //第二个坐标
+    CLLocation *before = [[CLLocation alloc] initWithLatitude:self.locLatitude.doubleValue longitude:self.locLongitude.doubleValue];
+    // 计算距离
+    CLLocationDistance meters=[current distanceFromLocation:before];
+    ShowMessage([NSString stringWithFormat:@"距离公司%.2f米",meters]);
+    //        NSLog(@"%f",meters);
     
-//        if (meters>200) {
-//            ShowMessage(@"还没到打卡的范围");
-//            return;
-//        }
+    //        if (meters>200) {
+    //            ShowMessage(@"还没到打卡的范围");
+    //            return;
+    //        }
     
     if ([self.clockMode isEqualToString:@"1"]) {
         ShowErrorStatus(@"请检查网络");
@@ -910,12 +916,12 @@
     }
     
     /*************************************************/
-//    AttendWorkShift *attendWorkShift = self.homeViewModel.attendWorkShift;
-//    NSString *count =  attendWorkShift.daySignCount;
+    //    AttendWorkShift *attendWorkShift = self.homeViewModel.attendWorkShift;
+    //    NSString *count =  attendWorkShift.daySignCount;
     
     NSString *curDate = [LSCoreToolCenter currentYearType]; // 当前日期
     NSString *curDatetime = [LSCoreToolCenter curDate]; // 获取当前时间
-
+    
     if (self.homeViewModel.arr.count==0) {
         return;
     }
@@ -1144,7 +1150,7 @@
     if(self.retCode==-1){
         //        RingUtil.playLocalSound(R.raw.oper_error);
         if(SIMULATOR==0){
-//            [YYAudioTool playMusic:@"oper_error.mp3"];
+            //            [YYAudioTool playMusic:@"oper_error.mp3"];
         }
         ShowMessage(@"还不到打卡时间!");
         return;
@@ -1163,7 +1169,7 @@
     if(self.retCode==3){
         //        RingUtil.playLocalSound(R.raw.oper_error);
         if(SIMULATOR==0){
-//            [YYAudioTool playMusic:@"oper_error.mp3"];
+            //            [YYAudioTool playMusic:@"oper_error.mp3"];
         }
         ShowMessage(@"超过打卡时间了!");
         return;

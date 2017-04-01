@@ -61,3 +61,6 @@
 
 #define offSetCardArea 30*60
 
+
+#define defaultImg @"homepage_head_portrait_base"
+

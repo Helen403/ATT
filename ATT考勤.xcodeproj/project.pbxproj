@@ -28,6 +28,7 @@
 		790D8AEE1E2F4F4D00DDA697 /* CopyToMeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D8AED1E2F4F4D00DDA697 /* CopyToMeModel.m */; };
 		790D8AF11E2F4F9D00DDA697 /* CopyCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D8AF01E2F4F9D00DDA697 /* CopyCellView.m */; };
 		790D8AFB1E2F55EB00DDA697 /* MyMsgController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D8AFA1E2F55EB00DDA697 /* MyMsgController.m */; };
+		791597F71E8F1FC7008A95F5 /* LocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 791597F61E8F1FC7008A95F5 /* LocalNotificationManager.m */; };
 		7916F7C71E2C587B00518DBB /* HWPopTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7916F7C61E2C587B00518DBB /* HWPopTool.m */; };
 		7916F7CA1E2CCC6700518DBB /* LeaveCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7916F7C91E2CCC6700518DBB /* LeaveCellView.m */; };
 		791711721E236836003D15C1 /* TeamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 791711711E236836003D15C1 /* TeamController.m */; };
@@ -236,6 +237,11 @@
 		794620EB1E767E9E00873199 /* FeedbackCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620EA1E767E9E00873199 /* FeedbackCellView.m */; };
 		794620EF1E767F4300873199 /* FeedbackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620EE1E767F4300873199 /* FeedbackModel.m */; };
 		794620F21E76A2EC00873199 /* TimeSoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620F11E76A2EC00873199 /* TimeSoundView.m */; };
+		79476A771E8F3D2100436BF1 /* MySchedulieController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79476A761E8F3D2100436BF1 /* MySchedulieController.m */; };
+		79476A7A1E8F3D6600436BF1 /* MySchedulieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79476A791E8F3D6600436BF1 /* MySchedulieView.m */; };
+		79476A7D1E8F3D8100436BF1 /* MySchedulieViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79476A7C1E8F3D8100436BF1 /* MySchedulieViewModel.m */; };
+		79476A801E8F3DE800436BF1 /* MySchedulieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79476A7F1E8F3DE800436BF1 /* MySchedulieModel.m */; };
+		79476A831E8F3DFC00436BF1 /* MySchedulieCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79476A821E8F3DFC00436BF1 /* MySchedulieCellView.m */; };
 		7947BC8A1E7BB89B00EE8EA6 /* LateTreatmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BC891E7BB89B00EE8EA6 /* LateTreatmentController.m */; };
 		7947BC8D1E7BB8C900EE8EA6 /* LateTreatmentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BC8C1E7BB8C900EE8EA6 /* LateTreatmentViewModel.m */; };
 		7947BC901E7BB8E100EE8EA6 /* LateTreatmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947BC8F1E7BB8E100EE8EA6 /* LateTreatmentView.m */; };
@@ -557,6 +563,12 @@
 		79BD12731E69144D00AC40CF /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD12711E69144D00AC40CF /* UIView+Extension.m */; };
 		79BD12771E69145600AC40CF /* XHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD12751E69145600AC40CF /* XHDatePickerView.m */; };
 		79BD12781E69145600AC40CF /* XHDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD12761E69145600AC40CF /* XHDatePickerView.xib */; };
+		79D70C121E8F310F00BF5AC5 /* LocalPushCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D70C111E8F310F00BF5AC5 /* LocalPushCenter.m */; };
+		79D70C151E8F32ED00BF5AC5 /* TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D70C141E8F32ED00BF5AC5 /* TriangleView.m */; };
+		79D70C1F1E8F35B700BF5AC5 /* BindingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D70C1E1E8F35B700BF5AC5 /* BindingController.m */; };
+		79D70C221E8F360100BF5AC5 /* BindingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D70C211E8F360100BF5AC5 /* BindingViewModel.m */; };
+		79D70C251E8F362300BF5AC5 /* BindingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D70C241E8F362300BF5AC5 /* BindingView.m */; };
+		79D70C281E8F363D00BF5AC5 /* BindingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D70C271E8F363D00BF5AC5 /* BindingModel.m */; };
 		79DD27581E319D9F00923D19 /* MultiRolesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD27571E319D9F00923D19 /* MultiRolesController.m */; };
 		79DD275B1E319E2100923D19 /* MultiRolesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD275A1E319E2100923D19 /* MultiRolesView.m */; };
 		79DD27611E31A13800923D19 /* MultiRolesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD27601E31A13800923D19 /* MultiRolesModel.m */; };
@@ -748,6 +760,7 @@
 		79FC77DC1E56E7C50018C222 /* ScanCodeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FC77DB1E56E7C40018C222 /* ScanCodeViewModel.m */; };
 		79FCCC641E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FCCC631E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m */; };
 		79FD0DEB1E8BB13400F48F32 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FD0DEA1E8BB13400F48F32 /* libmp3lame.a */; };
+		79FD56B71E8FFFA8000A4264 /* AttendHolidays.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FD56B61E8FFFA8000A4264 /* AttendHolidays.m */; };
 		79FFB2591E24BA7E00EC082F /* AddressListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB2581E24BA7E00EC082F /* AddressListCellView.m */; };
 		79FFB25C1E24BB0400EC082F /* AddressListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FFB25B1E24BB0400EC082F /* AddressListModel.m */; };
 		79FFB25E1E24BC3D00EC082F /* AddressList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79FFB25D1E24BC3D00EC082F /* AddressList.plist */; };
@@ -819,6 +832,8 @@
 		790D8AF01E2F4F9D00DDA697 /* CopyCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopyCellView.m; sourceTree = "<group>"; };
 		790D8AF91E2F55EB00DDA697 /* MyMsgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMsgController.h; sourceTree = "<group>"; };
 		790D8AFA1E2F55EB00DDA697 /* MyMsgController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMsgController.m; sourceTree = "<group>"; };
+		791597F51E8F1FC7008A95F5 /* LocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalNotificationManager.h; path = "ATT考勤/app/LocalNotificationManager.h"; sourceTree = "<group>"; };
+		791597F61E8F1FC7008A95F5 /* LocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalNotificationManager.m; path = "ATT考勤/app/LocalNotificationManager.m"; sourceTree = "<group>"; };
 		7916F7C51E2C587B00518DBB /* HWPopTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPopTool.h; sourceTree = "<group>"; };
 		7916F7C61E2C587B00518DBB /* HWPopTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPopTool.m; sourceTree = "<group>"; };
 		7916F7C81E2CCC6700518DBB /* LeaveCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaveCellView.h; sourceTree = "<group>"; };
@@ -1192,6 +1207,16 @@
 		794620EE1E767F4300873199 /* FeedbackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackModel.m; sourceTree = "<group>"; };
 		794620F01E76A2EC00873199 /* TimeSoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSoundView.h; sourceTree = "<group>"; };
 		794620F11E76A2EC00873199 /* TimeSoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSoundView.m; sourceTree = "<group>"; };
+		79476A751E8F3D2100436BF1 /* MySchedulieController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySchedulieController.h; sourceTree = "<group>"; };
+		79476A761E8F3D2100436BF1 /* MySchedulieController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySchedulieController.m; sourceTree = "<group>"; };
+		79476A781E8F3D6600436BF1 /* MySchedulieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySchedulieView.h; sourceTree = "<group>"; };
+		79476A791E8F3D6600436BF1 /* MySchedulieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySchedulieView.m; sourceTree = "<group>"; };
+		79476A7B1E8F3D8100436BF1 /* MySchedulieViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySchedulieViewModel.h; sourceTree = "<group>"; };
+		79476A7C1E8F3D8100436BF1 /* MySchedulieViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySchedulieViewModel.m; sourceTree = "<group>"; };
+		79476A7E1E8F3DE800436BF1 /* MySchedulieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySchedulieModel.h; sourceTree = "<group>"; };
+		79476A7F1E8F3DE800436BF1 /* MySchedulieModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySchedulieModel.m; sourceTree = "<group>"; };
+		79476A811E8F3DFC00436BF1 /* MySchedulieCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySchedulieCellView.h; sourceTree = "<group>"; };
+		79476A821E8F3DFC00436BF1 /* MySchedulieCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySchedulieCellView.m; sourceTree = "<group>"; };
 		7947BC881E7BB89B00EE8EA6 /* LateTreatmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LateTreatmentController.h; sourceTree = "<group>"; };
 		7947BC891E7BB89B00EE8EA6 /* LateTreatmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LateTreatmentController.m; sourceTree = "<group>"; };
 		7947BC8B1E7BB8C900EE8EA6 /* LateTreatmentViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LateTreatmentViewModel.h; sourceTree = "<group>"; };
@@ -1689,6 +1714,18 @@
 		79BD12741E69145600AC40CF /* XHDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDatePickerView.h; sourceTree = "<group>"; };
 		79BD12751E69145600AC40CF /* XHDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDatePickerView.m; sourceTree = "<group>"; };
 		79BD12761E69145600AC40CF /* XHDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHDatePickerView.xib; sourceTree = "<group>"; };
+		79D70C101E8F310F00BF5AC5 /* LocalPushCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPushCenter.h; sourceTree = "<group>"; };
+		79D70C111E8F310F00BF5AC5 /* LocalPushCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPushCenter.m; sourceTree = "<group>"; };
+		79D70C131E8F32ED00BF5AC5 /* TriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleView.h; sourceTree = "<group>"; };
+		79D70C141E8F32ED00BF5AC5 /* TriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleView.m; sourceTree = "<group>"; };
+		79D70C1D1E8F35B700BF5AC5 /* BindingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingController.h; sourceTree = "<group>"; };
+		79D70C1E1E8F35B700BF5AC5 /* BindingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingController.m; sourceTree = "<group>"; };
+		79D70C201E8F360100BF5AC5 /* BindingViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingViewModel.h; sourceTree = "<group>"; };
+		79D70C211E8F360100BF5AC5 /* BindingViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingViewModel.m; sourceTree = "<group>"; };
+		79D70C231E8F362300BF5AC5 /* BindingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingView.h; sourceTree = "<group>"; };
+		79D70C241E8F362300BF5AC5 /* BindingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingView.m; sourceTree = "<group>"; };
+		79D70C261E8F363D00BF5AC5 /* BindingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingModel.h; sourceTree = "<group>"; };
+		79D70C271E8F363D00BF5AC5 /* BindingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingModel.m; sourceTree = "<group>"; };
 		79DD27561E319D9F00923D19 /* MultiRolesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRolesController.h; sourceTree = "<group>"; };
 		79DD27571E319D9F00923D19 /* MultiRolesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiRolesController.m; sourceTree = "<group>"; };
 		79DD27591E319E2100923D19 /* MultiRolesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRolesView.h; sourceTree = "<group>"; };
@@ -2069,6 +2106,8 @@
 		79FCCC631E640BF1005329C6 /* WGS84ConvertToGCJ02ForAMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84ConvertToGCJ02ForAMapView.m; sourceTree = "<group>"; };
 		79FD0DE91E8BB13400F48F32 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		79FD0DEA1E8BB13400F48F32 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
+		79FD56B51E8FFFA8000A4264 /* AttendHolidays.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendHolidays.h; sourceTree = "<group>"; };
+		79FD56B61E8FFFA8000A4264 /* AttendHolidays.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendHolidays.m; sourceTree = "<group>"; };
 		79FFB2571E24BA7E00EC082F /* AddressListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListCellView.h; sourceTree = "<group>"; };
 		79FFB2581E24BA7E00EC082F /* AddressListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressListCellView.m; sourceTree = "<group>"; };
 		79FFB25A1E24BB0400EC082F /* AddressListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressListModel.h; sourceTree = "<group>"; };
@@ -3013,7 +3052,6 @@
 				793FC9971E56A57B0032F689 /* ScanCode(扫码加入公司) */,
 				794927631E10F124007331CA /* CompanyCode(公司码) */,
 				7904A6E61E09163800D6E8D4 /* Home(首页) */,
-				7949277F1E1108FE007331CA /* Apply(申请) */,
 				79F46F241E68174900F2923F /* ChoiceStaff(选择员工) */,
 				7947F1341E67BAC200E68C83 /* ChoiceStaffTeam(选择员工部门) */,
 				79F964AE1E2CB26E00838CC4 /* Cost(费用申请) */,
@@ -3036,12 +3074,15 @@
 				7947BC981E7BDBCF00EE8EA6 /* AlreadyTreatment(已处理) */,
 				79E079B81E7F6682000BB48C /* ApprovalTreatment(我审批的) */,
 				7947BC821E7B925900EE8EA6 /* LateTreatment(待处理) */,
+				7949277F1E1108FE007331CA /* Apply(申请) */,
 				793765261E14935600F7B34F /* Approve(已处理) */,
+				79476A6E1E8F3BC400436BF1 /* MySchedulie(我的排班) */,
 				793710281E1C82E8002F3E2E /* Mine(我的信息) */,
 				793BCB131E66540200B743E9 /* ChangeSignName(修改签名) */,
 				79236AFB1E65588700A005C0 /* ChangeName(修改名字) */,
 				79ED5E7C1E1CE48100BBC3D9 /* Set(设置) */,
 				796A972B1E28782800E1B7E0 /* Security(账户与安全) */,
+				79D70C161E8F34F400BF5AC5 /* Binding(绑定设备) */,
 				793849621E5BC5BD00EA2502 /* ChangePassword(修改密码) */,
 				79F7D8511E5AC8BB004DF0DB /* ChangeTelPhone(更换手机号) */,
 				79375CFA1E1DD7D100E27934 /* Version(版本检测) */,
@@ -4343,6 +4384,10 @@
 				793D3AF81E712C0F00266D9C /* MyCalendarView.m */,
 				793D3AFB1E712DAE00266D9C /* MyWeekView.h */,
 				793D3AFC1E712DAE00266D9C /* MyWeekView.m */,
+				79D70C131E8F32ED00BF5AC5 /* TriangleView.h */,
+				79D70C141E8F32ED00BF5AC5 /* TriangleView.m */,
+				79FD56B51E8FFFA8000A4264 /* AttendHolidays.h */,
+				79FD56B61E8FFFA8000A4264 /* AttendHolidays.m */,
 			);
 			name = "MyCalendar(我的日历)";
 			path = "ATT考勤/app";
@@ -4508,6 +4553,71 @@
 				794620EE1E767F4300873199 /* FeedbackModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		79476A6E1E8F3BC400436BF1 /* MySchedulie(我的排班) */ = {
+			isa = PBXGroup;
+			children = (
+				79476A741E8F3C0000436BF1 /* Other */,
+				79476A731E8F3BFA00436BF1 /* Cell */,
+				79476A721E8F3BF300436BF1 /* Model */,
+				79476A711E8F3BEF00436BF1 /* View */,
+				79476A701E8F3BE500436BF1 /* ViewController */,
+				79476A6F1E8F3BDD00436BF1 /* ViewModel */,
+			);
+			name = "MySchedulie(我的排班)";
+			sourceTree = "<group>";
+		};
+		79476A6F1E8F3BDD00436BF1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79476A7B1E8F3D8100436BF1 /* MySchedulieViewModel.h */,
+				79476A7C1E8F3D8100436BF1 /* MySchedulieViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		79476A701E8F3BE500436BF1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79476A751E8F3D2100436BF1 /* MySchedulieController.h */,
+				79476A761E8F3D2100436BF1 /* MySchedulieController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		79476A711E8F3BEF00436BF1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79476A781E8F3D6600436BF1 /* MySchedulieView.h */,
+				79476A791E8F3D6600436BF1 /* MySchedulieView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		79476A721E8F3BF300436BF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79476A7E1E8F3DE800436BF1 /* MySchedulieModel.h */,
+				79476A7F1E8F3DE800436BF1 /* MySchedulieModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		79476A731E8F3BFA00436BF1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				79476A811E8F3DFC00436BF1 /* MySchedulieCellView.h */,
+				79476A821E8F3DFC00436BF1 /* MySchedulieCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		79476A741E8F3C0000436BF1 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		7947BC821E7B925900EE8EA6 /* LateTreatment(待处理) */ = {
@@ -6440,6 +6550,80 @@
 				799A292A1E850A72006041CD /* MyDatePickerView.m */,
 			);
 			name = XHDatePicker;
+			sourceTree = "<group>";
+		};
+		79D70C0F1E8F30FE00BF5AC5 /* LocalPushCenter */ = {
+			isa = PBXGroup;
+			children = (
+				791597F51E8F1FC7008A95F5 /* LocalNotificationManager.h */,
+				791597F61E8F1FC7008A95F5 /* LocalNotificationManager.m */,
+				79D70C101E8F310F00BF5AC5 /* LocalPushCenter.h */,
+				79D70C111E8F310F00BF5AC5 /* LocalPushCenter.m */,
+			);
+			name = LocalPushCenter;
+			sourceTree = "<group>";
+		};
+		79D70C161E8F34F400BF5AC5 /* Binding(绑定设备) */ = {
+			isa = PBXGroup;
+			children = (
+				79D70C1C1E8F358700BF5AC5 /* Other */,
+				79D70C1B1E8F357C00BF5AC5 /* Cell */,
+				79D70C1A1E8F357600BF5AC5 /* Model */,
+				79D70C191E8F357100BF5AC5 /* View */,
+				79D70C181E8F356700BF5AC5 /* ViewController */,
+				79D70C171E8F355C00BF5AC5 /* ViewModel */,
+			);
+			name = "Binding(绑定设备)";
+			sourceTree = "<group>";
+		};
+		79D70C171E8F355C00BF5AC5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				79D70C201E8F360100BF5AC5 /* BindingViewModel.h */,
+				79D70C211E8F360100BF5AC5 /* BindingViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		79D70C181E8F356700BF5AC5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				79D70C1D1E8F35B700BF5AC5 /* BindingController.h */,
+				79D70C1E1E8F35B700BF5AC5 /* BindingController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		79D70C191E8F357100BF5AC5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79D70C231E8F362300BF5AC5 /* BindingView.h */,
+				79D70C241E8F362300BF5AC5 /* BindingView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		79D70C1A1E8F357600BF5AC5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79D70C261E8F363D00BF5AC5 /* BindingModel.h */,
+				79D70C271E8F363D00BF5AC5 /* BindingModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		79D70C1B1E8F357C00BF5AC5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		79D70C1C1E8F358700BF5AC5 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		79DD274F1E3199C600923D19 /* MultiRoles(多角色) */ = {
@@ -8765,6 +8949,7 @@
 		83B8787B68883EECD9829725 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79D70C0F1E8F30FE00BF5AC5 /* LocalPushCenter */,
 				79907F861E8E516C00DDE4B2 /* BBVoiceRecord */,
 				79FD0DE81E8BB12300F48F32 /* Lame */,
 				793D3AFA1E712C2200266D9C /* MyCalendar(我的日历) */,
@@ -8865,7 +9050,7 @@
 				TargetAttributes = {
 					7928BD681E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = PLK9A7N26F;
+						DevelopmentTeam = TMLDK3R5QN;
 					};
 					7928BD811E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
@@ -9238,6 +9423,7 @@
 				79FA39411E13439000B8D3A7 /* MyExamineTableCellView.m in Sources */,
 				7943B3E61E6D095C004BF1B8 /* GoOutModel.m in Sources */,
 				795AC4621E2C50D700C69308 /* NSNotificationCenter+YXAdd.m in Sources */,
+				79476A7A1E8F3D6600436BF1 /* MySchedulieView.m in Sources */,
 				79236B071E6558FD00A005C0 /* ChangeNameView.m in Sources */,
 				794620EB1E767E9E00873199 /* FeedbackCellView.m in Sources */,
 				79F46F231E68041100F2923F /* ApplyManViewModel.m in Sources */,
@@ -9293,6 +9479,7 @@
 				794214BD1E88E80E000A3AE8 /* NoticeListViewModel.m in Sources */,
 				7949276D1E10F19F007331CA /* CompanyCodeView.m in Sources */,
 				793D3AFD1E712DAE00266D9C /* MyWeekView.m in Sources */,
+				79476A801E8F3DE800436BF1 /* MySchedulieModel.m in Sources */,
 				791A51FB1E55A1D800F7C026 /* XMLDictionary.m in Sources */,
 				79FBD3431E8BF31B004CEC0E /* MyTrajectoryModel.m in Sources */,
 				79F4F07E1E1F85E200115C3B /* MessageView.m in Sources */,
@@ -9318,6 +9505,7 @@
 				79FFB26A1E24DF3E00EC082F /* EmployeeViewModel.m in Sources */,
 				79EF94521E262F7100F8E9BC /* HARootScrollViewCell.m in Sources */,
 				7943B3E31E6D0946004BF1B8 /* GoOutCellView.m in Sources */,
+				79D70C281E8F363D00BF5AC5 /* BindingModel.m in Sources */,
 				794927781E10FB6E007331CA /* ForgetPwdController.m in Sources */,
 				7948EE9F1E825F6A009ACE51 /* WeekDetalisModel.m in Sources */,
 				79F8561C1E02C689002D82F4 /* HCollectionViewCell.m in Sources */,
@@ -9402,6 +9590,7 @@
 				79FA3F401E8A12EA001F5B1A /* IconView.m in Sources */,
 				79F43DA71E0D597100C4C932 /* CreateView.m in Sources */,
 				79F964221E2CA2BC00838CC4 /* OvertimeView.m in Sources */,
+				79D70C1F1E8F35B700BF5AC5 /* BindingController.m in Sources */,
 				791EE6EC1E1F9259000BA8B8 /* NewsController.m in Sources */,
 				791711721E236836003D15C1 /* TeamController.m in Sources */,
 				79EF94191E2612E700F8E9BC /* PersonalController.m in Sources */,
@@ -9411,6 +9600,7 @@
 				795AC4691E2C50D700C69308 /* UILabel+YXAdd.m in Sources */,
 				7980E6691E83B198000FACB4 /* TeamOutWorkController.m in Sources */,
 				794E04781E23207900CFE3A3 /* StatisticsViewModel.m in Sources */,
+				79D70C221E8F360100BF5AC5 /* BindingViewModel.m in Sources */,
 				7948EE571E82523D009ACE51 /* TeamReportView.m in Sources */,
 				7947BCA11E7BDF9300EE8EA6 /* AlreadyTreatmentController.m in Sources */,
 				79282EA21E0B65C600F4E050 /* LoginView.m in Sources */,
@@ -9441,6 +9631,7 @@
 				79375D5F1E1E3D7300E27934 /* CustomView.m in Sources */,
 				798506701E028C1400028C22 /* HView.m in Sources */,
 				79F9DA8B1E5C3A1800625F19 /* AttendWorkShift.m in Sources */,
+				79D70C151E8F32ED00BF5AC5 /* TriangleView.m in Sources */,
 				7947F14A1E67CD4300E68C83 /* ApplyManCellView.m in Sources */,
 				793BCB221E6654C500B743E9 /* ChangeSignNameViewModel.m in Sources */,
 				79F964A61E2CB11900838CC4 /* LeaveEarlyController.m in Sources */,
@@ -9473,6 +9664,7 @@
 				79F964121E2C9D9300838CC4 /* LeaveModel.m in Sources */,
 				79367B0D1E12539400696A38 /* LateController.m in Sources */,
 				79F9649C1E2CAEC900838CC4 /* DrainPunchViewModel.m in Sources */,
+				79476A771E8F3D2100436BF1 /* MySchedulieController.m in Sources */,
 				79FFB2671E24DF1800EC082F /* EmployeeController.m in Sources */,
 				7964B38E1E2F1A05001AC5E5 /* ApproveViewModel.m in Sources */,
 				79F9641C1E2CA28300838CC4 /* OvertimeController.m in Sources */,
@@ -9556,6 +9748,7 @@
 				795A97231E8358A700F9A4B8 /* MonthDetailsHeadView.m in Sources */,
 				79E079E11E7FD100000BB48C /* AlreadyDetailsModel.m in Sources */,
 				7937CC091E24893800A4F82F /* AddressListView.m in Sources */,
+				79D70C121E8F310F00BF5AC5 /* LocalPushCenter.m in Sources */,
 				79E079C71E7F6EAA000BB48C /* ApprovalTreatmentView.m in Sources */,
 				79ED5E881E1CE56400BBC3D9 /* SetView.m in Sources */,
 				793604C21E5D43C80006646E /* ZJQRScannerView.m in Sources */,
@@ -9603,9 +9796,11 @@
 				7917117E1E236F11003D15C1 /* TeamModel.m in Sources */,
 				795AC4601E2C50D700C69308 /* NSData+YXAdd.m in Sources */,
 				79F9DA8E1E5C3D5100625F19 /* AttendWorkShiftDetail.m in Sources */,
+				791597F71E8F1FC7008A95F5 /* LocalNotificationManager.m in Sources */,
 				795AC4751E2C51B400C69308 /* LocManager.m in Sources */,
 				7943B3E91E6D0D6B004BF1B8 /* ShiftCellView.m in Sources */,
 				79375D381E1DFCB700E27934 /* FunctionModel.m in Sources */,
+				79FD56B71E8FFFA8000A4264 /* AttendHolidays.m in Sources */,
 				79F4F0841E1F891C00115C3B /* MessageCellView.m in Sources */,
 				79F964091E2C9BF700838CC4 /* LeaveController.m in Sources */,
 				79F46F331E68188F00F2923F /* ChoiceStaffView.m in Sources */,
@@ -9627,6 +9822,7 @@
 				794927861E110978007331CA /* ApplyController.m in Sources */,
 				7980E6C71E83D2EA000FACB4 /* TeamRedBlackController.m in Sources */,
 				7948EE861E825E39009ACE51 /* MonthViewModel.m in Sources */,
+				79476A831E8F3DFC00436BF1 /* MySchedulieCellView.m in Sources */,
 				79F964B71E2CB2B000838CC4 /* CostController.m in Sources */,
 				79375D341E1DFC5500E27934 /* FunctionCellView.m in Sources */,
 				793765321E14946400F7B34F /* DealWithViewModel.m in Sources */,
@@ -9656,7 +9852,9 @@
 				796803311E111F4F00CED421 /* MyApplyView.m in Sources */,
 				794927621E10A694007331CA /* BuildRoleViewModel.m in Sources */,
 				79F7D8501E5AC297004DF0DB /* CompanyCodeCellView.m in Sources */,
+				79476A7D1E8F3D8100436BF1 /* MySchedulieViewModel.m in Sources */,
 				7948EE831E825E1F009ACE51 /* MonthView.m in Sources */,
+				79D70C251E8F362300BF5AC5 /* BindingView.m in Sources */,
 				7947BC971E7BBD8000EE8EA6 /* LateTreatmentModel.m in Sources */,
 				790D8AFB1E2F55EB00DDA697 /* MyMsgController.m in Sources */,
 				795A97491E837AE700F9A4B8 /* TeamDailyDetailsViewModel.m in Sources */,
@@ -9849,7 +10047,7 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = PLK9A7N26F;
+				DEVELOPMENT_TEAM = TMLDK3R5QN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9863,7 +10061,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9883,7 +10081,7 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = PLK9A7N26F;
+				DEVELOPMENT_TEAM = TMLDK3R5QN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9897,7 +10095,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "ATT考勤/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

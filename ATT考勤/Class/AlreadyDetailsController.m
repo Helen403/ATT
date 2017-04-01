@@ -59,7 +59,7 @@
     self.alreadyDetailsViewModel.lateArr = arr;
     
     self.alreadyDetailsViewModel.indexTmp = self.indexTmp;
-    
+   
     [self.alreadyDetailsView refreash:self.indexTmp];
     
 }

@@ -277,7 +277,7 @@
             if ([@"漏打卡" isEqualToString:apType]) {
                 // =================================================
                 
-                self.startTime.text=[NSString stringWithFormat:@"漏打时间:%@",self.approvalTreatmentViewModel.approvalTreament.startDate];
+                self.startTime.text=[NSString stringWithFormat:@"申请时间:%@",self.approvalTreatmentViewModel.approvalTreament.startDate];
                 self.endTime.text = [NSString stringWithFormat:@"补打时间:%@",self.approvalTreatmentViewModel.approvalTreament.endDate];
                 self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.approvalTreatmentViewModel.approvalTreament.type1Name];
                 self.compensate.text = @"";
@@ -464,11 +464,8 @@
         [_disagree addTarget:self action:@selector(disagree:) forControlEvents:UIControlEventTouchUpInside];
         
         [_disagree.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_disagree.layer setCornerRadius:10];
-        
         [_disagree.layer setBorderWidth:2];//设置边界的宽度
-        
         [_disagree setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
 

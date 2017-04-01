@@ -35,7 +35,7 @@
     }];
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.mas_bottom).offset(-[self h_w:1]);
+        make.bottom.equalTo(weakSelf.mas_bottom).offset(0);
         make.left.equalTo(0);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];

@@ -90,7 +90,7 @@
 -(UILabel *)week1{
     if (!_week1) {
         _week1 = [[UILabel alloc] init];
-        _week1.text = @"周日";
+        _week1.text = @"日";
         _week1.font = H14;
         _week1.textColor = MAIN_ORANGER;
         _week1.textAlignment = NSTextAlignmentCenter;
@@ -100,7 +100,7 @@
 -(UILabel *)week2{
     if (!_week2) {
         _week2 = [[UILabel alloc] init];
-        _week2.text = @"周一";
+        _week2.text = @"一";
         _week2.font = H14;
         _week2.textColor = MAIN_PAN_2;
         _week2.textAlignment = NSTextAlignmentCenter;
@@ -110,7 +110,7 @@
 -(UILabel *)week3{
     if (!_week3) {
         _week3 = [[UILabel alloc] init];
-        _week3.text = @"周二";
+        _week3.text = @"二";
         _week3.font = H14;
         _week3.textColor = MAIN_PAN_2;
         _week3.textAlignment = NSTextAlignmentCenter;
@@ -121,7 +121,7 @@
 -(UILabel *)week4{
     if (!_week4) {
         _week4 = [[UILabel alloc] init];
-        _week4.text = @"周三";
+        _week4.text = @"三";
         _week4.font = H14;
         _week4.textColor = MAIN_PAN_2;
         _week4.textAlignment = NSTextAlignmentCenter;
@@ -132,7 +132,7 @@
 -(UILabel *)week5{
     if (!_week5) {
         _week5 = [[UILabel alloc] init];
-        _week5.text = @"周四";
+        _week5.text = @"四";
         _week5.font = H14;
         _week5.textColor = MAIN_PAN_2;
         _week5.textAlignment = NSTextAlignmentCenter;
@@ -143,7 +143,7 @@
 -(UILabel *)week6{
     if (!_week6) {
         _week6 = [[UILabel alloc] init];
-        _week6.text = @"周五";
+        _week6.text = @"五";
         _week6.font = H14;
         _week6.textColor = MAIN_PAN_2;
         _week6.textAlignment = NSTextAlignmentCenter;
@@ -153,7 +153,7 @@
 -(UILabel *)week7{
     if (!_week7) {
         _week7 = [[UILabel alloc] init];
-        _week7.text = @"周六";
+        _week7.text = @"六";
         _week7.font = H14;
         _week7.textColor = MAIN_ORANGER;
         _week7.textAlignment = NSTextAlignmentCenter;
