@@ -149,11 +149,6 @@
 		79375D651E1E3E2800E27934 /* CustomCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79375D641E1E3E2800E27934 /* CustomCellView.m */; };
 		79375D6B1E1E402C00E27934 /* CustomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79375D6A1E1E402C00E27934 /* CustomModel.m */; };
 		79375D6D1E1E409700E27934 /* Custom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79375D6C1E1E409700E27934 /* Custom.plist */; };
-		7937652F1E14944000F7B34F /* DealWithController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7937652E1E14944000F7B34F /* DealWithController.m */; };
-		793765321E14946400F7B34F /* DealWithViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765311E14946400F7B34F /* DealWithViewModel.m */; };
-		793765351E14947600F7B34F /* DealWithView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765341E14947600F7B34F /* DealWithView.m */; };
-		793765381E14978300F7B34F /* DealWithCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765371E14978300F7B34F /* DealWithCellView.m */; };
-		7937653B1E14983A00F7B34F /* DealWithModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7937653A1E14983A00F7B34F /* DealWithModel.m */; };
 		7937653D1E14987F00F7B34F /* DealWith.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7937653C1E14987F00F7B34F /* DealWith.plist */; };
 		793765451E14A45800F7B34F /* XCFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765411E14A45800F7B34F /* XCFNavigationController.m */; };
 		793765461E14A45800F7B34F /* XCFTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793765431E14A45800F7B34F /* XCFTabBarController.m */; };
@@ -481,12 +476,6 @@
 		796310E61E0D2ACC001462AF /* NewpartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 796310E51E0D2ACC001462AF /* NewpartView.m */; };
 		796310E91E0D2B3A001462AF /* NewpartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796310E81E0D2B3A001462AF /* NewpartViewController.m */; };
 		796310EC1E0D2B58001462AF /* NewpartViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 796310EB1E0D2B58001462AF /* NewpartViewModel.m */; };
-		7964B3881E2F1977001AC5E5 /* ProcessedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7964B3871E2F1977001AC5E5 /* ProcessedController.m */; };
-		7964B38B1E2F19B3001AC5E5 /* ApproveController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7964B38A1E2F19B3001AC5E5 /* ApproveController.m */; };
-		7964B38E1E2F1A05001AC5E5 /* ApproveViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7964B38D1E2F1A05001AC5E5 /* ApproveViewModel.m */; };
-		7964B3911E2F1B67001AC5E5 /* ApproveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7964B3901E2F1B67001AC5E5 /* ApproveView.m */; };
-		7964B3941E2F1B8F001AC5E5 /* ApproveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7964B3931E2F1B8F001AC5E5 /* ApproveModel.m */; };
-		7964B3971E2F1E0A001AC5E5 /* ApproveCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7964B3961E2F1E0A001AC5E5 /* ApproveCellView.m */; };
 		796803311E111F4F00CED421 /* MyApplyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 796803301E111F4F00CED421 /* MyApplyView.m */; };
 		796803341E111F7400CED421 /* MyExamineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 796803331E111F7400CED421 /* MyExamineView.m */; };
 		796803371E11202C00CED421 /* MyApplyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 796803361E11202C00CED421 /* MyApplyViewModel.m */; };
@@ -1062,16 +1051,6 @@
 		79375D691E1E402C00E27934 /* CustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomModel.h; sourceTree = "<group>"; };
 		79375D6A1E1E402C00E27934 /* CustomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomModel.m; sourceTree = "<group>"; };
 		79375D6C1E1E409700E27934 /* Custom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Custom.plist; sourceTree = "<group>"; };
-		7937652D1E14944000F7B34F /* DealWithController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealWithController.h; sourceTree = "<group>"; };
-		7937652E1E14944000F7B34F /* DealWithController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealWithController.m; sourceTree = "<group>"; };
-		793765301E14946400F7B34F /* DealWithViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealWithViewModel.h; sourceTree = "<group>"; };
-		793765311E14946400F7B34F /* DealWithViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealWithViewModel.m; sourceTree = "<group>"; };
-		793765331E14947600F7B34F /* DealWithView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealWithView.h; sourceTree = "<group>"; };
-		793765341E14947600F7B34F /* DealWithView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealWithView.m; sourceTree = "<group>"; };
-		793765361E14978300F7B34F /* DealWithCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealWithCellView.h; sourceTree = "<group>"; };
-		793765371E14978300F7B34F /* DealWithCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealWithCellView.m; sourceTree = "<group>"; };
-		793765391E14983A00F7B34F /* DealWithModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealWithModel.h; sourceTree = "<group>"; };
-		7937653A1E14983A00F7B34F /* DealWithModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealWithModel.m; sourceTree = "<group>"; };
 		7937653C1E14987F00F7B34F /* DealWith.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DealWith.plist; sourceTree = "<group>"; };
 		793765401E14A45800F7B34F /* XCFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFNavigationController.h; sourceTree = "<group>"; };
 		793765411E14A45800F7B34F /* XCFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFNavigationController.m; sourceTree = "<group>"; };
@@ -1559,18 +1538,6 @@
 		796310E81E0D2B3A001462AF /* NewpartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewpartViewController.m; sourceTree = "<group>"; };
 		796310EA1E0D2B58001462AF /* NewpartViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewpartViewModel.h; sourceTree = "<group>"; };
 		796310EB1E0D2B58001462AF /* NewpartViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewpartViewModel.m; sourceTree = "<group>"; };
-		7964B3861E2F1977001AC5E5 /* ProcessedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessedController.h; sourceTree = "<group>"; };
-		7964B3871E2F1977001AC5E5 /* ProcessedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessedController.m; sourceTree = "<group>"; };
-		7964B3891E2F19B3001AC5E5 /* ApproveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApproveController.h; sourceTree = "<group>"; };
-		7964B38A1E2F19B3001AC5E5 /* ApproveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApproveController.m; sourceTree = "<group>"; };
-		7964B38C1E2F1A05001AC5E5 /* ApproveViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApproveViewModel.h; sourceTree = "<group>"; };
-		7964B38D1E2F1A05001AC5E5 /* ApproveViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApproveViewModel.m; sourceTree = "<group>"; };
-		7964B38F1E2F1B67001AC5E5 /* ApproveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApproveView.h; sourceTree = "<group>"; };
-		7964B3901E2F1B67001AC5E5 /* ApproveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApproveView.m; sourceTree = "<group>"; };
-		7964B3921E2F1B8F001AC5E5 /* ApproveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApproveModel.h; sourceTree = "<group>"; };
-		7964B3931E2F1B8F001AC5E5 /* ApproveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApproveModel.m; sourceTree = "<group>"; };
-		7964B3951E2F1E0A001AC5E5 /* ApproveCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApproveCellView.h; sourceTree = "<group>"; };
-		7964B3961E2F1E0A001AC5E5 /* ApproveCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApproveCellView.m; sourceTree = "<group>"; };
 		7968032F1E111F4F00CED421 /* MyApplyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyApplyView.h; sourceTree = "<group>"; };
 		796803301E111F4F00CED421 /* MyApplyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyApplyView.m; sourceTree = "<group>"; };
 		796803321E111F7400CED421 /* MyExamineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyExamineView.h; sourceTree = "<group>"; };
@@ -3069,7 +3036,6 @@
 				79E079B81E7F6682000BB48C /* ApprovalTreatment(我审批的) */,
 				7947BC821E7B925900EE8EA6 /* LateTreatment(待处理) */,
 				7949277F1E1108FE007331CA /* Apply(申请) */,
-				793765261E14935600F7B34F /* Approve(已处理) */,
 				79476A6E1E8F3BC400436BF1 /* MySchedulie(我的排班) */,
 				793710281E1C82E8002F3E2E /* Mine(我的信息) */,
 				793BCB131E66540200B743E9 /* ChangeSignName(修改签名) */,
@@ -3903,83 +3869,6 @@
 			sourceTree = "<group>";
 		};
 		79375D591E1E3C7D00E27934 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Other;
-			sourceTree = "<group>";
-		};
-		793765261E14935600F7B34F /* Approve(已处理) */ = {
-			isa = PBXGroup;
-			children = (
-				7937652C1E14941B00F7B34F /* Other */,
-				7937652B1E14941500F7B34F /* Cell */,
-				7937652A1E14940E00F7B34F /* Model */,
-				793765291E14940900F7B34F /* View */,
-				793765281E14940100F7B34F /* ViewController */,
-				793765271E1493F600F7B34F /* ViewModel */,
-			);
-			name = "Approve(已处理)";
-			sourceTree = "<group>";
-		};
-		793765271E1493F600F7B34F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				793765301E14946400F7B34F /* DealWithViewModel.h */,
-				793765311E14946400F7B34F /* DealWithViewModel.m */,
-				7964B38C1E2F1A05001AC5E5 /* ApproveViewModel.h */,
-				7964B38D1E2F1A05001AC5E5 /* ApproveViewModel.m */,
-			);
-			name = ViewModel;
-			sourceTree = "<group>";
-		};
-		793765281E14940100F7B34F /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				7937652D1E14944000F7B34F /* DealWithController.h */,
-				7937652E1E14944000F7B34F /* DealWithController.m */,
-				7964B3861E2F1977001AC5E5 /* ProcessedController.h */,
-				7964B3871E2F1977001AC5E5 /* ProcessedController.m */,
-				7964B3891E2F19B3001AC5E5 /* ApproveController.h */,
-				7964B38A1E2F19B3001AC5E5 /* ApproveController.m */,
-			);
-			name = ViewController;
-			sourceTree = "<group>";
-		};
-		793765291E14940900F7B34F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				793765331E14947600F7B34F /* DealWithView.h */,
-				793765341E14947600F7B34F /* DealWithView.m */,
-				7964B38F1E2F1B67001AC5E5 /* ApproveView.h */,
-				7964B3901E2F1B67001AC5E5 /* ApproveView.m */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		7937652A1E14940E00F7B34F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				793765391E14983A00F7B34F /* DealWithModel.h */,
-				7937653A1E14983A00F7B34F /* DealWithModel.m */,
-				7964B3921E2F1B8F001AC5E5 /* ApproveModel.h */,
-				7964B3931E2F1B8F001AC5E5 /* ApproveModel.m */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		7937652B1E14941500F7B34F /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				793765361E14978300F7B34F /* DealWithCellView.h */,
-				793765371E14978300F7B34F /* DealWithCellView.m */,
-				7964B3951E2F1E0A001AC5E5 /* ApproveCellView.h */,
-				7964B3961E2F1E0A001AC5E5 /* ApproveCellView.m */,
-			);
-			name = Cell;
-			sourceTree = "<group>";
-		};
-		7937652C1E14941B00F7B34F /* Other */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -9475,7 +9364,6 @@
 				79362F681E0CB1E500F9B769 /* ForgetView.m in Sources */,
 				793781F21E31E34900ABA7C9 /* ChatController.m in Sources */,
 				79907F981E8E518B00DDE4B2 /* BBVoiceRecordController.m in Sources */,
-				7937653B1E14983A00F7B34F /* DealWithModel.m in Sources */,
 				7943136B1E53F32B0071530C /* Company.m in Sources */,
 				79F43DAA1E0D598A00C4C932 /* CreateViewModel.m in Sources */,
 				793782181E31E79B00ABA7C9 /* ChatViewModel.m in Sources */,
@@ -9500,9 +9388,7 @@
 				79367B171E1268E200696A38 /* ProveView.m in Sources */,
 				79FA39441E1346BC00B8D3A7 /* MyExamineCellViewModel.m in Sources */,
 				79375D5C1E1E3CF900E27934 /* CustomController.m in Sources */,
-				793765351E14947600F7B34F /* DealWithView.m in Sources */,
 				79F4F0771E1F808300115C3B /* DLTabedSlideView.m in Sources */,
-				793765381E14978300F7B34F /* DealWithCellView.m in Sources */,
 				79375D621E1E3D8C00E27934 /* CustomViewModel.m in Sources */,
 				79F4F0871E1F893900115C3B /* MessageModel.m in Sources */,
 				79FFB2591E24BA7E00EC082F /* AddressListCellView.m in Sources */,
@@ -9513,14 +9399,12 @@
 				79345B9D1E1F255F0007A348 /* MyOpinionView.m in Sources */,
 				794C772C1E3204B800013243 /* EmotionImages.m in Sources */,
 				79380A891E25D3C2004E7250 /* TeamAttendanceHeadView.m in Sources */,
-				7964B3911E2F1B67001AC5E5 /* ApproveView.m in Sources */,
 				79FB79961E80B24E00F7588A /* DailyController.m in Sources */,
 				79367AF71E11FD1800696A38 /* MyApplyController.m in Sources */,
 				79F8A4EB1E03C426004F8A8C /* LoginViewController.m in Sources */,
 				7934879C1E270BA100D074D7 /* FDCalendar.m in Sources */,
 				79F46F301E68187B00F2923F /* ChoiceStaffViewModel.m in Sources */,
 				79375D061E1DD8E300E27934 /* VersionView.m in Sources */,
-				7937652F1E14944000F7B34F /* DealWithController.m in Sources */,
 				79FBD32B1E8BF19B004CEC0E /* MyContrastController.m in Sources */,
 				794214C01E88E822000A3AE8 /* NoticeListView.m in Sources */,
 				79DD27711E31B74900923D19 /* MyMsgModel.m in Sources */,
@@ -9573,7 +9457,6 @@
 				7937821B1E31E7D100ABA7C9 /* ChatModel.m in Sources */,
 				793710341E1C83AB002F3E2E /* MineViewModel.m in Sources */,
 				79282EAB1E0B7C7F00F4E050 /* ZJLeadingPageCell.m in Sources */,
-				7964B38B1E2F19B3001AC5E5 /* ApproveController.m in Sources */,
 				793765491E14A78400F7B34F /* UIBarButtonItem+Extension.m in Sources */,
 				79FA3F401E8A12EA001F5B1A /* IconView.m in Sources */,
 				79F43DA71E0D597100C4C932 /* CreateView.m in Sources */,
@@ -9623,7 +9506,6 @@
 				7947F14A1E67CD4300E68C83 /* ApplyManCellView.m in Sources */,
 				793BCB221E6654C500B743E9 /* ChangeSignNameViewModel.m in Sources */,
 				79F964A61E2CB11900838CC4 /* LeaveEarlyController.m in Sources */,
-				7964B3881E2F1977001AC5E5 /* ProcessedController.m in Sources */,
 				79F366D71E6527D5000D531B /* AnnouncementModel.m in Sources */,
 				79F964AC1E2CB14D00838CC4 /* LeaveEarlyView.m in Sources */,
 				795AC4651E2C50D700C69308 /* NSTimer+YXAdd.m in Sources */,
@@ -9654,7 +9536,6 @@
 				79F9649C1E2CAEC900838CC4 /* DrainPunchViewModel.m in Sources */,
 				79476A771E8F3D2100436BF1 /* MySchedulieController.m in Sources */,
 				79FFB2671E24DF1800EC082F /* EmployeeController.m in Sources */,
-				7964B38E1E2F1A05001AC5E5 /* ApproveViewModel.m in Sources */,
 				79F9641C1E2CA28300838CC4 /* OvertimeController.m in Sources */,
 				7948EE961E825F19009ACE51 /* WeekDetailsController.m in Sources */,
 				791EE6F81E1F9392000BA8B8 /* NewsModel.m in Sources */,
@@ -9703,7 +9584,6 @@
 				79F856161E02C3F3002D82F4 /* HTableViewHeaderFooterView.m in Sources */,
 				7948EE731E8254E1009ACE51 /* WeekCellView.m in Sources */,
 				79E07A011E7FDF1F000BB48C /* RefuseDetailsModel.m in Sources */,
-				7964B3941E2F1B8F001AC5E5 /* ApproveModel.m in Sources */,
 				791C76671E515FFF003B1E54 /* BuildRoleModel.m in Sources */,
 				793868261E0A29DF004EC88A /* HomeViewController.m in Sources */,
 				798506761E0294D400028C22 /* HViewModel.m in Sources */,
@@ -9813,7 +9693,6 @@
 				79476A831E8F3DFC00436BF1 /* MySchedulieCellView.m in Sources */,
 				79F964B71E2CB2B000838CC4 /* CostController.m in Sources */,
 				79375D341E1DFC5500E27934 /* FunctionCellView.m in Sources */,
-				793765321E14946400F7B34F /* DealWithViewModel.m in Sources */,
 				79907F9A1E8E518B00DDE4B2 /* BBVoiceRecordToastContentView.m in Sources */,
 				795A973C1E8367E100F9A4B8 /* TeamDailySectionHeadView.m in Sources */,
 				79375D131E1DE73800E27934 /* TimeController.m in Sources */,
@@ -9898,7 +9777,6 @@
 				79FC77DC1E56E7C50018C222 /* ScanCodeViewModel.m in Sources */,
 				79FAFAAC1E348BDC00577917 /* TeamListViewModel.m in Sources */,
 				791EE6EF1E1F9280000BA8B8 /* NewsView.m in Sources */,
-				7964B3971E2F1E0A001AC5E5 /* ApproveCellView.m in Sources */,
 				79F0A13A1E13990A00A1B8AA /* ZJScrollPageView.m in Sources */,
 				79F9648C1E2CAD5500838CC4 /* OffView.m in Sources */,
 				79877F5F1E68F29F00437E77 /* ChoiceStaffTeamCellView.m in Sources */,

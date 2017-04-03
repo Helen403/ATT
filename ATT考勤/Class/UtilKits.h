@@ -32,6 +32,7 @@
 //#import "PINCache.h"
 #import "HWPopTool.h"
 #import "UITableView+FDTemplateLayoutCell.h"
+#import "EGOCache.h"
 
 
 #endif /* UtilKits_h */

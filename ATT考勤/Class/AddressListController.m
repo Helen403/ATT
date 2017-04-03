@@ -40,9 +40,6 @@
 
 @implementation AddressListController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
 
 
 #pragma mark private
@@ -247,7 +244,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[AddressListCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([AddressListCellView class])]];
         [self.view addSubview:_tableView];
-        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT*0.15)];
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT*0.17)];
         
     }
     return _tableView;

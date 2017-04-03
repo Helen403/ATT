@@ -71,13 +71,13 @@
     
     [self h_removeNavgationBarLine];
     // 替换back按钮
-    UIBarButtonItem *backBarButtonItem = [UIBarButtonItem barButtonItemWithImageName:@"ic_schedule_menu_back"
-                                                                     imageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 8)
-                                                                              target:self
-                                                                              action:@selector(back)];
-   
-    
-    [self layoutNavigationBar:[UIImage imageNamed:@"navigationBarBG@2x.png"] titleColor:[UIColor blackColor] titleFont:[UIFont fontWithName:@"MicrosoftYaHei" size:18] leftBarButtonItem:backBarButtonItem rightBarButtonItem:nil];
+//    UIBarButtonItem *backBarButtonItem = [UIBarButtonItem barButtonItemWithImageName:@"ic_schedule_menu_back"
+//                                                                     imageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 8)
+//                                                                              target:self
+//                                                                              action:@selector(back)];
+//   
+//    
+   [self layoutNavigationBar:[UIImage imageNamed:@"navigationBarBG@2x.png"] titleColor:[UIColor blackColor] titleFont:[UIFont fontWithName:@"MicrosoftYaHei" size:18] leftBarButtonItem:nil rightBarButtonItem:nil];
     
     if ([self respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]) {
         [self setAutomaticallyAdjustsScrollViewInsets:NO];
@@ -108,14 +108,14 @@
     //    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
 }
 
--(void)back{
-    [self.navigationController popViewControllerAnimated:YES];
-    [self h_back];
-}
-
--(void)h_back{
-    
-}
+//-(void)back{
+//    [self.navigationController popViewControllerAnimated:YES];
+//    [self h_back];
+//}
+//
+//-(void)h_back{
+//    
+//}
 
 #pragma mark - private
 /**

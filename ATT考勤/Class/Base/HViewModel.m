@@ -62,7 +62,6 @@
     }];
     
     [task resume];
-
 }
 
 -(NSDictionary *)getFilter:(NSString *)result filter:(NSString *)filter{

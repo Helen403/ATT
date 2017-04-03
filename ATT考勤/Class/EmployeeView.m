@@ -38,7 +38,6 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-    
     [self.employeeHeadView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:0]);
         make.right.equalTo(-[self h_w:0]);
@@ -65,13 +64,10 @@
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
-    
-    
 }
 
 -(void)h_loadData{
   [self.employeeViewModel.refreshDataCommand execute:nil];
-
 }
 
 -(void)h_bindViewModel{
@@ -107,8 +103,6 @@
     return _employeeHeadView;
 }
 
-
-
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] init];
@@ -118,12 +112,10 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[EmployeeCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([EmployeeCellView class])]];
         _tableView.scrollEnabled = NO;
-        
     }
     return _tableView;
     
 }
-
 
 #pragma mark - delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

@@ -43,6 +43,8 @@
 
 @property(nonatomic,strong) UILabel *compensate;
 
+@property(nonatomic,strong) UIView *bgView;
+
 @end
 
 
@@ -94,18 +96,25 @@
         make.top.equalTo(weakSelf.witness.mas_bottom).offset([self h_w:10]);
     }];
     
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.top.equalTo(weakSelf.reasonExplain.mas_bottom).offset([self h_w:10]) ;
+         make.size.equalTo(CGSizeMake(SCREEN_WIDTH-[self h_w:20], [self h_w:130]));
+          make.centerX.equalTo(weakSelf);;
+    }];
+    
+    
     [self.reason mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.reasonExplain.mas_bottom).offset([self h_w:10]) ;
-        make.left.equalTo(weakSelf.title);
-        make.right.equalTo(-[self h_w:10]);
+        make.top.equalTo(weakSelf.bgView.mas_top).offset([self h_w:10]) ;
+        make.left.equalTo(weakSelf.bgView.mas_left).offset([self h_w:10]);
+        make.right.equalTo(weakSelf.bgView.mas_right).offset(-[self h_w:10]);
     }];
     
 
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.reason.mas_bottom).offset([self h_w:60]);
+        make.top.equalTo(weakSelf.bgView.mas_bottom).offset([self h_w:10]);
         make.centerX.equalTo(weakSelf);;
         
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-[self h_w:20], [self h_w:280]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-[self h_w:20], [self h_w:220]));
     }];
     
     
@@ -136,6 +145,7 @@
     [self addSubview:self.endTime];
     [self addSubview:self.witness];
     [self addSubview:self.compensate];
+    [self addSubview:self.bgView];
     [self addSubview:self.reasonExplain];
     [self addSubview:self.reason];
 
@@ -177,8 +187,7 @@
                 self.startTime.text=[NSString stringWithFormat:@"开始时间:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.startDate];
                 self.endTime.text = [NSString stringWithFormat:@"结束时间:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.endDate];
                 self.witness.text = [NSString stringWithFormat:@"请假类型:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.type1Name];
-                self.compensate.text = [NSString stringWithFormat:@"时长:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.type2Name];
-                
+                 self.compensate.text = [NSString stringWithFormat:@"时长:%.f小时",self.alreadyDetailsViewModel.alreadyDetailsModel.type2Name.floatValue/60.0f];
                 // =================================================
             }
             if ([@"加班" isEqualToString:apType]) {
@@ -249,7 +258,11 @@
                 
                 self.startTime.text=[NSString stringWithFormat:@"漏打时间:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.startDate];
                 self.endTime.text = [NSString stringWithFormat:@"补打时间:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.endDate];
-                self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.type1Name];
+                if (self.alreadyDetailsViewModel.alreadyDetailsModel.type1Name==nil) {
+                    self.witness.text = @"证明人:";
+                }else{
+                    self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.type1Name];
+                }
                 self.compensate.text = @"";
                 // =================================================
             }
@@ -259,7 +272,11 @@
                 
                 self.startTime.text=[NSString stringWithFormat:@"迟到时间:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.startDate];
                 self.endTime.text = [NSString stringWithFormat:@"正常时间:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.endDate];
-                self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.type1Name];
+                if (self.alreadyDetailsViewModel.alreadyDetailsModel.type1Name==nil) {
+                    self.witness.text = @"证明人:";
+                }else{
+                    self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.type1Name];
+                }
                 self.compensate.text = @"";
                 // =================================================
             }
@@ -269,7 +286,12 @@
                 
                 self.startTime.text=[NSString stringWithFormat:@"早退时间:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.startDate];
                 self.endTime.text = [NSString stringWithFormat:@"正常时间:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.endDate];
-                self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.type1Name];
+                if (self.alreadyDetailsViewModel.alreadyDetailsModel.type1Name==nil) {
+                    self.witness.text = @"证明人:";
+                }else{
+                   self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.alreadyDetailsViewModel.alreadyDetailsModel.type1Name];
+                }
+ 
                 self.compensate.text = @"";
                 // =================================================
             }
@@ -388,6 +410,15 @@
     return _compensate;
 }
 
+-(UIView *)bgView{
+    if (!_bgView) {
+        _bgView = [[UIView alloc] init];
+        _bgView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
+        _bgView.layer.borderWidth =1.0;
+        _bgView.layer.cornerRadius =5.0;
+    }
+    return _bgView;
+}
 
 -(LogisticsView *)view{
     if (!_view) {

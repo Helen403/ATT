@@ -57,11 +57,9 @@
     [[self.teamViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
-            
         });
     }];
 }
-
 
 #pragma mark lazyload
 -(TeamViewModel *)teamViewModel{

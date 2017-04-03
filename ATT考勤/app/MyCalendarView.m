@@ -277,6 +277,7 @@ static NSString *cellID = @"cellID";
         
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
+        _collectionView.scrollEnabled = NO;
         
     }
     return _collectionView;

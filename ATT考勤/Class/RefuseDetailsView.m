@@ -41,6 +41,8 @@
 
 @property(nonatomic,strong) UILabel *compensate;
 
+@property(nonatomic,strong) UIView *bgView;
+
 @end
 
 
@@ -92,18 +94,24 @@
         make.top.equalTo(weakSelf.witness.mas_bottom).offset([self h_w:10]);
     }];
     
-    [self.reason mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.reasonExplain.mas_bottom).offset([self h_w:10]) ;
-        make.left.equalTo(weakSelf.title);
-        make.right.equalTo(-[self h_w:10]);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-[self h_w:20], [self h_w:130]));
+        make.centerX.equalTo(weakSelf);;
+    }];
+    
+    [self.reason mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.bgView.mas_top).offset([self h_w:10]) ;
+        make.left.equalTo(weakSelf.bgView.mas_left).offset([self h_w:10]);
+        make.right.equalTo(weakSelf.bgView.mas_right).offset(-[self h_w:10]);
     }];
     
     
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.reason.mas_bottom).offset([self h_w:60]);
+        make.top.equalTo(weakSelf.bgView.mas_bottom).offset([self h_w:10]);
         make.centerX.equalTo(weakSelf);;
         
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-[self h_w:20], [self h_w:280]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH-[self h_w:20], [self h_w:220]));
     }];
     
     
@@ -133,6 +141,7 @@
     [self addSubview:self.startTime];
     [self addSubview:self.endTime];
     [self addSubview:self.witness];
+    [self addSubview:self.bgView];
     [self addSubview:self.compensate];
     [self addSubview:self.reasonExplain];
     [self addSubview:self.reason];
@@ -174,7 +183,7 @@
                 self.startTime.text=[NSString stringWithFormat:@"开始时间:%@",self.refuseDetailsViewModel.refuseDetailsModel.startDate];
                 self.endTime.text = [NSString stringWithFormat:@"结束时间:%@",self.refuseDetailsViewModel.refuseDetailsModel.endDate];
                 self.witness.text = [NSString stringWithFormat:@"请假类型:%@",self.refuseDetailsViewModel.refuseDetailsModel.type1Name];
-                self.compensate.text = [NSString stringWithFormat:@"时长:%@",self.refuseDetailsViewModel.refuseDetailsModel.type2Name];
+                self.compensate.text = [NSString stringWithFormat:@"时长:%.f小时",self.refuseDetailsViewModel.refuseDetailsModel.type2Name.floatValue/60.0f];
                 
                 // =================================================
             }
@@ -246,7 +255,11 @@
                 
                 self.startTime.text=[NSString stringWithFormat:@"漏打时间:%@",self.refuseDetailsViewModel.refuseDetailsModel.startDate];
                 self.endTime.text = [NSString stringWithFormat:@"补打时间:%@",self.refuseDetailsViewModel.refuseDetailsModel.endDate];
-                self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.refuseDetailsViewModel.refuseDetailsModel.type1Name];
+                if (self.refuseDetailsViewModel.refuseDetailsModel.type1Name==nil) {
+                    self.witness.text = @"证明人:";
+                }else{
+                    self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.refuseDetailsViewModel.refuseDetailsModel.type1Name];
+                }
                 self.compensate.text = @"";
                 // =================================================
             }
@@ -256,7 +269,11 @@
                 
                 self.startTime.text=[NSString stringWithFormat:@"迟到时间:%@",self.refuseDetailsViewModel.refuseDetailsModel.startDate];
                 self.endTime.text = [NSString stringWithFormat:@"正常时间:%@",self.refuseDetailsViewModel.refuseDetailsModel.endDate];
-                self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.refuseDetailsViewModel.refuseDetailsModel.type1Name];
+                if (self.refuseDetailsViewModel.refuseDetailsModel.type1Name==nil) {
+                    self.witness.text = @"证明人:";
+                }else{
+                    self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.refuseDetailsViewModel.refuseDetailsModel.type1Name];
+                }
                 self.compensate.text = @"";
                 // =================================================
             }
@@ -266,7 +283,11 @@
                 
                 self.startTime.text=[NSString stringWithFormat:@"早退时间:%@",self.refuseDetailsViewModel.refuseDetailsModel.startDate];
                 self.endTime.text = [NSString stringWithFormat:@"正常时间:%@",self.refuseDetailsViewModel.refuseDetailsModel.endDate];
-                self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.refuseDetailsViewModel.refuseDetailsModel.type1Name];
+                if (self.refuseDetailsViewModel.refuseDetailsModel.type1Name==nil) {
+                    self.witness.text = @"证明人:";
+                }else{
+                    self.witness.text = [NSString stringWithFormat:@"证明人:%@",self.refuseDetailsViewModel.refuseDetailsModel.type1Name];
+                }
                 self.compensate.text = @"";
                 // =================================================
             }
@@ -397,24 +418,27 @@
 -(UIButton *)preBtn{
     if (!_preBtn) {
         _preBtn =[[UIButton alloc] init];
-        
         [_preBtn setTitle:@"  上一页  " forState:UIControlStateNormal];
         _preBtn.titleLabel.font = H14;
         [_preBtn addTarget:self action:@selector(pre:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_preBtn.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_preBtn.layer setCornerRadius:10];
-        
         [_preBtn.layer setBorderWidth:2];//设置边界的宽度
-        
         [_preBtn setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
-        
         [_preBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _preBtn;
+}
+
+-(UIView *)bgView{
+    if (!_bgView) {
+        _bgView = [[UIView alloc] init];
+        _bgView.layer.borderColor = MAIN_LINE_COLOR.CGColor;
+        _bgView.layer.borderWidth =1.0;
+        _bgView.layer.cornerRadius =5.0;
+    }
+    return _bgView;
 }
 
 
@@ -432,21 +456,14 @@
 -(UIButton *)lastBtn{
     if (!_lastBtn) {
         _lastBtn = [[UIButton alloc] init];
-        
         [_lastBtn setTitle:@"  下一页  " forState:UIControlStateNormal];
         _lastBtn.titleLabel.font = H14;
         [_lastBtn addTarget:self action:@selector(last:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_lastBtn.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_lastBtn.layer setCornerRadius:10];
-        
         [_lastBtn.layer setBorderWidth:2];//设置边界的宽度
-        
         [_lastBtn setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
-        
         [_lastBtn.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _lastBtn;

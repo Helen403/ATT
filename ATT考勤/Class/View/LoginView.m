@@ -9,6 +9,7 @@
 #import "LoginView.h"
 #import "LoginViewModel.h"
 
+
 @interface LoginView()<UITextFieldDelegate,WJTextFieldDelegate>
 
 @property(nonatomic,strong) LoginViewModel *loginViewModel;
@@ -35,7 +36,6 @@
 
 @property(nonatomic,strong) UIView *line3;
 
-@property(nonatomic,strong) UIView *line4;
 
 @property(nonatomic,strong) UILabel *ThirdText;
 
@@ -104,12 +104,7 @@
         make.size.equalTo(CGSizeMake(length-[self h_w:30], [self h_w:25]));
     }];
     
-//    [self.line4 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo(leftPadding);
-//        make.right.equalTo(-leftPadding);
-//        make.top.equalTo(weakSelf.pwdTextField.mas_bottom).offset([self h_w:20]);
-//        make.size.equalTo(CGSizeMake(SCREEN_WIDTH,1));
-//    }];
+
     
     [self.eyes mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf.pwdImg);
@@ -211,7 +206,6 @@
     [self addSubview:self.QQ];
     [self addSubview:self.sina];
     [self addSubview:self.eyes];
-    [self addSubview:self.line4];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -507,13 +501,7 @@
     }
     return _line3;
 }
--(UIView *)line4{
-    if (!_line4) {
-        _line4 = [[UIView alloc] init];
-        _line4.backgroundColor = MAIN_GRAY;
-    }
-    return _line4;
-}
+
 
 -(UILabel *)ThirdText{
     if (!_ThirdText) {

@@ -16,7 +16,7 @@
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-           DismissHud();
+        DismissHud();
         if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
             return;
         }
@@ -32,13 +32,11 @@
         }
         self.arr = arr;
         
-        [self.tableViewSubject sendNext:xmlDoc];
-        
-     
+        [self.tableViewSubject sendNext:nil];
+        if (self.arr>0) {
+            [[EGOCache globalCache] setString:result forKey:@"findAllEmpByCompanyCode"];
+        }
     }];
-    
-
-    
 }
 
 -(NSMutableArray *)arr{
@@ -87,17 +85,28 @@
                                  <companyCode xmlns=\"\">%@</companyCode>\
                                  </findAllEmpByCompanyCode>",self.companyCode];
                 
-                [self SOAPData:findAllEmpByCompanyCode soapBody:body success:^(NSString *result) {
-                    
-                    [subscriber sendNext:result];
-                    [subscriber sendCompleted];
-                } failure:^(NSError *error) {
-                    DismissHud();
-                    ShowErrorStatus(@"请检查网络状态");
-                    [subscriber sendNext:@"netFail"];
-                    [subscriber sendCompleted];
-                }];
+               NSString *findAll =  [[EGOCache globalCache] stringForKey:@"findAllEmpByCompanyCode"];
                 
+                NSString *xmlDoc = [self getFilterStr:findAll filter1:@"<ns2:findAllEmpByCompanyCodeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAllEmpByCompanyCodeResponse>"];
+                
+                NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[AddressListModel class] rowRootName:@"Emps"];
+        
+                if (arrTmp.count>0) {
+                    [subscriber sendNext:findAll];
+                    [subscriber sendCompleted];
+                }else{
+                    [self SOAPData:findAllEmpByCompanyCode soapBody:body success:^(NSString *result) {
+                        
+                        [subscriber sendNext:result];
+                        [subscriber sendCompleted];
+                    } failure:^(NSError *error) {
+                        DismissHud();
+                        ShowErrorStatus(@"请检查网络状态");
+                        [subscriber sendNext:@"netFail"];
+                        [subscriber sendCompleted];
+                    }];
+                }
+
                 return nil;
             }];
         }];
