@@ -368,7 +368,6 @@
     if (!_line1) {
         _line1 = [[UIView alloc] init];
         _line1.backgroundColor = MAIN_GRAY;
-        
     }
     return _line1;
 }
@@ -387,10 +386,8 @@
         
         _pwdTextField.backgroundColor = [UIColor clearColor];
         //设置边框样式，只有设置了才会显示边框样式
-        
         // 设置内容 -- 垂直居中
         _pwdTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        
         //当输入框没有内容时，水印提示 提示内容为password
         _pwdTextField.placeholder = @"密 码";
         _pwdTextField.tintColor = MAIN_PAN_2;
@@ -422,16 +419,10 @@
         [_login setTitle:@"登   录" forState:UIControlStateNormal];
         _login.titleLabel.font = H22;
         [_login addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
-        
         [_login.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_login.layer setCornerRadius:10];
-        
         [_login.layer setBorderWidth:2];//设置边界的宽度
-        
         [_login setBackgroundColor:MAIN_ORANGER];
-        
-        
         [_login.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _login;

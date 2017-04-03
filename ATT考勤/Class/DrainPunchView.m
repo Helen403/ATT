@@ -331,10 +331,10 @@
 }
 
 -(void)timeClick1{
-    _datepicker = nil;
-    self.dataIndex = 1;
-    [self.datepicker setDateType:DateTypeStartDate];
-    [self.datepicker show];
+//    _datepicker = nil;
+//    self.dataIndex = 1;
+//    [self.datepicker setDateType:DateTypeStartDate];
+//    [self.datepicker show];
 }
 
 -(UIView *)timeView2{
@@ -348,10 +348,10 @@
 }
 
 -(void)timeClick2{
-    _datepicker = nil;
-    self.dataIndex = 2;
-    [self.datepicker setDateType:DateTypeEndDate];
-    [self.datepicker show];
+//    _datepicker = nil;
+//    self.dataIndex = 2;
+//    [self.datepicker setDateType:DateTypeEndDate];
+//    [self.datepicker show];
 }
 
 

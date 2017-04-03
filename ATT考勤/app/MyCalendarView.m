@@ -9,6 +9,7 @@
 #import "MyCalendarView.h"
 #import "LYWCollectionViewCell.h"
 #import "MyWeekView.h"
+#import "AttendHolidays.h"
 
 static NSString *cellID = @"cellID";
 
@@ -219,8 +220,20 @@ static NSString *cellID = @"cellID";
         _today.text = @"今天";
         _today.font = H14;
         _today.textColor = MAIN_PAN_2;
+        _today.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(todayClick)];
+        [_today addGestureRecognizer:setTap];
     }
     return _today;
+}
+
+-(void)todayClick{
+    self.index=0;
+    self.arr = [LSCoreToolCenter getCurrentMonthInfo:self.index];
+    self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
+    [self.collectionView reloadData];
+    [self updateConstraints];
+    self.countBlock((int)ceil(self.arr.count/7));
 }
 
 
@@ -258,7 +271,7 @@ static NSString *cellID = @"cellID";
         //头部视图高度
         layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = 0;
-        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.backgroundColor = [UIColor darkGrayColor];
         //注册表格
         [_collectionView registerClass:[LYWCollectionViewCell class] forCellWithReuseIdentifier:cellID];
         
@@ -292,15 +305,20 @@ static NSString *cellID = @"cellID";
     if(![cell.dateLable.text isEqualToString:@""]){
         
         cell.userInteractionEnabled = YES;
+        cell.triangleView.hidden = NO;
+        cell.title.text = @"白班";
+        
     }else{
         cell.userInteractionEnabled = NO;
+        cell.triangleView.hidden = YES;
+        cell.title.text = @"";
     }
     
     if ([self.current isEqualToString:self.title.text]) {
         //设置今天高亮
         if (day == [cell.dateLable.text intValue]) {
             self.indexPath = indexPath;
-            cell.backgroundColor = [UIColor yellowColor];
+            cell.backgroundColor = [UIColor purpleColor];
         }else{
             cell.backgroundColor = [UIColor whiteColor];
         }
@@ -321,6 +339,7 @@ static NSString *cellID = @"cellID";
 }
 
 
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath == self.indexPath) {
@@ -333,7 +352,7 @@ static NSString *cellID = @"cellID";
     
     LYWCollectionViewCell *currentCell =  (LYWCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
-    currentCell.backgroundColor = [UIColor yellowColor];
+    currentCell.backgroundColor = [UIColor purpleColor];
     NSString *today = [self getToday:indexPath.row];
     NSString *day = [ NSString stringWithFormat:@"%@%@日 %@",self.title.text,currentCell.dateLable.text,today];
     self.calendarBlock(day);
@@ -369,6 +388,7 @@ static NSString *cellID = @"cellID";
     }
     return str;
 }
+
 
 
 

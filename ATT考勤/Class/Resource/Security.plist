@@ -14,5 +14,11 @@
 		<key>content</key>
 		<string></string>
 	</dict>
+	<dict>
+		<key>title</key>
+		<string>绑定设备</string>
+		<key>content</key>
+		<string></string>
+	</dict>
 </array>
 </plist>

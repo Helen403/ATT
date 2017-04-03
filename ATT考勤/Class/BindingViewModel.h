@@ -10,4 +10,21 @@
 
 @interface BindingViewModel : HViewModel
 
+
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+@property(nonatomic,strong) NSString *userCode;
+
+@property(nonatomic,strong) RACSubject *successSubject;
+
+@property(nonatomic,strong) NSString *deviceName;
+
+@property(nonatomic,strong) NSString *changeDeviceName;
+
+@property(nonatomic,strong) NSString *deviceCode;
+
+@property(nonatomic,strong) RACCommand *modifyCommand;
+
+@property(nonatomic,strong) RACSubject *bindSubject;
+
 @end

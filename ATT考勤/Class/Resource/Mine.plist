@@ -64,18 +64,6 @@
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>information_scheduling_picture</string>
-		<key>title</key>
-		<string>我的排班</string>
-		<key>icon</key>
-		<string></string>
-		<key>info</key>
-		<string>白班</string>
-		<key>back</key>
-		<string>1</string>
-	</dict>
-	<dict>
-		<key>img</key>
 		<string>information_holiday_picture</string>
 		<key>title</key>
 		<string>我的假期</string>
@@ -84,17 +72,17 @@
 		<key>info</key>
 		<string>暂无假期</string>
 		<key>back</key>
-		<string>1</string>
+		<string>0</string>
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>settings_ customer_service_picture</string>
+		<string>information_scheduling_picture</string>
 		<key>title</key>
-		<string>我的考勤</string>
+		<string>我的排班</string>
 		<key>icon</key>
 		<string></string>
 		<key>info</key>
-		<string></string>
+		<string>白班</string>
 		<key>back</key>
 		<string>1</string>
 	</dict>

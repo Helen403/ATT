@@ -171,17 +171,12 @@
 -(UITextField *)useText{
     if (!_useText) {
         _useText = [[UITextField alloc] init];
-        
         _useText.backgroundColor = [UIColor clearColor];
         //设置边框样式，只有设置了才会显示边框样式
-        
         // 设置内容 -- 垂直居中
         _useText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        
-        
         //当输入框没有内容时，水印提示 提示内容为password
         _useText.placeholder = @"输入手机号";
-        
         //修改account的placeholder的字体颜色、大小
         [_useText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_useText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
@@ -190,7 +185,6 @@
         // 设置右边永远显示清除按钮
         _useText.clearButtonMode = UITextFieldViewModeAlways;
         _useText.keyboardType = UIKeyboardTypePhonePad;
-
     }
     return _useText;
 }
@@ -216,23 +210,16 @@
 -(UIButton *)countDown{
     if (!_countDown) {
         _countDown = [[UIButton alloc] init];
-        
         _countDown.titleLabel.textColor = white_color;
-        
         [_countDown setTitle:@"验证码" forState:UIControlStateNormal];
         _countDown.userInteractionEnabled = YES;
         _countDown.titleLabel.font = H14;
         [_countDown addTarget:self action:@selector(startTime:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_countDown.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_countDown.layer setCornerRadius:10];
-        
         [_countDown.layer setBorderWidth:6];//设置边界的宽度
-        
         [_countDown setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-
         [_countDown.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     

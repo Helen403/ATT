@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TriangleView.h"
 
 @interface LYWCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic,strong) UILabel *dateLable;
+
+@property(nonatomic,strong) UILabel *title;
+
+@property(nonatomic,strong) TriangleView *triangleView;
 
 - (instancetype)initWithFrame:(CGRect)frame;
 

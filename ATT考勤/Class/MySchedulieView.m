@@ -42,9 +42,9 @@
     
     WS(weakSelf);
     [self.myCalendarView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(0);
-        make.top.equalTo(0);
-        make.right.equalTo(0);
+        make.left.equalTo(0.3);
+        make.top.equalTo(0.3);
+        make.right.equalTo(0.3);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH/7*self.count+[self h_w:33]*2));
     }];
     

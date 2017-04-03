@@ -37,7 +37,7 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-    self.title = @"部门考勤";
+    self.title = @"绑定设备";
 }
 
 
@@ -46,12 +46,28 @@
 }
 
 -(void)h_bindViewModel{
-    
+    [[self.bindingViewModel.bindSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:NO];
+        });
+    }];
 }
 
 #pragma mark lazyload
+-(BindingView *)bindingView{
+    if (!_bindingView) {
+        _bindingView = [[BindingView alloc] initWithViewModel:self.bindingViewModel];
+    }
+    return _bindingView;
+}
 
-
+-(BindingViewModel *)bindingViewModel{
+    if (!_bindingViewModel) {
+        _bindingViewModel = [[BindingViewModel alloc] init];
+    }
+    return _bindingViewModel;
+}
 
 
 @end

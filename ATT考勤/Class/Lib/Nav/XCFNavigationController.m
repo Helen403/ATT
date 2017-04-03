@@ -32,12 +32,12 @@
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (self.viewControllers.count > 0) {
-        // 替换back按钮
-        UIBarButtonItem *backBarButtonItem = [UIBarButtonItem barButtonItemWithImageName:@"ic_schedule_menu_back"
-                                                                           imageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 8)
-                                                                                    target:self
-                                                                                    action:@selector(back)];
-        viewController.navigationItem.leftBarButtonItem = backBarButtonItem;
+//        // 替换back按钮
+//        UIBarButtonItem *backBarButtonItem = [UIBarButtonItem barButtonItemWithImageName:@"ic_schedule_menu_back"
+//                                                                           imageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 8)
+//                                                                                    target:self
+//                                                                                    action:@selector(back)];
+//        viewController.navigationItem.leftBarButtonItem = backBarButtonItem;
         // 隐藏tabbar
         viewController.hidesBottomBarWhenPushed = YES;
     }
@@ -46,6 +46,7 @@
 
 - (void)back {
     [self popViewControllerAnimated:YES];
+    //[self h_back];
 }
 
 @end

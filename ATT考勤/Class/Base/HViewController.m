@@ -8,12 +8,15 @@
 
 #import "HViewController.h"
 #import "HView.h"
+#import "UIBarButtonItem+Extension.h"
 
 @interface HViewController ()
 
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 @property (nonatomic, assign) BOOL statusBarHidden;
 @property (nonatomic, assign) BOOL changeStatusBarAnimated;
+
+@property(nonatomic,strong) HViewController *hh;
 
 @end
 
@@ -22,7 +25,6 @@
 + (instancetype)allocWithZone:(struct _NSZone *)zone {
     
     HViewController *viewController = [super allocWithZone:zone];
-    
     @weakify(viewController)
     
     [[viewController rac_signalForSelector:@selector(viewDidLoad)] subscribeNext:^(id x) {
@@ -68,8 +70,14 @@
     [self setIsExtendLayout:NO];
     
     [self h_removeNavgationBarLine];
+    // 替换back按钮
+    UIBarButtonItem *backBarButtonItem = [UIBarButtonItem barButtonItemWithImageName:@"ic_schedule_menu_back"
+                                                                     imageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 8)
+                                                                              target:self
+                                                                              action:@selector(back)];
+   
     
-    [self layoutNavigationBar:[UIImage imageNamed:@"navigationBarBG@2x.png"] titleColor:[UIColor blackColor] titleFont:[UIFont fontWithName:@"MicrosoftYaHei" size:18] leftBarButtonItem:nil rightBarButtonItem:nil];
+    [self layoutNavigationBar:[UIImage imageNamed:@"navigationBarBG@2x.png"] titleColor:[UIColor blackColor] titleFont:[UIFont fontWithName:@"MicrosoftYaHei" size:18] leftBarButtonItem:backBarButtonItem rightBarButtonItem:nil];
     
     if ([self respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]) {
         [self setAutomaticallyAdjustsScrollViewInsets:NO];
@@ -98,6 +106,15 @@
 - (void)dealloc {
     
     //    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+}
+
+-(void)back{
+    [self.navigationController popViewControllerAnimated:YES];
+    [self h_back];
+}
+
+-(void)h_back{
+    
 }
 
 #pragma mark - private

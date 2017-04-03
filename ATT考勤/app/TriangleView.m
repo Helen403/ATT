@@ -42,7 +42,7 @@
     
     [[UIColor whiteColor] setStroke];
     
-    [[UIColor redColor] setFill];
+    [[UIColor yellowColor] setFill];
     
     CGContextDrawPath(context, kCGPathFillStroke);
     

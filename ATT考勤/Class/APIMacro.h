@@ -299,3 +299,10 @@
 
 //寻找所有假期
 #define findAllHolidayByMonth @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//寻找我的设备
+#define findMyDevice @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//修改我的设备
+#define modifyMyDevice @"http://13822767713.xicp.net/smart/ws/IAttService"
+

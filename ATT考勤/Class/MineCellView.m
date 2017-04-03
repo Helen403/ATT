@@ -138,15 +138,16 @@
             
             break;
         }
-            //我的排班
+          //我的假期
         case 5:{
-            self.info.text = @"";
-            break;
-        }
-            //我的假期
-        case 6:{
             NSString *myHoldays =  [[NSUserDefaults standardUserDefaults] objectForKey:@"findMyHoldays"];
             self.info.text = [NSString stringWithFormat:@"%@分钟",myHoldays];
+            break;
+           
+        }
+            //我的排班
+        case 6:{
+            self.info.text = @"";
             break;
         }
     }

@@ -173,7 +173,6 @@
 		793782151E31E3AD00ABA7C9 /* SenderVoiceNodePlaying@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 793782041E31E3AD00ABA7C9 /* SenderVoiceNodePlaying@2x.png */; };
 		793782181E31E79B00ABA7C9 /* ChatViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 793782171E31E79B00ABA7C9 /* ChatViewModel.m */; };
 		7937821B1E31E7D100ABA7C9 /* ChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7937821A1E31E7D100ABA7C9 /* ChatModel.m */; };
-		7937821D1E31E8C200ABA7C9 /* Chat.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7937821C1E31E8C200ABA7C9 /* Chat.plist */; };
 		793782201E31F4D700ABA7C9 /* KeyBordVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 7937821F1E31F4D700ABA7C9 /* KeyBordVIew.m */; };
 		793782241E31F5E800ABA7C9 /* UIImage+StrethImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 793782231E31F5E800ABA7C9 /* UIImage+StrethImage.m */; };
 		793782361E31FA8500ABA7C9 /* chat_bg_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 793782251E31FA8500ABA7C9 /* chat_bg_default.jpg */; };
@@ -578,7 +577,6 @@
 		79DD276D1E31B2F000923D19 /* MyMsgViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD276C1E31B2F000923D19 /* MyMsgViewModel.m */; };
 		79DD27711E31B74900923D19 /* MyMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD27701E31B74900923D19 /* MyMsgModel.m */; };
 		79DD27741E31B76B00923D19 /* MyMsgCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DD27731E31B76B00923D19 /* MyMsgCellView.m */; };
-		79DD27761E31B99900923D19 /* MyMsg.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79DD27751E31B99900923D19 /* MyMsg.plist */; };
 		79E079C11E7F66F1000BB48C /* ApprovalTreatmentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E079C01E7F66F0000BB48C /* ApprovalTreatmentController.m */; };
 		79E079C41E7F6E9B000BB48C /* ApprovalTreatmentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E079C31E7F6E9B000BB48C /* ApprovalTreatmentViewModel.m */; };
 		79E079C71E7F6EAA000BB48C /* ApprovalTreatmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E079C61E7F6EAA000BB48C /* ApprovalTreatmentView.m */; };
@@ -651,7 +649,6 @@
 		79F4B6421E275DD3008CAA6E /* ContrastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F4B6411E275DD3008CAA6E /* ContrastView.m */; };
 		79F4B6451E275FDC008CAA6E /* ContrastCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F4B6441E275FDC008CAA6E /* ContrastCellView.m */; };
 		79F4B6481E276032008CAA6E /* ContrastModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F4B6471E276032008CAA6E /* ContrastModel.m */; };
-		79F4B64A1E276303008CAA6E /* Contrast.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79F4B6491E276303008CAA6E /* Contrast.plist */; };
 		79F4B6511E277071008CAA6E /* TrajectoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F4B6501E277071008CAA6E /* TrajectoryView.m */; };
 		79F4B6541E2771BA008CAA6E /* TrajectoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F4B6531E2771BA008CAA6E /* TrajectoryModel.m */; };
 		79F4B6571E2771D8008CAA6E /* TrajectoryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F4B6561E2771D8008CAA6E /* TrajectoryCellView.m */; };
@@ -1100,7 +1097,6 @@
 		793782171E31E79B00ABA7C9 /* ChatViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewModel.m; sourceTree = "<group>"; };
 		793782191E31E7D100ABA7C9 /* ChatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatModel.h; sourceTree = "<group>"; };
 		7937821A1E31E7D100ABA7C9 /* ChatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatModel.m; sourceTree = "<group>"; };
-		7937821C1E31E8C200ABA7C9 /* Chat.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Chat.plist; sourceTree = "<group>"; };
 		7937821E1E31F4D700ABA7C9 /* KeyBordVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyBordVIew.h; sourceTree = "<group>"; };
 		7937821F1E31F4D700ABA7C9 /* KeyBordVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyBordVIew.m; sourceTree = "<group>"; };
 		793782221E31F5E800ABA7C9 /* UIImage+StrethImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+StrethImage.h"; sourceTree = "<group>"; };
@@ -1744,7 +1740,6 @@
 		79DD27701E31B74900923D19 /* MyMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMsgModel.m; sourceTree = "<group>"; };
 		79DD27721E31B76B00923D19 /* MyMsgCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMsgCellView.h; sourceTree = "<group>"; };
 		79DD27731E31B76B00923D19 /* MyMsgCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMsgCellView.m; sourceTree = "<group>"; };
-		79DD27751E31B99900923D19 /* MyMsg.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MyMsg.plist; sourceTree = "<group>"; };
 		79E079BF1E7F66F0000BB48C /* ApprovalTreatmentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApprovalTreatmentController.h; sourceTree = "<group>"; };
 		79E079C01E7F66F0000BB48C /* ApprovalTreatmentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApprovalTreatmentController.m; sourceTree = "<group>"; };
 		79E079C21E7F6E9B000BB48C /* ApprovalTreatmentViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApprovalTreatmentViewModel.h; sourceTree = "<group>"; };
@@ -1885,7 +1880,6 @@
 		79F4B6441E275FDC008CAA6E /* ContrastCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContrastCellView.m; sourceTree = "<group>"; };
 		79F4B6461E276032008CAA6E /* ContrastModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContrastModel.h; sourceTree = "<group>"; };
 		79F4B6471E276032008CAA6E /* ContrastModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContrastModel.m; sourceTree = "<group>"; };
-		79F4B6491E276303008CAA6E /* Contrast.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Contrast.plist; sourceTree = "<group>"; };
 		79F4B64F1E277071008CAA6E /* TrajectoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrajectoryView.h; sourceTree = "<group>"; };
 		79F4B6501E277071008CAA6E /* TrajectoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrajectoryView.m; sourceTree = "<group>"; };
 		79F4B6521E2771BA008CAA6E /* TrajectoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrajectoryModel.h; sourceTree = "<group>"; };
@@ -3442,12 +3436,9 @@
 				79EF94291E261F6300F8E9BC /* Personal.plist */,
 				793487AC1E27141800D074D7 /* Calendar.plist */,
 				793487BD1E2728AB00D074D7 /* List.plist */,
-				79F4B6491E276303008CAA6E /* Contrast.plist */,
 				79F4B6581E2773D8008CAA6E /* Trajectory.plist */,
 				79F964C11E2CBDFF00838CC4 /* Leave.plist */,
 				79DD27661E31A22600923D19 /* MultiRoles.plist */,
-				79DD27751E31B99900923D19 /* MyMsg.plist */,
-				7937821C1E31E8C200ABA7C9 /* Chat.plist */,
 				79FAFAB31E348FA400577917 /* TeamList.plist */,
 				79FAFAD81E34B12200577917 /* Security.plist */,
 				791C76681E5160CF003B1E54 /* BuildRole.plist */,
@@ -9196,7 +9187,6 @@
 				793782141E31E3AD00ABA7C9 /* SenderVoiceNodePlaying.png in Resources */,
 				794C77841E3204B800013243 /* emotion0079@2x.png in Resources */,
 				79907FAA1E8E51C500DDE4B2 /* ic_record_too_short@2x.png in Resources */,
-				79DD27761E31B99900923D19 /* MyMsg.plist in Resources */,
 				7980E6BD1E83D167000FACB4 /* main_statistiics_sign@2x.png in Resources */,
 				794C77891E3204B800013243 /* emotion0084@2x.png in Resources */,
 				794C775F1E3204B800013243 /* emotion0042@2x.png in Resources */,
@@ -9220,7 +9210,6 @@
 				794C77851E3204B800013243 /* emotion0080@2x.png in Resources */,
 				79F0A1491E13B0BF00A1B8AA /* Pending.plist in Resources */,
 				7937823A1E31FA8500ABA7C9 /* chat_bottom_smile_press.png in Resources */,
-				79F4B64A1E276303008CAA6E /* Contrast.plist in Resources */,
 				794C77771E3204B800013243 /* emotion0066@2x.png in Resources */,
 				7937823E1E31FA8500ABA7C9 /* chat_bottom_voice_nor.png in Resources */,
 				794C77971E3204B800013243 /* liaotian_ic_gengduo_nor.png in Resources */,
@@ -9265,7 +9254,6 @@
 				794C77751E3204B800013243 /* emotion0064@2x.png in Resources */,
 				793782121E31E3AD00ABA7C9 /* SenderVoiceNodeDownloading.png in Resources */,
 				794C777F1E3204B800013243 /* emotion0074@2x.png in Resources */,
-				7937821D1E31E8C200ABA7C9 /* Chat.plist in Resources */,
 				7954BB251E5FCCE900E03173 /* msg_ding.mp3 in Resources */,
 				794C77581E3204B800013243 /* emotion0035@2x.png in Resources */,
 				79F4F0891E1F89BB00115C3B /* Message.plist in Resources */,

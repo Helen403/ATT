@@ -15,6 +15,7 @@
 #import "UserModel.h"
 #import "IconView.h"
 #import "FSAudioStream.h"
+#import "UIBarButtonItem+Extension.h"
 
 
 @interface ChatController ()<UITableViewDelegate,UITableViewDataSource,MoreButtonViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,InputToolbarDelegate>
@@ -156,6 +157,13 @@
     };
 
 }
+
+-(void)h_back{
+//    UITabBarController *tabBarVc = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+//         tabBarVc.selectedIndex = 3;
+}
+
+
 
 - (void)commitVoiceNotice:(NSURL *)Path and:(NSInteger)time{
 

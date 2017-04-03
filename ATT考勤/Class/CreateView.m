@@ -214,13 +214,10 @@
         _pwdText = [[UITextField alloc] init];
         _pwdText.backgroundColor = [UIColor clearColor];
         //设置边框样式，只有设置了才会显示边框样式
-        
         // 设置内容 -- 垂直居中
         _pwdText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        
         //当输入框没有内容时，水印提示 提示内容为password
         _pwdText.placeholder = @"输入你的密码";
-        
         //修改account的placeholder的字体颜色、大小
         [_pwdText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_pwdText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
@@ -257,16 +254,12 @@
 -(UITextField *)surepwdText{
     if (!_surepwdText) {
         _surepwdText = [[UITextField alloc] init];
-        
         _surepwdText.backgroundColor = [UIColor clearColor];
         //设置边框样式，只有设置了才会显示边框样式
-        
         // 设置内容 -- 垂直居中
         _surepwdText.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        
         //当输入框没有内容时，水印提示 提示内容为password
         _surepwdText.placeholder = @"再次输入你的密码";
-        
         //修改account的placeholder的字体颜色、大小
         [_surepwdText setValue: MAIN_TEXTFIELD forKeyPath:@"_placeholderLabel.textColor"];
         [_surepwdText setValue:H14 forKeyPath:@"_placeholderLabel.font"];
@@ -296,16 +289,11 @@
         _next.titleLabel.textColor = white_color;
         _next.titleLabel.font = H20;
         [_next addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_next.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_next.layer setCornerRadius:10];
-        
         [_next.layer setBorderWidth:2];//设置边界的宽度
-        
         [_next setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
         [_next.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _next;

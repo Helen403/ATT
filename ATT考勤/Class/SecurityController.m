@@ -12,6 +12,7 @@
 
 #import "ChangeTelphoneController.h"
 #import "ChangePasswordController.h"
+#import "BindingController.h"
 
 @interface SecurityController ()
 
@@ -70,6 +71,14 @@
                 break;
             }
 
+                //绑定设备
+            case 2:{
+                BindingController *binding = [[BindingController alloc] init];
+                
+                [self.navigationController pushViewController:binding animated:NO];
+                break;
+            }
+                
         }
 
     }];

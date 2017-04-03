@@ -9,7 +9,7 @@
 #import "MineController.h"
 #import "MineView.h"
 #import "MineViewModel.h"
-#import "CheckController.h"
+
 #import "TZImagePickerController.h"
 #import "ChangeNameController.h"
 #import "ChangeSignNameController.h"
@@ -85,19 +85,14 @@
                 break;
             }
                 //我的排班
-            case 5:{
+            case 6:{
                 MySchedulieController *mySchedulie = [[MySchedulieController alloc] init];
                 
                 [self.navigationController pushViewController:mySchedulie animated:NO];
                 
                 break;
             }
-                //跳转到考勤
-            case 7:{
-                CheckController *check = [[CheckController alloc] init];
-                [self.navigationController pushViewController:check animated:NO];
-                break;
-            }
+        
         }
     }];
 }

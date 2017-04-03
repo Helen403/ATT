@@ -7,7 +7,11 @@
 //
 
 #import "HView.h"
+#import "BindingModel.h"
 
 @interface BindingView : HView
+
+@property(nonatomic,strong) BindingModel *bindingModel;
+
 
 @end

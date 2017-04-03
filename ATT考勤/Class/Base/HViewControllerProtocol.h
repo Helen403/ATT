@@ -24,4 +24,6 @@
 - (void)h_recoverKeyboard;
 - (void)h_viewWillAppear;
 - (void)h_viewWillDisappear;
+
+- (void)h_back;
 @end

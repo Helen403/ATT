@@ -108,6 +108,7 @@
         if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
             return;
         }
+        
         [self.personalSubject sendNext:nil];
         [self.scheduCommand execute:nil];
         
@@ -129,7 +130,7 @@
         
         AttendWorkShift *attendWorkShift = [AttendWorkShift mj_objectWithKeyValues:xmlDoc];
         self.attendWorkShift = attendWorkShift;
-        if ([attendWorkShift.shiftNickName isEqualToString:@"未排班"]) {
+        if ([attendWorkShift.shiftName isEqualToString:@"未排班"]) {
             //未排班
             [self.notSubject sendNext:nil];
             

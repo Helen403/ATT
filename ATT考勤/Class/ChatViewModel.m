@@ -23,7 +23,7 @@
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findMyMsgResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findMyMsgResponse>"];
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[ChatModel class] rowRootName:@"Newss"];
-        if (arr.count != self.arr.count) {
+        if (arr.count != self.arr.count&&arr.count>0) {
             self.arr = arr;
             [self.successSubject sendNext:nil];
         }
