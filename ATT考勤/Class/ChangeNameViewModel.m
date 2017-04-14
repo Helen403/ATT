@@ -33,6 +33,10 @@
         
         if ([[ele3 stringValue] isEqualToString:@"0"]) {
              ShowMessage(@"修改成功");
+            
+              [[NSUserDefaults standardUserDefaults] setObject:self.userNickName forKey:@"userNickName"];
+            
+            
             [self.successSubject sendNext:nil];
            
         }else{

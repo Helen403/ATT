@@ -22,7 +22,7 @@
 		<key>icon</key>
 		<string></string>
 		<key>info</key>
-		<string>诸葛亮</string>
+		<string></string>
 		<key>back</key>
 		<string>0</string>
 	</dict>
@@ -34,7 +34,7 @@
 		<key>icon</key>
 		<string></string>
 		<key>info</key>
-		<string>失败是成功之母</string>
+		<string></string>
 		<key>back</key>
 		<string>0</string>
 	</dict>
@@ -46,7 +46,7 @@
 		<key>icon</key>
 		<string></string>
 		<key>info</key>
-		<string>中山韦达信息技术有限公司</string>
+		<string></string>
 		<key>back</key>
 		<string>0</string>
 	</dict>
@@ -58,7 +58,7 @@
 		<key>icon</key>
 		<string></string>
 		<key>info</key>
-		<string>100分</string>
+		<string>0分</string>
 		<key>back</key>
 		<string>0</string>
 	</dict>

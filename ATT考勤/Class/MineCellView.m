@@ -116,7 +116,14 @@
         }
             //我的名字
         case 1:{
-            self.info.text = userModel.userNickName;
+            
+            if (userModel.userNickName ==nil) {
+                NSString *str =  [[NSUserDefaults standardUserDefaults] objectForKey:@"userNickName"];
+                self.info.text = str;
+            }else{
+                 self.info.text = userModel.userNickName;
+            }
+          
             break;
         }
             //我的签名
