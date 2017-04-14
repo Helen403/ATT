@@ -26,14 +26,6 @@
 
 @property (nonatomic,strong) XCFNavigationController *nav;
 
-@property (nonatomic, strong) RACCommand *loginclickCommand;
-
-@property(nonatomic,strong) NSString *telphone;
-
-@property(nonatomic,assign) Boolean flag;
-
-@property (nonatomic, strong) RACCommand *loginCommand;
-
 @property(nonatomic,strong) NavigationView *navigationView;
 
 
@@ -43,15 +35,8 @@
 
 #pragma mark system
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    //注册本地通知
-    [self h_initialize];
-    
-    NSString *telphone = [[NSUserDefaults standardUserDefaults] objectForKey:@"myUser"];
-    if (telphone.length>0) {
-        self.telphone = telphone;
-        [self.loginclickCommand execute:nil];
-    }
+
+  
     
     /*****************************************************/
     //请先启动BaiduMapManager
@@ -150,16 +135,17 @@
     
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     NSString *companyNickName =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyNickName"];
-    
-    if (telphone.length>0&&companyCode.length>0&&companyNickName.length>0) {
-        if (self.flag) {
-            [self rootController];
-        }else{
-            //            self.telphone = telphone;
-            //            [self.loginCommand execute:nil];
-            [self CannotController];
-        }
+    NSString *userCodeNum =  [[NSUserDefaults standardUserDefaults] objectForKey:@"userCode"];
+    NSString *RealName =  [[NSUserDefaults standardUserDefaults] objectForKey:@"userRealName"];
+    if (telphone.length>0&&companyCode.length>0&&companyNickName.length>0&&userCodeNum.length>0 &&RealName.length>0) {
+        UserModel *user = [[UserModel alloc] init];
+        user.userCode = userCodeNum;
+        user.userRealName = RealName;
+        //存储对象
+        saveModel(user, @"user");
         
+        [self rootController];
+
     }else{
         [self CannotController];
         
@@ -167,77 +153,7 @@
     
 }
 
-#pragma mark private
--(void)h_initialize{
-    
-    [self.loginclickCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        //        DismissHud();
-        
-        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
-            self.flag = NO;
-            return ;
-        }
-        
-        if (result.length<200) {
-            self.flag = NO;
-        }else{
-            
-            NSDictionary *xmlDoc = [LSCoreToolCenter getFilter:result filter:@"User"];
-            
-            UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
-            
-            //存储对象
-            saveModel(model, @"user");
-            [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"createUserCode"];
-            self.flag = YES;
-        }
-        
-        
-    }];
-    
-    
-    [[[self.loginclickCommand.executing skip:1] take:1] subscribeNext:^(id x) {
-        
-        if ([x isEqualToNumber:@(YES)]) {
-            // ShowMaskStatus(@"正在拼命加载");
-        }
-    }];
-    
-    
-    [self.loginCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
-        DismissHud();
-        
-        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
-            [self CannotController];
-            return ;
-        }
-        
-        if (result.length<200) {
-            [self CannotController];
-        }else{
-            
-            NSDictionary *xmlDoc = [LSCoreToolCenter getFilter:result filter:@"User"];
-            
-            UserModel *model = [UserModel mj_objectWithKeyValues:xmlDoc];
-            
-            //存储对象
-            saveModel(model, @"user");
-            [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"createUserCode"];
-            [self rootController];
-        }
-        
-        
-    }];
-    
-    
-    [[[self.loginCommand.executing skip:1] take:1] subscribeNext:^(id x) {
-        
-        if ([x isEqualToNumber:@(YES)]) {
-            // ShowMaskStatus(@"正在拼命加载");
-        }
-    }];
-    
-}
+
 
 -(void)rootController{
     
@@ -299,65 +215,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {}
 - (void)applicationWillTerminate:(UIApplication *)application {}
 
-#pragma mark lazyload
--(RACCommand *)loginclickCommand{
-    if (!_loginclickCommand) {
-        
-        _loginclickCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-            
-            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-                
-                NSString *body =[NSString stringWithFormat: @"<findUserByTelphone xmlns=\"http://service.webservice.vada.com/\">\
-                                 <telphone xmlns=\"\">%@</telphone>\
-                                 </findUserByTelphone>",self.telphone];
-                
-                [LSCoreToolCenter SOAPData:findUserByTelphone soapBody:body success:^(NSString *result) {
-                    
-                    [subscriber sendNext:result];
-                    [subscriber sendCompleted];
-                } failure:^(NSError *error) {
-                    DismissHud();
-                    //                    ShowErrorStatus(@"请检查网络状态");
-                    [subscriber sendNext:@"netFail"];
-                    [subscriber sendCompleted];
-                }];
-                return nil;
-            }];
-        }];
-        
-    }
-    return _loginclickCommand;
-}
 
-
--(RACCommand *)loginCommand{
-    if (!_loginCommand) {
-        
-        _loginCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-            
-            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-                
-                NSString *body =[NSString stringWithFormat: @"<findUserByTelphone xmlns=\"http://service.webservice.vada.com/\">\
-                                 <telphone xmlns=\"\">%@</telphone>\
-                                 </findUserByTelphone>",self.telphone];
-                
-                [LSCoreToolCenter SOAPData:findUserByTelphone soapBody:body success:^(NSString *result) {
-                    
-                    [subscriber sendNext:result];
-                    [subscriber sendCompleted];
-                } failure:^(NSError *error) {
-                    DismissHud();
-                    ShowErrorStatus(@"请检查网络状态");
-                    [subscriber sendNext:@"netFail"];
-                    [subscriber sendCompleted];
-                }];
-                return nil;
-            }];
-        }];
-        
-    }
-    return _loginCommand;
-}
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {

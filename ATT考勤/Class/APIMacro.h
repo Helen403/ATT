@@ -306,3 +306,12 @@
 //修改我的设备
 #define modifyMyDevice @"http://13822767713.xicp.net/smart/ws/IAttService"
 
+//寻找我的节假日通过月
+#define findAllHolidayByMonth @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+
+//寻找工作计划
+#define findAllShiftWorkPlan @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//寻找部门通过EmpCode
+#define findDeptByDeptCode @"http://13822767713.xicp.net/smart/ws/IAttService"

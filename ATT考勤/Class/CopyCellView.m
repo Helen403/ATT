@@ -23,6 +23,8 @@
 
 @property(nonatomic,strong) UIImageView *back;
 
+@property(nonatomic,strong) UIView *line;
+
 @end
 
 @implementation CopyCellView
@@ -63,6 +65,12 @@
     }];
     
     
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.bottom.equalTo(weakSelf.mas_bottom).offset(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
+    }];
+    
     [super updateConstraints];
 }
 
@@ -75,7 +83,7 @@
     [self addSubview:self.time];
     [self addSubview:self.back];
     [self addSubview:self.result];
-    
+    [self addSubview:self.line];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -100,7 +108,7 @@
     
     self.title.text = toMeModel.applyDateDesc;
     self.result.text = [NSString stringWithFormat:@"%@ %@",toMeModel.applyType,toMeModel.applyMsg] ;
-    //    self.time.text = lateTreatmentMode.applyDate;
+    
     self.bgView.backgroundColor = toMeModel.empColor;
 }
 
@@ -180,5 +188,13 @@
     return _result;
 }
 
+
+-(UIView *)line{
+    if (!_line) {
+        _line = [[UIView alloc] init];
+        _line.backgroundColor = MAIN_LINE_COLOR;
+    }
+    return _line;
+}
 
 @end

@@ -149,6 +149,11 @@
     
     MineCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MineCellView class])] forIndexPath:indexPath];
     
+    
+    if(indexPath.row==3||indexPath.row==4||indexPath.row==5){
+       cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
     cell.mineModel = self.mineViewModel.arr[indexPath.row];
     cell.index = indexPath.row;
     cell.userModel = self.userModel;

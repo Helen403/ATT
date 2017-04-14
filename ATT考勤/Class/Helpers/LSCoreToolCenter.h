@@ -27,7 +27,9 @@ extern void DismissHud(void);
 +(void)playMusic:(NSString *)urlMusic1;
 +(NSString *)currentYearYMDHMSA;
 +(NSInteger)getCurrentWeek;
++(NSString *)curDateMonth;
 
++(NSInteger)getCurrentWeekTmp:(NSString *)str;
 +(NSInteger )getCurrentPreMonth:(NSInteger)i;
 
 //插入数据库
@@ -186,5 +188,8 @@ extern void DismissHud(void);
 
 + (NSInteger)dateTimeDifferenceWithStartTime:(NSString *)startTime endTime:(NSString *)endTime;
 +(NSString *)currentYearYMDHMS;
++ (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha;
++(NSString *)nextYear:(NSInteger)i;
++(NSString *)nextMonth:(NSInteger)i;
 
 @end

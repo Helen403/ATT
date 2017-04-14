@@ -23,6 +23,8 @@
 
 @property(nonatomic,strong) UIImageView *back;
 
+@property(nonatomic,strong) UIView *line;
+
 @end
 
 @implementation RefuseCellView
@@ -61,6 +63,11 @@
         make.centerY.equalTo(weakSelf);
         make.right.equalTo(weakSelf.back.mas_left).offset(-[self h_w:10]);
     }];
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.bottom.equalTo(weakSelf.mas_bottom).offset(0);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
+    }];
     
     
     [super updateConstraints];
@@ -75,7 +82,7 @@
     [self addSubview:self.time];
     [self addSubview:self.back];
     [self addSubview:self.result];
-    
+    [self addSubview:self.line];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -102,7 +109,7 @@
     
     self.title.text = refuseModel.applyDateDesc;
     self.result.text = [NSString stringWithFormat:@"%@ %@",refuseModel.applyType,refuseModel.applyMsg] ;
-    //    self.time.text = lateTreatmentMode.applyDate;
+    
     self.bgView.backgroundColor = refuseModel.empColor;
 }
 
@@ -181,6 +188,13 @@
     return _result;
 }
 
+-(UIView *)line{
+    if (!_line) {
+        _line = [[UIView alloc] init];
+        _line.backgroundColor = MAIN_LINE_COLOR;
+    }
+    return _line;
+}
 
 
 

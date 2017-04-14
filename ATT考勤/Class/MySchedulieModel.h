@@ -10,10 +10,10 @@
 
 @interface MySchedulieModel : NSObject
 
-@property(nonatomic,strong) NSString *img;
-
-@property(nonatomic,strong) NSString *content;
-
-@property(nonatomic,strong) NSString *status;
+@property (nonatomic , copy) NSString              * holidayDay;
+@property (nonatomic , copy) NSString              * holidayYear;
+@property (nonatomic , copy) NSString              * companyCode;
+@property (nonatomic , copy) NSString              * holidayMonth;
+@property (nonatomic , copy) NSString              * holidayLsh;
 
 @end

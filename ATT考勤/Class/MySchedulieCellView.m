@@ -62,9 +62,9 @@
         return;
     }
     _mySchedulieModel = mySchedulieModel;
-    self.img.image = ImageNamed(mySchedulieModel.img);
-    self.content.text = mySchedulieModel.content;
-    [self.button setTitle:mySchedulieModel.status forState:UIControlStateNormal];
+//    self.img.image = ImageNamed(mySchedulieModel.img);
+//    self.content.text = mySchedulieModel.content;
+//    [self.button setTitle:mySchedulieModel.status forState:UIControlStateNormal];
 }
 
 

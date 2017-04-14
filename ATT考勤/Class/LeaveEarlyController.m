@@ -39,7 +39,7 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-    self.title = @"销早退申请";
+    self.title = @"消早退申请";
 }
 
 -(void)h_addSubviews{

@@ -23,7 +23,7 @@
             return;
         }
         if (result.length<200) {
-            //NSNumber *row =[NSNumber numberWithInteger:2];
+           
             [self.attendFailSubject sendNext:nil];
         }else{
             NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAttendRecordByUserDateResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAttendRecordByUserDateResponse>"];
@@ -355,6 +355,8 @@
                     self.deptCode = empModel.deptCode;
                     self.empCode = empModel.empCode;
                     
+                    [[NSUserDefaults standardUserDefaults] setObject:empModel.empCode forKey:@"empCode"];
+                    
                     [[NSUserDefaults standardUserDefaults] setObject:empModel.empTelphone forKey:@"empTelphone"];
                     /*******************************************/
                     NSString *body2 =[NSString stringWithFormat: @"<findDeptByDeptCode xmlns=\"http://service.webservice.vada.com/\">\
@@ -362,7 +364,7 @@
                                       <deptCode xmlns=\"\">%@</deptCode>\
                                       </findDeptByDeptCode>",self.companyCode,self.deptCode];
                     
-                    [self SOAPData:findEmpByUserCode soapBody:body2 success:^(NSString *result) {
+                    [self SOAPData:findDeptByDeptCode soapBody:body2 success:^(NSString *result) {
                         
                         
                         NSDictionary *xmlDoc = [self getFilter:result filter:@"Dept"];
@@ -489,7 +491,5 @@
     }
     return _findImgSubject;
 }
-
-
 
 @end

@@ -61,6 +61,9 @@
 @property (nonatomic, assign) float duration;
 @property (nonatomic, assign) BOOL canceled;
 
+
+@property(nonatomic,strong) UIButton *send;
+
 @end
 
 @implementation InputToolbar
@@ -393,19 +396,53 @@ static InputToolbar* _instance = nil;
     self.voiceLabel.frame = CGRectMake(CGRectGetMaxX(self.voiceButton.frame) + 5, 5, SCREEN_WIDTH - 115, 36);
     [self addSubview:self.voiceLabel];
     
-    self.emojiButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.textInput.frame) + 5, 9, 30, 30)];
-    [self.emojiButton setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_nor"] forState:UIControlStateNormal];
-    [self.emojiButton setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_press"] forState:UIControlStateHighlighted];
-    [self.emojiButton addTarget:self action:@selector(clickEmojiButton) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.emojiButton];
     
-    self.moreButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.emojiButton.frame) + 5, 9, 30, 30)];
-    [self.moreButton setImage:[UIImage imageNamed:@"liaotian_ic_gengduo_nor"] forState:UIControlStateNormal];
-    [self.moreButton setImage:[UIImage imageNamed:@"liaotian_ic_gengduo_press"] forState:UIControlStateHighlighted];
-    [self.moreButton addTarget:self action:@selector(clickMoreButton) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.moreButton];
+    self.send.frame = CGRectMake(CGRectGetMaxX(self.textInput.frame) + 5, 5, 66, 36);
+    [self addSubview:self.send];
+    
+//    self.emojiButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.textInput.frame) + 5, 9, 30, 30)];
+//    [self.emojiButton setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_nor"] forState:UIControlStateNormal];
+//    [self.emojiButton setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_press"] forState:UIControlStateHighlighted];
+//    [self.emojiButton addTarget:self action:@selector(clickEmojiButton) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:self.emojiButton];
+//    
+//    self.moreButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.emojiButton.frame) + 5, 9, 30, 30)];
+//    [self.moreButton setImage:[UIImage imageNamed:@"liaotian_ic_gengduo_nor"] forState:UIControlStateNormal];
+//    [self.moreButton setImage:[UIImage imageNamed:@"liaotian_ic_gengduo_press"] forState:UIControlStateHighlighted];
+//    [self.moreButton addTarget:self action:@selector(clickMoreButton) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:self.moreButton];
 }
 
+-(UIButton *)send{
+    if (!_send) {
+        _send = [[UIButton alloc] init];
+        [_send setTitle:@"发送" forState:UIControlStateNormal];
+        _send.titleLabel.font = H14;
+        [_send setTitleColor:MAIN_PAN_2 forState:UIControlStateNormal];
+        
+        [_send addTarget:self action:@selector(sendClick) forControlEvents:UIControlEventTouchUpInside];
+        [_send.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
+        [_send.layer setCornerRadius:5];
+        [_send.layer setBorderWidth:0.8];//设置边界的宽度
+        //[_send setBackgroundColor:white_color];
+        [_send.layer setBorderColor:MAIN_PAN_2.CGColor];
+    }
+    return _send;
+}
+
+-(void)sendClick{
+    if (self.textInput.text.length>0) {
+        if (_sendContent) {
+            _sendContent(self.textInput.attributedText);
+            self.y = SCREEN_HEIGHT - _keyboardHeight - InputToolbarHeight;
+            _inputToolbarFrameChange(self.height,self.y);
+        }
+        self.textInput.text = nil;
+        self.textInput.height = 36;
+        self.height = InputToolbarHeight;
+    }
+   
+}
 
 
 - (void)textViewDidChange:(UITextView *)textView

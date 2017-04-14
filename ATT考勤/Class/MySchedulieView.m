@@ -89,7 +89,6 @@
     
 }
 
-
 -(void)h_bindViewModel{
     WS(weakSelf);
     self.myCalendarView.calendarBlock = ^(NSString *day){
@@ -100,12 +99,13 @@
         weakSelf.count = count;
         [weakSelf updateConstraints];
     };
+    
 }
 
 #pragma mark lazyload
 -(MyCalendarView *)myCalendarView{
     if (!_myCalendarView) {
-        _myCalendarView = [[MyCalendarView alloc] init];
+        _myCalendarView = [[MyCalendarView alloc] initWithViewModel:self.mySchedulieViewModel];
     }
     return _myCalendarView;
 }
@@ -154,7 +154,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.mySchedulieViewModel.arr.count;
+    return 0;
 }
 
 #pragma mark tableViewDataSource
@@ -162,7 +162,7 @@
     
     MySchedulieCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MySchedulieCellView class])] forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.mySchedulieModel = self.mySchedulieViewModel.arr[indexPath.row];
+  //  cell.mySchedulieModel = self.mySchedulieViewModel.arr[indexPath.row];
     
     return cell;
 }

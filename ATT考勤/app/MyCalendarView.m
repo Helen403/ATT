@@ -10,13 +10,16 @@
 #import "LYWCollectionViewCell.h"
 #import "MyWeekView.h"
 #import "AttendHolidays.h"
+#import "MySchedulieViewModel.h"
+#import "MyCalendarCellModel.h"
+#import "MySchedulieModel.h"
+#import "MySchedulieShiftWork.h"
 
 static NSString *cellID = @"cellID";
 
 @interface MyCalendarView()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property(nonatomic,strong) NSData *currentDate;
-
 //表格视图
 @property(nonatomic,strong) UICollectionView *collectionView;
 //当月第一天星期几
@@ -48,17 +51,24 @@ static NSString *cellID = @"cellID";
 
 @property(nonatomic,strong) UILabel *week;
 
+@property(nonatomic,strong) MySchedulieViewModel *mySchedulieViewModel;
+
 @end
 
 
 @implementation MyCalendarView
+
+-(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
+
+    self.mySchedulieViewModel = (MySchedulieViewModel *)viewModel;
+    return [super initWithViewModel:viewModel];
+}
 
 #pragma mark system
 
 -(void)updateConstraints{
     
     WS(weakSelf);
-    
     [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(0);
         make.left.equalTo(0);
@@ -134,7 +144,6 @@ static NSString *cellID = @"cellID";
     [self addSubview:self.week];
     [self addSubview:self.collectionView];
     
-    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
@@ -146,10 +155,77 @@ static NSString *cellID = @"cellID";
     self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
     self.current = self.title.text;
     self.arr = [LSCoreToolCenter getCurrentMonthInfo:self.index];
+    NSMutableArray *arr = [NSMutableArray array];
+    for(int i = 0;i<self.arr.count;i++){
+         MyCalendarCellModel *myCalendar = [[MyCalendarCellModel alloc] init];
+        myCalendar.content = self.arr[i];
+        [arr addObject:myCalendar];
+    }
+    self.arr = arr;
+
     self.week.text =[NSString stringWithFormat:@"第%ld周",(long)[LSCoreToolCenter getCurrentWeek]] ;
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    NSString *empTmp =  [[NSUserDefaults standardUserDefaults] objectForKey:@"empCode"];
+    self.mySchedulieViewModel.companyCode = companyCode;
+    self.mySchedulieViewModel.curYear = [LSCoreToolCenter curDateYear];
+    self.mySchedulieViewModel.curMonth = [LSCoreToolCenter curDateMonth];
+    self.mySchedulieViewModel.empCode = empTmp;
+    [self.mySchedulieViewModel.refreshDataCommand execute:nil];
+}
+
+
+-(void)h_bindViewModel{
+
+    [[self.mySchedulieViewModel.successSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            NSInteger count = self.arr.count;
+            NSMutableArray *arr = [NSMutableArray array];
+            for(int i = 0;i<count;i++){
+                MyCalendarCellModel *myCalendar = [[MyCalendarCellModel alloc] init];
+                MyCalendarCellModel *myCalendarTmp =  self.arr[i];
+                NSString *str = myCalendarTmp.content;
+                myCalendar.content = str;
+                
+                for(int j = 0;j<self.mySchedulieViewModel.shiftWorkArr.count;j++){
+                    
+                    
+                    MySchedulieShiftWork *mySchedulieShiftWork = self.mySchedulieViewModel.shiftWorkArr[j];
+                    
+                    if ([mySchedulieShiftWork.planDay isEqualToString:str]) {
+                        myCalendar.title = mySchedulieShiftWork.shiftNickName;
+                        myCalendar.titleColor =[LSCoreToolCenter colorWithHexString:[NSString stringWithFormat:@"#%@",mySchedulieShiftWork.shiftDispColor] alpha:1] ;
+                    }
+
+                }
+                
+                
+                for(int j = 0;j<self.mySchedulieViewModel.holidayArr.count;j++){
+                    MySchedulieModel *mySchedulieModel = self.mySchedulieViewModel.holidayArr[j];
+                    if ([mySchedulieModel.holidayDay isEqualToString:str]) {
+                        myCalendar.title = @"节假";
+                    }
+                }
+                [arr addObject:myCalendar];
+            }
+            self.arr = arr;
+
+            [self.collectionView reloadData];
+            [self updateConstraints];
+             self.countBlock((int)ceil(self.arr.count/7));
+        });
+    }];
 }
 
 #pragma mark lazyload
+-(MySchedulieViewModel *)mySchedulieViewModel{
+    if (!_mySchedulieViewModel) {
+        _mySchedulieViewModel = [[MySchedulieViewModel alloc] init];
+    }
+    return _mySchedulieViewModel;
+}
+
 -(UILabel *)pre{
     if (!_pre) {
         _pre = [[UILabel alloc] init];
@@ -167,18 +243,52 @@ static NSString *cellID = @"cellID";
     --self.index;
     self.arr = [LSCoreToolCenter getCurrentMonthInfo:self.index];
     self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
-    [self.collectionView reloadData];
-    [self updateConstraints];
-    self.countBlock((int)ceil(self.arr.count/7));
+    NSMutableArray *arr = [NSMutableArray array];
+    for(int i = 0;i<self.arr.count;i++){
+        MyCalendarCellModel *myCalendar = [[MyCalendarCellModel alloc] init];
+        myCalendar.content = self.arr[i];
+        [arr addObject:myCalendar];
+    }
+    self.arr = arr;
+    
+    self.week.text =[NSString stringWithFormat:@"第%ld周",(long)[LSCoreToolCenter getCurrentWeek]] ;
+    
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    NSString *empTmp =  [[NSUserDefaults standardUserDefaults] objectForKey:@"empCode"];
+    self.mySchedulieViewModel.companyCode = companyCode;
+    self.mySchedulieViewModel.curYear = [LSCoreToolCenter nextYear:self.index];
+    self.mySchedulieViewModel.curMonth = [LSCoreToolCenter nextMonth:self.index];
+    self.mySchedulieViewModel.empCode = empTmp;
+    [self.mySchedulieViewModel.refreshDataCommand execute:nil];
+    
+    
 }
 
 -(void)lastClick{
     ++self.index;
     self.arr = [LSCoreToolCenter getCurrentMonthInfo:self.index];
     self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
-    [self.collectionView reloadData];
-    [self updateConstraints];
-    self.countBlock((int)ceil(self.arr.count/7));
+    NSMutableArray *arr = [NSMutableArray array];
+    for(int i = 0;i<self.arr.count;i++){
+        MyCalendarCellModel *myCalendar = [[MyCalendarCellModel alloc] init];
+        myCalendar.content = self.arr[i];
+        [arr addObject:myCalendar];
+    }
+    self.arr = arr;
+    
+
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    NSString *empTmp =  [[NSUserDefaults standardUserDefaults] objectForKey:@"empCode"];
+    self.mySchedulieViewModel.companyCode = companyCode;
+    self.mySchedulieViewModel.curYear = [LSCoreToolCenter nextYear:self.index];
+    self.mySchedulieViewModel.curMonth = [LSCoreToolCenter nextMonth:self.index];
+    self.mySchedulieViewModel.empCode = empTmp;
+    [self.mySchedulieViewModel.refreshDataCommand execute:nil];
+    
+
+   
 }
 
 -(UILabel *)title{
@@ -228,12 +338,7 @@ static NSString *cellID = @"cellID";
 }
 
 -(void)todayClick{
-    self.index=0;
-    self.arr = [LSCoreToolCenter getCurrentMonthInfo:self.index];
-    self.title.text = [LSCoreToolCenter getCurrentMonthTitle:self.index];
-    [self.collectionView reloadData];
-    [self updateConstraints];
-    self.countBlock((int)ceil(self.arr.count/7));
+    [self h_loadData];
 }
 
 
@@ -265,7 +370,6 @@ static NSString *cellID = @"cellID";
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:180]) collectionViewLayout:layout];
         //设置collectionView及自动布局,代理方法尤为重要
-        
         //头部始终在顶端
         layout.sectionHeadersPinToVisibleBounds = YES;
         //头部视图高度
@@ -278,7 +382,6 @@ static NSString *cellID = @"cellID";
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.scrollEnabled = NO;
-        
     }
     return _collectionView;
 }
@@ -296,9 +399,10 @@ static NSString *cellID = @"cellID";
 //这里是自定义cell,非常简单的自定义
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     LYWCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    cell.layer.borderColor=[UIColor darkGrayColor].CGColor;
-    cell.layer.borderWidth=0.3;
-    cell.dateLable.text = self.arr[indexPath.row];
+    cell.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    cell.layer.borderWidth = 0.3;
+    MyCalendarCellModel *myCalendarCellModel = self.arr[indexPath.row];
+    cell.dateLable.text = myCalendarCellModel.content;
     NSDate *date = [[NSDate alloc] init];
     NSInteger day = [LSCoreToolCenter day:date];
     
@@ -307,7 +411,9 @@ static NSString *cellID = @"cellID";
         
         cell.userInteractionEnabled = YES;
         cell.triangleView.hidden = NO;
-        cell.title.text = @"白班";
+        
+        cell.title.text = myCalendarCellModel.title;
+        cell.title.textColor = myCalendarCellModel.titleColor;
         
     }else{
         cell.userInteractionEnabled = NO;
@@ -320,6 +426,10 @@ static NSString *cellID = @"cellID";
         if (day == [cell.dateLable.text intValue]) {
             self.indexPath = indexPath;
             cell.backgroundColor = [UIColor purpleColor];
+            NSString *today = [self getToday:indexPath.row];
+            NSString *daytmp = [ NSString stringWithFormat:@"%@%@日",self.title.text,cell.dateLable.text];
+             NSInteger week = [LSCoreToolCenter getCurrentWeekTmp:daytmp];
+               self.week.text =[NSString stringWithFormat:@"第%ld周",week] ;
         }else{
             cell.backgroundColor = [UIColor whiteColor];
         }
@@ -339,8 +449,6 @@ static NSString *cellID = @"cellID";
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
-
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath == self.indexPath) {
@@ -356,6 +464,9 @@ static NSString *cellID = @"cellID";
     currentCell.backgroundColor = [UIColor purpleColor];
     NSString *today = [self getToday:indexPath.row];
     NSString *day = [ NSString stringWithFormat:@"%@%@日 %@",self.title.text,currentCell.dateLable.text,today];
+    NSString *tmp = [ NSString stringWithFormat:@"%@%@日",self.title.text,currentCell.dateLable.text];
+    NSInteger week = [LSCoreToolCenter getCurrentWeekTmp:tmp];
+    self.week.text =[NSString stringWithFormat:@"第%ld周",week] ;
     self.calendarBlock(day);
 }
 

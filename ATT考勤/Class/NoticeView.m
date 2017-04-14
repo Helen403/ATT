@@ -31,6 +31,10 @@
 
 @property(nonatomic,assign) NSInteger indexTmp;
 
+@property(nonatomic,strong) UIScrollView *scrollView;
+
+@property(nonatomic,strong) UIView *view;
+
 @end
 
 @implementation NoticeView
@@ -45,25 +49,51 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-    [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
+
+    [self.scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo([self h_w:10]);
+        make.right.equalTo(-[self h_w:10]);
+        make.top.equalTo(0);
+        make.bottom.equalTo(weakSelf.preBtn.mas_top).offset(-[self h_w:10]);
+        
+    }];
+    
+    //计算大小
+    CGSize size = [self.content.text sizeWithFont:H18 constrainedToSize:CGSizeMake(SCREEN_WIDTH, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
+    CGFloat h = size.height;
+    
+    [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(0);
+        make.top.equalTo(0);
+        make.bottom.equalTo(0);
+        make.right.equalTo(0);
+        make.height.equalTo(h+[self h_w:140]);
+        make.width.equalTo(SCREEN_WIDTH-[self h_w:20]);
+    }];
+    
+    
+    [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([self h_w:10]);
         make.centerX.equalTo(weakSelf);
     }];
     
-    [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:10]);
-        make.right.equalTo(-[self h_w:10]);
-        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:15]);
-        
+    [self.content mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.right.equalTo(0);
+        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:10]);
+        make.width.equalTo(SCREEN_WIDTH);
+        make.height.equalTo(h);
     }];
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(-[self h_w:10]);
+        make.right.equalTo(0);
         make.top.equalTo(weakSelf.content.mas_bottom).offset([self h_w:30]);
     }];
     
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(-[self h_w:10]);
+        make.right.equalTo(0);
         make.top.equalTo(weakSelf.name.mas_bottom).offset([self h_w:10]);
     }];
     
@@ -91,10 +121,16 @@
 #pragma mark private
 -(void)h_setupViews{
     
-    [self addSubview:self.title];
-    [self addSubview:self.content];
-    [self addSubview:self.name];
-    [self addSubview:self.time];
+    
+    
+    [self addSubview:self.scrollView];
+    [self.scrollView addSubview:self.view];
+    
+    [self.view addSubview:self.title];
+    [self.view addSubview:self.content];
+    [self.view  addSubview:self.name];
+    [self.view  addSubview:self.time];
+    
     [self addSubview:self.preBtn];
     [self addSubview:self.page];
     [self addSubview:self.lastBtn];
@@ -105,7 +141,7 @@
 }
 
 -(void)h_loadData{
- 
+    
 }
 
 -(void)setIndex:(NSInteger)index{
@@ -120,22 +156,23 @@
 }
 
 -(void)h_bindViewModel{
-
+    
     [[self.noticeViewModel.successSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
-
-         [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
+        
+        [self performSelectorOnMainThread:@selector(mainThread) withObject:nil waitUntilDone:YES];
     }];
 }
 
 -(void)mainThread{
     //设置多少页
-
+    
     self.page.text = [NSString stringWithFormat:@"第%ld页/共%ld页",(long)self.indexTmp+1,self.noticeViewModel.preArr.count];
     AnnouncementModel *announcementModel = self.noticeViewModel.announcement;
     self.title.text = announcementModel.msgTitle;
     self.content.text = announcementModel.msgContent;
     self.name.text =  announcementModel.msgOffice;
     self.time.text = announcementModel.msgPublishDate;
+    [self updateConstraints];
 }
 
 #pragma mark lazyload
@@ -165,6 +202,8 @@
         //自动折行设置
         [_content setLineBreakMode:NSLineBreakByWordWrapping];
         _content.numberOfLines = 0;
+        //        [_content setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+        //_content.preferredMaxLayoutWidth = (SCREEN_WIDTH - 10.0 * 2);
     }
     return _content;
 }
@@ -211,11 +250,11 @@
     if (self.indexTmp < 0) {
         self.indexTmp = 0;
     }
-
+    
     if (self.noticeViewModel.preArr.count==0) {
         return;
     }
-
+    
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.noticeViewModel.companyCode = companyCode;
     UserModel *user =  getModel(@"user");
@@ -265,6 +304,24 @@
     self.noticeViewModel.userCode = user.userCode;
     self.noticeViewModel.index = self.indexTmp;
     [self.noticeViewModel.refreshDataCommand execute:nil];
+}
+
+-(UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.pagingEnabled =YES;
+        _scrollView.bounces = NO;
+        _scrollView.showsVerticalScrollIndicator = FALSE;
+    }
+    return _scrollView;
+}
+
+
+-(UIView *)view{
+    if (!_view) {
+        _view = [[UIView alloc] init];
+    }
+    return _view;
 }
 
 

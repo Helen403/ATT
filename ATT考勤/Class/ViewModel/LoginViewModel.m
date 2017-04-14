@@ -39,8 +39,14 @@
             if ([self.telphone isEqualToString:model.userTelphone]&&[password isEqualToString:model.userPassword]) {
                 //存储对象
                 saveModel(model, @"user");
+                [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"userCode"];
+                [[NSUserDefaults standardUserDefaults] setObject:xmlDoc forKey:@"returnCode"];
+                
+                [[NSUserDefaults standardUserDefaults] setObject:model.userRealName forKey:@"userRealName"];
+                
+                
                 [[NSUserDefaults standardUserDefaults] setObject:model.userCode forKey:@"createUserCode"];
-                  [[NSUserDefaults standardUserDefaults] setObject:self.telphone forKey:@"myUser"];
+                [[NSUserDefaults standardUserDefaults] setObject:self.telphone forKey:@"myUser"];
                 
                 [self.loginclickSubject sendNext:nil];
             }else{
@@ -146,7 +152,6 @@
     }
     return _qqclickSubject;
 }
-
 
 -(RACSubject *)sinaclickSubject{
     if (!_sinaclickSubject) {

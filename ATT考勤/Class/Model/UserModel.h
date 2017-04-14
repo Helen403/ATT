@@ -21,7 +21,6 @@
 @property (nonatomic , copy) NSString              * userPassword;
 @property (nonatomic , copy) NSString              * userActiveCode;
 @property (nonatomic , copy) NSString              * userEmail;
-
 @property (nonatomic , copy) NSString              * signName;
 
 @end

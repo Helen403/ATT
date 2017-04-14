@@ -10,6 +10,20 @@
 
 @interface MySchedulieViewModel : HViewModel
 
-@property(nonatomic,strong) NSMutableArray *arr;
+@property(nonatomic,strong) NSMutableArray *shiftWorkArr;
+
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+@property(nonatomic,strong) RACSubject *successSubject;
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property(nonatomic,strong) NSString *curYear;
+
+@property(nonatomic,strong) NSString *curMonth;
+
+@property(nonatomic,strong) NSString *empCode;
+
+@property(nonatomic,strong) NSMutableArray *holidayArr;
 
 @end

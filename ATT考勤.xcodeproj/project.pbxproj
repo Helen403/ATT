@@ -231,6 +231,8 @@
 		794620EB1E767E9E00873199 /* FeedbackCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620EA1E767E9E00873199 /* FeedbackCellView.m */; };
 		794620EF1E767F4300873199 /* FeedbackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620EE1E767F4300873199 /* FeedbackModel.m */; };
 		794620F21E76A2EC00873199 /* TimeSoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794620F11E76A2EC00873199 /* TimeSoundView.m */; };
+		7946471E1E94839B00000260 /* MySchedulieShiftWork.m in Sources */ = {isa = PBXBuildFile; fileRef = 7946471D1E94839B00000260 /* MySchedulieShiftWork.m */; };
+		794647211E94882200000260 /* MyCalendarCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 794647201E94882200000260 /* MyCalendarCellModel.m */; };
 		79476A771E8F3D2100436BF1 /* MySchedulieController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79476A761E8F3D2100436BF1 /* MySchedulieController.m */; };
 		79476A7A1E8F3D6600436BF1 /* MySchedulieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79476A791E8F3D6600436BF1 /* MySchedulieView.m */; };
 		79476A7D1E8F3D8100436BF1 /* MySchedulieViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79476A7C1E8F3D8100436BF1 /* MySchedulieViewModel.m */; };
@@ -1182,6 +1184,10 @@
 		794620EE1E767F4300873199 /* FeedbackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackModel.m; sourceTree = "<group>"; };
 		794620F01E76A2EC00873199 /* TimeSoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSoundView.h; sourceTree = "<group>"; };
 		794620F11E76A2EC00873199 /* TimeSoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSoundView.m; sourceTree = "<group>"; };
+		7946471C1E94839B00000260 /* MySchedulieShiftWork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySchedulieShiftWork.h; sourceTree = "<group>"; };
+		7946471D1E94839B00000260 /* MySchedulieShiftWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySchedulieShiftWork.m; sourceTree = "<group>"; };
+		7946471F1E94882200000260 /* MyCalendarCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCalendarCellModel.h; sourceTree = "<group>"; };
+		794647201E94882200000260 /* MyCalendarCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCalendarCellModel.m; sourceTree = "<group>"; };
 		79476A751E8F3D2100436BF1 /* MySchedulieController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySchedulieController.h; sourceTree = "<group>"; };
 		79476A761E8F3D2100436BF1 /* MySchedulieController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySchedulieController.m; sourceTree = "<group>"; };
 		79476A781E8F3D6600436BF1 /* MySchedulieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySchedulieView.h; sourceTree = "<group>"; };
@@ -4268,6 +4274,8 @@
 				79D70C141E8F32ED00BF5AC5 /* TriangleView.m */,
 				79FD56B51E8FFFA8000A4264 /* AttendHolidays.h */,
 				79FD56B61E8FFFA8000A4264 /* AttendHolidays.m */,
+				7946471F1E94882200000260 /* MyCalendarCellModel.h */,
+				794647201E94882200000260 /* MyCalendarCellModel.m */,
 			);
 			name = "MyCalendar(我的日历)";
 			path = "ATT考勤/app";
@@ -4478,6 +4486,8 @@
 		79476A721E8F3BF300436BF1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7946471C1E94839B00000260 /* MySchedulieShiftWork.h */,
+				7946471D1E94839B00000260 /* MySchedulieShiftWork.m */,
 				79476A7E1E8F3DE800436BF1 /* MySchedulieModel.h */,
 				79476A7F1E8F3DE800436BF1 /* MySchedulieModel.m */,
 			);
@@ -8930,7 +8940,7 @@
 				TargetAttributes = {
 					7928BD681E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = TMLDK3R5QN;
+						DevelopmentTeam = PLK9A7N26F;
 					};
 					7928BD811E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
@@ -9353,6 +9363,7 @@
 				79345B9A1E1F25420007A348 /* FeedbackView.m in Sources */,
 				7980E66C1E83B247000FACB4 /* TeamOutWorkViewModel.m in Sources */,
 				79E079FB1E7FDEF8000BB48C /* RefuseDetailsViewModel.m in Sources */,
+				794647211E94882200000260 /* MyCalendarCellModel.m in Sources */,
 				794214BD1E88E80E000A3AE8 /* NoticeListViewModel.m in Sources */,
 				7949276D1E10F19F007331CA /* CompanyCodeView.m in Sources */,
 				793D3AFD1E712DAE00266D9C /* MyWeekView.m in Sources */,
@@ -9681,6 +9692,7 @@
 				79F7D8601E5AC9A8004DF0DB /* ChangeTelphoneView.m in Sources */,
 				79F0A1381E13990A00A1B8AA /* ZJCollectionView.m in Sources */,
 				79F8560D1E02C216002D82F4 /* HTableViewCell.m in Sources */,
+				7946471E1E94839B00000260 /* MySchedulieShiftWork.m in Sources */,
 				7947BCA71E7BE07600EE8EA6 /* AlreadyTreatmentViewModel.m in Sources */,
 				796803341E111F7400CED421 /* MyExamineView.m in Sources */,
 				7980E6881E83BCA4000FACB4 /* HeroModel.m in Sources */,
@@ -9913,7 +9925,7 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = TMLDK3R5QN;
+				DEVELOPMENT_TEAM = PLK9A7N26F;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9947,7 +9959,7 @@
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = TMLDK3R5QN;
+				DEVELOPMENT_TEAM = PLK9A7N26F;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

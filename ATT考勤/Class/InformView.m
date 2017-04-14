@@ -32,6 +32,10 @@
 
 @property(nonatomic,assign) NSInteger indexTmp;
 
+@property(nonatomic,strong) UIScrollView *scrollView;
+
+@property(nonatomic,strong) UIView *view;
+
 @end
 
 @implementation InformView
@@ -46,17 +50,45 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-    [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo([self h_w:10]);
+        make.right.equalTo(-[self h_w:10]);
+        make.top.equalTo(0);
+        make.bottom.equalTo(weakSelf.preBtn.mas_top).offset(-[self h_w:10]);
+        
+    }];
+    
+    //计算大小
+    CGSize size = [self.content.text sizeWithFont:H18 constrainedToSize:CGSizeMake(SCREEN_WIDTH, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
+    CGFloat h = size.height;
+    
+    [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(0);
+        make.top.equalTo(0);
+        make.bottom.equalTo(0);
+        make.right.equalTo(0);
+        make.height.equalTo(h+[self h_w:140]);
+        make.width.equalTo(SCREEN_WIDTH-[self h_w:20]);
+    }];
+    
+    
+    [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([self h_w:10]);
         make.centerX.equalTo(weakSelf);
     }];
     
-    [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([self h_w:10]);
-        make.right.equalTo(-[self h_w:10]);
-        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:15]);
-        
+    
+    
+    [self.content mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(0);
+        make.right.equalTo(0);
+        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:10]);
+        make.width.equalTo(SCREEN_WIDTH);
+        make.height.equalTo(h);
     }];
+    
     
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(-[self h_w:10]);
@@ -92,10 +124,15 @@
 #pragma mark private
 -(void)h_setupViews{
     
-    [self addSubview:self.title];
-    [self addSubview:self.content];
-    [self addSubview:self.name];
-    [self addSubview:self.time];
+    
+    [self addSubview:self.scrollView];
+    [self.scrollView addSubview:self.view];
+    
+    [self.view addSubview:self.title];
+    [self.view addSubview:self.content];
+    [self.view  addSubview:self.name];
+    [self.view  addSubview:self.time];
+    
     [self addSubview:self.preBtn];
     [self addSubview:self.page];
     [self addSubview:self.lastBtn];
@@ -135,6 +172,7 @@
     self.content.text = NoticeModel.msgContent;
     self.name.text =  NoticeModel.msgOffice;
     self.time.text = NoticeModel.msgPublishDate;
+    [self updateConstraints];
 }
 
 #pragma mark lazyload
@@ -265,4 +303,24 @@
     self.informViewModel.index = self.indexTmp;
     [self.informViewModel.refreshDataCommand execute:nil];
 }
+
+
+-(UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.pagingEnabled =YES;
+        _scrollView.bounces = NO;
+        _scrollView.showsVerticalScrollIndicator = FALSE;
+    }
+    return _scrollView;
+}
+
+
+-(UIView *)view{
+    if (!_view) {
+        _view = [[UIView alloc] init];
+    }
+    return _view;
+}
+
 @end

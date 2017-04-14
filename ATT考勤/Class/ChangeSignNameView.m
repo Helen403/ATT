@@ -118,6 +118,7 @@
         // 5.监听文本框的文字改变
         [_useTextField becomeFirstResponder];
         
+        
     }
     return _useTextField;
 }
