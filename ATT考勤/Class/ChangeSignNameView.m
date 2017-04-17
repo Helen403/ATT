@@ -10,7 +10,7 @@
 #import "ChangeSignNameViewModel.h"
 #import "UserModel.h"
 
-#define MAX_STARWORDS_LENGTH 14
+#define MAX_STARWORDS_LENGTH 400
 
 
 @interface ChangeSignNameView()<UITextFieldDelegate>
@@ -105,7 +105,7 @@
         _useTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         
         //当输入框没有内容时，水印提示 提示内容为password
-        _useTextField.placeholder = @"请输入新签名(最多14个字)";
+        _useTextField.placeholder = @"请输入新签名";
         _useTextField.tintColor = MAIN_PAN_2;
         _useTextField.textColor = MAIN_PAN_2;
         //修改account的placeholder的字体颜色、大小
@@ -116,7 +116,6 @@
         // 设置右边永远显示清除按钮
         _useTextField.clearButtonMode = UITextFieldViewModeAlways;
        _useTextField.delegate = self;//设置代理
-        
         // 5.监听文本框的文字改变
         [_useTextField becomeFirstResponder];
         // 5.监听文本框的文字改变

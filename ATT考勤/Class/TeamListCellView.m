@@ -83,7 +83,7 @@
 
     
     self.title.text = teamListModel.empName;
-    self.number.text = teamListModel.empTelphone;
+    //self.number.text = teamListModel.empTelphone;
     
 }
 

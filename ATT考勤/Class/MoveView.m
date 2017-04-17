@@ -223,23 +223,23 @@
         make.top.equalTo(weakSelf.view2.mas_bottom).offset([self h_w:10]);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:120]+length*0.5));
     }];
     
     [self.proveView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.applyManView.mas_bottom).offset(padding);
-        make.left.equalTo(weakSelf.line1);
-        make.right.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
-    }];
-    
-    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.textView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
         make.right.equalTo(weakSelf.line1);
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
     }];
     
+//    [self.applyManView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(weakSelf.textView.mas_bottom).offset(padding);
+//        make.left.equalTo(weakSelf.line1);
+//        make.right.equalTo(weakSelf.line1);
+//        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, length*0.5));
+//    }];
+//    
     [self.finish mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.proveView.mas_bottom).offset(padding);
         make.left.equalTo(weakSelf.line1);
@@ -282,7 +282,7 @@
     [self.view2 addSubview:self.line4];
     [self.scrollView addSubview:self.textView];
     [self.scrollView addSubview:self.proveView];
-    [self.scrollView addSubview:self.applyManView];
+    //[self.scrollView addSubview:self.applyManView];
     [self.scrollView addSubview:self.finish];
     
     

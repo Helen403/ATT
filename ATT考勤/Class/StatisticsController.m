@@ -52,7 +52,7 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-    self.title = @"统计";
+    self.title = @"报表";
 }
 
 -(void)h_addSubviews{

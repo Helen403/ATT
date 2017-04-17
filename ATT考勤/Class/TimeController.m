@@ -37,7 +37,7 @@
 
 #pragma private
 -(void)h_layoutNavigation{
-    self.title = @"定时提醒";
+    self.title = @"打卡声音";
 }
 
 -(void)h_addSubviews{

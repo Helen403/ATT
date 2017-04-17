@@ -165,10 +165,10 @@
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[ProveModel class] rowRootName:@"FlowDescs"];
         if (arr.count>1) {
-             [arr removeObjectAtIndex:0];
+            [arr removeObjectAtIndex:0];
             ProveModel *proveModel = [[ProveModel alloc] init];
             UserModel *user =  getModel(@"user");
-            proveModel.whois = user.userNickName;
+            proveModel.whois = user.userRealName;
             proveModel.whoisId = user.userCode;
             [arr insertObject:proveModel atIndex:0];
         }

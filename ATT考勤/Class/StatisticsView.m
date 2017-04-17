@@ -135,9 +135,9 @@
     text.font = H14;
     text.textColor = MAIN_PAN_2;
     if (section == 0) {
-        text.text = @"我的考勤";
+        text.text = @"我的报表";
     }else if(section == 1){
-        text.text = @"部门考勤";
+        text.text = @"部门报表";
     }else{
         text.text = @"英雄榜";
     }

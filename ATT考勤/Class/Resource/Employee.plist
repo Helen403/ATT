@@ -28,7 +28,7 @@
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>绑定设备</string>
+		<string>设备名称</string>
 		<key>content</key>
 		<string>iphone6</string>
 		<key>show</key>

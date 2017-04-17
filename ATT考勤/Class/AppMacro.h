@@ -17,6 +17,8 @@
 
 #define MAIN_PAN RGBCOLOR(188, 188, 188)
 
+#define MAIN_PAN_4 RGBCOLOR(78, 78, 78)
+
 #define BG_COLOR RGBCOLOR(240,240,240)
 
 #define MAIN_LINE_COLOR RGBCOLOR(206,206,206)
@@ -60,6 +62,9 @@
 
 
 #define offSetCardArea 30*60
+
+
+#define offSetCardAreaEnd 24*60*60
 
 
 #define defaultImg @"homepage_head_portrait_base"

@@ -50,7 +50,7 @@
     style.autoAdjustTitlesWidth = YES;
     style.adjustCoverOrLineWidth = YES;
     style.selectedTitleColor = MAIN_ORANGER;
-    self.titles = @[@"我申请的",
+    self.titles = @[@"我的申请",
                     @"我审批的",
                     ];
     // 初始化

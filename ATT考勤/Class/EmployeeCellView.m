@@ -30,13 +30,15 @@
     WS(weakSelf);
     
     [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([self h_w:20]);
+        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:18]);
         make.left.equalTo([self h_w:10]);
     }];
     
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.content.mas_bottom).offset([self h_w:18]);
+        
+        
+        make.top.equalTo([self h_w:20]);
         make.left.equalTo([self h_w:10]);
     }];
 
@@ -121,7 +123,7 @@
         _title = [[UILabel alloc] init];
         _title.text = @"";
         _title.font = H12;
-        _title.textColor = MAIN_PAN;
+        _title.textColor = MAIN_PAN_4;
     }
     return _title;
 }

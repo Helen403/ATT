@@ -68,7 +68,7 @@
     
     CGFloat leftPadding =(SCREEN_WIDTH-SCREEN_WIDTH*0.8)*0.5;
     CGFloat length = SCREEN_WIDTH-SCREEN_WIDTH*0.35;
-    CGFloat biglength = [self h_w:50];
+    //CGFloat biglength = [self h_w:50];
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
         make.top.equalTo(SCREEN_HEIGHT*0.1);
@@ -106,10 +106,10 @@
     
 
     
-    [self.eyes mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf.pwdImg);
-        make.left.equalTo(weakSelf.pwdTextField.mas_right).offset([self h_w:2]);
-    }];
+//    [self.eyes mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(weakSelf.pwdImg);
+//        make.left.equalTo(weakSelf.pwdTextField.mas_right).offset([self h_w:2]);
+//    }];
     
     
     [self.login mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -130,52 +130,52 @@
     }];
     
     
-    [self.weixin mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(weakSelf.mas_bottom).offset(-SCREEN_HEIGHT*0.02);
-        make.left.equalTo(weakSelf.line1);
-        make.size.equalTo(CGSizeMake(biglength, biglength));
-    }];
-    
-    [self.QQ mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(weakSelf);
-        make.top.equalTo(weakSelf.weixin);
-        make.size.equalTo(CGSizeMake(biglength, biglength));
-    }];
-    
-    [self.sina mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(weakSelf.line1);
-        make.top.equalTo(weakSelf.weixin);
-        make.size.equalTo(CGSizeMake(biglength, biglength));
-    }];
-    
-    [self.ThirdText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(weakSelf);
-        make.bottom.equalTo(weakSelf.weixin.mas_top).offset(-[self h_w:25]);
-        
-    }];
-    CGSize size =  [LSCoreToolCenter getSizeWithText:@" 使用第三方登录 " fontSize:12];
-    [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf.ThirdText);
-        make.left.equalTo(weakSelf.line1);
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width*0.5-leftPadding,[self h_w:1]));
-        }else{
-            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width-leftPadding,[self h_w:1]));
-        }
-        
-    }];
-    
-    [self.line3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.equalTo(weakSelf.line1);
-        make.centerY.equalTo(weakSelf.ThirdText);
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width*0.5-leftPadding,[self h_w:1]));
-        }else{
-            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width-leftPadding,[self h_w:1]));
-        }
-    }];
-    
+//    [self.weixin mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(weakSelf.mas_bottom).offset(-SCREEN_HEIGHT*0.02);
+//        make.left.equalTo(weakSelf.line1);
+//        make.size.equalTo(CGSizeMake(biglength, biglength));
+//    }];
+//    
+//    [self.QQ mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(weakSelf);
+//        make.top.equalTo(weakSelf.weixin);
+//        make.size.equalTo(CGSizeMake(biglength, biglength));
+//    }];
+//    
+//    [self.sina mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(weakSelf.line1);
+//        make.top.equalTo(weakSelf.weixin);
+//        make.size.equalTo(CGSizeMake(biglength, biglength));
+//    }];
+//    
+//    [self.ThirdText mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(weakSelf);
+//        make.bottom.equalTo(weakSelf.weixin.mas_top).offset(-[self h_w:25]);
+//        
+//    }];
+//    CGSize size =  [LSCoreToolCenter getSizeWithText:@" 使用第三方登录 " fontSize:12];
+//    [self.line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(weakSelf.ThirdText);
+//        make.left.equalTo(weakSelf.line1);
+//        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+//            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width*0.5-leftPadding,[self h_w:1]));
+//        }else{
+//            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width-leftPadding,[self h_w:1]));
+//        }
+//        
+//    }];
+//    
+//    [self.line3 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        
+//        make.right.equalTo(weakSelf.line1);
+//        make.centerY.equalTo(weakSelf.ThirdText);
+//        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+//            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width*0.5-leftPadding,[self h_w:1]));
+//        }else{
+//            make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.5-size.width-leftPadding,[self h_w:1]));
+//        }
+//    }];
+//    
     [self.bg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(weakSelf);
     }];
@@ -199,13 +199,13 @@
     [self addSubview:self.login];
     [self addSubview:self.forgetText];
     [self addSubview:self.registerText];
-    [self addSubview:self.ThirdText];
-    [self addSubview:self.line2];
-    [self addSubview:self.line3];
-    [self addSubview:self.weixin];
-    [self addSubview:self.QQ];
-    [self addSubview:self.sina];
-    [self addSubview:self.eyes];
+//    [self addSubview:self.ThirdText];
+//    [self addSubview:self.line2];
+//    [self addSubview:self.line3];
+//    [self addSubview:self.weixin];
+//    [self addSubview:self.QQ];
+//    [self addSubview:self.sina];
+//    [self addSubview:self.eyes];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -304,13 +304,10 @@
 -(UITextField *)useTextField{
     if (!_useTextField) {
         _useTextField = [[UITextField alloc] init];
-        
         _useTextField.backgroundColor = [UIColor clearColor];
         //设置边框样式，只有设置了才会显示边框样式
-        
         // 设置内容 -- 垂直居中
         _useTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        
         //当输入框没有内容时，水印提示 提示内容为password
         _useTextField.placeholder = @"手机号";
         _useTextField.tintColor = MAIN_PAN_2;
@@ -377,7 +374,6 @@
 -(UITextField *)pwdTextField{
     if (!_pwdTextField) {
         _pwdTextField = [[UITextField alloc] init];
-        
         _pwdTextField.backgroundColor = [UIColor clearColor];
         //设置边框样式，只有设置了才会显示边框样式
         // 设置内容 -- 垂直居中
@@ -435,11 +431,9 @@
         
         self.login.backgroundColor = MAIN_ENABLE;
         [self.login.layer setBorderColor:MAIN_ENABLE.CGColor];
-        
-        
+
         [self endEditing:YES];
     }else{
-        
         ShowErrorStatus(@"手机号和密码不能为空");
         self.login.enabled = YES;
         self.login.backgroundColor = MAIN_ORANGER;

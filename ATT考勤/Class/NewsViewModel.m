@@ -90,16 +90,16 @@
                     newsModel1.number = announceNumber;
                     [arr addObject:newsModel1];
                     
-                    NSString *body2 =[NSString stringWithFormat: @"<findNoticeNumber xmlns=\"http://service.webservice.vada.com/\">\
-                                      <companyCode xmlns=\"\">%@</companyCode>\
-                                      </findNoticeNumber>",self.companyCode];
-                    [self SOAPData: findNoticeNumber soapBody:body2 success:^(NSString *result) {
-                        
-                        NSString *noticeNumber = [self getFilterOneStr:result filter:@"String"];
-                        NewsModel *newsModel2 = self.arr[1];
-                        newsModel2.number = noticeNumber;
-                        [arr addObject:newsModel2];
-                        
+//                    NSString *body2 =[NSString stringWithFormat: @"<findNoticeNumber xmlns=\"http://service.webservice.vada.com/\">\
+//                                      <companyCode xmlns=\"\">%@</companyCode>\
+//                                      </findNoticeNumber>",self.companyCode];
+//                    [self SOAPData: findNoticeNumber soapBody:body2 success:^(NSString *result) {
+//                        
+//                        NSString *noticeNumber = [self getFilterOneStr:result filter:@"String"];
+//                        NewsModel *newsModel2 = self.arr[1];
+//                        newsModel2.number = noticeNumber;
+//                        [arr addObject:newsModel2];
+                    
                         
                         NSString *body3 =[NSString stringWithFormat: @"<findNewsNumber xmlns=\"http://service.webservice.vada.com/\">\
                                           <companyCode xmlns=\"\">%@</companyCode>\
@@ -107,7 +107,7 @@
                                           </findNewsNumber>",self.companyCode,self.userCode];
                         [self SOAPData: findNewsNumber soapBody:body3 success:^(NSString *result) {
                             NSString *newsNumber = [self getFilterOneStr:result filter:@"String"];
-                            NewsModel *newsModel3 = self.arr[2];
+                            NewsModel *newsModel3 = self.arr[1];
                             newsModel3.number = newsNumber;
                             [arr addObject:newsModel3];
                             self.arr = arr;
@@ -119,12 +119,12 @@
                             [subscriber sendNext:@"netFail"];
                             [subscriber sendCompleted];
                         }];
-                    } failure:^(NSError *error) {
-                        DismissHud();
-                        ShowErrorStatus(@"请检查网络状态");
-                        [subscriber sendNext:@"netFail"];
-                        [subscriber sendCompleted];
-                    }];
+//                    } failure:^(NSError *error) {
+//                        DismissHud();
+//                        ShowErrorStatus(@"请检查网络状态");
+//                        [subscriber sendNext:@"netFail"];
+//                        [subscriber sendCompleted];
+//                    }];
                     
                 } failure:^(NSError *error) {
                     DismissHud();

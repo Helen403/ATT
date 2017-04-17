@@ -12,14 +12,6 @@
 	</dict>
 	<dict>
 		<key>img</key>
-		<string>settings_ detection_picture</string>
-		<key>title</key>
-		<string>公司通知</string>
-		<key>number</key>
-		<string></string>
-	</dict>
-	<dict>
-		<key>img</key>
 		<string>settings_ notice_picture</string>
 		<key>title</key>
 		<string>我的消息</string>

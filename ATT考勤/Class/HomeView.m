@@ -492,9 +492,7 @@
         }
         
     }else{
-        
-        
-        
+
         NSString *onworkafter30 =[LSCoreToolCenter getDateAddMinuts:onworkdatetime time:offSetCardArea];//上班标准时间+30分钟
         NSString *offworkafter30 =[LSCoreToolCenter getDateAddMinuts:offworkdatetime time:offSetCardArea];//下班标准时间+30分钟
         long onworkdiff =[LSCoreToolCenter getDateDiff:curDatetime end:onworkafter30];
@@ -889,8 +887,19 @@
     if (self.locAddress.length>0&&self.locLongitude.length>0&&self.locLatitude.length>0) {
         
     }else{
-        ShowMessage(@"定位不成功 请在本机 设置－隐私－定位服务开启");
-        [self.locService startUserLocationService];
+        
+        //判断是否开启了定位，开启了，才上传
+        if ([CLLocationManager locationServicesEnabled] &&
+            ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized
+             || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)) {
+                //定位功能可用
+              [self.locService startUserLocationService];
+            }
+        else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied){
+            //定位不可用
+            ShowMessage(@"定位权限没开启 请在本机 设置－隐私－定位服务开启");
+        }
+ 
         return;
     }
     

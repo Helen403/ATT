@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
 }
 
 #pragma mark system
@@ -38,7 +38,7 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-
+    self.title = @"我的考勤月报详情";
 }
 
 

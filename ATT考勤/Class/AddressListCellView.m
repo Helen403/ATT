@@ -82,7 +82,7 @@
     }
 
     self.title.text = addressListModel.empName;
-    self.number.text = addressListModel.empTelphone;
+    //self.number.text = addressListModel.empTelphone;
     self.view.backgroundColor = addressListModel.empColor;
 }
 

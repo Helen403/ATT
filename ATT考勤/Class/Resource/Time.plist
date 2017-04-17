@@ -22,35 +22,5 @@
 		<key>info</key>
 		<string>默认</string>
 	</dict>
-	<dict>
-		<key>icon</key>
-		<string>remind_set_vibration_picture</string>
-		<key>title</key>
-		<string>打卡震动</string>
-		<key>on</key>
-		<string>1</string>
-		<key>info</key>
-		<string></string>
-	</dict>
-	<dict>
-		<key>icon</key>
-		<string>remind_set_work_prompt_picture</string>
-		<key>title</key>
-		<string>上班打卡提醒</string>
-		<key>on</key>
-		<string>0</string>
-		<key>info</key>
-		<string>提前5分钟</string>
-	</dict>
-	<dict>
-		<key>icon</key>
-		<string>remind_set_rest_prompt_picture</string>
-		<key>title</key>
-		<string>下班打卡提醒</string>
-		<key>on</key>
-		<string>0</string>
-		<key>info</key>
-		<string>提前5分钟</string>
-	</dict>
 </array>
 </plist>

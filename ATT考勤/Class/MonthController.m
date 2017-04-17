@@ -39,7 +39,7 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-    self.title = @"考勤月报";
+    self.title = @"我的考勤月报";
 }
 
 

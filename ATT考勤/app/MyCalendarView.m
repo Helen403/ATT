@@ -93,15 +93,15 @@ static NSString *cellID = @"cellID";
         make.top.equalTo(weakSelf.pre);
     }];
     
-    [self.today mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.pre);
-        make.right.equalTo(weakSelf.title.mas_left).offset(-[self h_w:10]);
-    }];
-    
-    [self.week mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.pre);
-        make.left.equalTo(weakSelf.title.mas_right).offset([self h_w:10]);
-    }];
+//    [self.today mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(weakSelf.pre);
+//        make.right.equalTo(weakSelf.title.mas_left).offset(-[self h_w:10]);
+//    }];
+//    
+//    [self.week mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(weakSelf.pre);
+//        make.left.equalTo(weakSelf.title.mas_right).offset([self h_w:10]);
+//    }];
     
     [self.last mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.pre);
@@ -140,8 +140,8 @@ static NSString *cellID = @"cellID";
     [self addSubview:self.last];
     [self addSubview:self.line2];
     [self addSubview:self.myWeekView];
-    [self addSubview:self.today];
-    [self addSubview:self.week];
+    //[self addSubview:self.today];
+    //[self addSubview:self.week];
     [self addSubview:self.collectionView];
     
     [self setNeedsUpdateConstraints];
@@ -194,7 +194,13 @@ static NSString *cellID = @"cellID";
                     MySchedulieShiftWork *mySchedulieShiftWork = self.mySchedulieViewModel.shiftWorkArr[j];
                     
                     if ([mySchedulieShiftWork.planDay isEqualToString:str]) {
-                        myCalendar.title = mySchedulieShiftWork.shiftNickName;
+                        if([mySchedulieShiftWork.shiftLsh isEqualToString:@"-1"]){
+                         myCalendar.title = @" 休";
+                        }else{
+                        myCalendar.title = @" 班";
+                        
+                        }
+                       
                         myCalendar.titleColor =[LSCoreToolCenter colorWithHexString:[NSString stringWithFormat:@"#%@",mySchedulieShiftWork.shiftDispColor] alpha:1] ;
                     }
 
@@ -204,7 +210,7 @@ static NSString *cellID = @"cellID";
                 for(int j = 0;j<self.mySchedulieViewModel.holidayArr.count;j++){
                     MySchedulieModel *mySchedulieModel = self.mySchedulieViewModel.holidayArr[j];
                     if ([mySchedulieModel.holidayDay isEqualToString:str]) {
-                        myCalendar.title = @"节假";
+                        myCalendar.title = @" 休";
                     }
                 }
                 [arr addObject:myCalendar];
@@ -214,6 +220,9 @@ static NSString *cellID = @"cellID";
             [self.collectionView reloadData];
             [self updateConstraints];
              self.countBlock((int)ceil(self.arr.count/7));
+            
+            
+          
         });
     }];
 }
@@ -286,9 +295,7 @@ static NSString *cellID = @"cellID";
     self.mySchedulieViewModel.curMonth = [LSCoreToolCenter nextMonth:self.index];
     self.mySchedulieViewModel.empCode = empTmp;
     [self.mySchedulieViewModel.refreshDataCommand execute:nil];
-    
 
-   
 }
 
 -(UILabel *)title{
@@ -429,7 +436,11 @@ static NSString *cellID = @"cellID";
             NSString *today = [self getToday:indexPath.row];
             NSString *daytmp = [ NSString stringWithFormat:@"%@%@日",self.title.text,cell.dateLable.text];
              NSInteger week = [LSCoreToolCenter getCurrentWeekTmp:daytmp];
-               self.week.text =[NSString stringWithFormat:@"第%ld周",week] ;
+            self.week.text =[NSString stringWithFormat:@"第%ld周",week];
+            //NSString *today = [self getToday:indexPath.row];
+            NSString *day = [ NSString stringWithFormat:@"%@%@日 %@",self.title.text,cell.dateLable.text,today];
+            self.calendarBlock(day);
+            
         }else{
             cell.backgroundColor = [UIColor whiteColor];
         }
@@ -467,14 +478,19 @@ static NSString *cellID = @"cellID";
     NSString *tmp = [ NSString stringWithFormat:@"%@%@日",self.title.text,currentCell.dateLable.text];
     NSInteger week = [LSCoreToolCenter getCurrentWeekTmp:tmp];
     self.week.text =[NSString stringWithFormat:@"第%ld周",week] ;
+    
     self.calendarBlock(day);
 }
 
 
 
 -(NSString *)getToday:(NSInteger )i{
+    NSLog(@"%ld",i%7);
     NSString *str = @"";
     switch (i%7) {
+        case 0:
+            str = @"星期日";
+            break;
         case 1:
             str = @"星期一";
             break;
@@ -493,10 +509,7 @@ static NSString *cellID = @"cellID";
         case 6:
             str = @"星期六";
             break;
-        case 0:
-            str = @"星期日";
-            break;
-            
+
     }
     return str;
 }

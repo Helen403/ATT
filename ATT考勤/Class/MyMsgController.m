@@ -29,7 +29,7 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-    self.title = @"我的消息";
+    self.title = @"消息";
 }
 
 #pragma mark system

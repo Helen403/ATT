@@ -28,7 +28,6 @@
 		790D8AEE1E2F4F4D00DDA697 /* CopyToMeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D8AED1E2F4F4D00DDA697 /* CopyToMeModel.m */; };
 		790D8AF11E2F4F9D00DDA697 /* CopyCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D8AF01E2F4F9D00DDA697 /* CopyCellView.m */; };
 		790D8AFB1E2F55EB00DDA697 /* MyMsgController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D8AFA1E2F55EB00DDA697 /* MyMsgController.m */; };
-		791597F71E8F1FC7008A95F5 /* LocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 791597F61E8F1FC7008A95F5 /* LocalNotificationManager.m */; };
 		7916F7C71E2C587B00518DBB /* HWPopTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7916F7C61E2C587B00518DBB /* HWPopTool.m */; };
 		7916F7CA1E2CCC6700518DBB /* LeaveCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7916F7C91E2CCC6700518DBB /* LeaveCellView.m */; };
 		791711721E236836003D15C1 /* TeamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 791711711E236836003D15C1 /* TeamController.m */; };
@@ -56,6 +55,11 @@
 		792134791E4B15CA00C25A67 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 792134781E4B15CA00C25A67 /* GDataXMLNode.m */; };
 		7921347B1E4B174E00C25A67 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7921347A1E4B174E00C25A67 /* libxml2.2.tbd */; };
 		7921347D1E4B176C00C25A67 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7921347C1E4B176C00C25A67 /* libxml2.tbd */; };
+		7921C45C1EA4C88400854425 /* CommunicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7921C45B1EA4C88300854425 /* CommunicationController.m */; };
+		7921C45F1EA4C8A400854425 /* CommunicationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7921C45E1EA4C8A400854425 /* CommunicationViewModel.m */; };
+		7921C4621EA4C8B700854425 /* CommunicationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7921C4611EA4C8B700854425 /* CommunicationView.m */; };
+		7921C4651EA4C8CE00854425 /* CommunicationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7921C4641EA4C8CE00854425 /* CommunicationModel.m */; };
+		7921C4681EA4C8F800854425 /* CommunicationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7921C4671EA4C8F800854425 /* CommunicationCellView.m */; };
 		792253C01E890B25002841E4 /* InformListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792253BF1E890B25002841E4 /* InformListController.m */; };
 		792253C31E890B4D002841E4 /* InformListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 792253C21E890B4D002841E4 /* InformListViewModel.m */; };
 		792253C61E890B5A002841E4 /* InformListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 792253C51E890B5A002841E4 /* InformListView.m */; };
@@ -214,6 +218,13 @@
 		793D3AF31E70F23300266D9C /* LYWCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D3AF21E70F23300266D9C /* LYWCollectionViewCell.m */; };
 		793D3AF91E712C0F00266D9C /* MyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D3AF81E712C0F00266D9C /* MyCalendarView.m */; };
 		793D3AFD1E712DAE00266D9C /* MyWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793D3AFC1E712DAE00266D9C /* MyWeekView.m */; };
+		793F68B91EA44C9B001E880A /* BPushCerResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 793F68B61EA44C9B001E880A /* BPushCerResource.bundle */; };
+		793F68BA1EA44C9B001E880A /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 793F68B71EA44C9B001E880A /* libBPush.a */; };
+		793F68BB1EA44C9B001E880A /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 793F68B81EA44C9B001E880A /* test.caf */; };
+		793F68BD1EA44CB9001E880A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793F68BC1EA44CB9001E880A /* Foundation.framework */; };
+		793F68BF1EA44CC5001E880A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793F68BE1EA44CC5001E880A /* CoreTelephony.framework */; };
+		793F68C11EA44D1F001E880A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793F68C01EA44D1F001E880A /* SystemConfiguration.framework */; };
+		793F68C31EA44D30001E880A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793F68C21EA44D30001E880A /* CoreLocation.framework */; };
 		793FC9961E5687F50032F689 /* EmployeeTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 793FC9951E5687F50032F689 /* EmployeeTitle.m */; };
 		793FC9A01E56A6360032F689 /* ScanCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 793FC99F1E56A6360032F689 /* ScanCodeController.m */; };
 		794214BA1E88E784000A3AE8 /* NoticeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 794214B91E88E784000A3AE8 /* NoticeListController.m */; };
@@ -553,7 +564,6 @@
 		79BD12731E69144D00AC40CF /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD12711E69144D00AC40CF /* UIView+Extension.m */; };
 		79BD12771E69145600AC40CF /* XHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD12751E69145600AC40CF /* XHDatePickerView.m */; };
 		79BD12781E69145600AC40CF /* XHDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BD12761E69145600AC40CF /* XHDatePickerView.xib */; };
-		79D70C121E8F310F00BF5AC5 /* LocalPushCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D70C111E8F310F00BF5AC5 /* LocalPushCenter.m */; };
 		79D70C151E8F32ED00BF5AC5 /* TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D70C141E8F32ED00BF5AC5 /* TriangleView.m */; };
 		79D70C1F1E8F35B700BF5AC5 /* BindingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D70C1E1E8F35B700BF5AC5 /* BindingController.m */; };
 		79D70C221E8F360100BF5AC5 /* BindingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D70C211E8F360100BF5AC5 /* BindingViewModel.m */; };
@@ -799,6 +809,7 @@
 		7901EEF51E8159400020FAA3 /* DailyDetailsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyDetailsCellView.m; sourceTree = "<group>"; };
 		790430011E2474D600D486A0 /* Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Toast.h; path = "ATT考勤/Class/Lib/Toast.h"; sourceTree = "<group>"; };
 		790430021E2474D600D486A0 /* Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Toast.m; path = "ATT考勤/Class/Lib/Toast.m"; sourceTree = "<group>"; };
+		7904E3BA1EA0CA6C00D2FAFD /* ATT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ATT.entitlements; sourceTree = "<group>"; };
 		790721931E69A19B0009AD35 /* BusinessTravelCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessTravelCellView.h; sourceTree = "<group>"; };
 		790721941E69A19B0009AD35 /* BusinessTravelCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessTravelCellView.m; sourceTree = "<group>"; };
 		7907A2961E84045D00B63C16 /* black_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_bg.png; sourceTree = "<group>"; };
@@ -820,8 +831,6 @@
 		790D8AF01E2F4F9D00DDA697 /* CopyCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopyCellView.m; sourceTree = "<group>"; };
 		790D8AF91E2F55EB00DDA697 /* MyMsgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMsgController.h; sourceTree = "<group>"; };
 		790D8AFA1E2F55EB00DDA697 /* MyMsgController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMsgController.m; sourceTree = "<group>"; };
-		791597F51E8F1FC7008A95F5 /* LocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalNotificationManager.h; path = "ATT考勤/app/LocalNotificationManager.h"; sourceTree = "<group>"; };
-		791597F61E8F1FC7008A95F5 /* LocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalNotificationManager.m; path = "ATT考勤/app/LocalNotificationManager.m"; sourceTree = "<group>"; };
 		7916F7C51E2C587B00518DBB /* HWPopTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPopTool.h; sourceTree = "<group>"; };
 		7916F7C61E2C587B00518DBB /* HWPopTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPopTool.m; sourceTree = "<group>"; };
 		7916F7C81E2CCC6700518DBB /* LeaveCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaveCellView.h; sourceTree = "<group>"; };
@@ -871,6 +880,16 @@
 		792134781E4B15CA00C25A67 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		7921347A1E4B174E00C25A67 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		7921347C1E4B176C00C25A67 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		7921C45A1EA4C88300854425 /* CommunicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationController.h; sourceTree = "<group>"; };
+		7921C45B1EA4C88300854425 /* CommunicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationController.m; sourceTree = "<group>"; };
+		7921C45D1EA4C8A400854425 /* CommunicationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationViewModel.h; sourceTree = "<group>"; };
+		7921C45E1EA4C8A400854425 /* CommunicationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationViewModel.m; sourceTree = "<group>"; };
+		7921C4601EA4C8B700854425 /* CommunicationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationView.h; sourceTree = "<group>"; };
+		7921C4611EA4C8B700854425 /* CommunicationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationView.m; sourceTree = "<group>"; };
+		7921C4631EA4C8CE00854425 /* CommunicationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationModel.h; sourceTree = "<group>"; };
+		7921C4641EA4C8CE00854425 /* CommunicationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationModel.m; sourceTree = "<group>"; };
+		7921C4661EA4C8F800854425 /* CommunicationCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationCellView.h; sourceTree = "<group>"; };
+		7921C4671EA4C8F800854425 /* CommunicationCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationCellView.m; sourceTree = "<group>"; };
 		792253BE1E890B25002841E4 /* InformListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformListController.h; sourceTree = "<group>"; };
 		792253BF1E890B25002841E4 /* InformListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformListController.m; sourceTree = "<group>"; };
 		792253C11E890B4D002841E4 /* InformListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformListViewModel.h; sourceTree = "<group>"; };
@@ -1150,6 +1169,14 @@
 		793D3AF81E712C0F00266D9C /* MyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCalendarView.m; sourceTree = "<group>"; };
 		793D3AFB1E712DAE00266D9C /* MyWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWeekView.h; sourceTree = "<group>"; };
 		793D3AFC1E712DAE00266D9C /* MyWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWeekView.m; sourceTree = "<group>"; };
+		793F68B51EA44C9B001E880A /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
+		793F68B61EA44C9B001E880A /* BPushCerResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BPushCerResource.bundle; sourceTree = "<group>"; };
+		793F68B71EA44C9B001E880A /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
+		793F68B81EA44C9B001E880A /* test.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.caf; sourceTree = "<group>"; };
+		793F68BC1EA44CB9001E880A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		793F68BE1EA44CC5001E880A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		793F68C01EA44D1F001E880A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		793F68C21EA44D30001E880A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		793FC9941E5687F50032F689 /* EmployeeTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeTitle.h; sourceTree = "<group>"; };
 		793FC9951E5687F50032F689 /* EmployeeTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeTitle.m; sourceTree = "<group>"; };
 		793FC99E1E56A6360032F689 /* ScanCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeController.h; sourceTree = "<group>"; };
@@ -1683,8 +1710,6 @@
 		79BD12741E69145600AC40CF /* XHDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDatePickerView.h; sourceTree = "<group>"; };
 		79BD12751E69145600AC40CF /* XHDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDatePickerView.m; sourceTree = "<group>"; };
 		79BD12761E69145600AC40CF /* XHDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHDatePickerView.xib; sourceTree = "<group>"; };
-		79D70C101E8F310F00BF5AC5 /* LocalPushCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPushCenter.h; sourceTree = "<group>"; };
-		79D70C111E8F310F00BF5AC5 /* LocalPushCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPushCenter.m; sourceTree = "<group>"; };
 		79D70C131E8F32ED00BF5AC5 /* TriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleView.h; sourceTree = "<group>"; };
 		79D70C141E8F32ED00BF5AC5 /* TriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleView.m; sourceTree = "<group>"; };
 		79D70C1D1E8F35B700BF5AC5 /* BindingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingController.h; sourceTree = "<group>"; };
@@ -2108,9 +2133,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				793F68C31EA44D30001E880A /* CoreLocation.framework in Frameworks */,
+				793F68C11EA44D1F001E880A /* SystemConfiguration.framework in Frameworks */,
+				793F68BF1EA44CC5001E880A /* CoreTelephony.framework in Frameworks */,
+				793F68BD1EA44CB9001E880A /* Foundation.framework in Frameworks */,
 				7921347D1E4B176C00C25A67 /* libxml2.tbd in Frameworks */,
 				7921347B1E4B174E00C25A67 /* libxml2.2.tbd in Frameworks */,
 				79AF688D1E0BD741000D9E48 /* libsqlite3.tbd in Frameworks */,
+				793F68BA1EA44C9B001E880A /* libBPush.a in Frameworks */,
 				79FD0DEB1E8BB13400F48F32 /* libmp3lame.a in Frameworks */,
 				79F8A4DD1E03C0C1004F8A8C /* libz.tbd in Frameworks */,
 				153979DCD9B3B0F66F09E1B1 /* libPods-ATT考勤.a in Frameworks */,
@@ -2771,6 +2801,71 @@
 			path = GDataXMLNode;
 			sourceTree = "<group>";
 		};
+		7921C4531EA4C83000854425 /* Communication(通讯) */ = {
+			isa = PBXGroup;
+			children = (
+				7921C4591EA4C86500854425 /* Other */,
+				7921C4581EA4C86100854425 /* Cell */,
+				7921C4571EA4C85D00854425 /* Model */,
+				7921C4561EA4C85900854425 /* View */,
+				7921C4551EA4C85300854425 /* ViewController */,
+				7921C4541EA4C84500854425 /* ViewModel */,
+			);
+			name = "Communication(通讯)";
+			sourceTree = "<group>";
+		};
+		7921C4541EA4C84500854425 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7921C45D1EA4C8A400854425 /* CommunicationViewModel.h */,
+				7921C45E1EA4C8A400854425 /* CommunicationViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		7921C4551EA4C85300854425 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7921C45A1EA4C88300854425 /* CommunicationController.h */,
+				7921C45B1EA4C88300854425 /* CommunicationController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		7921C4561EA4C85900854425 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7921C4601EA4C8B700854425 /* CommunicationView.h */,
+				7921C4611EA4C8B700854425 /* CommunicationView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7921C4571EA4C85D00854425 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7921C4631EA4C8CE00854425 /* CommunicationModel.h */,
+				7921C4641EA4C8CE00854425 /* CommunicationModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7921C4581EA4C86100854425 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7921C4661EA4C8F800854425 /* CommunicationCellView.h */,
+				7921C4671EA4C8F800854425 /* CommunicationCellView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		7921C4591EA4C86500854425 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		792253B71E890AA5002841E4 /* InformList(公司通知列表) */ = {
 			isa = PBXGroup;
 			children = (
@@ -2954,6 +3049,7 @@
 		7928BD6B1E0273A4009BB0B4 /* ATT考勤 */ = {
 			isa = PBXGroup;
 			children = (
+				7904E3BA1EA0CA6C00D2FAFD /* ATT.entitlements */,
 				7928BD9F1E0277AE009BB0B4 /* App */,
 				7928BDA01E0277B8009BB0B4 /* Class */,
 				79F05E081E03BD5B00F335DA /* Resource */,
@@ -3053,7 +3149,7 @@
 				79F7D8511E5AC8BB004DF0DB /* ChangeTelPhone(更换手机号) */,
 				79375CFA1E1DD7D100E27934 /* Version(版本检测) */,
 				79375D221E1DF76F00E27934 /* function(功能介绍) */,
-				79375D0A1E1DE6E200E27934 /* Time(定时提醒) */,
+				79375D0A1E1DE6E200E27934 /* Time(打卡声音) */,
 				79375D531E1E3B7200E27934 /* Custom(客服中心) */,
 				79F4F0581E1F784B00115C3B /* Message(消息通知) */,
 				79907F781E8E4CDD00DDE4B2 /* Agreement(产品协议) */,
@@ -3085,6 +3181,7 @@
 				791EE6FC1E1F9D5E000BA8B8 /* Notice(公司公告) */,
 				791711691E2367CC003D15C1 /* Team(部门通讯) */,
 				79FFB25F1E24DCEA00EC082F /* Employee(员工信息) */,
+				7921C4531EA4C83000854425 /* Communication(通讯) */,
 				7937CBFD1E2486AB00A4F82F /* AddressList(通讯领域) */,
 				791EE6E31E1F91E6000BA8B8 /* News(消息) */,
 				79EF94101E2611A300F8E9BC /* Personal(个人考勤) */,
@@ -3616,7 +3713,7 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
-		79375D0A1E1DE6E200E27934 /* Time(定时提醒) */ = {
+		79375D0A1E1DE6E200E27934 /* Time(打卡声音) */ = {
 			isa = PBXGroup;
 			children = (
 				7953AB081E78F29600149105 /* TimeSoundViewModel */,
@@ -3629,7 +3726,7 @@
 				79375D0C1E1DE70D00E27934 /* ViewController */,
 				79375D0B1E1DE70700E27934 /* ViewModel */,
 			);
-			name = "Time(定时提醒)";
+			name = "Time(打卡声音)";
 			sourceTree = "<group>";
 		};
 		79375D0B1E1DE70700E27934 /* ViewModel */ = {
@@ -6442,17 +6539,6 @@
 			name = XHDatePicker;
 			sourceTree = "<group>";
 		};
-		79D70C0F1E8F30FE00BF5AC5 /* LocalPushCenter */ = {
-			isa = PBXGroup;
-			children = (
-				791597F51E8F1FC7008A95F5 /* LocalNotificationManager.h */,
-				791597F61E8F1FC7008A95F5 /* LocalNotificationManager.m */,
-				79D70C101E8F310F00BF5AC5 /* LocalPushCenter.h */,
-				79D70C111E8F310F00BF5AC5 /* LocalPushCenter.m */,
-			);
-			name = LocalPushCenter;
-			sourceTree = "<group>";
-		};
 		79D70C161E8F34F400BF5AC5 /* Binding(绑定设备) */ = {
 			isa = PBXGroup;
 			children = (
@@ -8839,7 +8925,14 @@
 		83B8787B68883EECD9829725 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				79D70C0F1E8F30FE00BF5AC5 /* LocalPushCenter */,
+				793F68C21EA44D30001E880A /* CoreLocation.framework */,
+				793F68C01EA44D1F001E880A /* SystemConfiguration.framework */,
+				793F68BE1EA44CC5001E880A /* CoreTelephony.framework */,
+				793F68BC1EA44CB9001E880A /* Foundation.framework */,
+				793F68B51EA44C9B001E880A /* BPush.h */,
+				793F68B61EA44C9B001E880A /* BPushCerResource.bundle */,
+				793F68B71EA44C9B001E880A /* libBPush.a */,
+				793F68B81EA44C9B001E880A /* test.caf */,
 				79907F861E8E516C00DDE4B2 /* BBVoiceRecord */,
 				79FD0DE81E8BB12300F48F32 /* Lame */,
 				793D3AFA1E712C2200266D9C /* MyCalendar(我的日历) */,
@@ -8941,6 +9034,14 @@
 					7928BD681E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = PLK9A7N26F;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					7928BD811E0273A4009BB0B4 = {
 						CreatedOnToolsVersion = 7.0;
@@ -9157,6 +9258,8 @@
 				794C77581E3204B800013243 /* emotion0035@2x.png in Resources */,
 				79F4F0891E1F89BB00115C3B /* Message.plist in Resources */,
 				793782411E31FA8500ABA7C9 /* chatfrom_bg_normal.png in Resources */,
+				793F68BB1EA44C9B001E880A /* test.caf in Resources */,
+				793F68B91EA44C9B001E880A /* BPushCerResource.bundle in Resources */,
 				79375D521E1E2E5A00E27934 /* About.plist in Resources */,
 				7937823F1E31FA8500ABA7C9 /* chat_bottom_voice_press.png in Resources */,
 				794E04801E2323BF00CFE3A3 /* Statistics.plist in Resources */,
@@ -9301,6 +9404,7 @@
 				7901EEF01E8159170020FAA3 /* DailyDetailsView.m in Sources */,
 				79282EC01E0B7DF000F4E050 /* ZJTextOnlyHUDView.m in Sources */,
 				793710371E1C83C5002F3E2E /* MineView.m in Sources */,
+				7921C45C1EA4C88400854425 /* CommunicationController.m in Sources */,
 				794C772E1E3204B800013243 /* MoreButtonView.m in Sources */,
 				79E079C11E7F66F1000BB48C /* ApprovalTreatmentController.m in Sources */,
 				79FFE74B1E8007A800681683 /* CopyDetailsModel.m in Sources */,
@@ -9381,6 +9485,7 @@
 				79DD27741E31B76B00923D19 /* MyMsgCellView.m in Sources */,
 				79FFE7421E80072000681683 /* CopyDetailsController.m in Sources */,
 				793BF1E01E7A1DD100FBD784 /* NavigationView.m in Sources */,
+				7921C4621EA4C8B700854425 /* CommunicationView.m in Sources */,
 				7947BC8D1E7BB8C900EE8EA6 /* LateTreatmentViewModel.m in Sources */,
 				7938682C1E0A2A8A004EC88A /* HomeViewModel.m in Sources */,
 				79EF941F1E26143200F8E9BC /* PersonalViewModel.m in Sources */,
@@ -9549,6 +9654,7 @@
 				79FFB2671E24DF1800EC082F /* EmployeeController.m in Sources */,
 				79F9641C1E2CA28300838CC4 /* OvertimeController.m in Sources */,
 				7948EE961E825F19009ACE51 /* WeekDetailsController.m in Sources */,
+				7921C4651EA4C8CE00854425 /* CommunicationModel.m in Sources */,
 				791EE6F81E1F9392000BA8B8 /* NewsModel.m in Sources */,
 				792253C61E890B5A002841E4 /* InformListView.m in Sources */,
 				795A97551E837B6C00F9A4B8 /* TeamDailyDetailsHeadView.m in Sources */,
@@ -9627,7 +9733,6 @@
 				795A97231E8358A700F9A4B8 /* MonthDetailsHeadView.m in Sources */,
 				79E079E11E7FD100000BB48C /* AlreadyDetailsModel.m in Sources */,
 				7937CC091E24893800A4F82F /* AddressListView.m in Sources */,
-				79D70C121E8F310F00BF5AC5 /* LocalPushCenter.m in Sources */,
 				79E079C71E7F6EAA000BB48C /* ApprovalTreatmentView.m in Sources */,
 				79ED5E881E1CE56400BBC3D9 /* SetView.m in Sources */,
 				793604C21E5D43C80006646E /* ZJQRScannerView.m in Sources */,
@@ -9675,7 +9780,6 @@
 				7917117E1E236F11003D15C1 /* TeamModel.m in Sources */,
 				795AC4601E2C50D700C69308 /* NSData+YXAdd.m in Sources */,
 				79F9DA8E1E5C3D5100625F19 /* AttendWorkShiftDetail.m in Sources */,
-				791597F71E8F1FC7008A95F5 /* LocalNotificationManager.m in Sources */,
 				795AC4751E2C51B400C69308 /* LocManager.m in Sources */,
 				7943B3E91E6D0D6B004BF1B8 /* ShiftCellView.m in Sources */,
 				79375D381E1DFCB700E27934 /* FunctionModel.m in Sources */,
@@ -9717,6 +9821,7 @@
 				79362F6B1E0CB21B00F9B769 /* ForgetViewModel.m in Sources */,
 				795AC4671E2C50D700C69308 /* UIButton+YXAdd.m in Sources */,
 				79F964351E2CA4D900838CC4 /* BusinessTravelView.m in Sources */,
+				7921C45F1EA4C8A400854425 /* CommunicationViewModel.m in Sources */,
 				7980E66F1E83B259000FACB4 /* TeamOutWorkView.m in Sources */,
 				79FA39471E13478600B8D3A7 /* MyExamineModel.m in Sources */,
 				794214C61E88E848000A3AE8 /* NoticeListCellView.m in Sources */,
@@ -9744,6 +9849,7 @@
 				7901EEE71E81558E0020FAA3 /* PendingCellView.m in Sources */,
 				79EF941C1E26130C00F8E9BC /* PersonalView.m in Sources */,
 				79F4F0731E1F808300115C3B /* DLCustomSlideView.m in Sources */,
+				7921C4681EA4C8F800854425 /* CommunicationCellView.m in Sources */,
 				79EF944F1E262F7100F8E9BC /* HACursor.m in Sources */,
 				7948EE991E825F31009ACE51 /* WeekDetailsView.m in Sources */,
 				7980E6B21E83C8DE000FACB4 /* TeamOutWorkDetailsView.m in Sources */,
@@ -9924,6 +10030,7 @@
 			baseConfigurationReference = 8ED7B189C990D6740CA551D4 /* Pods-ATT考勤.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "ATT考勤/ATT.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = PLK9A7N26F;
 				ENABLE_BITCODE = NO;
@@ -9958,6 +10065,7 @@
 			baseConfigurationReference = CD88A55891B3DFA35306F0D4 /* Pods-ATT考勤.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "ATT考勤/ATT.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = PLK9A7N26F;
 				ENABLE_BITCODE = NO;

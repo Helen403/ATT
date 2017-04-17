@@ -11,7 +11,7 @@
 #import "UserModel.h"
 
 
-#define MAX_STARWORDS_LENGTH 6
+#define MAX_STARWORDS_LENGTH 400
 
 @interface ChangeNameView()
 
@@ -105,7 +105,7 @@
         _useTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         
         //当输入框没有内容时，水印提示 提示内容为password
-        _useTextField.placeholder = @"请输入新昵称(最多6个字)";
+        _useTextField.placeholder = @"请输入新昵称";
         _useTextField.tintColor = MAIN_PAN_2;
         _useTextField.textColor = MAIN_PAN_2;
         //修改account的placeholder的字体颜色、大小
