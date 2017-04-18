@@ -10,4 +10,10 @@
 
 @interface CommunicationViewModel : HViewModel
 
+@property(nonatomic,strong) RACSubject *tableViewSubject;
+
+@property(nonatomic,strong) RACSubject *cellclickSubject;
+
+@property(nonatomic,strong) RACSubject *myTeamSubject;
+
 @end

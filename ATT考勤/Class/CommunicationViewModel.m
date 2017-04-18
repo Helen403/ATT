@@ -10,4 +10,26 @@
 
 @implementation CommunicationViewModel
 
+-(RACSubject *)tableViewSubject{
+    if (!_tableViewSubject) {
+        _tableViewSubject = [RACSubject subject];
+    }
+    return _tableViewSubject;
+}
+
+-(RACSubject *)cellclickSubject{
+    if (!_cellclickSubject) {
+        _cellclickSubject = [RACSubject subject];
+    }
+    return _cellclickSubject;
+}
+
+-(RACSubject *)myTeamSubject{
+    if (!_myTeamSubject) {
+        _myTeamSubject = [RACSubject subject] ;
+    }
+    return _myTeamSubject;
+}
+
+
 @end

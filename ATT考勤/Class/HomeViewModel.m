@@ -354,6 +354,8 @@
                     
                     self.deptCode = empModel.deptCode;
                     self.empCode = empModel.empCode;
+                      [[NSUserDefaults standardUserDefaults] setObject:empModel.deptCode forKey:@"deptCode"];
+                    
                     
                     [[NSUserDefaults standardUserDefaults] setObject:empModel.empCode forKey:@"empCode"];
                     
@@ -370,6 +372,7 @@
                         NSDictionary *xmlDoc = [self getFilter:result filter:@"Dept"];
                         
                         Dept *dept = [Dept mj_objectWithKeyValues:xmlDoc];
+                        [[NSUserDefaults standardUserDefaults] setObject:dept.deptFullName forKey:@"deptName"];
                         
                         self.dept = dept;
                         [subscriber sendNext:result];
