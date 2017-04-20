@@ -9,6 +9,7 @@
 #import "TimeSoundView.h"
 #import "TimeSoundCellView.h"
 #import "TimeSoundViewModel.h"
+#import "YYAudioTool.h"
 
 @interface TimeSoundView()<UITableViewDelegate,UITableViewDataSource>
 
@@ -116,6 +117,7 @@
     [[HWPopTool sharedInstance] closeWithBlcok:^{
         TimeSoundModel *timeSound = self.timeSoundViewModel.arr[indexPath.row];
         [[NSUserDefaults standardUserDefaults] setObject:timeSound.title forKey:@"Sound"];
+        [YYAudioTool playMusic:timeSound.title];
         self.clickBlock(0);
     }];
 }

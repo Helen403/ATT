@@ -321,3 +321,6 @@
 
 //收藏联系人
 #define saveMyEmpFriends @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//删除联系人
+#define delMyEmpFriends @"http://13822767713.xicp.net/smart/ws/IAttService"

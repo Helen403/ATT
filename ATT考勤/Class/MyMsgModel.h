@@ -16,6 +16,6 @@
 @property (nonatomic , copy) NSString              * msgUserName;
 @property (nonatomic , copy) NSString              * msgLast;
 @property (nonatomic , copy) NSString              * msgDate;
-
+@property(nonatomic,strong) NSString *empColor;
 
 @end

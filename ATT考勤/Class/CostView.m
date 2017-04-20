@@ -97,6 +97,10 @@
 
 @property(nonatomic,assign) NSInteger dataIndex;
 
+@property(nonatomic,assign)BOOL isHaveDian;
+
+@property(nonatomic,assign)BOOL isFirstZero;
+
 @end
 
 @implementation CostView
@@ -185,7 +189,6 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
-    
     [self.view2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.line3.mas_bottom).offset(0);
         make.left.equalTo(weakSelf.line1);
@@ -202,7 +205,6 @@
         make.centerY.equalTo(weakSelf.view2);
         make.right.equalTo(0);
     }];
-    
     
     [self.compensateShowText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(weakSelf.back2.mas_left).offset(-[self h_w:10]);
@@ -309,7 +311,6 @@
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.costViewModel.companyCode = companyCode;
     [self.costViewModel.refreshDataCommand execute:nil];
-    
 }
 
 
@@ -519,51 +520,51 @@
         //设置输入框内容的字体样式和大小
         _sureTimeShowText.font = H14;
         // 设置右边永远显示清除按钮
-        _sureTimeShowText.keyboardType = UIKeyboardTypePhonePad;
+        _sureTimeShowText.keyboardType =  UIKeyboardTypeDecimalPad;
         // 5.监听文本框的文字改变
         _sureTimeShowText.delegate = self;
     }
     return _sureTimeShowText;
 }
 
-+ (BOOL)validateNumber:(NSString*)number text:(NSString *)textFieldText floatCount:(NSInteger)floatCount {
-    BOOL res = YES;
-    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
-    int i = 0;
-    if (number.length==0) {
-        //允许删除
-        return  YES;
-    }
-    while (i < number.length) {
-        //确保是数字
-        NSString * string = [number substringWithRange:NSMakeRange(i, 1)];
-        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
-        if (range.length == 0) {
-            res = NO;
-            break;
-        }
-        i++;
-    }
-    if (textFieldText.length==0) {
-        //第一个不能是0和.
-        if ([number isEqualToString:@"0"]||[number isEqualToString:@"."]) {
-            return NO;
-        }
-    }
-    NSArray *array = [textFieldText componentsSeparatedByString:@"."];
-    NSInteger count = [array count] ;
-    //小数点只能有一个
-    if (count>1&&[number isEqualToString:@"."]) {
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *text             = _sureTimeShowText.text;
+    NSString *decimalSeperator = @".";
+    NSCharacterSet *charSet    = nil;
+    NSString *numberChars      = @"0123456789";
+    
+    if ([string isEqualToString:decimalSeperator] && [text length] == 0) {
         return NO;
     }
-    //控制小数点后面的字数
-    if ([textFieldText rangeOfString:@"."].location!=NSNotFound) {
-        if (textFieldText.length-[textFieldText rangeOfString:@"."].location>floatCount) {
+    
+    NSRange decimalRange = [text rangeOfString:decimalSeperator];
+    BOOL isDecimalNumber = (decimalRange.location != NSNotFound);
+    if (isDecimalNumber) {
+        charSet = [NSCharacterSet characterSetWithCharactersInString:numberChars];
+        if ([string rangeOfString:decimalSeperator].location != NSNotFound) {
             return NO;
         }
     }
-    return res;
+    else {
+        numberChars = [numberChars stringByAppendingString:decimalSeperator];
+        charSet = [NSCharacterSet characterSetWithCharactersInString:numberChars];
+    }
     
+    NSCharacterSet *invertedCharSet = [charSet invertedSet];
+    NSString *trimmedString = [string stringByTrimmingCharactersInSet:invertedCharSet];
+    text = [text stringByReplacingCharactersInRange:range withString:trimmedString];
+    
+    if (isDecimalNumber) {
+        NSArray *arr = [text componentsSeparatedByString:decimalSeperator];
+        if ([arr count] == 2) {
+            if ([arr[1] length] > 2) {
+                return NO;
+            }
+        }
+    }
+    
+    textField.text = text;
+    return NO;
 }
 
 -(UIView *)line3{

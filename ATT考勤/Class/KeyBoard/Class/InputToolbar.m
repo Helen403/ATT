@@ -106,7 +106,7 @@
     
     if (gestureRecognizer.state ==  UIGestureRecognizerStateBegan) {
         
-        NSLog(@"UIGestureRecognizerStateBegan");
+        //NSLog(@"UIGestureRecognizerStateBegan");
         self.voiceLabel.text = @"松手停止录音";
         self.currentRecordState = BBVoiceRecordState_Recording;
         self.voiceLabel.backgroundColor = [UIColor colorWithHex:0xC6C7CA];
@@ -120,7 +120,7 @@
     }
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         
-        NSLog(@"UIGestureRecognizerStateEnded");
+        //NSLog(@"UIGestureRecognizerStateEnded");
         self.currentRecordState = BBVoiceRecordState_ReleaseToCancel;
         self.voiceLabel.text = @"按住 说话";
         self.voiceLabel.backgroundColor = white_color;
@@ -177,7 +177,7 @@
 
 
 -(void)startRecordNotice{
-    NSLog(@"开始录音");
+    //NSLog(@"开始录音");
     [self addTimer];
     AVAudioSession *session =[AVAudioSession sharedInstance];
     NSError *sessionError;
@@ -219,7 +219,7 @@
         [_recorder record];
         
     }else{
-        NSLog(@"音频格式和文件存储格式不匹配,无法初始化Recorder");
+        //NSLog(@"音频格式和文件存储格式不匹配,无法初始化Recorder");
         
     }
 }
@@ -233,7 +233,7 @@
 
 -(void)stopRecordNotice{
     [self removeTimer];
-    NSLog(@"停止录音");
+    //NSLog(@"停止录音");
     
     if ([self.recorder isRecording]) {
         [self.recorder stop];
@@ -257,7 +257,7 @@
         return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
         
     }else{
-        NSLog(@"计算文件大小：文件不存在");
+       // NSLog(@"计算文件大小：文件不存在");
     }
     
     return 0;
@@ -418,14 +418,13 @@ static InputToolbar* _instance = nil;
         _send = [[UIButton alloc] init];
         [_send setTitle:@"发送" forState:UIControlStateNormal];
         _send.titleLabel.font = H14;
-        [_send setTitleColor:MAIN_PAN_2 forState:UIControlStateNormal];
-        
+        [_send setTitleColor:RGBCOLOR(146, 146, 146) forState:UIControlStateNormal];
         [_send addTarget:self action:@selector(sendClick) forControlEvents:UIControlEventTouchUpInside];
         [_send.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
         [_send.layer setCornerRadius:5];
         [_send.layer setBorderWidth:0.8];//设置边界的宽度
         //[_send setBackgroundColor:white_color];
-        [_send.layer setBorderColor:MAIN_PAN_2.CGColor];
+        [_send.layer setBorderColor:RGBCOLOR(146, 146, 146).CGColor];
     }
     return _send;
 }

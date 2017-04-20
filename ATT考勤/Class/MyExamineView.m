@@ -22,16 +22,16 @@
 @implementation MyExamineView
 #pragma mark system
 -(instancetype)initWithViewModel:(id<HViewModelProtocol>)viewModel{
-
+    
     self.myExamineViewModel = (MyExamineViewModel *)viewModel;
     return [super initWithViewModel:viewModel];
 }
 
 
 -(void)updateConstraints{
-
+    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-
+        
         make.left.equalTo(0);
         make.right.equalTo(0);
         make.bottom.equalTo(0);
@@ -39,12 +39,12 @@
     }];
     
     [super updateConstraints];
-
+    
 }
 
 #pragma mark private
 -(void)h_setupViews{
-
+    
     self.backgroundColor = white_color;
     [self addSubview:self.tableView];
     
@@ -77,7 +77,7 @@
 }
 
 -(void)h_bindViewModel{
-
+    
     [[self.myExamineViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -105,7 +105,7 @@
         _tableView.scrollEnabled = NO;
     }
     return _tableView;
-
+    
 }
 
 #pragma mark - delegate
@@ -126,9 +126,7 @@
     
     cell.myExamineModel = self.myExamineViewModel.arr[indexPath.row];
     
-    if ([cell.myExamineModel.hint isEqualToString:@"0"]) {
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+    
     
     return cell;
 }
@@ -141,11 +139,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    MyExamineModel *myExamineModel = self.myExamineViewModel.arr[indexPath.row];
+    if ([myExamineModel.hint isEqualToString:@"0"]) {
+        return;
+    }
     
-    
-  
-        NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-        [self.myExamineViewModel.cellclickSubject sendNext:row];
+    NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
+    [self.myExamineViewModel.cellclickSubject sendNext:row];
     
     
 }

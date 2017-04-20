@@ -43,7 +43,7 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-    self.title = @"聊天";
+    
 }
 
 -(void)h_addSubviews{
@@ -126,6 +126,8 @@
         return;
     }
     _myMsgModel = myMsgModel;
+    self.title = self.myMsgModel.msgUserName;
+    
     NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
     self.companyCode = companyCode;
     UserModel *user = getModel(@"user");

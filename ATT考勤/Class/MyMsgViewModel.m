@@ -61,6 +61,7 @@
                     
                     [subscriber sendNext:result];
                     [subscriber sendCompleted];
+                    
                 } failure:^(NSError *error) {
                     DismissHud();
                     ShowErrorStatus(@"请检查网络状态");

@@ -10,7 +10,7 @@
 
 @interface MyMsgCellView()
 
-@property(nonatomic,strong) UIImageView *img;
+@property(nonatomic,strong) UILabel *img;
 
 @property(nonatomic,strong) UILabel *title;
 
@@ -22,6 +22,9 @@
 
 @property(nonatomic,strong) UILabel *count;
 
+
+@property(nonatomic,strong) UIView *view;
+
 @end
 
 @implementation MyMsgCellView
@@ -30,19 +33,27 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
+  
+    
     [self.img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(weakSelf);
         make.left.equalTo([self h_w:10]);
+        make.centerY.equalTo(weakSelf);
+    }];
+    
+    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf);
+        make.centerX.equalTo(weakSelf.img);
+        make.size.equalTo(CGSizeMake([self h_w:36], [self h_w:36]));
     }];
     
     [self.count mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.right.equalTo(weakSelf.img.mas_right).offset([self h_w:5]);
-         make.top.equalTo(weakSelf.img.mas_top).offset(-[self h_w:5]);
+           make.right.equalTo(weakSelf.view.mas_right).offset([self h_w:5]);
+         make.top.equalTo(weakSelf.view.mas_top).offset(-[self h_w:5]);
          make.size.equalTo(CGSizeMake([self h_w:16], [self h_w:16]));
     }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.img.mas_top).offset(0);
+        make.top.equalTo(weakSelf.view.mas_top).offset(3);
         make.left.equalTo(weakSelf.img.mas_right).offset([self h_w:10]);
     }];
     
@@ -55,17 +66,21 @@
         make.top.equalTo(weakSelf.img.mas_top).offset(0);
         make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
     }];
+    
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(0);
           make.bottom.equalTo(weakSelf.mas_bottom).offset([self h_w:1]);
          make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
+    
     [super updateConstraints];
 }
 
 #pragma mark private
 -(void)h_setupViews{
     
+    
+    [self addSubview:self.view];
     [self addSubview:self.img];
     [self addSubview:self.title];
     [self addSubview:self.content];
@@ -83,7 +98,7 @@
         return;
     }
     _myMsgModel = myMsgModel;
-    self.img.image = ImageNamed(@"remind_set_vioce_prompt_picture");
+   
     self.title.text = myMsgModel.msgUserName;
     if([myMsgModel.msgLast rangeOfString:@".mp3"].location !=NSNotFound){
         //NSLog(@"yes");
@@ -94,11 +109,21 @@
         self.content.text = myMsgModel.msgLast;
     }
     
+    if ([LSCoreToolCenter PureLetters:myMsgModel.msgUserName]) {
+        self.img.text = myMsgModel.msgUserName;
+    }else{
+        if (myMsgModel.msgUserName.length==3) {
+            self.img.text = [myMsgModel.msgUserName  substringFromIndex:1];
+        }else{
+            self.img.text = myMsgModel.msgUserName;
+        }
+    }
+     self.view.backgroundColor = [UIColor colorWithHexString:myMsgModel.empColor];
     self.time.text = myMsgModel.msgDate;
     if([myMsgModel.msgSize isEqualToString:@"0"]){
         self.count.hidden = YES;
     }else{
-          self.count.hidden = NO;
+        self.count.hidden = NO;
     }
     self.count.text = myMsgModel.msgSize;
 }
@@ -107,11 +132,15 @@
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     self.count.backgroundColor = MAIN_RED;
+    self.view.backgroundColor =[UIColor colorWithHexString:self.myMsgModel.empColor] ;
+    self.img.backgroundColor =[UIColor colorWithHexString:self.myMsgModel.empColor] ;
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     self.count.backgroundColor = MAIN_RED;
+    self.view.backgroundColor =[UIColor colorWithHexString:self.myMsgModel.empColor] ;
+    self.img.backgroundColor =[UIColor colorWithHexString:self.myMsgModel.empColor] ;
 }
 
 
@@ -129,12 +158,25 @@
     return _count;
 }
 
--(UIImageView *)img{
+-(UILabel *)img{
     if (!_img) {
-        _img = [[UIImageView alloc] init];
-        _img.image = ImageNamed(@"");
+        _img = [[UILabel alloc] init];
+        _img.text = @"";
+        _img.font = H14;
+        _img.textColor = white_color;
+        
     }
     return _img;
+}
+
+-(UIView *)view{
+    if (!_view) {
+        _view = [[UIView alloc] init];
+        
+        ViewRadius(_view, [self h_w:18]);
+    }
+    return _view;
+    
 }
 
 -(UILabel *)title{

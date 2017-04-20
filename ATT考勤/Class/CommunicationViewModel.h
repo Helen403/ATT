@@ -28,4 +28,8 @@
 
 @property(nonatomic,strong) NSMutableArray *arr;
 
+@property(nonatomic,strong) NSString *friendEmpCode;
+
+@property(nonatomic,strong) RACCommand *delCommand;
+
 @end

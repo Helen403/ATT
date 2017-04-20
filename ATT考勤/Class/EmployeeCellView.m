@@ -99,7 +99,12 @@
             break;
     }
     
-
+    UserModel *user = getModel(@"user");
+    if ([employeeModel.userCode isEqualToString:user.userCode]) {
+        self.chat.hidden = YES;
+    }else{
+        self.chat.hidden = NO;
+    }
 }
 
 
@@ -116,6 +121,9 @@
     }else{
         self.chat.hidden = YES;
     }
+    
+    
+  
 }
 
 #pragma mark lazyload
@@ -158,11 +166,7 @@
     }
    
     if ([view tag] == 1) {
-        UserModel *user = getModel(@"user");
-        
-        if ([self.employeeModel.userCode isEqualToString:user.userCode]) {
-            return;
-        }
+     
         
         MyMsgModel *msg = [[MyMsgModel alloc] init];
         msg.msgUserName = self.employeeModel.empName;

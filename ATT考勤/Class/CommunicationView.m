@@ -213,15 +213,23 @@
         
         // 添加按钮
         __weak typeof(alert) weakAlert = alert;
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-            NSLog(@"点击了确定按钮-");
-        }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            NSLog(@"点击了取消按钮");
+            //NSLog(@"点击了取消按钮");
         }]];
-        
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            //NSLog(@"点击了确定按钮-");
+            NSString *empCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"empCode"];
+            self.communicationViewModel.myEmpCode = empCode;
+            NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+            self.communicationViewModel.companyCode = companyCode;
+            CommunicationModel *model = self.communicationViewModel.arr[indexPath.row];
+            self.communicationViewModel.friendEmpCode = model.empCode;
+            [self.communicationViewModel.delCommand execute:nil];
+            [self.communicationViewModel.arr removeObjectAtIndex:indexPath.row];
+            [self.tableView reloadData];
+        }]];
+       
 
-        
         UITabBarController *tabBarVc = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         UINavigationController *nav = (UINavigationController *)tabBarVc.selectedViewController;
         

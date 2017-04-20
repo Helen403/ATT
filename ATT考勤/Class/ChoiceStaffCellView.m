@@ -81,7 +81,6 @@
     }
     _teamListModel = teamListModel;
     
-    
     if (teamListModel.empName.length==3) {
         self.name.text = [teamListModel.empName  substringFromIndex:1];
     }else{
@@ -107,7 +106,6 @@
 -(UIView *)bg{
     if (!_bg) {
         _bg = [[UIView alloc] init];
-     
         ViewRadius(_bg, [self h_w:20]);
     }
     return _bg;
@@ -160,8 +158,5 @@
     }
     return _introduction;
 }
-
-
-
 
 @end

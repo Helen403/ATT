@@ -252,10 +252,10 @@
         
         NSString *xmlDoc = [LSCoreToolCenter getFilterStr:result filter:@"String"];
         if ([xmlDoc isEqualToString:@"0"]) {
-            ShowMessage(@"修改成功");
+            ShowMessage(@"收藏成功");
           
         }else{
-            ShowErrorStatus(@"修改失败");
+            ShowErrorStatus(@"收藏失败");
         }
     }];
     
