@@ -924,12 +924,16 @@
         return;
     }
     
-    /*************************************************/
-    //    AttendWorkShift *attendWorkShift = self.homeViewModel.attendWorkShift;
-    //    NSString *count =  attendWorkShift.daySignCount;
-    
+   /*************************************************/
     NSString *curDate = [LSCoreToolCenter currentYearType]; // 当前日期
     NSString *curDatetime = [LSCoreToolCenter curDate]; // 获取当前时间
+    
+
+    
+    
+    //==================================================/
+    
+    
     
     if (self.homeViewModel.arr.count==0) {
         return;
@@ -969,6 +973,8 @@
             if(diffM11>0){
                 
                 self.retCode=-1;
+                //self.retCode=0;
+
                 self.timePoint=1;
             }else{
                 if(diffM12>=0){
@@ -1003,7 +1009,8 @@
                             }
                         }else{
                             //超过B点打卡时间!
-                            self.retCode=3;
+//                            self.retCode=3;
+                            self.retCode=0;
                             self.timePoint=2;
                         }
                     }
@@ -1017,6 +1024,7 @@
             if(diffM11>0){
                 //不到C点打卡时间!
                 self.retCode=-1;
+//                self.retCode=0;
                 self.timePoint=3;
             }else{
                 if(diffM12>=0){
@@ -1050,7 +1058,8 @@
                             }
                         }else{
                             //超过D点打卡时间!
-                            self.retCode=3;
+//                            self.retCode=3;
+                             self.retCode=0;
                             self.timePoint=4;
                         }
                     }
@@ -1063,7 +1072,9 @@
             //-----------------------------------------------------------
             if(diffM11>0){
                 //不到E点打卡时间!
-                self.retCode=-1;
+               self.retCode=-1;
+//                 self.retCode=0;
+               
                 self.timePoint=5;
             }else{
                 if(diffM12>=0){
@@ -1097,7 +1108,8 @@
                             }
                         }else{
                             //超过F点打卡时间!
-                            self.retCode=3;
+//                            self.retCode=3;
+                            self.retCode=0;
                             self.timePoint=6;
                         }
                     }
@@ -1111,6 +1123,7 @@
             if(diffM11>0){
                 //不到G点打卡时间!
                 self.retCode=-1;
+//                self.retCode=0;
                 self.timePoint=7;
             }else{
                 if(diffM12>=0){
@@ -1139,12 +1152,14 @@
                                 self.timePoint=8;
                             }else{
                                 //H点打卡时间! 早退
-                                self.retCode=1;
+                                //self.retCode=1;
+                                self.retCode=0;
                                 self.timePoint=8;
                             }
                         }else{
                             //超过H点打卡时间!
-                            self.retCode=3;
+                            //self.retCode=3;
+                            self.retCode=0;
                             self.timePoint=8;
                         }
                     }
@@ -1154,6 +1169,137 @@
             break;
         }
     }
+    
+    
+    
+    
+    
+    
+    /*************************************************/
+//    AttendWorkShift *attendWorkShift = self.homeViewModel.attendWorkShift;
+//    NSString *lastTmp = @"";
+//    
+//    NSString *count =  attendWorkShift.daySignCount;
+//    if ([@"2" isEqualToString:count]) {
+//        AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
+//        
+//        lastTmp= [NSString stringWithFormat:@"%@ %@:00",[LSCoreToolCenter getCurrentTimeYMD],detail1.workEndDatetime];
+//    }
+//    
+//    /**************************************************/
+//    if ([@"4" isEqualToString:count]) {
+//        AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
+//        AttendWorkShiftDetail *detail2 = self.homeViewModel.arr[1];
+//        
+//        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail2.workStartDatetime]; //取的第2次上班时间
+//        
+//        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:-1*offSetCardArea];
+//        long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
+//        if(diffC>0){
+//            //显示第1阶段打卡时间
+//            //            lastTmp = [NSString stringWithFormat:@"%@:00",detail1.workEndDatetime];
+//        }else{
+//            //显示第2阶段打卡时间
+//            
+//            lastTmp = [NSString stringWithFormat:@"%@ %@:00",[LSCoreToolCenter getCurrentTimeYMD],detail2.workEndDatetime];
+//        }
+//        
+//    }
+//    /**************************************************/
+//    if ([@"6" isEqualToString:count]) {
+//        AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
+//        AttendWorkShiftDetail *detail2 = self.homeViewModel.arr[1];
+//        AttendWorkShiftDetail *detail3 = self.homeViewModel.arr[2];
+//        
+//        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail2.workStartDatetime]; //取的第2次上班时间
+//        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:-1*offSetCardArea];
+//        long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
+//				    
+//        
+//        NSString *strEdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail3.workStartDatetime]; //取的第3次上班时间
+//        NSString *strEbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strEdatetime time:-1*offSetCardArea];
+//        long diffE = [LSCoreToolCenter getDateDiff:curDatetime end:strEbeforedatetime];
+//        
+//        long diffCE = [LSCoreToolCenter getDateDiff:strCbeforedatetime end:strEbeforedatetime]; //计算C,E点时间差
+//        
+//        if(diffC>0){
+//            //显示第1阶段打卡时间
+//            
+//            //            lastTmp = [NSString stringWithFormat:@"%@:00",detail1.workEndDatetime];
+//        }else{
+//            if(diffCE>=diffE&&diffE>0){
+//                //显示第2阶段打卡时间
+//                
+//                //                lastTmp = [NSString stringWithFormat:@"%@:00",detail2.workEndDatetime];
+//            }else{
+//                //显示第3阶段打卡时间
+//                
+//                lastTmp = [NSString stringWithFormat:@"%@ %@:00",[LSCoreToolCenter getCurrentTimeYMD],detail3.workEndDatetime];
+//            }
+//        }
+//        
+//    }
+//    /**************************************************/
+//    if ([@"8" isEqualToString:count]) {
+//        AttendWorkShiftDetail *detail1 = self.homeViewModel.arr[0];
+//        AttendWorkShiftDetail *detail2 = self.homeViewModel.arr[1];
+//        AttendWorkShiftDetail *detail3 = self.homeViewModel.arr[2];
+//        AttendWorkShiftDetail *detail4 = self.homeViewModel.arr[3];
+//        
+//        
+//        NSString *strCdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail2.workStartDatetime]; //取的第2次上班时间
+//        NSString *strCbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strCdatetime time:-1*offSetCardArea];
+//        long diffC = [LSCoreToolCenter getDateDiff:curDatetime end:strCbeforedatetime];
+//				    
+//        NSString *strEdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail3.workStartDatetime]; //取的第3次上班时间
+//        NSString *strEbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strEdatetime time:-1*offSetCardArea];
+//        long diffE = [LSCoreToolCenter getDateDiff:curDatetime end:strEbeforedatetime];
+//        
+//        long diffCE = [LSCoreToolCenter getDateDiff:strCbeforedatetime end:strEbeforedatetime]; //计算C,E点时间差
+//        
+//        
+//        NSString *strGdatetime=[NSString stringWithFormat:@"%@ %@:00",curDate,detail4.workStartDatetime]; //取的第4次上班时间
+//        NSString *strGbeforedatetime = [LSCoreToolCenter getDateAddMinuts:strGdatetime time:-1*offSetCardArea];
+//        long diffG = [LSCoreToolCenter getDateDiff:curDatetime end:strGbeforedatetime];
+//        
+//        long diffEG = [LSCoreToolCenter getDateDiff:strEbeforedatetime end:strGbeforedatetime]; //计算E,G点时间差
+//				    
+//        if(diffC>0){
+//            //显示第1阶段打卡时间
+//            
+//            //            lastTmp =[NSString stringWithFormat:@"%@:00",detail1.workEndDatetime];
+//        }else{
+//            if(diffCE>=diffE&&diffE>0){
+//                //显示第2阶段打卡时间
+//                
+//                //                lastTmp = [NSString stringWithFormat:@"%@:00",detail2.workEndDatetime];
+//            }else{
+//                if(diffEG>=diffG&&diffG>0){
+//                    //显示第3阶段打卡时间
+//                    
+//                    //                    lastTmp = [NSString stringWithFormat:@"%@:00",detail3.workEndDatetime];
+//                }else{
+//                    //显示第4阶段打卡时间
+//                    
+//                    lastTmp = [NSString stringWithFormat:@"%@ %@:00",[LSCoreToolCenter getCurrentTimeYMD],detail4.workEndDatetime];
+//                }
+//            }
+//        }
+//    }
+//    long diffTmp = 0;
+//    
+//    if ([lastTmp isEqualToString:@""]) {
+//        
+//    }else{
+//        diffTmp = [LSCoreToolCenter getDateDiff:curDatetime end:lastTmp];
+//    }
+//    
+//    if (diffTmp<0) {
+//        self.retCode=0;
+//    }
+    
+    
+    
     
     //==================================================
     if(self.retCode==-1){

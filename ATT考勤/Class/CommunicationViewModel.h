@@ -16,4 +16,16 @@
 
 @property(nonatomic,strong) RACSubject *myTeamSubject;
 
+@property(nonatomic,strong) RACSubject *searchSubject;
+
+@property(nonatomic,strong) RACSubject *myCompanySubject;
+
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property(nonatomic,strong) NSString *myEmpCode;
+
+@property(nonatomic,strong) NSMutableArray *arr;
+
 @end

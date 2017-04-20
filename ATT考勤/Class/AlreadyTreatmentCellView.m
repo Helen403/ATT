@@ -110,7 +110,7 @@
     self.title.text = alreadyTreatmentModel.applyDateDesc;
     self.result.text = [NSString stringWithFormat:@"%@ %@",alreadyTreatmentModel.applyType,alreadyTreatmentModel.applyMsg] ;
     
-    self.bgView.backgroundColor = alreadyTreatmentModel.empColor;
+    self.bgView.backgroundColor = [UIColor colorWithHexString:alreadyTreatmentModel.empColor];
 }
 
 
@@ -119,15 +119,15 @@
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     
-    self.bgView.backgroundColor = self.alreadyTreatmentModel.empColor;
-    self.name.backgroundColor = self.alreadyTreatmentModel.empColor;
+    self.bgView.backgroundColor =[UIColor colorWithHexString: self.alreadyTreatmentModel.empColor];
+    self.name.backgroundColor =[UIColor colorWithHexString:self.alreadyTreatmentModel.empColor] ;
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.bgView.backgroundColor = self.alreadyTreatmentModel.empColor;
-    self.name.backgroundColor = self.alreadyTreatmentModel.empColor;
+    self.bgView.backgroundColor =[UIColor colorWithHexString:self.alreadyTreatmentModel.empColor] ;
+    self.name.backgroundColor =[UIColor colorWithHexString:self.alreadyTreatmentModel.empColor] ;
 }
 
 

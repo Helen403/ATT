@@ -16,6 +16,7 @@
     if (!_arr) {
         _arr = [NSMutableArray array];
         TeamListModel *teamListModel = [[TeamListModel alloc] init];
+        teamListModel.empColor = @"#177EF1";
         teamListModel.empName = @"+";
         [_arr addObject:teamListModel];
     }

@@ -25,14 +25,8 @@
             
             NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[RefuseModel class] rowRootName:@"FlowCheckModels"];
             
-            NSMutableArray *arr = [NSMutableArray array];
-            NSInteger count = arrTmp.count;
-            for(int i = 0;i<count;i++){
-                RefuseModel *refuseModel = arrTmp[i];
-                refuseModel.empColor = randomColorA;
-                [arr addObject:refuseModel];
-            }
-            self.arr = arr;
+          
+            self.arr = arrTmp;
             [self.tableViewSubject sendNext:nil];
         }
         

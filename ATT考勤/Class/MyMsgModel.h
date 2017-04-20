@@ -17,4 +17,5 @@
 @property (nonatomic , copy) NSString              * msgLast;
 @property (nonatomic , copy) NSString              * msgDate;
 
+
 @end

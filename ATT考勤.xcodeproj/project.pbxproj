@@ -486,6 +486,7 @@
 		795AC4771E2C51B400C69308 /* SMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC4721E2C51B400C69308 /* SMController.m */; };
 		795AC4781E2C51B400C69308 /* UIViewController+SMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC4741E2C51B400C69308 /* UIViewController+SMController.m */; };
 		795AC47B1E2C584900C69308 /* PBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 795AC47A1E2C584900C69308 /* PBLocation.m */; };
+		795BBB6F1EA84A11007601FA /* ComSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 795BBB6E1EA84A11007601FA /* ComSearchView.m */; };
 		796310E61E0D2ACC001462AF /* NewpartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 796310E51E0D2ACC001462AF /* NewpartView.m */; };
 		796310E91E0D2B3A001462AF /* NewpartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796310E81E0D2B3A001462AF /* NewpartViewController.m */; };
 		796310EC1E0D2B58001462AF /* NewpartViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 796310EB1E0D2B58001462AF /* NewpartViewModel.m */; };
@@ -1565,6 +1566,8 @@
 		795AC4741E2C51B400C69308 /* UIViewController+SMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SMController.m"; sourceTree = "<group>"; };
 		795AC4791E2C584900C69308 /* PBLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBLocation.h; sourceTree = "<group>"; };
 		795AC47A1E2C584900C69308 /* PBLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBLocation.m; sourceTree = "<group>"; };
+		795BBB6D1EA84A11007601FA /* ComSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComSearchView.h; sourceTree = "<group>"; };
+		795BBB6E1EA84A11007601FA /* ComSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComSearchView.m; sourceTree = "<group>"; };
 		796310E41E0D2ACC001462AF /* NewpartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewpartView.h; sourceTree = "<group>"; };
 		796310E51E0D2ACC001462AF /* NewpartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewpartView.m; sourceTree = "<group>"; };
 		796310E71E0D2B3A001462AF /* NewpartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewpartViewController.h; sourceTree = "<group>"; };
@@ -2862,6 +2865,8 @@
 		7921C4591EA4C86500854425 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				795BBB6D1EA84A11007601FA /* ComSearchView.h */,
+				795BBB6E1EA84A11007601FA /* ComSearchView.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -9479,6 +9484,7 @@
 				79362F681E0CB1E500F9B769 /* ForgetView.m in Sources */,
 				793781F21E31E34900ABA7C9 /* ChatController.m in Sources */,
 				79907F981E8E518B00DDE4B2 /* BBVoiceRecordController.m in Sources */,
+				795BBB6F1EA84A11007601FA /* ComSearchView.m in Sources */,
 				7943136B1E53F32B0071530C /* Company.m in Sources */,
 				79F43DAA1E0D598A00C4C932 /* CreateViewModel.m in Sources */,
 				793782181E31E79B00ABA7C9 /* ChatViewModel.m in Sources */,

@@ -24,14 +24,8 @@
             
             NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[AlreadyTreatmentModel class] rowRootName:@"FlowCheckModels"];
             
-            NSMutableArray *arr = [NSMutableArray array];
-            NSInteger count = arrTmp.count;
-            for(int i = 0;i<count;i++){
-                AlreadyTreatmentModel *already = arrTmp[i];
-                already.empColor = randomColorA;
-                [arr addObject:already];
-            }
-            self.arr = arr;
+           
+            self.arr = arrTmp;
             [self.tableViewSubject sendNext:nil];
         }
         

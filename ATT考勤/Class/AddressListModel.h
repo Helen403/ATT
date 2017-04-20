@@ -10,13 +10,6 @@
 
 @interface AddressListModel : NSObject
 
-//@property(nonatomic,strong) NSString *img;
-//
-//@property(nonatomic,strong) NSString *title;
-//
-//@property(nonatomic,strong) NSString *number;
-
-
 @property (nonatomic , copy) NSString              * position;
 @property (nonatomic , copy) NSString              * fullTimeCultural;
 @property (nonatomic , copy) NSString              * empNation;
@@ -32,17 +25,18 @@
 @property (nonatomic , copy) NSString              * empWebChatId;
 @property (nonatomic , copy) NSString              * leaveDate;
 @property (nonatomic , copy) NSString              * deptCode;
+@property (nonatomic , copy) NSString              * phoneDeviceName;
 @property (nonatomic , copy) NSString              * empName;
 @property (nonatomic , copy) NSString              * positionlevel;
 @property (nonatomic , copy) NSString              * idNumber;
 @property (nonatomic , copy) NSString              * empStatus;
+@property (nonatomic , copy) NSString              * userCode;
 @property (nonatomic , copy) NSString              * empId;
+@property (nonatomic , copy) NSString              * empColor;
 @property (nonatomic , copy) NSString              * empStreet;
 @property (nonatomic , copy) NSString              * empCity;
 @property (nonatomic , copy) NSString              * empTelphone;
 @property (nonatomic , copy) NSString              * companyCode;
 @property (nonatomic , copy) NSString              * fullTimeProfession;
-
-@property (nonatomic ,strong) UIColor              *empColor;
 
 @end

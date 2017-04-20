@@ -191,5 +191,6 @@ extern void DismissHud(void);
 + (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha;
 +(NSString *)nextYear:(NSInteger)i;
 +(NSString *)nextMonth:(NSInteger)i;
++(NSString *)getFilterStr:(NSString *)result filter:(NSString *)filter;
 
 @end

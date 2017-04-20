@@ -174,7 +174,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
+    //NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     //[self.mySchedulieViewModel.cellclickSubject sendNext:row];
 }
 

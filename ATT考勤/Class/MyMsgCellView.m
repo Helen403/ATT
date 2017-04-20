@@ -95,6 +95,11 @@
     }
     
     self.time.text = myMsgModel.msgDate;
+    if([myMsgModel.msgSize isEqualToString:@"0"]){
+        self.count.hidden = YES;
+    }else{
+          self.count.hidden = NO;
+    }
     self.count.text = myMsgModel.msgSize;
 }
 

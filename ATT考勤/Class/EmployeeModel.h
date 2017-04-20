@@ -39,6 +39,8 @@
 @property (nonatomic , copy) NSString              * empTelphone;
 @property (nonatomic , copy) NSString              * companyCode;
 @property (nonatomic , copy) NSString              * fullTimeProfession;
+@property(nonatomic,strong) NSString *empColor;
+
 
 @property(nonatomic,strong)  NSMutableArray *arr;
 

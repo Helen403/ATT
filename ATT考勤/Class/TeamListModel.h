@@ -10,11 +10,7 @@
 
 @interface TeamListModel : NSObject
 
-//@property(nonatomic,strong) NSString *img;
 
-//@property(nonatomic,strong) NSString *title;
-
-//@property(nonatomic,strong) NSString *number;
 
 @property (nonatomic , copy) NSString              * position;
 @property (nonatomic , copy) NSString              * fullTimeCultural;
@@ -41,6 +37,6 @@
 @property (nonatomic , copy) NSString              * empTelphone;
 @property (nonatomic , copy) NSString              * companyCode;
 @property (nonatomic , copy) NSString              * fullTimeProfession;
-
+@property(nonatomic,strong) NSString *empColor;
 
 @end

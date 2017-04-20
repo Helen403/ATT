@@ -7,6 +7,7 @@
 //
 
 #import "EmployeeHeadView.h"
+#import "UserModel.h"
 
 @interface EmployeeHeadView()
 
@@ -27,6 +28,16 @@
 @property(nonatomic,strong) UIView *titleView;
 
 @property(nonatomic,strong) UILabel *titleViewText;
+
+@property(nonatomic,strong) RACCommand *refreshDataCommand;
+
+
+@property(nonatomic,strong) NSString *companyCode;
+
+@property(nonatomic,strong) NSString *myEmpCode;
+
+@property(nonatomic,strong) NSString *friendEmpCode;
+
 
 @end
 
@@ -102,6 +113,11 @@
     [self updateConstraintsIfNeeded];
 }
 
+
+-(void)h_bindViewModel{
+    [self h_initialize];
+}
+
 #pragma mark dataload
 -(void)setEmployeeModel:(EmployeeModel *)employeeModel{
     if (!employeeModel) {
@@ -120,8 +136,8 @@
         }
     }
 
-    
-  
+    self.view.backgroundColor = [UIColor colorWithHexString:employeeModel.empColor];
+
 }
 
 
@@ -166,15 +182,32 @@
 -(UIImageView *)star{
     if (!_star) {
         _star = [[UIImageView alloc] init];
-        //        _star.image = ImageNamed(@"role_code_icon");
+        _star.image = ImageNamed(@"ic_unfavorite");
+        _star.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(collectClick)];
+        [_star addGestureRecognizer:setTap];
     }
     return _star;
 }
 
+-(void)collectClick{
+     NSString *empCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"empCode"];
+    if ([empCode isEqualToString:self.employeeModel.empCode]) {
+        return;
+    }
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.companyCode = companyCode;
+   
+    self.myEmpCode = empCode;
+    self.friendEmpCode = self.employeeModel.empCode;
+    [self.refreshDataCommand execute:nil];
+}
+
+
 -(UIView *)view{
     if (!_view) {
         _view = [[UIView alloc] init];
-        _view.backgroundColor = randomColorA;
+        
         ViewRadius(_view, [self h_w:22]);
     }
     return _view;
@@ -208,5 +241,73 @@
     }
     return _titleViewText;
 }
+#pragma mark private
+-(void)h_initialize{
+    
+    [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return;
+        }
+        
+        NSString *xmlDoc = [LSCoreToolCenter getFilterStr:result filter:@"String"];
+        if ([xmlDoc isEqualToString:@"0"]) {
+            ShowMessage(@"修改成功");
+          
+        }else{
+            ShowErrorStatus(@"修改失败");
+        }
+    }];
+    
+    
+    [[[self.refreshDataCommand.executing skip:1] take:1] subscribeNext:^(id x) {
+        
+        if ([x isEqualToNumber:@(YES)]) {
+            ShowMaskStatus(@"正在拼命加载");
+        }
+    }];
+    
+}
+
+
+- (RACCommand *)refreshDataCommand {
+    
+    if (!_refreshDataCommand) {
+        
+        @weakify(self);
+        _refreshDataCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                
+                NSString *body =[NSString stringWithFormat: @"<saveMyEmpFriends xmlns=\"http://service.webservice.vada.com/\">\
+                                 <companyCode xmlns=\"\">%@</companyCode>\
+                                 <myEmpCode xmlns=\"\">%@</myEmpCode>\
+                                 <friendEmpCode xmlns=\"\">%@</friendEmpCode>\
+                                 </saveMyEmpFriends>",self.companyCode,self.myEmpCode,self.friendEmpCode];
+                
+                [LSCoreToolCenter SOAPData:saveMyEmpFriends soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                    
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                    
+                }];
+                
+                return nil;
+            }];
+        }];
+    }
+    
+    return _refreshDataCommand;
+}
+
 
 @end

@@ -8,6 +8,7 @@
 
 #import "ProveCellView.h"
 
+
 @interface ProveCellView()
 
 @property(nonatomic,strong) UILabel *name;
@@ -61,10 +62,8 @@
         }else{
             self.name.text = proveModel.whois;
         }
-    
     }
-
-    self.bg.backgroundColor = randomColorA;
+    self.bg.backgroundColor =[UIColor colorWithHexString:proveModel.empColor] ;
 }
 
 #pragma mark lazyload
@@ -81,7 +80,6 @@
 -(UIView *)bg{
     if (!_bg) {
         _bg = [[UIView alloc] init];
-        _bg.backgroundColor = randomColorA;
         ViewRadius(_bg, [self h_w:20]);
     }
     return _bg;

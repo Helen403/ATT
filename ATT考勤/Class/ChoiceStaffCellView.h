@@ -13,6 +13,4 @@
 
 @property(nonatomic,strong) TeamListModel *teamListModel;
 
-@property(nonatomic,strong) UIColor *bgColor;
-
 @end

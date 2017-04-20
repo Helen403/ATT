@@ -109,7 +109,7 @@
     self.title.text = toMeModel.applyDateDesc;
     self.result.text = [NSString stringWithFormat:@"%@ %@",toMeModel.applyType,toMeModel.applyMsg] ;
     
-    self.bgView.backgroundColor = toMeModel.empColor;
+    self.bgView.backgroundColor =[UIColor colorWithHexString:toMeModel.empColor] ;
 }
 
 
@@ -117,15 +117,15 @@
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     
-    self.bgView.backgroundColor = self.toMeModel.empColor;
-    self.name.backgroundColor = self.toMeModel.empColor;
+    self.bgView.backgroundColor =[UIColor colorWithHexString:self.toMeModel.empColor] ;
+    self.name.backgroundColor =[UIColor colorWithHexString:self.toMeModel.empColor] ;
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.bgView.backgroundColor = self.toMeModel.empColor;
-    self.name.backgroundColor = self.toMeModel.empColor;
+    self.bgView.backgroundColor =[UIColor colorWithHexString:self.toMeModel.empColor] ;
+    self.name.backgroundColor =[UIColor colorWithHexString:self.toMeModel.empColor] ;
 }
 
 

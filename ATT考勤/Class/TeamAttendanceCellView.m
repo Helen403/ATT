@@ -117,7 +117,7 @@
 -(UIView *)line{
     if (!_line) {
         _line = [[UIView alloc] init];
-        _line.backgroundColor = randomColorA;
+       
     }
     return _line;
 }

@@ -126,6 +126,10 @@
     
     cell.myExamineModel = self.myExamineViewModel.arr[indexPath.row];
     
+    if ([cell.myExamineModel.hint isEqualToString:@"0"]) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
     return cell;
 }
 
@@ -136,11 +140,14 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-     MyExamineTableCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MyExamineTableCellView class])] forIndexPath:indexPath];
-     cell.myExamineModel = self.myExamineViewModel.arr[indexPath.row];
-    cell.selected = NO;
-    NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    [self.myExamineViewModel.cellclickSubject sendNext:row];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    
+  
+        NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
+        [self.myExamineViewModel.cellclickSubject sendNext:row];
+    
+    
 }
 
 

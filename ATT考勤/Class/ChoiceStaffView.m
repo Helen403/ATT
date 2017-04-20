@@ -363,7 +363,7 @@
     ChoiceStaffCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([ChoiceStaffCellView class])] forIndexPath:indexPath];
     
     cell.teamListModel = self.choiceStaffViewModel.arr[indexPath.row];
-    cell.bgColor = randomColorA;
+   
     return cell;
 }
 

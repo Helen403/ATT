@@ -1549,4 +1549,26 @@ void DismissHud(void){
 }
 
 
++(NSString *)getFilterStr:(NSString *)result filter:(NSString *)filter{
+    
+    if(result.length==0){
+        return @"";
+    }
+    NSString *str1 = [NSString stringWithFormat:@"<%@>",filter];
+    NSRange range1 = [result rangeOfString:str1];//匹配得到的下标
+    NSString *str2 = [NSString stringWithFormat:@"</%@>",filter];
+    NSRange range2 = [result rangeOfString:str2];//匹配得到的下标
+    
+    @try {
+        result = [result substringToIndex:range2.location];
+        result = [result substringFromIndex:range1.location+range1.length];
+    } @catch (NSException *exception) {
+        result = @"";
+        
+    } @finally {
+        
+    }
+    return result;
+}
+
 @end

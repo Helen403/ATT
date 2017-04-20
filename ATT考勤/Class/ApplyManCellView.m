@@ -62,7 +62,7 @@
         self.name.text = teamListModel.empName;
     }
 
-    self.bg.backgroundColor = randomColorA;
+    self.bg.backgroundColor =[UIColor colorWithHexString:teamListModel.empColor] ;
 }
 
 #pragma mark lazyload
@@ -79,7 +79,7 @@
 -(UIView *)bg{
     if (!_bg) {
         _bg = [[UIView alloc] init];
-        _bg.backgroundColor = randomColorA;
+        
         ViewRadius(_bg, [self h_w:20]);
     }
     return _bg;

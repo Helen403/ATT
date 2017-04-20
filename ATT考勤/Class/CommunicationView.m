@@ -9,12 +9,14 @@
 #import "CommunicationView.h"
 #import "CommunicationViewModel.h"
 #import "CommunicationCellView.h"
+#import "ComSearchView.h"
+
 
 @interface CommunicationView()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) CommunicationViewModel *communicationViewModel;
 
-@property (nonatomic ,strong) UISearchBar *searchBar;
+@property (nonatomic ,strong) ComSearchView *searchBar;
 
 @property(nonatomic,strong) UIImageView *icon;
 
@@ -184,8 +186,48 @@
     [self addSubview:self.noPerson];
     [self addSubview:self.noTitle];
     
+    UILongPressGestureRecognizer * longPressGr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressToDo:)];
+    longPressGr.minimumPressDuration = 1.0;
+    [self.tableView addGestureRecognizer:longPressGr];
+
+    
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
+}
+
+-(void)longPressToDo:(UILongPressGestureRecognizer *)gesture
+{
+    
+    if(gesture.state == UIGestureRecognizerStateBegan){
+        CGPoint point = [gesture locationInView:self.tableView];
+        
+        NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:point];
+        
+        if(indexPath == nil) return ;
+        
+        //add your code here
+        
+        NSLog(@"点击%ld",(long)indexPath.row);
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除" message:@"确认要删除该收藏人" preferredStyle:UIAlertControllerStyleAlert];
+        
+        // 添加按钮
+        __weak typeof(alert) weakAlert = alert;
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            NSLog(@"点击了确定按钮-");
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            NSLog(@"点击了取消按钮");
+        }]];
+        
+
+        
+        UITabBarController *tabBarVc = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UINavigationController *nav = (UINavigationController *)tabBarVc.selectedViewController;
+        
+        [nav presentViewController:alert animated:YES completion:nil];
+        
+    }
 }
 
 
@@ -198,7 +240,37 @@
     
     self.noPerson.hidden = NO;
     self.noTitle.hidden = NO;
+    NSString *empCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"empCode"];
+    self.communicationViewModel.myEmpCode = empCode;
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.communicationViewModel.companyCode = companyCode;
+    [self.communicationViewModel.refreshDataCommand execute:nil];
 }
+
+-(void)h_refreash{
+    NSString *empCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"empCode"];
+    self.communicationViewModel.myEmpCode = empCode;
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    self.communicationViewModel.companyCode = companyCode;
+    [self.communicationViewModel.refreshDataCommand execute:nil];
+}
+
+
+-(void)h_bindViewModel{
+    [[self.communicationViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            if (self.communicationViewModel.arr.count>0) {
+                self.noPerson.hidden = YES;
+                self.noTitle.hidden = YES;
+            }else{
+                self.noPerson.hidden = NO;
+                self.noTitle.hidden = NO;
+            }
+        });
+    }];
+}
+
 
 #pragma mark lazyload
 -(CommunicationViewModel *)communicationViewModel{
@@ -208,19 +280,18 @@
     return _communicationViewModel;
 }
 
-- (UISearchBar *)searchBar{
+- (ComSearchView *)searchBar{
     if (!_searchBar) {
-        _searchBar = [[UISearchBar alloc]init];
-        _searchBar.placeholder = @"姓名/手机号";
-        _searchBar.searchBarStyle = UISearchBarStyleDefault;
-        _searchBar.userInteractionEnabled = NO;
-        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchBarClick)];
+        _searchBar = [[ComSearchView alloc]init];
+        _searchBar.userInteractionEnabled = YES;
+        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchClick)];
         [_searchBar addGestureRecognizer:setTap];
     }
     return _searchBar;
 }
 
--(void)searchBarClick{
+-(void)searchClick{
+    [self.communicationViewModel.searchSubject sendNext:nil];
     
 }
 
@@ -248,7 +319,6 @@
         _content.text = @"组织架构";
         _content.font = H12;
         _content.textColor = MAIN_PAN_3;
-        
     }
     return _content;
 }
@@ -282,7 +352,7 @@
 }
 
 -(void)view1Click{
-    [self.communicationViewModel.tableViewSubject sendNext:nil];
+    [self.communicationViewModel.myCompanySubject sendNext:nil];
 }
 
 -(UIImageView *)myIcon{
@@ -388,7 +458,6 @@
     
 }
 
-
 #pragma mark - delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
@@ -397,7 +466,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 0;
+    return self.communicationViewModel.arr.count;
 }
 
 #pragma mark tableViewDataSource
@@ -405,7 +474,7 @@
     
     CommunicationCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([CommunicationCellView class])] forIndexPath:indexPath];
     //   cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //    cell.dealWithModel = self.dealWithViewModel.arr[indexPath.row];
+    cell.communicationModel = self.communicationViewModel.arr[indexPath.row];
     
     return cell;
 }
@@ -413,13 +482,13 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:40];
+    return [self h_w:50];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
-    //    [self.dealWithViewModel.cellclickSubject sendNext:row];
+    [self.communicationViewModel.cellclickSubject sendNext:row];
 }
 
 

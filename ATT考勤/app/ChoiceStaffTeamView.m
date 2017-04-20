@@ -217,16 +217,11 @@
         [_sure setTitle:@" 确认 " forState:UIControlStateNormal];
         _sure.titleLabel.font = H14;
         [_sure addTarget:self action:@selector(sureClick:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_sure.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
-        
         [_sure.layer setCornerRadius:10];
-        
         [_sure.layer setBorderWidth:2];//设置边界的宽度
-        
         [_sure setBackgroundColor:MAIN_ORANGER];
         //设置按钮的边界颜色
-        
         [_sure.layer setBorderColor:MAIN_ORANGER.CGColor];
     }
     return _sure;

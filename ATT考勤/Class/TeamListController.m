@@ -221,7 +221,7 @@
         TeamListCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TeamListCellView class])] forIndexPath:indexPath];
         
         cell.teamListModel = self.teamListViewModel.arr[indexPath.row];
-        cell.bgColor = randomColorA;
+       
         return cell;
     }else
     {

@@ -27,14 +27,8 @@
             
             NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[LateTreatmentModel class] rowRootName:@"FlowCheckModels"];
             
-            NSMutableArray *arr = [NSMutableArray array];
-            NSInteger count = arrTmp.count;
-            for(int i = 0;i<count;i++){
-                LateTreatmentModel *lateTreatment = arrTmp[i];
-                lateTreatment.empColor = randomColorA;
-                [arr addObject:lateTreatment];
-            }
-            self.arr = arr;
+        
+            self.arr = arrTmp;
             [self.tableViewSubject sendNext:nil];
         }
     }];

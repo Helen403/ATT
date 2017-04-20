@@ -110,22 +110,22 @@
     self.title.text = refuseModel.applyDateDesc;
     self.result.text = [NSString stringWithFormat:@"%@ %@",refuseModel.applyType,refuseModel.applyMsg] ;
     
-    self.bgView.backgroundColor = refuseModel.empColor;
+    self.bgView.backgroundColor =[UIColor colorWithHexString:refuseModel.empColor] ;
 }
 
 
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     
-    self.bgView.backgroundColor = self.refuseModel.empColor;
-    self.name.backgroundColor = self.refuseModel.empColor;
+    self.bgView.backgroundColor = [UIColor colorWithHexString:self.refuseModel.empColor] ;
+    self.name.backgroundColor = [UIColor colorWithHexString:self.refuseModel.empColor] ;
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.bgView.backgroundColor = self.refuseModel.empColor;
-    self.name.backgroundColor = self.refuseModel.empColor;
+    self.bgView.backgroundColor = [UIColor colorWithHexString:self.refuseModel.empColor] ;
+    self.name.backgroundColor =[UIColor colorWithHexString:self.refuseModel.empColor] ;
 }
 
 

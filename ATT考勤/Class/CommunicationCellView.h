@@ -7,7 +7,10 @@
 //
 
 #import "HTableViewCell.h"
+#import "CommunicationModel.h"
 
 @interface CommunicationCellView : HTableViewCell
+
+@property(nonatomic,strong) CommunicationModel *communicationModel;
 
 @end

@@ -13,4 +13,6 @@
 
 @property(nonatomic,strong) MyExamineModel *myExamineModel;
 
+@property(nonatomic,strong) UILabel *hint;
+
 @end

@@ -17,5 +17,7 @@
 @property (nonatomic , copy) NSString              * type;
 @property (nonatomic , copy) NSString              * name;
 @property (nonatomic , copy) NSString              * whois;
+@property(nonatomic,strong) NSString *empColor;
+
 
 @end

@@ -9,6 +9,7 @@
 #import "EmployeeCellView.h"
 #import "ChatController.h"
 #import "MyMsgModel.h"
+#import "UserModel.h"
 
 @interface EmployeeCellView()
 
@@ -157,10 +158,15 @@
     }
    
     if ([view tag] == 1) {
+        UserModel *user = getModel(@"user");
+        
+        if ([self.employeeModel.userCode isEqualToString:user.userCode]) {
+            return;
+        }
         
         MyMsgModel *msg = [[MyMsgModel alloc] init];
         msg.msgUserName = self.employeeModel.empName;
-        msg.msgUserCode = self.employeeModel.empId;
+        msg.msgUserCode = self.employeeModel.userCode;
         
         ChatController *chat = [[ChatController alloc] init];
         chat.myMsgModel = msg;

@@ -101,22 +101,22 @@
     self.title.text = lateTreatmentMode.applyDateDesc;
     self.result.text = [NSString stringWithFormat:@"%@ %@",lateTreatmentMode.applyType,lateTreatmentMode.applyMsg] ;
 //    self.time.text = lateTreatmentMode.applyDate;
-    self.bgView.backgroundColor = lateTreatmentMode.empColor;
+    self.bgView.backgroundColor =[UIColor colorWithHexString:lateTreatmentMode.empColor] ;
 }
 
 
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     
-    self.bgView.backgroundColor = self.lateTreatmentModel.empColor;
-    self.name.backgroundColor = self.lateTreatmentModel.empColor;
+    self.bgView.backgroundColor =[UIColor colorWithHexString:self.lateTreatmentModel.empColor] ;
+    self.name.backgroundColor =[UIColor colorWithHexString:self.lateTreatmentModel.empColor] ;
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.bgView.backgroundColor = self.lateTreatmentModel.empColor;
-    self.name.backgroundColor = self.lateTreatmentModel.empColor;
+    self.bgView.backgroundColor =[UIColor colorWithHexString:self.lateTreatmentModel.empColor] ;
+    self.name.backgroundColor =[UIColor colorWithHexString:self.lateTreatmentModel.empColor] ;
 }
 
 

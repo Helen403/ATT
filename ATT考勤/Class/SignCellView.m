@@ -7,6 +7,7 @@
 //
 
 #import "SignCellView.h"
+#import "UIColor+YXAdd.h"
 
 
 
@@ -91,7 +92,7 @@
     
     self.title.text = signModel.empName;
     self.number.text = signModel.cardDatetime;
-    self.view.backgroundColor = signModel.empColor;
+    self.view.backgroundColor =[UIColor colorWithHexString:signModel.empColor] ;
     self.rank.text = [NSString stringWithFormat:@"第%ld名",(long)self.index+1];
     if (self.index==0||self.index==1||self.index==2) {
         self.title.textColor = MAIN_RED;
@@ -110,15 +111,15 @@
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     
-    self.view.backgroundColor = self.signModel.empColor;
-    self.img.backgroundColor = self.signModel.empColor;
+    self.view.backgroundColor =[UIColor colorWithHexString:self.signModel.empColor] ;
+    self.img.backgroundColor =[UIColor colorWithHexString:self.signModel.empColor] ;
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.view.backgroundColor = self.signModel.empColor;
-    self.img.backgroundColor = self.signModel.empColor;
+    self.view.backgroundColor =[UIColor colorWithHexString:self.signModel.empColor] ;
+    self.img.backgroundColor =[UIColor colorWithHexString:self.signModel.empColor] ;
 }
 
 

@@ -14,6 +14,7 @@
 @property (nonatomic , copy) NSString              * empSort;
 @property (nonatomic , copy) NSString              * empSex;
 @property (nonatomic , copy) NSString              * cardDatetime;
+@property(nonatomic,strong) NSString *empColor;
 
-@property(nonatomic,strong) UIColor * empColor;
+
 @end

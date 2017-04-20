@@ -170,6 +170,8 @@
             UserModel *user =  getModel(@"user");
             proveModel.whois = user.userRealName;
             proveModel.whoisId = user.userCode;
+            NSString *empColor =  [[NSUserDefaults standardUserDefaults] objectForKey:@"empColor"];
+            proveModel.empColor = empColor;
             [arr insertObject:proveModel atIndex:0];
         }
        

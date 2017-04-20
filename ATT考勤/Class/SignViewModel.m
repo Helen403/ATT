@@ -23,14 +23,9 @@
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findSortEmpSignResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findSortEmpSignResponse>"];
         
         NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[SignModel class] rowRootName:@"CardSignDayModels"];
-        NSMutableArray *arr = [NSMutableArray array];
-        NSInteger count = arrTmp.count;
-        for(int i = 0;i<count;i++){
-            SignModel *sign = arrTmp[i];
-            sign.empColor = randomColorA;
-            [arr addObject:sign];
-        }
-        self.arr = arr;
+    
+      
+        self.arr = arrTmp;
         [self.successSubject sendNext:nil];
         
     }];

@@ -7,6 +7,8 @@
 //
 
 #import "HeroCellView.h"
+#import "UIColor+YXAdd.h"
+
 
 @interface HeroCellView()
 
@@ -90,7 +92,7 @@
     
     self.title.text = heroModel.empName;
     self.number.text =[NSString stringWithFormat:@"%.2f小时",heroModel.workHours.floatValue] ;
-    self.view.backgroundColor = heroModel.empColor;
+    self.view.backgroundColor =[UIColor colorWithHexString:heroModel.empColor] ;
     self.rank.text = [NSString stringWithFormat:@"第%ld名",(long)self.index+1];
     if (self.index==0||self.index==1||self.index==2) {
         self.title.textColor = MAIN_RED;
@@ -109,15 +111,15 @@
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     
-    self.view.backgroundColor = self.heroModel.empColor;
-    self.img.backgroundColor = self.heroModel.empColor;
+    self.view.backgroundColor =[UIColor colorWithHexString:self.heroModel.empColor] ;
+    self.img.backgroundColor =[UIColor colorWithHexString:self.heroModel.empColor] ;
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.view.backgroundColor = self.heroModel.empColor;
-    self.img.backgroundColor = self.heroModel.empColor;
+    self.view.backgroundColor =[UIColor colorWithHexString:self.heroModel.empColor] ;
+    self.img.backgroundColor =[UIColor colorWithHexString:self.heroModel.empColor] ;
 }
 
 

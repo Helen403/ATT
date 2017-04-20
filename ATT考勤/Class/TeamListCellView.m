@@ -84,30 +84,24 @@
     
     self.title.text = teamListModel.empName;
     //self.number.text = teamListModel.empTelphone;
-    
+    self.view.backgroundColor = [UIColor colorWithHexString:teamListModel.empColor];
 }
 
 
--(void)setBgColor:(UIColor *)bgColor{
-    if (!bgColor) {
-        return;
-    }
-    _bgColor = bgColor;
-    self.view.backgroundColor = bgColor;
-}
+
 
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     
-    self.view.backgroundColor = self.bgColor;
-    self.img.backgroundColor = self.bgColor;
+    self.view.backgroundColor = self.view.backgroundColor = [UIColor colorWithHexString:self.teamListModel.empColor];
+    self.img.backgroundColor = self.view.backgroundColor = [UIColor colorWithHexString:self.teamListModel.empColor];
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.view.backgroundColor = self.bgColor;
-    self.img.backgroundColor = self.bgColor;
+    self.view.backgroundColor = self.view.backgroundColor = [UIColor colorWithHexString:self.teamListModel.empColor];
+    self.img.backgroundColor = self.view.backgroundColor = [UIColor colorWithHexString:self.teamListModel.empColor];
 }
 
 

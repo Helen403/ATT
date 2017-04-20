@@ -315,3 +315,9 @@
 
 //寻找部门通过EmpCode
 #define findDeptByDeptCode @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//寻找我的收藏人
+#define findMyEmpFriends @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//收藏联系人
+#define saveMyEmpFriends @"http://13822767713.xicp.net/smart/ws/IAttService"

@@ -22,14 +22,9 @@
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findSortEmpHoursResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findSortEmpHoursResponse>"];
 
         NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[HeroModel class] rowRootName:@"WorkHoursModels"];
-        NSMutableArray *arr = [NSMutableArray array];
-        NSInteger count = arrTmp.count;
-        for(int i = 0;i<count;i++){
-            HeroModel *hero = arrTmp[i];
-            hero.empColor = randomColorA;
-            [arr addObject:hero];
-        }
-        self.arr = arr;
+      
+       
+        self.arr = arrTmp;
         [self.successSubject sendNext:nil];
         
     }];

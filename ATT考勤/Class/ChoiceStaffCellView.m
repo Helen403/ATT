@@ -90,6 +90,7 @@
     
     self.title.text = teamListModel.empName;
     self.introduction.text = teamListModel.position;
+    self.bg.backgroundColor = [UIColor colorWithHexString:teamListModel.empColor] ;
 }
 
 
@@ -106,7 +107,7 @@
 -(UIView *)bg{
     if (!_bg) {
         _bg = [[UIView alloc] init];
-        _bg.backgroundColor = self.bgColor;
+     
         ViewRadius(_bg, [self h_w:20]);
     }
     return _bg;
@@ -116,15 +117,15 @@
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     
-    self.bg.backgroundColor = self.bgColor;
-    self.name.backgroundColor = self.bgColor;
+    self.bg.backgroundColor =[UIColor colorWithHexString:self.teamListModel.empColor] ;
+    self.name.backgroundColor = [UIColor colorWithHexString:self.teamListModel.empColor] ;
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-     self.bg.backgroundColor = self.bgColor;
-     self.name.backgroundColor = self.bgColor;
+     self.bg.backgroundColor = [UIColor colorWithHexString:self.teamListModel.empColor];
+    self.name.backgroundColor = [UIColor colorWithHexString:self.teamListModel.empColor];
 }
 
 
@@ -134,7 +135,7 @@
         _name.text = @"";
         _name.font = H12;
         _name.textColor = white_color;
-        _name.backgroundColor = self.bgColor;
+        _name.backgroundColor = [UIColor colorWithHexString:self.teamListModel.empColor];
     }
     return _name;
 }

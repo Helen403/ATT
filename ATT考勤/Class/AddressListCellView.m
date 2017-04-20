@@ -7,6 +7,7 @@
 //
 
 #import "AddressListCellView.h"
+#import "UIColor+YXAdd.h"
 
 @interface AddressListCellView()
 
@@ -16,9 +17,7 @@
 
 @property(nonatomic,strong) UILabel *number;
 
-
 @property(nonatomic,strong) UIView *view;
-
 
 @end
 
@@ -83,21 +82,21 @@
 
     self.title.text = addressListModel.empName;
     //self.number.text = addressListModel.empTelphone;
-    self.view.backgroundColor = addressListModel.empColor;
+    self.view.backgroundColor = [UIColor colorWithHexString:addressListModel.empColor] ;
 }
 
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     
-    self.view.backgroundColor = self.addressListModel.empColor;
-    self.img.backgroundColor = self.addressListModel.empColor;
+    self.view.backgroundColor =[UIColor colorWithHexString:self.addressListModel.empColor] ;
+    self.img.backgroundColor =[UIColor colorWithHexString:self.addressListModel.empColor] ;
 }
 
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    self.view.backgroundColor = self.addressListModel.empColor;
-    self.img.backgroundColor = self.addressListModel.empColor;
+    self.view.backgroundColor =[UIColor colorWithHexString:self.addressListModel.empColor] ;
+    self.img.backgroundColor =[UIColor colorWithHexString:self.addressListModel.empColor] ;
 }
 
 

@@ -23,14 +23,8 @@
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAllEmpByCompanyCodeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAllEmpByCompanyCodeResponse>"];
         
         NSMutableArray *arrTmp = [LSCoreToolCenter xmlToArray:xmlDoc class:[AddressListModel class] rowRootName:@"Emps"];
-        NSMutableArray *arr = [NSMutableArray array];
-        NSInteger count = arrTmp.count;
-        for(int i = 0;i<count;i++){
-            AddressListModel *addressList = arrTmp[i];
-            addressList.empColor = randomColorA;
-            [arr addObject:addressList];
-        }
-        self.arr = arr;
+     
+        self.arr = arrTmp;
         
         [self.tableViewSubject sendNext:nil];
         if (self.arr>0) {

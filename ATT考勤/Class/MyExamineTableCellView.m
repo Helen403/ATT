@@ -17,7 +17,7 @@
 
 @property(nonatomic,strong) UILabel *title;
 
-@property(nonatomic,strong) UILabel *hint;
+
 
 @property(nonatomic,strong) UIImageView *back;
 
@@ -88,7 +88,6 @@
     self.Img.image = ImageNamed(myExamineModel.Img);
     self.title.text = myExamineModel.title;
     self.hint.text = myExamineModel.hint;
-
 }
 
 
@@ -123,7 +122,7 @@
 -(UILabel *)hint{
     if (!_hint) {
         _hint = [[UILabel alloc] init];
-        _hint.text = @"1";
+        _hint.text = @"0";
         _hint.textColor = MAIN_PAN_2;
         _hint.font = H14;
     }

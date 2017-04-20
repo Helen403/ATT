@@ -11,6 +11,9 @@
 #import "CommunicationViewModel.h"
 #import "TeamController.h"
 #import "TeamListController.h"
+#import "AddressListController.h"
+#import "EmployeeController.h"
+#import "CommunicationModel.h"
 
 @interface CommunicationController ()
 
@@ -43,7 +46,7 @@
 
 -(void)h_bindViewModel{
     //跳转到部门通讯
-    [[self.communicationViewModel.tableViewSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+    [[self.communicationViewModel.myCompanySubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         TeamController *team = [[TeamController alloc] init];
         
@@ -53,16 +56,63 @@
     [[self.communicationViewModel.myTeamSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
         
         TeamListController *teamList = [[TeamListController alloc] init];
-   
+        
         NSString *deptCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"deptCode"];
-         NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+        NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
         teamList.deptCode =  deptCode;
         teamList.companyCode = companyCode;
         [self.navigationController pushViewController:teamList animated:NO];
         
         
     }];
+    
+    [[self.communicationViewModel.searchSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        
+        AddressListController *application = [[AddressListController alloc] init];
+        
+        [self.navigationController pushViewController:application animated:NO];
+    }];
+    
+    [[self.communicationViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        EmployeeController *employee = [[EmployeeController alloc] init];
+        AddressListModel *addressListModel = [[AddressListModel alloc] init];
+        
+        CommunicationModel *communicationModel =  self.communicationViewModel.arr[[x intValue]];
+        addressListModel.position = communicationModel.position;
+        addressListModel.fullTimeCultural= communicationModel.fullTimeCultural;
+        addressListModel.empNation = communicationModel.empNation;
+        addressListModel.empProvice = communicationModel.empProvice;
+        addressListModel.empBirthDate = communicationModel.empBirthDate;
+        addressListModel.empPhotos = communicationModel.empPhotos;
+        addressListModel.empQQ = communicationModel.empQQ;
+        addressListModel.empEmail = communicationModel.empEmail; addressListModel.isMarriage = communicationModel.isMarriage;  addressListModel.enterDate = communicationModel.enterDate;  addressListModel.empCode = communicationModel.empCode;  addressListModel.empSex = communicationModel.empSex;  addressListModel.empWebChatId = communicationModel.empWebChatId;
+        addressListModel.leaveDate = communicationModel.leaveDate;
+        addressListModel.empNation = communicationModel.empNation;  addressListModel.deptCode = communicationModel.deptCode;
+        addressListModel.phoneDeviceName = communicationModel.phoneDeviceName;
+        addressListModel.empName = communicationModel.empName;
+        addressListModel.positionlevel = communicationModel.positionlevel;
+        addressListModel.idNumber = communicationModel.idNumber;
+        addressListModel.empStatus = communicationModel.empStatus;
+        addressListModel.userCode = communicationModel.userCode;
+        addressListModel.empId = communicationModel.empId;
+        addressListModel.empColor = communicationModel.empColor;
+        addressListModel.empStreet = communicationModel.empStreet;
+        addressListModel.empCity = communicationModel.empCity;
+        addressListModel.empTelphone = communicationModel.empTelphone;
+        addressListModel.companyCode = communicationModel.companyCode;
+        addressListModel.fullTimeProfession = communicationModel.fullTimeProfession;
+        employee.addressListModel = addressListModel;
+        
+        [self.navigationController pushViewController:employee animated:NO];
+        
+    }];
+    
 }
+
+-(void)h_viewWillAppear{
+    [self.communicationView h_refreash];
+}
+
 
 #pragma mark lazyload
 -(CommunicationView *)communicationView{

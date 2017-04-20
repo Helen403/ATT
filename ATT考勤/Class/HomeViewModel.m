@@ -356,6 +356,8 @@
                     self.empCode = empModel.empCode;
                       [[NSUserDefaults standardUserDefaults] setObject:empModel.deptCode forKey:@"deptCode"];
                     
+                      [[NSUserDefaults standardUserDefaults] setObject:empModel.empColor forKey:@"empColor"];
+                    
                     
                     [[NSUserDefaults standardUserDefaults] setObject:empModel.empCode forKey:@"empCode"];
                     

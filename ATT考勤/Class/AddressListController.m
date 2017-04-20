@@ -32,9 +32,7 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 
-@property(nonatomic,strong) ToTeamView *toTeamView;
 
-@property(nonatomic,strong) UIView *content;
 
 @end
 
@@ -49,8 +47,9 @@
 
 -(void)h_addSubviews{
     self.view.backgroundColor = [UIColor whiteColor];
-    self.content.frame = CGRectMake(0, 0, SCREEN_WIDTH, 84);
-    self.tableView.frame = CGRectMake(0,84,SCREEN_WIDTH, self.view.frame.size.height-84);
+    self.searchBar.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
+    
+    self.tableView.frame = CGRectMake(0,44,SCREEN_WIDTH, self.view.frame.size.height-44);
 }
 
 -(void)h_bindViewModel{
@@ -184,33 +183,6 @@
     return allString;
 }
 
--(UIView *)content{
-    if (!_content) {
-        _content = [[UIView alloc] init];
-        _content.frame = CGRectMake(0, 0, SCREEN_WIDTH, 84);
-        [_content addSubview:self.searchBar];
-        [_content addSubview:self.toTeamView];
-        [self.view addSubview:_content];
-    }
-    return _content;
-}
-
--(ToTeamView *)toTeamView{
-    if (!_toTeamView) {
-        _toTeamView = [[ToTeamView alloc] init];
-        _toTeamView.backgroundColor = white_color;
-        _toTeamView.frame = CGRectMake(0, 44, SCREEN_WIDTH,40);
-        _toTeamView.userInteractionEnabled = YES;
-        UITapGestureRecognizer *setTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toTeam)];
-        [_toTeamView addGestureRecognizer:setTap];
-    }
-    return _toTeamView;
-}
-
-
--(void)toTeam{
-    [self.addressListViewModel.teamclickSubject sendNext:nil];
-}
 
 - (UISearchDisplayController *)searchDC{
     if (!_searchDC) {
@@ -229,7 +201,7 @@
         _searchBar.delegate = self;
         _searchBar.placeholder = @"姓名/手机号";
         _searchBar.searchBarStyle = UISearchBarStyleDefault;
-        _searchBar.frame = CGRectMake(0, 0, SCREEN_WIDTH,44);
+        [self.view addSubview:_searchBar];
     }
     return _searchBar;
 }

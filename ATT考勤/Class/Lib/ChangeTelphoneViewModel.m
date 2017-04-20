@@ -20,7 +20,7 @@
             return;
         }
         NSString *xmlDoc = [self getFilterStr:result filter:@"String"];
-        NSLog(@"%@",xmlDoc);
+        //NSLog(@"%@",xmlDoc);
         [self.SMSbackSubject sendNext:xmlDoc];
     }];
     
