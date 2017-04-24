@@ -897,7 +897,7 @@
             }
         else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied){
             //定位不可用
-            ShowMessage(@"定位权限没开启 请在本机 设置－隐私－定位服务开启");
+            ShowMessage(@"定位权限没开启!");
         }
  
         return;

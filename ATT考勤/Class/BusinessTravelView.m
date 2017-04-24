@@ -395,6 +395,7 @@
         _datepicker.datePickerStyle = DateStyleShowYearMonthDayHourMinute;
         _datepicker.dateType = DateTypeStartDate;
         _datepicker.minLimitDate = [NSDate date:@"2017-02-01 12:22" WithFormat:@"yyyy-MM-dd HH:mm"];
+        
         _datepicker.maxLimitDate = [NSDate date:@"2020-12-12 12:12" WithFormat:@"yyyy-MM-dd HH:mm"];    }
     return _datepicker;
 }

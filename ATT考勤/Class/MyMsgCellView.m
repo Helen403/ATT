@@ -33,7 +33,7 @@
 -(void)updateConstraints{
     
     WS(weakSelf);
-  
+    
     
     [self.img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([self h_w:10]);
@@ -47,9 +47,9 @@
     }];
     
     [self.count mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.right.equalTo(weakSelf.view.mas_right).offset([self h_w:5]);
-         make.top.equalTo(weakSelf.view.mas_top).offset(-[self h_w:5]);
-         make.size.equalTo(CGSizeMake([self h_w:16], [self h_w:16]));
+        make.right.equalTo(weakSelf.view.mas_right).offset([self h_w:5]);
+        make.top.equalTo(weakSelf.view.mas_top).offset(-[self h_w:5]);
+        make.size.equalTo(CGSizeMake([self h_w:16], [self h_w:16]));
     }];
     
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,8 +69,8 @@
     
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(0);
-          make.bottom.equalTo(weakSelf.mas_bottom).offset([self h_w:1]);
-         make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
+        make.bottom.equalTo(weakSelf.mas_bottom).offset([self h_w:1]);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     
     [super updateConstraints];
@@ -98,8 +98,8 @@
         return;
     }
     _myMsgModel = myMsgModel;
-   
-    self.title.text = myMsgModel.msgUserName;
+    
+    
     if([myMsgModel.msgLast rangeOfString:@".mp3"].location !=NSNotFound){
         //NSLog(@"yes");
         self.content.text = @"语音内容";
@@ -109,16 +109,21 @@
         self.content.text = myMsgModel.msgLast;
     }
     
-    if ([LSCoreToolCenter PureLetters:myMsgModel.msgUserName]) {
-        self.img.text = myMsgModel.msgUserName;
+    NSString *text = myMsgModel.msgUserName;
+    if ([myMsgModel.msgUserName isEqualToString:@"机器人"]) {
+        text = @"系统";
+    }
+    self.title.text = text;
+    if ([LSCoreToolCenter PureLetters:text]) {
+        self.img.text = text;
     }else{
-        if (myMsgModel.msgUserName.length==3) {
-            self.img.text = [myMsgModel.msgUserName  substringFromIndex:1];
+        if (text.length==3) {
+            self.img.text = [text  substringFromIndex:1];
         }else{
-            self.img.text = myMsgModel.msgUserName;
+            self.img.text = text;
         }
     }
-     self.view.backgroundColor = [UIColor colorWithHexString:myMsgModel.empColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:myMsgModel.empColor];
     self.time.text = myMsgModel.msgDate;
     if([myMsgModel.msgSize isEqualToString:@"0"]){
         self.count.hidden = YES;
@@ -187,7 +192,7 @@
         _title.textColor = MAIN_PAN_2;
     }
     return _title;
-
+    
 }
 
 -(UILabel *)content{

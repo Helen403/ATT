@@ -173,7 +173,7 @@
 -(UIImageView *)img{
     if (!_img) {
         _img = [[UIImageView alloc] init];
-        _img.image = ImageNamed(@"map_loc_address");
+        //_img.image = ImageNamed(@"map_loc_address");
     }
     return _img;
 }

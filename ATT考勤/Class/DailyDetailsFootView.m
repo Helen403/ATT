@@ -68,10 +68,10 @@
         return;
     }
     _dailyDetailsModel = dailyDetailsModel;
-    self.goOutWorkHours.text = [NSString stringWithFormat:@"当天请假时间:%@分钟",dailyDetailsModel.goOutWorkHours];
-    self.overWorkHours.text = [NSString stringWithFormat:@"当天外出时间:%@分钟",dailyDetailsModel.overWorkHours];
+    self.goOutWorkHours.text = [NSString stringWithFormat:@"当天请假时间:%.2f小时",dailyDetailsModel.goOutWorkHours.floatValue];
+    self.overWorkHours.text = [NSString stringWithFormat:@"当天外出时间:%.2f小时",dailyDetailsModel.overWorkHours.floatValue];
     CGFloat work = dailyDetailsModel.workHours.floatValue;
-    self.workHours.text = [NSString stringWithFormat:@"当天工作时间:%.2f分钟",work];
+    self.workHours.text = [NSString stringWithFormat:@"当天工作时间:%.2f小时",work];
 }
 
 
@@ -79,7 +79,7 @@
 -(UILabel *)goOutWorkHours{
     if (!_goOutWorkHours) {
         _goOutWorkHours = [[UILabel alloc] init];
-        _goOutWorkHours.text = @"";
+        _goOutWorkHours.text = @"当天请假时间:0.00小时";
         _goOutWorkHours.font = H14;
         _goOutWorkHours.textColor = MAIN_PAN_2;
     }
@@ -88,7 +88,7 @@
 -(UILabel *)overWorkHours{
     if (!_overWorkHours) {
         _overWorkHours = [[UILabel alloc] init];
-        _overWorkHours.text = @"";
+        _overWorkHours.text = @"当天外出时间:0.00小时";
         _overWorkHours.font = H14;
         _overWorkHours.textColor = MAIN_PAN_2;
     }
@@ -97,7 +97,7 @@
 -(UILabel *)workHours{
     if (!_workHours) {
         _workHours = [[UILabel alloc] init];
-        _workHours.text = @"";
+        _workHours.text = @"当天工作时间:0.00小时";
         _workHours.font = H14;
         _workHours.textColor = MAIN_PAN_2;
     }

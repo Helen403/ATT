@@ -733,6 +733,9 @@
 }
 
 -(void)click1{
+    if (self.costViewModel.arrDept.count==0) {
+        return;
+    }
     self.index = 1;
     self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*(self.costViewModel.arrDept.count+1));
     [self.tableView reloadData];
@@ -753,8 +756,11 @@
 }
 
 -(void)click2{
+    if (self.costViewModel.arrCostType.count==0) {
+        return;
+    }
     self.index = 2;
-    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*self.costViewModel.arrCostType.count);
+    self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, [self h_w:40]*(self.costViewModel.arrCostType.count+1));
     [self.tableView reloadData];
     [HWPopTool sharedInstance].shadeBackgroundType = ShadeBackgroundTypeSolid;
     [HWPopTool sharedInstance].closeButtonType = ButtonPositionTypeRight;

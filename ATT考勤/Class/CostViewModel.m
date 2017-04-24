@@ -23,6 +23,7 @@
         NSString *xmlDoc = [self getFilterStr:result filter1:@"<ns2:findAttendCostTypeResponse xmlns:ns2=\"http://service.webservice.vada.com/\">" filter2:@"</ns2:findAttendCostTypeResponse>"];
         
         NSMutableArray *arr = [LSCoreToolCenter xmlToArray:xmlDoc class:[CostWorkModel class] rowRootName:@"AttendCostWorks"];
+        
         self.arrCostType = arr;
         [self.tableViewSubject sendNext:nil];
     }];

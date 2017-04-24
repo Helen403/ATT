@@ -76,27 +76,27 @@
         make.size.equalTo(CGSizeMake(SCREEN_WIDTH,(self.choiceStaffTeamViewModel.arr.count)*[self h_w:50]));
     }];
     
-    [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.tableView.mas_bottom).offset([self h_w:30]);
-        make.centerX.equalTo(weakSelf);
-    }];
-    
-    [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.icon.mas_bottom).offset([self h_w:10]);
-        make.centerX.equalTo(weakSelf);
-    }];
-    
-    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(0);
-        make.bottom.equalTo(0);
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:50]));
-    }];
-    
-    [self.sure mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(weakSelf.bottomView.mas_right).offset(-[self h_w:10]);
-        make.centerY.equalTo(weakSelf.bottomView);
-         make.size.equalTo(CGSizeMake([self h_w:65], [self h_w:30]));
-    }];
+//    [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(weakSelf.tableView.mas_bottom).offset([self h_w:30]);
+//        make.centerX.equalTo(weakSelf);
+//    }];
+//    
+//    [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(weakSelf.icon.mas_bottom).offset([self h_w:10]);
+//        make.centerX.equalTo(weakSelf);
+//    }];
+//    
+//    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(0);
+//        make.bottom.equalTo(0);
+//        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:50]));
+//    }];
+//    
+//    [self.sure mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(weakSelf.bottomView.mas_right).offset(-[self h_w:10]);
+//        make.centerY.equalTo(weakSelf.bottomView);
+//         make.size.equalTo(CGSizeMake([self h_w:65], [self h_w:30]));
+//    }];
     
     
     [super updateConstraints];
@@ -198,7 +198,7 @@
 -(UIImageView *)icon{
     if (!_icon) {
         _icon = [[UIImageView alloc] init];
-        _icon.image = ImageNamed(@"guide_icon");
+        //_icon.image = ImageNamed(@"guide_icon");
     }
     return _icon;
 }
@@ -234,7 +234,7 @@
 -(UILabel *)name{
     if (!_name) {
         _name = [[UILabel alloc] init];
-        _name.text = @"暂无员工";
+        //_name.text = @"暂无员工";
         _name.font = H12;
         _name.textColor = MAIN_PAN_2;
     }

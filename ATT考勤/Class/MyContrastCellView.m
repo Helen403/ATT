@@ -96,8 +96,14 @@
     }
     
     _myContrastModel = myContrastModel;
-    self.title.text =[NSString stringWithFormat:@"%@/%@",myContrastModel.day,myContrastModel.month] ;
-    self.current.text = [NSString stringWithFormat:@"%.2f小时", myContrastModel.curMonthHours.floatValue];
+    self.title.text =[NSString stringWithFormat:@"%@/%@",myContrastModel.day,myContrastModel.month];
+    NSString *cur = [NSString stringWithFormat:@"%.2f小时", myContrastModel.curMonthHours.floatValue];
+    if ([cur isEqualToString:@"0.00小时"]) {
+        self.current.text = @"";
+    }else{
+        self.current.text = cur;
+    }
+    
     self.length = SCREEN_WIDTH * myContrastModel.curMonthHours.floatValue/18.00f;
     self.lineLength = SCREEN_WIDTH /18.00f*(self.average.floatValue);
    
