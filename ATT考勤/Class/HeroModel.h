@@ -14,7 +14,7 @@
 @property (nonatomic , copy) NSString              * empGrade;
 @property (nonatomic , copy) NSString              * workHours;
 @property (nonatomic , copy) NSString              * empSex;
-@property(nonatomic,strong) NSString *empColor;
+@property (nonatomic,strong) NSString              *empColor;
 
 
 

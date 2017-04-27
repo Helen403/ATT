@@ -10,12 +10,15 @@
 #import "TimeSoundCellView.h"
 #import "TimeSoundViewModel.h"
 #import "YYAudioTool.h"
+#import "TimeSoundModel.h"
 
 @interface TimeSoundView()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) UITableView *tableView;
 
 @property(nonatomic,strong) TimeSoundViewModel *timeSoundViewModel;
+
+@property(nonatomic,assign) NSInteger index;
 
 @end
 
@@ -99,9 +102,17 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     TimeSoundCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([TimeSoundCellView class])] forIndexPath:indexPath];
+    TimeSoundModel *time = self.timeSoundViewModel.arr[indexPath.row];
     
-    cell.timeSoundModel = self.timeSoundViewModel.arr[indexPath.row];
     
+    NSString *sound =  [[NSUserDefaults standardUserDefaults] objectForKey:@"Sound"];
+    if ([sound isEqualToString:time.title]) {
+        time.flag = YES;
+        self.index = indexPath.row;
+    }
+    cell.timeSoundModel = time;
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -113,13 +124,26 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    TimeSoundModel *timeSound = self.timeSoundViewModel.arr[indexPath.row];
+    TimeSoundModel *timeTmp = self.timeSoundViewModel.arr[self.index];
+
+    [YYAudioTool playMusic:timeSound.title];
+    if (self.index == indexPath.row) {
+        return;
+    }
     
-    [[HWPopTool sharedInstance] closeWithBlcok:^{
-        TimeSoundModel *timeSound = self.timeSoundViewModel.arr[indexPath.row];
-        [[NSUserDefaults standardUserDefaults] setObject:timeSound.title forKey:@"Sound"];
-        [YYAudioTool playMusic:timeSound.title];
-        self.clickBlock(0);
-    }];
+    timeSound.flag = YES;
+    timeTmp.flag = NO;
+    [self.tableView reloadData];
+    
+
+    [[NSUserDefaults standardUserDefaults] setObject:timeSound.title forKey:@"Sound"];
+    
+    self.clickBlock(0);
+    
+    //    [[HWPopTool sharedInstance] closeWithBlcok:^{
+    //
+    //    }];
 }
 
 

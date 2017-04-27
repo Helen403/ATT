@@ -23,6 +23,9 @@
 #import "TeamRedBlackController.h"
 #import "MyContrastController.h"
 #import "MyTrajectoryController.h"
+#import "CompanyDailyController.h"
+#import "CompanyWeekController.h"
+#import "CompanyMonthController.h"
 
 
 @interface StatisticsController ()
@@ -34,10 +37,6 @@
 @end
 
 @implementation StatisticsController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
 
 
 #pragma mark system
@@ -128,31 +127,55 @@
                 [self.navigationController pushViewController:teamOutWork animated:NO];
                 break;
             }
-                //工时英雄榜
+                //公司考勤日报
             case 9:{
+                CompanyDailyController *companyDaily = [[CompanyDailyController alloc] init];
+                
+                [self.navigationController pushViewController:companyDaily animated:NO];
+                break;
+            }
+                //公司考勤周报
+            case 10:{
+                CompanyWeekController *companyWeek = [[CompanyWeekController alloc] init];
+                
+                [self.navigationController pushViewController:companyWeek animated:NO];
+                break;
+            }
+                //公司考勤月报
+            case 11:{
+                CompanyMonthController *companyMonth = [[CompanyMonthController alloc] init];
+                
+                [self.navigationController pushViewController:companyMonth animated:NO];
+                break;
+            }
+
+                //工时英雄榜
+            case 12:{
                 HeroController *hero = [[HeroController alloc] init];
                 
                 [self.navigationController pushViewController:hero animated:NO];
                 break;
             }
                 //签到英雄榜
-            case 10:{
+            case 13:{
                 SignController *sign = [[SignController alloc] init];
                 
                 [self.navigationController pushViewController:sign animated:NO];
                 break;
             }
                 //部门红黑榜
-            case 11:{
+            case 14:{
                 TeamRedBlackController *teamRedBlack = [[TeamRedBlackController alloc] init];
                 
                 [self.navigationController pushViewController:teamRedBlack animated:NO];
                 break;
             }
-              
-             
         }
     }];
+}
+
+-(void)h_viewWillAppear{
+    [self.statisticsView h_viewWillAppear];
 }
 
 #pragma mark lazyload

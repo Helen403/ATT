@@ -324,3 +324,24 @@
 
 //删除联系人
 #define delMyEmpFriends @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//删除某条聊天消息
+#define delMyMsgList @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//寻找公司日报
+#define findCompanyDayReport  @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//寻找公司日报详情
+#define findCompanyDayReportDetail @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//寻找公司周报
+#define findCompanyWeekReport @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//寻找公司月报
+#define findCompanyMonthReport @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+//寻找用户权限
+#define findUserAuthorByUserCode @"http://13822767713.xicp.net/smart/ws/IAttService"
+
+
+

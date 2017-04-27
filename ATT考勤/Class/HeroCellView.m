@@ -22,6 +22,8 @@
 
 @property(nonatomic,strong) UILabel *number;
 
+@property(nonatomic,strong) UIView *line;
+
 @end
 
 @implementation HeroCellView
@@ -50,12 +52,18 @@
     
     [self.rank mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.title);
-          make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:6]);
+        make.top.equalTo(weakSelf.title.mas_bottom).offset([self h_w:6]);
     }];
     
     [self.number mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(weakSelf);
         make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
+    }];
+    
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(weakSelf);
+        make.bottom.equalTo(weakSelf.mas_bottom);
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:1]));
     }];
     [super updateConstraints];
 }
@@ -67,6 +75,7 @@
     [self addSubview:self.title];
     [self addSubview:self.rank];
     [self addSubview:self.number];
+    [self addSubview:self.line];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -170,10 +179,18 @@
     if (!_rank) {
         _rank = [[UILabel alloc] init];
         _rank.text = @"";
-        _rank.font = H14;
+        _rank.font = H12;
         _rank.textColor = MAIN_PAN_2;
     }
     return _rank;
+}
+
+-(UIView *)line{
+    if (!_line) {
+        _line = [[UIView alloc] init];
+        _line.backgroundColor = MAIN_LINE_COLOR;
+    }
+    return _line;
 }
 
 

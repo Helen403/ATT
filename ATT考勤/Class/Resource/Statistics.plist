@@ -58,6 +58,24 @@
 	</dict>
 	<dict>
 		<key>img</key>
+		<string>statistical_company_daily</string>
+		<key>title</key>
+		<string>公司考勤日报</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>statistical_company_weekly</string>
+		<key>title</key>
+		<string>公司考勤周报</string>
+	</dict>
+	<dict>
+		<key>img</key>
+		<string>statistical_company_monthly</string>
+		<key>title</key>
+		<string>公司考勤月报</string>
+	</dict>
+	<dict>
+		<key>img</key>
 		<string>statistical_working_hours_heroes_list_picture</string>
 		<key>title</key>
 		<string>工时英雄榜</string>

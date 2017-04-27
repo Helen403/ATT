@@ -13,4 +13,6 @@
 
 @property(nonatomic,strong) TimeSoundModel *timeSoundModel;
 
+@property(nonatomic,strong) UIImageView *icon;
+
 @end

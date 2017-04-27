@@ -20,8 +20,8 @@
 
 @property(nonatomic,strong) NSString *cardDate;
 
-
 @property(nonatomic,strong) RACSubject *successSubject;
 
 @property(nonatomic,strong) RACSubject *cellclickSubject;
+
 @end

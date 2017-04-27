@@ -358,6 +358,7 @@
                     
                       [[NSUserDefaults standardUserDefaults] setObject:empModel.empColor forKey:@"empColor"];
                     
+                      [[NSUserDefaults standardUserDefaults] setObject:empModel.empName forKey:@"empName"];
                     
                     [[NSUserDefaults standardUserDefaults] setObject:empModel.empCode forKey:@"empCode"];
                     

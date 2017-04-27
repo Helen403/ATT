@@ -10,6 +10,7 @@
 #import "MyMsgViewModel.h"
 #import "MyMsgCellView.h"
 #import "UserModel.h"
+#import "MyMsgModel.h"
 
 
 @interface MyMsgView()<UITableViewDataSource,UITableViewDelegate>
@@ -43,9 +44,57 @@
     
     [self addSubview:self.tableView];
     
+    UILongPressGestureRecognizer * longPressGr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressToDo:)];
+    longPressGr.minimumPressDuration = 1.0;
+    [self.tableView addGestureRecognizer:longPressGr];
+
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
+
+
+-(void)longPressToDo:(UILongPressGestureRecognizer *)gesture
+{
+    
+    if(gesture.state == UIGestureRecognizerStateBegan){
+        CGPoint point = [gesture locationInView:self.tableView];
+        
+        NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:point];
+        
+        if(indexPath == nil) return ;
+        
+      
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除" message:@"确认要删除该消息" preferredStyle:UIAlertControllerStyleAlert];
+        
+        // 添加按钮
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+
+            UserModel *user =  getModel(@"user");
+            
+            self.myMsgViewModel.userCode = user.userCode;
+            NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+            self.myMsgViewModel.companyCode = companyCode;
+            
+            MyMsgModel *model = self.myMsgViewModel.arr[indexPath.row];
+            self.myMsgViewModel.targetUserCode = model.msgUserCode;
+            [self.myMsgViewModel.delMsgCommand execute:nil];
+            
+            [self.myMsgViewModel.arr removeObjectAtIndex:indexPath.row];
+            [self.tableView reloadData];
+        }]];
+        
+        
+        UITabBarController *tabBarVc = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UINavigationController *nav = (UINavigationController *)tabBarVc.selectedViewController;
+        
+        [nav presentViewController:alert animated:YES completion:nil];
+        
+    }
+}
+
 
 
 -(void)h_bindViewModel{
@@ -72,7 +121,6 @@
         _myMsgViewModel = [[MyMsgViewModel alloc] init];
     }
     return _myMsgViewModel;
-    
 }
 
 -(UITableView *)tableView{
@@ -107,7 +155,7 @@
     MyMsgCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([MyMsgCellView class])] forIndexPath:indexPath];
     
     cell.myMsgModel = self.myMsgViewModel.arr[indexPath.row];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

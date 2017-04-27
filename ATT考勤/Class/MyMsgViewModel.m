@@ -36,6 +36,13 @@
         }
     }];
     
+    
+    [self.delMsgCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {
+        DismissHud();
+        if ([result isEqualToString:@"netFail"]||[result isEqualToString:@""]) {
+            return ;
+        }
+    }];
 }
 
 
@@ -75,6 +82,45 @@
     }
     return _refreshDataCommand;
 }
+
+- (RACCommand *)delMsgCommand {
+    
+    if (!_delMsgCommand) {
+        
+        @weakify(self);
+        _delMsgCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            
+            @strongify(self);
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                @strongify(self);
+                
+                
+                NSString *body =[NSString stringWithFormat: @"<delMyMsgList xmlns=\"http://service.webservice.vada.com/\">\
+                                 <companyCode xmlns=\"\">%@</companyCode>\
+                                 <userCode xmlns=\"\">%@</userCode>\
+                                 <targetUserCode xmlns=\"\">%@</targetUserCode>\
+                                 </delMyMsgList>",self.companyCode,self.userCode,self.targetUserCode];
+                
+                [self SOAPData:delMyMsgList soapBody:body success:^(NSString *result) {
+                    
+                    [subscriber sendNext:result];
+                    [subscriber sendCompleted];
+                    
+                } failure:^(NSError *error) {
+                    DismissHud();
+                    ShowErrorStatus(@"请检查网络状态");
+                    [subscriber sendNext:@"netFail"];
+                    [subscriber sendCompleted];
+                }];
+                
+                return nil;
+            }];
+        }];
+    }
+    return _delMsgCommand;
+}
+
 
 
 -(RACSubject *)successSubject{

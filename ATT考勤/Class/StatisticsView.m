@@ -9,6 +9,7 @@
 #import "StatisticsView.h"
 #import "StatisticsViewModel.h"
 #import "StatisticsCellView.h"
+#import "UserModel.h"
 
 @interface StatisticsView()<UITableViewDataSource,UITableViewDelegate>
 
@@ -46,6 +47,26 @@
     [self updateConstraintsIfNeeded];
 }
 
+-(void)h_viewWillAppear{
+    NSString *companyCode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"companyCode"];
+    
+    self.statisticsViewModel.companyCode = companyCode;
+    UserModel *user = getModel(@"user");
+    self.statisticsViewModel.userCode = user.userCode;
+    [self.statisticsViewModel.refreshDataCommand execute:nil];
+}
+
+
+-(void)h_bindViewModel{
+
+    [[self.statisticsViewModel.cellclickSubject takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber *x) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+        
+    }];
+}
+
 #pragma mark lazyload
 -(StatisticsViewModel *)statisticsViewModel{
     if (!_statisticsViewModel) {
@@ -65,21 +86,55 @@
         
     }
     return _tableView;
-    
 }
 
 
 #pragma mark - delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 3;
+    return 4;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
         return 5;
     }else if(section == 1){
-        return 4;
+        if (!self.statisticsViewModel.userAuthorModel) {
+            int count = 0;
+            if([self.statisticsViewModel.userAuthorModel.isReportDeptDay isEqualToString:@"1"]){
+                count = count + 1;
+            }
+            if([self.statisticsViewModel.userAuthorModel.isReportDeptWeek isEqualToString:@"1"]){
+                count = count + 1;
+            }
+            if([self.statisticsViewModel.userAuthorModel.isReportDeptMonth isEqualToString:@"1"]){
+                count = count + 1;
+            }
+            if([self.statisticsViewModel.userAuthorModel.isReportDeptOut isEqualToString:@"1"]){
+                count = count + 1;
+            }
+            return count;
+        }else{
+            return 0;
+        }
+
+    }else if(section == 2){
+        if (!self.statisticsViewModel.userAuthorModel) {
+            int count = 0;
+            if([self.statisticsViewModel.userAuthorModel.isReportCompanyDay isEqualToString:@"1"]){
+                count = count + 1;
+            }
+            if([self.statisticsViewModel.userAuthorModel.isReportCompanyWeek isEqualToString:@"1"]){
+                count = count + 1;
+            }
+            if([self.statisticsViewModel.userAuthorModel.isReportCompanyMonth isEqualToString:@"1"]){
+                count = count + 1;
+            }
+            return count;
+        }else{
+            return 0;
+        }
+
     }else{
         return 3;
     }
@@ -93,9 +148,37 @@
     if (indexPath.section == 0) {
         cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row];
     }else if(indexPath.section == 1){
-        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+5];
+        if (!self.statisticsViewModel.userAuthorModel) {
+            
+            if([self.statisticsViewModel.userAuthorModel.isReportDeptDay isEqualToString:@"1"]&& indexPath.row ==6 ){
+               cell.statisticsModel = self.statisticsViewModel.arr[6];
+            }
+            if([self.statisticsViewModel.userAuthorModel.isReportDeptWeek isEqualToString:@"1"]&& indexPath.row ==7){
+               cell.statisticsModel = self.statisticsViewModel.arr[7];
+            }
+            if([self.statisticsViewModel.userAuthorModel.isReportDeptMonth isEqualToString:@"1"]&& indexPath.row ==8){
+               cell.statisticsModel = self.statisticsViewModel.arr[8];
+            }
+            if([self.statisticsViewModel.userAuthorModel.isReportDeptOut isEqualToString:@"1"]&& indexPath.row ==9){
+               cell.statisticsModel = self.statisticsViewModel.arr[9];
+            }
+        }
+        
+     
+    }else if(indexPath.section == 2){
+        if([self.statisticsViewModel.userAuthorModel.isReportCompanyDay isEqualToString:@"1"]&&indexPath.row == 10){
+              cell.statisticsModel = self.statisticsViewModel.arr[10];
+        }
+        if([self.statisticsViewModel.userAuthorModel.isReportCompanyWeek isEqualToString:@"1"]&&indexPath.row == 11){
+            cell.statisticsModel = self.statisticsViewModel.arr[11];
+        }
+        if([self.statisticsViewModel.userAuthorModel.isReportCompanyMonth isEqualToString:@"1"]&&indexPath.row ==12){
+           cell.statisticsModel = self.statisticsViewModel.arr[12];
+        }
+        
     }else{
-        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+9];
+        cell.statisticsModel = self.statisticsViewModel.arr[indexPath.row+12];
+
     }
     return cell;
 }
@@ -113,8 +196,13 @@
         row = [NSNumber numberWithInteger:indexPath.row];
     }else if(indexPath.section == 1){
         row = [NSNumber numberWithInteger:indexPath.row+5];
-    }else{
+    }else if(indexPath.section == 2){
+        
         row = [NSNumber numberWithInteger:indexPath.row+9];
+        
+        
+    }else{
+        row = [NSNumber numberWithInteger:indexPath.row+12];
     }
 
     [self.statisticsViewModel.cellclickSubject sendNext:row];
@@ -138,6 +226,8 @@
         text.text = @"我的报表";
     }else if(section == 1){
         text.text = @"部门报表";
+    }else if(section == 2){
+        text.text = @"公司报表";
     }else{
         text.text = @"英雄榜";
     }

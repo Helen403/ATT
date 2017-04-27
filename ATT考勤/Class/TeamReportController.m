@@ -20,10 +20,6 @@
 
 @implementation TeamReportController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-}
 
 #pragma mark system
 -(void)updateViewConstraints{
@@ -37,7 +33,7 @@
 
 #pragma mark private
 -(void)h_layoutNavigation{
-    self.title = @"部门周报";
+    self.title = @"部门考勤周报";
 }
 
 

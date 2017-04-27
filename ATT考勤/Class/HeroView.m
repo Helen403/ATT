@@ -9,12 +9,16 @@
 #import "HeroView.h"
 #import "HeroViewModel.h"
 #import "HeroCellView.h"
+#import "HeroHeadView.h"
+#import "HeroModel.h"
 
 @interface HeroView()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) HeroViewModel *heroViewModel;
 
 @property(nonatomic,strong) UITableView *tableView;
+
+@property(nonatomic,strong) HeroHeadView *heroHeadView;
 
 @end
 
@@ -79,6 +83,7 @@
         _tableView.backgroundColor = white_color;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[HeroCellView class] forCellReuseIdentifier:[NSString stringWithUTF8String:object_getClassName([HeroCellView class])]];
+        _tableView.tableHeaderView = self.heroHeadView;
         
     }
     return _tableView;
@@ -103,7 +108,13 @@
     HeroCellView *cell = [tableView dequeueReusableCellWithIdentifier:[NSString stringWithUTF8String:object_getClassName([HeroCellView class])] forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.index = indexPath.row;
-    cell.heroModel = self.heroViewModel.arr[indexPath.row];
+    HeroModel *heroModel = self.heroViewModel.arr[indexPath.row];
+    cell.heroModel = heroModel;
+    NSString *empName =  [[NSUserDefaults standardUserDefaults] objectForKey:@"empName"];
+    if ([empName isEqualToString:heroModel.empName]) {
+        self.heroHeadView.index = indexPath.row+1;
+        self.heroHeadView.heroModel = heroModel;
+    }
     
     return cell;
 }
@@ -111,13 +122,24 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self h_w:50];
+    return [self h_w:60];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSNumber *row =[NSNumber numberWithInteger:indexPath.row];
     [self.heroViewModel.cellclickSubject sendNext:row];
+}
+
+-(HeroHeadView *)heroHeadView{
+    if (!_heroHeadView) {
+        _heroHeadView = [[HeroHeadView alloc] init];
+        _heroHeadView.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self h_w:200]);
+//        [_heroHeadView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.equalTo(CGSizeMake(SCREEN_WIDTH, [self h_w:140]));
+//        }];
+    }
+    return _heroHeadView;
 }
 
 @end

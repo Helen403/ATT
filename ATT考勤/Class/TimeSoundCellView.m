@@ -12,6 +12,8 @@
 
 @property(nonatomic,strong) UILabel *title;
 
+
+
 @end
 
 @implementation TimeSoundCellView
@@ -24,6 +26,13 @@
         make.centerY.equalTo(weakSelf);
         make.left.equalTo([self h_w:10]);
     }];
+    
+    [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(weakSelf);
+        make.right.equalTo(weakSelf.mas_right).offset(-[self h_w:10]);
+        make.size.equalTo(CGSizeMake([self h_w:20], [self h_w:20]));
+    }];
+    
     [super updateConstraints];
 }
 
@@ -31,6 +40,7 @@
 -(void)h_setupViews{
     
     [self addSubview:self.title];
+    [self addSubview:self.icon];
     
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
@@ -43,7 +53,12 @@
         return;
     }
     _timeSoundModel =  timeSoundModel;
-       self.title.text = timeSoundModel.title;
+    self.title.text = timeSoundModel.title;
+    if (timeSoundModel.flag) {
+        self.icon.hidden = NO;
+    }else{
+        self.icon.hidden = YES;
+    }
 
 }
 
@@ -56,5 +71,14 @@
         _title.textColor = MAIN_PAN_2;
     }
     return _title;
+}
+
+-(UIImageView *)icon{
+    if (!_icon) {
+        _icon = [[UIImageView alloc] init];
+        _icon.image = ImageNamed(@"ic_locus_line_on");
+        _icon.hidden = YES;
+    }
+    return _icon;
 }
 @end

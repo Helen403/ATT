@@ -12,4 +12,6 @@
 
 @property(nonatomic,strong) NSString *title;
 
+@property(nonatomic,assign) Boolean flag;
+
 @end

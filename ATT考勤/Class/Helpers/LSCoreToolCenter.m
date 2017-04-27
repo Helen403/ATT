@@ -813,6 +813,20 @@ void DismissHud(void){
     return curTime;
 }
 
++(NSString *) getCurrentD{
+    
+    NSDate *date=[[NSDate alloc] init];
+    
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    
+    [formatter  setDateFormat:@"dd"];
+    
+    NSString *curTime=[formatter stringFromDate:date];
+    
+    return curTime;
+}
+
+
 +(NSString *)getFormatter:(NSString *)str {
     
     

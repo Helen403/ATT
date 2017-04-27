@@ -192,5 +192,6 @@ extern void DismissHud(void);
 +(NSString *)nextYear:(NSInteger)i;
 +(NSString *)nextMonth:(NSInteger)i;
 +(NSString *)getFilterStr:(NSString *)result filter:(NSString *)filter;
++(NSString *) getCurrentD;
 
 @end

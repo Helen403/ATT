@@ -10,7 +10,7 @@
 #import "TeamDailyDetailsModel.h"
 
 @implementation TeamDailyDetailsViewModel
-
+#pragma mark private
 -(void)h_initialize{
     
     [self.refreshDataCommand.executionSignals.switchToLatest subscribeNext:^(NSString *result) {

@@ -20,7 +20,10 @@
 
 @property(nonatomic,strong) NSString *userCode;
 
-
 @property(nonatomic,strong) RACSubject *successSubject;
+
+@property(nonatomic,strong) RACCommand *delMsgCommand;
+
+@property(nonatomic,strong) NSString *targetUserCode;
 
 @end
